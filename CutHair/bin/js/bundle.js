@@ -2146,14 +2146,11 @@
             let otherParent = otherOwner.parent;
             switch (otherOwner.name) {
                 case 'Hairline':
+                    console.log(this.self);
                     let posY1 = this.selfTransform.position.y;
                     let posY2 = otherParent.transform.position.y + otherParent.transform.localScaleY;
-                    let diffY = Math.abs(posY1 - posY2);
-                    console.log('posY2:', posY2);
-                    console.log('posY1:', posY1);
-                    console.log('距离差值:', otherParent.transform.localScaleY - diffY / 10);
-                    otherParent.transform.localScaleY -= 0.01;
-                    return;
+                    let diffY = Math.abs(posY1 - posY2) / 10 / 6;
+                    console.log('距离差值:', diffY);
                     if (diffY <= 0.01) {
                         otherParent.transform.localScaleY -= 0.01;
                     }
