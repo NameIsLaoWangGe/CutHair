@@ -1019,7 +1019,7 @@ export module lwg {
         export class Object3D extends Laya.Script3D {
             /**挂载当前脚本的节点*/
             self: Laya.Sprite3D;
-            /**所在场景*/
+            /**所在的3D场景*/
             selfScene: Laya.Scene3D;
             /***/
             selfTransform: Laya.Transform3D;
@@ -2976,10 +2976,25 @@ export module lwg {
     export module Tools {
 
         /**
+         * 二维坐标中一个点按照另一个点旋转一定的角度后，得到的点
+         * @param x0 原点X
+         * @param y0 原点Y
+         * @param x1 旋转点X
+         * @param y1 旋转点Y
+         * @param angle 角度
+         */
+        export function dotRotateXY(x0, y0, x1, y1, angle): Laya.Point {
+            let x2 = x0 + (x1 - x0) * Math.cos(angle * Math.PI / 180) - (y1 - y0) * Math.sin(angle * Math.PI / 180);
+            let y2 = y0 + (x1 - x0) * Math.sin(angle * Math.PI / 180) + (y1 - y0) * Math.cos(angle * Math.PI / 180);
+            return new Laya.Point(x2,y2);
+        }
+
+
+        /**
          * RGB三个颜色值转换成16进制的字符串‘000000’，需要加上‘#’；
          * */
         export function toHexString(r, g, b) {
-            return ("00000" + (r << 16 | g << 8 | b).toString(16)).slice(-6);
+            return '#' + ("00000" + (r << 16 | g << 8 | b).toString(16)).slice(-6);
         }
 
         /**

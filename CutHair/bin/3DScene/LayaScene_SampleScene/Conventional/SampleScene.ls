@@ -105,14 +105,14 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0,
-						37.2,
-						-52.8
+						-3.23,
+						128.8,
+						-0.45
 					],
 					"rotation":[
 						0,
-						0.5925148,
-						0.8055596,
+						0.9018325,
+						0.4320858,
 						0
 					],
 					"scale":[
@@ -124,8 +124,8 @@
 					"lightmapBakedType":1,
 					"color":[
 						1,
-						0.8886326,
-						0.6462264
+						1,
+						1
 					]
 				},
 				"components":[],
@@ -213,7 +213,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Nose.lmat"
 										}
 									]
@@ -251,7 +250,6 @@
 							"enableRender":true,
 							"materials":[
 								{
-									"type":"Laya.BlinnPhongMaterial",
 									"path":"Assets/Material/Wall.lmat"
 								}
 							]
@@ -283,8 +281,8 @@
 							"layer":0,
 							"position":[
 								-3.6,
-								-48.43,
-								128.7
+								-43.39,
+								125.79
 							],
 							"rotation":[
 								-0.5,
@@ -301,7 +299,6 @@
 							"enableRender":true,
 							"materials":[
 								{
-									"type":"Laya.BlinnPhongMaterial",
 									"path":"Assets/Material/Floor.lmat"
 								}
 							]
@@ -352,7 +349,6 @@
 					"enableRender":true,
 					"materials":[
 						{
-							"type":"Laya.BlinnPhongMaterial",
 							"path":"Assets/Mesh/armchair.lmat"
 						}
 					]
@@ -414,7 +410,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Mesh/Razor.lmat"
 										}
 									]
@@ -450,7 +445,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Mesh/Razor.lmat"
 										}
 									]
@@ -486,7 +480,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Mesh/Razor.lmat"
 										}
 									]
@@ -522,7 +515,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Mesh/Razor.lmat"
 										}
 									]
@@ -558,7 +550,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Mesh/Razor.lmat"
 										}
 									]
@@ -594,7 +585,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Mesh/Razor.lmat"
 										}
 									]
@@ -780,74 +770,8 @@
 				"components":[],
 				"child":[
 					{
-						"type":"MeshSprite3D",
-						"instanceID":21,
-						"props":{
-							"name":"HeadCollision",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.138,
-								0.05799866,
-								0
-							],
-							"rotation":[
-								0,
-								-0.7071068,
-								0,
-								-0.7071068
-							],
-							"scale":[
-								1.32,
-								1.1,
-								1.320001
-							],
-							"enableRender":true,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"Rigidbody3D",
-								"mass":1,
-								"isKinematic":true,
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"linearDamping":0,
-								"angularDamping":0,
-								"overrideGravity":false,
-								"gravity":[
-									0,
-									0,
-									0
-								],
-								"shapes":[
-									{
-										"type":"CapsuleColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"radius":0.5,
-										"height":2,
-										"orientation":1
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[]
-					},
-					{
 						"type":"Sprite3D",
-						"instanceID":22,
+						"instanceID":21,
 						"props":{
 							"name":"StarGlasses",
 							"active":true,
@@ -874,7 +798,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":23,
+								"instanceID":22,
 								"props":{
 									"name":"StarGlasses_0",
 									"active":true,
@@ -900,7 +824,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
@@ -910,7 +833,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":24,
+								"instanceID":23,
 								"props":{
 									"name":"StarGlasses_1",
 									"active":true,
@@ -936,7 +859,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
@@ -948,7 +870,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":25,
+						"instanceID":24,
 						"props":{
 							"name":"Head",
 							"active":true,
@@ -975,7 +897,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":26,
+								"instanceID":25,
 								"props":{
 									"name":"Head_0",
 									"active":true,
@@ -1001,7 +923,6 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/face.lmat"
 										}
 									]
@@ -1011,7 +932,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":27,
+								"instanceID":26,
 								"props":{
 									"name":"Head_1",
 									"active":true,
@@ -1037,12 +958,77 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Floor.lmat"
 										}
 									]
 								},
 								"components":[],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":27,
+								"props":{
+									"name":"Capsule",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0,
+										-0.167,
+										0.892
+									],
+									"rotation":[
+										-0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1.3,
+										1.3,
+										1.3
+									],
+									"meshPath":"Library/unity default resources-Capsule.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Resources/unity_builtin_extra.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":20,
+										"isKinematic":false,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":true,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"CapsuleColliderShape",
+												"center":[
+													0,
+													0,
+													0
+												],
+												"radius":0.5,
+												"height":2,
+												"orientation":1
+											}
+										],
+										"isTrigger":false
+									}
+								],
 								"child":[]
 							}
 						]
@@ -1101,12 +1087,30 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":false,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":true,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1136,7 +1140,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1188,8 +1191,8 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.145,
-										1.149002,
+										0.154,
+										1.152,
 										-0.08499956
 									],
 									"rotation":[
@@ -1200,18 +1203,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1241,7 +1262,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1293,7 +1313,7 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.105,
+										0.115,
 										1.149002,
 										-0.08499956
 									],
@@ -1305,18 +1325,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1346,7 +1384,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1398,8 +1435,8 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.066,
-										1.149002,
+										0.073,
+										1.146,
 										-0.08499956
 									],
 									"rotation":[
@@ -1410,18 +1447,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1451,7 +1506,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1503,30 +1557,48 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.02,
-										1.149002,
+										0.032,
+										1.134,
 										-0.08499956
 									],
 									"rotation":[
 										0,
 										0,
-										0,
-										-1
+										-0.1727027,
+										-0.984974
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1556,7 +1628,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1608,7 +1679,7 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.032,
+										0.354,
 										1.149002,
 										-0.08499956
 									],
@@ -1620,18 +1691,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":false,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":true,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1661,7 +1750,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1713,8 +1801,8 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.092,
-										1.116,
+										0.3159,
+										1.152,
 										-0.08499956
 									],
 									"rotation":[
@@ -1725,18 +1813,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1766,7 +1872,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1818,8 +1923,8 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.141,
-										1.1,
+										0.2769,
+										1.149002,
 										-0.08499956
 									],
 									"rotation":[
@@ -1830,18 +1935,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1871,7 +1994,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -1923,8 +2045,8 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.242,
-										1.038,
+										0.2349,
+										1.146004,
 										-0.08499956
 									],
 									"rotation":[
@@ -1935,18 +2057,36 @@
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -1976,7 +2116,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -2028,30 +2167,48 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.321,
-										0.994,
+										0.1939,
+										1.134003,
 										-0.08499956
 									],
 									"rotation":[
 										0,
 										0,
-										0,
-										-1
+										-0.1727027,
+										-0.984974
 									],
 									"scale":[
 										0.015,
-										0.09999999,
+										0.1,
 										0.015
 									],
 									"enableRender":true,
 									"materials":[
 										{
-											"type":"Laya.BlinnPhongMaterial",
 											"path":"Assets/Material/Glasses.lmat"
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
 								"child":[
 									{
 										"type":"MeshSprite3D",
@@ -2081,2107 +2238,6 @@
 											"enableRender":true,
 											"materials":[
 												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":49,
-								"props":{
-									"name":"HairlineRoot (10)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.419,
-										0.875,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":50,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":51,
-								"props":{
-									"name":"HairlineRoot (11)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.487,
-										0.726,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":52,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":53,
-								"props":{
-									"name":"HairlineRoot (12)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1948999,
-										1.075,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":54,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":55,
-								"props":{
-									"name":"HairlineRoot (13)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.282,
-										1.02,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":56,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":57,
-								"props":{
-									"name":"HairlineRoot (14)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.367,
-										0.952,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":58,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":59,
-								"props":{
-									"name":"HairlineRoot (15)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.457,
-										0.826,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":60,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":61,
-								"props":{
-									"name":"HairlineRoot (16)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.513,
-										1.059,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":62,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":63,
-								"props":{
-									"name":"HairlineRoot (17)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4658999,
-										1.089,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":64,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":65,
-								"props":{
-									"name":"HairlineRoot (18)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3868999,
-										1.11,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":66,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":67,
-								"props":{
-									"name":"HairlineRoot (19)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2889,
-										1.126,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":68,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":69,
-								"props":{
-									"name":"HairlineRoot (20)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4259,
-										1.106,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":70,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":71,
-								"props":{
-									"name":"HairlineRoot (21)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3409,
-										1.12,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":72,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":73,
-								"props":{
-									"name":"HairlineRoot (22)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2289,
-										1.14,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":74,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":75,
-								"props":{
-									"name":"HairlineRoot (23)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.757,
-										0.839,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":76,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":77,
-								"props":{
-									"name":"HairlineRoot (24)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.722,
-										0.897,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":78,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":79,
-								"props":{
-									"name":"HairlineRoot (25)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.686,
-										0.938,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":80,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":81,
-								"props":{
-									"name":"HairlineRoot (26)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.599,
-										1.003,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":82,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":83,
-								"props":{
-									"name":"HairlineRoot (27)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.811,
-										0.822,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0.3544542,
-										-0.9350734
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":84,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":85,
-								"props":{
-									"name":"HairlineRoot (28)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.558,
-										1.038,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":86,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":87,
-								"props":{
-									"name":"HairlineRoot (29)",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.638,
-										0.988,
-										-0.08499956
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.015,
-										0.09999999,
-										0.015
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":88,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Material/Glasses.lmat"
 												}
 											]
@@ -4225,6 +2281,151 @@
 								]
 							}
 						]
+					}
+				]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":49,
+				"props":{
+					"name":"standardParent",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.034,
+						95.034,
+						7.726
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[],
+				"child":[
+					{
+						"type":"MeshSprite3D",
+						"instanceID":50,
+						"props":{
+							"name":"standard",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.233,
+								-0.085,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								-0.1736483,
+								-0.9848078
+							],
+							"scale":[
+								1,
+								0.01,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":51,
+						"props":{
+							"name":"standard",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.708,
+								-0.085,
+								0.007
+							],
+							"rotation":[
+								0,
+								0,
+								0.1736482,
+								-0.9848078
+							],
+							"scale":[
+								1,
+								0.01,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
 					}
 				]
 			}

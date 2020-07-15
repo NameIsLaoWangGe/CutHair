@@ -24,8 +24,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     lwgInit(): void {
         
-
-        
         this.Razor = this.self.getChildByName('Razor') as Laya.Sprite3D;
         this.razorFPos.x = this.Razor.transform.localPositionX;
         this.razorFPos.y = this.Razor.transform.localPositionY;

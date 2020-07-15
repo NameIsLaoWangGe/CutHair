@@ -1914,8 +1914,14 @@
         })(PalyAudio = lwg.PalyAudio || (lwg.PalyAudio = {}));
         let Tools;
         (function (Tools) {
+            function dotRotateXY(x0, y0, x1, y1, angle) {
+                let x2 = x0 + (x1 - x0) * Math.cos(angle * Math.PI / 180) - (y1 - y0) * Math.sin(angle * Math.PI / 180);
+                let y2 = y0 + (x1 - x0) * Math.sin(angle * Math.PI / 180) + (y1 - y0) * Math.cos(angle * Math.PI / 180);
+                return new Laya.Point(x2, y2);
+            }
+            Tools.dotRotateXY = dotRotateXY;
             function toHexString(r, g, b) {
-                return ("00000" + (r << 16 | g << 8 | b).toString(16)).slice(-6);
+                return '#' + ("00000" + (r << 16 | g << 8 | b).toString(16)).slice(-6);
             }
             Tools.toHexString = toHexString;
             function twoObjectsLen_3D(obj1, obj2) {
@@ -2143,20 +2149,26 @@
         }
         onTriggerEnter(other) {
             let otherOwner = other.owner;
-            let otherParent = otherOwner.parent;
+            let otherOwnerParent = otherOwner.parent;
             switch (otherOwner.name) {
                 case 'Hairline':
-                    let diffY = Math.abs((this.selfTransform.position.y - 0.05) - otherParent.transform.position.y);
-                    let HairlineH = otherParent.transform.localScaleY * 2 * otherOwner.transform.localScaleY;
+                    let length = otherOwnerParent.transform.localScaleY * 2 * otherOwner.transform.localScaleY;
+                    let HairlineH = lwg.Tools.dotRotateXY(otherOwnerParent.transform.position.x, otherOwnerParent.transform.position.y, otherOwnerParent.transform.position.x, otherOwnerParent.transform.position.y + length, otherOwnerParent.transform.localRotationEulerZ).y - otherOwnerParent.transform.position.y;
+                    let diffY = Math.abs((this.selfTransform.position.y - this.self.transform.localScaleY / 2) - otherOwnerParent.transform.position.y);
                     let cutH = HairlineH - diffY;
-                    let ratio = cutH / HairlineH;
-                    otherParent.transform.localScaleY -= otherParent.transform.localScaleY * ratio;
-                    console.log('截取比例', ratio);
-                    return;
+                    let cutRatio = cutH / HairlineH;
+                    otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
+                    let cutHairline = otherOwnerParent.clone();
+                    cutHairline.transform.localScaleY -= otherOwnerParent.transform.localScaleY * (1 - cutRatio);
+                    cutHairline.name = 'cutHairline';
+                    cutHairline.getChildAt(0).name = 'cutHairline';
+                    otherOwnerParent.parent.addChild(cutHairline);
                     break;
                 default:
                     break;
             }
+        }
+        cutHairline(len) {
         }
         lwgOnUpdate() {
         }
