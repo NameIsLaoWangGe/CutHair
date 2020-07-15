@@ -1,6 +1,7 @@
 import { lwg } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
+import GameMain3D_Floor from "./GameMain3D_Floor";
 export default class GameMain3D extends lwg.Admin.Scene3D {
 
     Razor: Laya.Sprite3D = new Laya.Sprite3D();
@@ -20,10 +21,12 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     Assembly: Laya.Sprite3D = new Laya.Sprite3D();
     Mustache_RootTem: Laya.Sprite3D = new Laya.Sprite3D();
 
+    Floor: Laya.Sprite3D = new Laya.Sprite3D();
+
     constructor() { super(); }
 
     lwgInit(): void {
-        
+
         this.Razor = this.self.getChildByName('Razor') as Laya.Sprite3D;
         this.razorFPos.x = this.Razor.transform.localPositionX;
         this.razorFPos.y = this.Razor.transform.localPositionY;
@@ -31,7 +34,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.razorFEulerY = this.Razor.transform.localRotationEulerY;
         this.Razor.addComponent(GameMain3D_Razor);
 
-        // this.Head = this.self.getChildByName('Head') as Laya.MeshSprite3D;
+        this.Floor = this.self.getChildByName('Floor') as Laya.Sprite3D;
+        this.Floor.addComponent(GameMain3D_Floor);
+
+        this.Head = this.self.getChildByName('Head') as Laya.MeshSprite3D;
         // this.headFPos.x = this.Head.transform.localPositionX;
         // this.headFPos.y = this.Head.transform.localPositionY;
         // this.headFPos.z = this.Head.transform.localPositionZ;

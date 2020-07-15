@@ -29,7 +29,9 @@ export module record {
     }
 
     export enum Unity {
-        size = '一个模型真实大小测量方法，1、给一个模型增加一个boxCollider组件，此时会自动计算物体的长宽高，并且显示在boxcollider中;2、如果需要调整模型的大小，用scale，这时候会自动调整boxcollider的大小，无需手动调整，但是boxcollider的长宽高数字并不会发生改变，不需要改变这个值。那么此时模型的大小就是boxcollider.size*scale;3.如果物体的父节点也发生了scale缩放，则模型的真实大小为boxcollider.size*scale*parent.size；4、如果父节点还有父节点发生了缩放，那么逐级进行*parent.size'
+        size = '一个模型真实大小测量方法，1、给一个模型增加一个boxCollider组件，此时会自动计算物体的长宽高，并且显示在boxcollider中;2、如果需要调整模型的大小，用scale，这时候会自动调整boxcollider的大小，无需手动调整，但是boxcollider的长宽高数字并不会发生改变，不需要改变这个值。那么此时模型的大小就是boxcollider.size*scale;3.如果物体的父节点也发生了scale缩放，则模型的真实大小为boxcollider.size*scale*parent.size；4、如果父节点还有父节点发生了缩放，那么逐级进行*parent.size',
+
+        IsTrigger = '在box中，这个IsTrigger表示是否为触发器，如果IsTrigger=true，则不受物理属性影响，并且需要用onTriggerEnter进行碰撞检测，如果为false，则用onCollisionEnter方法检测碰撞；如果一个为true另一个为false的两个物体碰撞，那么在他们的挂载的脚本中，检测碰撞也是不一样的，必须和IsTrigger所匹配'
     }
 
     /**一些变量的初始化*/

@@ -26,16 +26,20 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
 
                 // 克隆一个掉落的头发，并且使其掉落
-                let cutHairline = otherOwnerParent.clone() as Laya.MeshSprite3D;
-                cutHairline.transform.localScaleY -= otherOwnerParent.transform.localScaleY * (1 - cutRatio);
-                cutHairline.name = 'cutHairline';
-                cutHairline.getChildAt(0).name = 'cutHairline';
-                otherOwnerParent.parent.addChild(cutHairline);
+                let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
+                cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                cutHair.transform.position = this.self.transform.position;
+                let CutHairParent =( this.selfScene['GameMain3D'].Head as Laya.Sprite3D).getChildByName('CutHairParent')as Laya.Sprite3D;
+                // cutHair.name = 'cutHair';
+                // CutHairParent.addChild(cutHair);
+                
+                // let cutHairline = cutHair.getChildAt(0);
+                // cutHairline.name = 'cutHairline';
                 // let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
                 // rig3D.isKinematic = false;
-                // rig3D.restitution = 0.1;
-                // rig3D.gravity = (new Laya.Vector3(0, -1, 0));
-                // rig3D.mass = 0.1;
+                // rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.1));
+                // rig3D.rollingFriction = 0.5;
+                // rig3D.restitution = 0;
                 break;
             default:
                 break;

@@ -2158,11 +2158,19 @@
                     let cutH = HairlineH - diffY;
                     let cutRatio = cutH / HairlineH;
                     otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
-                    let cutHairline = otherOwnerParent.clone();
-                    cutHairline.transform.localScaleY -= otherOwnerParent.transform.localScaleY * (1 - cutRatio);
+                    let cutHair = otherOwnerParent.clone();
+                    cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                    cutHair.transform.position = this.self.transform.position;
+                    let CutHairParent = this.selfScene['GameMain3D'].Head.getChildByName('CutHairParent');
+                    cutHair.name = 'cutHair';
+                    CutHairParent.addChild(cutHair);
+                    let cutHairline = cutHair.getChildAt(0);
                     cutHairline.name = 'cutHairline';
-                    cutHairline.getChildAt(0).name = 'cutHairline';
-                    otherOwnerParent.parent.addChild(cutHairline);
+                    let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
+                    rig3D.isKinematic = false;
+                    rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.1));
+                    rig3D.rollingFriction = 0.5;
+                    rig3D.restitution = 0;
                     break;
                 default:
                     break;
@@ -2211,6 +2219,27 @@
         }
     }
 
+    class GameMain3D_Floor extends lwg.Admin.Object3D {
+        lwgInit() {
+            console.log(this.self);
+            this.rig3D.restitution = 0;
+        }
+        onTriggerEnter(other) {
+            let owner = other.owner;
+            switch (owner.name) {
+                case 'cutHairline':
+                    owner.parent.removeSelf();
+                    break;
+                default:
+                    break;
+            }
+        }
+        lwgOnUpdate() {
+        }
+        lwgDisable() {
+        }
+    }
+
     class GameMain3D extends lwg.Admin.Scene3D {
         constructor() {
             super();
@@ -2224,6 +2253,7 @@
             this.mainCameraFpos = new Laya.Vector3();
             this.Assembly = new Laya.Sprite3D();
             this.Mustache_RootTem = new Laya.Sprite3D();
+            this.Floor = new Laya.Sprite3D();
         }
         lwgInit() {
             this.Razor = this.self.getChildByName('Razor');
@@ -2232,6 +2262,9 @@
             this.razorFPos.z = this.Razor.transform.localPositionZ;
             this.razorFEulerY = this.Razor.transform.localRotationEulerY;
             this.Razor.addComponent(GameMain3D_Razor);
+            this.Floor = this.self.getChildByName('Floor');
+            this.Floor.addComponent(GameMain3D_Floor);
+            this.Head = this.self.getChildByName('Head');
         }
         refresh3DScene() {
             this.Razor.transform.localPositionX = this.razorFPos.x;
