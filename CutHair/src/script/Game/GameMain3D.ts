@@ -23,6 +23,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     Floor: Laya.Sprite3D = new Laya.Sprite3D();
 
+    Capsule: Laya.Sprite3D = new Laya.Sprite3D();
+
     constructor() { super(); }
 
     lwgInit(): void {
@@ -38,6 +40,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.Floor.addComponent(GameMain3D_Floor);
 
         this.Head = this.self.getChildByName('Head') as Laya.MeshSprite3D;
+        this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
+        let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+        capsuleRig3D.restitution = 0;
+
         // this.headFPos.x = this.Head.transform.localPositionX;
         // this.headFPos.y = this.Head.transform.localPositionY;
         // this.headFPos.z = this.Head.transform.localPositionZ;

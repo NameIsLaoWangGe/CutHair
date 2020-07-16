@@ -283,8 +283,8 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						-0.246,
-						95.534,
+						-0.361,
+						95.764,
 						6.506
 					],
 					"rotation":[
@@ -828,8 +828,75 @@
 						]
 					},
 					{
-						"type":"Sprite3D",
+						"type":"MeshSprite3D",
 						"instanceID":23,
+						"props":{
+							"name":"Capsule",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.167,
+								-0.02999878,
+								0
+							],
+							"rotation":[
+								0,
+								-0.7071068,
+								0,
+								-0.7071068
+							],
+							"scale":[
+								1.3,
+								1.3,
+								1.3
+							],
+							"meshPath":"Library/unity default resources-Capsule.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"Rigidbody3D",
+								"mass":20,
+								"isKinematic":true,
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"linearDamping":0,
+								"angularDamping":0,
+								"overrideGravity":true,
+								"gravity":[
+									0,
+									0,
+									0
+								],
+								"shapes":[
+									{
+										"type":"CapsuleColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"radius":0.5,
+										"height":2,
+										"orientation":1
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
+					},
+					{
+						"type":"Sprite3D",
+						"instanceID":24,
 						"props":{
 							"name":"Head",
 							"active":true,
@@ -856,7 +923,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":24,
+								"instanceID":25,
 								"props":{
 									"name":"Head_1",
 									"active":true,
@@ -887,73 +954,6 @@
 									]
 								},
 								"components":[],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":25,
-								"props":{
-									"name":"Capsule",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.167,
-										1.098
-									],
-									"rotation":[
-										-0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1.3,
-										1.3,
-										1.3
-									],
-									"meshPath":"Library/unity default resources-Capsule.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Resources/unity_builtin_extra.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":20,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":true,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"CapsuleColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"radius":0.5,
-												"height":2,
-												"orientation":1
-											}
-										],
-										"isTrigger":false
-									}
-								],
 								"child":[]
 							}
 						]
@@ -6598,12 +6598,40 @@
 								]
 							}
 						]
+					},
+					{
+						"type":"Sprite3D",
+						"instanceID":119,
+						"props":{
+							"name":"CutHairParent",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							]
+						},
+						"components":[],
+						"child":[]
 					}
 				]
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":119,
+				"instanceID":120,
 				"props":{
 					"name":"standardParent",
 					"active":true,
@@ -6611,7 +6639,7 @@
 					"layer":0,
 					"position":[
 						-0.034,
-						96.456,
+						97.319,
 						6.554
 					],
 					"rotation":[
@@ -6630,7 +6658,7 @@
 				"child":[
 					{
 						"type":"MeshSprite3D",
-						"instanceID":120,
+						"instanceID":121,
 						"props":{
 							"name":"standard",
 							"active":true,
@@ -6688,7 +6716,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":121,
+						"instanceID":122,
 						"props":{
 							"name":"standard",
 							"active":true,
@@ -6748,7 +6776,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":122,
+				"instanceID":123,
 				"props":{
 					"name":"Floor",
 					"active":true,

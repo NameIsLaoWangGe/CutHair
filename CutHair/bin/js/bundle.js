@@ -2160,16 +2160,16 @@
                     otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
                     let cutHair = otherOwnerParent.clone();
                     cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
-                    cutHair.transform.position = this.self.transform.position;
                     let CutHairParent = this.selfScene['GameMain3D'].Head.getChildByName('CutHairParent');
                     cutHair.name = 'cutHair';
                     CutHairParent.addChild(cutHair);
+                    cutHair.transform.position = this.self.transform.position;
                     let cutHairline = cutHair.getChildAt(0);
                     cutHairline.name = 'cutHairline';
                     let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
                     rig3D.isKinematic = false;
-                    rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.1));
-                    rig3D.rollingFriction = 0.5;
+                    rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
+                    rig3D.rollingFriction = 0;
                     rig3D.restitution = 0;
                     break;
                 default:
@@ -2254,6 +2254,7 @@
             this.Assembly = new Laya.Sprite3D();
             this.Mustache_RootTem = new Laya.Sprite3D();
             this.Floor = new Laya.Sprite3D();
+            this.Capsule = new Laya.Sprite3D();
         }
         lwgInit() {
             this.Razor = this.self.getChildByName('Razor');
@@ -2265,6 +2266,9 @@
             this.Floor = this.self.getChildByName('Floor');
             this.Floor.addComponent(GameMain3D_Floor);
             this.Head = this.self.getChildByName('Head');
+            this.Capsule = this.Head.getChildByName('Capsule');
+            let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
+            capsuleRig3D.restitution = 0;
         }
         refresh3DScene() {
             this.Razor.transform.localPositionX = this.razorFPos.x;
@@ -2325,7 +2329,7 @@
             super(...arguments);
             this.cameraAndRazorPos = new Laya.Vector3();
             this.moveSwitch = false;
-            this.speed = 0.08;
+            this.speed = 0.09;
         }
         selfNode() {
             this.Rocker = this.self['Rocker'];

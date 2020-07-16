@@ -83,7 +83,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
 
     /**指引图标的移动速度，也表现为灵敏度*/
-    speed: number = 0.08;
+    speed: number = 0.09;
     /**剃须刀跟随指引节点*/
     RazorFellowGuide(): void {
         let p = lwg.Tools.twoSubV3_3D(this.Razor.transform.position, this.Guide.transform.position);
