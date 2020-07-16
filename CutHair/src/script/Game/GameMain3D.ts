@@ -2,6 +2,7 @@ import { lwg } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
+import { Global, G, GEnum } from "../Lwg_Template/Global";
 export default class GameMain3D extends lwg.Admin.Scene3D {
 
     Razor: Laya.Sprite3D = new Laya.Sprite3D();
@@ -25,9 +26,19 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     Capsule: Laya.Sprite3D = new Laya.Sprite3D();
 
+    /**四个节点代表摄像机移动到四个任务的方位*/
+    Landmark_Left: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Right: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Side: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Top: Laya.Sprite3D = new Laya.Sprite3D();
     constructor() { super(); }
 
     lwgInit(): void {
+        this.Landmark_Left = this.self.getChildByName('Landmark_Left') as Laya.Sprite3D;
+        this.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.Sprite3D;
+        this.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.Sprite3D;
+        this.Landmark_Top = this.self.getChildByName('Landmark_Top') as Laya.Sprite3D;
+
 
         this.Razor = this.self.getChildByName('Razor') as Laya.Sprite3D;
         this.razorFPos.x = this.Razor.transform.localPositionX;
@@ -44,36 +55,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         capsuleRig3D.restitution = 0;
 
-        // this.headFPos.x = this.Head.transform.localPositionX;
-        // this.headFPos.y = this.Head.transform.localPositionY;
-        // this.headFPos.z = this.Head.transform.localPositionZ;
-        // this.headFEulerY = this.Head.transform.localRotationEulerY;
+        G._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
 
-        // this.LevelTem = this.self.getChildByName('Level1') as Laya.MeshSprite3D;
-        // this.LevelFpos.x = this.LevelTem.transform.localPositionX;
-        // this.LevelFpos.y = this.LevelTem.transform.localPositionY;
-        // this.LevelFpos.z = this.LevelTem.transform.localPositionZ;
-
-        // this.LevelTem.removeSelf();
-        // this.Level = this.LevelTem.clone() as Laya.MeshSprite3D;
-        // this.self.addChild(this.Level);
-
-        // let MustacheParent = this.Level.getChildByName('MustacheParent') as Laya.MeshSprite3D;
-        // for (let index = 0; index < MustacheParent.numChildren; index++) {
-        //     const element = MustacheParent.getChildAt(index);
-        //     let script = element.getComponent(GameMain3D_Moustache);
-        //     if (script === null) {
-        //         element.addComponent(GameMain3D_Moustache);
-        //     }
-        // }
-
-        // this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
-        // this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
-        // this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
-
-        // this.Assembly = this.self.getChildByName('Assembly') as Laya.Sprite3D;
-        // this.Mustache_RootTem = this.Assembly.getChildByName('Mustache_Root') as Laya.Sprite3D;
-        // this.Mustache_RootTem.removeSelf();
     }
 
 

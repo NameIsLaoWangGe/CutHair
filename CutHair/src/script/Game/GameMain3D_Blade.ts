@@ -4,6 +4,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
     lwgInit(): void {
     }
+
     onTriggerEnter(other): void {
         let otherOwner = other.owner as Laya.Sprite3D;
         let otherOwnerParent = otherOwner.parent as Laya.Sprite3D;

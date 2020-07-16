@@ -1,8 +1,7 @@
-// import ADManager, { TaT } from "../../TJ/Admanager";
 
 /**综合模板*/
 export module lwg {
-    /**全局控制,全局变量*/
+    /**全局方法,全局变量，每个游戏不一样*/
     export module Global {
         /**当前的关卡是第几关*/
         export let _gameLevel: number = 1;
@@ -38,22 +37,27 @@ export module lwg {
         export let _CustomsNum: number = 999;
         /**关闭舞台点击事件*/
         export let _stageClick: boolean = true;
+        /**限定皮肤界面是否打开了*/
+        export let _openXD: boolean = false;
 
         /**在体力提示界面中，用于判断在失败界面时，判断从哪个按钮进去，是通过重来按钮还是下一关按钮进来的*/
         export let intoBtn: string;
 
-
         /**当前金币总数数量*/
         export let _goldNum = 0;
-        /**关卡数据表*/
-        export let _levelsData: any;
+        /**提示内容集合*/
+        export let _hintDec: any;
+        /**心灵鸡汤内容集合*/
+        export let _stimulateDec: any;
 
-        /**过关提示的描述*/
-        export let _hintDec: any
-        /**声音开关*/
-        export let _voiceSwitch: boolean = true;
+        /**互推开关*/
+        export let _elect: boolean = true;
+
         /**手机震动开关*/
         export let _shakeSwitch: boolean = true;
+
+        /**某些按钮延迟出现时间*/
+        export let _btnDelayed: number = 2000;
 
         /**当前选中的皮肤样式*/
         export let _currentPifu: string = '01_gongzhu';
@@ -62,7 +66,7 @@ export module lwg {
         /**当前未拥有皮肤名称集合*/
         export let _notHavePifu: Array<string>;
         /**当前未拥有皮肤名称，删除限定的皮肤，是最后一个皮肤*/
-        export let _notHavePifuSubXD: Array<string>;
+        export let _notHavePifuSubXD: Array<string> = [];
         /**所有的皮肤的和排列顺序*/
         export let _allPifu: Array<string> = ['01_gongzhu', '02_chiji', '03_change', '04_huiguniang', '05_tianshi', '06_xiaohongmao', '07_xiaohuangya', '08_zhenzi', '09_aisha'];
 
@@ -72,15 +76,63 @@ export module lwg {
         /**限定皮肤剩余点击看广告的次数*/
         export let _watchAdsNum: number = 0;
 
+        /**皮卡丘的皮肤是否存在了！*/
+        export let _huangpihaozi: boolean = false;
+
+        /**皮卡丘的皮肤是否存在了！*/
+        export let _zibiyazi: boolean = false;
+
+        /**皮卡丘的皮肤是否存在了！*/
+        export let _kejigongzhu: boolean = false;
+        /**皮卡丘的皮肤是否存在了！*/
+        export let _haimiangongzhu: boolean = false;
+
+        /**第二批彩蛋皮肤获取*/
+        export let _paintedPifu: Array<string> = [];
+
+        /**当前选中的皮肤编号*/
+        export let _pickPaintedNum: number = 0;
+
         /**当前在游戏结束后，看广告的模式*/
         export let _gameOverAdvModel: number;
 
         /**当前是否为评测版本,隐藏某些功能*/
         export let pingceV: boolean = true;
 
+        /**屏幕震动*/
+        export function _vibratingScreen(): void {
+        }
 
-        export let _shaverState: string;
-
+        /**找出还没有获得的皮肤,不包括限定皮肤*/
+        export function notHavePifuSubXD(): void {
+            // 所有皮肤赋值给新数组
+            let allArray = [];
+            for (let i = 0; i < lwg.Global._allPifu.length; i++) {
+                const element = lwg.Global._allPifu[i];
+                allArray.push(element);
+            }
+            // 删除已经有的皮肤，得出还没有的皮肤
+            for (let j = 0; j < allArray.length; j++) {
+                let element1 = allArray[j];
+                for (let k = 0; k < lwg.Global._havePifu.length; k++) {
+                    let element2 = lwg.Global._havePifu[k];
+                    if (element1 === element2) {
+                        allArray.splice(j, 1);
+                        j--;
+                    }
+                }
+            }
+            lwg.Global._notHavePifu = allArray;
+            // 去除超人皮肤
+            for (let k = 0; k < allArray.length; k++) {
+                const element = allArray[k];
+                if (element === '09_aisha') {
+                    allArray.splice(k, 1);
+                }
+            }
+            lwg.Global._notHavePifuSubXD = allArray;
+            // console.log(lwg.Global._notHavePifuSubXD);
+        }
 
         /**指代当前界面的等级节点*/
         export let LevelNode: Laya.Sprite;
@@ -182,6 +234,14 @@ export module lwg {
                 GoldNumNode = sp;
             }));
         }
+        /**增加体力*/
+        export function _addGold(number) {
+            lwg.Global._goldNum += number;
+            let Num = lwg.Global.GoldNumNode.getChildByName('Num') as Laya.FontClip;
+            Num.value = lwg.Global._goldNum.toString();
+
+            lwg.LocalStorage.addData();
+        }
 
         /**指代当前剩余体力节点*/
         export let ExecutionNumNode: Laya.Sprite;
@@ -205,6 +265,18 @@ export module lwg {
             }));
         }
 
+        /**增加体力*/
+        export function _addExecution(number) {
+            lwg.Global._execution += number;
+            if (lwg.Global._execution > 15) {
+                lwg.Global._execution = 15;
+            }
+            let num = lwg.Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
+            num.value = lwg.Global._execution.toString();
+
+            lwg.LocalStorage.addData();
+        }
+
         /**指代当前暂停游戏节点*/
         export let BtnPauseNode: Laya.Sprite;
         /**
@@ -218,7 +290,7 @@ export module lwg {
                 _prefab.json = prefab;
                 sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
                 parent.addChild(sp);
-                sp.pos(645, 137);
+                sp.pos(645, 167);
                 sp.zOrder = 0;
                 BtnPauseNode = sp;
                 BtnPauseNode.name = 'BtnPauseNode';
@@ -244,7 +316,7 @@ export module lwg {
                 _prefab.json = prefab;
                 sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
                 parent.addChild(sp);
-                sp.pos(645, 273);
+                sp.pos(645, 293);
                 sp.zOrder = 0;
                 BtnHintNode = sp;
                 BtnHintNode.name = 'BtnHintNode';
@@ -282,7 +354,7 @@ export module lwg {
                 _prefab.json = prefab;
                 sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
                 parent.addChild(sp);
-                sp.pos(645, 404);
+                sp.pos(645, 409);
                 sp.zOrder = 0;
                 Click.on(Click.ClickType.largen, null, sp, null, btnAgainUp, null, null, null);
                 BtnAgainNode = sp;
@@ -290,8 +362,11 @@ export module lwg {
         }
         export function btnAgainUp(event): void {
             event.stopPropagation();
-            refreshNum++;
             event.currentTarget.scale(1, 1);
+            if (!_gameStart) {
+                return;
+            }
+            refreshNum++;
             Admin._refreshScene();
         }
 
@@ -300,14 +375,7 @@ export module lwg {
         /**
          * 创建通用重来prefab
          * @param parent 父节点
-         * @param x x位置
          * @param y y位置
-         * @param soundUrl 音效的地址
-         * @param caller 指向脚本（this）引用
-         * @param down 按下函数
-         * @param move 移动函数
-         * @param up 抬起函数
-         * @param out 出屏幕函数
          */
         export function _createP201_01(parent): void {
             let sp: Laya.Sprite;
@@ -316,9 +384,31 @@ export module lwg {
                 _prefab.json = prefab;
                 sp = Laya.Pool.getItemByCreateFun('P201', _prefab.create, _prefab);
                 parent.addChild(sp);
-                sp.pos(90, 225);
+                sp.pos(80, 290);
                 sp.zOrder = 65;
                 P201_01Node = sp;
+            }));
+        }
+
+        /**动态创建一个心灵鸡汤*/
+        export let StimulateDecNode: Laya.Sprite;
+        /**
+         * 创建通用重来prefab
+         * @param parent 父节点
+         */
+        export function _createStimulateDec(parent, ): void {
+            let sp: Laya.Sprite;
+            Laya.loader.load('prefab/StimulateDec.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('StimulateDec', _prefab.create, _prefab);
+                let dec = sp.getChildByName('Dec') as Laya.Label;
+                let num = lwg.Admin.openCustomName.substring(lwg.Admin.openCustomName.length - 3, lwg.Admin.openCustomName.length);
+                dec.text = lwg.Global._stimulateDec[Number(num) - 1]['dec'];
+                parent.addChild(sp);
+                sp.pos(35, 150);
+                sp.zOrder = 65;
+                StimulateDecNode = sp;
             }));
         }
 
@@ -373,6 +463,34 @@ export module lwg {
             }));
         }
 
+        /**
+        * 创建提示框prefab
+        * @param input 类型，也就是提示文字类型
+        */
+        export function _createHint_InPut(input: string): void {
+            let sp: Laya.Sprite;
+            Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                Laya.stage.addChild(sp);
+                sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
+                let dec = sp.getChildByName('dec') as Laya.Label;
+                dec.text = input
+                sp.zOrder = 100;
+
+                dec.alpha = 0;
+                Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
+                    Animation.fadeOut(dec, 0, 1, 150, 0, f => {
+                        Animation.fadeOut(dec, 1, 0, 200, 1500, f => {
+                            Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                                sp.removeSelf();
+                            });
+                        });
+                    });
+                });
+            }));
+        }
         /**
          * 创建体力消耗动画
          * @param  subEx 消耗多少体力值
@@ -462,7 +580,11 @@ export module lwg {
                 '_currentPifu': lwg.Global._currentPifu,
                 '_havePifu': lwg.Global._havePifu,
                 '_watchAdsNum': lwg.Global._watchAdsNum,
-                // '_gameOverAdvModel': lwg.Global._gameOverAdvModel,
+                '_huangpihaozi': lwg.Global._huangpihaozi,
+                '_zibiyazi': lwg.Global._zibiyazi,
+                '_kejigongzhu': lwg.Global._kejigongzhu,
+                '_pickPaintedNum': lwg.Global._pickPaintedNum,
+                '_haimiangongzhu': lwg.Global._haimiangongzhu
             }
             // 转换成字符串上传
             let data: string = JSON.stringify(storageData);
@@ -495,9 +617,57 @@ export module lwg {
                 lwg.Global._currentPifu = Enum.PifuAllName[0];
                 lwg.Global._havePifu = ['01_gongzhu'];
                 lwg.Global._watchAdsNum = 0;
-                // lwg.Global._gameOverAdvModel = 1;
-                // lwg.Global._whetherAdv = false;
+                lwg.Global._huangpihaozi = false;
+                lwg.Global._zibiyazi = false;
+                lwg.Global._kejigongzhu = false;
+                lwg.Global._haimiangongzhu = false;
+                lwg.Global._pickPaintedNum = 0;
+
                 return null;
+            }
+        }
+    }
+
+    /**事件类*/
+    export module EventAdmin {
+
+        export enum EventType {
+            btnOnClick = 'btnOnClick',
+            aniComplete = 'aniComplete',
+        }
+
+        export class EventClass {
+            static Self = new EventClass();
+
+            /**事件基类*/
+            dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
+
+            /**事件注册*/
+            static reg(type: any, caller: any, listener: Function) {
+                if (!caller) {
+                    console.error("caller must exist!");
+                }
+                EventClass.Self.dispatcher.on(type.toString(), caller, listener);
+            }
+
+            /**事件通知*/
+            static notify(type: any, args?: any) {
+                EventClass.Self.dispatcher.event(type.toString(), args);
+            }
+
+            /**关闭某个事件*/
+            static off(type: any, caller: any, listener: Function) {
+                EventClass.Self.dispatcher.off(type.toString(), caller, listener);
+            }
+
+            /**关闭所有事件*/
+            static offAll(type: any) {
+                EventClass.Self.dispatcher.offAll(type.toString());
+            }
+
+            /**移除某个caller上的所有事件*/
+            static offCaller(caller: any) {
+                EventClass.Self.dispatcher.offAllCaller(caller);
             }
         }
     }
@@ -514,6 +684,7 @@ export module lwg {
             UILoding = 'UILoding',
             UIStart = 'UIStart',
             UIMain = 'UIMain',
+            GameMain3D = 'GameMain3D',
             UIVictory = 'UIVictory',
             UIDefeated = 'UIDefeated',
             UIExecutionHint = 'UIExecutionHint',
@@ -525,8 +696,13 @@ export module lwg {
             UISmallHint = 'UISmallHint',
             UIXDpifu = 'UIXDpifu',
             UIPifuTry = 'UIPifuTry',
+            UIRedeem = 'UIRedeem',
+            UIAnchorXD = 'UIAnchorXD',
+            UITurntable = 'UITurntable',
+            UICaiDanQiang = 'UICaiDanQiang',
+            UICaidanPifu = 'UICaidanPifu',
             UIOperation = 'UIOperation',
-            GameMain3D = 'GameMain3D',
+
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -559,11 +735,22 @@ export module lwg {
                 }
                 scene.name = openName;
                 _sceneControl[openName] = scene;
-                // 背景图自适应
+                // 背景图自适应并且居中
                 let background = scene.getChildByName('background') as Laya.Image;
                 if (background) {
-                    background.width = Laya.stage.width;
-                    background.height = Laya.stage.height;
+                    if (openName.substring(0, 6) === 'UIMain') {
+                        background.width = null;
+                        background.height = null;
+                        background.x = 360;
+                        background.y = 640;
+                        // background.pivotX = background.width / 2;
+                        // background.pivotY = background.height / 2;
+                        // background.x = Laya.stage.width / 2;
+                        // background.y = Laya.stage.height / 2;
+                    } else {
+                        background.width = Laya.stage.width;
+                        background.height = Laya.stage.height;
+                    }
                 }
                 // console.log('打开' + openName + '场景');
                 if (cloesScene) {
@@ -592,7 +779,7 @@ export module lwg {
             } else {
                 num = lwg.Global._gameLevel;
             }
-            openLevelNum = num;
+            openLevelNum = lwg.Global._gameLevel;
             // 格式
             if (num <= 9) {
                 sceneName = 'UIMain_00' + num;
@@ -612,10 +799,10 @@ export module lwg {
         export function _openNumCustom(num): void {
             let sceneName;
             // 大于30关后从第一关开始循环
+            openLevelNum = num;
             if (num > 30) {
                 num = num - 30;
             }
-            openLevelNum = num;
             // 格式
             if (num <= 9) {
                 sceneName = 'UIMain_00' + num;
@@ -689,28 +876,15 @@ export module lwg {
           * 刷新当前实际打开的关卡场景
           **/
         export function _refreshScene(): void {
-            // let sceneName;
-            // if (lwg.Global._gameLevel <= 9) {
-            //     sceneName = 'UIMain_00' + lwg.Global._gameLevel;
-            // } else if (9 < lwg.Global._gameLevel || lwg.Global._gameLevel <= 99) {
-            //     sceneName = 'UIMain_0' + lwg.Global._gameLevel;
-            // }
             _sceneControl[openCustomName].close();
             _openScene(openCustomName, null, null, null);
         }
-
 
         /**
         * 关闭当前实际打开的关卡场景
         **/
         export function _closeCustomScene(): void {
             console.log('关闭当前关卡' + openCustomName);
-            // let sceneName;
-            // if (gameLevel <= 9) {
-            //     sceneName = 'UIMain_00' + gameLevel;
-            // } else if (9 < gameLevel || gameLevel <= 99) {
-            //     sceneName = 'UIMain_0' + gameLevel;
-            // }
             _sceneControl[openCustomName].close();
         }
 
@@ -789,39 +963,42 @@ export module lwg {
             constructor() {
                 super();
             }
-            onEnable() {
+            onAwake(): void {
                 this.self = this.owner as Laya.Scene;
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
                 this.gameState(this.calssName);
+                this.selfNode();
+                this.variateInit();
+                this.adaptive();
+            }
+            onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
-                this.selfNode();
                 this.lwgInit();
-                this.btnOnClick();
-                this.adaptive();
-                this.openAni();
-                // printPoint('on', this.calssName);
+                this.btnAndOpenAni();
             }
-            /**节点引用声明*/
+            /**声明场景里的一些节点*/
             selfNode(): void {
 
             }
-
-            /**游戏当前的状态*/
+            /**初始化一些变量*/
+            variateInit() {
+            }
+            /**游戏当前的状态,有些页面没有状态*/
             gameState(calssName): void {
                 switch (calssName) {
                     case SceneName.UIStart:
-                        _gameState = lwg.Enum.GameState.GameStart;
+                        _gameState = GameState.GameStart;
                         break;
                     case SceneName.UIMain:
-                        _gameState = lwg.Enum.GameState.Play;
+                        _gameState = GameState.Play;
                         break;
                     case SceneName.UIDefeated:
-                        _gameState = lwg.Enum.GameState.Defeated;
+                        _gameState = GameState.Defeated;
                         break;
                     case SceneName.UIVictory:
-                        _gameState = lwg.Enum.GameState.Victory;
+                        _gameState = GameState.Victory;
                         break;
                     default:
                         break;
@@ -832,30 +1009,50 @@ export module lwg {
             lwgInit(): void {
                 // console.log('父类的初始化！');
             }
-            /**点击事件注册*/
+            /**通过openni返回的时间来延时开启点击事件*/
+            btnAndOpenAni(): void {
+                let time = this.openAni();
+                if (time) {
+                    Laya.timer.once(time, this, f => {
+                        this.btnOnClick();
+                    });
+                } else {
+                    this.btnOnClick();
+                }
+            }
+            /**按钮点击事件注册*/
             btnOnClick(): void {
             }
+
+            /**开场或者离场动画单位时间*/
+            aniTime: number = 0;
+            /**开场或者离场动画单位延迟时间*/
+            aniDelayde: number = 0;
+            /**开场动画,返回的数字用于开启点击事件*/
+            openAni(): number {
+                return this.aniTime;
+            }
+
             /**一些节点自适应*/
             adaptive(): void {
             }
-            /**开场动画*/
-            openAni(): void {
-            }
+
             /**离场动画*/
-            vanishAni(): void {
+            vanishAni(): number {
+                return 0;
             }
 
             onUpdate(): void {
-                this.lwgUpDate();
+                this.lwgOnUpdate();
             }
 
-            /**每帧更新时执行，尽量不要在这里写大循环逻辑或者使用*/
-            lwgUpDate(): void {
+            lwgOnUpdate(): void {
 
             }
+
             onDisable(): void {
-                // printPoint('dis', this.calssName);
                 this.lwgDisable();
+                Laya.timer.clearAll(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgDisable(): void {
@@ -866,21 +1063,21 @@ export module lwg {
         /**场景通用父类*/
         export class Scene3D extends Laya.Script3D {
             /**挂载当前脚本的节点*/
-            self: Laya.Scene;
+            self: Laya.Scene3D;
             calssName: string;
             MainCamera: Laya.Sprite3D;
             constructor() {
                 super();
             }
             onEnable() {
-                this.self = this.owner as Laya.Scene;
+                this.self = this.owner as Laya.Scene3D;
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
                 this.gameState(this.calssName);
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
                 this.MainCamera = this.self.getChildByName("Main Camera") as Laya.MeshSprite3D;
-                this.selfVars();
+                this.selfNode();
                 this.lwgInit();
                 this.btnOnClick();
                 this.adaptive();
@@ -888,22 +1085,22 @@ export module lwg {
                 // printPoint('on', this.calssName);
             }
             /**场景背部全局变量*/
-            selfVars(): void {
+            selfNode(): void {
             }
             /**游戏当前的状态*/
             gameState(calssName): void {
                 switch (calssName) {
                     case SceneName.UIStart:
-                        _gameState = lwg.Enum.GameState.GameStart;
+                        _gameState = GameState.GameStart;
                         break;
                     case SceneName.UIMain:
-                        _gameState = lwg.Enum.GameState.Play;
+                        _gameState = GameState.Play;
                         break;
                     case SceneName.UIDefeated:
-                        _gameState = lwg.Enum.GameState.Defeated;
+                        _gameState = GameState.Defeated;
                         break;
                     case SceneName.UIVictory:
-                        _gameState = lwg.Enum.GameState.Victory;
+                        _gameState = GameState.Victory;
                         break;
                     default:
                         break;
@@ -944,7 +1141,6 @@ export module lwg {
 
             }
         }
-
 
         /**角色通用父类*/
         export class Person extends Laya.Script {
@@ -956,6 +1152,12 @@ export module lwg {
             rig: Laya.RigidBody;
             constructor() {
                 super();
+            }
+            onAwake(): void {
+
+            }
+            lwgOnAwake(): void {
+
             }
             onEnable(): void {
                 this.self = this.owner as Laya.Sprite;
@@ -984,6 +1186,14 @@ export module lwg {
             constructor() {
                 super();
             }
+
+            onAwake(): void {
+                this.selfNode();
+            }
+            /**声明场景里的一些节点*/
+            selfNode(): void {
+
+            }
             onEnable(): void {
                 this.self = this.owner as Laya.Sprite;
                 this.selfScene = this.self.scene;
@@ -993,12 +1203,15 @@ export module lwg {
                 this.self[calssName] = this;
                 this.rig = this.self.getComponent(Laya.RigidBody);
                 this.lwgInit();
+                this.btnOnClick();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
             lwgInit(): void {
                 console.log('父类的初始化！');
             }
-
+            /**点击事件注册*/
+            btnOnClick(): void {
+            }
             onUpdate(): void {
                 this.lwgOnUpdate();
             }
@@ -1006,13 +1219,14 @@ export module lwg {
 
             }
             onDisable(): void {
-
+                this.lwgDisable();
+                Laya.Tween.clearTween(this);
             }
-
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgDisable(): void {
 
             }
+
         }
 
         /**物件通用父类*/
@@ -1061,69 +1275,35 @@ export module lwg {
         }
     }
 
-    export module Event {
-        export class Mgr {
-            static I: Mgr;
-
-            dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
-
-            init(segment) {
-                Mgr.notify("preloadStep", segment);
-            }
-
-            static reg(type: any, caller: any, listener: Function) {
-                if (!caller) {
-                    console.error("caller must exist!");
-                }
-                Mgr.I.dispatcher.on(type.toString(), caller, listener);
-            }
-
-            static notify(type: any, args?: any) {
-                Mgr.I.dispatcher.event(type.toString(), args);
-            }
-
-            static off(type: any, caller: any, listener: Function) {
-                Mgr.I.dispatcher.off(type.toString(), caller, listener);
-            }
-
-            static offAll(type: any) {
-                Mgr.I.dispatcher.offAll(type.toString());
-            }
-
-            static offCaller(caller: any) {
-                Mgr.I.dispatcher.offAllCaller(caller);
-            }
-        }
-    }
-
     export module Effects {
         /**特效元素的图片地址，所有项目都可用*/
         export enum SkinUrl {
-            'Frame/Effects/cir_white.png',
-            "Frame/Effects/cir_black.png",
-            "Frame/Effects/cir_blue.png",
-            "Frame/Effects/cir_bluish.png",
-            "Frame/Effects/cir_cyan.png",
-            "Frame/Effects/cir_grass.png",
-            "Frame/Effects/cir_green.png",
-            "Frame/Effects/cir_orange.png",
-            "Frame/Effects/cir_pink.png",
-            "Frame/Effects/cir_purple.png",
-            "Frame/Effects/cir_red.png",
-            "Frame/Effects/cir_yellow.png",
+            'Effects/cir_white.png',
+            "Effects/cir_black.png",
+            "Effects/cir_blue.png",
+            "Effects/cir_bluish.png",
+            "Effects/cir_cyan.png",
+            "Effects/cir_grass.png",
+            "Effects/cir_green.png",
+            "Effects/cir_orange.png",
+            "Effects/cir_pink.png",
+            "Effects/cir_purple.png",
+            "Effects/cir_red.png",
+            "Effects/cir_yellow.png",
 
-            "Frame/Effects/star_black.png",
-            "Frame/Effects/star_blue.png",
-            "Frame/Effects/star_bluish.png",
-            "Frame/Effects/star_cyan.png",
-            "Frame/Effects/star_grass.png",
-            "Frame/Effects/star_green.png",
-            "Frame/Effects/star_orange.png",
-            "Frame/Effects/star_pink.png",
-            "Frame/Effects/star_purple.png",
-            "Frame/Effects/star_red.png",
-            "Frame/Effects/star_white.png",
-            "Frame/Effects/star_yellow.png"
+            "Effects/star_black.png",
+            "Effects/star_blue.png",
+            "Effects/star_bluish.png",
+            "Effects/star_cyan.png",
+            "Effects/star_grass.png",
+            "Effects/star_green.png",
+            "Effects/star_orange.png",
+            "Effects/star_pink.png",
+            "Effects/star_purple.png",
+            "Effects/star_red.png",
+            "Effects/star_white.png",
+            "Effects/star_yellow.png",
+            "Effects/icon_biggold.png"
         }
 
         /**类粒子特效的通用父类*/
@@ -1156,12 +1336,14 @@ export module lwg {
             /**初始角度*/
             startRotat: number;
 
-
             /**随机旋转方向*/
             startDir: number;
             /**随机消失时间*/
-            vanishTime: number;
+            continueTime: number;
 
+            onAwake(): void {
+                this.initProperty();
+            }
             onEnable(): void {
                 this.self = this.owner as Laya.Sprite;
                 this.selfScene = this.self.scene;
@@ -1171,7 +1353,6 @@ export module lwg {
                 this.self.pivotY = this.self.height / 2;
                 this.timer = 0;
                 this.lwgInit();
-                this.initProperty();
                 this.propertyAssign();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
@@ -1216,22 +1397,31 @@ export module lwg {
          * 创建普通爆炸动画，四周爆炸随机散开
          * @param parent 父节点
          * @param quantity 数量
+         * @param speed 速度
+         * @param continueTime 持续时间（按帧数计算）
          * @param x X轴位置
          * @param y Y轴位置
          */
-        export function createCommonExplosion(parent, quantity, x, y): void {
+        export function createCommonExplosion(parent, quantity, x, y, style, speed, continueTime): void {
             for (let index = 0; index < quantity; index++) {
                 let ele = Laya.Pool.getItemByClass('ele', Laya.Image) as Laya.Image;
                 ele.name = 'ele';//标识符和名称一样
-                let num = Math.floor(Math.random() * 12);
-                ele.alpha = 1;
+                let num
+                if (style === 'star') {
+                    num = 12 + Math.floor(Math.random() * 12);
+                } else if (style === 'dot') {
+                    num = Math.floor(Math.random() * 12);
+                }
                 ele.skin = SkinUrl[num];
+                ele.alpha = 1;
                 parent.addChild(ele);
                 ele.pos(x, y);
                 let scirpt = ele.getComponent(commonExplosion);
                 if (!scirpt) {
-                    ele.addComponent(commonExplosion);
+                    scirpt = ele.addComponent(commonExplosion);
                 }
+                scirpt.startSpeed = 5 * Math.random() + speed;
+                scirpt.continueTime = 8 * Math.random() + continueTime;
             }
         }
 
@@ -1242,14 +1432,14 @@ export module lwg {
                 this.startSpeed = 5 * Math.random() + 8;
                 this.startScale = 0.4 + Math.random() * 0.6;
                 this.accelerated = 0.1;
-                this.vanishTime = 8 + Math.random() * 10;
+                this.continueTime = 8 + Math.random() * 10;
             }
             moveRules(): void {
                 this.timer++;
-                if (this.timer >= this.vanishTime / 2) {
-                    this.self.alpha -= 0.15;
+                if (this.timer >= this.continueTime / 2) {
+                    this.self.alpha -= 0.1;
                 }
-                if (this.timer >= this.vanishTime) {
+                if (this.timer >= this.continueTime) {
                     this.self.removeSelf();
                 } else {
                     this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
@@ -1272,6 +1462,7 @@ export module lwg {
             ele.name = 'addGold';//标识符和名称一样
             let num = Math.floor(Math.random() * 12);
             ele.alpha = 1;
+            ele.scale(1, 1);
             ele.skin = SkinUrl[24];
             parent.addChild(ele);
             ele.zOrder = 60;
@@ -1312,7 +1503,7 @@ export module lwg {
                 if (this.moveSwitch) {
                     this.timer++;
                     if (this.timer > 0) {
-                        lwg.Animation.move_Simple(this.self, this.self.x, this.self.y, this.targetX, this.targetY, 250, 0, f => {
+                        lwg.Animation.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
                             this.self.removeSelf();
                             if (this.func !== null) {
                                 this.func();
@@ -1326,7 +1517,7 @@ export module lwg {
 
 
         /**
-          * 创建普通爆炸动画，四周爆炸随机散开
+          * 创建类似于烟花爆炸动画，四周爆炸随机散开
           * @param parent 父节点
           * @param quantity 数量
           * @param x X轴位置
@@ -1355,17 +1546,17 @@ export module lwg {
                 this.startSpeed = 5 * Math.random() + 5;
                 this.startScale = 0.4 + Math.random() * 0.6;
                 this.accelerated = 0.1;
-                this.vanishTime = 200 + Math.random() * 10;
+                this.continueTime = 200 + Math.random() * 10;
             }
             moveRules(): void {
                 this.timer++;
-                if (this.timer >= this.vanishTime * 3 / 5) {
+                if (this.timer >= this.continueTime * 3 / 5) {
                     this.self.alpha -= 0.1;
                 }
-                if (this.timer >= this.vanishTime) {
+                if (this.timer >= this.continueTime) {
                     this.self.removeSelf();
                 } else {
-                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
+                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed);
                 }
                 if (this.self.scaleX < 0) {
                     this.self.scaleX += 0.01;
@@ -1417,19 +1608,19 @@ export module lwg {
                 this.startSpeed = 10 * Math.random() + 3;
                 this.startScale = 0.4 + Math.random() * 0.6;
                 this.accelerated = 0.1;
-                this.vanishTime = 300 + Math.random() * 50;
+                this.continueTime = 300 + Math.random() * 50;
                 this.randomRotate = 1 + Math.random() * 20;
             }
             moveRules(): void {
                 this.timer++;
-                if (this.timer >= this.vanishTime * 3 / 5) {
+                if (this.timer >= this.continueTime * 3 / 5) {
                     this.self.alpha -= 0.1;
                 }
-                if (this.timer >= this.vanishTime) {
+                if (this.timer >= this.continueTime) {
                     this.self.removeSelf();
                 } else {
-                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
-                    this.self.y += this.accelerated * 10;
+                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed);
+                    // this.self.y += this.accelerated * 10;
                 }
 
                 this.self.rotation += this.randomRotate;
@@ -1446,6 +1637,28 @@ export module lwg {
 
     /**加载一些骨骼动画，在loding界面出现的时候执行skLoding()方法*/
     export module Sk {
+        /**皮肤的顺序以及名称*/
+        export enum PifuMatching {
+            gongzhu = '01_gongzhu',
+            chiji = '02_chiji',
+            change = '03_change',
+            huiguniang = '04_huiguniang',
+            tianshi = '05_tianshi',
+            xiaohongmao = '06_xiaohongmao',
+            xiaohuangya = '07_xiaohuangya',
+            zhenzi = '08_zhenzi',
+            aisha = '09_aisha'
+        }
+        /**皮肤的顺序以及名称*/
+        export enum PaintedPifu {
+            daji = 'P_001_daji',
+            shizi = 'P_002_shizi',
+            pikaqiu = 'P_003_pikaqiu',
+            cangshu = 'P_004_cangshu',
+            haimianbaobao = 'P_005_haimianbaobao',
+            keji = 'P_006_keji',
+            kedaya = 'P_007_kedaya',
+        }
 
         /**公主骨骼动画*/
         export let gongzhuTem: Laya.Templet = new Laya.Templet();
@@ -1457,6 +1670,15 @@ export module lwg {
         export let xiaohongmaoTem: Laya.Templet = new Laya.Templet();
         export let xiaohuangyaTem: Laya.Templet = new Laya.Templet();
         export let zhenziTem: Laya.Templet = new Laya.Templet();
+        export let kedayaTem: Laya.Templet = new Laya.Templet();
+
+        // 第二批
+        export let cangshuTem: Laya.Templet = new Laya.Templet();
+        export let dajiTem: Laya.Templet = new Laya.Templet();
+        export let haimianbaobaoTem: Laya.Templet = new Laya.Templet();
+        export let pikaqiuTem: Laya.Templet = new Laya.Templet();
+        export let shiziTem: Laya.Templet = new Laya.Templet();
+        export let kejiTem: Laya.Templet = new Laya.Templet();
 
         /**王子骨骼动画*/
         export let wangziTem: Laya.Templet = new Laya.Templet();
@@ -1475,12 +1697,21 @@ export module lwg {
             createGongzhuTem();
             createAishaTem();
             createChijiTem();
-            createChangeTem()
+            createChangeTem();
             createHuiguniangTem();
             createTianshiTem();
             createXiaohongmaoTem();
             createXiaohuangyaTem();
             createZhenziTem();
+
+            // 第二批
+            createCangshuTem();
+            createPikaqiuTem();
+            createDajiTem();
+            createHaimianbaobaoTem();
+            createShiziTem();
+            createKejiTem();
+            createKedayaTem();
 
             createWangziTem();
             createGouTem();
@@ -1488,6 +1719,7 @@ export module lwg {
             createQingdi_02Tem();
             createHoumaTem();
             createHouziTem();
+
         }
 
         /**全部加载*/
@@ -1538,6 +1770,48 @@ export module lwg {
             zhenziTem.loadAni("SK/zhenzi.sk");
         }
 
+        // 第二批
+        export function createCangshuTem(): void {
+            cangshuTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            cangshuTem.on(Laya.Event.ERROR, this, onError);
+            cangshuTem.loadAni("SK/cangshu.sk");
+        }
+
+        export function createDajiTem(): void {
+            dajiTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            dajiTem.on(Laya.Event.ERROR, this, onError);
+            dajiTem.loadAni("SK/daji.sk");
+        }
+
+        export function createHaimianbaobaoTem(): void {
+            haimianbaobaoTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            haimianbaobaoTem.on(Laya.Event.ERROR, this, onError);
+            haimianbaobaoTem.loadAni("SK/haimianbaobao.sk");
+        }
+
+        export function createPikaqiuTem(): void {
+            pikaqiuTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            pikaqiuTem.on(Laya.Event.ERROR, this, onError);
+            pikaqiuTem.loadAni("SK/pikaqiu.sk");
+        }
+
+        export function createShiziTem(): void {
+            shiziTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            shiziTem.on(Laya.Event.ERROR, this, onError);
+            shiziTem.loadAni("SK/shizi.sk");
+        }
+        export function createKejiTem(): void {
+            kejiTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            kejiTem.on(Laya.Event.ERROR, this, onError);
+            kejiTem.loadAni("SK/keji.sk");
+        }
+
+        export function createKedayaTem(): void {
+            kedayaTem.on(Laya.Event.COMPLETE, this, onCompelet);
+            kedayaTem.on(Laya.Event.ERROR, this, onError);
+            kedayaTem.loadAni("SK/kedaya.sk");
+        }
+
 
         export function createWangziTem(): void {
             wangziTem.on(Laya.Event.COMPLETE, this, onCompelet);
@@ -1569,10 +1843,11 @@ export module lwg {
             houziTem.on(Laya.Event.ERROR, this, onError);
             houziTem.loadAni("SK/houzi.sk");
         }
+
         export function onCompelet(tem: Laya.Templet): void {
             console.log(tem['_skBufferUrl'], '加载成功');
-
         }
+
         export function onError(url): void {
             console.log(url, '加载失败！');
         }
@@ -1589,7 +1864,7 @@ export module lwg {
             '暂无分享!',
             '暂无提示机会!',
             '观看完整广告才能获取奖励哦！',
-            '没有过关哦，再接再厉！',
+            '通关上一关才能解锁本关！',
             '分享成功后才能获取奖励！',
             '分享成功',
             '暂无视频，玩一局游戏之后分享！',
@@ -1597,6 +1872,14 @@ export module lwg {
             '今日体力福利已领取！',
             '分享成功，获得125金币！',
             '限定皮肤已经获得，请前往商店查看。',
+            '分享失败！',
+            '兑换码错误！',
+            '获得柯基公主皮肤，前往彩蛋墙查看！',
+            '获得黄皮耗子皮肤，前往彩蛋墙查看！',
+            '获得赛牙人皮肤，前往彩蛋墙查看！',
+            '获得海绵公主皮肤，前往彩蛋墙查看！',
+            '获得仓鼠公主皮肤，前往彩蛋墙查看！',
+            '获得自闭鸭子皮肤，前往彩蛋墙查看！',
         }
 
         /**提示类型*/
@@ -1615,7 +1898,15 @@ export module lwg {
             'consumeEx',
             'no_exemptExTime',
             'shareyes',
-            "getXD"
+            "getXD",
+            "sharefailNoAward",
+            "inputerr",
+            'kejigongzhu',
+            'huangpihaozi',
+            'saiyaren',
+            'haimiangongzhu',
+            'cangshugongzhu',
+            'zibiyazi',
         }
         /**皮肤的顺序以及名称*/
         export enum PifuOrder {
@@ -1625,18 +1916,8 @@ export module lwg {
         export enum PifuAllName {
             '01_gongzhu', '02_chiji', '03_change', '04_huiguniang', '05_tianshi', '06_xiaohongmao', '07_xiaohuangya', '08_zhenzi', '09_aisha'
         }
-        /**皮肤的顺序以及名称*/
-        export enum PifuMatching {
-            gongzhu = '01_gongzhu',
-            chiji = '02_chiji',
-            change = '03_change',
-            huiguniang = '04_huiguniang',
-            tianshi = '05_tianshi',
-            xiaohongmao = '06_xiaohongmao',
-            xiaohuangya = '07_xiaohuangya',
-            zhenzi = '08_zhenzi',
-            aisha = '09_aisha'
-        }
+
+
         /**皮肤图片顺序对应的地址*/
         export enum PifuSkin {
             'UI_new/Pifu/pifu_01_gongzhu.png',
@@ -1663,24 +1944,36 @@ export module lwg {
             'UI_new/Pifu/pifu_09_aisha_h.png'
         }
 
-        // /**点击事件类型*/
-        // export enum ClickType {
-        //     /**无效果*/
-        //     noEffect = 'noEffect',
-        //     /**点击放大*/
-        //     largen = 'largen',
-        //     /**类似气球*/
-        //     balloon = 'balloon',
-        //     /**小虫子*/
-        //     beetle = 'beetle',
-        // }
+        /**名称图片对应地址*/
+        export enum PifuNameSkin {
+            'UI_new/Pifu/word_xueer.png',
+            'UI_new/Pifu/word_jingying.png',
+            'UI_new/Pifu/word_change.png',
+            'UI_new/Pifu/word_hui.png',
+            'UI_new/Pifu/word_tianshi.png',
+            'UI_new/Pifu/wrod_hongmao.png',
+            'UI_new/Pifu/word_huangya.png',
+            'UI_new/Pifu/word_changfa.png',
+            'UI_new/Pifu/word_bingjing.png'
+        }
+
+        /**彩蛋皮肤顺序对应的地址*/
+        export enum CaidanPifuName {
+            huangpihaozi = '01_huangpihaozi',
+            zibiyazi = '02_zibiyazi',
+            cangshugongzhu = '03_cangshugongzhu',
+            kejigongzhu = '04_kejigongzhu',
+            saiyaren = '05_saiyaren',
+            haimiangongzhu = '06_haimiangongzhu',
+            daji = '07_daji'
+        }
 
         /**音效*/
         export enum voiceUrl {
-            btn = 'Voice/btn.wav',
-            bgm = 'Voice/bgm.mp3',
-            victory = 'Voice/guoguan.wav',
-            defeated = 'Voice/wancheng.wav',
+            btn = 'voice/btn.wav',
+            bgm = 'voice/bgm.mp3',
+            victory = 'voice/guoguan.wav',
+            defeated = 'voice/wancheng.wav',
         }
 
         /**皮肤的顺序以及名称*/
@@ -1696,48 +1989,13 @@ export module lwg {
             '英雄'
         }
 
-
-        /**任务类型*/
-        export enum TaskType {
-            /**颠起*/
-            topUp = 'topUp',
-            /**移动*/
-            move = 'move',
-            /**坚持时间*/
-            continue = 'continue',
-            /**吃金币*/
-            gold = 'gold',
-        }
-
-        /**角色的四个方向*/
-        export enum PersonDir {
-            up = 'up',
-            down = 'down',
-            left = 'left',
-            right = 'right',
-        }
-
-        /**游戏当前的状态*/
-        export enum GameState {
-            /**开始界面*/
-            GameStart = 'GameStart',
-            /**游戏中*/
-            Play = 'Play',
-            /**暂停中*/
-            Pause = 'pause',
-            /**胜利*/
-            Victory = 'victory',
-            /**失败*/
-            Defeated = 'defeated',
-        }
-
         /**角色当前的状态，状态唯一，状态不会改变移动方向，需要手动改*/
         export enum MoveState {
-            /**在梯子上，优先级最高*/
+            /**在地板上，优先级最高*/
             onFloor = 'onFloor',
             /**在梯子上，优先级第二*/
             onLadder = 'onLadder',
-            /**在梯子上，优先级最后*/
+            /**在空中，优先级最后*/
             inAir = 'inAir'
         }
 
@@ -1775,6 +2033,32 @@ export module lwg {
             yellowish = 'Room/room_yellowish.png'
         }
 
+        /**房子的皮肤地址顺序*/
+        export enum RoomSkinZoder {
+            'Room/room_blue.png' = 0,
+            'Room/room_bluish.png' = 1,
+            'Room/room_grass.png' = 2,
+            'Room/room_green.png' = 3,
+            'Room/room_pink.png' = 4,
+            'Room/room_purple.png' = 5,
+            'Room/room_red.png' = 6,
+            'Room/room_yellow.png' = 7,
+            'Room/room_yellowish.png' = 8
+        }
+        /**房子的皮肤地址对应的墙纸地址*/
+        export enum WallpaperSkin {
+            'Room/room_blue_wallpaper.png',
+            'Room/room_bluish_wallpaper.png',
+            'Room/room_grass_wallpaper.png',
+            'Room/room_green_wallpaper.png',
+            'Room/room_pink_wallpaper.png',
+            'Room/room_purple_wallpaper.png',
+            'Room/room_red_wallpaper.png',
+            'Room/room_yellow_wallpaper.png',
+            'Room/room_yellowish_wallpaper.png'
+        }
+
+
         /**通道上的墙壁的皮肤地址*/
         export enum WallSkin {
             blue = 'Room/room_blue_wall.png',
@@ -1785,7 +2069,8 @@ export module lwg {
             purple = 'Room/room_purple_wall.png',
             red = 'Room/room_red_wall.png',
             yellow = 'Room/room_yellow_wall.png',
-            yellowish = 'Room/room_yellowish_wall.png'
+            yellowish = 'Room/room_yellowish_wall.png',
+            common = 'Room/room_common_wall.png'
         }
 
         /**通道颜色的皮肤地址*/
@@ -1798,7 +2083,8 @@ export module lwg {
             purple = 'Room/room_purple_color.png',
             red = 'Room/room_red_color.png',
             yellow = 'Room/room_yellow_color.png',
-            yellowish = 'Room/room_yellowish_color.png'
+            yellowish = 'Room/room_yellowish_color.png',
+            common = 'Room/room_common_color.png'
         }
 
         /**公主的动画类型*/
@@ -1842,19 +2128,27 @@ export module lwg {
             box_02_static = "box_02_static"
         }
 
-        /**所有碰撞框的owner名称前3位*/
-        export enum ColliderOwner {
-            nose = "Nos",
-            mustache = "Mus",
-            eye = "Eye",
-        }
+        // export enum bulletType {
+        //     yellow = 'yellow',
+        //     bule = 'bule',
+        //     green = 'green',
+        // }
+        // export enum bulletSkin {
+        //     yellow = 'Frame/UI/ui_circle_c_008.png',
+        //     bule = 'Frame/UI/ui_circle_006.png',
+        //     green = 'Frame/UI/ui_circle_001.png',
+        // }
+        // export enum enemyType {
+        //     yellow = 'yellow',
+        //     bule = 'bule',
+        //     green = 'green',
+        // }
+        // export enum enemySkin {
+        //     yellow = 'Frame/UI/ui_square_011.png',
+        //     bule = 'Frame/UI/ui_square_002.png',
+        //     green = 'Frame/UI/ui_square_009.png',
+        // }
 
-        /**剃须刀的状态*/
-        export enum RazorState {
-            move = "move",
-            touchNose = "touchNose",
-            touchEye = "touchEye",
-        }
     }
 
     /**
@@ -1996,8 +2290,8 @@ export module lwg {
     //         default:
     //             break;
     //     }
-    // btnPrintNum++;
-    // console.log('按钮打点' + btnPrintNum);
+    //     // btnPrintNum++;
+    //     // console.log('按钮打点' + btnPrintNum);
     // }
 
     /**
@@ -2030,13 +2324,14 @@ export module lwg {
         /**按下*/
         down(event): void {
             event.currentTarget.scale(1.1, 1.1);
-            if (lwg.Global._voiceSwitch) {
+            if (lwg.PalyAudio._voiceSwitch) {
                 Laya.SoundManager.playSound(Click.audioUrl, 1, Laya.Handler.create(this, function () { }));
             }
         }
         /**移动*/
         move(event): void {
-            event.currentTarget.scale(1, 1);
+            // event.currentTarget.scale(1, 1);
+            // console.log('不做处理')
         }
 
         /**抬起*/
@@ -2102,6 +2397,34 @@ export module lwg {
         }
     }
 
+    export module Animation3D {
+        /**
+         * 物体的缓动
+         * @param v3_Pos 目标到的位置transform.position;
+         * @param v3_Rotate 移动速度
+         */
+        export function Pos_Euler(target: Laya.Sprite3D, v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, time: number) {
+            //创建一个Tween的属性对像
+            let moveTarget = target.transform.position;
+
+            Laya.Tween.to(moveTarget, {
+                x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
+                    target.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
+                    //移动灯光位置
+                })
+            }, time, null);
+
+            let rotateTarget = this.MainCamera.transform.localRotationEuler;
+            Laya.Tween.to(rotateTarget, {
+                x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
+                    target.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
+                    target.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
+                    target.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
+                    //移动灯光位置
+                })
+            }, time, null);
+        }
+    }
 
     /**动画模块*/
     export module Animation {
@@ -2360,15 +2683,16 @@ export module lwg {
         /**
          * 简单下落
          * @param node 节点
-         * @param targetY 目标位置
+         * @param fY 初始Y位置
+         * @param tY 目标Y位置
          * @param rotation 落地角度
          * @param time 花费时间
          * @param delayed 延时时间
          * @param func 回调函数
          */
-        export function drop_Simple(node, targetY, rotation, time, delayed, func): void {
-
-            Laya.Tween.to(node, { y: targetY, rotation: rotation }, time, Laya.Ease.expoIn, Laya.Handler.create(this, function () {
+        export function drop_Simple(node, fY, tY, rotation, time, delayed, func): void {
+            node.y = fY;
+            Laya.Tween.to(node, { y: tY, rotation: rotation }, time, Laya.Ease.circOut, Laya.Handler.create(this, function () {
                 if (func !== null) {
                     func();
                 }
@@ -2382,8 +2706,7 @@ export module lwg {
           * @param firstY 初始位置
           * @param targetY 目标位置
           * @param extendY 延伸长度
-          * @param time1 第一阶段花费时间
-          * @param time2 第二阶段花费时间
+          * @param time1 花费时间
           * @param delayed 延时时间
           * @param func 结束回调函数
           * */
@@ -2392,7 +2715,7 @@ export module lwg {
             target.alpha = fAlpha;
             target.y = firstY;
 
-            Laya.Tween.to(target, { alpha: 1, y: targetY + extendY }, time1, Laya.Ease.expoIn, Laya.Handler.create(this, function () {
+            Laya.Tween.to(target, { alpha: 1, y: targetY + extendY }, time1, null, Laya.Handler.create(this, function () {
 
                 Laya.Tween.to(target, { y: targetY - extendY / 2 }, time1 / 2, null, Laya.Handler.create(this, function () {
 
@@ -2794,7 +3117,7 @@ export module lwg {
         }
 
         /**
-        * 简单的透明度渐变闪烁动画
+        * 简单的透明度渐变闪烁动画,闪一下消失
         * @param target 节点
         * @param minAlpha 最低到多少透明度
         * @param maXalpha 最高透明度
@@ -2802,7 +3125,7 @@ export module lwg {
         * @param delayed 延迟时间
         * @param func 完成后的回调
         */
-        export function blink_FadeOut(target, minAlpha, maXalpha, time, delayed, func): void {
+        export function blink_FadeOut_v(target, minAlpha, maXalpha, time, delayed, func): void {
             target.alpha = minAlpha;
             Laya.Tween.to(target, { alpha: maXalpha }, time, null, Laya.Handler.create(this, function () {
                 // 原始状态
@@ -2810,6 +3133,49 @@ export module lwg {
                     if (func !== null) {
                         func()
                     }
+                }), 0);
+            }), delayed);
+        }
+
+        /**
+          * 简单的透明度渐变闪烁动画，闪烁后不消失
+          * @param target 节点
+          * @param minAlpha 最低到多少透明度
+          * @param maXalpha 最高透明度
+          * @param time 花费时间
+          * @param delayed 延迟时间
+          * @param func 完成后的回调
+          */
+        export function blink_FadeOut(target, minAlpha, maXalpha, time, delayed, func): void {
+            Laya.Tween.to(target, { alpha: minAlpha }, time, null, Laya.Handler.create(this, function () {
+                // 原始状态
+                Laya.Tween.to(target, { alpha: maXalpha }, time, null, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func()
+                    }
+                }), 0);
+            }), delayed);
+        }
+
+        /**
+          * 根据节点的锚点进行摇头动画，类似于不倒翁动画
+          * @param target 节点
+          * @param rotate 摇摆的幅度
+          * @param time 花费时间
+          * @param delayed 延迟时间
+          * @param func 完成后的回调
+          */
+        export function shookHead_Simple(target, rotate, time, delayed, func): void {
+            let firstR = target.rotation;
+            Laya.Tween.to(target, { rotation: firstR + rotate }, time, null, Laya.Handler.create(this, function () {
+                Laya.Tween.to(target, { rotation: firstR - rotate * 2 }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { rotation: firstR + rotate }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(target, { rotation: firstR }, time, null, Laya.Handler.create(this, function () {
+                            if (func !== null) {
+                                func()
+                            }
+                        }), 0);
+                    }), 0);
                 }), 0);
             }), delayed);
         }
@@ -2901,60 +3267,16 @@ export module lwg {
      */
     export module PalyAudio {
 
-        // /**单张发牌音效
-        //  * @param number 播放次数
-        // */
-        // export function aAingleCard(number): void {
-        //     Laya.SoundManager.playSound('音效/单张发牌.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-
-        // /**连续发牌音效
-        //  * @param number 播放次数
-        // */
-        // export function groupUp(number): void {
-        //     Laya.SoundManager.playSound('音效/连续发牌.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-        // /**群体下落音效
-        //  * @param number 播放次数 
-        // */
-        // export function groupDrop(number): void {
-        //     Laya.SoundManager.playSound('音效/全体下落.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-
-        // /**播放单张卡牌旋转音效
-        //  * @param number 播放次数
-        // */
-        // export function cardRotate(number): void {
-        //     Laya.SoundManager.playSound('音效/单张牌旋转.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-
-        // /**游戏结束音效
-        //  * @param number 播放次数
-        // */
-        // export function gameOver(number): void {
-        //     Laya.SoundManager.playSound('音效/结束.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-
-        // /**点击正确音效
-        // * @param number 播放次数
-        // */
-        // export function clickRight(number): void {
-        //     Laya.SoundManager.playSound('音效/点击正确.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-
-        // /**点击正确音效
-        //  * @param number 播放次数
-        // */
-        // export function clickError(number): void {
-        //     Laya.SoundManager.playSound('音效/点击错误.mp3', number, Laya.Handler.create(this, function () { }));
-        // }
-
+        /**音效开关*/
+        export let _voiceSwitch = true;
         /**通用音效播放
          * @param url 音效地址
          * @param number 播放次数
          */
         export function playSound(url, number) {
-            Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () { }));
+            if (_voiceSwitch) {
+                Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () { }));
+            }
         }
 
         /**通用背景音乐播放
@@ -2963,7 +3285,9 @@ export module lwg {
         * @param deley 延时时间
         */
         export function playMusic(url, number, deley) {
-            Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), deley);
+            if (_voiceSwitch) {
+                Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), deley);
+            }
         }
 
         /**停止播放背景音乐*/
@@ -2974,7 +3298,6 @@ export module lwg {
 
     /**工具模块*/
     export module Tools {
-
         /**
          * 二维坐标中一个点按照另一个点旋转一定的角度后，得到的点
          * @param x0 原点X
@@ -2986,7 +3309,7 @@ export module lwg {
         export function dotRotateXY(x0, y0, x1, y1, angle): Laya.Point {
             let x2 = x0 + (x1 - x0) * Math.cos(angle * Math.PI / 180) - (y1 - y0) * Math.sin(angle * Math.PI / 180);
             let y2 = y0 + (x1 - x0) * Math.sin(angle * Math.PI / 180) + (y1 - y0) * Math.cos(angle * Math.PI / 180);
-            return new Laya.Point(x2,y2);
+            return new Laya.Point(x2, y2);
         }
 
 
@@ -3049,7 +3372,6 @@ export module lwg {
                 } else {
                     return p;
                 }
-
             }
         }
 
@@ -3090,7 +3412,7 @@ export module lwg {
         }
 
         /**
-         * 将3D物体坐标转换程屏幕UI坐标
+         * 将3D物体坐标转换程屏幕坐标
          * @param v3 3D世界的坐标
          * @param camera 摄像机
         */
@@ -3102,7 +3424,6 @@ export module lwg {
             point.y = ScreenV3.y;
             return point;
         }
-
         /**
          * 
          * @param n 
@@ -3283,3 +3604,12 @@ export module lwg {
     }
 }
 export default lwg;
+export let Admin = lwg.Admin;
+export let Click = lwg.Click;
+export let Global = lwg.Global;
+export let Animation = lwg.Animation;
+export let EventAdmin = lwg.EventAdmin;
+export let Tools = lwg.Tools;
+export let Effects = lwg.Effects;
+export let Animation3D = lwg.Animation3D;
+

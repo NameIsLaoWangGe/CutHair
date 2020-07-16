@@ -1,4 +1,5 @@
 import { lwg } from "../Lwg_Template/lwg";
+import { G, GEnum } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
 
@@ -19,37 +20,99 @@ export default class UIOperation extends lwg.Admin.Scene {
     MainCamera: Laya.Sprite3D;
 
 
-    selfNode(): void {
-        // this.Scope = this.self['Scope'];
-        this.Rocker = this.self['Rocker'];
-        // this.BtnAgain = this.self['BtnAgain'];
-        // this.Guide = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Guide;
-        // this.MainCamera = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].MainCamera;
-        this.Razor = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Razor;
+    /**四个节点代表摄像机移动到四个任务的方位*/
+    Landmark_Left: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Right: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Side: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Top: Laya.Sprite3D = new Laya.Sprite3D();
 
+    selfNode(): void {
+        this.Rocker = this.self['Rocker'];
+        this.Razor = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Razor;
+        this.MainCamera = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].MainCamera;
+
+        this.Landmark_Left = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Left;
+        this.Landmark_Right = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Right;
+        this.Landmark_Side = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Side;
+        this.Landmark_Top = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Top;
     }
 
     /**摄像机和刀片的坐标差值*/
     cameraAndRazorPos: Laya.Vector3 = new Laya.Vector3();
     lwgInit(): void {
-        // this.radius = this.Scope.width / 2;
-        // this.Razor.transform.localRotationEulerY = 180;
-        // this.Rocker.x = this.Scope.x;
-        // this.Rocker.y = this.Scope.y;
-        // lwg.Global._gameStart = true;
-        // this.BtnAgain.visible = false;
-
-        // this.cameraAndRazorPos.x = this.Razor.transform.position.x - this.MainCamera.transform.position.x;
-        // this.cameraAndRazorPos.y = this.Razor.transform.position.y - this.MainCamera.transform.position.y;
-        // this.cameraAndRazorPos.z = this.Razor.transform.position.z - this.MainCamera.transform.position.z;
     }
 
     btnOnClick(): void {
-        // lwg.Click.on(lwg.Click.ClickType.largen, null, this.BtnAgain, this, null, null, this.btnAgainUp, null);
+        lwg.Click.on(lwg.Click.ClickType.largen, null, this.self['BtnLast'], this, this.btnAgainDown, null, this.btnAgainUp, null);
     }
-    btnAgainUp(): void {
-        // lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].refresh3DScene();
+    btnAgainDown(e: Laya.Event): void {
+        e.stopPropagation();
     }
+    btnAgainUp(e: Laya.Event): void {
+        e.stopPropagation();
+        G._taskNum++;
+        this.mainCameraMove();
+    }
+
+    /**移动时间*/
+    moveTime = 1000;
+    /**
+     * 摄像机的移动规则
+     * */
+    mainCameraMove(): void {
+        if (G._taskNum > G._taskArr.length) {
+            return;
+        }
+        switch (G._taskArr[G._taskNum]) {
+
+            case GEnum.TaskType.leftBeard:
+                this.setCamera(this.Landmark_Left.transform.position, this.Landmark_Left.transform.localRotationEuler, this.moveTime);
+                break;
+
+            case GEnum.TaskType.rightBeard:
+                this.setCamera(this.Landmark_Right.transform.position, this.Landmark_Right.transform.localRotationEuler, this.moveTime);
+                break;
+
+            case GEnum.TaskType.sideHair:
+                this.setCamera(this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
+                break;
+
+            case GEnum.TaskType.topHead:
+                this.setCamera(this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 缓动摄像机
+     * @param z z轴移动到的位置
+     * @param time 移动速度
+     */
+    public setCamera(v3_Pos: Laya.Vector3, v3_Rotate, time: number) {
+        //创建一个Tween的属性对像
+        let moveTarget = this.MainCamera.transform.position;
+
+        Laya.Tween.to(moveTarget, {
+            x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
+                this.MainCamera.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
+                //移动灯光位置
+            })
+        }, time, null);
+
+        let rotateTarget = this.MainCamera.transform.localRotationEuler;
+        Laya.Tween.to(rotateTarget, {
+            x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
+                this.MainCamera.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
+                this.MainCamera.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
+                this.MainCamera.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
+                //移动灯光位置
+            })
+        }, time, null);
+    }
+
 
     /**触摸位置*/
     touchPosX: number;
@@ -81,7 +144,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.moveSwitch = false;
     }
 
-
     /**指引图标的移动速度，也表现为灵敏度*/
     speed: number = 0.09;
     /**剃须刀跟随指引节点*/
@@ -99,8 +161,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.MainCamera.transform.localPositionZ = this.Razor.transform.position.z - this.cameraAndRazorPos.z;
     }
 
-    lwgUpDate(): void {
-
+    lwgOnUpdate(): void {
     }
 
 }

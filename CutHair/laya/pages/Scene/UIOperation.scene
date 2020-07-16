@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":4,
+    "selecteID":9,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":5,
+    "maxID":12,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -44,6 +44,48 @@
             "compId":4,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,BtnLast,BtnLast",
+            "props":{"y":1104,"x":611,"width":143,"var":"BtnLast","texture":"Frame/UI/ui_square_c_005.png","pivotY":72,"pivotX":72,"name":"BtnLast","height":144},
+            "nodeParent":2,
+            "label":"BtnLast",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":9,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite",
+                    "props":{"y":22.25,"x":21.75,"width":100,"texture":"Frame/UI/ui_circle_c_006.png","height":100},
+                    "nodeParent":9,
+                    "label":"Sprite",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":10,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"y":77,"x":72,"width":82,"valign":"middle","text":"下一个","pivotY":17,"pivotX":41,"height":33,"fontSize":25,"font":"Microsoft YaHei","bold":true,"align":"center"},
+                    "nodeParent":9,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":11,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {
