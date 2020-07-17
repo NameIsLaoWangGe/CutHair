@@ -3,6 +3,7 @@ import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
 import { Global, G, GEnum } from "../Lwg_Template/Global";
+import GameMain3D_knife from "./GameMain3D_knife";
 export default class GameMain3D extends lwg.Admin.Scene3D {
     // 剃刀 
     Razor: Laya.MeshSprite3D = new Laya.MeshSprite3D();
@@ -62,12 +63,13 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.razorFEulerY = this.Razor.transform.localRotationEulerY;
         this.Razor.addComponent(GameMain3D_Razor);
 
-        this.knife = this.Level.getChildByName('knife') as Laya.MeshSprite3D;
 
         this.Floor = this.Level.getChildByName('Floor') as Laya.MeshSprite3D;
         this.Floor.addComponent(GameMain3D_Floor);
 
         this.Head = this.Level.getChildByName('Head') as Laya.MeshSprite3D;
+        this.knife = this.Head.getChildByName('knife') as Laya.MeshSprite3D;
+        this.knife.addComponent(GameMain3D_knife);
         this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
         let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         capsuleRig3D.restitution = 0;

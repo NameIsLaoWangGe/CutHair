@@ -8,13 +8,8 @@ export default class GameMain3D_Floor extends lwg.Admin.Object3D {
     }
     onTriggerEnter(other: Laya.Rigidbody3D): void {
         let owner = other.owner as Laya.MeshSprite3D;
-        switch (owner.name) {
-            case 'cutHairline':
-                owner.parent.removeSelf();
-                break;
-            default:
-                break;
-        }
+        owner.parent.removeSelf();
+        
     }
 
 
