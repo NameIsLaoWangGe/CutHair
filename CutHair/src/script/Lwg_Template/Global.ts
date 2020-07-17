@@ -14,10 +14,6 @@ export module Global {
         export enum RazorState {
             move = 'move',
         }
-
-        export enum CameraPos {
-            move = 'move',
-        }
     }
     /**控制游戏的全局变量*/
     export module G {

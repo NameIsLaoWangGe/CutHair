@@ -6,8 +6,11 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
     }
 
     onTriggerEnter(other): void {
-        let otherOwner = other.owner as Laya.Sprite3D;
-        let otherOwnerParent = otherOwner.parent as Laya.Sprite3D;
+        if (!lwg.Admin._gameStart) {
+            return ;
+        }
+        let otherOwner = other.owner as Laya.MeshSprite3D;
+        let otherOwnerParent = otherOwner.parent as Laya.MeshSprite3D;
 
         switch (otherOwner.name) {
             case 'Hairline':
@@ -26,33 +29,33 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 // 截取
                 otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
 
-                // 克隆一个掉落的头发，并且使其掉落
-                let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
-                cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
-                let CutHairParent = (this.selfScene['GameMain3D'].Head as Laya.Sprite3D).getChildByName('CutHairParent') as Laya.Sprite3D;
-                // console.log(CutHairParent);
-                cutHair.name = 'cutHair';
-                CutHairParent.addChild(cutHair);
-                cutHair.transform.position = this.self.transform.position;
+                // 过短则不生成，否则太多太碎
+                if (cutH >= 0.01) {
+                    // 克隆一个掉落的头发，并且使其掉落
+                    let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
+                    cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                    let CutHairParent = (this.selfScene['GameMain3D'].Head as Laya.MeshSprite3D).getChildByName('CutHairParent') as Laya.MeshSprite3D;
+                    // console.log(CutHairParent);
+                    cutHair.name = 'cutHair';
+                    CutHairParent.addChild(cutHair);
+                    cutHair.transform.position = this.self.transform.position;
 
-                let cutHairline = cutHair.getChildAt(0);
-                cutHairline.name = 'cutHairline';
-                let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-                rig3D.isKinematic = false;
-                rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
-                rig3D.rollingFriction = 0;
-                rig3D.restitution = 0;
+                    let cutHairline = cutHair.getChildAt(0);
+                    cutHairline.name = 'cutHairline';
+                    let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+                    rig3D.isKinematic = false;
+                    rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
+                    rig3D.rollingFriction = 0;
+                    rig3D.restitution = 0;
+                }
+
+                break;
+            case 'standard':
+                console.log('碰到线了！')
                 break;
             default:
                 break;
         }
-    }
-
-    /**
-     * 创建一个被剪掉的头发
-     * @param len 
-     */
-    cutHairline(len): void {
     }
 
     lwgOnUpdate(): void {

@@ -678,6 +678,8 @@ export module lwg {
         export let _sceneControl: any = {};
         /**游戏当前处于什么状态中*/
         export let _gameState: string;
+        /**游戏是否结束*/
+        export let _gameStart: boolean = false;
 
         /**当前所有场景的名称*/
         export enum SceneName {
@@ -975,7 +977,7 @@ export module lwg {
             onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
-                this.lwgInit();
+                this.lwgOnEnable();
                 this.btnAndOpenAni();
             }
             /**声明场景里的一些节点*/
@@ -1006,7 +1008,7 @@ export module lwg {
                 // console.log(lwg.Admin._gameState);
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgInit(): void {
+            lwgOnEnable(): void {
                 // console.log('父类的初始化！');
             }
             /**通过openni返回的时间来延时开启点击事件*/
@@ -1065,20 +1067,32 @@ export module lwg {
             /**挂载当前脚本的节点*/
             self: Laya.Scene3D;
             calssName: string;
-            MainCamera: Laya.Sprite3D;
+            MainCamera: Laya.MeshSprite3D;
+            mainCameraFpos: Laya.Vector3 = new Laya.Vector3();
             constructor() {
                 super();
             }
-            onEnable() {
+            onAwake(): void {
                 this.self = this.owner as Laya.Scene3D;
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
                 this.gameState(this.calssName);
+                this.selfNode();
+                this.adaptive();
+
+                this.MainCamera = this.self.getChildByName("Main Camera") as Laya.MeshSprite3D;
+                if (this.MainCamera) {
+                    this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
+                    this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
+                    this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
+                }
+
+            }
+
+            onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
-                this.MainCamera = this.self.getChildByName("Main Camera") as Laya.MeshSprite3D;
-                this.selfNode();
-                this.lwgInit();
+                this.lwgOnEnable();
                 this.btnOnClick();
                 this.adaptive();
                 this.openAni();
@@ -1108,7 +1122,7 @@ export module lwg {
                 // console.log(lwg.Admin._gameState);
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgInit(): void {
+            lwgOnEnable(): void {
                 // console.log('父类的初始化！');
             }
             /**点击事件注册*/
@@ -1125,10 +1139,10 @@ export module lwg {
             }
 
             onUpdate(): void {
-                this.lwgUpDate();
+                this.lwgOnUpDate();
             }
             /**每帧更新时执行，尽量不要在这里写大循环逻辑或者使用*/
-            lwgUpDate(): void {
+            lwgOnUpDate(): void {
 
             }
 
@@ -1232,7 +1246,7 @@ export module lwg {
         /**物件通用父类*/
         export class Object3D extends Laya.Script3D {
             /**挂载当前脚本的节点*/
-            self: Laya.Sprite3D;
+            self: Laya.MeshSprite3D;
             /**所在的3D场景*/
             selfScene: Laya.Scene3D;
             /***/
@@ -1245,7 +1259,7 @@ export module lwg {
                 super();
             }
             onEnable(): void {
-                this.self = this.owner as Laya.Sprite3D;
+                this.self = this.owner as Laya.MeshSprite3D;
                 this.selfTransform = this.self.transform;
                 this.selfScene = this.self.scene;
                 // 类名
@@ -2215,10 +2229,15 @@ export module lwg {
                     btnEffect = new Btn_LargenEffect();
                     break;
             }
-            target.on(Laya.Event.MOUSE_DOWN, caller, down === null ? btnEffect.down : down);
-            target.on(Laya.Event.MOUSE_MOVE, caller, move === null ? btnEffect.move : move);
-            target.on(Laya.Event.MOUSE_UP, caller, up === null ? btnEffect.up : up);
-            target.on(Laya.Event.MOUSE_OUT, caller, out === null ? btnEffect.out : out);
+            target.on(Laya.Event.MOUSE_DOWN, caller, down);
+            target.on(Laya.Event.MOUSE_MOVE, caller, move);
+            target.on(Laya.Event.MOUSE_UP, caller, up);
+            target.on(Laya.Event.MOUSE_OUT, caller, out);
+
+            target.on(Laya.Event.MOUSE_DOWN, caller, btnEffect.down);
+            target.on(Laya.Event.MOUSE_MOVE, caller, btnEffect.move);
+            target.on(Laya.Event.MOUSE_UP, caller, btnEffect.up);
+            target.on(Laya.Event.MOUSE_OUT, caller, btnEffect.out);
         }
 
         /**
@@ -2249,50 +2268,17 @@ export module lwg {
             }
             // btnPrintPoint('on', target);
 
-            target.off(Laya.Event.MOUSE_DOWN, caller, down === null ? btnEffect.down : down);
-            target.off(Laya.Event.MOUSE_MOVE, caller, move === null ? btnEffect.move : move);
-            target.off(Laya.Event.MOUSE_UP, caller, up === null ? btnEffect.up : up);
-            target.off(Laya.Event.MOUSE_OUT, caller, out === null ? btnEffect.out : out);
+            target.off(Laya.Event.MOUSE_DOWN, caller, down);
+            target.off(Laya.Event.MOUSE_MOVE, caller, move);
+            target.off(Laya.Event.MOUSE_UP, caller, up);
+            target.off(Laya.Event.MOUSE_OUT, caller, out);
+
+            target.off(Laya.Event.MOUSE_DOWN, caller, btnEffect.down);
+            target.off(Laya.Event.MOUSE_MOVE, caller, btnEffect.move);
+            target.off(Laya.Event.MOUSE_UP, caller, btnEffect.up);
+            target.off(Laya.Event.MOUSE_OUT, caller, btnEffect.out);
         }
     }
-
-    // let btnPrintNum: number = 0;
-    // /**
-    //  * 按钮打点，记录玩家点击的次数
-    //  * @param type 按钮是进入时打点还是点击时打点
-    //  * @param name 按钮名称
-    //  * */
-    // export function btnPrintPoint(type, target): void {
-    //     switch (target) {
-    //         // 游戏界面
-    //         case lwg.Global.BtnPauseNode:
-    //             if (type === 'on') {
-    //                 ADManager.TAPoint(TaT.BtnShow, 'pausebt_play');
-    //             } else if (type === 'dis') {
-    //                 ADManager.TAPoint(TaT.BtnClick, 'pausebt_play');
-    //             }
-    //             break;
-    //         case lwg.Global.BtnHintNode:
-    //             if (type === 'on') {
-    //                 ADManager.TAPoint(TaT.BtnShow, 'ADrwardbt_play');
-    //             } else if (type === 'dis') {
-    //                 ADManager.TAPoint(TaT.BtnClick, 'ADrwardbt_play');
-    //             }
-    //             break;
-    //         case lwg.Global.BtnAgainNode:
-    //             if (type === 'on') {
-    //                 ADManager.TAPoint(TaT.BtnShow, 'returnbt_play');
-    //             } else if (type === 'dis') {
-    //                 ADManager.TAPoint(TaT.BtnClick, 'returnbt_play');
-    //             }
-    //             break;
-
-    //         default:
-    //             break;
-    //     }
-    //     // btnPrintNum++;
-    //     // console.log('按钮打点' + btnPrintNum);
-    // }
 
     /**
      * 没有效果的点击事件，有时候用于防止界面的事件穿透
@@ -2400,10 +2386,11 @@ export module lwg {
     export module Animation3D {
         /**
          * 物体的缓动
-         * @param v3_Pos 目标到的位置transform.position;
+         * @param target 移动目标
+         * @param v3_Pos 目标的位置引用（transform.position）;
          * @param v3_Rotate 移动速度
          */
-        export function Pos_Euler(target: Laya.Sprite3D, v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, time: number) {
+        export function Pos_Euler(target: Laya.MeshSprite3D, v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, time: number) {
             //创建一个Tween的属性对像
             let moveTarget = target.transform.position;
 
@@ -2414,7 +2401,7 @@ export module lwg {
                 })
             }, time, null);
 
-            let rotateTarget = this.MainCamera.transform.localRotationEuler;
+            let rotateTarget = target.transform.localRotationEuler;
             Laya.Tween.to(rotateTarget, {
                 x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
                     target.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
@@ -3325,7 +3312,7 @@ export module lwg {
          * @param obj1 物体1
          * @param obj2 物体2
          */
-        export function twoObjectsLen_3D(obj1: Laya.Sprite3D, obj2: Laya.Sprite3D): number {
+        export function twoObjectsLen_3D(obj1: Laya.MeshSprite3D, obj2: Laya.MeshSprite3D): number {
             let obj1V3: Laya.Vector3 = obj1.transform.position;
             let obj2V3: Laya.Vector3 = obj2.transform.position;
             let p = new Laya.Vector3();

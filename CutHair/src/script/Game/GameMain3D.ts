@@ -4,59 +4,77 @@ import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
 import { Global, G, GEnum } from "../Lwg_Template/Global";
 export default class GameMain3D extends lwg.Admin.Scene3D {
-
-    Razor: Laya.Sprite3D = new Laya.Sprite3D();
+    // 剃刀 
+    Razor: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     razorFPos: Laya.Vector3 = new Laya.Vector3();
     razorFEulerY: number;
+
+    // 刮脸的刮刀
+    knife: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    knifeFPos: Laya.Vector3 = new Laya.Vector3();
+    knifeFEulerY: number;
 
     Head: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     headFPos: Laya.Vector3 = new Laya.Vector3();
     headFEulerY: number;
 
+    //当前关卡节点
     LevelTem: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     Level: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     LevelFpos: Laya.Vector3 = new Laya.Vector3();
 
-    mainCameraFpos: Laya.Vector3 = new Laya.Vector3();
 
-    Assembly: Laya.Sprite3D = new Laya.Sprite3D();
-    Mustache_RootTem: Laya.Sprite3D = new Laya.Sprite3D();
+    // 地板
+    Floor: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
-    Floor: Laya.Sprite3D = new Laya.Sprite3D();
+    // 头部
+    Capsule: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
-    Capsule: Laya.Sprite3D = new Laya.Sprite3D();
 
     /**四个节点代表摄像机移动到四个任务的方位*/
-    Landmark_Left: Laya.Sprite3D = new Laya.Sprite3D();
-    Landmark_Right: Laya.Sprite3D = new Laya.Sprite3D();
-    Landmark_Side: Laya.Sprite3D = new Laya.Sprite3D();
-    Landmark_Top: Laya.Sprite3D = new Laya.Sprite3D();
+    Landmark_Left: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    Landmark_Right: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    Landmark_Side: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    Landmark_Top: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     constructor() { super(); }
 
-    lwgInit(): void {
-        this.Landmark_Left = this.self.getChildByName('Landmark_Left') as Laya.Sprite3D;
-        this.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.Sprite3D;
-        this.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.Sprite3D;
-        this.Landmark_Top = this.self.getChildByName('Landmark_Top') as Laya.Sprite3D;
 
+    selfNode(): void {
 
-        this.Razor = this.self.getChildByName('Razor') as Laya.Sprite3D;
+        this.LevelTem = this.self.getChildByName('Level_001') as Laya.MeshSprite3D;
+        this.LevelFpos.x = this.LevelTem.transform.position.x;
+        this.LevelFpos.y = this.LevelTem.transform.position.y;
+        this.LevelFpos.z = this.LevelTem.transform.position.z;
+
+        this.Level = this.LevelTem.clone() as Laya.MeshSprite3D;
+        this.self.addChild(this.Level);
+        this.LevelTem.removeSelf();
+
+        this.Landmark_Left = this.Level.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
+        this.Landmark_Right = this.Level.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
+        this.Landmark_Side = this.Level.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
+        this.Landmark_Top = this.Level.getChildByName('Landmark_Top') as Laya.MeshSprite3D;
+
+        this.Razor = this.Level.getChildByName('Razor') as Laya.MeshSprite3D;
         this.razorFPos.x = this.Razor.transform.localPositionX;
         this.razorFPos.y = this.Razor.transform.localPositionY;
         this.razorFPos.z = this.Razor.transform.localPositionZ;
         this.razorFEulerY = this.Razor.transform.localRotationEulerY;
         this.Razor.addComponent(GameMain3D_Razor);
 
-        this.Floor = this.self.getChildByName('Floor') as Laya.Sprite3D;
+        this.knife = this.Level.getChildByName('knife') as Laya.MeshSprite3D;
+
+        this.Floor = this.Level.getChildByName('Floor') as Laya.MeshSprite3D;
         this.Floor.addComponent(GameMain3D_Floor);
 
-        this.Head = this.self.getChildByName('Head') as Laya.MeshSprite3D;
+        this.Head = this.Level.getChildByName('Head') as Laya.MeshSprite3D;
         this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
         let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         capsuleRig3D.restitution = 0;
 
-        G._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+    }
 
+    lwgOnEnable(): void {
     }
 
 
@@ -93,7 +111,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         lwg.Global._gameStart = true;
     }
 
-    lwgUpDate(): void {
+    lwgOnUpDate(): void {
 
     }
 
