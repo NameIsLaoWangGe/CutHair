@@ -1,23 +1,16 @@
-import { lwg, Click, Animation, Animation3D } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation, Animation3D, Tools, EventAdmin } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
+    /** @prop {name:TaskProgress, tips:"每个任务的进度条", type:Prefab}*/
+    public TaskProgress: Laya.Prefab;
 
-    /**大圆空间*/
-    Scope: Laya.Sprite;
     /**摇杆*/
     Rocker: Laya.Sprite;
-    /**摇杆移动半径*/
-    radius: number;
-
-    BtnAgain: Laya.Sprite;
-
     /**剃须刀*/
     Razor: Laya.MeshSprite3D;
     /**刮刀*/
     knife: Laya.MeshSprite3D;
-    /**引导*/
-    Guide: Laya.MeshSprite3D;
     /**3D场景内的摄像机*/
     MainCamera: Laya.MeshSprite3D;
 
@@ -33,39 +26,100 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**射线扫描结果*/
     outs: Array<Laya.HitResult> = new Array<Laya.HitResult>();
 
+    /**当前3D主场景*/
     GameMain3D: Laya.Scene3D;
+    /**任务进度条父节点*/
+    TaskBar: Laya.Sprite;
+    /**下一个任务按钮*/
+    BtnLast: Laya.Sprite;
+
+    /**头发父节点*/
+    HairParent: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
     selfNode(): void {
         this.Rocker = this.self['Rocker'];
 
         this.GameMain3D = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D];
-        this.MainCamera = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].MainCamera;
-        this.Razor = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Razor;
-        this.knife = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].knife;
+        this.MainCamera = this.GameMain3D['GameMain3D'].MainCamera;
+        this.Razor = this.GameMain3D['GameMain3D'].Razor;
+        this.knife = this.GameMain3D['GameMain3D'].knife;
 
-        this.Landmark_Left = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Left;
-        this.Landmark_Right = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Right;
-        this.Landmark_Side = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Side;
-        this.Landmark_Top = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Top;
+        this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
+        this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
+        this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
+        this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
 
-        this.Capsule = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Capsule;
+        this.Capsule = this.GameMain3D['GameMain3D'].Capsule;
+
+        this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
+
+        this.TaskBar = this.self['TaskBar'];
+
+        this.BtnLast = this.self['BtnLast'];
     }
 
     /**摄像机和刀片的坐标差值*/
     cameraAndRazorPos: Laya.Vector3 = new Laya.Vector3();
     lwgOnEnable(): void {
-        GVariate._taskNum = 0;
+        GVariate._taskNum = 0
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+        this.createProgress();
+        this.BtnLast.visible = false;
+
+        EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
+            this.BtnLast.visible = true;
+        })
+        this.createTaskContent();
     }
 
+    /**
+     * 创建任务进度条
+     */
+    createProgress(): void {
+        for (let index = 0; index < GVariate._taskArr.length; index++) {
+            const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress) as Laya.Sprite;
+            this.TaskBar.addChild(TaskPro);
+            TaskPro.pos(index * 100, 0);
+            let Bar = TaskPro.getChildByName('Bar') as Laya.Image;
+            let Mask = Bar.mask;
+            Mask.scaleX = 0;
+        }
+    }
+
+    /**
+     * 创建每个任务需要修剪的内容,一般是头发的数量
+     * */
+    createTaskContent(): void {
+        for (let index = 0; index < GVariate._taskArr.length; index++) {
+            switch (GVariate._taskArr[index]) {
+                case GEnum.TaskType.sideHair:
+                    GVariate._sideHairNum.setValue = this.HairParent.numChildren;
+                    break;
+                case GEnum.TaskType.leftBeard:
+                    break;
+                case GEnum.TaskType.rightBeard:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**监听每根头发的长度*/
+    monitorHiarLen(): void {
+        for (let index = 0; index < this.HairParent.numChildren; index++) {
+            // const element = array[index];
+
+        }
+    }
+
+
     btnOnClick(): void {
-        lwg.Click.on(Click.ClickType.largen, null, this.self['BtnLast'], this, this.btnAgainDown, null, this.btnAgainUp, null);
+        lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
     }
-    btnAgainDown(e: Laya.Event): void {
-        e.stopPropagation();
-    }
-    btnAgainUp(e: Laya.Event): void {
+
+    btnLastUp(e: Laya.Event): void {
         e.stopPropagation();
         GVariate._taskNum++;
         this.mainCameraMove();
@@ -168,26 +222,12 @@ export default class UIOperation extends lwg.Admin.Scene {
                     break;
 
                 case GEnum.TaskType.leftBeard:
-
-                    let hitResult1 = this.rayDetection() as Laya.HitResult;
-                    if (hitResult1) {
-                        let pos = hitResult1.point;
-                        this.knife.transform.position = pos;
-                        this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
-                    }
+                    this.leftAndRightShaving();
 
                     break;
 
                 case GEnum.TaskType.rightBeard:
-                    let hitResult2 = this.rayDetection() as Laya.HitResult;
-                    if (hitResult2) {
-                        let pos = hitResult2.point;
-                        this.knife.transform.position = pos;
-                        this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
-                        this.knife.transform.localRotationEulerY += 180;
-                        // this.knife.transform.localRotationEulerX -= 50;
-
-                    }
+                    this.leftAndRightShaving();
 
                     break;
 
@@ -198,6 +238,17 @@ export default class UIOperation extends lwg.Admin.Scene {
                     break;
             }
 
+        }
+    }
+
+    leftAndRightShaving(): void {
+        let hitResult = this.rayDetection() as Laya.HitResult;
+        if (hitResult) {
+            let p = Tools.twoSubV3_3D(hitResult.point, this.Capsule.transform.position, true);
+            let len = Tools.twoObjectsLen_3D(this.knife, this.Capsule);
+            let unit: number = 0.1 * (1.05 - len);
+            this.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
+            this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
         }
     }
 
@@ -229,22 +280,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.moveSwitch = false;
     }
 
-    /**指引图标的移动速度，也表现为灵敏度*/
-    speed: number = 0.09;
-    /**剃须刀跟随指引节点*/
-    RazorFellowGuide(): void {
-        let p = lwg.Tools.twoSubV3_3D(this.Razor.transform.position, this.Guide.transform.position);
-        let normalizP = new Laya.Vector3();
-        Laya.Vector3.normalize(p, normalizP);
-        this.Razor.transform.localPositionX -= normalizP.x * this.speed;
-        this.Razor.transform.localPositionZ -= normalizP.z * this.speed;
-    }
-
-    /**摄像机跟随着剃须刀*/
-    cameraFellowRazor(): void {
-        this.MainCamera.transform.localPositionX = this.Razor.transform.position.x - this.cameraAndRazorPos.x;
-        this.MainCamera.transform.localPositionZ = this.Razor.transform.position.z - this.cameraAndRazorPos.z;
-    }
 
     lwgOnUpdate(): void {
     }

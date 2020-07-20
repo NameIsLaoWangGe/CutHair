@@ -129,7 +129,6 @@
                 lwg.Global._goldNum += number;
                 let Num = lwg.Global.GoldNumNode.getChildByName('Num');
                 Num.value = lwg.Global._goldNum.toString();
-                lwg.LocalStorage.addData();
             }
             Global._addGold = _addGold;
             function _createExecutionNum(parent) {
@@ -155,7 +154,6 @@
                 }
                 let num = lwg.Global.ExecutionNumNode.getChildByName('Num');
                 num.value = lwg.Global._execution.toString();
-                lwg.LocalStorage.addData();
             }
             Global._addExecution = _addExecution;
             function _createBtnPause(parent) {
@@ -371,74 +369,11 @@
             }
             Global._createAddExecution = _createAddExecution;
         })(Global = lwg.Global || (lwg.Global = {}));
-        let LocalStorage;
-        (function (LocalStorage) {
-            let storageData;
-            function addData() {
-                storageData = {
-                    '_gameLevel': lwg.Global._gameLevel,
-                    '_goldNum': lwg.Global._goldNum,
-                    '_execution': lwg.Global._execution,
-                    '_exemptExTime': lwg.Global._exemptExTime,
-                    '_freeHintTime': lwg.Global._freeHintTime,
-                    '_hotShareTime': lwg.Global._hotShareTime,
-                    '_addExDate': lwg.Global._addExDate,
-                    '_addExHours': lwg.Global._addExHours,
-                    '_addMinutes': lwg.Global._addMinutes,
-                    '_buyNum': lwg.Global._buyNum,
-                    '_currentPifu': lwg.Global._currentPifu,
-                    '_havePifu': lwg.Global._havePifu,
-                    '_watchAdsNum': lwg.Global._watchAdsNum,
-                    '_huangpihaozi': lwg.Global._huangpihaozi,
-                    '_zibiyazi': lwg.Global._zibiyazi,
-                    '_kejigongzhu': lwg.Global._kejigongzhu,
-                    '_pickPaintedNum': lwg.Global._pickPaintedNum,
-                    '_haimiangongzhu': lwg.Global._haimiangongzhu
-                };
-                let data = JSON.stringify(storageData);
-                Laya.LocalStorage.setJSON('storageData', data);
-            }
-            LocalStorage.addData = addData;
-            function clearData() {
-                Laya.LocalStorage.clear();
-            }
-            LocalStorage.clearData = clearData;
-            function getData() {
-                let storageData = Laya.LocalStorage.getJSON('storageData');
-                if (storageData) {
-                    let data = JSON.parse(storageData);
-                    return data;
-                }
-                else {
-                    lwg.Global._gameLevel = 1;
-                    lwg.Global._goldNum = 0;
-                    lwg.Global._execution = 15;
-                    lwg.Global._exemptExTime = null;
-                    lwg.Global._freeHintTime = null;
-                    lwg.Global._hotShareTime = null;
-                    lwg.Global._addExDate = (new Date).getDate();
-                    lwg.Global._addExHours = (new Date).getHours();
-                    lwg.Global._addMinutes = (new Date).getMinutes();
-                    lwg.Global._buyNum = 1;
-                    lwg.Global._currentPifu = Enum.PifuAllName[0];
-                    lwg.Global._havePifu = ['01_gongzhu'];
-                    lwg.Global._watchAdsNum = 0;
-                    lwg.Global._huangpihaozi = false;
-                    lwg.Global._zibiyazi = false;
-                    lwg.Global._kejigongzhu = false;
-                    lwg.Global._haimiangongzhu = false;
-                    lwg.Global._pickPaintedNum = 0;
-                    return null;
-                }
-            }
-            LocalStorage.getData = getData;
-        })(LocalStorage = lwg.LocalStorage || (lwg.LocalStorage = {}));
         let EventAdmin;
         (function (EventAdmin) {
             let EventType;
             (function (EventType) {
-                EventType["btnOnClick"] = "btnOnClick";
-                EventType["aniComplete"] = "aniComplete";
+                EventType["gameOver"] = "gameOver";
             })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
             class EventClass {
                 constructor() {
@@ -625,7 +560,6 @@
                     Admin.openLevelNum++;
                     Admin._openLevelNumCustom();
                 }
-                LocalStorage.addData();
             }
             Admin._nextCustomScene = _nextCustomScene;
             function _refreshScene() {
@@ -796,9 +730,9 @@
                     this.rig = this.self.getComponent(Laya.RigidBody);
                     let calssName = this['__proto__']['constructor'].name;
                     this.self[calssName] = this;
-                    this.lwgInit();
+                    this.lwgOnEnable();
                 }
-                lwgInit() {
+                lwgOnEnable() {
                     console.log('父类的初始化！');
                 }
             }
@@ -808,20 +742,20 @@
                     super();
                 }
                 onAwake() {
-                    this.selfNode();
-                }
-                selfNode() {
-                }
-                onEnable() {
                     this.self = this.owner;
                     this.selfScene = this.self.scene;
                     let calssName = this['__proto__']['constructor'].name;
                     this.self[calssName] = this;
                     this.rig = this.self.getComponent(Laya.RigidBody);
-                    this.lwgInit();
+                    this.selfNode();
+                }
+                selfNode() {
+                }
+                onEnable() {
+                    this.lwgOnEnable();
                     this.btnOnClick();
                 }
-                lwgInit() {
+                lwgOnEnable() {
                     console.log('父类的初始化！');
                 }
                 btnOnClick() {
@@ -851,9 +785,9 @@
                     this.self[calssName] = this;
                     this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
                     this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider);
-                    this.lwgInit();
+                    this.lwgOnEnable();
                 }
-                lwgInit() {
+                lwgOnEnable() {
                     console.log('父类的初始化！');
                 }
                 onUpdate() {
@@ -872,31 +806,31 @@
         (function (Effects) {
             let SkinUrl;
             (function (SkinUrl) {
-                SkinUrl[SkinUrl["Effects/cir_white.png"] = 0] = "Effects/cir_white.png";
-                SkinUrl[SkinUrl["Effects/cir_black.png"] = 1] = "Effects/cir_black.png";
-                SkinUrl[SkinUrl["Effects/cir_blue.png"] = 2] = "Effects/cir_blue.png";
-                SkinUrl[SkinUrl["Effects/cir_bluish.png"] = 3] = "Effects/cir_bluish.png";
-                SkinUrl[SkinUrl["Effects/cir_cyan.png"] = 4] = "Effects/cir_cyan.png";
-                SkinUrl[SkinUrl["Effects/cir_grass.png"] = 5] = "Effects/cir_grass.png";
-                SkinUrl[SkinUrl["Effects/cir_green.png"] = 6] = "Effects/cir_green.png";
-                SkinUrl[SkinUrl["Effects/cir_orange.png"] = 7] = "Effects/cir_orange.png";
-                SkinUrl[SkinUrl["Effects/cir_pink.png"] = 8] = "Effects/cir_pink.png";
-                SkinUrl[SkinUrl["Effects/cir_purple.png"] = 9] = "Effects/cir_purple.png";
-                SkinUrl[SkinUrl["Effects/cir_red.png"] = 10] = "Effects/cir_red.png";
-                SkinUrl[SkinUrl["Effects/cir_yellow.png"] = 11] = "Effects/cir_yellow.png";
-                SkinUrl[SkinUrl["Effects/star_black.png"] = 12] = "Effects/star_black.png";
-                SkinUrl[SkinUrl["Effects/star_blue.png"] = 13] = "Effects/star_blue.png";
-                SkinUrl[SkinUrl["Effects/star_bluish.png"] = 14] = "Effects/star_bluish.png";
-                SkinUrl[SkinUrl["Effects/star_cyan.png"] = 15] = "Effects/star_cyan.png";
-                SkinUrl[SkinUrl["Effects/star_grass.png"] = 16] = "Effects/star_grass.png";
-                SkinUrl[SkinUrl["Effects/star_green.png"] = 17] = "Effects/star_green.png";
-                SkinUrl[SkinUrl["Effects/star_orange.png"] = 18] = "Effects/star_orange.png";
-                SkinUrl[SkinUrl["Effects/star_pink.png"] = 19] = "Effects/star_pink.png";
-                SkinUrl[SkinUrl["Effects/star_purple.png"] = 20] = "Effects/star_purple.png";
-                SkinUrl[SkinUrl["Effects/star_red.png"] = 21] = "Effects/star_red.png";
-                SkinUrl[SkinUrl["Effects/star_white.png"] = 22] = "Effects/star_white.png";
-                SkinUrl[SkinUrl["Effects/star_yellow.png"] = 23] = "Effects/star_yellow.png";
-                SkinUrl[SkinUrl["Effects/icon_biggold.png"] = 24] = "Effects/icon_biggold.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_white.png"] = 0] = "Frame/Effects/cir_white.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_black.png"] = 1] = "Frame/Effects/cir_black.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_blue.png"] = 2] = "Frame/Effects/cir_blue.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_bluish.png"] = 3] = "Frame/Effects/cir_bluish.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_cyan.png"] = 4] = "Frame/Effects/cir_cyan.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_grass.png"] = 5] = "Frame/Effects/cir_grass.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_green.png"] = 6] = "Frame/Effects/cir_green.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_orange.png"] = 7] = "Frame/Effects/cir_orange.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_pink.png"] = 8] = "Frame/Effects/cir_pink.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_purple.png"] = 9] = "Frame/Effects/cir_purple.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_red.png"] = 10] = "Frame/Effects/cir_red.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_yellow.png"] = 11] = "Frame/Effects/cir_yellow.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_black.png"] = 12] = "Frame/Effects/star_black.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_blue.png"] = 13] = "Frame/Effects/star_blue.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_bluish.png"] = 14] = "Frame/Effects/star_bluish.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_cyan.png"] = 15] = "Frame/Effects/star_cyan.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_grass.png"] = 16] = "Frame/Effects/star_grass.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_green.png"] = 17] = "Frame/Effects/star_green.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_orange.png"] = 18] = "Frame/Effects/star_orange.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_pink.png"] = 19] = "Frame/Effects/star_pink.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_purple.png"] = 20] = "Frame/Effects/star_purple.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_red.png"] = 21] = "Frame/Effects/star_red.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_white.png"] = 22] = "Frame/Effects/star_white.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_yellow.png"] = 23] = "Frame/Effects/star_yellow.png";
+                SkinUrl[SkinUrl["Frame/Effects/icon_biggold.png"] = 24] = "Frame/Effects/icon_biggold.png";
             })(SkinUrl = Effects.SkinUrl || (Effects.SkinUrl = {}));
             class EffectsBase extends Laya.Script {
                 onAwake() {
@@ -910,10 +844,10 @@
                     this.self.pivotX = this.self.width / 2;
                     this.self.pivotY = this.self.height / 2;
                     this.timer = 0;
-                    this.lwgInit();
+                    this.lwgOnEnable();
                     this.propertyAssign();
                 }
-                lwgInit() {
+                lwgOnEnable() {
                 }
                 initProperty() {
                 }
@@ -1660,16 +1594,20 @@
             function off(effect, target, caller, down, move, up, out) {
                 let btnEffect;
                 switch (effect) {
-                    case 'largen':
+                    case ClickType.noEffect:
+                        btnEffect = new Btn_NoEffect();
+                        break;
+                    case ClickType.largen:
                         btnEffect = new Btn_LargenEffect();
                         break;
-                    case 'balloon':
+                    case ClickType.balloon:
                         btnEffect = new Btn_Balloon();
                         break;
-                    case 'beetle':
+                    case ClickType.balloon:
                         btnEffect = new Btn_Beetle();
                         break;
                     default:
+                        btnEffect = new Btn_LargenEffect();
                         break;
                 }
                 target.off(Laya.Event.MOUSE_DOWN, caller, down);
@@ -2272,10 +2210,17 @@
                 return len;
             }
             Tools.twoObjectsLen_2D = twoObjectsLen_2D;
-            function twoSubV3_3D(V3_01, V3_02) {
+            function twoSubV3_3D(V3_01, V3_02, normalizing) {
                 let p = new Laya.Vector3();
                 Laya.Vector3.subtract(V3_01, V3_02, p);
-                return p;
+                if (normalizing) {
+                    let p1 = new Laya.Vector3();
+                    Laya.Vector3.normalize(p, p1);
+                    return p1;
+                }
+                else {
+                    return p;
+                }
             }
             Tools.twoSubV3_3D = twoSubV3_3D;
             function reverseVector(type, Vecoter1, Vecoter2, normalizing) {
@@ -2500,7 +2445,7 @@
     let Animation3D = lwg.Animation3D;
 
     class GameMain3D_Blade extends lwg.Admin.Object3D {
-        lwgInit() {
+        lwgOnEnable() {
         }
         onTriggerEnter(other) {
             if (!lwg.Admin._gameStart) {
@@ -2560,14 +2505,31 @@
             (function (RazorState) {
                 RazorState["move"] = "move";
             })(RazorState = Enum.RazorState || (Enum.RazorState = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["taskReach"] = "taskReach";
+            })(EventType = Enum.EventType || (Enum.EventType = {}));
         })(Enum = Global.Enum || (Global.Enum = {}));
         let GVariate;
         (function (GVariate) {
             GVariate._gameLevel = 1;
             GVariate._execution = 10;
             GVariate._goldNum = 10;
-            GVariate._haircutNum = 0;
             GVariate._taskArr = [];
+            GVariate._sideHairNum = {
+                value: 0,
+                get getValue() {
+                    console.log('取值', this.value);
+                    return this.value;
+                },
+                set setValue(vals) {
+                    this.value = vals;
+                    console.log('剩余需要修理的头发', this.value);
+                    if (this.value <= 0) {
+                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
+                    }
+                }
+            };
             GVariate._taskNum = 0;
         })(GVariate = Global.GVariate || (Global.GVariate = {}));
         let GData;
@@ -2608,7 +2570,7 @@
     let GData = Global$1.GData;
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
-        lwgInit() {
+        lwgOnEnable() {
             this.RazorState = GEnum.RazorState.move;
             let Blade = this.self.getChildByName('Blade');
             Blade.addComponent(GameMain3D_Blade);
@@ -2624,7 +2586,7 @@
             super(...arguments);
             this.moveSwitch = false;
         }
-        lwgInit() {
+        lwgOnEnable() {
             this.timer = 0;
             this.moveSwitch = false;
         }
@@ -2643,7 +2605,7 @@
     }
 
     class GameMain3D_Floor extends lwg.Admin.Object3D {
-        lwgInit() {
+        lwgOnEnable() {
             this.rig3D.restitution = 0;
         }
         onTriggerEnter(other) {
@@ -2666,7 +2628,7 @@
     }
 
     class GameMain3D_knife extends lwg.Admin.Object3D {
-        lwgInit() {
+        lwgOnEnable() {
         }
         onTriggerEnter(other) {
             let owner = other.owner;
@@ -2693,6 +2655,7 @@
             this.knifeFPos = new Laya.Vector3();
             this.Head = new Laya.MeshSprite3D();
             this.headFPos = new Laya.Vector3();
+            this.HairParent = new Laya.MeshSprite3D();
             this.LevelTem = new Laya.MeshSprite3D();
             this.Level = new Laya.MeshSprite3D();
             this.LevelFpos = new Laya.Vector3();
@@ -2720,17 +2683,18 @@
             this.razorFPos.y = this.Razor.transform.localPositionY;
             this.razorFPos.z = this.Razor.transform.localPositionZ;
             this.razorFEulerY = this.Razor.transform.localRotationEulerY;
-            this.Razor.addComponent(GameMain3D_Razor);
             this.Floor = this.Level.getChildByName('Floor');
-            this.Floor.addComponent(GameMain3D_Floor);
             this.Head = this.Level.getChildByName('Head');
-            this.knife = this.Head.getChildByName('knife');
-            this.knife.addComponent(GameMain3D_knife);
+            this.HairParent = this.Head.getChildByName('HairParent');
+            this.knife = this.Level.getChildByName('knife');
             this.Capsule = this.Head.getChildByName('Capsule');
             let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
             capsuleRig3D.restitution = 0;
         }
         lwgOnEnable() {
+            this.Floor.addComponent(GameMain3D_Floor);
+            this.Razor.addComponent(GameMain3D_Razor);
+            this.knife.addComponent(GameMain3D_knife);
         }
         refresh3DScene() {
             this.Razor.transform.localPositionX = this.razorFPos.x;
@@ -2796,36 +2760,65 @@
             this.Landmark_Top = new Laya.MeshSprite3D();
             this._ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
             this.outs = new Array();
+            this.HairParent = new Laya.MeshSprite3D();
             this.cameraAndRazorPos = new Laya.Vector3();
             this.moveTime = 1000;
             this.moveSwitch = false;
-            this.speed = 0.09;
         }
         ;
         selfNode() {
             this.Rocker = this.self['Rocker'];
             this.GameMain3D = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D];
-            this.MainCamera = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].MainCamera;
-            this.Razor = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Razor;
-            this.knife = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].knife;
-            this.Landmark_Left = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Left;
-            this.Landmark_Right = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Right;
-            this.Landmark_Side = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Side;
-            this.Landmark_Top = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Landmark_Top;
-            this.Capsule = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Capsule;
+            this.MainCamera = this.GameMain3D['GameMain3D'].MainCamera;
+            this.Razor = this.GameMain3D['GameMain3D'].Razor;
+            this.knife = this.GameMain3D['GameMain3D'].knife;
+            this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
+            this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
+            this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
+            this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
+            this.Capsule = this.GameMain3D['GameMain3D'].Capsule;
+            this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
+            this.TaskBar = this.self['TaskBar'];
+            this.BtnLast = this.self['BtnLast'];
         }
         lwgOnEnable() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
             GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+            this.createProgress();
+            this.BtnLast.visible = false;
+            EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
+                this.BtnLast.visible = true;
+            });
+            this.createTaskContent();
+        }
+        createProgress() {
+            for (let index = 0; index < GVariate._taskArr.length; index++) {
+                const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress);
+                this.TaskBar.addChild(TaskPro);
+                TaskPro.pos(index * 100, 0);
+                let Bar = TaskPro.getChildByName('Bar');
+                let Mask = Bar.mask;
+                Mask.scaleX = 0;
+            }
+        }
+        createTaskContent() {
+            for (let index = 0; index < GVariate._taskArr.length; index++) {
+                switch (GVariate._taskArr[index]) {
+                    case GEnum.TaskType.sideHair:
+                        GVariate._sideHairNum.setValue = this.HairParent.numChildren;
+                        break;
+                    case GEnum.TaskType.sideHair:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         btnOnClick() {
-            lwg.Click.on(Click.ClickType.largen, null, this.self['BtnLast'], this, this.btnAgainDown, null, this.btnAgainUp, null);
+            lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
         }
-        btnAgainDown(e) {
-            e.stopPropagation();
-        }
-        btnAgainUp(e) {
+        btnLastUp(e) {
             e.stopPropagation();
             GVariate._taskNum++;
             this.mainCameraMove();
@@ -2886,27 +2879,26 @@
                         this.Razor.transform.localPositionY -= diffY * 0.01;
                         break;
                     case GEnum.TaskType.leftBeard:
-                        let hitResult1 = this.rayDetection();
-                        if (hitResult1) {
-                            let pos = hitResult1.point;
-                            this.knife.transform.position = pos;
-                            this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
-                        }
+                        this.leftAndRightShaving();
                         break;
                     case GEnum.TaskType.rightBeard:
-                        let hitResult2 = this.rayDetection();
-                        if (hitResult2) {
-                            let pos = hitResult2.point;
-                            this.knife.transform.position = pos;
-                            this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
-                            this.knife.transform.localRotationEulerY += 180;
-                        }
+                        this.leftAndRightShaving();
                         break;
                     case GEnum.TaskType.topHead:
                         break;
                     default:
                         break;
                 }
+            }
+        }
+        leftAndRightShaving() {
+            let hitResult = this.rayDetection();
+            if (hitResult) {
+                let p = Tools.twoSubV3_3D(hitResult.point, this.Capsule.transform.position, true);
+                let len = Tools.twoObjectsLen_3D(this.knife, this.Capsule);
+                let unit = 0.1 * (1.05 - len);
+                this.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
+                this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
             }
         }
         rayDetection() {
@@ -2926,17 +2918,6 @@
         }
         onStageMouseUp(e) {
             this.moveSwitch = false;
-        }
-        RazorFellowGuide() {
-            let p = lwg.Tools.twoSubV3_3D(this.Razor.transform.position, this.Guide.transform.position);
-            let normalizP = new Laya.Vector3();
-            Laya.Vector3.normalize(p, normalizP);
-            this.Razor.transform.localPositionX -= normalizP.x * this.speed;
-            this.Razor.transform.localPositionZ -= normalizP.z * this.speed;
-        }
-        cameraFellowRazor() {
-            this.MainCamera.transform.localPositionX = this.Razor.transform.position.x - this.cameraAndRazorPos.x;
-            this.MainCamera.transform.localPositionZ = this.Razor.transform.position.z - this.cameraAndRazorPos.z;
         }
         lwgOnUpdate() {
         }

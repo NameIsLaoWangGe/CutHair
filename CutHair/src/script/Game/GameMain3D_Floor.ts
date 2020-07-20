@@ -2,7 +2,7 @@ import { lwg } from "../Lwg_Template/lwg";
 
 export default class GameMain3D_Floor extends lwg.Admin.Object3D {
 
-    lwgInit(): void {
+    lwgOnEnable(): void {
         this.rig3D.restitution = 0;
     }
     onTriggerEnter(other: Laya.Rigidbody3D): void {
@@ -17,7 +17,6 @@ export default class GameMain3D_Floor extends lwg.Admin.Object3D {
             default:
                 break;
         }
-
     }
 
 

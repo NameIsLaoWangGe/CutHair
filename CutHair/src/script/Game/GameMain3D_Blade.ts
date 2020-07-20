@@ -1,13 +1,18 @@
-import { lwg } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Global } from "../Lwg_Template/lwg";
+import { GEnum } from "../Lwg_Template/Global";
 
 export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
-    lwgInit(): void {
+    /**头发的总数*/
+    hairsNumber: any;
+    lwgOnEnable(): void {
+
+     
     }
 
     onTriggerEnter(other): void {
         if (!lwg.Admin._gameStart) {
-            return ;
+            return;
         }
         let otherOwner = other.owner as Laya.MeshSprite3D;
         let otherOwnerParent = otherOwner.parent as Laya.MeshSprite3D;
@@ -51,7 +56,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
                 break;
             case 'standard':
-                console.log('碰到线了！')
+                console.log('碰到线了！');
                 break;
             default:
                 break;

@@ -15,9 +15,11 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     knifeFPos: Laya.Vector3 = new Laya.Vector3();
     knifeFEulerY: number;
 
+    // 头
     Head: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     headFPos: Laya.Vector3 = new Laya.Vector3();
     headFEulerY: number;
+    HairParent: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
     //当前关卡节点
     LevelTem: Laya.MeshSprite3D = new Laya.MeshSprite3D();
@@ -58,14 +60,13 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.razorFPos.y = this.Razor.transform.localPositionY;
         this.razorFPos.z = this.Razor.transform.localPositionZ;
         this.razorFEulerY = this.Razor.transform.localRotationEulerY;
-        this.Razor.addComponent(GameMain3D_Razor);
 
         this.Floor = this.Level.getChildByName('Floor') as Laya.MeshSprite3D;
-        this.Floor.addComponent(GameMain3D_Floor);
 
         this.Head = this.Level.getChildByName('Head') as Laya.MeshSprite3D;
-        this.knife = this.Head.getChildByName('knife') as Laya.MeshSprite3D;
-        this.knife.addComponent(GameMain3D_knife);
+        this.HairParent = this.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
+
+        this.knife = this.Level.getChildByName('knife') as Laya.MeshSprite3D;
         this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
         let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         capsuleRig3D.restitution = 0;
@@ -73,8 +74,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     }
 
     lwgOnEnable(): void {
+        this.Floor.addComponent(GameMain3D_Floor);
+        this.Razor.addComponent(GameMain3D_Razor);
+        this.knife.addComponent(GameMain3D_knife);
     }
-
 
     /**重制整个场景，包括物体的位置和大小*/
     refresh3DScene(): void {

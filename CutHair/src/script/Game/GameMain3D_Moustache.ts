@@ -4,7 +4,7 @@ export default class GameMain3D_Moustache extends lwg.Admin.Object3D {
 
     timer: number;
     moveSwitch: boolean = false;
-    lwgInit(): void {
+    lwgOnEnable(): void {
         this.timer = 0;
         this.moveSwitch = false;
     }

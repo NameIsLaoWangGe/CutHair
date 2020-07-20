@@ -11576,107 +11576,12 @@
 										]
 									}
 								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":201,
-								"props":{
-									"name":"knife",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.571,
-										-0.164,
-										-0.586
-									],
-									"rotation":[
-										0,
-										0.2993738,
-										0,
-										-0.954136
-									],
-									"scale":[
-										0.5,
-										0.15,
-										0.2
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":false,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Resources/unity_builtin_extra.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"PhysicsCollider",
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":202,
-										"props":{
-											"name":"HandSaw_0",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												-0.3370822,
-												0.09332319,
-												-0.1079165
-											],
-											"rotation":[
-												-0.4999999,
-												0.5000001,
-												0.4999999,
-												0.5000001
-											],
-											"scale":[
-												1.900002,
-												0.7600014,
-												2.533339
-											],
-											"meshPath":"Assets/Mesh/HandSaw-HandSaw_0.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/knife.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
 							}
 						]
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":203,
+						"instanceID":201,
 						"props":{
 							"name":"standardParent",
 							"active":true,
@@ -11703,7 +11608,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":204,
+								"instanceID":202,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11739,7 +11644,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":205,
+								"instanceID":203,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11775,7 +11680,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":206,
+								"instanceID":204,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11811,7 +11716,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":207,
+								"instanceID":205,
 								"props":{
 									"name":"standard (3)",
 									"active":true,
@@ -11847,7 +11752,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":208,
+								"instanceID":206,
 								"props":{
 									"name":"standard (4)",
 									"active":true,
@@ -11883,7 +11788,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":209,
+								"instanceID":207,
 								"props":{
 									"name":"standard (5)",
 									"active":true,
@@ -11919,7 +11824,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":210,
+								"instanceID":208,
 								"props":{
 									"name":"standard (6)",
 									"active":true,
@@ -11955,7 +11860,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":211,
+								"instanceID":209,
 								"props":{
 									"name":"standard (7)",
 									"active":true,
@@ -11991,7 +11896,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":212,
+								"instanceID":210,
 								"props":{
 									"name":"standard (8)",
 									"active":true,
@@ -12027,7 +11932,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":213,
+								"instanceID":211,
 								"props":{
 									"name":"standard (9)",
 									"active":true,
@@ -12063,7 +11968,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":214,
+								"instanceID":212,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -12114,7 +12019,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":215,
+								"instanceID":213,
 								"props":{
 									"name":"standard (1)",
 									"active":true,
@@ -12152,7 +12057,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":216,
+						"instanceID":214,
 						"props":{
 							"name":"Floor",
 							"active":true,
@@ -12220,7 +12125,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":217,
+						"instanceID":215,
 						"props":{
 							"name":"Landmark_Side",
 							"active":true,
@@ -12279,7 +12184,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":218,
+						"instanceID":216,
 						"props":{
 							"name":"Landmark_Right",
 							"active":true,
@@ -12338,7 +12243,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":219,
+						"instanceID":217,
 						"props":{
 							"name":"Landmark_Left",
 							"active":true,
@@ -12397,7 +12302,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":220,
+						"instanceID":218,
 						"props":{
 							"name":"Landmark_Top",
 							"active":true,
@@ -12453,6 +12358,101 @@
 							}
 						],
 						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":219,
+						"props":{
+							"name":"knife",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.1114773,
+								0.1818237,
+								0.1305404
+							],
+							"rotation":[
+								0,
+								0.954136,
+								0,
+								0.2993737
+							],
+							"scale":[
+								0.5000001,
+								0.15,
+								0.2000001
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"instanceID":220,
+								"props":{
+									"name":"HandSaw_0",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.32,
+										0.09332319,
+										-0.008
+									],
+									"rotation":[
+										-0.4995634,
+										-0.5004363,
+										-0.5004363,
+										0.4995634
+									],
+									"scale":[
+										1.900002,
+										0.7600014,
+										2.533339
+									],
+									"meshPath":"Assets/Mesh/HandSaw-HandSaw_0.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/knife.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							}
+						]
 					}
 				]
 			},

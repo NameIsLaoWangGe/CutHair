@@ -1,4 +1,3 @@
-
 /**综合模板*/
 export module lwg {
     /**全局方法,全局变量，每个游戏不一样*/
@@ -239,8 +238,6 @@ export module lwg {
             lwg.Global._goldNum += number;
             let Num = lwg.Global.GoldNumNode.getChildByName('Num') as Laya.FontClip;
             Num.value = lwg.Global._goldNum.toString();
-
-            lwg.LocalStorage.addData();
         }
 
         /**指代当前剩余体力节点*/
@@ -274,7 +271,6 @@ export module lwg {
             let num = lwg.Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
             num.value = lwg.Global._execution.toString();
 
-            lwg.LocalStorage.addData();
         }
 
         /**指代当前暂停游戏节点*/
@@ -561,79 +557,14 @@ export module lwg {
         }
     }
 
-    /**本地信息存储*/
-    export module LocalStorage {
-        let storageData: any;
-        /**上传本地数据到缓存,一般在游戏胜利后和购买皮肤后上传*/
-        export function addData(): void {
-            storageData = {
-                '_gameLevel': lwg.Global._gameLevel,
-                '_goldNum': lwg.Global._goldNum,
-                '_execution': lwg.Global._execution,
-                '_exemptExTime': lwg.Global._exemptExTime,
-                '_freeHintTime': lwg.Global._freeHintTime,
-                '_hotShareTime': lwg.Global._hotShareTime,
-                '_addExDate': lwg.Global._addExDate,
-                '_addExHours': lwg.Global._addExHours,
-                '_addMinutes': lwg.Global._addMinutes,
-                '_buyNum': lwg.Global._buyNum,
-                '_currentPifu': lwg.Global._currentPifu,
-                '_havePifu': lwg.Global._havePifu,
-                '_watchAdsNum': lwg.Global._watchAdsNum,
-                '_huangpihaozi': lwg.Global._huangpihaozi,
-                '_zibiyazi': lwg.Global._zibiyazi,
-                '_kejigongzhu': lwg.Global._kejigongzhu,
-                '_pickPaintedNum': lwg.Global._pickPaintedNum,
-                '_haimiangongzhu': lwg.Global._haimiangongzhu
-            }
-            // 转换成字符串上传
-            let data: string = JSON.stringify(storageData);
-            Laya.LocalStorage.setJSON('storageData', data);
-        }
 
-        /**清除本地数据*/
-        export function clearData(): void {
-            Laya.LocalStorage.clear();
-        }
-
-        /**获取本地数据，在onlode场景获取*/
-        export function getData(): any {
-            let storageData: string = Laya.LocalStorage.getJSON('storageData');
-            if (storageData) {
-                // 将字符串转换成json
-                let data: any = JSON.parse(storageData);
-                return data;
-            } else {
-                lwg.Global._gameLevel = 1;
-                lwg.Global._goldNum = 0;
-                lwg.Global._execution = 15;
-                lwg.Global._exemptExTime = null;
-                lwg.Global._freeHintTime = null;
-                lwg.Global._hotShareTime = null;
-                lwg.Global._addExDate = (new Date).getDate();
-                lwg.Global._addExHours = (new Date).getHours();
-                lwg.Global._addMinutes = (new Date).getMinutes();
-                lwg.Global._buyNum = 1;
-                lwg.Global._currentPifu = Enum.PifuAllName[0];
-                lwg.Global._havePifu = ['01_gongzhu'];
-                lwg.Global._watchAdsNum = 0;
-                lwg.Global._huangpihaozi = false;
-                lwg.Global._zibiyazi = false;
-                lwg.Global._kejigongzhu = false;
-                lwg.Global._haimiangongzhu = false;
-                lwg.Global._pickPaintedNum = 0;
-
-                return null;
-            }
-        }
-    }
 
     /**事件类*/
     export module EventAdmin {
 
         export enum EventType {
-            btnOnClick = 'btnOnClick',
-            aniComplete = 'aniComplete',
+            gameOver = 'gameOver',
+
         }
 
         export class EventClass {
@@ -642,7 +573,12 @@ export module lwg {
             /**事件基类*/
             dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
 
-            /**事件注册*/
+            /**
+             * 事件注册,总控制事件注册在当前类，每个游戏独有的事件不要注册在这里，防止每关重复注册
+             * @param type 事件类型或者名称
+             * @param caller 事件的执行域
+             * @param listener 响应事件的回调函数,以下写法可以传递参数进来:()=>{}
+             */
             static reg(type: any, caller: any, listener: Function) {
                 if (!caller) {
                     console.error("caller must exist!");
@@ -650,22 +586,37 @@ export module lwg {
                 EventClass.Self.dispatcher.on(type.toString(), caller, listener);
             }
 
-            /**事件通知*/
+            /**
+             * 通知事件
+             * @param type 事件类型或者名称
+             * @param args 注册事件中的回调函数中的参数
+             */
             static notify(type: any, args?: any) {
                 EventClass.Self.dispatcher.event(type.toString(), args);
             }
 
-            /**关闭某个事件*/
+            /**
+             * 关闭某个事件
+             * @param type 事件类型或者名称
+             * @param caller 事件的执行域
+             * @param listener 关闭后的回调函数
+             * */
             static off(type: any, caller: any, listener: Function) {
                 EventClass.Self.dispatcher.off(type.toString(), caller, listener);
             }
 
-            /**关闭所有事件*/
+            /**
+             * 关闭所有执行域中的事件
+             * @param type 事件类型或者名称
+            */
             static offAll(type: any) {
                 EventClass.Self.dispatcher.offAll(type.toString());
             }
 
-            /**移除某个caller上的所有事件*/
+            /**
+             * 移除某个caller上的所有事件
+             * @param caller 执行域
+            */
             static offCaller(caller: any) {
                 EventClass.Self.dispatcher.offAllCaller(caller);
             }
@@ -871,7 +822,6 @@ export module lwg {
                 Admin.openLevelNum++;
                 Admin._openLevelNumCustom();
             }
-            LocalStorage.addData();
         }
 
         /**
@@ -1181,10 +1131,10 @@ export module lwg {
                 let calssName = this['__proto__']['constructor'].name;
                 // 组件变为的self属性
                 this.self[calssName] = this;
-                this.lwgInit();
+                this.lwgOnEnable();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgInit(): void {
+            lwgOnEnable(): void {
                 console.log('父类的初始化！');
             }
         }
@@ -1202,13 +1152,6 @@ export module lwg {
             }
 
             onAwake(): void {
-                this.selfNode();
-            }
-            /**声明场景里的一些节点*/
-            selfNode(): void {
-
-            }
-            onEnable(): void {
                 this.self = this.owner as Laya.Sprite;
                 this.selfScene = this.self.scene;
                 // 类名
@@ -1216,11 +1159,18 @@ export module lwg {
                 // 组件变为的self属性
                 this.self[calssName] = this;
                 this.rig = this.self.getComponent(Laya.RigidBody);
-                this.lwgInit();
+                this.selfNode();
+            }
+            /**声明场景里的一些节点*/
+            selfNode(): void {
+
+            }
+            onEnable(): void {
+                this.lwgOnEnable();
                 this.btnOnClick();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgInit(): void {
+            lwgOnEnable(): void {
                 console.log('父类的初始化！');
             }
             /**点击事件注册*/
@@ -1268,10 +1218,10 @@ export module lwg {
                 this.self[calssName] = this;
                 this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
                 this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider) as Laya.PhysicsCollider;
-                this.lwgInit();
+                this.lwgOnEnable();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgInit(): void {
+            lwgOnEnable(): void {
                 console.log('父类的初始化！');
             }
 
@@ -1292,32 +1242,32 @@ export module lwg {
     export module Effects {
         /**特效元素的图片地址，所有项目都可用*/
         export enum SkinUrl {
-            'Effects/cir_white.png',
-            "Effects/cir_black.png",
-            "Effects/cir_blue.png",
-            "Effects/cir_bluish.png",
-            "Effects/cir_cyan.png",
-            "Effects/cir_grass.png",
-            "Effects/cir_green.png",
-            "Effects/cir_orange.png",
-            "Effects/cir_pink.png",
-            "Effects/cir_purple.png",
-            "Effects/cir_red.png",
-            "Effects/cir_yellow.png",
+            'Frame/Effects/cir_white.png',
+            "Frame/Effects/cir_black.png",
+            "Frame/Effects/cir_blue.png",
+            "Frame/Effects/cir_bluish.png",
+            "Frame/Effects/cir_cyan.png",
+            "Frame/Effects/cir_grass.png",
+            "Frame/Effects/cir_green.png",
+            "Frame/Effects/cir_orange.png",
+            "Frame/Effects/cir_pink.png",
+            "Frame/Effects/cir_purple.png",
+            "Frame/Effects/cir_red.png",
+            "Frame/Effects/cir_yellow.png",
 
-            "Effects/star_black.png",
-            "Effects/star_blue.png",
-            "Effects/star_bluish.png",
-            "Effects/star_cyan.png",
-            "Effects/star_grass.png",
-            "Effects/star_green.png",
-            "Effects/star_orange.png",
-            "Effects/star_pink.png",
-            "Effects/star_purple.png",
-            "Effects/star_red.png",
-            "Effects/star_white.png",
-            "Effects/star_yellow.png",
-            "Effects/icon_biggold.png"
+            "Frame/Effects/star_black.png",
+            "Frame/Effects/star_blue.png",
+            "Frame/Effects/star_bluish.png",
+            "Frame/Effects/star_cyan.png",
+            "Frame/Effects/star_grass.png",
+            "Frame/Effects/star_green.png",
+            "Frame/Effects/star_orange.png",
+            "Frame/Effects/star_pink.png",
+            "Frame/Effects/star_purple.png",
+            "Frame/Effects/star_red.png",
+            "Frame/Effects/star_white.png",
+            "Frame/Effects/star_yellow.png",
+            "Frame/Effects/icon_biggold.png"
         }
 
         /**类粒子特效的通用父类*/
@@ -1366,11 +1316,11 @@ export module lwg {
                 this.self.pivotX = this.self.width / 2;
                 this.self.pivotY = this.self.height / 2;
                 this.timer = 0;
-                this.lwgInit();
+                this.lwgOnEnable();
                 this.propertyAssign();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgInit(): void {
+            lwgOnEnable(): void {
             }
             /**初始化特效单元的属性*/
             initProperty(): void {
@@ -1411,10 +1361,12 @@ export module lwg {
          * 创建普通爆炸动画，四周爆炸随机散开
          * @param parent 父节点
          * @param quantity 数量
-         * @param speed 速度
-         * @param continueTime 持续时间（按帧数计算）
          * @param x X轴位置
          * @param y Y轴位置
+         * @param style 皮肤类型
+         * @param speed 速度
+         * @param continueTime 持续时间（按帧数计算）
+      
          */
         export function createCommonExplosion(parent, quantity, x, y, style, speed, continueTime): void {
             for (let index = 0; index < quantity; index++) {
@@ -2254,19 +2206,22 @@ export module lwg {
         export function off(effect, target, caller, down, move, up, out): void {
             let btnEffect;
             switch (effect) {
-                case 'largen':
+                case ClickType.noEffect:
+                    btnEffect = new Btn_NoEffect();
+                    break;
+                case ClickType.largen:
                     btnEffect = new Btn_LargenEffect();
                     break;
-                case 'balloon':
+                case ClickType.balloon:
                     btnEffect = new Btn_Balloon();
                     break;
-                case 'beetle':
+                case ClickType.balloon:
                     btnEffect = new Btn_Beetle();
                     break;
                 default:
+                    btnEffect = new Btn_LargenEffect();
                     break;
             }
-            // btnPrintPoint('on', target);
 
             target.off(Laya.Event.MOUSE_DOWN, caller, down);
             target.off(Laya.Event.MOUSE_MOVE, caller, move);
@@ -3330,15 +3285,22 @@ export module lwg {
         }
 
         /**
-        * 返回相同坐标系中两个三维向量的相减向量（obj1-obj2）
-        * @param V3_01 向量1
-        * @param V3_02 向量2
-        */
-        export function twoSubV3_3D(V3_01: Laya.Vector3, V3_02: Laya.Vector3): Laya.Vector3 {
+             * 返回相同坐标系中两个三维向量的相减向量（obj1-obj2）
+             * @param V3_01 向量1
+             * @param V3_02 向量2
+             * @param normalizing 是否是单位向量
+             */
+        export function twoSubV3_3D(V3_01: Laya.Vector3, V3_02: Laya.Vector3, normalizing: boolean): Laya.Vector3 {
             let p = new Laya.Vector3();
             // 向量相减后计算长度
             Laya.Vector3.subtract(V3_01, V3_02, p);
-            return p;
+            if (normalizing) {
+                let p1: Laya.Vector3 = new Laya.Vector3();
+                Laya.Vector3.normalize(p, p1);
+                return p1;
+            } else {
+                return p;
+            }
         }
 
         /**
@@ -3620,4 +3582,3 @@ export let EventAdmin = lwg.EventAdmin;
 export let Tools = lwg.Tools;
 export let Effects = lwg.Effects;
 export let Animation3D = lwg.Animation3D;
-
