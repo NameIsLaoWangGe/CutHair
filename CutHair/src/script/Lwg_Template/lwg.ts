@@ -689,7 +689,7 @@ export module lwg {
                 scene.name = openName;
                 _sceneControl[openName] = scene;
                 // 背景图自适应并且居中
-                let background = scene.getChildByName('background') as Laya.Image;
+                let background = scene.getChildByName('Background') as Laya.Image;
                 if (background) {
                     if (openName.substring(0, 6) === 'UIMain') {
                         background.width = null;

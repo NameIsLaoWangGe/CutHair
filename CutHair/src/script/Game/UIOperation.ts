@@ -1,4 +1,4 @@
-import { lwg, Click, Animation, Animation3D, Tools, EventAdmin } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation, Animation3D, Tools, EventAdmin, Admin } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
@@ -35,6 +35,10 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     /**头发父节点*/
     HairParent: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    /**左侧胡须的父节点*/
+    RightBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    /**右侧须的父节点*/
+    LeftBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
     selfNode(): void {
         this.Rocker = this.self['Rocker'];
@@ -52,6 +56,8 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.Capsule = this.GameMain3D['GameMain3D'].Capsule;
 
         this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
+        this.LeftBeard = this.GameMain3D['GameMain3D'].LeftBeard;
+        this.RightBeard = this.GameMain3D['GameMain3D'].RightBeard;
 
         this.TaskBar = this.self['TaskBar'];
 
@@ -61,14 +67,20 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**摄像机和刀片的坐标差值*/
     cameraAndRazorPos: Laya.Vector3 = new Laya.Vector3();
     lwgOnEnable(): void {
-        GVariate._taskNum = 0
+        GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
         this.createProgress();
         this.BtnLast.visible = false;
 
         EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
-            this.BtnLast.visible = true;
+            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                // this.self.close();
+                // Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+            } else {
+                this.BtnLast.visible = true;
+            }
+
         })
         this.createTaskContent();
     }
@@ -88,17 +100,20 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     /**
-     * 创建每个任务需要修剪的内容,一般是头发的数量
+     * 创建每个任务需要的修剪内容,一般是头发的数量
      * */
     createTaskContent(): void {
         for (let index = 0; index < GVariate._taskArr.length; index++) {
             switch (GVariate._taskArr[index]) {
                 case GEnum.TaskType.sideHair:
                     GVariate._sideHairNum.setValue = this.HairParent.numChildren;
+                    this.monitorHiarLen();
                     break;
                 case GEnum.TaskType.leftBeard:
+                    GVariate._leftBeardNum.setValue = this.LeftBeard.numChildren;
                     break;
                 case GEnum.TaskType.rightBeard:
+                    GVariate._rightBeardNum.setValue = this.RightBeard.numChildren;
                     break;
                 default:
                     break;
@@ -109,17 +124,38 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**监听每根头发的长度*/
     monitorHiarLen(): void {
         for (let index = 0; index < this.HairParent.numChildren; index++) {
-            // const element = array[index];
-
+            const element = this.HairParent.getChildAt(index) as Laya.MeshSprite3D;
+            let len = element.transform.localPositionY;
+            element['HairLen'] = {
+                detection: true,
+                value: len,
+                get getValue(): number {
+                    return this.value
+                },
+                set setValue(v: number) {
+                    if (this.detection) {
+                        if (v < 0.13) {
+                            // console.log('这根头发理完了！');
+                            this.detection = false;
+                            GVariate._sideHairNum.setValue = GVariate._sideHairNum.value - 1;
+                        }
+                        this.value = v;
+                        // console.log('当前头发长度', this.value);
+                    } else {
+                        // console.log('抱歉!,这根头发已经检测过了');
+                    }
+                }
+            }
         }
     }
-
 
     btnOnClick(): void {
         lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
     }
 
     btnLastUp(e: Laya.Event): void {
+        this.BtnLast.visible = false;
+        this.moveSwitch = false;
         e.stopPropagation();
         GVariate._taskNum++;
         this.mainCameraMove();
@@ -137,6 +173,8 @@ export default class UIOperation extends lwg.Admin.Scene {
         switch (GVariate._taskArr[GVariate._taskNum]) {
 
             case GEnum.TaskType.leftBeard:
+                this.knife.transform.localPosition = new Laya.Vector3(0.02, 0.132, 1.321);
+                this.knife.transform.localRotationEuler = new Laya.Vector3(0, 325.577 + 90, 0);
                 // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Left.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
                 this.setCamera(this.Landmark_Left.transform.position, this.Landmark_Left.transform.localRotationEuler, this.moveTime);
 

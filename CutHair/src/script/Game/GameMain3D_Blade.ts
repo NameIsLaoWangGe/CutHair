@@ -6,8 +6,6 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
     /**头发的总数*/
     hairsNumber: any;
     lwgOnEnable(): void {
-
-     
     }
 
     onTriggerEnter(other): void {
@@ -33,14 +31,14 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 // console.log('截取比例', ratio);
                 // 截取
                 otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
-
+                // ['HairLen']为我们自己赋值的属性
+                otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
                 // 过短则不生成，否则太多太碎
                 if (cutH >= 0.01) {
                     // 克隆一个掉落的头发，并且使其掉落
                     let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
                     cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
                     let CutHairParent = (this.selfScene['GameMain3D'].Head as Laya.MeshSprite3D).getChildByName('CutHairParent') as Laya.MeshSprite3D;
-                    // console.log(CutHairParent);
                     cutHair.name = 'cutHair';
                     CutHairParent.addChild(cutHair);
                     cutHair.transform.position = this.self.transform.position;

@@ -35,19 +35,65 @@ export module Global {
 
         /**侧面所需理发的数量*/
         export let _sideHairNum: any = {
+            switch: true,
             value: 0,
             get getValue() {
-                console.log('取值', this.value);
+                // console.log('取值', this.value);
                 return this.value;
             },
             set setValue(vals) {
-                this.value = vals;
-                console.log('剩余需要修理的头发', this.value);
-                if (this.value <= 0) {
-                    EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
+                if (this.switch) {
+                    this.value = vals;
+                    console.log('剩余需要修理的头发', this.value);
+                    if (this.value <= 3) {
+                        this.switch = false;
+                        console.log('任务完成了！');
+                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
+                    }
                 }
             }
         };
+
+        /**左侧胡子的数量*/
+        export let _leftBeardNum: any = {
+            switch: true,
+            value: 0,
+            get getValue() {
+                // console.log('取值', this.value);
+                return this.value;
+            },
+            set setValue(vals) {
+                if (this.switch) {
+                    this.value = vals;
+                    console.log('剩余需要修理胡须的数量', this.value);
+                    if (this.value <= 3) {
+                        console.log('任务完成了！');
+                        this.switch = false;
+                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
+                    }
+                }
+            }
+        }
+
+        export let _rightBeardNum: any = {
+            switch: true,
+            value: 0,
+            get getValue() {
+                // console.log('取值', this.value);
+                return this.value;
+            },
+            set setValue(vals) {
+                if (this.switch) {
+                    this.value = vals;
+                    console.log('剩余需要修理胡须的数量', this.value);
+                    if (this.value <= 5) {
+                        console.log('任务完成了！');
+                        this.switch = false;
+                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
+                    }
+                }
+            }
+        }
 
         /**当前关卡中进行到第几个任务，索引从0开始*/
         export let _taskNum: number = 0;
