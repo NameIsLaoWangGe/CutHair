@@ -3322,6 +3322,13 @@ export module lwg {
             return lenp;
         }
 
+        /**返回两个二维物体的距离*/
+        export function twoObjectsLen_2D(obj1: Laya.Sprite, obj2: Laya.Sprite): number {
+            let point = new Laya.Point(obj1.x, obj1.y);
+            let len = point.distance(obj2.x, obj2.y);
+            return len;
+        }
+
         /**
         * 返回相同坐标系中两个三维向量的相减向量（obj1-obj2）
         * @param V3_01 向量1
@@ -3368,13 +3375,27 @@ export module lwg {
          * @param x 坐标x
          * @param y 坐标y
          * */
-        export function vectorAngle(x, y) {
+        export function vector_Angle(x, y): number {
             let radian: number = Math.atan2(x, y) //弧度  0.6435011087932844
             let angle: number = 90 - radian * (180 / Math.PI); //角度  36.86989764584402;
             if (angle <= 0) {
                 angle = 270 + (90 + angle);
             }
-            return angle;
+            return angle - 90;
+        };
+
+        /**
+         * 在Laya2维世界中
+         * 通过一个角度，返回一个单位向量
+         * @param x 坐标x
+         * @param y 坐标y
+         * */
+        export function angle_Vector(angle): Laya.Point {
+            angle -= 90;
+            let radian = (90 - angle) / (180 / Math.PI);
+            let p = new Laya.Point(Math.sin(radian), Math.cos(radian));
+            p.normalize();
+            return p;
         };
 
         /**

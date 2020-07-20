@@ -1,5 +1,5 @@
 import { lwg, Click, Animation, Animation3D } from "../Lwg_Template/lwg";
-import { G, GEnum } from "../Lwg_Template/Global";
+import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
 
@@ -54,9 +54,9 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**摄像机和刀片的坐标差值*/
     cameraAndRazorPos: Laya.Vector3 = new Laya.Vector3();
     lwgOnEnable(): void {
-        G._taskNum = 0;
+        GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
-        G._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
     }
 
     btnOnClick(): void {
@@ -67,7 +67,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
     btnAgainUp(e: Laya.Event): void {
         e.stopPropagation();
-        G._taskNum++;
+        GVariate._taskNum++;
         this.mainCameraMove();
     }
 
@@ -77,10 +77,10 @@ export default class UIOperation extends lwg.Admin.Scene {
      * 摄像机的移动规则
      * */
     mainCameraMove(): void {
-        if (G._taskNum > G._taskArr.length) {
+        if (GVariate._taskNum > GVariate._taskArr.length) {
             return;
         }
-        switch (G._taskArr[G._taskNum]) {
+        switch (GVariate._taskArr[GVariate._taskNum]) {
 
             case GEnum.TaskType.leftBeard:
                 // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Left.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
@@ -160,7 +160,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
 
-            switch (G._taskArr[G._taskNum]) {
+            switch (GVariate._taskArr[GVariate._taskNum]) {
 
                 case GEnum.TaskType.sideHair:
                     this.Razor.transform.localPositionX -= diffX * 0.01;
@@ -184,6 +184,9 @@ export default class UIOperation extends lwg.Admin.Scene {
                         let pos = hitResult2.point;
                         this.knife.transform.position = pos;
                         this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
+                        this.knife.transform.localRotationEulerY += 180;
+                        // this.knife.transform.localRotationEulerX -= 50;
+
                     }
 
                     break;

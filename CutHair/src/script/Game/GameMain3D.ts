@@ -2,7 +2,7 @@ import { lwg } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
-import { Global, G, GEnum } from "../Lwg_Template/Global";
+import { Global, GVariate, GEnum } from "../Lwg_Template/Global";
 import GameMain3D_knife from "./GameMain3D_knife";
 export default class GameMain3D extends lwg.Admin.Scene3D {
     // 剃刀 
@@ -24,13 +24,11 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     Level: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     LevelFpos: Laya.Vector3 = new Laya.Vector3();
 
-
     // 地板
     Floor: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
     // 头部
     Capsule: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-
 
     /**四个节点代表摄像机移动到四个任务的方位*/
     Landmark_Left: Laya.MeshSprite3D = new Laya.MeshSprite3D();
@@ -38,7 +36,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     Landmark_Side: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     Landmark_Top: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     constructor() { super(); }
-
 
     selfNode(): void {
 
@@ -62,7 +59,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.razorFPos.z = this.Razor.transform.localPositionZ;
         this.razorFEulerY = this.Razor.transform.localRotationEulerY;
         this.Razor.addComponent(GameMain3D_Razor);
-
 
         this.Floor = this.Level.getChildByName('Floor') as Laya.MeshSprite3D;
         this.Floor.addComponent(GameMain3D_Floor);

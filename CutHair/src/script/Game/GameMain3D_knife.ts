@@ -10,13 +10,12 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
     }
     onTriggerEnter(other: Laya.Rigidbody3D): void {
         let owner = other.owner as Laya.MeshSprite3D;
-        // console.log(other);
+        let ownerParent = owner.parent as Laya.MeshSprite3D;
         switch (owner.name.substring(0, 5)) {
             case 'Beard':
                 other.isKinematic = false;
                 other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
                 break;
-
             default:
                 break;
         }

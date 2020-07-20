@@ -2266,6 +2266,12 @@
                 return lenp;
             }
             Tools.twoObjectsLen_3D = twoObjectsLen_3D;
+            function twoObjectsLen_2D(obj1, obj2) {
+                let point = new Laya.Point(obj1.x, obj1.y);
+                let len = point.distance(obj2.x, obj2.y);
+                return len;
+            }
+            Tools.twoObjectsLen_2D = twoObjectsLen_2D;
             function twoSubV3_3D(V3_01, V3_02) {
                 let p = new Laya.Vector3();
                 Laya.Vector3.subtract(V3_01, V3_02, p);
@@ -2294,15 +2300,23 @@
                 }
             }
             Tools.reverseVector = reverseVector;
-            function vectorAngle(x, y) {
+            function vector_Angle(x, y) {
                 let radian = Math.atan2(x, y);
                 let angle = 90 - radian * (180 / Math.PI);
                 if (angle <= 0) {
                     angle = 270 + (90 + angle);
                 }
-                return angle;
+                return angle - 90;
             }
-            Tools.vectorAngle = vectorAngle;
+            Tools.vector_Angle = vector_Angle;
+            function angle_Vector(angle) {
+                angle -= 90;
+                let radian = (90 - angle) / (180 / Math.PI);
+                let p = new Laya.Point(Math.sin(radian), Math.cos(radian));
+                p.normalize();
+                return p;
+            }
+            Tools.angle_Vector = angle_Vector;
             function drawPieMask(parent, startAngle, endAngle) {
                 parent.cacheAs = "bitmap";
                 let drawPieSpt = new Laya.Sprite();
@@ -2547,16 +2561,51 @@
                 RazorState["move"] = "move";
             })(RazorState = Enum.RazorState || (Enum.RazorState = {}));
         })(Enum = Global.Enum || (Global.Enum = {}));
-        let G;
-        (function (G) {
-            G._haircutNum = 0;
-            G._taskArr = [];
-            G._taskNum = 0;
-            G._posArr = [new Laya.Vector3(0, 94.56, 0), new Laya.Vector3(0, 94.56, 0), new Laya.Vector3(0, 94.56, 0)];
-        })(G = Global.G || (Global.G = {}));
+        let GVariate;
+        (function (GVariate) {
+            GVariate._gameLevel = 1;
+            GVariate._execution = 10;
+            GVariate._goldNum = 10;
+            GVariate._haircutNum = 0;
+            GVariate._taskArr = [];
+            GVariate._taskNum = 0;
+        })(GVariate = Global.GVariate || (Global.GVariate = {}));
+        let GData;
+        (function (GData) {
+            let storageData;
+            function addData() {
+                storageData = {
+                    '_gameLevel': GVariate._gameLevel,
+                    '_execution': GVariate._execution,
+                    '_goldNum': GVariate._goldNum,
+                };
+                let data = JSON.stringify(storageData);
+                Laya.LocalStorage.setJSON('storageData', data);
+            }
+            GData.addData = addData;
+            function getData() {
+                let storageData = Laya.LocalStorage.getJSON('storageData');
+                if (storageData) {
+                    let data = JSON.parse(storageData);
+                    return data;
+                }
+                else {
+                    GVariate._gameLevel = 1;
+                    GVariate._execution = 20;
+                    GVariate._goldNum = 0;
+                    return null;
+                }
+            }
+            GData.getData = getData;
+            function clearData() {
+                Laya.LocalStorage.clear();
+            }
+            GData.clearData = clearData;
+        })(GData = Global.GData || (Global.GData = {}));
     })(Global$1 || (Global$1 = {}));
-    let G = Global$1.G;
+    let GVariate = Global$1.GVariate;
     let GEnum = Global$1.Enum;
+    let GData = Global$1.GData;
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
         lwgInit() {
@@ -2595,12 +2644,20 @@
 
     class GameMain3D_Floor extends lwg.Admin.Object3D {
         lwgInit() {
-            console.log(this.self);
             this.rig3D.restitution = 0;
         }
         onTriggerEnter(other) {
             let owner = other.owner;
-            owner.parent.removeSelf();
+            switch (owner.name.substr(0, 5)) {
+                case 'Beard':
+                    owner.parent.removeSelf();
+                    break;
+                case 'cutHair':
+                    owner.parent.removeSelf();
+                    break;
+                default:
+                    break;
+            }
         }
         lwgOnUpdate() {
         }
@@ -2613,6 +2670,7 @@
         }
         onTriggerEnter(other) {
             let owner = other.owner;
+            let ownerParent = owner.parent;
             switch (owner.name.substring(0, 5)) {
                 case 'Beard':
                     other.isKinematic = false;
@@ -2757,9 +2815,9 @@
             this.Capsule = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].Capsule;
         }
         lwgOnEnable() {
-            G._taskNum = 0;
+            GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            G._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
         }
         btnOnClick() {
             lwg.Click.on(Click.ClickType.largen, null, this.self['BtnLast'], this, this.btnAgainDown, null, this.btnAgainUp, null);
@@ -2769,14 +2827,14 @@
         }
         btnAgainUp(e) {
             e.stopPropagation();
-            G._taskNum++;
+            GVariate._taskNum++;
             this.mainCameraMove();
         }
         mainCameraMove() {
-            if (G._taskNum > G._taskArr.length) {
+            if (GVariate._taskNum > GVariate._taskArr.length) {
                 return;
             }
-            switch (G._taskArr[G._taskNum]) {
+            switch (GVariate._taskArr[GVariate._taskNum]) {
                 case GEnum.TaskType.leftBeard:
                     this.setCamera(this.Landmark_Left.transform.position, this.Landmark_Left.transform.localRotationEuler, this.moveTime);
                     break;
@@ -2822,7 +2880,7 @@
                 this.Rocker.y += diffY;
                 this.touchPosX = e.stageX;
                 this.touchPosY = e.stageY;
-                switch (G._taskArr[G._taskNum]) {
+                switch (GVariate._taskArr[GVariate._taskNum]) {
                     case GEnum.TaskType.sideHair:
                         this.Razor.transform.localPositionX -= diffX * 0.01;
                         this.Razor.transform.localPositionY -= diffY * 0.01;
@@ -2841,6 +2899,7 @@
                             let pos = hitResult2.point;
                             this.knife.transform.position = pos;
                             this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
+                            this.knife.transform.localRotationEulerY += 180;
                         }
                         break;
                     case GEnum.TaskType.topHead:

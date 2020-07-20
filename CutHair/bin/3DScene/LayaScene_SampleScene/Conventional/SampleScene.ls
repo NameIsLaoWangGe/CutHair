@@ -6389,9 +6389,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
+												0.639,
 												-0.442,
-												-0.263
+												-0.303
 											],
 											"rotation":[
 												0.7697511,
@@ -6405,7 +6405,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6416,7 +6416,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6429,19 +6429,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -6456,7 +6444,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -6467,7 +6455,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -6481,10 +6469,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -6530,7 +6528,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6541,7 +6539,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6554,19 +6552,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -6581,7 +6567,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -6592,7 +6578,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -6606,10 +6592,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -6655,7 +6651,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6666,7 +6662,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6679,19 +6675,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -6706,7 +6690,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -6717,7 +6701,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -6731,10 +6715,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -6780,7 +6774,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6791,7 +6785,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6804,19 +6798,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -6831,7 +6813,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -6842,7 +6824,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -6856,10 +6838,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -6905,7 +6897,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6916,7 +6908,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6929,19 +6921,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -6956,7 +6936,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -6967,7 +6947,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -6981,10 +6961,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7014,9 +7004,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
+												0.6028,
 												-0.393,
-												-0.31
+												-0.3408
 											],
 											"rotation":[
 												0.7697511,
@@ -7030,7 +7020,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7041,7 +7031,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7054,19 +7044,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7081,7 +7059,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7092,7 +7070,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7106,10 +7084,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7155,7 +7143,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7166,7 +7154,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7179,19 +7167,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7206,7 +7182,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7217,7 +7193,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7231,10 +7207,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7264,9 +7250,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
+												0.704,
 												-0.61,
-												-0.293
+												-0.366
 											],
 											"rotation":[
 												0.7697511,
@@ -7280,7 +7266,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7291,7 +7277,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7304,19 +7290,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7331,7 +7305,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7342,7 +7316,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7356,10 +7330,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7389,9 +7373,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
+												0.758,
 												-0.523,
-												-0.263
+												-0.356
 											],
 											"rotation":[
 												0.7697511,
@@ -7405,7 +7389,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7416,7 +7400,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7429,19 +7413,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7456,7 +7428,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7467,7 +7439,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7481,10 +7453,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7514,9 +7496,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
+												0.71,
 												-0.722,
-												-0.291
+												-0.348
 											],
 											"rotation":[
 												0.7697511,
@@ -7530,7 +7512,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7541,7 +7523,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7554,19 +7536,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7581,7 +7551,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7592,7 +7562,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7606,10 +7576,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7639,9 +7619,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.552,
+												0.69,
 												-0.781,
-												-0.257
+												-0.334
 											],
 											"rotation":[
 												0.7697511,
@@ -7655,7 +7635,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7666,7 +7646,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7679,19 +7659,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7706,7 +7674,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7717,7 +7685,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7731,10 +7699,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7780,7 +7758,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7791,7 +7769,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7804,19 +7782,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7831,7 +7797,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7842,7 +7808,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7856,10 +7822,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -7905,7 +7881,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7916,7 +7892,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7929,19 +7905,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -7956,7 +7920,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -7967,7 +7931,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -7981,10 +7945,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8030,7 +8004,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8041,7 +8015,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8054,19 +8028,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8081,7 +8043,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8092,7 +8054,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8106,10 +8068,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8155,7 +8127,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8166,7 +8138,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8179,19 +8151,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8206,7 +8166,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8217,7 +8177,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8231,10 +8191,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8280,7 +8250,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8291,7 +8261,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8304,19 +8274,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8331,7 +8289,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8342,7 +8300,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8356,10 +8314,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8389,9 +8357,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.515,
+												0.503,
 												-0.4420013,
-												-0.4029999
+												-0.467
 											],
 											"rotation":[
 												0.6347973,
@@ -8405,7 +8373,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8416,7 +8384,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8429,19 +8397,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8456,7 +8412,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8467,7 +8423,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8481,10 +8437,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8514,9 +8480,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.455,
+												0.4528,
 												-0.6380005,
-												-0.5509996
+												-0.5059
 											],
 											"rotation":[
 												0.6347973,
@@ -8530,7 +8496,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8541,7 +8507,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8554,19 +8520,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8581,7 +8535,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8592,7 +8546,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8606,10 +8560,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8655,7 +8619,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8666,7 +8630,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8679,19 +8643,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8706,7 +8658,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8717,7 +8669,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8731,10 +8683,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8780,7 +8742,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8791,7 +8753,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8804,19 +8766,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8831,7 +8781,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8842,7 +8792,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8856,10 +8806,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -8905,7 +8865,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -8916,7 +8876,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -8929,19 +8889,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -8956,7 +8904,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -8967,7 +8915,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -8981,10 +8929,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9014,9 +8972,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.608,
+												0.5822,
 												-0.5589981,
-												-0.5509996
+												-0.443
 											],
 											"rotation":[
 												0.6347973,
@@ -9030,7 +8988,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9041,7 +8999,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9054,19 +9012,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9081,7 +9027,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9092,7 +9038,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9106,10 +9052,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9155,7 +9111,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9166,7 +9122,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9179,19 +9135,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9206,7 +9150,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9217,7 +9161,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9231,10 +9175,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9280,7 +9234,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9291,7 +9245,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9304,19 +9258,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9331,7 +9273,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9342,7 +9284,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9356,10 +9298,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9389,15 +9341,15 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.515,
+												0.4963453,
 												-0.5230026,
-												-0.4029999
+												-0.4090271
 											],
 											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
+												0.6878071,
+												0.4816078,
+												-0.4448949,
+												-0.3115187
 											],
 											"scale":[
 												0.03,
@@ -9405,7 +9357,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9416,7 +9368,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9429,19 +9381,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9456,7 +9396,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9467,7 +9407,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9481,10 +9421,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9516,15 +9466,15 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0,
-										0,
-										0.473
+										0.545,
+										0.089,
+										0.6805048
 									],
 									"rotation":[
-										0,
-										0,
-										0,
-										-1
+										0.006264152,
+										-0.209453,
+										0.1840931,
+										-0.9603125
 									],
 									"scale":[
 										1,
@@ -9543,15 +9493,15 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.442,
-												-0.263
+												0.2651,
+												-0.5585,
+												-0.1218
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7899163,
+												-0.3046941,
+												-0.06569201,
+												-0.5280895
 											],
 											"scale":[
 												0.03,
@@ -9559,7 +9509,7 @@
 												0.03
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9570,7 +9520,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9583,19 +9533,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9610,7 +9548,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9621,7 +9559,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9635,10 +9573,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9668,23 +9616,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.386,
-												-0.383
+												0.3088,
+												-0.5429,
+												-0.1328
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7713628,
+												-0.3582026,
+												0.04029187,
+												-0.5244682
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000003
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9695,7 +9643,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9708,19 +9656,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9735,7 +9671,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9746,7 +9682,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9760,10 +9696,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9793,23 +9739,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.638,
-												-0.4109998
+												0.3696,
+												-0.506,
+												-0.1422
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8183343,
+												-0.3266251,
+												0.06232318,
+												-0.4687866
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000003
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9820,7 +9766,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9833,19 +9779,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9860,7 +9794,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9871,7 +9805,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -9885,10 +9819,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -9918,23 +9862,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.559,
-												-0.4109998
+												0.378,
+												-0.619,
+												-0.138
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8183343,
+												-0.3266251,
+												0.06232312,
+												-0.4687866
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000002
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9945,7 +9889,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9958,19 +9902,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -9985,7 +9917,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -9996,7 +9928,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10010,10 +9942,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10043,23 +9985,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.5589981,
-												-0.337
+												0.328,
+												-0.663,
+												-0.12
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8411636,
+												-0.2597911,
+												-0.09459666,
+												-0.4647623
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000002
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10070,7 +10012,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10083,19 +10025,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10110,7 +10040,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10121,7 +10051,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10135,10 +10065,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10168,23 +10108,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.393,
-												-0.31
+												0.414,
+												-0.506,
+												-0.176
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7899163,
+												-0.3046941,
+												-0.06569201,
+												-0.5280895
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000003
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10195,7 +10135,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10208,19 +10148,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10235,7 +10163,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10246,7 +10174,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10260,10 +10188,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10293,23 +10231,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.686,
-												-0.3369999
+												0.443,
+												-0.497,
+												-0.209
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7713628,
+												-0.3582026,
+												0.04029187,
+												-0.5244682
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000003
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10320,7 +10258,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10333,19 +10271,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10360,7 +10286,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10371,7 +10297,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10385,10 +10311,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10418,23 +10354,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.61,
-												-0.293
+												0.506,
+												-0.46,
+												-0.224
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8183343,
+												-0.3266251,
+												0.06232312,
+												-0.4687866
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000002
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10445,7 +10381,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10458,19 +10394,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10485,7 +10409,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10496,7 +10420,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10510,10 +10434,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10543,23 +10477,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.523,
-												-0.263
+												0.519,
+												-0.57,
+												-0.211
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8183343,
+												-0.3266251,
+												0.06232312,
+												-0.4687866
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000002
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10570,7 +10504,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10583,19 +10517,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10610,7 +10532,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10621,7 +10543,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10635,10 +10557,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10668,23 +10600,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.722,
-												-0.291
+												0.4652976,
+												-0.6346989,
+												-0.1990593
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7599503,
+												-0.3803709,
+												-0.1574952,
+												-0.5029798
 											],
 											"scale":[
 												0.03,
 												0.01,
-												0.03
+												0.03000001
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10695,7 +10627,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10708,19 +10640,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10735,7 +10655,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10746,7 +10666,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10760,10 +10680,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10793,23 +10723,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.552,
-												-0.781,
-												-0.257
+												0.498,
+												-0.721,
+												-0.193
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7599503,
+												-0.3803709,
+												-0.1574952,
+												-0.5029799
 											],
 											"scale":[
-												0.03,
+												0.02999999,
 												0.01,
-												0.03
+												0.03000001
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10820,7 +10750,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10833,19 +10763,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10860,7 +10778,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10871,7 +10789,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -10885,10 +10803,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -10918,23 +10846,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.72,
-												-0.472,
-												-0.361
+												0.445,
+												-0.581,
+												-0.203
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7599502,
+												-0.3803709,
+												-0.1574953,
+												-0.5029799
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02999999,
+												0.009999999,
+												0.02999999
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10945,7 +10873,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10958,19 +10886,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -10985,7 +10901,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -10996,7 +10912,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -11010,10 +10926,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -11043,23 +10969,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.571,
-												-0.531,
-												-0.18
+												0.3177,
+												-0.4764,
+												-0.1531
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.7713628,
+												-0.3582026,
+												0.04029188,
+												-0.5244682
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000001,
+												0.03000003
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -11070,7 +10996,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -11083,19 +11009,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -11110,7 +11024,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -11121,7 +11035,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -11135,10 +11049,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -11168,23 +11092,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.562,
-												-0.685997,
-												-0.168
+												0.257,
+												-0.69,
+												-0.119
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8411636,
+												-0.2597911,
+												-0.09459665,
+												-0.4647622
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.03000001,
+												0.01000002,
+												0.03000005
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -11195,7 +11119,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -11208,19 +11132,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -11235,7 +11147,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -11246,7 +11158,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -11260,10 +11172,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -11293,23 +11215,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.541,
-												-0.6100006,
-												-0.136
+												0.33764,
+												-0.7582153,
+												-0.1185209
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8411573,
+												-0.1981267,
+												-0.2234142,
+												-0.450873
 											],
 											"scale":[
 												0.03,
-												0.01,
-												0.03
+												0.01000001,
+												0.03000004
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -11320,7 +11242,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -11333,19 +11255,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -11360,7 +11270,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -11371,7 +11281,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -11385,10 +11295,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -11418,23 +11338,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.714,
-												-0.596,
-												-0.268
+												0.406,
+												-0.733,
+												-0.136
 											],
 											"rotation":[
-												0.760039,
-												0.532185,
-												0.3055337,
-												0.213937
+												-0.8411636,
+												-0.2597911,
+												-0.09459666,
+												-0.4647623
 											],
 											"scale":[
 												0.03,
-												0.01,
-												0.03
+												0.01000001,
+												0.03000004
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -11445,7 +11365,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -11458,19 +11378,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -11485,7 +11393,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -11496,7 +11404,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -11510,10 +11418,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -11543,23 +11461,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.434,
-												-0.3970032,
-												-0.2040002
+												0.525,
+												-0.791,
+												-0.188
 											],
 											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
+												-0.7599502,
+												-0.3803709,
+												-0.1574953,
+												-0.5029799
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02999999,
+												0.009999999,
+												0.02999999
 											],
 											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
+											"enableRender":false,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -11570,7 +11488,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1,
+												"mass":1E-07,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -11583,19 +11501,7 @@
 													0,
 													0
 												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
+												"shapes":[],
 												"isTrigger":false
 											}
 										],
@@ -11610,7 +11516,7 @@
 													"layer":0,
 													"position":[
 														0,
-														12.85,
+														10,
 														0
 													],
 													"rotation":[
@@ -11621,7 +11527,7 @@
 													],
 													"scale":[
 														1,
-														13,
+														10,
 														1
 													],
 													"meshPath":"Library/unity default resources-Cylinder.lm",
@@ -11635,1885 +11541,20 @@
 												},
 												"components":[
 													{
-														"type":"PhysicsCollider",
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
 														"restitution":0,
 														"friction":0.5,
 														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":201,
-										"props":{
-											"name":"Beard (18)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.3410034,
-												-0.3240001
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
 															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":202,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":203,
-										"props":{
-											"name":"Beard (19)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.5139999,
-												-0.3519999
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
 															0,
-															-8.940697E-08
+															0
 														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":204,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":205,
-										"props":{
-											"name":"Beard (20)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.3479996,
-												-0.2510001
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":206,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":207,
-										"props":{
-											"name":"Beard (21)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.5650024,
-												-0.2339999
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":208,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":209,
-										"props":{
-											"name":"Beard (22)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.4780045,
-												-0.2040002
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":210,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":211,
-										"props":{
-											"name":"Beard (23)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.4089999,
-												-0.7360001,
-												-0.1980001
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":212,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":213,
-										"props":{
-											"name":"Beard (24)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.4279999,
-												-0.4860001,
-												-0.121
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":214,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":215,
-										"props":{
-											"name":"Beard (25)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.4189999,
-												-0.6409988,
-												-0.1089999
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":216,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":217,
-										"props":{
-											"name":"Beard (26)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.593,
-												-0.352
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":218,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":219,
-										"props":{
-											"name":"Beard (27)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.5139999,
-												-0.2780001
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":220,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":221,
-										"props":{
-											"name":"Beard (28)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.6409988,
-												-0.2780001
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":222,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":223,
-										"props":{
-											"name":"Beard (29)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.434,
-												-0.677002,
-												-0.2320001
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":224,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":225,
-										"props":{
-											"name":"Beard (30)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.5769999,
-												-0.427002,
-												-0.3019997
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":226,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":227,
-										"props":{
-											"name":"Beard (31)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.398,
-												-0.5650024,
-												-0.07699984
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":228,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":229,
-										"props":{
-											"name":"Beard (32)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.5709999,
-												-0.5510025,
-												-0.2089998
-											],
-											"rotation":[
-												0.6584811,
-												0.4610734,
-												0.4872502,
-												0.3411763
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"CapsuleColliderShape",
-														"center":[
-															5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"radius":0.5000001,
-														"height":2,
-														"orientation":1
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":230,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														12.85,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														13,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"PhysicsCollider",
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
 														"shapes":[
 															{
 																"type":"CapsuleColliderShape",
@@ -13538,16 +11579,16 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":231,
+								"instanceID":201,
 								"props":{
 									"name":"knife",
 									"active":true,
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.722,
-										-0.3249969,
-										-0.768
+										0.571,
+										-0.164,
+										-0.586
 									],
 									"rotation":[
 										0,
@@ -13556,11 +11597,12 @@
 										-0.954136
 									],
 									"scale":[
-										0.65,
-										0.2,
-										0.01
+										0.5,
+										0.15,
+										0.2
 									],
-									"enableRender":true,
+									"meshPath":"Library/unity default resources-Cube.lm",
+									"enableRender":false,
 									"materials":[
 										{
 											"type":"Laya.BlinnPhongMaterial",
@@ -13585,7 +11627,7 @@
 												"size":[
 													1,
 													1,
-													-25.6
+													1
 												]
 											}
 										],
@@ -13595,27 +11637,27 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":232,
+										"instanceID":202,
 										"props":{
 											"name":"HandSaw_0",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.371,
-												0,
-												0.9
+												-0.3370822,
+												0.09332319,
+												-0.1079165
 											],
 											"rotation":[
-												-0.5,
+												-0.4999999,
 												0.5000001,
-												0.5000001,
-												0.5
+												0.4999999,
+												0.5000001
 											],
 											"scale":[
-												50.00001,
-												0.7692317,
-												2.500003
+												1.900002,
+												0.7600014,
+												2.533339
 											],
 											"meshPath":"Assets/Mesh/HandSaw-HandSaw_0.lm",
 											"enableRender":true,
@@ -13634,7 +11676,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":233,
+						"instanceID":203,
 						"props":{
 							"name":"standardParent",
 							"active":true,
@@ -13661,7 +11703,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":234,
+								"instanceID":204,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -13680,7 +11722,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13697,7 +11739,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":235,
+								"instanceID":205,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -13716,7 +11758,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13733,7 +11775,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":236,
+								"instanceID":206,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -13752,7 +11794,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13769,7 +11811,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":237,
+								"instanceID":207,
 								"props":{
 									"name":"standard (3)",
 									"active":true,
@@ -13788,7 +11830,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13805,7 +11847,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":238,
+								"instanceID":208,
 								"props":{
 									"name":"standard (4)",
 									"active":true,
@@ -13824,7 +11866,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13841,7 +11883,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":239,
+								"instanceID":209,
 								"props":{
 									"name":"standard (5)",
 									"active":true,
@@ -13860,7 +11902,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13877,7 +11919,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":240,
+								"instanceID":210,
 								"props":{
 									"name":"standard (6)",
 									"active":true,
@@ -13896,7 +11938,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13913,7 +11955,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":241,
+								"instanceID":211,
 								"props":{
 									"name":"standard (7)",
 									"active":true,
@@ -13932,7 +11974,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13949,7 +11991,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":242,
+								"instanceID":212,
 								"props":{
 									"name":"standard (8)",
 									"active":true,
@@ -13968,7 +12010,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -13985,7 +12027,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":243,
+								"instanceID":213,
 								"props":{
 									"name":"standard (9)",
 									"active":true,
@@ -14004,7 +12046,7 @@
 									],
 									"scale":[
 										0.1,
-										0.009999998,
+										0.03,
 										0.01
 									],
 									"meshPath":"Library/unity default resources-Cube.lm",
@@ -14021,7 +12063,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":244,
+								"instanceID":214,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -14069,12 +12111,48 @@
 									}
 								],
 								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":215,
+								"props":{
+									"name":"standard (1)",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.834,
+										-0.1335983,
+										-0.197
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										0.1,
+										0.03,
+										0.01
+									],
+									"meshPath":"Library/unity default resources-Cube.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"type":"Laya.BlinnPhongMaterial",
+											"path":"Assets/Material/Indexwire.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
 							}
 						]
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":245,
+						"instanceID":216,
 						"props":{
 							"name":"Floor",
 							"active":true,
@@ -14142,7 +12220,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":246,
+						"instanceID":217,
 						"props":{
 							"name":"Landmark_Side",
 							"active":true,
@@ -14201,7 +12279,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":247,
+						"instanceID":218,
 						"props":{
 							"name":"Landmark_Right",
 							"active":true,
@@ -14260,7 +12338,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":248,
+						"instanceID":219,
 						"props":{
 							"name":"Landmark_Left",
 							"active":true,
@@ -14319,7 +12397,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":249,
+						"instanceID":220,
 						"props":{
 							"name":"Landmark_Top",
 							"active":true,
@@ -14380,7 +12458,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":250,
+				"instanceID":221,
 				"props":{
 					"name":"Canvas",
 					"active":true,
@@ -14407,7 +12485,7 @@
 				"child":[
 					{
 						"type":"Sprite3D",
-						"instanceID":251,
+						"instanceID":222,
 						"props":{
 							"name":"Image",
 							"active":true,
