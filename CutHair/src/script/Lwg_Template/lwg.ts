@@ -837,22 +837,26 @@ export module lwg {
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
                 this.gameState(this.calssName);
+                this.lwgOnAwake();
                 this.selfNode();
                 this.variateInit();
                 this.adaptive();
+            }
+            lwgOnAwake(): void {
+
             }
             onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
                 this.lwgOnEnable();
                 this.btnAndOpenAni();
-                this.eventReg();
+                this.lwgEventReg();
             }
             /**声明场景里的一些节点*/
             selfNode(): void {
             }
             /**场景中的一些事件*/
-            eventReg(): void {
+            lwgEventReg(): void {
 
             }
             /**初始化一些变量*/
@@ -948,6 +952,7 @@ export module lwg {
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
                 this.gameState(this.calssName);
+                this.lwgOnAwake();
                 this.selfNode();
                 this.adaptive();
 
@@ -958,6 +963,9 @@ export module lwg {
                     this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                 }
             }
+            lwgOnAwake(): void {
+
+            }
             onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
@@ -965,7 +973,7 @@ export module lwg {
                 this.btnOnClick();
                 this.adaptive();
                 this.openAni();
-                this.eventReg();
+                this.lwgEventReg();
                 // printPoint('on', this.calssName);
             }
             /**场景背部全局变量*/
@@ -973,7 +981,7 @@ export module lwg {
             }
 
             /**场景中的一些事件*/
-            eventReg(): void {
+            lwgEventReg(): void {
 
             }
             /**游戏当前的状态*/

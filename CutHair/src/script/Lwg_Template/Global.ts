@@ -3,13 +3,14 @@ import { EventAdmin } from "./lwg";
 /**全局方法,全局变量，每个游戏不一样*/
 export module Global {
     /**游戏中用到的枚举*/
-    export module Enum {
+    export module GEnum {
         /**任务类型*/
         export enum TaskType {
             topHead = 'topHead',
             sideHair = 'sideHair',
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
+            middleBeard = 'middleBeard',
         }
 
         /**剃须刀的状态*/
@@ -21,7 +22,7 @@ export module Global {
         export enum EventType {
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
-            taskProgress= 'taskProgress',
+            taskProgress = 'taskProgress',
         }
     }
     /**控制游戏的全局变量*/
@@ -70,24 +71,9 @@ export module Global {
             Laya.LocalStorage.clear();
         }
     }
-
-    // // 监听value的动态变化
-    // this.watchVal = {
-    //     value: Number(Laya.LocalStorage.getItem('wv')) > 0 ? Laya.LocalStorage.getItem('wv') : 0,
-    //     get getValue() {
-    //         console.log('取值', this.value);
-    //         return this.value;
-    //     },
-    //     set setValue(vals) {
-    //         this.value = vals;
-    //         console.log('存过后的值', this.value);
-    //         Laya.LocalStorage.setItem('wv', this.value);
-    //     }
-    // }
-    // this.watchVal.vals = 7;
 }
 export default Global;
 export let GVariate = Global.GVariate;
-export let GEnum = Global.Enum;
+export let GEnum = Global.GEnum;
 export let GData = Global.GData;
 

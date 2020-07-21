@@ -39,8 +39,8 @@ export default class UIOperation extends lwg.Admin.Scene {
     RightBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     /**右侧须的父节点*/
     LeftBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-
-
+    /**中间胡须父节点*/
+    MiddleBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     /**侧面所需理发的数量*/
     _sideHairNum = {
         index: 0,
@@ -101,6 +101,26 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
     }
 
+    /**右侧胡子的数量*/
+    _middleBeardNum = {
+        index: 0,
+        sum: 0,
+        switch: true,
+        value: 0,
+        set setValue(vals) {
+            this.value = vals;
+            if (this.switch) {
+                console.log('剩余需要修理胡须的数量', this.value);
+                if (this.value <= 3) {
+                    console.log('任务完成了！');
+                    this.switch = false;
+                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+                }
+            }
+            EventAdmin.notify(GEnum.EventType.taskProgress);
+        }
+    }
+
     selfNode(): void {
         this.Rocker = this.self['Rocker'];
         this.GameMain3D = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D];
@@ -110,6 +130,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
         this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
+        this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
         this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
         this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
 
@@ -118,6 +139,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
         this.LeftBeard = this.GameMain3D['GameMain3D'].LeftBeard;
         this.RightBeard = this.GameMain3D['GameMain3D'].RightBeard;
+        this.MiddleBeard = this.GameMain3D['GameMain3D'].MiddleBeard;
 
         this.TaskBar = this.self['TaskBar'];
 
@@ -127,14 +149,14 @@ export default class UIOperation extends lwg.Admin.Scene {
     lwgOnEnable(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
-        GVariate._taskArr = [GEnum.TaskType.rightBeard, GEnum.TaskType.sideHair, GEnum.TaskType.leftBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard];
         this.createProgress();
         this.BtnLast.visible = false;
         this.createTaskContent();
         this.mainCameraMove();
     }
 
-    eventReg(): void {
+    lwgEventReg(): void {
         // 胜利
         EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
             if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
@@ -232,6 +254,13 @@ export default class UIOperation extends lwg.Admin.Scene {
 
                     break;
                 case GEnum.TaskType.rightBeard:
+                    this._rightBeardNum.setValue = this.RightBeard.numChildren;
+                    this._rightBeardNum.sum = this.RightBeard.numChildren;
+                    this._rightBeardNum.index = index;
+
+                    break;
+
+                case GEnum.TaskType.middleBeard:
                     this._rightBeardNum.setValue = this.RightBeard.numChildren;
                     this._rightBeardNum.sum = this.RightBeard.numChildren;
                     this._rightBeardNum.index = index;

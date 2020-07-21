@@ -575,19 +575,22 @@
                     this.self = this.owner;
                     this.calssName = this['__proto__']['constructor'].name;
                     this.gameState(this.calssName);
+                    this.lwgOnAwake();
                     this.selfNode();
                     this.variateInit();
                     this.adaptive();
+                }
+                lwgOnAwake() {
                 }
                 onEnable() {
                     this.self[this.calssName] = this;
                     this.lwgOnEnable();
                     this.btnAndOpenAni();
-                    this.eventReg();
+                    this.lwgEventReg();
                 }
                 selfNode() {
                 }
-                eventReg() {
+                lwgEventReg() {
                 }
                 variateInit() {
                 }
@@ -655,6 +658,7 @@
                     this.self = this.owner;
                     this.calssName = this['__proto__']['constructor'].name;
                     this.gameState(this.calssName);
+                    this.lwgOnAwake();
                     this.selfNode();
                     this.adaptive();
                     this.MainCamera = this.self.getChildByName("Main Camera");
@@ -664,17 +668,19 @@
                         this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                     }
                 }
+                lwgOnAwake() {
+                }
                 onEnable() {
                     this.self[this.calssName] = this;
                     this.lwgOnEnable();
                     this.btnOnClick();
                     this.adaptive();
                     this.openAni();
-                    this.eventReg();
+                    this.lwgEventReg();
                 }
                 selfNode() {
                 }
-                eventReg() {
+                lwgEventReg() {
                 }
                 gameState(calssName) {
                     switch (calssName) {
@@ -2511,26 +2517,27 @@
 
     var Global$1;
     (function (Global) {
-        let Enum;
-        (function (Enum) {
+        let GEnum;
+        (function (GEnum) {
             let TaskType;
             (function (TaskType) {
                 TaskType["topHead"] = "topHead";
                 TaskType["sideHair"] = "sideHair";
                 TaskType["leftBeard"] = "leftBeard";
                 TaskType["rightBeard"] = "rightBeard";
-            })(TaskType = Enum.TaskType || (Enum.TaskType = {}));
+                TaskType["middleBeard"] = "middleBeard";
+            })(TaskType = GEnum.TaskType || (GEnum.TaskType = {}));
             let RazorState;
             (function (RazorState) {
                 RazorState["move"] = "move";
-            })(RazorState = Enum.RazorState || (Enum.RazorState = {}));
+            })(RazorState = GEnum.RazorState || (GEnum.RazorState = {}));
             let EventType;
             (function (EventType) {
                 EventType["leftBeard"] = "leftBeard";
                 EventType["rightBeard"] = "rightBeard";
                 EventType["taskProgress"] = "taskProgress";
-            })(EventType = Enum.EventType || (Enum.EventType = {}));
-        })(Enum = Global.Enum || (Global.Enum = {}));
+            })(EventType = GEnum.EventType || (GEnum.EventType = {}));
+        })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
         (function (GVariate) {
             GVariate._gameLevel = 1;
@@ -2573,7 +2580,7 @@
         })(GData = Global.GData || (Global.GData = {}));
     })(Global$1 || (Global$1 = {}));
     let GVariate = Global$1.GVariate;
-    let GEnum = Global$1.Enum;
+    let GEnum = Global$1.GEnum;
     let GData = Global$1.GData;
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
@@ -2666,6 +2673,7 @@
             this.HairParent = new Laya.MeshSprite3D();
             this.RightBeard = new Laya.MeshSprite3D();
             this.LeftBeard = new Laya.MeshSprite3D();
+            this.MiddleBeard = new Laya.MeshSprite3D();
             this.LevelTem = new Laya.MeshSprite3D();
             this.Level = new Laya.MeshSprite3D();
             this.LevelFpos = new Laya.Vector3();
@@ -2675,8 +2683,9 @@
             this.Landmark_Right = new Laya.MeshSprite3D();
             this.Landmark_Side = new Laya.MeshSprite3D();
             this.Landmark_Top = new Laya.MeshSprite3D();
+            this.Landmark_Middle = new Laya.MeshSprite3D();
         }
-        selfNode() {
+        lwgOnAwake() {
             this.LevelTem = this.self.getChildByName('Level_001');
             this.LevelFpos.x = this.LevelTem.transform.position.x;
             this.LevelFpos.y = this.LevelTem.transform.position.y;
@@ -2684,10 +2693,13 @@
             this.Level = this.LevelTem.clone();
             this.self.addChild(this.Level);
             this.LevelTem.removeSelf();
+        }
+        selfNode() {
             this.Landmark_Left = this.Level.getChildByName('Landmark_Left');
             this.Landmark_Right = this.Level.getChildByName('Landmark_Right');
             this.Landmark_Side = this.Level.getChildByName('Landmark_Side');
             this.Landmark_Top = this.Level.getChildByName('Landmark_Top');
+            this.Landmark_Middle = this.Level.getChildByName('Landmark_Middle');
             this.Razor = this.Level.getChildByName('Razor');
             this.razorFPos.x = this.Razor.transform.localPositionX;
             this.razorFPos.y = this.Razor.transform.localPositionY;
@@ -2698,6 +2710,7 @@
             this.HairParent = this.Head.getChildByName('HairParent');
             this.LeftBeard = this.Head.getChildByName('LeftBeard');
             this.RightBeard = this.Head.getChildByName('RightBeard');
+            this.MiddleBeard = this.Head.getChildByName('MiddleBeard');
             this.knife = this.Level.getChildByName('knife');
             this.Capsule = this.Head.getChildByName('Capsule');
             let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
@@ -2708,7 +2721,7 @@
             this.Razor.addComponent(GameMain3D_Razor);
             this.knife.addComponent(GameMain3D_knife);
         }
-        eventReg() {
+        lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
                 this.refreshScene();
             });
@@ -2716,27 +2729,8 @@
         ;
         refreshScene() {
             this.Level.removeSelf();
-            this.Level = this.LevelTem.clone();
-            this.self.addChild(this.Level);
-            this.LevelTem.removeSelf();
-            this.Landmark_Left = this.Level.getChildByName('Landmark_Left');
-            this.Landmark_Right = this.Level.getChildByName('Landmark_Right');
-            this.Landmark_Side = this.Level.getChildByName('Landmark_Side');
-            this.Landmark_Top = this.Level.getChildByName('Landmark_Top');
-            this.Razor = this.Level.getChildByName('Razor');
-            this.razorFPos.x = this.Razor.transform.localPositionX;
-            this.razorFPos.y = this.Razor.transform.localPositionY;
-            this.razorFPos.z = this.Razor.transform.localPositionZ;
-            this.razorFEulerY = this.Razor.transform.localRotationEulerY;
-            this.Floor = this.Level.getChildByName('Floor');
-            this.Head = this.Level.getChildByName('Head');
-            this.HairParent = this.Head.getChildByName('HairParent');
-            this.LeftBeard = this.Head.getChildByName('LeftBeard');
-            this.RightBeard = this.Head.getChildByName('RightBeard');
-            this.knife = this.Level.getChildByName('knife');
-            this.Capsule = this.Head.getChildByName('Capsule');
-            let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
-            capsuleRig3D.restitution = 0;
+            this.lwgOnAwake();
+            this.selfNode();
             this.lwgOnEnable();
         }
         lwgOnUpDate() {
@@ -2779,6 +2773,7 @@
             this.HairParent = new Laya.MeshSprite3D();
             this.RightBeard = new Laya.MeshSprite3D();
             this.LeftBeard = new Laya.MeshSprite3D();
+            this.MiddleBeard = new Laya.MeshSprite3D();
             this._sideHairNum = {
                 index: 0,
                 sum: 0,
@@ -2833,6 +2828,24 @@
                     EventAdmin.notify(GEnum.EventType.taskProgress);
                 }
             };
+            this._middleBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余需要修理胡须的数量', this.value);
+                        if (this.value <= 3) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
             this.moveTime = 1000;
             this.moveSwitch = false;
         }
@@ -2844,25 +2857,27 @@
             this.knife = this.GameMain3D['GameMain3D'].knife;
             this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
             this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
+            this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
             this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
             this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
             this.Capsule = this.GameMain3D['GameMain3D'].Capsule;
             this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
             this.LeftBeard = this.GameMain3D['GameMain3D'].LeftBeard;
             this.RightBeard = this.GameMain3D['GameMain3D'].RightBeard;
+            this.MiddleBeard = this.GameMain3D['GameMain3D'].MiddleBeard;
             this.TaskBar = this.self['TaskBar'];
             this.BtnLast = this.self['BtnLast'];
         }
         lwgOnEnable() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.rightBeard, GEnum.TaskType.sideHair, GEnum.TaskType.leftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard];
             this.createProgress();
             this.BtnLast.visible = false;
             this.createTaskContent();
             this.mainCameraMove();
         }
-        eventReg() {
+        lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
                     Admin._openScene(Admin.SceneName.UIVictory, null, null, f => {
@@ -2936,6 +2951,11 @@
                         this._leftBeardNum.index = index;
                         break;
                     case GEnum.TaskType.rightBeard:
+                        this._rightBeardNum.setValue = this.RightBeard.numChildren;
+                        this._rightBeardNum.sum = this.RightBeard.numChildren;
+                        this._rightBeardNum.index = index;
+                        break;
+                    case GEnum.TaskType.middleBeard:
                         this._rightBeardNum.setValue = this.RightBeard.numChildren;
                         this._rightBeardNum.sum = this.RightBeard.numChildren;
                         this._rightBeardNum.index = index;
