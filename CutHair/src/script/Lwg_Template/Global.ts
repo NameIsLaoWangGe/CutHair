@@ -22,7 +22,9 @@ export module Global {
         export enum EventType {
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
+            middleBeard = 'middleBeard',
             taskProgress = 'taskProgress',
+            
         }
     }
     /**控制游戏的全局变量*/

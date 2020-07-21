@@ -373,33 +373,35 @@
         (function (EventAdmin) {
             let EventType;
             (function (EventType) {
-                EventType["gameOver"] = "gameOver";
+                EventType["taskReach"] = "taskReach";
+                EventType["defeated"] = "defeated";
+                EventType["scene3DRefresh"] = "Scene3DRefresh";
+                EventType["operrationRefresh"] = "OperrationRefresh";
             })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
-            class EventClass {
-                constructor() {
-                    this.dispatcher = new Laya.EventDispatcher();
+            EventAdmin.dispatcher = new Laya.EventDispatcher();
+            function reg(type, caller, listener) {
+                if (!caller) {
+                    console.error("caller must exist!");
                 }
-                static reg(type, caller, listener) {
-                    if (!caller) {
-                        console.error("caller must exist!");
-                    }
-                    EventClass.Self.dispatcher.on(type.toString(), caller, listener);
-                }
-                static notify(type, args) {
-                    EventClass.Self.dispatcher.event(type.toString(), args);
-                }
-                static off(type, caller, listener) {
-                    EventClass.Self.dispatcher.off(type.toString(), caller, listener);
-                }
-                static offAll(type) {
-                    EventClass.Self.dispatcher.offAll(type.toString());
-                }
-                static offCaller(caller) {
-                    EventClass.Self.dispatcher.offAllCaller(caller);
-                }
+                EventAdmin.dispatcher.on(type.toString(), caller, listener);
             }
-            EventClass.Self = new EventClass();
-            EventAdmin.EventClass = EventClass;
+            EventAdmin.reg = reg;
+            function notify(type, args) {
+                EventAdmin.dispatcher.event(type.toString(), args);
+            }
+            EventAdmin.notify = notify;
+            function off(type, caller, listener) {
+                this.dispatcher.off(type.toString(), caller, listener);
+            }
+            EventAdmin.off = off;
+            function offAll(type) {
+                EventAdmin.dispatcher.offAll(type.toString());
+            }
+            EventAdmin.offAll = offAll;
+            function offCaller(caller) {
+                EventAdmin.dispatcher.offAllCaller(caller);
+            }
+            EventAdmin.offCaller = offCaller;
         })(EventAdmin = lwg.EventAdmin || (lwg.EventAdmin = {}));
         let Admin;
         (function (Admin) {
@@ -451,16 +453,8 @@
                     Admin._sceneControl[openName] = scene;
                     let background = scene.getChildByName('Background');
                     if (background) {
-                        if (openName.substring(0, 6) === 'UIMain') {
-                            background.width = null;
-                            background.height = null;
-                            background.x = 360;
-                            background.y = 640;
-                        }
-                        else {
-                            background.width = Laya.stage.width;
-                            background.height = Laya.stage.height;
-                        }
+                        background.width = Laya.stage.width;
+                        background.height = Laya.stage.height;
                     }
                     if (cloesScene) {
                         cloesScene.close();
@@ -488,7 +482,6 @@
                     sceneName = 'UIMain_0' + num;
                 }
                 Admin.openCustomName = sceneName;
-                console.log('打开', sceneName);
                 _openScene(sceneName, null, null, f => {
                     lwg.Global._gameStart = true;
                 });
@@ -582,16 +575,22 @@
                     this.self = this.owner;
                     this.calssName = this['__proto__']['constructor'].name;
                     this.gameState(this.calssName);
+                    this.lwgOnAwake();
                     this.selfNode();
                     this.variateInit();
                     this.adaptive();
+                }
+                lwgOnAwake() {
                 }
                 onEnable() {
                     this.self[this.calssName] = this;
                     this.lwgOnEnable();
                     this.btnAndOpenAni();
+                    this.lwgEventReg();
                 }
                 selfNode() {
+                }
+                lwgEventReg() {
                 }
                 variateInit() {
                 }
@@ -644,6 +643,7 @@
                 onDisable() {
                     this.lwgDisable();
                     Laya.timer.clearAll(this);
+                    EventAdmin.offCaller(this);
                 }
                 lwgDisable() {
                 }
@@ -658,6 +658,7 @@
                     this.self = this.owner;
                     this.calssName = this['__proto__']['constructor'].name;
                     this.gameState(this.calssName);
+                    this.lwgOnAwake();
                     this.selfNode();
                     this.adaptive();
                     this.MainCamera = this.self.getChildByName("Main Camera");
@@ -667,14 +668,19 @@
                         this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                     }
                 }
+                lwgOnAwake() {
+                }
                 onEnable() {
                     this.self[this.calssName] = this;
                     this.lwgOnEnable();
                     this.btnOnClick();
                     this.adaptive();
                     this.openAni();
+                    this.lwgEventReg();
                 }
                 selfNode() {
+                }
+                lwgEventReg() {
                 }
                 gameState(calssName) {
                     switch (calssName) {
@@ -2444,6 +2450,21 @@
     let Effects = lwg.Effects;
     let Animation3D = lwg.Animation3D;
 
+    class UIDefeated extends lwg.Admin.Scene {
+        selfNode() {
+            this.BtnAgain = this.self['BtnAgain'];
+        }
+        btnOnClick() {
+            Click.on(Click.ClickType.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        }
+        btnAgainUp() {
+            console.log('重新开始！');
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
+            this.self.close();
+        }
+    }
+
     class GameMain3D_Blade extends lwg.Admin.Object3D {
         lwgOnEnable() {
         }
@@ -2461,7 +2482,9 @@
                     let cutH = HairlineH - diffY;
                     let cutRatio = cutH / HairlineH;
                     otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
-                    otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                    if (otherOwnerParent['HairLen']) {
+                        otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                    }
                     if (cutH >= 0.01) {
                         let cutHair = otherOwnerParent.clone();
                         cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
@@ -2479,7 +2502,8 @@
                     }
                     break;
                 case 'standard':
-                    console.log('碰到线了！');
+                    console.log('碰到线了，游戏失败！');
+                    EventAdmin.notify(EventAdmin.EventType.defeated);
                     break;
                 default:
                     break;
@@ -2493,84 +2517,34 @@
 
     var Global$1;
     (function (Global) {
-        let Enum;
-        (function (Enum) {
+        let GEnum;
+        (function (GEnum) {
             let TaskType;
             (function (TaskType) {
                 TaskType["topHead"] = "topHead";
                 TaskType["sideHair"] = "sideHair";
                 TaskType["leftBeard"] = "leftBeard";
                 TaskType["rightBeard"] = "rightBeard";
-            })(TaskType = Enum.TaskType || (Enum.TaskType = {}));
+                TaskType["middleBeard"] = "middleBeard";
+            })(TaskType = GEnum.TaskType || (GEnum.TaskType = {}));
             let RazorState;
             (function (RazorState) {
                 RazorState["move"] = "move";
-            })(RazorState = Enum.RazorState || (Enum.RazorState = {}));
+            })(RazorState = GEnum.RazorState || (GEnum.RazorState = {}));
             let EventType;
             (function (EventType) {
-                EventType["taskReach"] = "taskReach";
-            })(EventType = Enum.EventType || (Enum.EventType = {}));
-        })(Enum = Global.Enum || (Global.Enum = {}));
+                EventType["leftBeard"] = "leftBeard";
+                EventType["rightBeard"] = "rightBeard";
+                EventType["middleBeard"] = "middleBeard";
+                EventType["taskProgress"] = "taskProgress";
+            })(EventType = GEnum.EventType || (GEnum.EventType = {}));
+        })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
         (function (GVariate) {
             GVariate._gameLevel = 1;
             GVariate._execution = 10;
             GVariate._goldNum = 10;
             GVariate._taskArr = [];
-            GVariate._sideHairNum = {
-                switch: true,
-                value: 0,
-                get getValue() {
-                    return this.value;
-                },
-                set setValue(vals) {
-                    if (this.switch) {
-                        this.value = vals;
-                        console.log('剩余需要修理的头发', this.value);
-                        if (this.value <= 3) {
-                            this.switch = false;
-                            console.log('任务完成了！');
-                            EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
-                        }
-                    }
-                }
-            };
-            GVariate._leftBeardNum = {
-                switch: true,
-                value: 0,
-                get getValue() {
-                    return this.value;
-                },
-                set setValue(vals) {
-                    if (this.switch) {
-                        this.value = vals;
-                        console.log('剩余需要修理胡须的数量', this.value);
-                        if (this.value <= 3) {
-                            console.log('任务完成了！');
-                            this.switch = false;
-                            EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
-                        }
-                    }
-                }
-            };
-            GVariate._rightBeardNum = {
-                switch: true,
-                value: 0,
-                get getValue() {
-                    return this.value;
-                },
-                set setValue(vals) {
-                    if (this.switch) {
-                        this.value = vals;
-                        console.log('剩余需要修理胡须的数量', this.value);
-                        if (this.value <= 5) {
-                            console.log('任务完成了！');
-                            this.switch = false;
-                            EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
-                        }
-                    }
-                }
-            };
             GVariate._taskNum = 0;
         })(GVariate = Global.GVariate || (Global.GVariate = {}));
         let GData;
@@ -2607,7 +2581,7 @@
         })(GData = Global.GData || (Global.GData = {}));
     })(Global$1 || (Global$1 = {}));
     let GVariate = Global$1.GVariate;
-    let GEnum = Global$1.Enum;
+    let GEnum = Global$1.GEnum;
     let GData = Global$1.GData;
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
@@ -2645,22 +2619,29 @@
     }
 
     class GameMain3D_knife extends lwg.Admin.Object3D {
+        constructor() {
+            super(...arguments);
+            this.num = 0;
+        }
         lwgOnEnable() {
         }
         onTriggerEnter(other) {
             let owner = other.owner;
             let ownerParent = owner.parent;
-            switch (owner.name) {
+            this.num++;
+            switch (owner.name.substring(0, 5)) {
                 case 'Beard':
                     if (owner['already']) {
-                        console.log('不会碰撞两次哦');
                         return;
                     }
-                    if (ownerParent.parent.name === 'RightBeard') {
-                        GVariate._rightBeardNum.setValue = GVariate._rightBeardNum.value - 1;
+                    if (ownerParent.name === 'RightBeard') {
+                        EventAdmin.notify(GEnum.EventType.rightBeard);
                     }
-                    else if (ownerParent.parent.name === 'LeftBeard') {
-                        GVariate._leftBeardNum.setValue = GVariate._leftBeardNum.value - 1;
+                    else if (ownerParent.name === 'LeftBeard') {
+                        EventAdmin.notify(GEnum.EventType.leftBeard);
+                    }
+                    else if (ownerParent.name === 'MiddleBeard') {
+                        EventAdmin.notify(GEnum.EventType.middleBeard);
                     }
                     other.isKinematic = false;
                     other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
@@ -2671,6 +2652,7 @@
         }
         onTriggerExit(other) {
             let owner = other.owner;
+            let ownerParent = owner.parent;
             switch (owner.name) {
                 case 'Beard':
                     owner['already'] = true;
@@ -2695,6 +2677,7 @@
             this.HairParent = new Laya.MeshSprite3D();
             this.RightBeard = new Laya.MeshSprite3D();
             this.LeftBeard = new Laya.MeshSprite3D();
+            this.MiddleBeard = new Laya.MeshSprite3D();
             this.LevelTem = new Laya.MeshSprite3D();
             this.Level = new Laya.MeshSprite3D();
             this.LevelFpos = new Laya.Vector3();
@@ -2704,62 +2687,57 @@
             this.Landmark_Right = new Laya.MeshSprite3D();
             this.Landmark_Side = new Laya.MeshSprite3D();
             this.Landmark_Top = new Laya.MeshSprite3D();
+            this.Landmark_Middle = new Laya.MeshSprite3D();
         }
-        selfNode() {
+        lwgOnAwake() {
             this.LevelTem = this.self.getChildByName('Level_001');
             this.LevelFpos.x = this.LevelTem.transform.position.x;
             this.LevelFpos.y = this.LevelTem.transform.position.y;
             this.LevelFpos.z = this.LevelTem.transform.position.z;
+            this.createLevel();
+        }
+        createLevel() {
             this.Level = this.LevelTem.clone();
             this.self.addChild(this.Level);
             this.LevelTem.removeSelf();
+        }
+        selfNode() {
+            this.Head = this.Level.getChildByName('Head');
+            this.Capsule = this.Head.getChildByName('Capsule');
+            let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
+            capsuleRig3D.restitution = 0;
+            this.HairParent = this.Head.getChildByName('HairParent');
+            this.LeftBeard = this.Head.getChildByName('LeftBeard');
+            this.RightBeard = this.Head.getChildByName('RightBeard');
+            this.MiddleBeard = this.Head.getChildByName('MiddleBeard');
             this.Landmark_Left = this.Level.getChildByName('Landmark_Left');
             this.Landmark_Right = this.Level.getChildByName('Landmark_Right');
             this.Landmark_Side = this.Level.getChildByName('Landmark_Side');
             this.Landmark_Top = this.Level.getChildByName('Landmark_Top');
+            this.Landmark_Middle = this.Level.getChildByName('Landmark_Middle');
             this.Razor = this.Level.getChildByName('Razor');
             this.razorFPos.x = this.Razor.transform.localPositionX;
             this.razorFPos.y = this.Razor.transform.localPositionY;
             this.razorFPos.z = this.Razor.transform.localPositionZ;
             this.razorFEulerY = this.Razor.transform.localRotationEulerY;
             this.Floor = this.Level.getChildByName('Floor');
-            this.Head = this.Level.getChildByName('Head');
-            this.HairParent = this.Head.getChildByName('HairParent');
-            this.LeftBeard = this.Head.getChildByName('LeftBeard');
-            this.RightBeard = this.Head.getChildByName('RightBeard');
             this.knife = this.Level.getChildByName('knife');
-            this.Capsule = this.Head.getChildByName('Capsule');
-            let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
-            capsuleRig3D.restitution = 0;
         }
         lwgOnEnable() {
             this.Floor.addComponent(GameMain3D_Floor);
             this.Razor.addComponent(GameMain3D_Razor);
             this.knife.addComponent(GameMain3D_knife);
         }
+        lwgEventReg() {
+            EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
+                this.refreshScene();
+            });
+        }
+        ;
         refreshScene() {
             this.Level.removeSelf();
-            this.Level = this.LevelTem.clone();
-            this.self.addChild(this.Level);
-            this.LevelTem.removeSelf();
-            this.Landmark_Left = this.Level.getChildByName('Landmark_Left');
-            this.Landmark_Right = this.Level.getChildByName('Landmark_Right');
-            this.Landmark_Side = this.Level.getChildByName('Landmark_Side');
-            this.Landmark_Top = this.Level.getChildByName('Landmark_Top');
-            this.Razor = this.Level.getChildByName('Razor');
-            this.razorFPos.x = this.Razor.transform.localPositionX;
-            this.razorFPos.y = this.Razor.transform.localPositionY;
-            this.razorFPos.z = this.Razor.transform.localPositionZ;
-            this.razorFEulerY = this.Razor.transform.localRotationEulerY;
-            this.Floor = this.Level.getChildByName('Floor');
-            this.Head = this.Level.getChildByName('Head');
-            this.HairParent = this.Head.getChildByName('HairParent');
-            this.LeftBeard = this.Head.getChildByName('LeftBeard');
-            this.RightBeard = this.Head.getChildByName('RightBeard');
-            this.knife = this.Level.getChildByName('knife');
-            this.Capsule = this.Head.getChildByName('Capsule');
-            let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
-            capsuleRig3D.restitution = 0;
+            this.createLevel();
+            this.selfNode();
             this.lwgOnEnable();
         }
         lwgOnUpDate() {
@@ -2797,16 +2775,89 @@
             this.Landmark_Right = new Laya.MeshSprite3D();
             this.Landmark_Side = new Laya.MeshSprite3D();
             this.Landmark_Top = new Laya.MeshSprite3D();
+            this.Landmark_Middle = new Laya.MeshSprite3D();
             this._ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
             this.outs = new Array();
             this.HairParent = new Laya.MeshSprite3D();
             this.RightBeard = new Laya.MeshSprite3D();
             this.LeftBeard = new Laya.MeshSprite3D();
-            this.cameraAndRazorPos = new Laya.Vector3();
+            this.MiddleBeard = new Laya.MeshSprite3D();
+            this.taskArr = [];
+            this._sideHairNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余需要修理的头发', this.value);
+                        if (this.value <= 3) {
+                            this.switch = false;
+                            console.log('任务完成了！');
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._leftBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余需要修理胡须的数量', this.value);
+                        if (this.value <= 3) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._rightBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余需要修理胡须的数量', this.value);
+                        if (this.value <= 3) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._middleBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余需要修理胡须的数量', this.value);
+                        if (this.value <= 3) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
             this.moveTime = 1000;
             this.moveSwitch = false;
         }
-        ;
         selfNode() {
             this.Rocker = this.self['Rocker'];
             this.GameMain3D = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D];
@@ -2815,54 +2866,119 @@
             this.knife = this.GameMain3D['GameMain3D'].knife;
             this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
             this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
+            this.Landmark_Middle = this.GameMain3D['GameMain3D'].Landmark_Middle;
             this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
             this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
             this.Capsule = this.GameMain3D['GameMain3D'].Capsule;
             this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
             this.LeftBeard = this.GameMain3D['GameMain3D'].LeftBeard;
             this.RightBeard = this.GameMain3D['GameMain3D'].RightBeard;
+            this.MiddleBeard = this.GameMain3D['GameMain3D'].MiddleBeard;
             this.TaskBar = this.self['TaskBar'];
             this.BtnLast = this.self['BtnLast'];
         }
         lwgOnEnable() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard];
             this.createProgress();
             this.BtnLast.visible = false;
-            EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
+            this.createTaskContent();
+            this.mainCameraMove();
+        }
+        lwgEventReg() {
+            EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-                    this.self.close();
-                    Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+                    Admin._openScene(Admin.SceneName.UIVictory, null, null, f => {
+                    });
                 }
                 else {
                     this.BtnLast.visible = true;
                 }
             });
-            this.createTaskContent();
+            EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
+                Admin._gameStart = false;
+                Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+            });
+            EventAdmin.reg(EventAdmin.EventType.operrationRefresh, this, () => {
+                lwg.Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => { });
+            });
+            EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
+                this._leftBeardNum.setValue = this._leftBeardNum.value - 0.5;
+            });
+            EventAdmin.reg(GEnum.EventType.rightBeard, this, () => {
+                this._rightBeardNum.setValue = this._rightBeardNum.value - 0.5;
+            });
+            EventAdmin.reg(GEnum.EventType.middleBeard, this, () => {
+                this._middleBeardNum.setValue = this._middleBeardNum.value - 0.5;
+            });
+            EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
+                let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum);
+                let Bar = TaskBar.getChildByName('Bar');
+                let sum;
+                let value;
+                switch (GVariate._taskArr[GVariate._taskNum]) {
+                    case GEnum.TaskType.sideHair:
+                        value = this._sideHairNum.value;
+                        sum = this._sideHairNum.sum;
+                        break;
+                    case GEnum.TaskType.leftBeard:
+                        value = this._leftBeardNum.value;
+                        sum = this._leftBeardNum.sum;
+                        break;
+                    case GEnum.TaskType.rightBeard:
+                        value = this._rightBeardNum.value;
+                        sum = this._rightBeardNum.sum;
+                        break;
+                    case GEnum.TaskType.middleBeard:
+                        value = this._middleBeardNum.value;
+                        sum = this._middleBeardNum.sum;
+                        break;
+                    default:
+                        break;
+                }
+                Bar.mask.x = (sum - value) * Bar.width / sum - Bar.mask.width;
+            });
         }
         createProgress() {
+            let spacing = 100;
             for (let index = 0; index < GVariate._taskArr.length; index++) {
                 const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress);
                 this.TaskBar.addChild(TaskPro);
-                TaskPro.pos(index * 100, 0);
+                TaskPro.pos(index * spacing, 0);
                 let Bar = TaskPro.getChildByName('Bar');
-                let Mask = Bar.mask;
-                Mask.scaleX = 0;
             }
+            this.TaskBar.width = GVariate._taskArr.length * spacing;
+            this.TaskBar.pivotX = this.TaskBar.width / 2;
+            this.TaskBar.x = Laya.stage.width / 2;
         }
         createTaskContent() {
             for (let index = 0; index < GVariate._taskArr.length; index++) {
                 switch (GVariate._taskArr[index]) {
                     case GEnum.TaskType.sideHair:
-                        GVariate._sideHairNum.setValue = this.HairParent.numChildren;
+                        this._sideHairNum.setValue = this.HairParent.numChildren;
+                        this._sideHairNum.sum = this.HairParent.numChildren;
+                        this._sideHairNum.index = index;
                         this.monitorHiarLen();
+                        this.taskArr.push(this._sideHairNum);
                         break;
                     case GEnum.TaskType.leftBeard:
-                        GVariate._leftBeardNum.setValue = this.LeftBeard.numChildren;
+                        this._leftBeardNum.setValue = this.LeftBeard.numChildren;
+                        this._leftBeardNum.sum = this.LeftBeard.numChildren;
+                        this._leftBeardNum.index = index;
+                        this.taskArr.push(this._leftBeardNum);
                         break;
                     case GEnum.TaskType.rightBeard:
-                        GVariate._rightBeardNum.setValue = this.RightBeard.numChildren;
+                        this._rightBeardNum.setValue = this.RightBeard.numChildren;
+                        this._rightBeardNum.sum = this.RightBeard.numChildren;
+                        this._rightBeardNum.index = index;
+                        this.taskArr.push(this._rightBeardNum);
+                        break;
+                    case GEnum.TaskType.middleBeard:
+                        this._middleBeardNum.setValue = this.RightBeard.numChildren;
+                        this._middleBeardNum.sum = this.RightBeard.numChildren;
+                        this._middleBeardNum.index = index;
+                        this.taskArr.push(this._middleBeardNum);
                         break;
                     default:
                         break;
@@ -2870,6 +2986,7 @@
             }
         }
         monitorHiarLen() {
+            let _sideHairNum = this._sideHairNum;
             for (let index = 0; index < this.HairParent.numChildren; index++) {
                 const element = this.HairParent.getChildAt(index);
                 let len = element.transform.localPositionY;
@@ -2883,23 +3000,13 @@
                         if (this.detection) {
                             if (v < 0.13) {
                                 this.detection = false;
-                                GVariate._sideHairNum.setValue = GVariate._sideHairNum.value - 1;
+                                _sideHairNum.setValue = _sideHairNum.value - 1;
                             }
                             this.value = v;
                         }
                     }
                 };
             }
-        }
-        btnOnClick() {
-            lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
-        }
-        btnLastUp(e) {
-            this.BtnLast.visible = false;
-            this.moveSwitch = false;
-            e.stopPropagation();
-            GVariate._taskNum++;
-            this.mainCameraMove();
         }
         mainCameraMove() {
             if (GVariate._taskNum > GVariate._taskArr.length) {
@@ -2916,6 +3023,9 @@
                     break;
                 case GEnum.TaskType.sideHair:
                     this.setCamera(this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
+                    break;
+                case GEnum.TaskType.middleBeard:
+                    this.setCamera(this.Landmark_Middle.transform.position, this.Landmark_Middle.transform.localRotationEuler, this.moveTime);
                     break;
                 case GEnum.TaskType.topHead:
                     this.setCamera(this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
@@ -2940,12 +3050,29 @@
                 })
             }, time, null);
         }
+        btnOnClick() {
+            lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
+        }
+        btnLastUp(e) {
+            this.BtnLast.visible = false;
+            this.moveSwitch = false;
+            e.stopPropagation();
+            GVariate._taskNum++;
+            this.mainCameraMove();
+            EventAdmin.notify(GEnum.EventType.taskProgress);
+            if (this.taskArr[GVariate._taskNum].value <= 3) {
+                EventAdmin.notify(EventAdmin.EventType.taskReach);
+            }
+        }
         onStageMouseDown(e) {
             this.moveSwitch = true;
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
         }
         onStageMouseMove(e) {
+            if (!Admin._gameStart) {
+                return;
+            }
             if (this.moveSwitch) {
                 let diffX = e.stageX - this.touchPosX;
                 let diffY = e.stageY - this.touchPosY;
@@ -2962,6 +3089,9 @@
                         this.leftAndRightShaving();
                         break;
                     case GEnum.TaskType.rightBeard:
+                        this.leftAndRightShaving();
+                        break;
+                    case GEnum.TaskType.middleBeard:
                         this.leftAndRightShaving();
                         break;
                     case GEnum.TaskType.topHead:
@@ -3011,10 +3141,9 @@
             Click.on(Click.ClickType.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
         }
         btnNextUp() {
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
             this.self.close();
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, () => {
-                lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].refreshScene();
-            });
         }
         lwgDisable() {
         }
@@ -3090,6 +3219,7 @@
         constructor() { }
         static init() {
             var reg = Laya.ClassUtils.regClass;
+            reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
             reg("script/Game/UIVictory.ts", UIVictory);

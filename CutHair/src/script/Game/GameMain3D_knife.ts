@@ -24,7 +24,11 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
                 } else if (ownerParent.name === 'LeftBeard') {
                     EventAdmin.notify(GEnum.EventType.leftBeard)
 
+                } else if (ownerParent.name === 'MiddleBeard') {
+                    EventAdmin.notify(GEnum.EventType.middleBeard)
+
                 }
+
                 other.isKinematic = false;
                 other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
                 break;

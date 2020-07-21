@@ -52,12 +52,27 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.LevelFpos.x = this.LevelTem.transform.position.x;
         this.LevelFpos.y = this.LevelTem.transform.position.y;
         this.LevelFpos.z = this.LevelTem.transform.position.z;
+        this.createLevel();
+    }
 
+    /**产生关卡*/
+    createLevel(): void {
         this.Level = this.LevelTem.clone() as Laya.MeshSprite3D;
         this.self.addChild(this.Level);
         this.LevelTem.removeSelf();
     }
     selfNode(): void {
+
+        this.Head = this.Level.getChildByName('Head') as Laya.MeshSprite3D;
+        this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
+        let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+        capsuleRig3D.restitution = 0;
+
+        this.HairParent = this.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
+        this.LeftBeard = this.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
+        this.RightBeard = this.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
+        this.MiddleBeard = this.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
+
         this.Landmark_Left = this.Level.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
         this.Landmark_Right = this.Level.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
         this.Landmark_Side = this.Level.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
@@ -72,16 +87,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         this.Floor = this.Level.getChildByName('Floor') as Laya.MeshSprite3D;
 
-        this.Head = this.Level.getChildByName('Head') as Laya.MeshSprite3D;
-        this.HairParent = this.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
-        this.LeftBeard = this.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
-        this.RightBeard = this.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
-        this.MiddleBeard = this.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
-
         this.knife = this.Level.getChildByName('knife') as Laya.MeshSprite3D;
-        this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
-        let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-        capsuleRig3D.restitution = 0;
+
     }
 
     lwgOnEnable(): void {
@@ -99,7 +106,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     refreshScene(): void {
         this.Level.removeSelf();
-        this.lwgOnAwake();
+        this.createLevel();
         this.selfNode();
         this.lwgOnEnable();
     }

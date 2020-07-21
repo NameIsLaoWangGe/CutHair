@@ -15,11 +15,12 @@ export default class UIOperation extends lwg.Admin.Scene {
     MainCamera: Laya.MeshSprite3D;
 
     Capsule: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**四个节点代表摄像机移动到四个任务的方位*/
+    /**节点代表摄像机移动到四个任务的方位*/
     Landmark_Left: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     Landmark_Right: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     Landmark_Side: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     Landmark_Top: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    Landmark_Middle: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
     /**射线*/
     _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
@@ -41,6 +42,9 @@ export default class UIOperation extends lwg.Admin.Scene {
     LeftBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     /**中间胡须父节点*/
     MiddleBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+    /**任务父节点集合*/
+    taskArr: Array<any> = [];
+
     /**侧面所需理发的数量*/
     _sideHairNum = {
         index: 0,
@@ -130,7 +134,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
         this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
-        this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
+        this.Landmark_Middle = this.GameMain3D['GameMain3D'].Landmark_Middle;
         this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
         this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
 
@@ -163,6 +167,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 Admin._openScene(Admin.SceneName.UIVictory, null, null, f => {
                 });
             } else {
+                //刷新一下属性 
                 this.BtnLast.visible = true;
             }
         })
@@ -188,6 +193,11 @@ export default class UIOperation extends lwg.Admin.Scene {
             this._rightBeardNum.setValue = this._rightBeardNum.value - 0.5;
         })
 
+        // 中间的胡子修剪
+        EventAdmin.reg(GEnum.EventType.middleBeard, this, () => {
+            this._middleBeardNum.setValue = this._middleBeardNum.value - 0.5;
+        })
+
         // 进度条的变化
         EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
             /**进度条*/
@@ -199,7 +209,6 @@ export default class UIOperation extends lwg.Admin.Scene {
                 case GEnum.TaskType.sideHair:
                     value = this._sideHairNum.value;
                     sum = this._sideHairNum.sum;
-
                     break;
                 case GEnum.TaskType.leftBeard:
                     value = this._leftBeardNum.value;
@@ -209,6 +218,11 @@ export default class UIOperation extends lwg.Admin.Scene {
                 case GEnum.TaskType.rightBeard:
                     value = this._rightBeardNum.value;
                     sum = this._rightBeardNum.sum;
+
+                    break;
+                case GEnum.TaskType.middleBeard:
+                    value = this._middleBeardNum.value;
+                    sum = this._middleBeardNum.sum;
 
                     break;
                 default:
@@ -245,31 +259,36 @@ export default class UIOperation extends lwg.Admin.Scene {
                     this._sideHairNum.sum = this.HairParent.numChildren;
                     this._sideHairNum.index = index;
                     this.monitorHiarLen();
-
+                    this.taskArr.push(this._sideHairNum);
                     break;
                 case GEnum.TaskType.leftBeard:
                     this._leftBeardNum.setValue = this.LeftBeard.numChildren;
                     this._leftBeardNum.sum = this.LeftBeard.numChildren;
                     this._leftBeardNum.index = index;
+                    this.taskArr.push(this._leftBeardNum);
 
                     break;
                 case GEnum.TaskType.rightBeard:
                     this._rightBeardNum.setValue = this.RightBeard.numChildren;
                     this._rightBeardNum.sum = this.RightBeard.numChildren;
                     this._rightBeardNum.index = index;
+                    this.taskArr.push(this._rightBeardNum);
 
                     break;
 
                 case GEnum.TaskType.middleBeard:
-                    this._rightBeardNum.setValue = this.RightBeard.numChildren;
-                    this._rightBeardNum.sum = this.RightBeard.numChildren;
-                    this._rightBeardNum.index = index;
+                    this._middleBeardNum.setValue = this.RightBeard.numChildren;
+                    this._middleBeardNum.sum = this.RightBeard.numChildren;
+                    this._middleBeardNum.index = index;
+                    this.taskArr.push(this._middleBeardNum);
+
 
                     break;
                 default:
                     break;
             }
         }
+
     }
 
     /**监听每根头发的长度*/
@@ -299,18 +318,6 @@ export default class UIOperation extends lwg.Admin.Scene {
                 }
             }
         }
-    }
-
-    btnOnClick(): void {
-        lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
-    }
-
-    btnLastUp(e: Laya.Event): void {
-        this.BtnLast.visible = false;
-        this.moveSwitch = false;
-        e.stopPropagation();
-        GVariate._taskNum++;
-        this.mainCameraMove();
     }
 
     /**移动时间*/
@@ -343,6 +350,11 @@ export default class UIOperation extends lwg.Admin.Scene {
                 this.setCamera(this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
                 break;
 
+            case GEnum.TaskType.middleBeard:
+                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
+                this.setCamera(this.Landmark_Middle.transform.position, this.Landmark_Middle.transform.localRotationEuler, this.moveTime);
+
+                break;
             case GEnum.TaskType.topHead:
                 // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
                 this.setCamera(this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
@@ -381,6 +393,22 @@ export default class UIOperation extends lwg.Admin.Scene {
         }, time, null);
     }
 
+    btnOnClick(): void {
+        lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
+    }
+
+    btnLastUp(e: Laya.Event): void {
+        this.BtnLast.visible = false;
+        this.moveSwitch = false;
+        e.stopPropagation();
+        GVariate._taskNum++;
+        this.mainCameraMove();
+        EventAdmin.notify(GEnum.EventType.taskProgress);
+        if (this.taskArr[GVariate._taskNum].value <= 3) {
+            EventAdmin.notify(EventAdmin.EventType.taskReach);
+        }
+    }
+
     /**触摸位置*/
     touchPosX: number;
     touchPosY: number;
@@ -392,6 +420,9 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     onStageMouseMove(e: Laya.Event) {
+        if (!Admin._gameStart) {
+            return;
+        }
 
         if (this.moveSwitch) {
 
@@ -417,6 +448,11 @@ export default class UIOperation extends lwg.Admin.Scene {
                     break;
 
                 case GEnum.TaskType.rightBeard:
+                    this.leftAndRightShaving();
+
+                    break;
+
+                case GEnum.TaskType.middleBeard:
                     this.leftAndRightShaving();
 
                     break;
