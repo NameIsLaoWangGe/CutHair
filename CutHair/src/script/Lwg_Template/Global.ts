@@ -17,88 +17,20 @@ export module Global {
             move = 'move',
         }
 
-        /**剃须刀的状态*/
+        /**事件*/
         export enum EventType {
-            taskReach = 'taskReach',
-            defeated = 'defeated',
-            Scene3DRefresh = 'Scene3DRefresh',
-            OperrationRefresh = 'Scene3DRefresh'
+            leftBeard = 'leftBeard',
+            rightBeard = 'rightBeard',
+            taskProgress= 'taskProgress',
         }
-
     }
     /**控制游戏的全局变量*/
     export module GVariate {
-
         export let _gameLevel: number = 1;
-
         export let _execution: number = 10;
         export let _goldNum: number = 10;
         /**当前关卡中的任务顺序集合*/
         export let _taskArr: Array<string> = [];
-
-        /**侧面所需理发的数量*/
-        export let _sideHairNum = {
-            switch: true,
-            value: 0,
-            get getValue() {
-                // console.log('取值', this.value);
-                return this.value;
-            },
-            set setValue(vals) {
-                if (this.switch) {
-                    this.value = vals;
-                    console.log('剩余需要修理的头发', this.value);
-                    if (this.value <= 3) {
-                        this.switch = false;
-                        console.log('任务完成了！');
-                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
-                    }
-                }
-            }
-        };
-
-        /**左侧胡子的数量*/
-        export let _leftBeardNum = {
-            switch: true,
-            value: 0,
-            get getValue() {
-                // console.log('取值', this.value);
-                return this.value;
-            },
-            set setValue(vals) {
-                if (this.switch) {
-                    this.value = vals;
-                    console.log('剩余需要修理胡须的数量', this.value);
-                    if (this.value <= 3) {
-                        console.log('任务完成了！');
-                        this.switch = false;
-                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
-                    }
-                }
-            }
-        }
-
-        export let _rightBeardNum = {
-            switch: true,
-            value: 0,
-            get getValue() {
-                // console.log('取值', this.value);
-                return this.value;
-            },
-            set setValue(vals) {
-                if (this.switch) {
-                    this.value = vals;
-                    console.log('剩余需要修理胡须的数量', this.value);
-                    if (this.value <= 5) {
-                        console.log('任务完成了！');
-                        this.switch = false;
-                        EventAdmin.EventClass.notify(GEnum.EventType.taskReach);
-                    }
-                }
-            }
-        }
-
-        /**当前关卡中进行到第几个任务，索引从0开始*/
         export let _taskNum: number = 0;
     }
 

@@ -1,0 +1,7 @@
+{
+  "code": "import { lwg, Click, EventAdmin } from \"../Lwg_Template/lwg\";\r\nexport default class UIDefeated extends lwg.Admin.Scene {\r\n    selfNode() {\r\n        this.BtnAgain = this.self['BtnAgain'];\r\n    }\r\n    btnOnClick() {\r\n        Click.on(Click.ClickType.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);\r\n    }\r\n    btnAgainUp() {\r\n        console.log('重新开始！');\r\n        EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);\r\n        EventAdmin.notify(EventAdmin.EventType.operrationRefresh);\r\n        this.self.close();\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/lwg.ts",
+    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/Global.ts"
+  ]
+}

@@ -557,69 +557,66 @@ export module lwg {
         }
     }
 
-
-
-    /**事件类*/
+    /**事件模块*/
     export module EventAdmin {
-
+        /**常用事件枚举*/
         export enum EventType {
-            gameOver = 'gameOver',
-
+            /**完成任务*/
+            taskReach = 'taskReach',
+            /**失败*/
+            defeated = 'defeated',
+            /**刷新3D场景*/
+            scene3DRefresh = 'Scene3DRefresh',
+            /**刷新操作场景*/
+            operrationRefresh = 'OperrationRefresh',
         }
 
-        export class EventClass {
-            static Self = new EventClass();
-
-            /**事件基类*/
-            dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
-
-            /**
-             * 事件注册,总控制事件注册在当前类，每个游戏独有的事件不要注册在这里，防止每关重复注册
-             * @param type 事件类型或者名称
-             * @param caller 事件的执行域
-             * @param listener 响应事件的回调函数,以下写法可以传递参数进来:()=>{}
-             */
-            static reg(type: any, caller: any, listener: Function) {
-                if (!caller) {
-                    console.error("caller must exist!");
-                }
-                EventClass.Self.dispatcher.on(type.toString(), caller, listener);
+        /**以节点为单位，在节点内注册事件，节点移除或者关闭后，关闭事件监听；如果需要在节点外注册事件，this为EventAdmin，不要写在节点脚本中，否则每次打开一次就会注册一次*/
+        export let dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
+        /**
+         * 事件注册,总控制事件注册在当前类，每个游戏独有的事件不要注册在这里，防止每关重复注册
+         * @param type 事件类型或者名称
+         * @param caller 事件的执行域
+         * @param listener 响应事件的回调函数,以下写法可以传递参数进来:()=>{}
+         */
+        export function reg(type: any, caller: any, listener: Function) {
+            if (!caller) {
+                console.error("caller must exist!");
             }
+            dispatcher.on(type.toString(), caller, listener);
+        }
+        /**
+         * 通知事件
+         * @param type 事件类型或者名称
+         * @param args 注册事件中的回调函数中的参数
+         */
+        export function notify(type: any, args?: any) {
+            dispatcher.event(type.toString(), args);
+        }
+        /**
+         * 关闭某个事件
+         * @param type 事件类型或者名称
+         * @param caller 事件的执行域
+         * @param listener 关闭后的回调函数
+         * */
+        export function off(type: any, caller: any, listener: Function) {
+            this.dispatcher.off(type.toString(), caller, listener);
+        }
 
-            /**
-             * 通知事件
-             * @param type 事件类型或者名称
-             * @param args 注册事件中的回调函数中的参数
-             */
-            static notify(type: any, args?: any) {
-                EventClass.Self.dispatcher.event(type.toString(), args);
-            }
+        /**
+         * 关闭所有执行域中的事件
+         * @param type 事件类型或者名称
+        */
+        export function offAll(type: any) {
+            dispatcher.offAll(type.toString());
+        }
 
-            /**
-             * 关闭某个事件
-             * @param type 事件类型或者名称
-             * @param caller 事件的执行域
-             * @param listener 关闭后的回调函数
-             * */
-            static off(type: any, caller: any, listener: Function) {
-                EventClass.Self.dispatcher.off(type.toString(), caller, listener);
-            }
-
-            /**
-             * 关闭所有执行域中的事件
-             * @param type 事件类型或者名称
-            */
-            static offAll(type: any) {
-                EventClass.Self.dispatcher.offAll(type.toString());
-            }
-
-            /**
-             * 移除某个caller上的所有事件
-             * @param caller 执行域
-            */
-            static offCaller(caller: any) {
-                EventClass.Self.dispatcher.offAllCaller(caller);
-            }
+        /**
+         * 移除某个caller上的所有事件
+         * @param caller 执行域
+        */
+        export function offCaller(caller: any) {
+            dispatcher.offAllCaller(caller);
         }
     }
 
@@ -632,7 +629,7 @@ export module lwg {
         /**游戏是否结束*/
         export let _gameStart: boolean = false;
 
-        /**当前所有场景的名称*/
+        /**常用场景的名称，和脚本名称保持一致*/
         export enum SceneName {
             UILoding = 'UILoding',
             UIStart = 'UIStart',
@@ -691,28 +688,15 @@ export module lwg {
                 // 背景图自适应并且居中
                 let background = scene.getChildByName('Background') as Laya.Image;
                 if (background) {
-                    if (openName.substring(0, 6) === 'UIMain') {
-                        background.width = null;
-                        background.height = null;
-                        background.x = 360;
-                        background.y = 640;
-                        // background.pivotX = background.width / 2;
-                        // background.pivotY = background.height / 2;
-                        // background.x = Laya.stage.width / 2;
-                        // background.y = Laya.stage.height / 2;
-                    } else {
-                        background.width = Laya.stage.width;
-                        background.height = Laya.stage.height;
-                    }
+                    background.width = Laya.stage.width;
+                    background.height = Laya.stage.height;
                 }
-                // console.log('打开' + openName + '场景');
                 if (cloesScene) {
                     cloesScene.close();
                 }
                 if (func) {
                     func();
                 }
-                // console.log(_sceneControl);
             }));
         }
 
@@ -740,7 +724,7 @@ export module lwg {
                 sceneName = 'UIMain_0' + num;
             }
             openCustomName = sceneName;
-            console.log('打开', sceneName);
+            // console.log('打开', sceneName);
             _openScene(sceneName, null, null, f => {
                 lwg.Global._gameStart = true;
             });
@@ -840,74 +824,7 @@ export module lwg {
             _sceneControl[openCustomName].close();
         }
 
-        // /**场景打点次数*/
-        // let printPointNum: number = 0;
-        // /**
-        // * 场景打点,记录玩家进场景和出场景的次数
-        // * @param type 两种类型，一种是离开打点，一种是进入打点
-        // */
-        // export function printPoint(type, name: string): void {
-        //     switch (name) {
-        //         case SceneName.UILoding:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'UIPreload');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'UIPreload');
-        //             }
-        //             break;
-        //         case SceneName.UIStart:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'mianpage');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'mianpage');
-        //             }
-        //             break;
-        //         case SceneName.UIVictory:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'successpage');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'successpage');
-        //             }
-        //             break;
-
-        //         case SceneName.UIDefeated:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'failpage');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'failpage');
-        //             }
-        //             break;
-
-        //         case SceneName.UIExecutionHint:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'noticketpage');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'noticketpage');
-        //             }
-        //             break;
-        //         case SceneName.UIPassHint:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'freegiftpage');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'freegiftpage');
-        //             }
-        //             break;
-        //         case SceneName.UIPuase:
-        //             if (type === 'on') {
-        //                 ADManager.TAPoint(TaT.PageEnter, 'pausepage');
-        //             } else if (type === 'dis') {
-        //                 ADManager.TAPoint(TaT.PageLeave, 'pausepage');
-        //             }
-        //             break;
-        //         default:
-
-        //             break;
-        //     }
-        // printPointNum++;
-        // console.log('场景打点', printPointNum);
-        // }
-
-        /**场景通用父类*/
+        /**2D场景通用父类*/
         export class Scene extends Laya.Script {
             /**挂载当前脚本的节点*/
             self: Laya.Scene;
@@ -1008,7 +925,7 @@ export module lwg {
             onDisable(): void {
                 this.lwgDisable();
                 Laya.timer.clearAll(this);
-                EventAdmin.EventClass.offCaller(this);
+                EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgDisable(): void {
@@ -1016,7 +933,7 @@ export module lwg {
             }
         }
 
-        /**场景通用父类*/
+        /**3D场景通用父类*/
         export class Scene3D extends Laya.Script3D {
             /**挂载当前脚本的节点*/
             self: Laya.Scene3D;
@@ -1040,9 +957,7 @@ export module lwg {
                     this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
                     this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                 }
-
             }
-
             onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
@@ -1116,7 +1031,7 @@ export module lwg {
             }
         }
 
-        /**角色通用父类*/
+        /**2D角色通用父类*/
         export class Person extends Laya.Script {
             /**挂载当前脚本的节点*/
             self: Laya.Sprite;
@@ -1149,7 +1064,7 @@ export module lwg {
             }
         }
 
-        /**物件通用父类*/
+        /**2D物件通用父类*/
         export class Object extends Laya.Script {
             /**挂载当前脚本的节点*/
             self: Laya.Sprite;
@@ -1200,10 +1115,9 @@ export module lwg {
             lwgDisable(): void {
 
             }
-
         }
 
-        /**物件通用父类*/
+        /**3D物件通用父类*/
         export class Object3D extends Laya.Script3D {
             /**挂载当前脚本的节点*/
             self: Laya.MeshSprite3D;

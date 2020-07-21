@@ -6,6 +6,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
     /**头发的总数*/
     hairsNumber: any;
     lwgOnEnable(): void {
+        
     }
 
     onTriggerEnter(other): void {
@@ -56,7 +57,8 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
                 break;
             case 'standard':
-                console.log('碰到线了！');
+                console.log('碰到线了，游戏失败！');
+                EventAdmin.notify(EventAdmin.EventType.defeated);
                 break;
             default:
                 break;

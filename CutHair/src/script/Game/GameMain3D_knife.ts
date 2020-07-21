@@ -1,4 +1,4 @@
-import { lwg } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin } from "../Lwg_Template/lwg";
 import GameMain3D_Blade from "./GameMain3D_Blade";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 
@@ -19,10 +19,10 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
                     return;
                 }
                 if (ownerParent.name === 'RightBeard') {
-                    GVariate._rightBeardNum.setValue = GVariate._rightBeardNum.value - 0.5;
+                    EventAdmin.notify(GEnum.EventType.rightBeard)
 
                 } else if (ownerParent.name === 'LeftBeard') {
-                    GVariate._leftBeardNum.setValue = GVariate._leftBeardNum.value - 0.5;
+                    EventAdmin.notify(GEnum.EventType.leftBeard)
 
                 }
                 other.isKinematic = false;

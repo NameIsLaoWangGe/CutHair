@@ -22,7 +22,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     Landmark_Top: Laya.MeshSprite3D = new Laya.MeshSprite3D();
 
     /**射线*/
-    _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));;
+    _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
     /**射线扫描结果*/
     outs: Array<Laya.HitResult> = new Array<Laya.HitResult>();
 
@@ -39,6 +39,67 @@ export default class UIOperation extends lwg.Admin.Scene {
     RightBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     /**右侧须的父节点*/
     LeftBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
+
+
+    /**侧面所需理发的数量*/
+    _sideHairNum = {
+        index: 0,
+        sum: 0,
+        switch: true,
+        value: 0,
+        set setValue(vals) {
+            this.value = vals;
+            if (this.switch) {
+                console.log('剩余需要修理的头发', this.value);
+                if (this.value <= 3) {
+                    this.switch = false;
+                    console.log('任务完成了！');
+                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+                }
+            }
+            EventAdmin.notify(GEnum.EventType.taskProgress);
+        }
+    };
+
+    /**左侧胡子的数量*/
+    _leftBeardNum = {
+        index: 0,
+        sum: 0,
+        switch: true,
+        value: 0,
+        set setValue(vals) {
+            this.value = vals;
+            if (this.switch) {
+                console.log('剩余需要修理胡须的数量', this.value);
+                if (this.value <= 3) {
+                    console.log('任务完成了！');
+                    this.switch = false;
+                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+                }
+            }
+            EventAdmin.notify(GEnum.EventType.taskProgress);
+        }
+    }
+
+    /**右侧胡子的数量*/
+    _rightBeardNum = {
+        index: 0,
+        sum: 0,
+        switch: true,
+        value: 0,
+        set setValue(vals) {
+            this.value = vals;
+            if (this.switch) {
+                console.log('剩余需要修理胡须的数量', this.value);
+                if (this.value <= 3) {
+                    console.log('任务完成了！');
+                    this.switch = false;
+                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+                }
+            }
+            EventAdmin.notify(GEnum.EventType.taskProgress);
+        }
+    }
 
     selfNode(): void {
         this.Rocker = this.self['Rocker'];
@@ -66,10 +127,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     lwgOnEnable(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
-        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
-        // GVariate._sideHairNum.switch = true;
-        // GVariate._leftBeardNum.switch = true;
-        // GVariate._rightBeardNum.switch = true;
+        GVariate._taskArr = [GEnum.TaskType.rightBeard, GEnum.TaskType.sideHair, GEnum.TaskType.leftBeard];
         this.createProgress();
         this.BtnLast.visible = false;
         this.createTaskContent();
@@ -78,42 +136,80 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     eventReg(): void {
         // 胜利
-        EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
+        EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
             if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-                // this.self.close();
-                Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+                Admin._openScene(Admin.SceneName.UIVictory, null, null, f => {
+                });
             } else {
                 this.BtnLast.visible = true;
             }
         })
 
-        // 游戏失败
-        EventAdmin.EventClass.reg(GEnum.EventType.defeated, this, () => {
-            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-                Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
-            } else {
-                this.BtnLast.visible = true;
-            }
+        // 失败
+        EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
+            Admin._gameStart = false;
+            Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
         })
 
         // 重来
-        EventAdmin.EventClass.reg(GEnum.EventType.OperrationRefresh, EventAdmin.EventClass, () => {
-            lwg.Admin._openScene(Admin.SceneName.UIOperation, null, null, () => { this.self.close() })
+        EventAdmin.reg(EventAdmin.EventType.operrationRefresh, this, () => {
+            lwg.Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => { })
+        })
+
+        // 左侧胡子修剪
+        EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
+            this._leftBeardNum.setValue = this._leftBeardNum.value - 0.5;
+        })
+
+        // 右侧胡子修剪
+        EventAdmin.reg(GEnum.EventType.rightBeard, this, () => {
+            this._rightBeardNum.setValue = this._rightBeardNum.value - 0.5;
+        })
+
+        // 进度条的变化
+        EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
+            /**进度条*/
+            let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum) as Laya.Sprite;
+            let Bar = TaskBar.getChildByName('Bar') as Laya.Image;
+            let sum;
+            let value;
+            switch (GVariate._taskArr[GVariate._taskNum]) {
+                case GEnum.TaskType.sideHair:
+                    value = this._sideHairNum.value;
+                    sum = this._sideHairNum.sum;
+
+                    break;
+                case GEnum.TaskType.leftBeard:
+                    value = this._leftBeardNum.value;
+                    sum = this._leftBeardNum.sum;
+
+                    break;
+                case GEnum.TaskType.rightBeard:
+                    value = this._rightBeardNum.value;
+                    sum = this._rightBeardNum.sum;
+
+                    break;
+                default:
+                    break;
+            }
+            Bar.mask.x = (sum - value) * Bar.width / sum - Bar.mask.width;
         })
     }
 
     /**
-     * 创建任务进度条
+     * 创建任务进度条,并且居中
      */
     createProgress(): void {
+        let spacing = 100;
         for (let index = 0; index < GVariate._taskArr.length; index++) {
             const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress) as Laya.Sprite;
             this.TaskBar.addChild(TaskPro);
-            TaskPro.pos(index * 100, 0);
+            TaskPro.pos(index * spacing, 0);
             let Bar = TaskPro.getChildByName('Bar') as Laya.Image;
-            let Mask = Bar.mask;
-            Mask.scaleX = 0;
         }
+        this.TaskBar.width = GVariate._taskArr.length * spacing;
+        this.TaskBar.pivotX = this.TaskBar.width / 2;
+        this.TaskBar.x = Laya.stage.width / 2;
     }
 
     /**
@@ -123,14 +219,23 @@ export default class UIOperation extends lwg.Admin.Scene {
         for (let index = 0; index < GVariate._taskArr.length; index++) {
             switch (GVariate._taskArr[index]) {
                 case GEnum.TaskType.sideHair:
-                    GVariate._sideHairNum.setValue = this.HairParent.numChildren;
+                    this._sideHairNum.setValue = this.HairParent.numChildren;
+                    this._sideHairNum.sum = this.HairParent.numChildren;
+                    this._sideHairNum.index = index;
                     this.monitorHiarLen();
+
                     break;
                 case GEnum.TaskType.leftBeard:
-                    GVariate._leftBeardNum.setValue = this.LeftBeard.numChildren;
+                    this._leftBeardNum.setValue = this.LeftBeard.numChildren;
+                    this._leftBeardNum.sum = this.LeftBeard.numChildren;
+                    this._leftBeardNum.index = index;
+
                     break;
                 case GEnum.TaskType.rightBeard:
-                    GVariate._rightBeardNum.setValue = this.RightBeard.numChildren;
+                    this._rightBeardNum.setValue = this.RightBeard.numChildren;
+                    this._rightBeardNum.sum = this.RightBeard.numChildren;
+                    this._rightBeardNum.index = index;
+
                     break;
                 default:
                     break;
@@ -140,6 +245,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     /**监听每根头发的长度*/
     monitorHiarLen(): void {
+        let _sideHairNum = this._sideHairNum;
         for (let index = 0; index < this.HairParent.numChildren; index++) {
             const element = this.HairParent.getChildAt(index) as Laya.MeshSprite3D;
             let len = element.transform.localPositionY;
@@ -154,7 +260,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                         if (v < 0.13) {
                             // console.log('这根头发理完了！');
                             this.detection = false;
-                            GVariate._sideHairNum.setValue = GVariate._sideHairNum.value - 1;
+                            _sideHairNum.setValue = _sideHairNum.value - 1;
                         }
                         this.value = v;
                         // console.log('当前头发长度', this.value);

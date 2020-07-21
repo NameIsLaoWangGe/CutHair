@@ -6,7 +6,6 @@ export default class UIVictory extends lwg.Admin.Scene {
     constructor() { super(); }
 
     lwgOnEnable(): void {
-
     }
 
     btnOnClick(): void {
@@ -14,7 +13,8 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     btnNextUp(): void {
-        EventAdmin.EventClass.notify(GEnum.EventType.Scene3DRefresh);
+        EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+        EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
         this.self.close();
     }
 

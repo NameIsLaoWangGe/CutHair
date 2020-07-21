@@ -8981,7 +8981,7 @@
 							"scale":[
 								0.5000001,
 								0.15,
-								0.2000001
+								0.1
 							],
 							"meshPath":"Library/unity default resources-Cube.lm",
 							"enableRender":false,
@@ -9059,63 +9059,6 @@
 			{
 				"type":"Sprite3D",
 				"instanceID":162,
-				"props":{
-					"name":"Canvas",
-					"active":true,
-					"isStatic":false,
-					"layer":5,
-					"position":[
-						-360,
-						640,
-						0
-					],
-					"rotation":[
-						0,
-						0,
-						0,
-						-1
-					],
-					"scale":[
-						1,
-						1,
-						1
-					]
-				},
-				"components":[],
-				"child":[
-					{
-						"type":"Sprite3D",
-						"instanceID":163,
-						"props":{
-							"name":"Image",
-							"active":true,
-							"isStatic":false,
-							"layer":5,
-							"position":[
-								-3,
-								0,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								10.95,
-								10.95,
-								1
-							]
-						},
-						"components":[],
-						"child":[]
-					}
-				]
-			},
-			{
-				"type":"Sprite3D",
-				"instanceID":164,
 				"props":{
 					"name":"EventSystem",
 					"active":true,

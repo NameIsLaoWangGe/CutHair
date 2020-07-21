@@ -88,7 +88,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     eventReg(): void {
         // 重来
-        EventAdmin.EventClass.reg(GEnum.EventType.Scene3DRefresh, this, () => {
+        EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
             this.refreshScene();
         })
     };
@@ -124,8 +124,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         capsuleRig3D.restitution = 0;
 
         this.lwgOnEnable();
-
-        EventAdmin.EventClass.notify(GEnum.EventType.OperrationRefresh);
     }
 
     lwgOnUpDate(): void {
