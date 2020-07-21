@@ -42,7 +42,6 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     selfNode(): void {
         this.Rocker = this.self['Rocker'];
-
         this.GameMain3D = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D];
         this.MainCamera = this.GameMain3D['GameMain3D'].MainCamera;
         this.Razor = this.GameMain3D['GameMain3D'].Razor;
@@ -64,25 +63,43 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.BtnLast = this.self['BtnLast'];
     }
 
-    /**摄像机和刀片的坐标差值*/
-    cameraAndRazorPos: Laya.Vector3 = new Laya.Vector3();
     lwgOnEnable(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
+        // GVariate._sideHairNum.switch = true;
+        // GVariate._leftBeardNum.switch = true;
+        // GVariate._rightBeardNum.switch = true;
         this.createProgress();
         this.BtnLast.visible = false;
+        this.createTaskContent();
+        this.mainCameraMove();
+    }
 
+    eventReg(): void {
+        // 胜利
         EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
             if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
                 // this.self.close();
-                // Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+                Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
             } else {
                 this.BtnLast.visible = true;
             }
-
         })
-        this.createTaskContent();
+
+        // 游戏失败
+        EventAdmin.EventClass.reg(GEnum.EventType.defeated, this, () => {
+            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+            } else {
+                this.BtnLast.visible = true;
+            }
+        })
+
+        // 重来
+        EventAdmin.EventClass.reg(GEnum.EventType.OperrationRefresh, EventAdmin.EventClass, () => {
+            lwg.Admin._openScene(Admin.SceneName.UIOperation, null, null, () => { this.self.close() })
+        })
     }
 
     /**

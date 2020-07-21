@@ -929,9 +929,13 @@ export module lwg {
                 this.self[this.calssName] = this;
                 this.lwgOnEnable();
                 this.btnAndOpenAni();
+                this.eventReg();
             }
             /**声明场景里的一些节点*/
             selfNode(): void {
+            }
+            /**场景中的一些事件*/
+            eventReg(): void {
 
             }
             /**初始化一些变量*/
@@ -959,7 +963,6 @@ export module lwg {
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
             lwgOnEnable(): void {
-                // console.log('父类的初始化！');
             }
             /**通过openni返回的时间来延时开启点击事件*/
             btnAndOpenAni(): void {
@@ -1005,6 +1008,7 @@ export module lwg {
             onDisable(): void {
                 this.lwgDisable();
                 Laya.timer.clearAll(this);
+                EventAdmin.EventClass.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgDisable(): void {
@@ -1046,10 +1050,16 @@ export module lwg {
                 this.btnOnClick();
                 this.adaptive();
                 this.openAni();
+                this.eventReg();
                 // printPoint('on', this.calssName);
             }
             /**场景背部全局变量*/
             selfNode(): void {
+            }
+
+            /**场景中的一些事件*/
+            eventReg(): void {
+
             }
             /**游戏当前的状态*/
             gameState(calssName): void {
@@ -2280,7 +2290,6 @@ export module lwg {
             event.currentTarget.scale(1, 1);
             // btnPrintPoint('on', event.currentTarget.name);
         }
-
 
         /**出屏幕*/
         out(event): void {

@@ -32,7 +32,9 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 // 截取
                 otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
                 // ['HairLen']为我们自己赋值的属性
-                otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                if (otherOwnerParent['HairLen']) {
+                    otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                }
                 // 过短则不生成，否则太多太碎
                 if (cutH >= 0.01) {
                     // 克隆一个掉落的头发，并且使其掉落

@@ -20,6 +20,9 @@ export module Global {
         /**剃须刀的状态*/
         export enum EventType {
             taskReach = 'taskReach',
+            defeated = 'defeated',
+            Scene3DRefresh = 'Scene3DRefresh',
+            OperrationRefresh = 'Scene3DRefresh'
         }
 
     }
@@ -34,7 +37,7 @@ export module Global {
         export let _taskArr: Array<string> = [];
 
         /**侧面所需理发的数量*/
-        export let _sideHairNum: any = {
+        export let _sideHairNum = {
             switch: true,
             value: 0,
             get getValue() {
@@ -55,7 +58,7 @@ export module Global {
         };
 
         /**左侧胡子的数量*/
-        export let _leftBeardNum: any = {
+        export let _leftBeardNum = {
             switch: true,
             value: 0,
             get getValue() {
@@ -75,7 +78,7 @@ export module Global {
             }
         }
 
-        export let _rightBeardNum: any = {
+        export let _rightBeardNum = {
             switch: true,
             value: 0,
             get getValue() {

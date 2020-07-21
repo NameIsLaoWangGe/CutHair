@@ -7,21 +7,22 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
     RazorState: string;
     lwgOnEnable(): void {
     }
+    num = 0;
     onTriggerEnter(other: Laya.Rigidbody3D): void {
         let owner = other.owner as Laya.MeshSprite3D;
         let ownerParent = owner.parent as Laya.MeshSprite3D;
-        switch (owner.name) {
+        this.num++;
+        switch (owner.name.substring(0, 5)) {
             case 'Beard':
                 // 随机给予一个属性，退出时把这个属性变为true，防止二次碰撞！
                 if (owner['already']) {
-                    console.log('不会碰撞两次哦');
                     return;
                 }
-                if (ownerParent.parent.name === 'RightBeard') {
-                    GVariate._rightBeardNum.setValue = GVariate._rightBeardNum.value - 1;
+                if (ownerParent.name === 'RightBeard') {
+                    GVariate._rightBeardNum.setValue = GVariate._rightBeardNum.value - 0.5;
 
-                } else if (ownerParent.parent.name === 'LeftBeard') {
-                    GVariate._leftBeardNum.setValue = GVariate._leftBeardNum.value - 1;
+                } else if (ownerParent.name === 'LeftBeard') {
+                    GVariate._leftBeardNum.setValue = GVariate._leftBeardNum.value - 0.5;
 
                 }
                 other.isKinematic = false;
@@ -34,6 +35,7 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
 
     onTriggerExit(other: Laya.Rigidbody3D): void {
         let owner = other.owner as Laya.MeshSprite3D;
+        let ownerParent = owner.parent as Laya.MeshSprite3D;
         switch (owner.name) {
             case 'Beard':
                 owner['already'] = true;

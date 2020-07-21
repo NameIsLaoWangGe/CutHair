@@ -1,5 +1,6 @@
-import { lwg, Click, Admin } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
+import { GEnum } from "../Lwg_Template/Global";
 
 export default class UIVictory extends lwg.Admin.Scene {
     constructor() { super(); }
@@ -13,9 +14,8 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     btnNextUp(): void {
+        EventAdmin.EventClass.notify(GEnum.EventType.Scene3DRefresh);
         this.self.close();
-        lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].refreshScene();
-        
     }
 
     lwgDisable(): void {

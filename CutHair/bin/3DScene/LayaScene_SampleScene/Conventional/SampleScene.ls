@@ -6356,28 +6356,28 @@
 										"type":"MeshSprite3D",
 										"instanceID":115,
 										"props":{
-											"name":"Beard (1)",
+											"name":"Beard",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.639,
-												-0.442,
-												-0.303
+												0.825,
+												-0.5240021,
+												-0.37
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.6961791,
+												0.1051392,
+												0.5973817,
+												-0.3839474
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6388,7 +6388,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6401,79 +6401,94 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":116,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
+									},
+									{
+										"type":"MeshSprite3D",
+										"instanceID":116,
+										"props":{
+											"name":"Beard (1)",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.778,
+												-0.5289993,
+												-0.428
+											],
+											"rotation":[
+												0.7667747,
+												-0.01819847,
+												0.4373613,
+												-0.4695109
+											],
+											"scale":[
+												0.02,
+												0.3000002,
+												0.02000001
+											],
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"type":"Laya.BlinnPhongMaterial",
+													"path":"Assets/Material/beard.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															0,
+															0,
+															0
+														],
+														"size":[
+															1,
+															1,
+															1
+														]
+													}
+												],
+												"isTrigger":true
+											}
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
@@ -6484,23 +6499,23 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.386,
-												-0.383
+												0.778,
+												-0.6610031,
+												-0.428
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.6948754,
+												0.05039777,
+												0.5444048,
+												-0.4671528
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6511,7 +6526,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6524,106 +6539,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":118,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":119,
+										"instanceID":118,
 										"props":{
 											"name":"Beard (3)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.638,
-												-0.4109998
+												0.778,
+												-0.747,
+												-0.428
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.7667747,
+												-0.01819847,
+												0.4373613,
+												-0.4695109
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6634,7 +6595,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6647,106 +6608,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":120,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":121,
+										"instanceID":119,
 										"props":{
 											"name":"Beard (4)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.559,
-												-0.4109998
+												0.771,
+												-0.809,
+												-0.345
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.7667747,
+												-0.01819847,
+												0.4373613,
+												-0.4695109
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6757,7 +6664,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6770,106 +6677,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":122,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":123,
+										"instanceID":120,
 										"props":{
 											"name":"Beard (5)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.5589981,
-												-0.337
+												0.835,
+												-0.6610031,
+												-0.37
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.6948754,
+												0.05039777,
+												0.5444048,
+												-0.4671528
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -6880,7 +6733,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -6893,106 +6746,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":124,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":125,
+										"instanceID":121,
 										"props":{
 											"name":"Beard (6)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.6028,
-												-0.393,
-												-0.3408
+												0.691,
+												-0.7470016,
+												-0.464
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.7667747,
+												-0.01819847,
+												0.4373613,
+												-0.4695109
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7003,7 +6802,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7016,106 +6815,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":126,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":127,
+										"instanceID":122,
 										"props":{
 											"name":"Beard (7)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.577,
-												-0.686,
-												-0.3369999
+												0.691,
+												-0.6169968,
+												-0.4639997
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.7178416,
+												0.03008152,
+												0.513743,
+												-0.4688994
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7126,7 +6871,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7139,106 +6884,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":128,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":129,
+										"instanceID":123,
 										"props":{
 											"name":"Beard (8)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.704,
-												-0.61,
-												-0.366
+												0.843,
+												-0.5240021,
+												-0.3000002
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.6318676,
+												0.1436125,
+												0.6650364,
+												-0.3712752
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3000002,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7249,7 +6940,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7262,106 +6953,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":130,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":131,
+										"instanceID":124,
 										"props":{
 											"name":"Beard (9)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.758,
-												-0.523,
-												-0.356
+												0.838,
+												-0.714,
+												-0.309
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.6961791,
+												0.1051392,
+												0.5973817,
+												-0.3839474
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3000002,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7372,7 +7009,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7385,106 +7022,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":132,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":133,
+										"instanceID":125,
 										"props":{
 											"name":"Beard (10)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.71,
-												-0.722,
-												-0.348
+												0.7113,
+												-0.5289993,
+												-0.4489999
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.73001,
+												0.01877658,
+												0.4963003,
+												-0.4694881
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7495,7 +7078,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7508,106 +7091,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":134,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":135,
+										"instanceID":126,
 										"props":{
 											"name":"Beard (11)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.69,
-												-0.781,
-												-0.334
+												0.684,
+												-0.6689987,
+												-0.5209999
 											],
 											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
+												0.787513,
+												-0.04145054,
+												0.3988131,
+												-0.4680314
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3000002,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7618,7 +7147,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7631,106 +7160,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":136,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":137,
+										"instanceID":127,
 										"props":{
 											"name":"Beard (12)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.784,
-												-0.509,
-												-0.185
+												0.684,
+												-0.5289993,
+												-0.5209999
 											],
 											"rotation":[
-												0.7932923,
-												0.5554692,
-												-0.2041996,
-												-0.1429821
+												0.73001,
+												0.01877658,
+												0.4963003,
+												-0.4694881
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3000002,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -7741,7 +7216,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -7754,1684 +7229,31 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":138,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":139,
-										"props":{
-											"name":"Beard (13)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.782,
-												-0.6380005,
-												-0.147
-											],
-											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
+												"isTrigger":true
 											}
 										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":140,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":141,
-										"props":{
-											"name":"Beard (14)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.782,
-												-0.685997,
-												-0.07299995
-											],
-											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":142,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":143,
-										"props":{
-											"name":"Beard (15)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.782,
-												-0.6100006,
-												-0.02900028
-											],
-											"rotation":[
-												0.7697511,
-												0.5389856,
-												-0.2801665,
-												-0.1961747
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":144,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":145,
-										"props":{
-											"name":"Beard (16)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.714,
-												-0.596,
-												-0.268
-											],
-											"rotation":[
-												0.7063373,
-												0.5880093,
-												-0.3936663,
-												-0.01896064
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":146,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":147,
-										"props":{
-											"name":"Beard (17)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.503,
-												-0.4420013,
-												-0.467
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":148,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":149,
-										"props":{
-											"name":"Beard (18)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.4528,
-												-0.6380005,
-												-0.5059
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":150,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":151,
-										"props":{
-											"name":"Beard (19)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.46,
-												-0.5589981,
-												-0.4769998
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":152,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":153,
-										"props":{
-											"name":"Beard (20)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.515,
-												-0.685997,
-												-0.4769998
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":154,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":155,
-										"props":{
-											"name":"Beard (21)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.515,
-												-0.3860016,
-												-0.5229998
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":156,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":157,
-										"props":{
-											"name":"Beard (22)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.5822,
-												-0.5589981,
-												-0.443
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":158,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":159,
-										"props":{
-											"name":"Beard (23)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.567,
-												-0.3929977,
-												-0.45
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":160,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":161,
-										"props":{
-											"name":"Beard (24)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.569,
-												-0.6100006,
-												-0.4330001
-											],
-											"rotation":[
-												0.6347973,
-												0.4444898,
-												-0.5177281,
-												-0.3625171
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":162,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":163,
-										"props":{
-											"name":"Beard (25)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.4963453,
-												-0.5230026,
-												-0.4090271
-											],
-											"rotation":[
-												0.6878071,
-												0.4816078,
-												-0.4448949,
-												-0.3115187
-											],
-											"scale":[
-												0.03,
-												0.01,
-												0.03
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":164,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
+										"child":[]
 									}
 								]
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":165,
+								"instanceID":128,
 								"props":{
 									"name":"LeftBeard",
 									"active":true,
@@ -9458,30 +7280,99 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":166,
+										"instanceID":129,
+										"props":{
+											"name":"Beard",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.3949635,
+												-0.5113876,
+												-0.06711634
+											],
+											"rotation":[
+												-0.2987335,
+												0.3716125,
+												0.845631,
+												-0.2399386
+											],
+											"scale":[
+												0.02000001,
+												0.3000003,
+												0.02000001
+											],
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"type":"Laya.BlinnPhongMaterial",
+													"path":"Assets/Material/beard.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															0,
+															0,
+															0
+														],
+														"size":[
+															1,
+															1,
+															1
+														]
+													}
+												],
+												"isTrigger":true
+											}
+										],
+										"child":[]
+									},
+									{
+										"type":"MeshSprite3D",
+										"instanceID":130,
 										"props":{
 											"name":"Beard (1)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.2651,
-												-0.5585,
-												-0.1218
+												0.4664999,
+												-0.4895157,
+												-0.06859449
 											],
 											"rotation":[
-												-0.7899163,
-												-0.3046941,
-												-0.06569201,
-												-0.5280895
+												-0.126237,
+												0.4259339,
+												0.8118893,
+												-0.3787881
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03
+												0.02,
+												0.3000001,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9492,7 +7383,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9505,106 +7396,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":167,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":168,
+										"instanceID":131,
 										"props":{
 											"name":"Beard (2)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.3088,
-												-0.5429,
-												-0.1328
+												0.5135194,
+												-0.6125618,
+												-0.0600028
 											],
 											"rotation":[
-												-0.7713628,
-												-0.3582026,
-												0.04029187,
-												-0.5244682
+												-0.2588417,
+												0.4295006,
+												0.8045951,
+												-0.3180518
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000003
+												0.02000001,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9615,7 +7452,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9628,106 +7465,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":169,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":170,
+										"instanceID":132,
 										"props":{
 											"name":"Beard (3)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.3696,
-												-0.506,
-												-0.1422
+												0.5441519,
+												-0.6927246,
+												-0.05440546
 											],
 											"rotation":[
-												-0.8183343,
-												-0.3266251,
-												0.06232318,
-												-0.4687866
+												-0.126237,
+												0.4259339,
+												0.8118893,
+												-0.3787881
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000003
+												0.02,
+												0.3000001,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9738,7 +7521,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9751,106 +7534,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":171,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":172,
+										"instanceID":133,
 										"props":{
 											"name":"Beard (4)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.378,
-												-0.619,
-												-0.138
+												0.5101338,
+												-0.7758694,
+												-0.1064745
 											],
 											"rotation":[
-												-0.8183343,
-												-0.3266251,
-												0.06232312,
-												-0.4687866
+												-0.126237,
+												0.4259339,
+												0.8118893,
+												-0.3787881
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000002
+												0.02,
+												0.3000001,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9861,7 +7590,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9874,106 +7603,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":173,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":174,
+										"instanceID":134,
 										"props":{
 											"name":"Beard (5)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.328,
-												-0.663,
-												-0.12
+												0.4378746,
+												-0.6407902,
+												-0.05029746
 											],
 											"rotation":[
-												-0.8411636,
-												-0.2597911,
-												-0.09459666,
-												-0.4647623
+												-0.2588417,
+												0.4295006,
+												0.8045951,
+												-0.3180518
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000002
+												0.02000001,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -9984,7 +7659,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -9997,106 +7672,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":175,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":176,
+										"instanceID":135,
 										"props":{
 											"name":"Beard (6)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.414,
-												-0.506,
-												-0.176
+												0.6214964,
+												-0.6664381,
+												-0.1012242
 											],
 											"rotation":[
-												-0.7899163,
-												-0.3046941,
-												-0.06569201,
-												-0.5280895
+												-0.126237,
+												0.4259339,
+												0.8118893,
+												-0.3787881
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000003
+												0.02,
+												0.3000001,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10107,7 +7728,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10120,106 +7741,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":177,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":178,
+										"instanceID":136,
 										"props":{
 											"name":"Beard (7)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.443,
-												-0.497,
-												-0.209
+												0.5751889,
+												-0.5452552,
+												-0.1096858
 											],
 											"rotation":[
-												-0.7713628,
-												-0.3582026,
-												0.04029187,
-												-0.5244682
+												-0.219929,
+												0.4293984,
+												0.8085665,
+												-0.3368511
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000003
+												0.02000001,
+												0.3000002,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10230,7 +7797,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10243,106 +7810,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":179,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":180,
+										"instanceID":137,
 										"props":{
 											"name":"Beard (8)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.506,
-												-0.46,
-												-0.224
+												0.3335749,
+												-0.5368308,
+												-0.09554368
 											],
 											"rotation":[
-												-0.8183343,
-												-0.3266251,
-												0.06232312,
-												-0.4687866
+												-0.3884335,
+												0.3598315,
+												0.8248198,
+												-0.1982749
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000002
+												0.02000001,
+												0.3,
+												0.02
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10353,7 +7866,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10366,106 +7879,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":181,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":182,
+										"instanceID":138,
 										"props":{
 											"name":"Beard (9)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.519,
-												-0.57,
-												-0.211
+												0.4107244,
+												-0.7102055,
+												-0.0816441
 											],
 											"rotation":[
-												-0.8183343,
-												-0.3266251,
-												0.06232312,
-												-0.4687866
+												-0.2987335,
+												0.3716125,
+												0.845631,
+												-0.2399386
 											],
 											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000002
+												0.02000001,
+												0.3000003,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10476,7 +7935,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10489,106 +7948,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":183,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":184,
+										"instanceID":139,
 										"props":{
 											"name":"Beard (10)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.4652976,
-												-0.6346989,
-												-0.1990593
+												0.521009,
+												-0.4714732,
+												-0.1085092
 											],
 											"rotation":[
-												-0.7599503,
-												-0.3803709,
-												-0.1574952,
-												-0.5029798
+												-0.1981436,
+												0.4289926,
+												0.810114,
+												-0.3470153
 											],
 											"scale":[
-												0.03,
-												0.01,
-												0.03000001
+												0.02,
+												0.3000001,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10599,7 +8004,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10612,106 +8017,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":185,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":186,
+										"instanceID":140,
 										"props":{
 											"name":"Beard (11)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.498,
-												-0.721,
-												-0.193
+												0.6391917,
+												-0.5743104,
+												-0.07710214
 											],
 											"rotation":[
-												-0.7599503,
-												-0.3803709,
-												-0.1574952,
-												-0.5029799
+												-0.08050322,
+												0.4226503,
+												0.8104255,
+												-0.3976133
 											],
 											"scale":[
-												0.02999999,
-												0.01,
-												0.03000001
+												0.02000002,
+												0.3000003,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10722,7 +8073,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10735,106 +8086,52 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":187,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
+												"isTrigger":true
 											}
-										]
+										],
+										"child":[]
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":188,
+										"instanceID":141,
 										"props":{
 											"name":"Beard (12)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.445,
-												-0.581,
-												-0.203
+												0.5893242,
+												-0.4438112,
+												-0.08621422
 											],
 											"rotation":[
-												-0.7599502,
-												-0.3803709,
-												-0.1574953,
-												-0.5029799
+												-0.1981436,
+												0.4289926,
+												0.810114,
+												-0.3470153
 											],
 											"scale":[
-												0.02999999,
-												0.009999999,
-												0.02999999
+												0.02,
+												0.3000001,
+												0.02000001
 											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -10845,7 +8142,7 @@
 										"components":[
 											{
 												"type":"Rigidbody3D",
-												"mass":1E-07,
+												"mass":1,
 												"isKinematic":true,
 												"restitution":0,
 												"friction":0.5,
@@ -10858,694 +8155,25 @@
 													0,
 													0
 												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":189,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
+												"shapes":[
 													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
+														"type":"BoxColliderShape",
+														"center":[
 															0,
 															0,
 															0
 														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
+														"size":[
+															1,
+															1,
+															1
+														]
 													}
 												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":190,
-										"props":{
-											"name":"Beard (13)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.3177,
-												-0.4764,
-												-0.1531
-											],
-											"rotation":[
-												-0.7713628,
-												-0.3582026,
-												0.04029188,
-												-0.5244682
-											],
-											"scale":[
-												0.03000001,
-												0.01000001,
-												0.03000003
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
+												"isTrigger":true
 											}
 										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":191,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":192,
-										"props":{
-											"name":"Beard (14)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.257,
-												-0.69,
-												-0.119
-											],
-											"rotation":[
-												-0.8411636,
-												-0.2597911,
-												-0.09459665,
-												-0.4647622
-											],
-											"scale":[
-												0.03000001,
-												0.01000002,
-												0.03000005
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":193,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":194,
-										"props":{
-											"name":"Beard (15)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.33764,
-												-0.7582153,
-												-0.1185209
-											],
-											"rotation":[
-												-0.8411573,
-												-0.1981267,
-												-0.2234142,
-												-0.450873
-											],
-											"scale":[
-												0.03,
-												0.01000001,
-												0.03000004
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":195,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":196,
-										"props":{
-											"name":"Beard (16)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.406,
-												-0.733,
-												-0.136
-											],
-											"rotation":[
-												-0.8411636,
-												-0.2597911,
-												-0.09459666,
-												-0.4647623
-											],
-											"scale":[
-												0.03,
-												0.01000001,
-												0.03000004
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":197,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":198,
-										"props":{
-											"name":"Beard (17)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.525,
-												-0.791,
-												-0.188
-											],
-											"rotation":[
-												-0.7599502,
-												-0.3803709,
-												-0.1574953,
-												-0.5029799
-											],
-											"scale":[
-												0.02999999,
-												0.009999999,
-												0.02999999
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":false,
-											"materials":[
-												{
-													"type":"Laya.BlinnPhongMaterial",
-													"path":"Assets/Material/beard.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1E-07,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":199,
-												"props":{
-													"name":"Beard",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														10,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														10,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"type":"Laya.BlinnPhongMaterial",
-															"path":"Assets/Material/beard.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"CapsuleColliderShape",
-																"center":[
-																	5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"radius":0.5000001,
-																"height":2,
-																"orientation":1
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
+										"child":[]
 									}
 								]
 							}
@@ -11553,7 +8181,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":200,
+						"instanceID":142,
 						"props":{
 							"name":"standardParent",
 							"active":true,
@@ -11580,7 +8208,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":201,
+								"instanceID":143,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11616,7 +8244,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":202,
+								"instanceID":144,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11652,7 +8280,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":203,
+								"instanceID":145,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11688,7 +8316,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":204,
+								"instanceID":146,
 								"props":{
 									"name":"standard (3)",
 									"active":true,
@@ -11724,7 +8352,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":205,
+								"instanceID":147,
 								"props":{
 									"name":"standard (4)",
 									"active":true,
@@ -11760,7 +8388,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":206,
+								"instanceID":148,
 								"props":{
 									"name":"standard (5)",
 									"active":true,
@@ -11796,7 +8424,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":207,
+								"instanceID":149,
 								"props":{
 									"name":"standard (6)",
 									"active":true,
@@ -11832,7 +8460,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":208,
+								"instanceID":150,
 								"props":{
 									"name":"standard (7)",
 									"active":true,
@@ -11868,7 +8496,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":209,
+								"instanceID":151,
 								"props":{
 									"name":"standard (8)",
 									"active":true,
@@ -11904,7 +8532,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":210,
+								"instanceID":152,
 								"props":{
 									"name":"standard (9)",
 									"active":true,
@@ -11940,7 +8568,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":211,
+								"instanceID":153,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11991,7 +8619,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":212,
+								"instanceID":154,
 								"props":{
 									"name":"standard (1)",
 									"active":true,
@@ -12029,7 +8657,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":213,
+						"instanceID":155,
 						"props":{
 							"name":"Floor",
 							"active":true,
@@ -12097,7 +8725,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":214,
+						"instanceID":156,
 						"props":{
 							"name":"Landmark_Side",
 							"active":true,
@@ -12156,7 +8784,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":215,
+						"instanceID":157,
 						"props":{
 							"name":"Landmark_Right",
 							"active":true,
@@ -12215,7 +8843,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":216,
+						"instanceID":158,
 						"props":{
 							"name":"Landmark_Left",
 							"active":true,
@@ -12274,7 +8902,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":217,
+						"instanceID":159,
 						"props":{
 							"name":"Landmark_Top",
 							"active":true,
@@ -12333,22 +8961,22 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":218,
+						"instanceID":160,
 						"props":{
 							"name":"knife",
 							"active":true,
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-0.1114773,
-								0.1818237,
-								0.1305404
+								-0.115,
+								0.046,
+								0.268
 							],
 							"rotation":[
 								0,
-								0.954136,
+								0.9271839,
 								0,
-								0.2993737
+								0.3746065
 							],
 							"scale":[
 								0.5000001,
@@ -12391,7 +9019,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":219,
+								"instanceID":161,
 								"props":{
 									"name":"HandSaw_0",
 									"active":true,
@@ -12430,7 +9058,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":220,
+				"instanceID":162,
 				"props":{
 					"name":"Canvas",
 					"active":true,
@@ -12457,7 +9085,7 @@
 				"child":[
 					{
 						"type":"Sprite3D",
-						"instanceID":221,
+						"instanceID":163,
 						"props":{
 							"name":"Image",
 							"active":true,
@@ -12487,7 +9115,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":222,
+				"instanceID":164,
 				"props":{
 					"name":"EventSystem",
 					"active":true,

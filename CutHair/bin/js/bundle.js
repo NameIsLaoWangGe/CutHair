@@ -590,8 +590,11 @@
                     this.self[this.calssName] = this;
                     this.lwgOnEnable();
                     this.btnAndOpenAni();
+                    this.eventReg();
                 }
                 selfNode() {
+                }
+                eventReg() {
                 }
                 variateInit() {
                 }
@@ -644,6 +647,7 @@
                 onDisable() {
                     this.lwgDisable();
                     Laya.timer.clearAll(this);
+                    EventAdmin.EventClass.offCaller(this);
                 }
                 lwgDisable() {
                 }
@@ -673,8 +677,11 @@
                     this.btnOnClick();
                     this.adaptive();
                     this.openAni();
+                    this.eventReg();
                 }
                 selfNode() {
+                }
+                eventReg() {
                 }
                 gameState(calssName) {
                     switch (calssName) {
@@ -2461,7 +2468,9 @@
                     let cutH = HairlineH - diffY;
                     let cutRatio = cutH / HairlineH;
                     otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
-                    otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                    if (otherOwnerParent['HairLen']) {
+                        otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                    }
                     if (cutH >= 0.01) {
                         let cutHair = otherOwnerParent.clone();
                         cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
@@ -2509,6 +2518,9 @@
             let EventType;
             (function (EventType) {
                 EventType["taskReach"] = "taskReach";
+                EventType["defeated"] = "defeated";
+                EventType["Scene3DRefresh"] = "Scene3DRefresh";
+                EventType["OperrationRefresh"] = "Scene3DRefresh";
             })(EventType = Enum.EventType || (Enum.EventType = {}));
         })(Enum = Global.Enum || (Global.Enum = {}));
         let GVariate;
@@ -2645,22 +2657,26 @@
     }
 
     class GameMain3D_knife extends lwg.Admin.Object3D {
+        constructor() {
+            super(...arguments);
+            this.num = 0;
+        }
         lwgOnEnable() {
         }
         onTriggerEnter(other) {
             let owner = other.owner;
             let ownerParent = owner.parent;
-            switch (owner.name) {
+            this.num++;
+            switch (owner.name.substring(0, 5)) {
                 case 'Beard':
                     if (owner['already']) {
-                        console.log('不会碰撞两次哦');
                         return;
                     }
-                    if (ownerParent.parent.name === 'RightBeard') {
-                        GVariate._rightBeardNum.setValue = GVariate._rightBeardNum.value - 1;
+                    if (ownerParent.name === 'RightBeard') {
+                        GVariate._rightBeardNum.setValue = GVariate._rightBeardNum.value - 0.5;
                     }
-                    else if (ownerParent.parent.name === 'LeftBeard') {
-                        GVariate._leftBeardNum.setValue = GVariate._leftBeardNum.value - 1;
+                    else if (ownerParent.name === 'LeftBeard') {
+                        GVariate._leftBeardNum.setValue = GVariate._leftBeardNum.value - 0.5;
                     }
                     other.isKinematic = false;
                     other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
@@ -2671,6 +2687,7 @@
         }
         onTriggerExit(other) {
             let owner = other.owner;
+            let ownerParent = owner.parent;
             switch (owner.name) {
                 case 'Beard':
                     owner['already'] = true;
@@ -2737,6 +2754,12 @@
             this.Razor.addComponent(GameMain3D_Razor);
             this.knife.addComponent(GameMain3D_knife);
         }
+        eventReg() {
+            EventAdmin.EventClass.reg(GEnum.EventType.Scene3DRefresh, this, () => {
+                this.refreshScene();
+            });
+        }
+        ;
         refreshScene() {
             this.Level.removeSelf();
             this.Level = this.LevelTem.clone();
@@ -2761,6 +2784,7 @@
             let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D);
             capsuleRig3D.restitution = 0;
             this.lwgOnEnable();
+            EventAdmin.EventClass.notify(GEnum.EventType.OperrationRefresh);
         }
         lwgOnUpDate() {
         }
@@ -2802,7 +2826,6 @@
             this.HairParent = new Laya.MeshSprite3D();
             this.RightBeard = new Laya.MeshSprite3D();
             this.LeftBeard = new Laya.MeshSprite3D();
-            this.cameraAndRazorPos = new Laya.Vector3();
             this.moveTime = 1000;
             this.moveSwitch = false;
         }
@@ -2830,13 +2853,29 @@
             GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.leftBeard];
             this.createProgress();
             this.BtnLast.visible = false;
+            this.createTaskContent();
+            this.mainCameraMove();
+        }
+        eventReg() {
             EventAdmin.EventClass.reg(GEnum.EventType.taskReach, this, () => {
-                if (GVariate._taskNum >= GVariate._taskArr.length - 1) ;
+                if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                    Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+                }
                 else {
                     this.BtnLast.visible = true;
                 }
             });
-            this.createTaskContent();
+            EventAdmin.EventClass.reg(GEnum.EventType.defeated, this, () => {
+                if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                    Admin._openScene(Admin.SceneName.UIVictory, null, null, f => { });
+                }
+                else {
+                    this.BtnLast.visible = true;
+                }
+            });
+            EventAdmin.EventClass.reg(GEnum.EventType.OperrationRefresh, EventAdmin.EventClass, () => {
+                lwg.Admin._openScene(Admin.SceneName.UIOperation, null, null, () => { });
+            });
         }
         createProgress() {
             for (let index = 0; index < GVariate._taskArr.length; index++) {
@@ -3008,8 +3047,8 @@
             Click.on(Click.ClickType.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
         }
         btnNextUp() {
+            EventAdmin.EventClass.notify(GEnum.EventType.Scene3DRefresh);
             this.self.close();
-            lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D]['GameMain3D'].refreshScene();
         }
         lwgDisable() {
         }

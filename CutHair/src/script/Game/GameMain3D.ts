@@ -1,4 +1,4 @@
-import { lwg } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Admin } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
@@ -86,6 +86,13 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.knife.addComponent(GameMain3D_knife);
     }
 
+    eventReg(): void {
+        // 重来
+        EventAdmin.EventClass.reg(GEnum.EventType.Scene3DRefresh, this, () => {
+            this.refreshScene();
+        })
+    };
+
     refreshScene(): void {
         this.Level.removeSelf();
 
@@ -117,6 +124,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         capsuleRig3D.restitution = 0;
 
         this.lwgOnEnable();
+
+        EventAdmin.EventClass.notify(GEnum.EventType.OperrationRefresh);
     }
 
     lwgOnUpDate(): void {
