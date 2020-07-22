@@ -132,8 +132,362 @@
 				"child":[]
 			},
 			{
-				"type":"Sprite3D",
+				"type":"MeshSprite3D",
 				"instanceID":3,
+				"props":{
+					"name":"Landmark_Side",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.24,
+						93.7,
+						1.978
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						0.1,
+						0.1,
+						0.1
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":4,
+				"props":{
+					"name":"Landmark_Right",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						3.15,
+						93.14,
+						4.26
+					],
+					"rotation":[
+						0,
+						0.4226183,
+						0,
+						-0.9063079
+					],
+					"scale":[
+						0.1000001,
+						0.1,
+						0.1000001
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":5,
+				"props":{
+					"name":"Landmark_Left",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						3.45,
+						92.91,
+						8.45
+					],
+					"rotation":[
+						0,
+						0.8660254,
+						0,
+						-0.4999999
+					],
+					"scale":[
+						0.1,
+						0.1,
+						0.1
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":6,
+				"props":{
+					"name":"Landmark_Top",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						1.2,
+						96.96,
+						5.07
+					],
+					"rotation":[
+						-0.4113332,
+						0.2668906,
+						-0.1273288,
+						-0.8621844
+					],
+					"scale":[
+						0.1,
+						0.1000001,
+						0.1000001
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":7,
+				"props":{
+					"name":"Landmark_Middle",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						3.4,
+						93.34,
+						6.44
+					],
+					"rotation":[
+						0,
+						0.6846744,
+						0,
+						-0.7288491
+					],
+					"scale":[
+						0.1,
+						0.1,
+						0.1
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":8,
+				"props":{
+					"name":"TouchScreen",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.167,
+						93.611,
+						6.57
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						10,
+						10,
+						0.01
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":9,
 				"props":{
 					"name":"Level_001",
 					"active":true,
@@ -159,303 +513,8 @@
 				"components":[],
 				"child":[
 					{
-						"type":"MeshSprite3D",
-						"instanceID":4,
-						"props":{
-							"name":"Landmark_Side",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.4754772,
-								0.4048233,
-								-3.83046
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								0.1,
-								0.1,
-								0.1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											1,
-											1,
-											1
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":5,
-						"props":{
-							"name":"Landmark_Right",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								2.434523,
-								-0.1551743,
-								-1.54846
-							],
-							"rotation":[
-								0,
-								0.4226183,
-								0,
-								-0.9063079
-							],
-							"scale":[
-								0.1000001,
-								0.1,
-								0.1000001
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											1,
-											1,
-											1
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":6,
-						"props":{
-							"name":"Landmark_Left",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								2.734523,
-								-0.38517,
-								2.64154
-							],
-							"rotation":[
-								0,
-								0.8660254,
-								0,
-								-0.4999999
-							],
-							"scale":[
-								0.1,
-								0.1,
-								0.1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											1,
-											1,
-											1
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":7,
-						"props":{
-							"name":"Landmark_Top",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.4845228,
-								3.664825,
-								-0.7384596
-							],
-							"rotation":[
-								-0.4113332,
-								0.2668906,
-								-0.1273288,
-								-0.8621844
-							],
-							"scale":[
-								0.1,
-								0.1,
-								0.1000001
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											1,
-											1,
-											1
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":8,
-						"props":{
-							"name":"Landmark_Middle",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								2.684523,
-								0.04482269,
-								0.6315403
-							],
-							"rotation":[
-								0,
-								0.6846744,
-								0,
-								-0.7288491
-							],
-							"scale":[
-								0.1,
-								0.1,
-								0.1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											1,
-											1,
-											1
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[]
-					},
-					{
 						"type":"Sprite3D",
-						"instanceID":9,
+						"instanceID":10,
 						"props":{
 							"name":"Room",
 							"active":true,
@@ -482,7 +541,7 @@
 						"child":[
 							{
 								"type":"Sprite3D",
-								"instanceID":10,
+								"instanceID":11,
 								"props":{
 									"name":"Sofa2",
 									"active":true,
@@ -509,7 +568,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":11,
+										"instanceID":12,
 										"props":{
 											"name":"Sofa2_0",
 											"active":true,
@@ -547,7 +606,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":12,
+								"instanceID":13,
 								"props":{
 									"name":"Wall",
 									"active":true,
@@ -598,7 +657,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":13,
+						"instanceID":14,
 						"props":{
 							"name":"Razor",
 							"active":true,
@@ -632,7 +691,7 @@
 						"child":[
 							{
 								"type":"Sprite3D",
-								"instanceID":14,
+								"instanceID":15,
 								"props":{
 									"name":"Razor",
 									"active":true,
@@ -659,7 +718,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":15,
+										"instanceID":16,
 										"props":{
 											"name":"Razor_0",
 											"active":true,
@@ -695,7 +754,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":16,
+										"instanceID":17,
 										"props":{
 											"name":"Razor_1",
 											"active":true,
@@ -731,7 +790,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":17,
+										"instanceID":18,
 										"props":{
 											"name":"Razor_2",
 											"active":true,
@@ -767,7 +826,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":18,
+										"instanceID":19,
 										"props":{
 											"name":"Razor_3",
 											"active":true,
@@ -803,7 +862,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":19,
+										"instanceID":20,
 										"props":{
 											"name":"Razor_4",
 											"active":true,
@@ -839,7 +898,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":20,
+										"instanceID":21,
 										"props":{
 											"name":"Razor_5",
 											"active":true,
@@ -877,7 +936,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":21,
+								"instanceID":22,
 								"props":{
 									"name":"Blade",
 									"active":true,
@@ -940,7 +999,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":22,
+						"instanceID":23,
 						"props":{
 							"name":"Head",
 							"active":true,
@@ -967,7 +1026,7 @@
 						"child":[
 							{
 								"type":"Sprite3D",
-								"instanceID":23,
+								"instanceID":24,
 								"props":{
 									"name":"StarGlasses",
 									"active":true,
@@ -994,7 +1053,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":24,
+										"instanceID":25,
 										"props":{
 											"name":"StarGlasses_0",
 											"active":true,
@@ -1029,7 +1088,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":25,
+										"instanceID":26,
 										"props":{
 											"name":"StarGlasses_1",
 											"active":true,
@@ -1066,9 +1125,9 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":26,
+								"instanceID":27,
 								"props":{
-									"name":"Capsule",
+									"name":"TouchHead",
 									"active":true,
 									"isStatic":false,
 									"layer":0,
@@ -1132,8 +1191,75 @@
 								"child":[]
 							},
 							{
+								"type":"MeshSprite3D",
+								"instanceID":28,
+								"props":{
+									"name":"TouchScope",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.167,
+										-2.88,
+										0
+									],
+									"rotation":[
+										0,
+										-0.7071068,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1.3,
+										1.3,
+										1.3
+									],
+									"meshPath":"Library/unity default resources-Capsule.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"type":"Laya.BlinnPhongMaterial",
+											"path":"Resources/unity_builtin_extra.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":20,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":true,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"CapsuleColliderShape",
+												"center":[
+													0,
+													0,
+													0
+												],
+												"radius":0.5,
+												"height":2,
+												"orientation":1
+											}
+										],
+										"isTrigger":false
+									}
+								],
+								"child":[]
+							},
+							{
 								"type":"Sprite3D",
-								"instanceID":27,
+								"instanceID":29,
 								"props":{
 									"name":"Head",
 									"active":true,
@@ -1160,7 +1286,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":28,
+										"instanceID":30,
 										"props":{
 											"name":"Head_1",
 											"active":true,
@@ -1197,7 +1323,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":29,
+								"instanceID":31,
 								"props":{
 									"name":"HairParent",
 									"active":true,
@@ -1224,7 +1350,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":30,
+										"instanceID":32,
 										"props":{
 											"name":"HairlineRoot",
 											"active":true,
@@ -1234,128 +1360,6 @@
 												0.1921,
 												1.126,
 												-0.134
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												0.015,
-												0.2,
-												0.015
-											],
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":31,
-												"props":{
-													"name":"Hairline",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0,
-														3.003001,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														3,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"path":"Assets/Material/Glasses.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"BoxColliderShape",
-																"center":[
-																	-5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"size":[
-																	1,
-																	2,
-																	1
-																]
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":32,
-										"props":{
-											"name":"HairlineRoot (1)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.2249,
-												1.125999,
-												-0.1339998
 											],
 											"rotation":[
 												0,
@@ -1470,14 +1474,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":34,
 										"props":{
-											"name":"HairlineRoot (2)",
+											"name":"HairlineRoot (1)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.286,
+												0.2249,
 												1.125999,
-												-0.176
+												-0.1339998
 											],
 											"rotation":[
 												0,
@@ -1592,14 +1596,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":36,
 										"props":{
-											"name":"HairlineRoot (3)",
+											"name":"HairlineRoot (2)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.2532001,
+												0.286,
 												1.125999,
-												-0.1339998
+												-0.176
 											],
 											"rotation":[
 												0,
@@ -1714,14 +1718,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":38,
 										"props":{
-											"name":"HairlineRoot (4)",
+											"name":"HairlineRoot (3)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.0998,
+												0.2532001,
 												1.125999,
-												-0.171
+												-0.1339998
 											],
 											"rotation":[
 												0,
@@ -1836,14 +1840,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":40,
 										"props":{
-											"name":"HairlineRoot (5)",
+											"name":"HairlineRoot (4)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.06700005,
+												0.0998,
 												1.125999,
-												-0.192
+												-0.171
 											],
 											"rotation":[
 												0,
@@ -1958,14 +1962,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":42,
 										"props":{
-											"name":"HairlineRoot (6)",
+											"name":"HairlineRoot (5)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.1609,
+												0.06700005,
 												1.125999,
-												-0.1339998
+												-0.192
 											],
 											"rotation":[
 												0,
@@ -2080,12 +2084,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":44,
 										"props":{
-											"name":"HairlineRoot (7)",
+											"name":"HairlineRoot (6)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.1281001,
+												0.1609,
 												1.125999,
 												-0.1339998
 											],
@@ -2202,12 +2206,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":46,
 										"props":{
-											"name":"HairlineRoot (8)",
+											"name":"HairlineRoot (7)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.029,
+												0.1281001,
 												1.125999,
 												-0.1339998
 											],
@@ -2324,12 +2328,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":48,
 										"props":{
-											"name":"HairlineRoot (9)",
+											"name":"HairlineRoot (8)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.06179996,
+												-0.029,
 												1.125999,
 												-0.1339998
 											],
@@ -2446,12 +2450,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":50,
 										"props":{
-											"name":"HairlineRoot (10)",
+											"name":"HairlineRoot (9)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.03210001,
+												-0.06179996,
 												1.125999,
 												-0.1339998
 											],
@@ -2568,12 +2572,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":52,
 										"props":{
-											"name":"HairlineRoot (11)",
+											"name":"HairlineRoot (10)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.0006999522,
+												0.03210001,
 												1.125999,
 												-0.1339998
 											],
@@ -2690,20 +2694,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":54,
 										"props":{
-											"name":"HairlineRoot (12)",
+											"name":"HairlineRoot (11)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.1306999,
-												1.058998,
-												-0.187
+												-0.0006999522,
+												1.125999,
+												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												-0.01596905,
-												-0.9998725
+												0,
+												-1
 											],
 											"scale":[
 												0.015,
@@ -2812,20 +2816,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":56,
 										"props":{
-											"name":"HairlineRoot (13)",
+											"name":"HairlineRoot (12)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.159,
-												1.059,
-												-0.1339998
+												-0.1306999,
+												1.058998,
+												-0.187
 											],
 											"rotation":[
 												0,
 												0,
-												-0.02242566,
-												-0.9997485
+												-0.01596905,
+												-0.9998725
 											],
 											"scale":[
 												0.015,
@@ -2934,20 +2938,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":58,
 										"props":{
-											"name":"HairlineRoot (14)",
+											"name":"HairlineRoot (13)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.1918,
-												1.043,
+												-0.159,
+												1.059,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												-0.029928,
-												-0.9995521
+												-0.02242566,
+												-0.9997485
 											],
 											"scale":[
 												0.015,
@@ -3056,20 +3060,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":60,
 										"props":{
-											"name":"HairlineRoot (15)",
+											"name":"HairlineRoot (14)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.218,
-												1.011,
+												-0.1918,
+												1.043,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												-0.04161406,
-												-0.9991338
+												-0.029928,
+												-0.9995521
 											],
 											"scale":[
 												0.015,
@@ -3178,20 +3182,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":62,
 										"props":{
-											"name":"HairlineRoot (16)",
+											"name":"HairlineRoot (15)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.093,
-												1.081,
+												-0.218,
+												1.011,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												-0.01160609,
-												-0.9999327
+												-0.04161406,
+												-0.9991338
 											],
 											"scale":[
 												0.015,
@@ -3300,20 +3304,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":64,
 										"props":{
-											"name":"HairlineRoot (17)",
+											"name":"HairlineRoot (16)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.4781,
-												1.072,
+												-0.093,
+												1.081,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0.009860983,
-												-0.9999514
+												-0.01160609,
+												-0.9999327
 											],
 											"scale":[
 												0.015,
@@ -3422,20 +3426,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":66,
 										"props":{
-											"name":"HairlineRoot (18)",
+											"name":"HairlineRoot (17)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.353,
-												1.125999,
+												0.4781,
+												1.072,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0,
-												-1
+												0.009860983,
+												-0.9999514
 											],
 											"scale":[
 												0.015,
@@ -3544,13 +3548,13 @@
 										"type":"MeshSprite3D",
 										"instanceID":68,
 										"props":{
-											"name":"HairlineRoot (19)",
+											"name":"HairlineRoot (18)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.3202,
-												1.124,
+												0.353,
+												1.125999,
 												-0.1339998
 											],
 											"rotation":[
@@ -3666,13 +3670,13 @@
 										"type":"MeshSprite3D",
 										"instanceID":70,
 										"props":{
-											"name":"HairlineRoot (20)",
+											"name":"HairlineRoot (19)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.4141,
-												1.107,
+												0.3202,
+												1.124,
 												-0.1339998
 											],
 											"rotation":[
@@ -3788,13 +3792,13 @@
 										"type":"MeshSprite3D",
 										"instanceID":72,
 										"props":{
-											"name":"HairlineRoot (21)",
+											"name":"HairlineRoot (20)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.4453,
-												1.093,
+												0.4141,
+												1.107,
 												-0.1339998
 											],
 											"rotation":[
@@ -3910,20 +3914,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":74,
 										"props":{
-											"name":"HairlineRoot (22)",
+											"name":"HairlineRoot (21)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.5392,
-												1.037,
-												-0.168
+												0.4453,
+												1.093,
+												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0.0232108,
-												-0.9997306
+												0,
+												-1
 											],
 											"scale":[
 												0.015,
@@ -4032,20 +4036,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":76,
 										"props":{
-											"name":"HairlineRoot (23)",
+											"name":"HairlineRoot (22)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.5064,
-												1.053,
-												-0.1339998
+												0.5392,
+												1.037,
+												-0.168
 											],
 											"rotation":[
 												0,
 												0,
-												0.01387495,
-												-0.9999037
+												0.0232108,
+												-0.9997306
 											],
 											"scale":[
 												0.015,
@@ -4154,20 +4158,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":78,
 										"props":{
-											"name":"HairlineRoot (24)",
+											"name":"HairlineRoot (23)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.3813,
-												1.125999,
-												-0.181
+												0.5064,
+												1.053,
+												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0.002268949,
-												-0.9999974
+												0.01387495,
+												-0.9999037
 											],
 											"scale":[
 												0.015,
@@ -4276,20 +4280,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":80,
 										"props":{
-											"name":"HairlineRoot (25)",
+											"name":"HairlineRoot (24)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.615,
-												0.9749985,
-												-0.1339998
+												0.3813,
+												1.125999,
+												-0.181
 											],
 											"rotation":[
 												0,
 												0,
-												0.02757268,
-												-0.9996198
+												0.002268949,
+												-0.9999974
 											],
 											"scale":[
 												0.015,
@@ -4327,128 +4331,6 @@
 											{
 												"type":"MeshSprite3D",
 												"instanceID":81,
-												"props":{
-													"name":"Hairline",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														0.2,
-														2.45,
-														0
-													],
-													"rotation":[
-														0,
-														0,
-														0,
-														-1
-													],
-													"scale":[
-														1,
-														3,
-														1
-													],
-													"meshPath":"Library/unity default resources-Cylinder.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"path":"Assets/Material/Glasses.lmat"
-														}
-													]
-												},
-												"components":[
-													{
-														"type":"Rigidbody3D",
-														"mass":1,
-														"isKinematic":true,
-														"restitution":0,
-														"friction":0.5,
-														"rollingFriction":0,
-														"linearDamping":0,
-														"angularDamping":0,
-														"overrideGravity":false,
-														"gravity":[
-															0,
-															0,
-															0
-														],
-														"shapes":[
-															{
-																"type":"BoxColliderShape",
-																"center":[
-																	-5.960464E-08,
-																	0,
-																	-8.940697E-08
-																],
-																"size":[
-																	1,
-																	2,
-																	1
-																]
-															}
-														],
-														"isTrigger":false
-													}
-												],
-												"child":[]
-											}
-										]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":82,
-										"props":{
-											"name":"HairlineRoot (26)",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.58,
-												0.9729996,
-												-0.1339998
-											],
-											"rotation":[
-												0,
-												0,
-												0.02757268,
-												-0.9996198
-											],
-											"scale":[
-												0.015,
-												0.2,
-												0.015
-											],
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[],
-												"isTrigger":false
-											}
-										],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":83,
 												"props":{
 													"name":"Hairline",
 													"active":true,
@@ -4518,15 +4400,137 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":84,
+										"instanceID":82,
 										"props":{
-											"name":"HairlineRoot (27)",
+											"name":"HairlineRoot (25)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.645,
-												0.898,
+												0.615,
+												0.9749985,
+												-0.1339998
+											],
+											"rotation":[
+												0,
+												0,
+												0.02757268,
+												-0.9996198
+											],
+											"scale":[
+												0.015,
+												0.2,
+												0.015
+											],
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[],
+												"isTrigger":false
+											}
+										],
+										"child":[
+											{
+												"type":"MeshSprite3D",
+												"instanceID":83,
+												"props":{
+													"name":"Hairline",
+													"active":true,
+													"isStatic":false,
+													"layer":0,
+													"position":[
+														0.2,
+														2.45,
+														0
+													],
+													"rotation":[
+														0,
+														0,
+														0,
+														-1
+													],
+													"scale":[
+														1,
+														3,
+														1
+													],
+													"meshPath":"Library/unity default resources-Cylinder.lm",
+													"enableRender":true,
+													"materials":[
+														{
+															"path":"Assets/Material/Glasses.lmat"
+														}
+													]
+												},
+												"components":[
+													{
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
+														"restitution":0,
+														"friction":0.5,
+														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
+														"shapes":[
+															{
+																"type":"BoxColliderShape",
+																"center":[
+																	-5.960464E-08,
+																	0,
+																	-8.940697E-08
+																],
+																"size":[
+																	1,
+																	2,
+																	1
+																]
+															}
+														],
+														"isTrigger":false
+													}
+												],
+												"child":[]
+											}
+										]
+									},
+									{
+										"type":"MeshSprite3D",
+										"instanceID":84,
+										"props":{
+											"name":"HairlineRoot (26)",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.58,
+												0.9729996,
 												-0.1339998
 											],
 											"rotation":[
@@ -4642,20 +4646,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":86,
 										"props":{
-											"name":"HairlineRoot (28)",
+											"name":"HairlineRoot (27)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.661,
-												0.875,
+												0.645,
+												0.898,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0.05712839,
-												-0.9983668
+												0.02757268,
+												-0.9996198
 											],
 											"scale":[
 												0.015,
@@ -4764,20 +4768,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":88,
 										"props":{
-											"name":"HairlineRoot (29)",
+											"name":"HairlineRoot (28)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.682,
-												0.708,
+												0.661,
+												0.875,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0.1112087,
-												-0.9937971
+												0.05712839,
+												-0.9983668
 											],
 											"scale":[
 												0.015,
@@ -4886,20 +4890,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":90,
 										"props":{
-											"name":"HairlineRoot (30)",
+											"name":"HairlineRoot (29)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.677,
-												0.786,
+												0.682,
+												0.708,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0.0678412,
-												-0.9976962
+												0.1112087,
+												-0.9937971
 											],
 											"scale":[
 												0.015,
@@ -5008,20 +5012,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":92,
 										"props":{
-											"name":"HairlineRoot (32)",
+											"name":"HairlineRoot (30)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.279,
-												0.9659958,
+												0.677,
+												0.786,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												-0.06043873,
-												-0.9981719
+												0.0678412,
+												-0.9976962
 											],
 											"scale":[
 												0.015,
@@ -5130,20 +5134,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":94,
 										"props":{
-											"name":"HairlineRoot (34)",
+											"name":"HairlineRoot (32)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.338,
-												0.897,
+												-0.279,
+												0.9659958,
 												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												-0.08941587,
-												-0.9959944
+												-0.06043873,
+												-0.9981719
 											],
 											"scale":[
 												0.015,
@@ -5252,20 +5256,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":96,
 										"props":{
-											"name":"HairlineRoot (35)",
+											"name":"HairlineRoot (34)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.1655999,
-												1.125999,
-												0.008999825
+												-0.338,
+												0.897,
+												-0.1339998
 											],
 											"rotation":[
 												0,
 												0,
-												0,
-												-1
+												-0.08941587,
+												-0.9959944
 											],
 											"scale":[
 												0.015,
@@ -5374,12 +5378,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":98,
 										"props":{
-											"name":"HairlineRoot (36)",
+											"name":"HairlineRoot (35)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.1015999,
+												0.1655999,
 												1.125999,
 												0.008999825
 											],
@@ -5496,12 +5500,12 @@
 										"type":"MeshSprite3D",
 										"instanceID":100,
 										"props":{
-											"name":"HairlineRoot (37)",
+											"name":"HairlineRoot (36)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.08830006,
+												0.1015999,
 												1.125999,
 												0.008999825
 											],
@@ -5618,14 +5622,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":102,
 										"props":{
-											"name":"HairlineRoot (38)",
+											"name":"HairlineRoot (37)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.1211,
+												-0.08830006,
 												1.125999,
-												0.064
+												0.008999825
 											],
 											"rotation":[
 												0,
@@ -5740,14 +5744,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":104,
 										"props":{
-											"name":"HairlineRoot (39)",
+											"name":"HairlineRoot (38)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.02720006,
+												-0.1211,
 												1.125999,
-												0.047
+												0.064
 											],
 											"rotation":[
 												0,
@@ -5862,14 +5866,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":106,
 										"props":{
-											"name":"HairlineRoot (40)",
+											"name":"HairlineRoot (39)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.06000002,
+												-0.02720006,
 												1.125999,
-												0.008999825
+												0.047
 											],
 											"rotation":[
 												0,
@@ -5984,20 +5988,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":108,
 										"props":{
-											"name":"HairlineRoot (41)",
+											"name":"HairlineRoot (40)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.1523001,
-												1.081001,
+												-0.06000002,
+												1.125999,
 												0.008999825
 											],
 											"rotation":[
 												0,
 												0,
-												-0.01160609,
-												-0.9999327
+												0,
+												-1
 											],
 											"scale":[
 												0.015,
@@ -6106,20 +6110,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":110,
 										"props":{
-											"name":"HairlineRoot (42)",
+											"name":"HairlineRoot (41)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.4187999,
-												1.071999,
-												0.05
+												-0.1523001,
+												1.081001,
+												0.008999825
 											],
 											"rotation":[
 												0,
 												0,
-												0.009860984,
-												-0.9999514
+												-0.01160609,
+												-0.9999327
 											],
 											"scale":[
 												0.015,
@@ -6228,20 +6232,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":112,
 										"props":{
-											"name":"HairlineRoot (43)",
+											"name":"HairlineRoot (42)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.2936999,
-												1.125999,
-												0.008999825
+												0.4187999,
+												1.071999,
+												0.05
 											],
 											"rotation":[
 												0,
 												0,
-												0,
-												-1
+												0.009860984,
+												-0.9999514
 											],
 											"scale":[
 												0.015,
@@ -6350,13 +6354,13 @@
 										"type":"MeshSprite3D",
 										"instanceID":114,
 										"props":{
-											"name":"HairlineRoot (44)",
+											"name":"HairlineRoot (43)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.2609,
-												1.124001,
+												0.2936999,
+												1.125999,
 												0.008999825
 											],
 											"rotation":[
@@ -6472,13 +6476,13 @@
 										"type":"MeshSprite3D",
 										"instanceID":116,
 										"props":{
-											"name":"HairlineRoot (45)",
+											"name":"HairlineRoot (44)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.3547999,
-												1.107002,
+												0.2609,
+												1.124001,
 												0.008999825
 											],
 											"rotation":[
@@ -6594,20 +6598,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":118,
 										"props":{
-											"name":"HairlineRoot (31)",
+											"name":"HairlineRoot (45)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.5392,
-												1.037003,
-												0.035
+												0.3547999,
+												1.107002,
+												0.008999825
 											],
 											"rotation":[
 												0,
 												0,
-												0.0232108,
-												-0.9997306
+												0,
+												-1
 											],
 											"scale":[
 												0.015,
@@ -6716,14 +6720,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":120,
 										"props":{
-											"name":"HairlineRoot (33)",
+											"name":"HairlineRoot (31)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.584,
+												0.5392,
 												1.037003,
-												0.004
+												0.035
 											],
 											"rotation":[
 												0,
@@ -6838,20 +6842,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":122,
 										"props":{
-											"name":"HairlineRoot (46)",
+											"name":"HairlineRoot (33)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.218,
-												1.011002,
-												-0.047
+												0.584,
+												1.037003,
+												0.004
 											],
 											"rotation":[
 												0,
 												0,
-												-0.04161406,
-												-0.9991338
+												0.0232108,
+												-0.9997306
 											],
 											"scale":[
 												0.015,
@@ -6960,14 +6964,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":124,
 										"props":{
-											"name":"HairlineRoot (47)",
+											"name":"HairlineRoot (46)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.171,
+												-0.218,
 												1.011002,
-												0.015
+												-0.047
 											],
 											"rotation":[
 												0,
@@ -7082,14 +7086,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":126,
 										"props":{
-											"name":"HairlineRoot (48)",
+											"name":"HairlineRoot (47)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.244,
+												-0.171,
 												1.011002,
-												0.01499987
+												0.015
 											],
 											"rotation":[
 												0,
@@ -7204,20 +7208,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":128,
 										"props":{
-											"name":"HairlineRoot (49)",
+											"name":"HairlineRoot (48)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.1015999,
-												1.125999,
-												0.054
+												-0.244,
+												1.011002,
+												0.01499987
 											],
 											"rotation":[
 												0,
 												0,
-												0,
-												-1
+												-0.04161406,
+												-0.9991338
 											],
 											"scale":[
 												0.015,
@@ -7326,14 +7330,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":130,
 										"props":{
-											"name":"HairlineRoot (50)",
+											"name":"HairlineRoot (49)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.2609,
-												1.124001,
-												0.069
+												0.1015999,
+												1.125999,
+												0.054
 											],
 											"rotation":[
 												0,
@@ -7448,20 +7452,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":132,
 										"props":{
-											"name":"HairlineRoot (51)",
+											"name":"HairlineRoot (50)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.279,
-												0.9659958,
-												-0.064
+												0.2609,
+												1.124001,
+												0.069
 											],
 											"rotation":[
 												0,
 												0,
-												-0.06043873,
-												-0.9981719
+												0,
+												-1
 											],
 											"scale":[
 												0.015,
@@ -7570,14 +7574,14 @@
 										"type":"MeshSprite3D",
 										"instanceID":134,
 										"props":{
-											"name":"HairlineRoot (52)",
+											"name":"HairlineRoot (51)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												-0.326,
+												-0.279,
 												0.9659958,
-												-0.003
+												-0.064
 											],
 											"rotation":[
 												0,
@@ -7692,20 +7696,20 @@
 										"type":"MeshSprite3D",
 										"instanceID":136,
 										"props":{
-											"name":"HairlineRoot (53)",
+											"name":"HairlineRoot (52)",
 											"active":true,
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.033,
-												1.125999,
-												0.111
+												-0.326,
+												0.9659958,
+												-0.003
 											],
 											"rotation":[
 												0,
 												0,
-												0,
-												-1
+												-0.06043873,
+												-0.9981719
 											],
 											"scale":[
 												0.015,
@@ -7809,12 +7813,134 @@
 												"child":[]
 											}
 										]
+									},
+									{
+										"type":"MeshSprite3D",
+										"instanceID":138,
+										"props":{
+											"name":"HairlineRoot (53)",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.033,
+												1.125999,
+												0.111
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												0.015,
+												0.2,
+												0.015
+											],
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[],
+												"isTrigger":false
+											}
+										],
+										"child":[
+											{
+												"type":"MeshSprite3D",
+												"instanceID":139,
+												"props":{
+													"name":"Hairline",
+													"active":true,
+													"isStatic":false,
+													"layer":0,
+													"position":[
+														0,
+														3.003001,
+														0
+													],
+													"rotation":[
+														0,
+														0,
+														0,
+														-1
+													],
+													"scale":[
+														1,
+														3,
+														1
+													],
+													"meshPath":"Library/unity default resources-Cylinder.lm",
+													"enableRender":true,
+													"materials":[
+														{
+															"path":"Assets/Material/Glasses.lmat"
+														}
+													]
+												},
+												"components":[
+													{
+														"type":"Rigidbody3D",
+														"mass":1,
+														"isKinematic":true,
+														"restitution":0,
+														"friction":0.5,
+														"rollingFriction":0,
+														"linearDamping":0,
+														"angularDamping":0,
+														"overrideGravity":false,
+														"gravity":[
+															0,
+															0,
+															0
+														],
+														"shapes":[
+															{
+																"type":"BoxColliderShape",
+																"center":[
+																	-5.960464E-08,
+																	0,
+																	-8.940697E-08
+																],
+																"size":[
+																	1,
+																	2,
+																	1
+																]
+															}
+														],
+														"isTrigger":false
+													}
+												],
+												"child":[]
+											}
+										]
 									}
 								]
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":138,
+								"instanceID":140,
 								"props":{
 									"name":"CutHairParent",
 									"active":true,
@@ -7842,7 +7968,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":139,
+								"instanceID":141,
 								"props":{
 									"name":"RightBeard",
 									"active":true,
@@ -7869,7 +7995,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":140,
+										"instanceID":142,
 										"props":{
 											"name":"Beard",
 											"active":true,
@@ -7938,7 +8064,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":141,
+										"instanceID":143,
 										"props":{
 											"name":"Beard (1)",
 											"active":true,
@@ -8007,7 +8133,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":142,
+										"instanceID":144,
 										"props":{
 											"name":"Beard (2)",
 											"active":true,
@@ -8076,7 +8202,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":143,
+										"instanceID":145,
 										"props":{
 											"name":"Beard (3)",
 											"active":true,
@@ -8145,7 +8271,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":144,
+										"instanceID":146,
 										"props":{
 											"name":"Beard (4)",
 											"active":true,
@@ -8214,7 +8340,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":145,
+										"instanceID":147,
 										"props":{
 											"name":"Beard (5)",
 											"active":true,
@@ -8283,7 +8409,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":146,
+										"instanceID":148,
 										"props":{
 											"name":"Beard (6)",
 											"active":true,
@@ -8352,7 +8478,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":147,
+										"instanceID":149,
 										"props":{
 											"name":"Beard (7)",
 											"active":true,
@@ -8421,7 +8547,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":148,
+										"instanceID":150,
 										"props":{
 											"name":"Beard (8)",
 											"active":true,
@@ -8490,7 +8616,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":149,
+										"instanceID":151,
 										"props":{
 											"name":"Beard (9)",
 											"active":true,
@@ -8559,7 +8685,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":150,
+										"instanceID":152,
 										"props":{
 											"name":"Beard (10)",
 											"active":true,
@@ -8628,7 +8754,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":151,
+										"instanceID":153,
 										"props":{
 											"name":"Beard (11)",
 											"active":true,
@@ -8697,7 +8823,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":152,
+										"instanceID":154,
 										"props":{
 											"name":"Beard (12)",
 											"active":true,
@@ -8768,7 +8894,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":153,
+								"instanceID":155,
 								"props":{
 									"name":"LeftBeard",
 									"active":true,
@@ -8795,7 +8921,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":154,
+										"instanceID":156,
 										"props":{
 											"name":"Beard",
 											"active":true,
@@ -8864,7 +8990,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":155,
+										"instanceID":157,
 										"props":{
 											"name":"Beard (1)",
 											"active":true,
@@ -8933,7 +9059,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":156,
+										"instanceID":158,
 										"props":{
 											"name":"Beard (2)",
 											"active":true,
@@ -9002,7 +9128,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":157,
+										"instanceID":159,
 										"props":{
 											"name":"Beard (3)",
 											"active":true,
@@ -9071,7 +9197,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":158,
+										"instanceID":160,
 										"props":{
 											"name":"Beard (4)",
 											"active":true,
@@ -9140,7 +9266,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":159,
+										"instanceID":161,
 										"props":{
 											"name":"Beard (5)",
 											"active":true,
@@ -9209,7 +9335,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":160,
+										"instanceID":162,
 										"props":{
 											"name":"Beard (6)",
 											"active":true,
@@ -9278,7 +9404,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":161,
+										"instanceID":163,
 										"props":{
 											"name":"Beard (7)",
 											"active":true,
@@ -9347,7 +9473,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":162,
+										"instanceID":164,
 										"props":{
 											"name":"Beard (8)",
 											"active":true,
@@ -9416,7 +9542,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":163,
+										"instanceID":165,
 										"props":{
 											"name":"Beard (9)",
 											"active":true,
@@ -9485,7 +9611,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":164,
+										"instanceID":166,
 										"props":{
 											"name":"Beard (10)",
 											"active":true,
@@ -9554,7 +9680,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":165,
+										"instanceID":167,
 										"props":{
 											"name":"Beard (11)",
 											"active":true,
@@ -9623,7 +9749,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":166,
+										"instanceID":168,
 										"props":{
 											"name":"Beard (12)",
 											"active":true,
@@ -9694,7 +9820,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":167,
+								"instanceID":169,
 								"props":{
 									"name":"MiddleBeard",
 									"active":true,
@@ -9721,7 +9847,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":168,
+										"instanceID":170,
 										"props":{
 											"name":"Beard",
 											"active":true,
@@ -9790,7 +9916,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":169,
+										"instanceID":171,
 										"props":{
 											"name":"Beard (1)",
 											"active":true,
@@ -9859,7 +9985,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":170,
+										"instanceID":172,
 										"props":{
 											"name":"Beard (2)",
 											"active":true,
@@ -9928,7 +10054,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":171,
+										"instanceID":173,
 										"props":{
 											"name":"Beard (3)",
 											"active":true,
@@ -9997,7 +10123,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":172,
+										"instanceID":174,
 										"props":{
 											"name":"Beard (4)",
 											"active":true,
@@ -10066,7 +10192,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":173,
+										"instanceID":175,
 										"props":{
 											"name":"Beard (5)",
 											"active":true,
@@ -10135,7 +10261,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":174,
+										"instanceID":176,
 										"props":{
 											"name":"Beard (6)",
 											"active":true,
@@ -10204,7 +10330,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":175,
+										"instanceID":177,
 										"props":{
 											"name":"Beard (7)",
 											"active":true,
@@ -10273,7 +10399,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":176,
+										"instanceID":178,
 										"props":{
 											"name":"Beard (8)",
 											"active":true,
@@ -10342,7 +10468,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":177,
+										"instanceID":179,
 										"props":{
 											"name":"Beard (9)",
 											"active":true,
@@ -10411,7 +10537,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":178,
+										"instanceID":180,
 										"props":{
 											"name":"Beard (10)",
 											"active":true,
@@ -10480,7 +10606,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":179,
+										"instanceID":181,
 										"props":{
 											"name":"Beard (11)",
 											"active":true,
@@ -10549,7 +10675,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":180,
+										"instanceID":182,
 										"props":{
 											"name":"Beard (12)",
 											"active":true,
@@ -10622,7 +10748,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":181,
+						"instanceID":183,
 						"props":{
 							"name":"standardParent",
 							"active":true,
@@ -10649,7 +10775,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":182,
+								"instanceID":184,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -10685,7 +10811,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":183,
+								"instanceID":185,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -10721,7 +10847,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":184,
+								"instanceID":186,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -10757,7 +10883,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":185,
+								"instanceID":187,
 								"props":{
 									"name":"standard (3)",
 									"active":true,
@@ -10793,7 +10919,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":186,
+								"instanceID":188,
 								"props":{
 									"name":"standard (4)",
 									"active":true,
@@ -10829,7 +10955,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":187,
+								"instanceID":189,
 								"props":{
 									"name":"standard (5)",
 									"active":true,
@@ -10865,7 +10991,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":188,
+								"instanceID":190,
 								"props":{
 									"name":"standard (6)",
 									"active":true,
@@ -10901,7 +11027,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":189,
+								"instanceID":191,
 								"props":{
 									"name":"standard (7)",
 									"active":true,
@@ -10937,7 +11063,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":190,
+								"instanceID":192,
 								"props":{
 									"name":"standard (8)",
 									"active":true,
@@ -10973,7 +11099,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":191,
+								"instanceID":193,
 								"props":{
 									"name":"standard (9)",
 									"active":true,
@@ -11009,7 +11135,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":192,
+								"instanceID":194,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -11060,7 +11186,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":193,
+								"instanceID":195,
 								"props":{
 									"name":"standard (1)",
 									"active":true,
@@ -11098,7 +11224,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":194,
+						"instanceID":196,
 						"props":{
 							"name":"Floor",
 							"active":true,
@@ -11166,7 +11292,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":195,
+						"instanceID":197,
 						"props":{
 							"name":"knife",
 							"active":true,
@@ -11224,7 +11350,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":196,
+								"instanceID":198,
 								"props":{
 									"name":"HandSaw_0",
 									"active":true,
@@ -11263,7 +11389,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":197,
+				"instanceID":199,
 				"props":{
 					"name":"EventSystem",
 					"active":true,

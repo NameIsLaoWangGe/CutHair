@@ -2,110 +2,76 @@ import { lwg, EventAdmin, Admin } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
-import { Global, GVariate, GEnum } from "../Lwg_Template/Global";
+import { Global, GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import GameMain3D_knife from "./GameMain3D_knife";
 export default class GameMain3D extends lwg.Admin.Scene3D {
-    // 剃刀 
-    Razor: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    razorFPos: Laya.Vector3 = new Laya.Vector3();
-    razorFEulerY: number;
 
-    // 刮脸的刮刀
-    knife: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    knifeFPos: Laya.Vector3 = new Laya.Vector3();
-    knifeFEulerY: number;
-
-    // 头
-    Head: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    headFPos: Laya.Vector3 = new Laya.Vector3();
-    headFEulerY: number;
-    /**头发父节点*/
-    HairParent: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**左侧胡须的父节点*/
-    RightBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**右侧须的父节点*/
-    LeftBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**中间胡须父节点*/
-    MiddleBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-
-    //当前关卡节点
-    LevelTem: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Level: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    LevelFpos: Laya.Vector3 = new Laya.Vector3();
-
-    // 地板
-    Floor: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-
-    // 头部
-    Capsule: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-
-    /**四个节点代表摄像机移动到四个任务的方位*/
-    Landmark_Left: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Right: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Side: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Top: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Middle: Laya.MeshSprite3D = new Laya.MeshSprite3D();
     constructor() { super(); }
 
     lwgOnAwake(): void {
-        this.LevelTem = this.self.getChildByName('Level_001') as Laya.MeshSprite3D;
-        this.LevelFpos.x = this.LevelTem.transform.position.x;
-        this.LevelFpos.y = this.LevelTem.transform.position.y;
-        this.LevelFpos.z = this.LevelTem.transform.position.z;
+        GSene3D.GameMain3D = this.self;
+        GSene3D.MainCamera = this.MainCamera;
+        console.log(GSene3D.MainCamera);
+        GSene3D.LevelTem = this.self.getChildByName('Level_001') as Laya.MeshSprite3D;
+        GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
+        GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
+        GSene3D.LevelFpos.z = GSene3D.LevelTem.transform.position.z;
         this.createLevel();
     }
 
     /**产生关卡*/
     createLevel(): void {
-        this.Level = this.LevelTem.clone() as Laya.MeshSprite3D;
-        this.self.addChild(this.Level);
-        this.LevelTem.removeSelf();
+        GSene3D.Level = GSene3D.LevelTem.clone() as Laya.MeshSprite3D;
+        this.self.addChild(GSene3D.Level);
+        GSene3D.LevelTem.removeSelf();
     }
     selfNode(): void {
 
-        this.Head = this.Level.getChildByName('Head') as Laya.MeshSprite3D;
-        this.Capsule = this.Head.getChildByName('Capsule') as Laya.MeshSprite3D;
-        let capsuleRig3D = this.Capsule.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-        capsuleRig3D.restitution = 0;
+        GSene3D.Head = GSene3D.Level.getChildByName('Head') as Laya.MeshSprite3D;
+        GSene3D.TouchHead = GSene3D.Head.getChildByName('TouchHead') as Laya.MeshSprite3D;
+        let TouchHeadRig = GSene3D.TouchHead.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+        TouchHeadRig.restitution = 0;
 
-        this.HairParent = this.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
-        this.LeftBeard = this.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
-        this.RightBeard = this.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
-        this.MiddleBeard = this.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
+        GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
+        GSene3D.LeftBeard = GSene3D.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
+        GSene3D.RightBeard = GSene3D.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
+        GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
 
-        this.Landmark_Left = this.Level.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
-        this.Landmark_Right = this.Level.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
-        this.Landmark_Side = this.Level.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
-        this.Landmark_Top = this.Level.getChildByName('Landmark_Top') as Laya.MeshSprite3D;
-        this.Landmark_Middle = this.Level.getChildByName('Landmark_Middle') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Top = this.self.getChildByName('Landmark_Top') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle') as Laya.MeshSprite3D;
 
-        this.Razor = this.Level.getChildByName('Razor') as Laya.MeshSprite3D;
-        this.razorFPos.x = this.Razor.transform.localPositionX;
-        this.razorFPos.y = this.Razor.transform.localPositionY;
-        this.razorFPos.z = this.Razor.transform.localPositionZ;
-        this.razorFEulerY = this.Razor.transform.localRotationEulerY;
+        GSene3D.TouchScreen = this.self.getChildByName('TouchScreen') as Laya.MeshSprite3D;
 
-        this.Floor = this.Level.getChildByName('Floor') as Laya.MeshSprite3D;
+        GSene3D.Razor = GSene3D.Level.getChildByName('Razor') as Laya.MeshSprite3D;
+        GSene3D.razorFPos.x = GSene3D.Razor.transform.localPositionX;
+        GSene3D.razorFPos.y = GSene3D.Razor.transform.localPositionY;
+        GSene3D.razorFPos.z = GSene3D.Razor.transform.localPositionZ;
+        GSene3D.razorFEulerY = GSene3D.Razor.transform.localRotationEulerY;
 
-        this.knife = this.Level.getChildByName('knife') as Laya.MeshSprite3D;
+        GSene3D.Floor = GSene3D.Level.getChildByName('Floor') as Laya.MeshSprite3D;
+
+        GSene3D.knife = GSene3D.Level.getChildByName('knife') as Laya.MeshSprite3D;
 
     }
 
     lwgOnEnable(): void {
-        this.Floor.addComponent(GameMain3D_Floor);
-        this.Razor.addComponent(GameMain3D_Razor);
-        this.knife.addComponent(GameMain3D_knife);
+        GSene3D.Floor.addComponent(GameMain3D_Floor);
+        GSene3D.Razor.addComponent(GameMain3D_Razor);
+        GSene3D.knife.addComponent(GameMain3D_knife);
     }
 
     lwgEventReg(): void {
         // 重来
-        EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
+        EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, GSene3D, () => {
             this.refreshScene();
         })
     };
 
     refreshScene(): void {
-        this.Level.removeSelf();
+        GSene3D.Level.removeSelf();
         this.createLevel();
         this.selfNode();
         this.lwgOnEnable();

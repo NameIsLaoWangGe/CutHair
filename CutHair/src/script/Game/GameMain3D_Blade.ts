@@ -1,12 +1,12 @@
 import { lwg, EventAdmin, Global } from "../Lwg_Template/lwg";
-import { GEnum } from "../Lwg_Template/Global";
+import { GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
     /**头发的总数*/
     hairsNumber: any;
     lwgOnEnable(): void {
-        
+
     }
 
     onTriggerEnter(other): void {
@@ -41,7 +41,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                     // 克隆一个掉落的头发，并且使其掉落
                     let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
                     cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
-                    let CutHairParent = (this.selfScene['GameMain3D'].Head as Laya.MeshSprite3D).getChildByName('CutHairParent') as Laya.MeshSprite3D;
+                    let CutHairParent = GSene3D.Head.getChildByName('CutHairParent') as Laya.MeshSprite3D;
                     cutHair.name = 'cutHair';
                     CutHairParent.addChild(cutHair);
                     cutHair.transform.position = this.self.transform.position;

@@ -1,50 +1,21 @@
 import { lwg, Click, Animation, Animation3D, Tools, EventAdmin, Admin } from "../Lwg_Template/lwg";
-import { GVariate, GEnum } from "../Lwg_Template/Global";
+import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
     /** @prop {name:TaskProgress, tips:"每个任务的进度条", type:Prefab}*/
     public TaskProgress: Laya.Prefab;
-
     /**摇杆*/
     Rocker: Laya.Sprite;
-    /**剃须刀*/
-    Razor: Laya.MeshSprite3D;
-    /**刮刀*/
-    knife: Laya.MeshSprite3D;
-    /**3D场景内的摄像机*/
-    MainCamera: Laya.MeshSprite3D;
-
-    Capsule: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**节点代表摄像机移动到四个任务的方位*/
-    Landmark_Left: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Right: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Side: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Top: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    Landmark_Middle: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-
     /**射线*/
     _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
     /**射线扫描结果*/
     outs: Array<Laya.HitResult> = new Array<Laya.HitResult>();
-
-    /**当前3D主场景*/
-    GameMain3D: Laya.Scene3D;
     /**任务进度条父节点*/
     TaskBar: Laya.Sprite;
     /**下一个任务按钮*/
     BtnLast: Laya.Sprite;
-
-    /**头发父节点*/
-    HairParent: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**左侧胡须的父节点*/
-    RightBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**右侧须的父节点*/
-    LeftBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**中间胡须父节点*/
-    MiddleBeard: Laya.MeshSprite3D = new Laya.MeshSprite3D();
-    /**任务父节点集合*/
-    taskArr: Array<any> = [];
-
+    /**任务所需修剪的毛发数量对象顺序*/
+    _numZoder: Array<any> = [];
     /**侧面所需理发的数量*/
     _sideHairNum = {
         index: 0,
@@ -127,26 +98,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     selfNode(): void {
         this.Rocker = this.self['Rocker'];
-        this.GameMain3D = lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D];
-        this.MainCamera = this.GameMain3D['GameMain3D'].MainCamera;
-        this.Razor = this.GameMain3D['GameMain3D'].Razor;
-        this.knife = this.GameMain3D['GameMain3D'].knife;
-
-        this.Landmark_Left = this.GameMain3D['GameMain3D'].Landmark_Left;
-        this.Landmark_Right = this.GameMain3D['GameMain3D'].Landmark_Right;
-        this.Landmark_Middle = this.GameMain3D['GameMain3D'].Landmark_Middle;
-        this.Landmark_Side = this.GameMain3D['GameMain3D'].Landmark_Side;
-        this.Landmark_Top = this.GameMain3D['GameMain3D'].Landmark_Top;
-
-        this.Capsule = this.GameMain3D['GameMain3D'].Capsule;
-
-        this.HairParent = this.GameMain3D['GameMain3D'].HairParent;
-        this.LeftBeard = this.GameMain3D['GameMain3D'].LeftBeard;
-        this.RightBeard = this.GameMain3D['GameMain3D'].RightBeard;
-        this.MiddleBeard = this.GameMain3D['GameMain3D'].MiddleBeard;
-
         this.TaskBar = this.self['TaskBar'];
-
         this.BtnLast = this.self['BtnLast'];
     }
 
@@ -229,6 +181,10 @@ export default class UIOperation extends lwg.Admin.Scene {
                     break;
             }
             Bar.mask.x = (sum - value) * Bar.width / sum - Bar.mask.width;
+            // 不超过最大值
+            if (Bar.mask.x > 0) {
+                Bar.mask.x = 0;
+            }
         })
     }
 
@@ -255,33 +211,32 @@ export default class UIOperation extends lwg.Admin.Scene {
         for (let index = 0; index < GVariate._taskArr.length; index++) {
             switch (GVariate._taskArr[index]) {
                 case GEnum.TaskType.sideHair:
-                    this._sideHairNum.setValue = this.HairParent.numChildren;
-                    this._sideHairNum.sum = this.HairParent.numChildren;
+                    this._sideHairNum.setValue = GSene3D.HairParent.numChildren;
+                    this._sideHairNum.sum = GSene3D.HairParent.numChildren;
                     this._sideHairNum.index = index;
                     this.monitorHiarLen();
-                    this.taskArr.push(this._sideHairNum);
+                    this._numZoder.push(this._sideHairNum);
+
                     break;
                 case GEnum.TaskType.leftBeard:
-                    this._leftBeardNum.setValue = this.LeftBeard.numChildren;
-                    this._leftBeardNum.sum = this.LeftBeard.numChildren;
+                    this._leftBeardNum.setValue = GSene3D.LeftBeard.numChildren;
+                    this._leftBeardNum.sum = GSene3D.LeftBeard.numChildren;
                     this._leftBeardNum.index = index;
-                    this.taskArr.push(this._leftBeardNum);
+                    this._numZoder.push(this._leftBeardNum);
 
                     break;
                 case GEnum.TaskType.rightBeard:
-                    this._rightBeardNum.setValue = this.RightBeard.numChildren;
-                    this._rightBeardNum.sum = this.RightBeard.numChildren;
+                    this._rightBeardNum.setValue = GSene3D.RightBeard.numChildren;
+                    this._rightBeardNum.sum = GSene3D.RightBeard.numChildren;
                     this._rightBeardNum.index = index;
-                    this.taskArr.push(this._rightBeardNum);
+                    this._numZoder.push(this._rightBeardNum);
 
                     break;
-
                 case GEnum.TaskType.middleBeard:
-                    this._middleBeardNum.setValue = this.RightBeard.numChildren;
-                    this._middleBeardNum.sum = this.RightBeard.numChildren;
+                    this._middleBeardNum.setValue = GSene3D.RightBeard.numChildren;
+                    this._middleBeardNum.sum = GSene3D.RightBeard.numChildren;
                     this._middleBeardNum.index = index;
-                    this.taskArr.push(this._middleBeardNum);
-
+                    this._numZoder.push(this._middleBeardNum);
 
                     break;
                 default:
@@ -294,8 +249,8 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**监听每根头发的长度*/
     monitorHiarLen(): void {
         let _sideHairNum = this._sideHairNum;
-        for (let index = 0; index < this.HairParent.numChildren; index++) {
-            const element = this.HairParent.getChildAt(index) as Laya.MeshSprite3D;
+        for (let index = 0; index < GSene3D.HairParent.numChildren; index++) {
+            const element = GSene3D.HairParent.getChildAt(index) as Laya.MeshSprite3D;
             let len = element.transform.localPositionY;
             element['HairLen'] = {
                 detection: true,
@@ -321,7 +276,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     /**移动时间*/
-    moveTime = 1000;
+    moveSpeed = 1000;
     /**
      * 摄像机的移动规则
      * */
@@ -332,32 +287,36 @@ export default class UIOperation extends lwg.Admin.Scene {
         switch (GVariate._taskArr[GVariate._taskNum]) {
 
             case GEnum.TaskType.leftBeard:
-                this.knife.transform.localPosition = new Laya.Vector3(0.02, 0.132, 1.321);
-                this.knife.transform.localRotationEuler = new Laya.Vector3(0, 325.577 + 90, 0);
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Left.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
-                this.setCamera(this.Landmark_Left.transform.position, this.Landmark_Left.transform.localRotationEuler, this.moveTime);
+                GSene3D.knife.transform.localPosition = new Laya.Vector3(0.02, 0.132, 1.321);
+                GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(0, 325.577 + 90, 0);
+                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Left.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
+                this.setCamera(GSene3D.Landmark_Left.transform.position, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed);
 
                 break;
 
             case GEnum.TaskType.rightBeard:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Right.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
-                this.setCamera(this.Landmark_Right.transform.position, this.Landmark_Right.transform.localRotationEuler, this.moveTime);
+                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Right.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
+                // this.setCamera(GSene3D.Landmark_Right.transform.position, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed);
+
+                Animation3D.MoveTo(GSene3D.MainCamera,GSene3D.Landmark_Right.transform.position,1000,this);
+                Animation3D.RotateTo(GSene3D.MainCamera,GSene3D.Landmark_Right.transform.localRotationEuler,1000,this);
+
                 break;
 
             case GEnum.TaskType.sideHair:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
+                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
 
-                this.setCamera(this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveTime);
+                this.setCamera(GSene3D.Landmark_Side.transform.position, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
                 break;
 
             case GEnum.TaskType.middleBeard:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
-                this.setCamera(this.Landmark_Middle.transform.position, this.Landmark_Middle.transform.localRotationEuler, this.moveTime);
+                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
+                this.setCamera(GSene3D.Landmark_Middle.transform.position, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed);
 
                 break;
             case GEnum.TaskType.topHead:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
-                this.setCamera(this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveTime);
+                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
+                this.setCamera(GSene3D.Landmark_Top.transform.position, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
 
                 break;
 
@@ -368,29 +327,30 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     /**
      * 缓动摄像机
-     * @param z z轴移动到的位置
-     * @param time 移动速度
+     * @param v3_Pos 移动到的位置
+     * @param v3_Rotate 旋转到的角度
+     * @param speed 移动速度
      */
-    public setCamera(v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, time: number) {
+    public setCamera(v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, speed: number) {
         //创建一个Tween的属性对像
-        let moveTarget = this.MainCamera.transform.position;
+        let moveTarget = GSene3D.MainCamera.transform.position;
 
         Laya.Tween.to(moveTarget, {
             x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
-                this.MainCamera.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
+                GSene3D.MainCamera.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
                 //移动灯光位置
             })
-        }, time, null);
+        }, speed, null);
 
-        let rotateTarget = this.MainCamera.transform.localRotationEuler;
+        let rotateTarget = GSene3D.MainCamera.transform.localRotationEuler;
         Laya.Tween.to(rotateTarget, {
             x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
-                this.MainCamera.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
-                this.MainCamera.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
-                this.MainCamera.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
+                GSene3D.MainCamera.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
+                GSene3D.MainCamera.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
+                GSene3D.MainCamera.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
                 //移动灯光位置
             })
-        }, time, null);
+        }, speed, null);
     }
 
     btnOnClick(): void {
@@ -404,7 +364,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum++;
         this.mainCameraMove();
         EventAdmin.notify(GEnum.EventType.taskProgress);
-        if (this.taskArr[GVariate._taskNum].value <= 3) {
+        if (this._numZoder[GVariate._taskNum].value <= 3) {
             EventAdmin.notify(EventAdmin.EventType.taskReach);
         }
     }
@@ -438,43 +398,39 @@ export default class UIOperation extends lwg.Admin.Scene {
             switch (GVariate._taskArr[GVariate._taskNum]) {
 
                 case GEnum.TaskType.sideHair:
-                    this.Razor.transform.localPositionX -= diffX * 0.01;
-                    this.Razor.transform.localPositionY -= diffY * 0.01;
+                    GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
+                    GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
                     break;
 
                 case GEnum.TaskType.leftBeard:
                     this.leftAndRightShaving();
-
                     break;
 
                 case GEnum.TaskType.rightBeard:
                     this.leftAndRightShaving();
-
                     break;
 
                 case GEnum.TaskType.middleBeard:
                     this.leftAndRightShaving();
 
                     break;
-
                 case GEnum.TaskType.topHead:
                     break;
-
                 default:
                     break;
             }
 
         }
     }
-
+    /**左右刮刀的移动规则*/
     leftAndRightShaving(): void {
         let hitResult = this.rayDetection() as Laya.HitResult;
         if (hitResult) {
-            let p = Tools.twoSubV3_3D(hitResult.point, this.Capsule.transform.position, true);
-            let len = Tools.twoObjectsLen_3D(this.knife, this.Capsule);
+            let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.TouchHead.transform.position, true);
+            let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.TouchHead);
             let unit: number = 0.1 * (1.05 - len);
-            this.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
-            this.knife.transform.lookAt(this.Capsule.transform.position, new Laya.Vector3(0, 1, 0));
+            GSene3D.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
+            GSene3D.knife.transform.lookAt(GSene3D.TouchHead.transform.position, new Laya.Vector3(0, 1, 0));
         }
     }
 
@@ -482,19 +438,19 @@ export default class UIOperation extends lwg.Admin.Scene {
     rayDetection(): any {
         //产生射线
         //射线碰撞到挡屏，用来设置手的初始位置，挡屏的属性isTrigger 要勾上，这样只检测碰撞，不产生碰撞反应
-        let Camera = this.MainCamera.getChildByName('MainCamera') as Laya.Camera;
+        let Camera = GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera;
         Camera.viewportPointToRay(new Laya.Vector2(this.touchPosX, this.touchPosY), this._ray);
-        this.GameMain3D.physicsSimulation.rayCastAll(this._ray, this.outs);
+        GSene3D.GameMain3D.physicsSimulation.rayCastAll(this._ray, this.outs);
         //找到挡屏的位置，把手的位置放在投屏位置的上方，也就是触摸点的上方
         if (this.outs.length != 0) {
             let outsChaild = null;
-            let Capsule = null;
+            let TouchHead = null;
             for (var i = 0; i < this.outs.length; i++) {
                 //找到挡屏
                 let hitResult = this.outs[i].collider.owner;
-                if (hitResult.name === 'Capsule') {
+                if (hitResult.name === 'TouchHead') {
                     // 开启移动
-                    Capsule = hitResult;
+                    TouchHead = hitResult;
                     outsChaild = this.outs[i];
                 }
             }

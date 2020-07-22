@@ -24,7 +24,7 @@ export module Global {
             rightBeard = 'rightBeard',
             middleBeard = 'middleBeard',
             taskProgress = 'taskProgress',
-            
+
         }
     }
     /**控制游戏的全局变量*/
@@ -73,9 +73,63 @@ export module Global {
             Laya.LocalStorage.clear();
         }
     }
+
+    /**3D场景中节点的一些引用，方便在2D场景中直接操作*/
+    export module GSene3D {
+        /**当前3D主场景*/
+        export let GameMain3D: Laya.Scene3D;
+        /**场景摄像机的父节点*/
+        export let MainCamera: Laya.MeshSprite3D;
+        /**剃刀*/
+        export let Razor: Laya.MeshSprite3D;
+        export let razorFPos: Laya.Vector3 = new Laya.Vector3();
+        export let razorFEulerY: number;
+
+        /**刮脸的刮刀*/
+        export let knife: Laya.MeshSprite3D;
+        export let knifeFPos: Laya.Vector3 = new Laya.Vector3();
+        export let knifeFEulerY: number;
+
+        /**头*/
+        export let Head: Laya.MeshSprite3D;
+        export let headFPos: Laya.Vector3 = new Laya.Vector3();;
+        export let headFEulerY: number;
+        /**头发父节点*/
+        export let HairParent: Laya.MeshSprite3D;
+        /**左侧胡须的父节点*/
+        export let RightBeard: Laya.MeshSprite3D;
+        /**右侧须的父节点*/
+        export let LeftBeard: Laya.MeshSprite3D;
+        /**中间胡须父节点*/
+        export let MiddleBeard: Laya.MeshSprite3D;
+
+        /**当前关卡节点*/
+        export let LevelTem: Laya.MeshSprite3D;
+        export let Level: Laya.MeshSprite3D;
+        export let LevelFpos: Laya.Vector3 = new Laya.Vector3();;
+
+        /**地板*/
+        export let Floor: Laya.MeshSprite3D;
+
+        /**头部触摸范围*/
+        export let TouchHead: Laya.MeshSprite3D;
+
+        /**6个节点代表摄像机移动到6个任务的方位*/
+        export let Landmark_Left: Laya.MeshSprite3D;
+        export let Landmark_Right: Laya.MeshSprite3D;
+        export let Landmark_Side: Laya.MeshSprite3D;
+        export let Landmark_Top: Laya.MeshSprite3D;
+        export let Landmark_Middle: Laya.MeshSprite3D;
+
+        /**触摸屏，用于移动剃刀，坐标必须和头部碰撞体一样,方向和摄像机一样*/
+        export let TouchScreen: Laya.MeshSprite3D;
+    }
 }
 export default Global;
 export let GVariate = Global.GVariate;
 export let GEnum = Global.GEnum;
 export let GData = Global.GData;
+export let GSene3D = Global.GSene3D;
+
+
 

@@ -952,16 +952,16 @@ export module lwg {
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
                 this.gameState(this.calssName);
-                this.lwgOnAwake();
-                this.selfNode();
-                this.adaptive();
-
                 this.MainCamera = this.self.getChildByName("Main Camera") as Laya.MeshSprite3D;
                 if (this.MainCamera) {
                     this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
                     this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
                     this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                 }
+                this.lwgOnAwake();
+                this.selfNode();
+                this.adaptive();
+
             }
             lwgOnAwake(): void {
 
@@ -2270,33 +2270,168 @@ export module lwg {
     }
 
     export module Animation3D {
+        /**缓动集合，用于清除当前this上的所有缓动*/ 
+        export let tweenMap: any = {};
+        /**帧率*/
+        export let frame: number = 1;
         /**
-         * 物体的缓动
-         * @param target 移动目标
-         * @param v3_Pos 目标的位置引用（transform.position）;
-         * @param v3_Rotate 移动速度
-         */
-        export function Pos_Euler(target: Laya.MeshSprite3D, v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, time: number) {
-            //创建一个Tween的属性对像
-            let moveTarget = target.transform.position;
+          * 移动物体
+          * @param target 目标物体
+          * @param toPos 要去的目的地
+          * @param duration 间隔
+          * @param caller 回调执行领域
+          * @param ease 缓动函数
+          * @param complete 播放完成回调 
+          * @param delay 延迟
+          * @param coverBefore 是否覆盖上一个缓动
+          * @param update 更新函数
+          * @param frame 帧数间隔
+          */
+        export function MoveTo(target: Laya.Sprite3D, toPos: Laya.Vector3, duration: number, caller: any
+            , ease?: Function, complete?: Function, delay: number = 0, coverBefore: boolean = true, update?: Function, frame?: number) {
+            let position: Laya.Vector3 = target.transform.position.clone();
+            // target["position"] = target.transform.position;
+            if (duration == 0 || duration === undefined || duration === null) {
+                target.transform.position = toPos.clone();
+                complete && complete.apply(caller);
+                return;
+            }
+            if (frame <= 0 || frame === undefined || frame === null) {
+                frame = this.frame;
+            }
+            let updateRenderPos = function () {
+                if (target.transform) {
+                    target.transform.position = position;
+                }
+                update && update();
+            };
+            Laya.timer.once(delay, target, function () {
+                Laya.timer.frameLoop(frame, target, updateRenderPos);
+            });
 
-            Laya.Tween.to(moveTarget, {
-                x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
-                    target.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
-                    //移动灯光位置
-                })
-            }, time, null);
+            let endTween = function () {
+                if (target.transform) {
+                    target.transform.position = toPos.clone();
+                    Laya.timer.clear(target, updateRenderPos);
+                }
+                complete && complete.apply(caller);
+            }
 
-            let rotateTarget = target.transform.localRotationEuler;
-            Laya.Tween.to(rotateTarget, {
-                x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
-                    target.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
-                    target.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
-                    target.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
-                    //移动灯光位置
-                })
-            }, time, null);
+            let tween = Laya.Tween.to(position, { x: toPos.x, y: toPos.y, z: toPos.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+            if (!tweenMap[target.id]) {
+                tweenMap[target.id] = [];
+            }
+            tweenMap[target.id].push(tween);
         }
+
+
+        /**
+          * 旋转物体
+          * @param target 目标物体
+          * @param toPos 要去的目的地
+          * @param duration 间隔
+          * @param caller 回调执行领域
+          * @param ease 缓动函数
+          * @param complete 播放完成回调 
+          * @param delay 延迟
+          * @param coverBefore 是否覆盖上一个缓动
+          * @param update 更新函数
+          * @param frame 帧数间隔
+          */
+        export function RotateTo(target: Laya.Sprite3D, toRotation: Laya.Vector3, duration: number, caller: any
+            , ease?: Function, complete?: Function, delay?: number, coverBefore?: boolean, update?: Function, frame?: number) {
+            let rotation: Laya.Vector3 = target.transform.localRotationEuler.clone();
+            if (duration == 0 || duration === undefined || duration === null) {
+                target.transform.localRotationEuler = toRotation.clone();
+                complete && complete.apply(caller);
+                return;
+            }
+            if (frame <= 0 || frame === undefined || frame === null) {
+                frame = this.frame;
+            }
+            let updateRenderRotation = function () {
+                if (target.transform) {
+                    target.transform.localRotationEuler = rotation;
+                }
+                update && update();
+            };
+            Laya.timer.once(delay, target, function () {
+                Laya.timer.frameLoop(frame, target, updateRenderRotation);
+            });
+
+            let endTween = function () {
+                if (target.transform) {
+                    target.transform.localRotationEuler = toRotation.clone();
+                    Laya.timer.clear(target, updateRenderRotation);
+                }
+                complete && complete.apply(caller);
+            }
+
+            let tween = Laya.Tween.to(rotation, { x: toRotation.x, y: toRotation.y, z: toRotation.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+            if (!tweenMap[target.id]) {
+                tweenMap[target.id] = [];
+            }
+            tweenMap[target.id].push(tween)
+        }
+
+
+        /**
+        * 缩放物体
+        * @param target 目标物体
+        * @param toPos 要去的目的地
+        * @param duration 间隔
+        * @param caller 回调执行领域
+        * @param ease 缓动函数
+        * @param complete 播放完成回调 
+        * @param delay 延迟
+        * @param coverBefore 是否覆盖上一个缓动
+        * @param update 更新函数
+        * @param frame 帧数间隔
+        */
+        export function ScaleTo(target: Laya.Sprite3D, toScale: Laya.Vector3, duration: number, caller: any
+            , ease?: Function, complete?: Function, delay?: number, coverBefore?: boolean, update?: Function, frame?: number) {
+            let localScale = target.transform.localScale.clone();
+            if (duration == 0 || duration === undefined || duration === null) {
+                target.transform.localScale = toScale.clone();
+                complete && complete.apply(caller);
+                return;
+            }
+            if (frame <= 0 || frame === undefined || frame === null) {
+                frame = this.frame;
+            }
+            let updateRenderPos = function () {
+                target.transform.localScale = localScale.clone();
+                update && update();
+            };
+            Laya.timer.once(delay, this, function () {
+                Laya.timer.frameLoop(frame, target, updateRenderPos);
+            });
+            let endTween = function () {
+                target.transform.localScale = toScale.clone();
+                Laya.timer.clear(target, updateRenderPos);
+                complete && complete.apply(caller);
+            }
+            let tween = Laya.Tween.to(localScale, { x: toScale.x, y: toScale.y, z: toScale.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+            if (!tweenMap[target.id]) {
+                tweenMap[target.id] = [];
+            }
+            tweenMap[target.id].push(tween);
+        }
+        /**
+         * 清除3d物体上的所有缓动动画
+         * @param target 
+         */
+        export function ClearTween(target: Laya.Sprite3D) {
+            let tweens = tweenMap[target.id] as Array<Laya.Tween>;
+            if (tweens && tweens.length) {
+                while (tweens.length > 0) {
+                    let tween = tweens.pop();
+                    tween.clear();
+                }
+            }
+            Laya.timer.clearAll(target);
+        }
+
     }
 
     /**动画模块*/
@@ -3313,7 +3448,7 @@ export module lwg {
         }
 
         /**
-         * 将3D物体坐标转换程屏幕坐标
+         * 将3D物体坐标转换成屏幕坐标
          * @param v3 3D世界的坐标
          * @param camera 摄像机
         */
@@ -3325,6 +3460,8 @@ export module lwg {
             point.y = ScreenV3.y;
             return point;
         }
+
+
         /**
          * 
          * @param n 
