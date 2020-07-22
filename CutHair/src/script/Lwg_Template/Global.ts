@@ -6,11 +6,12 @@ export module Global {
     export module GEnum {
         /**任务类型*/
         export enum TaskType {
-            topHead = 'topHead',
             sideHair = 'sideHair',
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
             middleBeard = 'middleBeard',
+            upLeftBeard = 'upLeftBeard',
+            upRightBeard = 'upRightBeard',
         }
 
         /**剃须刀的状态*/
@@ -23,8 +24,9 @@ export module Global {
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
             middleBeard = 'middleBeard',
+            upLeftBeard = 'upLeftBeard',
+            upRightBeard = 'upRightBeard',
             taskProgress = 'taskProgress',
-
         }
     }
     /**控制游戏的全局变量*/
@@ -94,14 +96,13 @@ export module Global {
         export let Head: Laya.MeshSprite3D;
         export let headFPos: Laya.Vector3 = new Laya.Vector3();;
         export let headFEulerY: number;
-        /**头发父节点*/
+        /**毛发的父节点*/
         export let HairParent: Laya.MeshSprite3D;
-        /**左侧胡须的父节点*/
         export let RightBeard: Laya.MeshSprite3D;
-        /**右侧须的父节点*/
         export let LeftBeard: Laya.MeshSprite3D;
-        /**中间胡须父节点*/
         export let MiddleBeard: Laya.MeshSprite3D;
+        export let UpRightBeard: Laya.MeshSprite3D;
+        export let UpLeftBeard: Laya.MeshSprite3D;
 
         /**当前关卡节点*/
         export let LevelTem: Laya.MeshSprite3D;
@@ -116,15 +117,25 @@ export module Global {
         /**头部操作范围*/
         export let HeadSimulate: Laya.MeshSprite3D;
 
-        /**6个节点代表摄像机移动到6个任务的方位*/
+        /**标记摄像机移动到任务的方位*/
         export let Landmark_Left: Laya.MeshSprite3D;
         export let Landmark_Right: Laya.MeshSprite3D;
         export let Landmark_Side: Laya.MeshSprite3D;
-        export let Landmark_Top: Laya.MeshSprite3D;
         export let Landmark_Middle: Laya.MeshSprite3D;
+        export let Landmark_UpLeft: Laya.MeshSprite3D;
+        export let Landmark_UpRight: Laya.MeshSprite3D;
+
 
         /**触摸屏，用于移动剃刀，坐标必须和头部碰撞体一样,方向和摄像机一样*/
         export let TouchScreen: Laya.MeshSprite3D;
+
+
+        /**标记刮刀的位置的一些节点*/
+        export let LeftSignknife: Laya.MeshSprite3D;
+        export let MiddleSignknife: Laya.MeshSprite3D;
+        export let RightSignknife: Laya.MeshSprite3D;
+        export let UpRightKnife: Laya.MeshSprite3D;
+        export let UpLeftKnife: Laya.MeshSprite3D;
 
     }
 }

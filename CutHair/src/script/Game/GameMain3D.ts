@@ -36,13 +36,23 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.LeftBeard = GSene3D.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
         GSene3D.RightBeard = GSene3D.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
         GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
+        GSene3D.UpRightBeard = GSene3D.Head.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
+        GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
+
         GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
 
-        GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
-        GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
-        GSene3D.Landmark_Top = this.self.getChildByName('Landmark_Top') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
         GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle') as Laya.MeshSprite3D;
+        GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
+        GSene3D.Landmark_UpRight = this.self.getChildByName('Landmark_UpRight') as Laya.MeshSprite3D;
+        GSene3D.Landmark_UpLeft = this.self.getChildByName('Landmark_UpLeft') as Laya.MeshSprite3D;
+
+        GSene3D.LeftSignknife = this.self.getChildByName('LeftSignknife') as Laya.MeshSprite3D;
+        GSene3D.MiddleSignknife = this.self.getChildByName('MiddleSignknife') as Laya.MeshSprite3D;
+        GSene3D.RightSignknife = this.self.getChildByName('RightSignknife') as Laya.MeshSprite3D;
+        GSene3D.UpRightKnife = this.self.getChildByName('UpRightKnife') as Laya.MeshSprite3D;
+        GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife') as Laya.MeshSprite3D;
 
         GSene3D.TouchScreen = this.self.getChildByName('TouchScreen') as Laya.MeshSprite3D;
 

@@ -39,6 +39,7 @@ P 5FD17798 vscroll.png
 P DDDDFB9E vslider$bar.png
 P 01BAE7F5 vslider.png
 D Frame
+D UI
 D Voice
 R DF5F5D4D bgm.mp3
 R 626CADAF btn.wav
@@ -119,3 +120,5 @@ P D6262B24 ui_square_c_009.png
 P 7331617A ui_square_c_010.png
 P 87918B79 ui_square_c_011.png
 P B253D6A3 ui_square_c_012.png
+D UI/Common
+P D29388FC ui_dialogBox.png
