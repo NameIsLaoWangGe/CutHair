@@ -447,11 +447,11 @@
 					],
 					"scale":[
 						10,
-						10,
+						15,
 						0.01
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -1025,109 +1025,10 @@
 						"components":[],
 						"child":[
 							{
-								"type":"Sprite3D",
+								"type":"MeshSprite3D",
 								"instanceID":24,
 								"props":{
-									"name":"StarGlasses",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.87,
-										0.2170029,
-										0.005000114
-									],
-									"rotation":[
-										0,
-										-0.7071068,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										6,
-										6,
-										6
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":25,
-										"props":{
-											"name":"StarGlasses_0",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												0,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												1,
-												1
-											],
-											"meshPath":"Assets/Mesh/StarGlasses-StarGlasses_0.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									},
-									{
-										"type":"MeshSprite3D",
-										"instanceID":26,
-										"props":{
-											"name":"StarGlasses_1",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												0,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												1,
-												1
-											],
-											"meshPath":"Assets/Mesh/StarGlasses-StarGlasses_1.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":27,
-								"props":{
-									"name":"TouchHead",
+									"name":"Headcollision",
 									"active":true,
 									"isStatic":false,
 									"layer":0,
@@ -1192,9 +1093,9 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":28,
+								"instanceID":25,
 								"props":{
-									"name":"TouchScope",
+									"name":"HeadSimulate",
 									"active":true,
 									"isStatic":false,
 									"layer":0,
@@ -1215,7 +1116,7 @@
 										1.3
 									],
 									"meshPath":"Library/unity default resources-Capsule.lm",
-									"enableRender":true,
+									"enableRender":false,
 									"materials":[
 										{
 											"type":"Laya.BlinnPhongMaterial",
@@ -1259,9 +1160,9 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":29,
+								"instanceID":26,
 								"props":{
-									"name":"Head",
+									"name":"Face",
 									"active":true,
 									"isStatic":false,
 									"layer":0,
@@ -1286,7 +1187,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":30,
+										"instanceID":27,
 										"props":{
 											"name":"Head_1",
 											"active":true,
@@ -1318,6 +1219,105 @@
 										},
 										"components":[],
 										"child":[]
+									},
+									{
+										"type":"Sprite3D",
+										"instanceID":28,
+										"props":{
+											"name":"StarGlasses",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												-0.005000114,
+												-0.87,
+												1.345001
+											],
+											"rotation":[
+												-0.7071068,
+												0,
+												0,
+												-0.7071068
+											],
+											"scale":[
+												6,
+												6,
+												6
+											]
+										},
+										"components":[],
+										"child":[
+											{
+												"type":"MeshSprite3D",
+												"instanceID":29,
+												"props":{
+													"name":"StarGlasses_0",
+													"active":true,
+													"isStatic":false,
+													"layer":0,
+													"position":[
+														0,
+														0,
+														0
+													],
+													"rotation":[
+														0,
+														0,
+														0,
+														-1
+													],
+													"scale":[
+														1,
+														1,
+														1
+													],
+													"meshPath":"Assets/Mesh/StarGlasses-StarGlasses_0.lm",
+													"enableRender":true,
+													"materials":[
+														{
+															"path":"Assets/Material/Glasses.lmat"
+														}
+													]
+												},
+												"components":[],
+												"child":[]
+											},
+											{
+												"type":"MeshSprite3D",
+												"instanceID":30,
+												"props":{
+													"name":"StarGlasses_1",
+													"active":true,
+													"isStatic":false,
+													"layer":0,
+													"position":[
+														0,
+														0,
+														0
+													],
+													"rotation":[
+														0,
+														0,
+														0,
+														-1
+													],
+													"scale":[
+														1,
+														1,
+														1
+													],
+													"meshPath":"Assets/Mesh/StarGlasses-StarGlasses_1.lm",
+													"enableRender":true,
+													"materials":[
+														{
+															"path":"Assets/Material/Glasses.lmat"
+														}
+													]
+												},
+												"components":[],
+												"child":[]
+											}
+										]
 									}
 								]
 							},

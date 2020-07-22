@@ -6,10 +6,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     public TaskProgress: Laya.Prefab;
     /**摇杆*/
     Rocker: Laya.Sprite;
-    /**射线*/
-    _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
-    /**射线扫描结果*/
-    outs: Array<Laya.HitResult> = new Array<Laya.HitResult>();
+
     /**任务进度条父节点*/
     TaskBar: Laya.Sprite;
     /**下一个任务按钮*/
@@ -286,71 +283,58 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
         switch (GVariate._taskArr[GVariate._taskNum]) {
 
+            case GEnum.TaskType.sideHair:
+
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+
+                break;
+
             case GEnum.TaskType.leftBeard:
                 GSene3D.knife.transform.localPosition = new Laya.Vector3(0.02, 0.132, 1.321);
                 GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(0, 325.577 + 90, 0);
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Left.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
-                this.setCamera(GSene3D.Landmark_Left.transform.position, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed);
+
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
 
                 break;
 
             case GEnum.TaskType.rightBeard:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Right.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
-                // this.setCamera(GSene3D.Landmark_Right.transform.position, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed);
 
-                Animation3D.MoveTo(GSene3D.MainCamera,GSene3D.Landmark_Right.transform.position,1000,this);
-                Animation3D.RotateTo(GSene3D.MainCamera,GSene3D.Landmark_Right.transform.localRotationEuler,1000,this);
+                GSene3D.knife.transform.localPosition = new Laya.Vector3(-0.32, 0.09332319, -0.008);
+                GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(-90.00001, 7.7, 0);
 
-                break;
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
 
-            case GEnum.TaskType.sideHair:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Side.transform.position, this.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
-
-                this.setCamera(GSene3D.Landmark_Side.transform.position, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
                 break;
 
             case GEnum.TaskType.middleBeard:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
-                this.setCamera(GSene3D.Landmark_Middle.transform.position, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed);
+
+                GSene3D.knife.transform.localPosition = new Laya.Vector3(-0.112, 0.04599762, 0.673);
+                GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(0, 261.668, 0);
+
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
 
                 break;
             case GEnum.TaskType.topHead:
-                // Animation3D.Pos_Euler(this.MainCamera, this.Landmark_Top.transform.position, this.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
-                this.setCamera(GSene3D.Landmark_Top.transform.position, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
+
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Top.transform.position, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed, this);
 
                 break;
 
             default:
                 break;
         }
-    }
 
-    /**
-     * 缓动摄像机
-     * @param v3_Pos 移动到的位置
-     * @param v3_Rotate 旋转到的角度
-     * @param speed 移动速度
-     */
-    public setCamera(v3_Pos: Laya.Vector3, v3_Rotate: Laya.Vector3, speed: number) {
-        //创建一个Tween的属性对像
-        let moveTarget = GSene3D.MainCamera.transform.position;
 
-        Laya.Tween.to(moveTarget, {
-            x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
-                GSene3D.MainCamera.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
-                //移动灯光位置
-            })
-        }, speed, null);
-
-        let rotateTarget = GSene3D.MainCamera.transform.localRotationEuler;
-        Laya.Tween.to(rotateTarget, {
-            x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
-                GSene3D.MainCamera.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
-                GSene3D.MainCamera.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
-                GSene3D.MainCamera.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
-                //移动灯光位置
-            })
-        }, speed, null);
     }
 
     btnOnClick(): void {
@@ -377,6 +361,31 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.moveSwitch = true;
         this.touchPosX = e.stageX;
         this.touchPosY = e.stageY;
+
+
+        if (GVariate._taskArr[GVariate._taskNum] === GEnum.TaskType.sideHair) {
+            return;
+        }
+        let Camera = GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera;
+        // 求出刀片投到屏幕上的位置
+        let pointknife = Tools.transitionScreenPointfor3D(GSene3D.knife.transform.position, Camera);
+        // 求出头部投到屏幕上的位置
+        let pointHead = Tools.transitionScreenPointfor3D(GSene3D.Headcollision.transform.position, Camera);
+        // 计算出他们在屏幕上的差值
+        let diffX = pointknife.x - pointHead.x;
+        let diffY = pointknife.y - pointHead.y;
+
+        // 通过触摸点设置一个和上面差值一样的偏差点
+        let touchDiffX = this.touchPosX - diffX;
+        let touchDiffY = this.touchPosY - diffY;
+
+        // 偏差点发射射线到投屏，把偏差点设置成模拟的头部HeadSimulate的坐标
+        // 这样我们在模拟的头部上面操作，此时手指的位置是模拟刀片的相对位置
+        let hitResult_Diff = Tools.rayScanning(Camera, GSene3D.GameMain3D, new Laya.Vector2(touchDiffX, touchDiffY), GSene3D.TouchScreen.name) as Laya.HitResult;
+        if (hitResult_Diff) {
+            GSene3D.HeadSimulate.transform.position = hitResult_Diff.point;
+        }
+
     }
 
     onStageMouseMove(e: Laya.Event) {
@@ -419,50 +428,50 @@ export default class UIOperation extends lwg.Admin.Scene {
                 default:
                     break;
             }
-
         }
     }
+
+    /**上一帧触摸点发射线到的位置对比两次的差值，，用于刀片的移动*/
+    lastPosX: number;
+    lastPosY: number;
+    lastPosZ: number;
+
     /**左右刮刀的移动规则*/
     leftAndRightShaving(): void {
-        let hitResult = this.rayDetection() as Laya.HitResult;
+        let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name) as Laya.HitResult;
         if (hitResult) {
-            let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.TouchHead.transform.position, true);
-            let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.TouchHead);
-            let unit: number = 0.1 * (1.05 - len);
-            GSene3D.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
-            GSene3D.knife.transform.lookAt(GSene3D.TouchHead.transform.position, new Laya.Vector3(0, 1, 0));
-        }
-    }
+            if (this.lastPosX == null || this.lastPosY == null || this.lastPosZ == null) {
+                this.lastPosX = hitResult.point.x;
+                this.lastPosY = hitResult.point.y;
+                this.lastPosZ = hitResult.point.z;
+            } else {
+                // 求出两次触摸的位置偏移
+                let diffX = hitResult.point.x - this.lastPosX;
+                let diffY = hitResult.point.y - this.lastPosY;
+                let diffZ = hitResult.point.z - this.lastPosZ;
 
-    /**射线检测*/
-    rayDetection(): any {
-        //产生射线
-        //射线碰撞到挡屏，用来设置手的初始位置，挡屏的属性isTrigger 要勾上，这样只检测碰撞，不产生碰撞反应
-        let Camera = GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera;
-        Camera.viewportPointToRay(new Laya.Vector2(this.touchPosX, this.touchPosY), this._ray);
-        GSene3D.GameMain3D.physicsSimulation.rayCastAll(this._ray, this.outs);
-        //找到挡屏的位置，把手的位置放在投屏位置的上方，也就是触摸点的上方
-        if (this.outs.length != 0) {
-            let outsChaild = null;
-            let TouchHead = null;
-            for (var i = 0; i < this.outs.length; i++) {
-                //找到挡屏
-                let hitResult = this.outs[i].collider.owner;
-                if (hitResult.name === 'TouchHead') {
-                    // 开启移动
-                    TouchHead = hitResult;
-                    outsChaild = this.outs[i];
-                }
+                // 剃刀加上这些位置偏移
+                GSene3D.knife.transform.position = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
+
+                this.lastPosX = hitResult.point.x;
+                this.lastPosY = hitResult.point.y;
+                this.lastPosZ = hitResult.point.z;
+
+                // let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.Headcollision.transform.position, true);
+                // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
+                // let unit: number = 0.1 * (1.05 - len);
+                // GSene3D.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
+                GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
             }
-            return outsChaild;
         }
     }
 
     onStageMouseUp(e: Laya.Event) {
+        this.lastPosX = null;
+        this.lastPosY = null;
+        this.lastPosY = null;
+        this.touchPosX = null;
+        this.touchPosY = null;
         this.moveSwitch = false;
-    }
-
-
-    lwgOnUpdate(): void {
     }
 }

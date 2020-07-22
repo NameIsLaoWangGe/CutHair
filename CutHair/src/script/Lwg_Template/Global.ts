@@ -74,7 +74,7 @@ export module Global {
         }
     }
 
-    /**3D场景中节点的一些引用，方便在2D场景中直接操作*/
+    /**3D场景中节点的一些引用，方便在2D场景中直接操作,Vector3可以初始化，其他不可以，因为当前脚本中没有Scrip3D，需要在3D脚本中声明*/
     export module GSene3D {
         /**当前3D主场景*/
         export let GameMain3D: Laya.Scene3D;
@@ -111,8 +111,10 @@ export module Global {
         /**地板*/
         export let Floor: Laya.MeshSprite3D;
 
-        /**头部触摸范围*/
-        export let TouchHead: Laya.MeshSprite3D;
+        /**头部碰撞框*/
+        export let Headcollision: Laya.MeshSprite3D;
+        /**头部操作范围*/
+        export let HeadSimulate: Laya.MeshSprite3D;
 
         /**6个节点代表摄像机移动到6个任务的方位*/
         export let Landmark_Left: Laya.MeshSprite3D;
@@ -123,6 +125,7 @@ export module Global {
 
         /**触摸屏，用于移动剃刀，坐标必须和头部碰撞体一样,方向和摄像机一样*/
         export let TouchScreen: Laya.MeshSprite3D;
+
     }
 }
 export default Global;

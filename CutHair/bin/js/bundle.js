@@ -1698,23 +1698,6 @@
         lwg.Btn_Beetle = Btn_Beetle;
         let Animation3D;
         (function (Animation3D) {
-            function Pos_Euler(target, v3_Pos, v3_Rotate, time) {
-                let moveTarget = target.transform.position;
-                Laya.Tween.to(moveTarget, {
-                    x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
-                        target.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
-                    })
-                }, time, null);
-                let rotateTarget = target.transform.localRotationEuler;
-                Laya.Tween.to(rotateTarget, {
-                    x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
-                        target.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
-                        target.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
-                        target.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
-                    })
-                }, time, null);
-            }
-            Animation3D.Pos_Euler = Pos_Euler;
             Animation3D.tweenMap = {};
             Animation3D.frame = 1;
             function MoveTo(target, toPos, duration, caller, ease, complete, delay = 0, coverBefore = true, update, frame) {
@@ -1783,6 +1766,46 @@
                 Animation3D.tweenMap[target.id].push(tween);
             }
             Animation3D.RotateTo = RotateTo;
+            function ScaleTo(target, toScale, duration, caller, ease, complete, delay, coverBefore, update, frame) {
+                let localScale = target.transform.localScale.clone();
+                if (duration == 0 || duration === undefined || duration === null) {
+                    target.transform.localScale = toScale.clone();
+                    complete && complete.apply(caller);
+                    return;
+                }
+                if (frame <= 0 || frame === undefined || frame === null) {
+                    frame = this.frame;
+                }
+                let updateRenderPos = function () {
+                    target.transform.localScale = localScale.clone();
+                    update && update();
+                };
+                Laya.timer.once(delay, this, function () {
+                    Laya.timer.frameLoop(frame, target, updateRenderPos);
+                });
+                let endTween = function () {
+                    target.transform.localScale = toScale.clone();
+                    Laya.timer.clear(target, updateRenderPos);
+                    complete && complete.apply(caller);
+                };
+                let tween = Laya.Tween.to(localScale, { x: toScale.x, y: toScale.y, z: toScale.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+                if (!Animation3D.tweenMap[target.id]) {
+                    Animation3D.tweenMap[target.id] = [];
+                }
+                Animation3D.tweenMap[target.id].push(tween);
+            }
+            Animation3D.ScaleTo = ScaleTo;
+            function ClearTween(target) {
+                let tweens = Animation3D.tweenMap[target.id];
+                if (tweens && tweens.length) {
+                    while (tweens.length > 0) {
+                        let tween = tweens.pop();
+                        tween.clear();
+                    }
+                }
+                Laya.timer.clearAll(target);
+            }
+            Animation3D.ClearTween = ClearTween;
         })(Animation3D = lwg.Animation3D || (lwg.Animation3D = {}));
         let Animation;
         (function (Animation) {
@@ -2259,6 +2282,26 @@
         })(PalyAudio = lwg.PalyAudio || (lwg.PalyAudio = {}));
         let Tools;
         (function (Tools) {
+            function rayScanning(camera, scene3D, point, filtrate) {
+                let _ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
+                let outs = new Array();
+                camera.viewportPointToRay(point, _ray);
+                scene3D.physicsSimulation.rayCastAll(_ray, outs);
+                if (outs.length != 0 && filtrate) {
+                    let outsChaild = null;
+                    for (var i = 0; i < outs.length; i++) {
+                        let hitResult = outs[i].collider.owner;
+                        if (hitResult.name === filtrate) {
+                            outsChaild = outs[i];
+                        }
+                    }
+                    return outsChaild;
+                }
+                else {
+                    return outs;
+                }
+            }
+            Tools.rayScanning = rayScanning;
             function dotRotateXY(x0, y0, x1, y1, angle) {
                 let x2 = x0 + (x1 - x0) * Math.cos(angle * Math.PI / 180) - (y1 - y0) * Math.sin(angle * Math.PI / 180);
                 let y2 = y0 + (x1 - x0) * Math.sin(angle * Math.PI / 180) + (y1 - y0) * Math.cos(angle * Math.PI / 180);
@@ -2760,13 +2803,14 @@
         }
         selfNode() {
             GSene3D.Head = GSene3D.Level.getChildByName('Head');
-            GSene3D.TouchHead = GSene3D.Head.getChildByName('TouchHead');
-            let TouchHeadRig = GSene3D.TouchHead.getComponent(Laya.Rigidbody3D);
+            GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision');
+            let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D);
             TouchHeadRig.restitution = 0;
             GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent');
             GSene3D.LeftBeard = GSene3D.Head.getChildByName('LeftBeard');
             GSene3D.RightBeard = GSene3D.Head.getChildByName('RightBeard');
             GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard');
+            GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate');
             GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left');
             GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
             GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
@@ -2828,8 +2872,6 @@
     class UIOperation extends lwg.Admin.Scene {
         constructor() {
             super(...arguments);
-            this._ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
-            this.outs = new Array();
             this._numZoder = [];
             this._sideHairNum = {
                 index: 0,
@@ -3050,43 +3092,40 @@
                 return;
             }
             switch (GVariate._taskArr[GVariate._taskNum]) {
+                case GEnum.TaskType.sideHair:
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
                 case GEnum.TaskType.leftBeard:
                     GSene3D.knife.transform.localPosition = new Laya.Vector3(0.02, 0.132, 1.321);
                     GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(0, 325.577 + 90, 0);
-                    this.setCamera(GSene3D.Landmark_Left.transform.position, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.rightBeard:
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, 1000, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, 1000, this);
-                    break;
-                case GEnum.TaskType.sideHair:
-                    this.setCamera(GSene3D.Landmark_Side.transform.position, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed);
+                    GSene3D.knife.transform.localPosition = new Laya.Vector3(-0.32, 0.09332319, -0.008);
+                    GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(-90.00001, 7.7, -277.6);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.middleBeard:
-                    this.setCamera(GSene3D.Landmark_Middle.transform.position, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed);
+                    GSene3D.knife.transform.localPosition = new Laya.Vector3(-0.112, 0.04599762, 0.673);
+                    GSene3D.knife.transform.localRotationEuler = new Laya.Vector3(0, -261.668, 0);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.topHead:
-                    this.setCamera(GSene3D.Landmark_Top.transform.position, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Top.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Top.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 default:
                     break;
             }
-        }
-        setCamera(v3_Pos, v3_Rotate, speed) {
-            let moveTarget = GSene3D.MainCamera.transform.position;
-            Laya.Tween.to(moveTarget, {
-                x: v3_Pos.x, y: v3_Pos.y, z: v3_Pos.z, update: new Laya.Handler(this, f => {
-                    GSene3D.MainCamera.transform.position = (new Laya.Vector3(moveTarget.x, moveTarget.y, moveTarget.z));
-                })
-            }, speed, null);
-            let rotateTarget = GSene3D.MainCamera.transform.localRotationEuler;
-            Laya.Tween.to(rotateTarget, {
-                x: v3_Rotate.x, y: v3_Rotate.y, z: v3_Rotate.z, update: new Laya.Handler(this, f => {
-                    GSene3D.MainCamera.transform.localRotationEulerX = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).x;
-                    GSene3D.MainCamera.transform.localRotationEulerY = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).y;
-                    GSene3D.MainCamera.transform.localRotationEulerZ = (new Laya.Vector3(rotateTarget.x, rotateTarget.y, rotateTarget.z)).z;
-                })
-            }, speed, null);
         }
         btnOnClick() {
             lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
@@ -3106,6 +3145,20 @@
             this.moveSwitch = true;
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
+            if (GVariate._taskArr[GVariate._taskNum] === GEnum.TaskType.sideHair) {
+                return;
+            }
+            let Camera = GSene3D.MainCamera.getChildByName('MainCamera');
+            let pointknife = Tools.transitionScreenPointfor3D(GSene3D.knife.transform.position, Camera);
+            let pointHead = Tools.transitionScreenPointfor3D(GSene3D.Headcollision.transform.position, Camera);
+            let diffX = pointknife.x - pointHead.x;
+            let diffY = pointknife.y - pointHead.y;
+            let touchDiffX = this.touchPosX - diffX;
+            let touchDiffY = this.touchPosY - diffY;
+            let hitResult_Diff = Tools.rayScanning(Camera, GSene3D.GameMain3D, new Laya.Vector2(touchDiffX, touchDiffY), GSene3D.TouchScreen.name);
+            if (hitResult_Diff) {
+                GSene3D.HeadSimulate.transform.position = hitResult_Diff.point;
+            }
         }
         onStageMouseMove(e) {
             if (!Admin._gameStart) {
@@ -3140,34 +3193,32 @@
             }
         }
         leftAndRightShaving() {
-            let hitResult = this.rayDetection();
+            let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
             if (hitResult) {
-                let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.TouchHead.transform.position, true);
-                let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.TouchHead);
-                let unit = 0.1 * (1.05 - len);
-                GSene3D.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
-                GSene3D.knife.transform.lookAt(GSene3D.TouchHead.transform.position, new Laya.Vector3(0, 1, 0));
-            }
-        }
-        rayDetection() {
-            let Camera = GSene3D.MainCamera.getChildByName('MainCamera');
-            Camera.viewportPointToRay(new Laya.Vector2(this.touchPosX, this.touchPosY), this._ray);
-            GSene3D.GameMain3D.physicsSimulation.rayCastAll(this._ray, this.outs);
-            if (this.outs.length != 0) {
-                let outsChaild = null;
-                for (var i = 0; i < this.outs.length; i++) {
-                    let hitResult = this.outs[i].collider.owner;
-                    if (hitResult.name === 'TouchHead') {
-                        outsChaild = this.outs[i];
-                    }
+                if (this.lastPosX == null || this.lastPosY == null || this.lastPosZ == null) {
+                    this.lastPosX = hitResult.point.x;
+                    this.lastPosY = hitResult.point.y;
+                    this.lastPosZ = hitResult.point.z;
                 }
-                return outsChaild;
+                else {
+                    let diffX = hitResult.point.x - this.lastPosX;
+                    let diffY = hitResult.point.y - this.lastPosY;
+                    let diffZ = hitResult.point.z - this.lastPosZ;
+                    GSene3D.knife.transform.position = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
+                    this.lastPosX = hitResult.point.x;
+                    this.lastPosY = hitResult.point.y;
+                    this.lastPosZ = hitResult.point.z;
+                    GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
+                }
             }
         }
         onStageMouseUp(e) {
+            this.lastPosX = null;
+            this.lastPosY = null;
+            this.lastPosY = null;
+            this.touchPosX = null;
+            this.touchPosY = null;
             this.moveSwitch = false;
-        }
-        lwgOnUpdate() {
         }
     }
 

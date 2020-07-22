@@ -22,20 +22,21 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     /**产生关卡*/
     createLevel(): void {
         GSene3D.Level = GSene3D.LevelTem.clone() as Laya.MeshSprite3D;
-        this.self.addChild(GSene3D.Level);
+        this.self.addChild(GSene3D.Level)
         GSene3D.LevelTem.removeSelf();
     }
     selfNode(): void {
 
         GSene3D.Head = GSene3D.Level.getChildByName('Head') as Laya.MeshSprite3D;
-        GSene3D.TouchHead = GSene3D.Head.getChildByName('TouchHead') as Laya.MeshSprite3D;
-        let TouchHeadRig = GSene3D.TouchHead.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+        GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision') as Laya.MeshSprite3D;
+        let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         TouchHeadRig.restitution = 0;
 
         GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
         GSene3D.LeftBeard = GSene3D.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
         GSene3D.RightBeard = GSene3D.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
         GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
+        GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
 
         GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;

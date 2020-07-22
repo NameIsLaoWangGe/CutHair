@@ -2270,7 +2270,7 @@ export module lwg {
     }
 
     export module Animation3D {
-        /**缓动集合，用于清除当前this上的所有缓动*/ 
+        /**缓动集合，用于清除当前this上的所有缓动*/
         export let tweenMap: any = {};
         /**帧率*/
         export let frame: number = 1;
@@ -3307,6 +3307,39 @@ export module lwg {
     /**工具模块*/
     export module Tools {
         /**
+         * 射线检测
+         * @param camera 摄像机
+         * @param scene3D 当前场景
+         * @param point 触摸点
+         * @param filtrate 找出指定触摸的模型的信息，如果不传则返回全部信息；
+         */
+        export function rayScanning(camera: Laya.Camera, scene3D: Laya.Scene3D, point: Laya.Vector2, filtrate?: string): any {
+            /**射线*/
+            let _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
+            /**射线扫描结果*/
+            let outs: Array<Laya.HitResult> = new Array<Laya.HitResult>();
+            //产生射线
+            //射线碰撞到挡屏，用来设置手的初始位置，挡屏的属性isTrigger 要勾上，这样只检测碰撞，不产生碰撞反应
+            camera.viewportPointToRay(point, _ray);
+            scene3D.physicsSimulation.rayCastAll(_ray, outs);
+            //找到挡屏的位置，把手的位置放在投屏位置的上方，也就是触摸点的上方
+            if (outs.length != 0 && filtrate) {
+                let outsChaild = null;
+                for (var i = 0; i < outs.length; i++) {
+                    //找到挡屏
+                    let hitResult = outs[i].collider.owner;
+                    if (hitResult.name === filtrate) {
+                        // 开启移动
+                        outsChaild = outs[i];
+                    }
+                }
+                return outsChaild;
+            } else {
+                return outs;
+            }
+        }
+
+        /**
          * 二维坐标中一个点按照另一个点旋转一定的角度后，得到的点
          * @param x0 原点X
          * @param y0 原点Y
@@ -3448,7 +3481,7 @@ export module lwg {
         }
 
         /**
-         * 将3D物体坐标转换成屏幕坐标
+         * 将3D坐标转换成屏幕坐标
          * @param v3 3D世界的坐标
          * @param camera 摄像机
         */
