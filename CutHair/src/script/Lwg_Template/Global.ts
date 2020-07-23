@@ -125,10 +125,8 @@ export module Global {
         export let Landmark_UpLeft: Laya.MeshSprite3D;
         export let Landmark_UpRight: Laya.MeshSprite3D;
 
-
         /**触摸屏，用于移动剃刀，坐标必须和头部碰撞体一样,方向和摄像机一样*/
         export let TouchScreen: Laya.MeshSprite3D;
-
 
         /**标记刮刀的位置的一些节点*/
         export let LeftSignknife: Laya.MeshSprite3D;

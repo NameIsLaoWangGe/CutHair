@@ -452,9 +452,6 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     btnLastUp(e: Laya.Event): void {
-        this.lastPosX = null;
-        this.lastPosY = null;
-        this.lastPosY = null;
         this.BtnLast.visible = false;
         this.moveSwitch = false;
         e.stopPropagation();
@@ -474,7 +471,9 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.moveSwitch = true;
         this.touchPosX = e.stageX;
         this.touchPosY = e.stageY;
-
+        this.lastPosX = null;
+        this.lastPosY = null;
+        this.lastPosZ = null;
 
         if (GVariate._taskArr[GVariate._taskNum] === GEnum.TaskType.sideHair) {
             return;
@@ -570,19 +569,22 @@ export default class UIOperation extends lwg.Admin.Scene {
                 let diffZ = hitResult.point.z - this.lastPosZ;
 
                 // 剃刀加上这些位置偏移
-                GSene3D.knife.transform.position = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
+                let v3 = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ)
+                // 设置最大范围值
+                let p = Tools.twoSubV3_3D(v3, GSene3D.Headcollision.transform.position, true);
+                let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
+                let unit: number = 0.1 * (1.05 - len);
+                GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
+                GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
+
 
                 this.lastPosX = hitResult.point.x;
                 this.lastPosY = hitResult.point.y;
                 this.lastPosZ = hitResult.point.z;
 
-                // let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.Headcollision.transform.position, true);
-                // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
-                // let unit: number = 0.1 * (1.05 - len);
-                // GSene3D.knife.transform.position = new Laya.Vector3(hitResult.point.x + p.x * unit, hitResult.point.y + p.y * unit, hitResult.point.z + p.z * unit);
-                GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
             }
         } else {
+            console.log('出屏了！');
             this.lastPosX = null;
             this.lastPosY = null;
             this.lastPosY = null;

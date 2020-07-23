@@ -1233,7 +1233,9 @@ export module lwg {
             startRotat: number;
 
             /**随机旋转方向*/
-            startDir: number;
+            rotateDir: string;
+            /**随机旋转角度*/
+            rotateRan: number;
             /**随机消失时间*/
             continueTime: number;
 
@@ -1245,14 +1247,14 @@ export module lwg {
                 this.selfScene = this.self.scene;
                 let calssName = this['__proto__']['constructor'].name;
                 this.self[calssName] = this;
-                this.self.pivotX = this.self.width / 2;
-                this.self.pivotY = this.self.height / 2;
+                // console.log(this.self.getBounds());
                 this.timer = 0;
-                this.lwgOnEnable();
+                this.lwgInit();
                 this.propertyAssign();
+
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgOnEnable(): void {
+            lwgInit(): void {
             }
             /**初始化特效单元的属性*/
             initProperty(): void {
@@ -1286,6 +1288,9 @@ export module lwg {
             }
             onDisable(): void {
                 Laya.Pool.recover(this.self.name, this.self);
+                this.destroy();//删除自己，下次重新添加
+                Laya.Tween.clearAll(this);
+                Laya.timer.clearAll(this);
             }
         }
 
@@ -1293,12 +1298,10 @@ export module lwg {
          * 创建普通爆炸动画，四周爆炸随机散开
          * @param parent 父节点
          * @param quantity 数量
-         * @param x X轴位置
-         * @param y Y轴位置
-         * @param style 皮肤类型
          * @param speed 速度
          * @param continueTime 持续时间（按帧数计算）
-      
+         * @param x X轴位置
+         * @param y Y轴位置
          */
         export function createCommonExplosion(parent, quantity, x, y, style, speed, continueTime): void {
             for (let index = 0; index < quantity; index++) {
@@ -1314,34 +1317,139 @@ export module lwg {
                 ele.alpha = 1;
                 parent.addChild(ele);
                 ele.pos(x, y);
-                let scirpt = ele.getComponent(commonExplosion);
-                if (!scirpt) {
-                    scirpt = ele.addComponent(commonExplosion);
-                }
-                scirpt.startSpeed = 5 * Math.random() + speed;
-                scirpt.continueTime = 8 * Math.random() + continueTime;
+                let scirpt = ele.addComponent(commonExplosion);
+                scirpt.startSpeed = Math.random() * speed;
+                scirpt.continueTime = 2 * Math.random() + continueTime;
             }
         }
 
         /**普通爆炸移动类*/
         export class commonExplosion extends lwg.Effects.EffectsBase {
+            lwgInit(): void {
+                this.self.width = 25;
+                this.self.height = 25;
+                this.self.pivotX = this.self.width / 2;
+                this.self.pivotY = this.self.height / 2;
+            }
             initProperty(): void {
                 this.startAngle = 360 * Math.random();
                 this.startSpeed = 5 * Math.random() + 8;
                 this.startScale = 0.4 + Math.random() * 0.6;
-                this.accelerated = 0.1;
+                this.accelerated = 2;
                 this.continueTime = 8 + Math.random() * 10;
+                this.rotateDir = Math.floor(Math.random() * 2) === 1 ? 'left' : 'right';
+                this.rotateRan = Math.random() * 10;
             }
             moveRules(): void {
                 this.timer++;
-                if (this.timer >= this.continueTime / 2) {
-                    this.self.alpha -= 0.1;
-                }
-                if (this.timer >= this.continueTime) {
-                    this.self.removeSelf();
+                if (this.rotateDir === 'left') {
+                    this.self.rotation += this.rotateRan;
                 } else {
-                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
+                    this.self.rotation -= this.rotateRan;
                 }
+                if (this.timer >= this.continueTime / 2) {
+                    this.self.alpha -= 0.04;
+                    if (this.self.alpha <= 0.65) {
+                        this.self.removeSelf();
+                    }
+                }
+                this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
+                this.accelerated += 0.2;
+            }
+        }
+
+        /**
+        * 创建爆炸旋转动画，爆炸后会在结尾处旋转几次
+        * @param parent 父节点
+        * @param quantity 数量
+        * @param x X位置
+        * @param Y Y位置
+        * @param speed 速度
+        * @param rotate 旋转最大值
+        * @param continueTime 持续时间（按帧数计算）
+        * @param x X轴位置
+        * @param y Y轴位置
+        */
+        export function createExplosion_Rotate(parent, quantity, x, y, style, speed, rotate): void {
+            for (let index = 0; index < quantity; index++) {
+                let ele = Laya.Pool.getItemByClass('ele', Laya.Image) as Laya.Image;
+                ele.name = 'ele';//标识符和名称一样
+                let num;
+                if (style === 'star') {
+                    num = 12 + Math.floor(Math.random() * 12);
+                } else if (style === 'dot') {
+                    num = Math.floor(Math.random() * 12);
+                }
+                ele.skin = SkinUrl[num];
+                ele.alpha = 1;
+                parent.addChild(ele);
+                ele.pos(x, y);
+                let scirpt = ele.addComponent(Explosion_Rotate);
+                scirpt.startSpeed = 2 + Math.random() * speed;
+                scirpt.rotateRan = Math.random() * rotate;
+            }
+        }
+
+        /**普通爆炸移动类*/
+        export class Explosion_Rotate extends lwg.Effects.EffectsBase {
+            lwgInit(): void {
+                this.self.width = 41;
+                this.self.height = 41;
+                this.self.pivotX = this.self.width / 2;
+                this.self.pivotY = this.self.height / 2;
+            }
+            initProperty(): void {
+                this.startAngle = 360 * Math.random();
+                this.startSpeed = 5 * Math.random() + 8;
+                this.startScale = 0.4 + Math.random() * 0.6;
+                this.accelerated = 0;
+                this.continueTime = 5 + Math.random() * 20;
+                this.rotateDir = Math.floor(Math.random() * 2) === 1 ? 'left' : 'right';
+                this.rotateRan = Math.random() * 15;
+            }
+            moveRules(): void {
+
+                if (this.rotateDir === 'left') {
+                    this.self.rotation += this.rotateRan;
+                } else {
+                    this.self.rotation -= this.rotateRan;
+                }
+                if (this.startSpeed - this.accelerated <= 0.1) {
+                    this.self.alpha -= 0.03;
+                    if (this.self.alpha <= 0) {
+                        this.self.removeSelf();
+                    }
+                } else {
+                    this.accelerated += 0.2;
+                }
+                this.commonSpeedXYByAngle(this.startAngle, this.startSpeed - this.accelerated);
+            }
+        }
+
+        /**
+         * 多个金币移动动画
+         * @param parent 父节点
+         * @param number 产生金币的数量
+         * @param fX 初始位置X
+         * @param fY 初始位置Y
+         * @param tX 目标X
+         * @param tY 目标Y
+         * @param func1 每一个金币产生后执行的回调
+         * @param func2 金币创建完成后的回调
+         */
+        export function getGoldAni(parent, number, fX, fY, tX, tY, func1, func2): void {
+            for (let index = 0; index < number; index++) {
+                lwg.Effects.createAddGold(parent, index, fX, fY, tX, tY, f => {
+                    if (index === number - 1) {
+                        if (func2 !== null) {
+                            func2();
+                        }
+                    } else {
+                        if (func1 !== null) {
+                            func1();
+                        }
+                    }
+                });
             }
         }
 
@@ -1395,6 +1503,12 @@ export module lwg {
             targetY: number;
             /**回调函数*/
             func: any
+            lwgInit(): void {
+                this.self.width = 115;
+                this.self.height = 111;
+                this.self.pivotX = this.self.width / 2;
+                this.self.pivotY = this.self.height / 2;
+            }
             initProperty(): void {
             }
             moveRules(): void {
@@ -1413,7 +1527,6 @@ export module lwg {
             }
         }
 
-
         /**
           * 创建类似于烟花爆炸动画，四周爆炸随机散开
           * @param parent 父节点
@@ -1425,7 +1538,7 @@ export module lwg {
             for (let index = 0; index < quantity; index++) {
                 let ele = Laya.Pool.getItemByClass('fireworks', Laya.Image) as Laya.Image;
                 ele.name = 'fireworks';//标识符和名称一样
-                let num = Math.floor(Math.random() * 12);
+                let num = 12 + Math.floor(Math.random() * 11);
                 ele.alpha = 1;
                 ele.skin = SkinUrl[num];
                 parent.addChild(ele);
@@ -1439,6 +1552,13 @@ export module lwg {
 
         /**类似烟花爆炸，速度逐渐减慢，并且有下降趋势*/
         export class Fireworks extends lwg.Effects.EffectsBase {
+            lwgInit(): void {
+                this.self.width = 41;
+                this.self.height = 41;
+                this.self.pivotX = this.self.width / 2;
+                this.self.pivotY = this.self.height / 2;
+            }
+
             initProperty(): void {
                 this.startAngle = 360 * Math.random();
                 this.startSpeed = 5 * Math.random() + 5;
@@ -1497,6 +1617,13 @@ export module lwg {
         export class leftOrRightJet extends lwg.Effects.EffectsBase {
             direction: string;
             randomRotate: number;
+
+            lwgInit(): void {
+                this.self.width = 41;
+                this.self.height = 41;
+                this.self.pivotX = this.self.width / 2;
+                this.self.pivotY = this.self.height / 2;
+            }
             initProperty(): void {
                 if (this.direction === 'left') {
                     this.startAngle = 100 * Math.random() - 90 + 45 - 10 - 20;
@@ -1531,7 +1658,6 @@ export module lwg {
             }
         }
     }
-
 
     /**加载一些骨骼动画，在loding界面出现的时候执行skLoding()方法*/
     export module Sk {

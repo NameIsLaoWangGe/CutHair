@@ -847,13 +847,11 @@
                     this.selfScene = this.self.scene;
                     let calssName = this['__proto__']['constructor'].name;
                     this.self[calssName] = this;
-                    this.self.pivotX = this.self.width / 2;
-                    this.self.pivotY = this.self.height / 2;
                     this.timer = 0;
-                    this.lwgOnEnable();
+                    this.lwgInit();
                     this.propertyAssign();
                 }
-                lwgOnEnable() {
+                lwgInit() {
                 }
                 initProperty() {
                 }
@@ -879,6 +877,9 @@
                 }
                 onDisable() {
                     Laya.Pool.recover(this.self.name, this.self);
+                    this.destroy();
+                    Laya.Tween.clearAll(this);
+                    Laya.timer.clearAll(this);
                 }
             }
             Effects.EffectsBase = EffectsBase;
@@ -897,37 +898,121 @@
                     ele.alpha = 1;
                     parent.addChild(ele);
                     ele.pos(x, y);
-                    let scirpt = ele.getComponent(commonExplosion);
-                    if (!scirpt) {
-                        scirpt = ele.addComponent(commonExplosion);
-                    }
-                    scirpt.startSpeed = 5 * Math.random() + speed;
-                    scirpt.continueTime = 8 * Math.random() + continueTime;
+                    let scirpt = ele.addComponent(commonExplosion);
+                    scirpt.startSpeed = Math.random() * speed;
+                    scirpt.continueTime = 2 * Math.random() + continueTime;
                 }
             }
             Effects.createCommonExplosion = createCommonExplosion;
             class commonExplosion extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 25;
+                    this.self.height = 25;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
                 initProperty() {
                     this.startAngle = 360 * Math.random();
                     this.startSpeed = 5 * Math.random() + 8;
                     this.startScale = 0.4 + Math.random() * 0.6;
-                    this.accelerated = 0.1;
+                    this.accelerated = 2;
                     this.continueTime = 8 + Math.random() * 10;
+                    this.rotateDir = Math.floor(Math.random() * 2) === 1 ? 'left' : 'right';
+                    this.rotateRan = Math.random() * 10;
                 }
                 moveRules() {
                     this.timer++;
-                    if (this.timer >= this.continueTime / 2) {
-                        this.self.alpha -= 0.1;
-                    }
-                    if (this.timer >= this.continueTime) {
-                        this.self.removeSelf();
+                    if (this.rotateDir === 'left') {
+                        this.self.rotation += this.rotateRan;
                     }
                     else {
-                        this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
+                        this.self.rotation -= this.rotateRan;
                     }
+                    if (this.timer >= this.continueTime / 2) {
+                        this.self.alpha -= 0.04;
+                        if (this.self.alpha <= 0.65) {
+                            this.self.removeSelf();
+                        }
+                    }
+                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
+                    this.accelerated += 0.2;
                 }
             }
             Effects.commonExplosion = commonExplosion;
+            function createExplosion_Rotate(parent, quantity, x, y, style, speed, rotate) {
+                for (let index = 0; index < quantity; index++) {
+                    let ele = Laya.Pool.getItemByClass('ele', Laya.Image);
+                    ele.name = 'ele';
+                    let num;
+                    if (style === 'star') {
+                        num = 12 + Math.floor(Math.random() * 12);
+                    }
+                    else if (style === 'dot') {
+                        num = Math.floor(Math.random() * 12);
+                    }
+                    ele.skin = SkinUrl[num];
+                    ele.alpha = 1;
+                    parent.addChild(ele);
+                    ele.pos(x, y);
+                    let scirpt = ele.addComponent(Explosion_Rotate);
+                    scirpt.startSpeed = 2 + Math.random() * speed;
+                    scirpt.rotateRan = Math.random() * rotate;
+                }
+            }
+            Effects.createExplosion_Rotate = createExplosion_Rotate;
+            class Explosion_Rotate extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 41;
+                    this.self.height = 41;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
+                initProperty() {
+                    this.startAngle = 360 * Math.random();
+                    this.startSpeed = 5 * Math.random() + 8;
+                    this.startScale = 0.4 + Math.random() * 0.6;
+                    this.accelerated = 0;
+                    this.continueTime = 5 + Math.random() * 20;
+                    this.rotateDir = Math.floor(Math.random() * 2) === 1 ? 'left' : 'right';
+                    this.rotateRan = Math.random() * 15;
+                }
+                moveRules() {
+                    if (this.rotateDir === 'left') {
+                        this.self.rotation += this.rotateRan;
+                    }
+                    else {
+                        this.self.rotation -= this.rotateRan;
+                    }
+                    if (this.startSpeed - this.accelerated <= 0.1) {
+                        this.self.alpha -= 0.03;
+                        if (this.self.alpha <= 0) {
+                            this.self.removeSelf();
+                        }
+                    }
+                    else {
+                        this.accelerated += 0.2;
+                    }
+                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed - this.accelerated);
+                }
+            }
+            Effects.Explosion_Rotate = Explosion_Rotate;
+            function getGoldAni(parent, number, fX, fY, tX, tY, func1, func2) {
+                for (let index = 0; index < number; index++) {
+                    lwg.Effects.createAddGold(parent, index, fX, fY, tX, tY, f => {
+                        if (index === number - 1) {
+                            if (func2 !== null) {
+                                func2();
+                            }
+                        }
+                        else {
+                            if (func1 !== null) {
+                                func1();
+                            }
+                        }
+                    });
+                }
+            }
+            Effects.getGoldAni = getGoldAni;
             function createAddGold(parent, index, x, y, targetX, targetY, func) {
                 let ele = Laya.Pool.getItemByClass('addGold', Laya.Image);
                 ele.name = 'addGold';
@@ -959,6 +1044,12 @@
             }
             Effects.createAddGold = createAddGold;
             class AddGold extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 115;
+                    this.self.height = 111;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
                 initProperty() {
                 }
                 moveRules() {
@@ -981,7 +1072,7 @@
                 for (let index = 0; index < quantity; index++) {
                     let ele = Laya.Pool.getItemByClass('fireworks', Laya.Image);
                     ele.name = 'fireworks';
-                    let num = Math.floor(Math.random() * 12);
+                    let num = 12 + Math.floor(Math.random() * 11);
                     ele.alpha = 1;
                     ele.skin = SkinUrl[num];
                     parent.addChild(ele);
@@ -994,6 +1085,12 @@
             }
             Effects.createFireworks = createFireworks;
             class Fireworks extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 41;
+                    this.self.height = 41;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
                 initProperty() {
                     this.startAngle = 360 * Math.random();
                     this.startSpeed = 5 * Math.random() + 5;
@@ -1045,6 +1142,12 @@
             }
             Effects.createLeftOrRightJet = createLeftOrRightJet;
             class leftOrRightJet extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 41;
+                    this.self.height = 41;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
                 initProperty() {
                     if (this.direction === 'left') {
                         this.startAngle = 100 * Math.random() - 90 + 45 - 10 - 20;
@@ -3236,9 +3339,6 @@
             lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
         }
         btnLastUp(e) {
-            this.lastPosX = null;
-            this.lastPosY = null;
-            this.lastPosY = null;
             this.BtnLast.visible = false;
             this.moveSwitch = false;
             e.stopPropagation();
@@ -3253,6 +3353,9 @@
             this.moveSwitch = true;
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
+            this.lastPosX = null;
+            this.lastPosY = null;
+            this.lastPosZ = null;
             if (GVariate._taskArr[GVariate._taskNum] === GEnum.TaskType.sideHair) {
                 return;
             }
@@ -3316,14 +3419,19 @@
                     let diffX = hitResult.point.x - this.lastPosX;
                     let diffY = hitResult.point.y - this.lastPosY;
                     let diffZ = hitResult.point.z - this.lastPosZ;
-                    GSene3D.knife.transform.position = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
+                    let v3 = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
+                    let p = Tools.twoSubV3_3D(v3, GSene3D.Headcollision.transform.position, true);
+                    let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
+                    let unit = 0.1 * (1.05 - len);
+                    GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
+                    GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
                     this.lastPosX = hitResult.point.x;
                     this.lastPosY = hitResult.point.y;
                     this.lastPosZ = hitResult.point.z;
-                    GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
                 }
             }
             else {
+                console.log('出屏了！');
                 this.lastPosX = null;
                 this.lastPosY = null;
                 this.lastPosY = null;
