@@ -3264,7 +3264,6 @@
                         break;
                 }
             }
-            console.log(this._numZoder);
         }
         monitorHiarLen() {
             let _sideHairNum = this._sideHairNum;
