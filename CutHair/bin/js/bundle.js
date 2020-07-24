@@ -2916,6 +2916,9 @@
         selfNode() {
             GSene3D.Head = GSene3D.Level.getChildByName('Head');
             GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision');
+            GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle');
+            GSene3D.HingeUp = GSene3D.Headcollision.getChildByName('HingeUp');
+            GSene3D.HingeDown = GSene3D.Headcollision.getChildByName('HingeDown');
             let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D);
             TouchHeadRig.restitution = 0;
             GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent');
@@ -2925,6 +2928,9 @@
             GSene3D.UpRightBeard = GSene3D.Head.getChildByName('UpRightBeard');
             GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard');
             GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate');
+            GSene3D.HingeMiddle_H = GSene3D.HeadSimulate.getChildByName('HingeMiddle_H');
+            GSene3D.HingeUp_H = GSene3D.HeadSimulate.getChildByName('HingeUp_H');
+            GSene3D.HingeDown_H = GSene3D.HeadSimulate.getChildByName('HingeDown_H');
             GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
             GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
             GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
@@ -3420,18 +3426,22 @@
                     let diffY = hitResult.point.y - this.lastPosY;
                     let diffZ = hitResult.point.z - this.lastPosZ;
                     let v3 = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
-                    let p = Tools.twoSubV3_3D(v3, GSene3D.Headcollision.transform.position, true);
-                    let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
-                    let unit = 0.1 * (1.05 - len);
-                    GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
-                    GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
+                    if (hitResult.point.y >= GSene3D.HingeUp_H.transform.position.y) ;
+                    else if (hitResult.point.y <= GSene3D.HingeDown_H.transform.position.y) ;
+                    else {
+                        GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                        GSene3D.HingeMiddle_H.transform.position = new Laya.Vector3(GSene3D.HingeMiddle_H.transform.position.x, hitResult.point.y, GSene3D.HingeMiddle_H.transform.position.z);
+                        let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.HingeMiddle_H.transform.position, true);
+                        let unit = 0.056;
+                        GSene3D.knife.transform.position = new Laya.Vector3(GSene3D.knife.transform.position.x + p.x * unit, GSene3D.knife.transform.position.y + p.y * unit, GSene3D.knife.transform.position.z + p.z * unit);
+                        GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    }
                     this.lastPosX = hitResult.point.x;
                     this.lastPosY = hitResult.point.y;
                     this.lastPosZ = hitResult.point.z;
                 }
             }
             else {
-                console.log('出屏了！');
                 this.lastPosX = null;
                 this.lastPosY = null;
                 this.lastPosY = null;

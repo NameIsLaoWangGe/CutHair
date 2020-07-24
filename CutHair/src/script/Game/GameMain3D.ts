@@ -29,6 +29,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         GSene3D.Head = GSene3D.Level.getChildByName('Head') as Laya.MeshSprite3D;
         GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision') as Laya.MeshSprite3D;
+        GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle') as Laya.MeshSprite3D;
+        GSene3D.HingeUp = GSene3D.Headcollision.getChildByName('HingeUp') as Laya.MeshSprite3D;
+        GSene3D.HingeDown = GSene3D.Headcollision.getChildByName('HingeDown') as Laya.MeshSprite3D;
+
         let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         TouchHeadRig.restitution = 0;
 
@@ -40,6 +44,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
 
         GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
+        GSene3D.HingeMiddle_H = GSene3D.HeadSimulate.getChildByName('HingeMiddle_H') as Laya.MeshSprite3D
+        GSene3D.HingeUp_H = GSene3D.HeadSimulate.getChildByName('HingeUp_H') as Laya.MeshSprite3D
+        GSene3D.HingeDown_H = GSene3D.HeadSimulate.getChildByName('HingeDown_H') as Laya.MeshSprite3D
 
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;

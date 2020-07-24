@@ -94,7 +94,7 @@ export module Global {
 
         /**头*/
         export let Head: Laya.MeshSprite3D;
-        export let headFPos: Laya.Vector3 = new Laya.Vector3();;
+        export let headFPos: Laya.Vector3 = new Laya.Vector3();
         export let headFEulerY: number;
         /**毛发的父节点*/
         export let HairParent: Laya.MeshSprite3D;
@@ -114,8 +114,15 @@ export module Global {
 
         /**头部碰撞框*/
         export let Headcollision: Laya.MeshSprite3D;
+        export let HingeMiddle:Laya.MeshSprite3D; 
+        export let HingeUp:Laya.MeshSprite3D; 
+        export let HingeDown:Laya.MeshSprite3D; 
+
         /**头部操作范围*/
         export let HeadSimulate: Laya.MeshSprite3D;
+        export let HingeMiddle_H:Laya.MeshSprite3D; 
+        export let HingeUp_H:Laya.MeshSprite3D; 
+        export let HingeDown_H:Laya.MeshSprite3D; 
 
         /**标记摄像机移动到任务的方位*/
         export let Landmark_Left: Laya.MeshSprite3D;

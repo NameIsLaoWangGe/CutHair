@@ -557,6 +557,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**左右刮刀的移动规则*/
     leftAndRightShaving(): void {
         let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name) as Laya.HitResult;
+        // console.log(hitResult);
         if (hitResult) {
             if (this.lastPosX === null || this.lastPosY === null || this.lastPosZ === null) {
                 this.lastPosX = hitResult.point.x;
@@ -568,28 +569,82 @@ export default class UIOperation extends lwg.Admin.Scene {
                 let diffY = hitResult.point.y - this.lastPosY;
                 let diffZ = hitResult.point.z - this.lastPosZ;
 
-                // 剃刀加上这些位置偏移
                 let v3 = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ)
                 // 设置最大范围值
-                let p = Tools.twoSubV3_3D(v3, GSene3D.Headcollision.transform.position, true);
-                let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
-                let unit: number = 0.1 * (1.05 - len);
-                GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
-                GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
+                // let p = Tools.twoSubV3_3D(v3, GSene3D.Headcollision.transform.position, true);
+                // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
+                // let unit: number = 0.1 * (1.05 - len);
+                // GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
+
+                if (hitResult.point.y >= GSene3D.HingeUp_H.transform.position.y) {
+
+                } else if (hitResult.point.y <= GSene3D.HingeDown_H.transform.position.y) {
+
+                } else {
+                    // 中间脚链的跟随和最大值范围
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+
+                    GSene3D.HingeMiddle_H.transform.position = new Laya.Vector3(GSene3D.HingeMiddle_H.transform.position.x, hitResult.point.y, GSene3D.HingeMiddle_H.transform.position.z);
+
+                    let p = Tools.twoSubV3_3D(hitResult.point, GSene3D.HingeMiddle_H.transform.position, true);
+                    // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.HingeMiddle);
+                    let unit: number = 0.056;
+                    GSene3D.knife.transform.position = new Laya.Vector3(GSene3D.knife.transform.position.x + p.x * unit, GSene3D.knife.transform.position.y + p.y * unit, GSene3D.knife.transform.position.z + p.z * unit);
+
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                }
+                // let num = 1.02;
+                // // 通过y轴的高度判断和三个脚链中哪一个进行连接
+                // if (GSene3D.knife.transform.position.y >= GSene3D.HingeUp.transform.position.y) {
+
+                //     //中间脚链的跟随和最大值范围
+                //     // let p = Tools.twoSubV3_3D(v3, GSene3D.HingeUp.transform.position, true);
+                //     // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.HingeUp);
+                //     // let unit: number = 0.1 * (num * 0.8 - len);
+                //     // GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
+                //     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                //     // console.log('和上面铰链进行连接！', unit);
+
+                // } else if (GSene3D.knife.transform.position.y <= GSene3D.HingeDown.transform.position.y) {
+
+                //     //中间脚链的跟随和最大值范围
+                //     // let p = Tools.twoSubV3_3D(v3, GSene3D.HingeDown.transform.position, true);
+                //     // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.HingeDown);
+                //     // let unit: number = 0.1 * (num * 0.8 - len);
+
+                //     // GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
+                //     GSene3D.knife.transform.lookAt(GSene3D.HingeDown.transform.position, new Laya.Vector3(0, 1, 0));
+
+                //     // console.log('和下面铰链进行连接！', unit);
+
+                // } else {
+                //     // 中间脚链的跟随和最大值范围
+                //     GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+
+                //     let p = Tools.twoSubV3_3D(v3, GSene3D.HingeMiddle.transform.position, true);
+                //     // let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.HingeMiddle);
+                //     let unit: number = 0.056;
+                //     GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
+                //     GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                // }
 
 
                 this.lastPosX = hitResult.point.x;
                 this.lastPosY = hitResult.point.y;
                 this.lastPosZ = hitResult.point.z;
 
+                // console.log(GSene3D.HeadSimulate.transform.position)
+
             }
         } else {
-            console.log('出屏了！');
+            // console.log('出范围了！');
             this.lastPosX = null;
             this.lastPosY = null;
             this.lastPosY = null;
         }
     }
+
+    /***/
 
     onStageMouseUp(e: Laya.Event) {
         this.lastPosX = null;
