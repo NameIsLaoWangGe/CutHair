@@ -44,9 +44,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
 
         GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
-        GSene3D.HingeMiddle_H = GSene3D.HeadSimulate.getChildByName('HingeMiddle_H') as Laya.MeshSprite3D
-        GSene3D.HingeUp_H = GSene3D.HeadSimulate.getChildByName('HingeUp_H') as Laya.MeshSprite3D
-        GSene3D.HingeDown_H = GSene3D.HeadSimulate.getChildByName('HingeDown_H') as Laya.MeshSprite3D
 
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
