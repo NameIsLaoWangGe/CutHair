@@ -2779,20 +2779,22 @@
                     if (otherOwnerParent['HairLen']) {
                         otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
                     }
-                    if (cutH >= 0.01) {
-                        let cutHair = otherOwnerParent.clone();
-                        cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
-                        let CutHairParent = GSene3D.Head.getChildByName('CutHairParent');
-                        cutHair.name = 'cutHair';
-                        CutHairParent.addChild(cutHair);
-                        cutHair.transform.position = this.self.transform.position;
-                        let cutHairline = cutHair.getChildAt(0);
-                        cutHairline.name = 'cutHairline';
-                        let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
-                        rig3D.isKinematic = false;
-                        rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
-                        rig3D.rollingFriction = 0;
-                        rig3D.restitution = 0;
+                    if (Math.floor(Math.random() * 5) === 1) {
+                        if (cutH >= 0.01) {
+                            let cutHair = otherOwnerParent.clone();
+                            cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                            let CutHairParent = GSene3D.Head.getChildByName('CutHairParent');
+                            cutHair.name = 'cutHair';
+                            CutHairParent.addChild(cutHair);
+                            cutHair.transform.position = this.self.transform.position;
+                            let cutHairline = cutHair.getChildAt(0);
+                            cutHairline.name = 'cutHairline';
+                            let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
+                            rig3D.isKinematic = false;
+                            rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
+                            rig3D.rollingFriction = 0;
+                            rig3D.restitution = 0;
+                        }
                     }
                     break;
                 case 'standard':
@@ -3278,7 +3280,7 @@
                     },
                     set setValue(v) {
                         if (this.detection) {
-                            if (v < 0.13) {
+                            if (v < 0.15) {
                                 this.detection = false;
                                 _sideHairNum.setValue = _sideHairNum.value - 1;
                             }

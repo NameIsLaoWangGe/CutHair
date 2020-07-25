@@ -36,23 +36,26 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 if (otherOwnerParent['HairLen']) {
                     otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
                 }
-                // 过短则不生成，否则太多太碎
-                if (cutH >= 0.01) {
-                    // 克隆一个掉落的头发，并且使其掉落
-                    let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
-                    cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
-                    let CutHairParent = GSene3D.Head.getChildByName('CutHairParent') as Laya.MeshSprite3D;
-                    cutHair.name = 'cutHair';
-                    CutHairParent.addChild(cutHair);
-                    cutHair.transform.position = this.self.transform.position;
+                // 三分之一概率不生成
+                if (Math.floor(Math.random() * 5) === 1) {
+                    // 过短则不生成，否则太多太碎
+                    if (cutH >= 0.01) {
+                        // 克隆一个掉落的头发，并且使其掉落
+                        let cutHair = otherOwnerParent.clone() as Laya.MeshSprite3D;
+                        cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                        let CutHairParent = GSene3D.Head.getChildByName('CutHairParent') as Laya.MeshSprite3D;
+                        cutHair.name = 'cutHair';
+                        CutHairParent.addChild(cutHair);
+                        cutHair.transform.position = this.self.transform.position;
 
-                    let cutHairline = cutHair.getChildAt(0);
-                    cutHairline.name = 'cutHairline';
-                    let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-                    rig3D.isKinematic = false;
-                    rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
-                    rig3D.rollingFriction = 0;
-                    rig3D.restitution = 0;
+                        let cutHairline = cutHair.getChildAt(0);
+                        cutHairline.name = 'cutHairline';
+                        let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+                        rig3D.isKinematic = false;
+                        rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
+                        rig3D.rollingFriction = 0;
+                        rig3D.restitution = 0;
+                    }
                 }
 
                 break;

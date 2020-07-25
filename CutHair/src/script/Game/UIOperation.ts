@@ -354,7 +354,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 },
                 set setValue(v: number) {
                     if (this.detection) {
-                        if (v < 0.13) {
+                        if (v < 0.15) {
                             // console.log('这根头发理完了！');
                             this.detection = false;
                             _sideHairNum.setValue = _sideHairNum.value - 1;
