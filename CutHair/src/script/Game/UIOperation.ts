@@ -44,7 +44,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余左侧胡须', this.value);
-                if (this.value <= 3) {
+                if (this.value <= 25) {
                     console.log('任务完成了！');
                     this.switch = false;
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -64,7 +64,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余剩余右侧胡须', this.value);
-                if (this.value <= 3) {
+                if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -84,7 +84,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余中间胡子', this.value);
-                if (this.value <= 3) {
+                if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -104,7 +104,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余右上角', this.value);
-                if (this.value <= 3) {
+                if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -124,7 +124,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余左上角', this.value);
-                if (this.value <= 3) {
+                if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -311,8 +311,8 @@ export default class UIOperation extends lwg.Admin.Scene {
 
                     break;
                 case GEnum.TaskType.middleBeard:
-                    this._middleBeardNum.setValue = GSene3D.RightBeard.numChildren;
-                    this._middleBeardNum.sum = GSene3D.RightBeard.numChildren;
+                    this._middleBeardNum.setValue = GSene3D.MiddleBeard.numChildren;
+                    this._middleBeardNum.sum = GSene3D.MiddleBeard.numChildren;
                     this._middleBeardNum.index = index;
                     this._numZoder.push(this._middleBeardNum);
 

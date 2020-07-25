@@ -1,6 +1,5 @@
 import { lwg } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
-
 export default class UILoding extends lwg.Admin.Scene {
     constructor() { super(); }
 
@@ -25,7 +24,7 @@ export default class UILoding extends lwg.Admin.Scene {
         scene[lwg.Admin.SceneName.GameMain3D] = scene.getComponent(GameMain3D);
         lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, null);
     }
-    
+
     lwgDisable(): void {
 
     }

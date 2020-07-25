@@ -37,7 +37,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                     otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
                 }
                 // 三分之一概率不生成
-                if (Math.floor(Math.random() * 5) === 1) {
+                if (Math.floor(Math.random() * 4) === 1) {
                     // 过短则不生成，否则太多太碎
                     if (cutH >= 0.01) {
                         // 克隆一个掉落的头发，并且使其掉落

@@ -125,33 +125,9 @@ export module record {
         '节点的长宽' = '节点的属性面板中，无论是sprite还是img只要在游戏中需要改变其图片，并且图片的大小发生了变化，只需要把节点的长宽变为空值auto即可，如果不变为auto，无论怎么换图片都是一样的大小，会压缩或者拉伸'
     }
 
-    // "res/atlas/Effects.atlas": [
-    //     "Effects/",
-    //     [
-    //         "cir_black.png",
-    //         "cir_blue.png",
-    //         "cir_bluish.png",
-    //         "cir_cyan.png",
-    //         "cir_grass.png",
-    //         "cir_green.png",
-    //         "cir_orange.png",
-    //         "cir_pink.png",
-    //         "cir_purple.png",
-    //         "cir_red.png",
-    //         "cir_white.png",
-    //         "cir_yellow.png",
-    //         "star_black.png",
-    //         "star_blue.png",
-    //         "star_bluish.png",
-    //         "star_cyan.png",
-    //         "star_grass.png",
-    //         "star_green.png",
-    //         "star_orange.png",
-    //         "star_pink.png",
-    //         "star_purple.png",
-    //         "star_red.png",
-    //         "star_white.png",
-    //         "star_yellow.png"
-    //     ]
-    // ]
+
+    export enum Laya3D {
+        '_defaultPhysicsMemory'= '如果出现内存不够的情况‘abort Cannot enlarge memory arrays’，在Laya.d3.js中的构造函数中改变this._defaultPhysicsMemory = 512;'
+
+    }
 }
