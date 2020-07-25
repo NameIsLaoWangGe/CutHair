@@ -569,7 +569,7 @@
 						0.1000001
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":false,
+					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -612,9 +612,9 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.889,
-						93.518,
-						6.557
+						0.973,
+						93.469,
+						6.582
 					],
 					"rotation":[
 						0,
@@ -628,7 +628,7 @@
 						0.1000001
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":false,
+					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -687,7 +687,7 @@
 						0.1
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":false,
+					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -746,7 +746,7 @@
 						0.1000001
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":false,
+					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -805,7 +805,7 @@
 						0.1000001
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":false,
+					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -1383,7 +1383,7 @@
 									"position":[
 										0.227,
 										0.103,
-										-0.005
+										0.002
 									],
 									"rotation":[
 										0,
@@ -1423,6 +1423,24 @@
 										],
 										"shapes":[
 											{
+												"type":"SphereColliderShape",
+												"center":[
+													-0.24,
+													0.11,
+													0.41
+												],
+												"radius":0.09
+											},
+											{
+												"type":"SphereColliderShape",
+												"center":[
+													0.24,
+													0.11,
+													0.41
+												],
+												"radius":0.09
+											},
+											{
 												"type":"CapsuleColliderShape",
 												"center":[
 													0,
@@ -1431,6 +1449,17 @@
 												],
 												"radius":0.5,
 												"height":1.8,
+												"orientation":1
+											},
+											{
+												"type":"CapsuleColliderShape",
+												"center":[
+													0,
+													-0.01,
+													0.49
+												],
+												"radius":0.05,
+												"height":0.28,
 												"orientation":1
 											}
 										],
@@ -1463,7 +1492,7 @@
 												0.1
 											],
 											"meshPath":"Library/unity default resources-Cube.lm",
-											"enableRender":false,
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -1518,7 +1547,7 @@
 												0.1
 											],
 											"meshPath":"Library/unity default resources-Cube.lm",
-											"enableRender":false,
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -1573,7 +1602,7 @@
 												0.1
 											],
 											"meshPath":"Library/unity default resources-Cube.lm",
-											"enableRender":false,
+											"enableRender":true,
 											"materials":[
 												{
 													"type":"Laya.BlinnPhongMaterial",
@@ -1615,8 +1644,8 @@
 									"layer":0,
 									"position":[
 										0.227,
-										0.103,
-										-0.005
+										0.1029968,
+										0.001999855
 									],
 									"rotation":[
 										0,
@@ -1656,6 +1685,24 @@
 										],
 										"shapes":[
 											{
+												"type":"SphereColliderShape",
+												"center":[
+													-0.24,
+													0.11,
+													0.41
+												],
+												"radius":0.09
+											},
+											{
+												"type":"SphereColliderShape",
+												"center":[
+													0.24,
+													0.11,
+													0.41
+												],
+												"radius":0.09
+											},
+											{
 												"type":"CapsuleColliderShape",
 												"center":[
 													0,
@@ -1664,6 +1711,17 @@
 												],
 												"radius":0.5,
 												"height":1.8,
+												"orientation":1
+											},
+											{
+												"type":"CapsuleColliderShape",
+												"center":[
+													0,
+													-0.01,
+													0.49
+												],
+												"radius":0.05,
+												"height":0.28,
 												"orientation":1
 											}
 										],
@@ -2081,21 +2139,7 @@
 												}
 											]
 										},
-										"components":[
-											{
-												"type":"PhysicsCollider",
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"shapes":[
-													{
-														"type":"MeshColliderShape",
-														"mesh":"Assets/Mesh_new/ren-tou.lm"
-													}
-												],
-												"isTrigger":false
-											}
-										],
+										"components":[],
 										"child":[]
 									},
 									{
@@ -14175,7 +14219,7 @@
 								]
 							}
 						],
-						"isTrigger":false
+						"isTrigger":true
 					}
 				],
 				"child":[
@@ -14195,8 +14239,8 @@
 							"rotation":[
 								0,
 								0,
-								0,
-								-1
+								0.1305262,
+								-0.9914449
 							],
 							"scale":[
 								1,
@@ -14247,15 +14291,15 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-2,
+								-3,
 								0,
 								0
 							],
 							"rotation":[
 								0,
 								0,
-								0,
-								-1
+								0.1305262,
+								-0.9914449
 							],
 							"scale":[
 								1,
@@ -14306,15 +14350,15 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-4,
+								-6,
 								0,
 								0
 							],
 							"rotation":[
 								0,
 								0,
-								0,
-								-1
+								0.1305262,
+								-0.9914449
 							],
 							"scale":[
 								1,
@@ -14365,15 +14409,15 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-6,
+								-9,
 								0,
 								0
 							],
 							"rotation":[
 								0,
 								0,
-								0,
-								-1
+								0.1305262,
+								-0.9914449
 							],
 							"scale":[
 								1,
@@ -14424,15 +14468,15 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-8,
+								-12,
 								0,
 								0
 							],
 							"rotation":[
 								0,
 								0,
-								0,
-								-1
+								0.1305262,
+								-0.9914449
 							],
 							"scale":[
 								1,

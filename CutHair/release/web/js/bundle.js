@@ -2916,6 +2916,9 @@
         selfNode() {
             GSene3D.Head = GSene3D.Level.getChildByName('Head');
             GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision');
+            GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle');
+            GSene3D.HingeUp = GSene3D.Headcollision.getChildByName('HingeUp');
+            GSene3D.HingeDown = GSene3D.Headcollision.getChildByName('HingeDown');
             let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D);
             TouchHeadRig.restitution = 0;
             GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent');
@@ -3261,7 +3264,6 @@
                         break;
                 }
             }
-            console.log(this._numZoder);
         }
         monitorHiarLen() {
             let _sideHairNum = this._sideHairNum;
@@ -3298,35 +3300,42 @@
                     break;
                 case GEnum.TaskType.rightBeard:
                     GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
-                    GSene3D.knife.transform.localRotationEuler = GSene3D.RightSignknife.transform.localRotationEuler;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.leftBeard:
                     GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
-                    GSene3D.knife.transform.localRotationEuler = GSene3D.LeftSignknife.transform.localRotationEuler;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.middleBeard:
                     GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
-                    GSene3D.knife.transform.localRotationEuler = GSene3D.MiddleSignknife.transform.localRotationEuler;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.upLeftBeard:
                     GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
-                    GSene3D.knife.transform.localRotationEuler = GSene3D.UpLeftKnife.transform.localRotationEuler;
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                    let Model2 = GSene3D.knife.getChildAt(0);
+                    Model2.transform.localRotationEulerX = -200;
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.upRightBeard:
                     GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
-                    GSene3D.knife.transform.localRotationEuler = GSene3D.UpRightKnife.transform.localRotationEuler;
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                    let Model1 = GSene3D.knife.getChildAt(0);
+                    Model1.transform.localRotationEulerX = -180;
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
@@ -3353,22 +3362,13 @@
             this.moveSwitch = true;
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
-            this.lastPosX = null;
-            this.lastPosY = null;
-            this.lastPosZ = null;
-            if (GVariate._taskArr[GVariate._taskNum] === GEnum.TaskType.sideHair) {
-                return;
-            }
             let Camera = GSene3D.MainCamera.getChildByName('MainCamera');
-            let pointknife = Tools.transitionScreenPointfor3D(GSene3D.knife.transform.position, Camera);
-            let pointHead = Tools.transitionScreenPointfor3D(GSene3D.Headcollision.transform.position, Camera);
-            let diffX = pointknife.x - pointHead.x;
-            let diffY = pointknife.y - pointHead.y;
-            let touchDiffX = this.touchPosX - diffX;
-            let touchDiffY = this.touchPosY - diffY;
-            let hitResult_Diff = Tools.rayScanning(Camera, GSene3D.GameMain3D, new Laya.Vector2(touchDiffX, touchDiffY), GSene3D.TouchScreen.name);
-            if (hitResult_Diff) {
-                GSene3D.HeadSimulate.transform.position = hitResult_Diff.point;
+            let hitResult_Touch = Tools.rayScanning(Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.TouchScreen.name);
+            if (hitResult_Touch) {
+                let x = GSene3D.Headcollision.transform.position.x - GSene3D.knife.transform.position.x + hitResult_Touch.point.x;
+                let y = GSene3D.Headcollision.transform.position.y - GSene3D.knife.transform.position.y + hitResult_Touch.point.y;
+                let z = GSene3D.Headcollision.transform.position.z - GSene3D.knife.transform.position.z + hitResult_Touch.point.z;
+                GSene3D.HeadSimulate.transform.position = new Laya.Vector3(x, y, z);
             }
         }
         onStageMouseMove(e) {
@@ -3388,59 +3388,45 @@
                         GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
                         break;
                     case GEnum.TaskType.leftBeard:
-                        this.leftAndRightShaving();
+                        this.knifeMove();
                         break;
                     case GEnum.TaskType.rightBeard:
-                        this.leftAndRightShaving();
+                        this.knifeMove();
                         break;
                     case GEnum.TaskType.middleBeard:
-                        this.leftAndRightShaving();
+                        this.knifeMove();
                         break;
                     case GEnum.TaskType.upRightBeard:
-                        this.leftAndRightShaving();
+                        this.knifeMove();
                         break;
                     case GEnum.TaskType.upLeftBeard:
-                        this.leftAndRightShaving();
+                        this.knifeMove();
                         break;
                     default:
                         break;
                 }
             }
         }
-        leftAndRightShaving() {
+        knifeMove() {
             let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
             if (hitResult) {
-                if (this.lastPosX === null || this.lastPosY === null || this.lastPosZ === null) {
-                    this.lastPosX = hitResult.point.x;
-                    this.lastPosY = hitResult.point.y;
-                    this.lastPosZ = hitResult.point.z;
+                let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
+                let y = GSene3D.Headcollision.transform.position.y - (GSene3D.HeadSimulate.transform.position.y - hitResult.point.y);
+                let z = GSene3D.Headcollision.transform.position.z - (GSene3D.HeadSimulate.transform.position.z - hitResult.point.z);
+                GSene3D.knife.transform.position = new Laya.Vector3(x, y, z);
+                if (GSene3D.knife.transform.position.y >= GSene3D.HingeUp.transform.position.y) {
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                }
+                else if (GSene3D.knife.transform.position.y <= GSene3D.HingeDown.transform.position.y) {
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeDown.transform.position, new Laya.Vector3(0, 1, 0));
                 }
                 else {
-                    let diffX = hitResult.point.x - this.lastPosX;
-                    let diffY = hitResult.point.y - this.lastPosY;
-                    let diffZ = hitResult.point.z - this.lastPosZ;
-                    let v3 = new Laya.Vector3(GSene3D.knife.transform.position.x + diffX, GSene3D.knife.transform.position.y + diffY, GSene3D.knife.transform.position.z + diffZ);
-                    let p = Tools.twoSubV3_3D(v3, GSene3D.Headcollision.transform.position, true);
-                    let len = Tools.twoObjectsLen_3D(GSene3D.knife, GSene3D.Headcollision);
-                    let unit = 0.1 * (1.05 - len);
-                    GSene3D.knife.transform.position = new Laya.Vector3(v3.x + p.x * unit, v3.y + p.y * unit, v3.z + p.z * unit);
-                    GSene3D.knife.transform.lookAt(GSene3D.Headcollision.transform.position, new Laya.Vector3(0, 1, 0));
-                    this.lastPosX = hitResult.point.x;
-                    this.lastPosY = hitResult.point.y;
-                    this.lastPosZ = hitResult.point.z;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
                 }
-            }
-            else {
-                console.log('出屏了！');
-                this.lastPosX = null;
-                this.lastPosY = null;
-                this.lastPosY = null;
             }
         }
         onStageMouseUp(e) {
-            this.lastPosX = null;
-            this.lastPosY = null;
-            this.lastPosY = null;
             this.touchPosX = null;
             this.touchPosY = null;
             this.moveSwitch = false;

@@ -30,14 +30,14 @@
 					"layer":0,
 					"position":[
 						0.24,
-						95.75,
-						4.72
+						93.7,
+						1.978
 					],
 					"rotation":[
-						-0.3433319,
 						0,
 						0,
-						-0.9392142
+						0,
+						-1
 					],
 					"scale":[
 						0.1,
@@ -141,8 +141,8 @@
 					"layer":0,
 					"position":[
 						0.13,
-						95.75,
-						8
+						95.71,
+						8.16
 					],
 					"rotation":[
 						0,
@@ -159,6 +159,7 @@
 					"enableRender":true,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -217,6 +218,7 @@
 					"enableRender":true,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -275,6 +277,7 @@
 					"enableRender":true,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -333,6 +336,7 @@
 					"enableRender":true,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -391,6 +395,7 @@
 					"enableRender":true,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -430,15 +435,15 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						3.4,
+						3.64,
 						93.34,
-						6.44
+						6.6
 					],
 					"rotation":[
 						0,
-						0.6846744,
+						0.7071068,
 						0,
-						-0.7288491
+						-0.7071068
 					],
 					"scale":[
 						0.1,
@@ -449,6 +454,7 @@
 					"enableRender":true,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -507,6 +513,7 @@
 					"enableRender":false,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -546,9 +553,9 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.6004772,
+						0.623,
 						93.34117,
-						6.07646
+						6.019
 					],
 					"rotation":[
 						0,
@@ -565,6 +572,7 @@
 					"enableRender":false,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -604,15 +612,15 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.8424772,
-						93.34117,
-						6.63946
+						0.889,
+						93.518,
+						6.557
 					],
 					"rotation":[
 						0,
-						0.6615805,
+						0.7042419,
 						0,
-						0.7498742
+						0.70996
 					],
 					"scale":[
 						0.5000004,
@@ -623,6 +631,7 @@
 					"enableRender":false,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -662,9 +671,9 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.5804772,
+						0.573,
 						93.34117,
-						7.11046
+						7.169
 					],
 					"rotation":[
 						0,
@@ -681,6 +690,7 @@
 					"enableRender":false,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -720,15 +730,15 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.26,
-						94.384,
-						5.91
+						0.206,
+						94.412,
+						5.887
 					],
 					"rotation":[
 						0,
-						0.9981708,
 						0,
-						0.06045713
+						0,
+						-1
 					],
 					"scale":[
 						0.5000002,
@@ -739,6 +749,7 @@
 					"enableRender":false,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -778,15 +789,15 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.013,
-						94.384,
-						7.205
+						0.206,
+						94.412,
+						7.228
 					],
 					"rotation":[
 						0,
-						0.9981708,
 						0,
-						0.06045713
+						0,
+						-1
 					],
 					"scale":[
 						0.5000002,
@@ -797,6 +808,7 @@
 					"enableRender":false,
 					"materials":[
 						{
+							"type":"Laya.BlinnPhongMaterial",
 							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
@@ -1080,6 +1092,7 @@
 											"enableRender":true,
 											"materials":[
 												{
+													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Mesh/Razor.lmat"
 												}
 											]
@@ -1115,6 +1128,7 @@
 											"enableRender":true,
 											"materials":[
 												{
+													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Mesh/Razor.lmat"
 												}
 											]
@@ -1150,6 +1164,7 @@
 											"enableRender":true,
 											"materials":[
 												{
+													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Mesh/Razor.lmat"
 												}
 											]
@@ -1185,6 +1200,7 @@
 											"enableRender":true,
 											"materials":[
 												{
+													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Mesh/Razor.lmat"
 												}
 											]
@@ -1220,6 +1236,7 @@
 											"enableRender":true,
 											"materials":[
 												{
+													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Mesh/Razor.lmat"
 												}
 											]
@@ -1255,6 +1272,7 @@
 											"enableRender":true,
 											"materials":[
 												{
+													"type":"Laya.BlinnPhongMaterial",
 													"path":"Assets/Mesh/Razor.lmat"
 												}
 											]
@@ -1363,9 +1381,9 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.167,
-										0.164,
-										0
+										0.227,
+										0.103,
+										-0.005
 									],
 									"rotation":[
 										0,
@@ -1375,229 +1393,14 @@
 									],
 									"scale":[
 										1.4,
-										1.13,
+										1.2,
 										1.4
 									],
 									"meshPath":"Library/unity default resources-Capsule.lm",
 									"enableRender":false,
 									"materials":[
 										{
-											"path":"Resources/unity_builtin_extra.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":20,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":true,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":31,
-								"props":{
-									"name":"HingeMiddle",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.167,
-										-0.025,
-										0
-									],
-									"rotation":[
-										0,
-										-0.7071068,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										0.1,
-										0.1,
-										0.1
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Resources/unity_builtin_extra.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":20,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":true,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":32,
-								"props":{
-									"name":"HingeUp",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.167,
-										0.654,
-										0
-									],
-									"rotation":[
-										0,
-										-0.7071068,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										0.1000001,
-										0.09999999,
-										0.1000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Resources/unity_builtin_extra.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":20,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":true,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":33,
-								"props":{
-									"name":"HingeDown",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.167,
-										-0.61,
-										0
-									],
-									"rotation":[
-										0,
-										-0.7071068,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										0.1000001,
-										0.09999999,
-										0.1000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Resources/unity_builtin_extra.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":20,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":true,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":34,
-								"props":{
-									"name":"HeadSimulate",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.167,
-										-2.88,
-										0
-									],
-									"rotation":[
-										0,
-										-0.7071068,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1.3,
-										1.3,
-										1.3
-									],
-									"meshPath":"Library/unity default resources-Capsule.lm",
-									"enableRender":false,
-									"materials":[
-										{
+											"type":"Laya.BlinnPhongMaterial",
 											"path":"Resources/unity_builtin_extra.lmat"
 										}
 									]
@@ -1627,7 +1430,240 @@
 													0
 												],
 												"radius":0.5,
-												"height":2,
+												"height":1.8,
+												"orientation":1
+											}
+										],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":31,
+										"props":{
+											"name":"HingeMiddle",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												0,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												0.1,
+												0.1,
+												0.1
+											],
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":false,
+											"materials":[
+												{
+													"type":"Laya.BlinnPhongMaterial",
+													"path":"Resources/unity_builtin_extra.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":20,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":true,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									},
+									{
+										"type":"MeshSprite3D",
+										"instanceID":32,
+										"props":{
+											"name":"HingeUp",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												0.4999999,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												0.1,
+												0.1,
+												0.1
+											],
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":false,
+											"materials":[
+												{
+													"type":"Laya.BlinnPhongMaterial",
+													"path":"Resources/unity_builtin_extra.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":20,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":true,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									},
+									{
+										"type":"MeshSprite3D",
+										"instanceID":33,
+										"props":{
+											"name":"HingeDown",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												-0.5000001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												0.1,
+												0.1,
+												0.1
+											],
+											"meshPath":"Library/unity default resources-Cube.lm",
+											"enableRender":false,
+											"materials":[
+												{
+													"type":"Laya.BlinnPhongMaterial",
+													"path":"Resources/unity_builtin_extra.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":20,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":true,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":34,
+								"props":{
+									"name":"HeadSimulate",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.227,
+										0.103,
+										-0.005
+									],
+									"rotation":[
+										0,
+										-0.7071068,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1.4,
+										1.2,
+										1.4
+									],
+									"meshPath":"Library/unity default resources-Capsule.lm",
+									"enableRender":false,
+									"materials":[
+										{
+											"type":"Laya.BlinnPhongMaterial",
+											"path":"Resources/unity_builtin_extra.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":20,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":true,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"CapsuleColliderShape",
+												"center":[
+													0,
+													0,
+													0
+												],
+												"radius":0.5,
+												"height":1.8,
 												"orientation":1
 											}
 										],
@@ -2045,7 +2081,21 @@
 												}
 											]
 										},
-										"components":[],
+										"components":[
+											{
+												"type":"PhysicsCollider",
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"shapes":[
+													{
+														"type":"MeshColliderShape",
+														"mesh":"Assets/Mesh_new/ren-tou.lm"
+													}
+												],
+												"isTrigger":false
+											}
+										],
 										"child":[]
 									},
 									{
@@ -11300,8 +11350,8 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0.9257228,
-												-0.7026,
+												0.791,
+												-0.624,
 												-0.4802
 											],
 											"rotation":[
@@ -13859,7 +13909,7 @@
 						"child":[]
 					},
 					{
-						"type":"MeshSprite3D",
+						"type":"Sprite3D",
 						"instanceID":245,
 						"props":{
 							"name":"knife",
@@ -13867,9 +13917,9 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-0.115,
-								0.046,
-								0.268
+								-0.036,
+								0.04599762,
+								0.146
 							],
 							"rotation":[
 								0,
@@ -13878,14 +13928,286 @@
 								0.3746065
 							],
 							"scale":[
-								0.5000001,
-								0.15,
-								0.1
+								1,
+								1,
+								1
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											0.5000002,
+											0.15,
+											0.1
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"instanceID":246,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.138,
+										0.04599762,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										-0.01745245,
+										-0.9998478
+									],
+									"scale":[
+										0.5000002,
+										0.15,
+										0.1
+									],
+									"meshPath":"Library/unity default resources-Cube.lm",
+									"enableRender":false,
+									"materials":[
+										{
+											"type":"Laya.BlinnPhongMaterial",
+											"path":"Resources/unity_builtin_extra.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":247,
+										"props":{
+											"name":"Model",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												0,
+												0
+											],
+											"rotation":[
+												-0.4995634,
+												-0.5004363,
+												-0.5004363,
+												0.4995634
+											],
+											"scale":[
+												1.900002,
+												0.7600014,
+												2.533339
+											],
+											"meshPath":"Assets/Mesh/HandSaw-HandSaw_0.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/knife.lmat"
+												}
+											]
+										},
+										"components":[],
+										"child":[]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":248,
+				"props":{
+					"name":"EventSystem",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0,
+						0,
+						0
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":249,
+				"props":{
+					"name":"Cube",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						1.54,
+						89.09,
+						-8.57
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						3,
+						1
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":250,
+				"props":{
+					"name":"Cube",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-15.52,
+						91.95,
+						0.43
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[
+					{
+						"type":"MeshSprite3D",
+						"instanceID":251,
+						"props":{
+							"name":"Cube",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								3,
+								1
 							],
 							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
+							"enableRender":true,
 							"materials":[
 								{
+									"type":"Laya.BlinnPhongMaterial",
 									"path":"Resources/unity_builtin_extra.lmat"
 								}
 							]
@@ -13911,76 +14233,248 @@
 										]
 									}
 								],
-								"isTrigger":true
+								"isTrigger":false
 							}
 						],
-						"child":[
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":252,
+						"props":{
+							"name":"Cube",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-2,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								3,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
 							{
-								"type":"MeshSprite3D",
-								"instanceID":246,
-								"props":{
-									"name":"HandSaw_0",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.32,
-										0.09332319,
-										-0.008
-									],
-									"rotation":[
-										-0.4995634,
-										-0.5004363,
-										-0.5004363,
-										0.4995634
-									],
-									"scale":[
-										1.900002,
-										0.7600014,
-										2.533339
-									],
-									"meshPath":"Assets/Mesh/HandSaw-HandSaw_0.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/knife.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
 							}
-						]
+						],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":253,
+						"props":{
+							"name":"Cube",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-4,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								3,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":254,
+						"props":{
+							"name":"Cube",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-6,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								3,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":255,
+						"props":{
+							"name":"Cube",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-8,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								3,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
 					}
 				]
-			},
-			{
-				"type":"Sprite3D",
-				"instanceID":247,
-				"props":{
-					"name":"EventSystem",
-					"active":true,
-					"isStatic":false,
-					"layer":0,
-					"position":[
-						0,
-						0,
-						0
-					],
-					"rotation":[
-						0,
-						0,
-						0,
-						-1
-					],
-					"scale":[
-						1,
-						1,
-						1
-					]
-				},
-				"components":[],
-				"child":[]
 			}
 		]
 	}

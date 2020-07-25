@@ -415,7 +415,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             case GEnum.TaskType.middleBeard:
 
                 GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position
-                GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z)
                 GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
 
                 Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
@@ -430,7 +430,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 let Model2 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
                 Model2.transform.localRotationEulerX = -200
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this);
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this)
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
 
@@ -545,7 +545,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**刮刀在脸上的移动规则*/
     knifeMove(): void {
         let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name) as Laya.HitResult;
-        // console.log(hitResult);
+        console.log(hitResult);
         if (hitResult) {
 
             let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
