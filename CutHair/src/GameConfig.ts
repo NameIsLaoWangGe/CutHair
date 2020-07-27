@@ -2,6 +2,7 @@
 import UIDefeated from "./script/Game/UIDefeated"
 import UILoding from "./script/Game/UILoding"
 import UIOperation from "./script/Game/UIOperation"
+import UIStart from "./script/Game/UIStart"
 import UIVictory from "./script/Game/UIVictory"
 import GameUI from "./script/GameUI"
 /*
@@ -26,6 +27,7 @@ export default class GameConfig{
         reg("script/Game/UIDefeated.ts",UIDefeated);
         reg("script/Game/UILoding.ts",UILoding);
         reg("script/Game/UIOperation.ts",UIOperation);
+        reg("script/Game/UIStart.ts",UIStart);
         reg("script/Game/UIVictory.ts",UIVictory);
         reg("script/GameUI.ts",GameUI);
     }

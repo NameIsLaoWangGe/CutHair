@@ -2667,6 +2667,7 @@
     class UIDefeated extends lwg.Admin.Scene {
         selfNode() {
             this.BtnAgain = this.self['BtnAgain'];
+            console.log(this.BtnAgain);
         }
         btnOnClick() {
             Click.on(Click.ClickType.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
@@ -2791,9 +2792,10 @@
                             cutHairline.name = 'cutHairline';
                             let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
                             rig3D.isKinematic = false;
-                            rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
+                            rig3D.gravity = (new Laya.Vector3(0, -1, -0.3));
                             rig3D.rollingFriction = 0;
                             rig3D.restitution = 0;
+                            Laya.timer.once(3000, this, f => { cutHair.removeSelf(); });
                         }
                     }
                     break;
@@ -2988,7 +2990,8 @@
             scene.addComponent(GameMain3D);
             lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D] = scene;
             scene[lwg.Admin.SceneName.GameMain3D] = scene.getComponent(GameMain3D);
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, null);
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, null, f => {
+            });
         }
         lwgDisable() {
         }
@@ -3119,8 +3122,8 @@
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
             GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-            this.createProgress();
             this.BtnLast.visible = false;
+            this.createProgress();
             this.createTaskContent();
             this.mainCameraMove();
             this.dialogueSet();
@@ -3144,19 +3147,19 @@
                 lwg.Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => { });
             });
             EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
-                this._leftBeardNum.setValue = this._leftBeardNum.value - 0.5;
+                this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
             });
             EventAdmin.reg(GEnum.EventType.rightBeard, this, () => {
-                this._rightBeardNum.setValue = this._rightBeardNum.value - 0.5;
+                this._rightBeardNum.setValue = this._rightBeardNum.value - 1;
             });
             EventAdmin.reg(GEnum.EventType.middleBeard, this, () => {
-                this._middleBeardNum.setValue = this._middleBeardNum.value - 0.5;
+                this._middleBeardNum.setValue = this._middleBeardNum.value - 1;
             });
             EventAdmin.reg(GEnum.EventType.upRightBeard, this, () => {
-                this._upRightBeardNum.setValue = this._upRightBeardNum.value - 0.5;
+                this._upRightBeardNum.setValue = this._upRightBeardNum.value - 1;
             });
             EventAdmin.reg(GEnum.EventType.upLeftBeard, this, () => {
-                this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 0.5;
+                this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 1;
             });
             EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
                 let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum);
@@ -3197,6 +3200,19 @@
                 }
             });
         }
+        createProgress() {
+            let spacing = 100;
+            for (let index = 0; index < GVariate._taskArr.length; index++) {
+                const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress);
+                this.TaskBar.addChild(TaskPro);
+                TaskPro.pos(index * spacing, 0);
+                let Bar = TaskPro.getChildByName('Bar');
+                let Mask = Bar.mask;
+            }
+            this.TaskBar.width = GVariate._taskArr.length * spacing;
+            this.TaskBar.pivotX = this.TaskBar.width / 2;
+            this.TaskBar.x = Laya.stage.width / 2;
+        }
         dialogueSet() {
             this.Dialogue.visible = false;
             Laya.timer.once(3000, this, () => {
@@ -3209,18 +3225,6 @@
                     });
                 });
             });
-        }
-        createProgress() {
-            let spacing = 100;
-            for (let index = 0; index < GVariate._taskArr.length; index++) {
-                const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress);
-                this.TaskBar.addChild(TaskPro);
-                TaskPro.pos(index * spacing, 0);
-                let Bar = TaskPro.getChildByName('Bar');
-            }
-            this.TaskBar.width = GVariate._taskArr.length * spacing;
-            this.TaskBar.pivotX = this.TaskBar.width / 2;
-            this.TaskBar.x = Laya.stage.width / 2;
         }
         createTaskContent() {
             for (let index = 0; index < GVariate._taskArr.length; index++) {
@@ -3280,7 +3284,7 @@
                     },
                     set setValue(v) {
                         if (this.detection) {
-                            if (v < 0.15) {
+                            if (v < 0.17) {
                                 this.detection = false;
                                 _sideHairNum.setValue = _sideHairNum.value - 1;
                             }
@@ -3411,7 +3415,6 @@
         }
         knifeMove() {
             let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
-            console.log(hitResult);
             if (hitResult) {
                 let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
                 let y = GSene3D.Headcollision.transform.position.y - (GSene3D.HeadSimulate.transform.position.y - hitResult.point.y);
@@ -3433,6 +3436,16 @@
             this.touchPosX = null;
             this.touchPosY = null;
             this.moveSwitch = false;
+        }
+    }
+
+    class UIStart extends lwg.Admin.Scene {
+        lwgOnEnable() {
+        }
+        onStageClick() {
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
+                this.self.close();
+            });
         }
     }
 
@@ -3525,6 +3538,7 @@
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
+            reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);
         }

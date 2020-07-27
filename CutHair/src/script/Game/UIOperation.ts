@@ -145,8 +145,8 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        this.createProgress();
         this.BtnLast.visible = false;
+        this.createProgress();
         this.createTaskContent();
         this.mainCameraMove();
         this.dialogueSet();
@@ -179,31 +179,33 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         // 左侧胡子修剪
         EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
-            this._leftBeardNum.setValue = this._leftBeardNum.value - 0.5;
+            this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
         })
 
         // 右侧胡子修剪
         EventAdmin.reg(GEnum.EventType.rightBeard, this, () => {
-            this._rightBeardNum.setValue = this._rightBeardNum.value - 0.5;
+            this._rightBeardNum.setValue = this._rightBeardNum.value - 1;
         })
 
         // 中间的胡子修剪
         EventAdmin.reg(GEnum.EventType.middleBeard, this, () => {
-            this._middleBeardNum.setValue = this._middleBeardNum.value - 0.5;
+            this._middleBeardNum.setValue = this._middleBeardNum.value - 1;
         })
 
         // 右上角胡子修剪
         EventAdmin.reg(GEnum.EventType.upRightBeard, this, () => {
-            this._upRightBeardNum.setValue = this._upRightBeardNum.value - 0.5;
+            this._upRightBeardNum.setValue = this._upRightBeardNum.value - 1;
         })
 
         // 左上角胡子修剪
         EventAdmin.reg(GEnum.EventType.upLeftBeard, this, () => {
-            this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 0.5;
+            this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 1;
         })
 
         // 进度条的变化
         EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
+
+
             /**进度条*/
             let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum) as Laya.Sprite;
             let Bar = TaskBar.getChildByName('Bar') as Laya.Image;
@@ -247,9 +249,30 @@ export default class UIOperation extends lwg.Admin.Scene {
             if (Bar.mask.x > 0) {
                 Bar.mask.x = 0;
             }
+
         })
     }
 
+    /**
+     * 创建任务进度条,并且居中
+     */
+    createProgress(): void {
+        let spacing = 100;
+        for (let index = 0; index < GVariate._taskArr.length; index++) {
+            const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress) as Laya.Sprite;
+            this.TaskBar.addChild(TaskPro);
+            TaskPro.pos(index * spacing, 0);
+            let Bar = TaskPro.getChildByName('Bar') as Laya.Image;
+            let Mask = Bar.mask;
+        }
+        this.TaskBar.width = GVariate._taskArr.length * spacing;
+        this.TaskBar.pivotX = this.TaskBar.width / 2;
+        this.TaskBar.x = Laya.stage.width / 2;
+
+        // console.log(this.TaskBar.width, this.TaskBar.x);
+    }
+
+    /**说话*/
     dialogueSet(): void {
         this.Dialogue.visible = false;
         Laya.timer.once(3000, this, () => {
@@ -266,21 +289,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
 
-    /**
-     * 创建任务进度条,并且居中
-     */
-    createProgress(): void {
-        let spacing = 100;
-        for (let index = 0; index < GVariate._taskArr.length; index++) {
-            const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress) as Laya.Sprite;
-            this.TaskBar.addChild(TaskPro);
-            TaskPro.pos(index * spacing, 0);
-            let Bar = TaskPro.getChildByName('Bar') as Laya.Image;
-        }
-        this.TaskBar.width = GVariate._taskArr.length * spacing;
-        this.TaskBar.pivotX = this.TaskBar.width / 2;
-        this.TaskBar.x = Laya.stage.width / 2;
-    }
+
 
     /**
      * 创建每个任务需要的修剪内容,一般是头发的数量
@@ -354,7 +363,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 },
                 set setValue(v: number) {
                     if (this.detection) {
-                        if (v < 0.15) {
+                        if (v < 0.17) {
                             // console.log('这根头发理完了！');
                             this.detection = false;
                             _sideHairNum.setValue = _sideHairNum.value - 1;
@@ -545,7 +554,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**刮刀在脸上的移动规则*/
     knifeMove(): void {
         let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name) as Laya.HitResult;
-        console.log(hitResult);
+        // console.log(hitResult);
         if (hitResult) {
 
             let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);

@@ -22,7 +22,8 @@ export default class UILoding extends lwg.Admin.Scene {
         scene.addComponent(GameMain3D);
         lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D] = scene;
         scene[lwg.Admin.SceneName.GameMain3D] = scene.getComponent(GameMain3D);
-        lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, null);
+        lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, null, f=>{
+        });
     }
 
     lwgDisable(): void {

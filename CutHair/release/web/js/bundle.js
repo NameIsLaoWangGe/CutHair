@@ -2779,20 +2779,22 @@
                     if (otherOwnerParent['HairLen']) {
                         otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
                     }
-                    if (cutH >= 0.01) {
-                        let cutHair = otherOwnerParent.clone();
-                        cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
-                        let CutHairParent = GSene3D.Head.getChildByName('CutHairParent');
-                        cutHair.name = 'cutHair';
-                        CutHairParent.addChild(cutHair);
-                        cutHair.transform.position = this.self.transform.position;
-                        let cutHairline = cutHair.getChildAt(0);
-                        cutHairline.name = 'cutHairline';
-                        let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
-                        rig3D.isKinematic = false;
-                        rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
-                        rig3D.rollingFriction = 0;
-                        rig3D.restitution = 0;
+                    if (Math.floor(Math.random() * 4) === 1) {
+                        if (cutH >= 0.01) {
+                            let cutHair = otherOwnerParent.clone();
+                            cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                            let CutHairParent = GSene3D.Head.getChildByName('CutHairParent');
+                            cutHair.name = 'cutHair';
+                            CutHairParent.addChild(cutHair);
+                            cutHair.transform.position = this.self.transform.position;
+                            let cutHairline = cutHair.getChildAt(0);
+                            cutHairline.name = 'cutHairline';
+                            let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
+                            rig3D.isKinematic = false;
+                            rig3D.gravity = (new Laya.Vector3(0, -0.5, -0.3));
+                            rig3D.rollingFriction = 0;
+                            rig3D.restitution = 0;
+                        }
                     }
                     break;
                 case 'standard':
@@ -3023,7 +3025,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余左侧胡须', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 25) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -3041,7 +3043,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余剩余右侧胡须', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -3059,7 +3061,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余中间胡子', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -3077,7 +3079,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余右上角', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -3095,7 +3097,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余左上角', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -3243,8 +3245,8 @@
                         this._numZoder.push(this._rightBeardNum);
                         break;
                     case GEnum.TaskType.middleBeard:
-                        this._middleBeardNum.setValue = GSene3D.RightBeard.numChildren;
-                        this._middleBeardNum.sum = GSene3D.RightBeard.numChildren;
+                        this._middleBeardNum.setValue = GSene3D.MiddleBeard.numChildren;
+                        this._middleBeardNum.sum = GSene3D.MiddleBeard.numChildren;
                         this._middleBeardNum.index = index;
                         this._numZoder.push(this._middleBeardNum);
                         break;
@@ -3278,7 +3280,7 @@
                     },
                     set setValue(v) {
                         if (this.detection) {
-                            if (v < 0.13) {
+                            if (v < 0.15) {
                                 this.detection = false;
                                 _sideHairNum.setValue = _sideHairNum.value - 1;
                             }
@@ -3409,6 +3411,7 @@
         }
         knifeMove() {
             let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
+            console.log(hitResult);
             if (hitResult) {
                 let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
                 let y = GSene3D.Headcollision.transform.position.y - (GSene3D.HeadSimulate.transform.position.y - hitResult.point.y);
@@ -3529,7 +3532,7 @@
     GameConfig.width = 720;
     GameConfig.height = 1280;
     GameConfig.scaleMode = "fixedwidth";
-    GameConfig.screenMode = "none";
+    GameConfig.screenMode = "vertical";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
     GameConfig.startScene = "Scene/UILoding.scene";

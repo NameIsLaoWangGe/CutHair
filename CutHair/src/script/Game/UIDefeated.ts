@@ -6,6 +6,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
     BtnAgain: Laya.Sprite;
     selfNode(): void {
         this.BtnAgain = this.self['BtnAgain'];
+        console.log(this.BtnAgain);
     }
     btnOnClick(): void {
         Click.on(Click.ClickType.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
