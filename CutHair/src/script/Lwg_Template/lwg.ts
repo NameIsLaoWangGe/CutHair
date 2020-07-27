@@ -857,7 +857,6 @@ export module lwg {
             }
             /**场景中的一些事件*/
             lwgEventReg(): void {
-
             }
             /**初始化一些变量*/
             variateInit() {

@@ -2848,20 +2848,18 @@
     }
 
     class GameMain3D_knife extends lwg.Admin.Object3D {
-        constructor() {
-            super(...arguments);
-            this.num = 0;
-        }
         lwgOnEnable() {
         }
         onTriggerEnter(other) {
             let owner = other.owner;
             let ownerParent = owner.parent;
-            this.num++;
             switch (owner.name.substring(0, 5)) {
                 case 'Beard':
                     if (owner['already']) {
                         return;
+                    }
+                    else {
+                        owner['already'] = true;
                     }
                     if (ownerParent.name === 'RightBeard') {
                         EventAdmin.notify(GEnum.EventType.rightBeard);
@@ -2879,18 +2877,8 @@
                         EventAdmin.notify(GEnum.EventType.upLeftBeard);
                     }
                     other.isKinematic = false;
+                    other.isTrigger = false;
                     other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
-                    break;
-                default:
-                    break;
-            }
-        }
-        onTriggerExit(other) {
-            let owner = other.owner;
-            let ownerParent = owner.parent;
-            switch (owner.name) {
-                case 'Beard':
-                    owner['already'] = true;
                     break;
                 default:
                     break;
@@ -3001,6 +2989,7 @@
         constructor() {
             super(...arguments);
             this._numZoder = [];
+            this.residueNum = 10;
             this._sideHairNum = {
                 index: 0,
                 sum: 0,
@@ -3028,7 +3017,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余左侧胡须', this.value);
-                        if (this.value <= 25) {
+                        if (this.value <= 3) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -3123,10 +3112,10 @@
             lwg.Admin._gameStart = true;
             GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
             this.BtnLast.visible = false;
-            this.createProgress();
             this.createTaskContent();
             this.mainCameraMove();
             this.dialogueSet();
+            this.createProgress();
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
@@ -3201,13 +3190,21 @@
             });
         }
         createProgress() {
+            this.TaskBar.removeChildren(0, this.TaskBar.numChildren);
             let spacing = 100;
             for (let index = 0; index < GVariate._taskArr.length; index++) {
                 const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress);
                 this.TaskBar.addChild(TaskPro);
                 TaskPro.pos(index * spacing, 0);
                 let Bar = TaskPro.getChildByName('Bar');
-                let Mask = Bar.mask;
+                Bar.width = 80;
+                let Mask = new Laya.Sprite();
+                Mask.loadImage('UI/GameMain/bai.png');
+                Mask['renderType'] = 'mask';
+                Bar.mask = Mask;
+                Mask.width = Bar.width + 20;
+                Mask.x = -(Bar.width + 20);
+                Mask.height = 25;
             }
             this.TaskBar.width = GVariate._taskArr.length * spacing;
             this.TaskBar.pivotX = this.TaskBar.width / 2;
@@ -3360,7 +3357,7 @@
             GVariate._taskNum++;
             this.mainCameraMove();
             EventAdmin.notify(GEnum.EventType.taskProgress);
-            if (this._numZoder[GVariate._taskNum].value <= 3) {
+            if (this._numZoder[GVariate._taskNum].value <= 10) {
                 EventAdmin.notify(EventAdmin.EventType.taskReach);
             }
         }

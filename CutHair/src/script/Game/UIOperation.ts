@@ -14,6 +14,9 @@ export default class UIOperation extends lwg.Admin.Scene {
     BtnLast: Laya.Sprite;
     /**任务所需修剪的毛发数量对象顺序*/
     _numZoder: Array<any> = [];
+
+    /**可以剩余毛发数量*/
+    residueNum: number = 10;
     /**侧面所需理发的数量*/
     _sideHairNum = {
         index: 0,
@@ -44,7 +47,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余左侧胡须', this.value);
-                if (this.value <= 25) {
+                if (this.value <= 3) {
                     console.log('任务完成了！');
                     this.switch = false;
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -134,7 +137,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
     }
 
-    selfNode(): void {
+    selfNode() {
         this.Rocker = this.self['Rocker'];
         this.TaskBar = this.self['TaskBar'];
         this.BtnLast = this.self['BtnLast'];
@@ -146,10 +149,10 @@ export default class UIOperation extends lwg.Admin.Scene {
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
         this.BtnLast.visible = false;
-        this.createProgress();
         this.createTaskContent();
         this.mainCameraMove();
         this.dialogueSet();
+        this.createProgress();
     }
 
     lwgEventReg(): void {
@@ -204,8 +207,6 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         // 进度条的变化
         EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
-
-
             /**进度条*/
             let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum) as Laya.Sprite;
             let Bar = TaskBar.getChildByName('Bar') as Laya.Image;
@@ -249,7 +250,6 @@ export default class UIOperation extends lwg.Admin.Scene {
             if (Bar.mask.x > 0) {
                 Bar.mask.x = 0;
             }
-
         })
     }
 
@@ -257,19 +257,26 @@ export default class UIOperation extends lwg.Admin.Scene {
      * 创建任务进度条,并且居中
      */
     createProgress(): void {
+        this.TaskBar.removeChildren(0, this.TaskBar.numChildren);
         let spacing = 100;
         for (let index = 0; index < GVariate._taskArr.length; index++) {
             const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress) as Laya.Sprite;
             this.TaskBar.addChild(TaskPro);
             TaskPro.pos(index * spacing, 0);
             let Bar = TaskPro.getChildByName('Bar') as Laya.Image;
-            let Mask = Bar.mask;
+            Bar.width = 80;
+            let Mask = new Laya.Sprite();
+            Mask.loadImage('UI/GameMain/bai.png');
+            Bar.mask = Mask
+            Mask.width = Bar.width + 20;
+            Mask.x = -(Bar.width + 20);
+            Mask.height = 25;
+
         }
         this.TaskBar.width = GVariate._taskArr.length * spacing;
         this.TaskBar.pivotX = this.TaskBar.width / 2;
         this.TaskBar.x = Laya.stage.width / 2;
 
-        // console.log(this.TaskBar.width, this.TaskBar.x);
     }
 
     /**说话*/
@@ -474,7 +481,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum++;
         this.mainCameraMove();
         EventAdmin.notify(GEnum.EventType.taskProgress);
-        if (this._numZoder[GVariate._taskNum].value <= 3) {
+        if (this._numZoder[GVariate._taskNum].value <= 10) {
             EventAdmin.notify(EventAdmin.EventType.taskReach);
         }
     }

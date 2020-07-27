@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Sprite",
-    "selectedBox":13,
-    "selecteID":21,
+    "selectedBox":21,
+    "selecteID":24,
     "searchKey":"Sprite,Task1",
     "props":{"width":80,"presetID":1,"preset":"laya/pages/Prefab/TaskProgress.prefab","name":"Task1","isPresetRoot":true,"height":25},
     "nodeParent":-1,
-    "maxID":24,
+    "maxID":25,
     "label":"Task1",
     "isOpen":true,
     "isDirectory":true,
@@ -37,25 +37,12 @@
             "nodeParent":13,
             "label":"Bar",
             "isOpen":true,
-            "isDirectory":true,
+            "isDirectory":false,
             "isAniNode":true,
-            "hasChild":true,
+            "hasChild":false,
             "compId":21,
             "child":[
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,Mask",
-                    "props":{"y":12.5,"x":-100,"width":100,"texture":"UI/GameMain/bai.png","renderType":"mask","presetID":8,"preset":"laya/pages/Prefab/TaskProgress.prefab","pivotY":13,"name":"Mask","height":25},
-                    "nodeParent":21,
-                    "label":"Mask",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":23,
-                    "child":[
-                        ]
-                }]
+                ]
         }],
     "animations":[
         {
