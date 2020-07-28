@@ -1,11 +1,12 @@
 import { lwg, Click, Admin, EventAdmin } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
-import { GEnum } from "../Lwg_Template/Global";
+import { GEnum, GVariate } from "../Lwg_Template/Global";
 
 export default class UIVictory extends lwg.Admin.Scene {
     constructor() { super(); }
 
     lwgOnEnable(): void {
+        GVariate._goldNum.setValue = 25;
     }
 
     btnOnClick(): void {

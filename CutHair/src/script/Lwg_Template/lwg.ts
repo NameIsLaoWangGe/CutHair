@@ -213,32 +213,7 @@ export module lwg {
             Admin._openScene('UISet', null, null, null);
         }
 
-        /**指代当前界面的金币资源*/
-        export let GoldNumNode: Laya.Sprite;
-        /**
-         * 创建通用剩余金币资源数量prefab
-         * @param parent 父节点
-         */
-        export function _createGoldNum(parent): void {
-            let sp: Laya.Sprite;
-            Laya.loader.load('prefab/GoldNum.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                let num = sp.getChildByName('Num') as Laya.FontClip;
-                num.value = Global._goldNum.toString();
-                parent.addChild(sp);
-                sp.pos(114, 91);
-                sp.zOrder = 50;
-                GoldNumNode = sp;
-            }));
-        }
-        /**增加体力*/
-        export function _addGold(number) {
-            lwg.Global._goldNum += number;
-            let Num = lwg.Global.GoldNumNode.getChildByName('Num') as Laya.FontClip;
-            Num.value = lwg.Global._goldNum.toString();
-        }
+
 
         /**指代当前剩余体力节点*/
         export let ExecutionNumNode: Laya.Sprite;
@@ -557,6 +532,221 @@ export module lwg {
         }
     }
 
+    /**金币模块*/
+    export module Gold {
+        /**金币数量*/
+        export let _goldNum: number;
+        /**指代当前全局的的金币资源节点*/
+        export let GoldNode: Laya.Sprite;
+        /**
+         * 创建通用剩余金币资源数量prefab
+         * @param parent 父节点
+         */
+        export function _createGoldNode(parent): void {
+            let sp: Laya.Sprite;
+            Laya.loader.load('prefab/GoldNode.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                let num = sp.getChildByName('Num') as Laya.FontClip;
+                num.value = _goldNum.toString();
+                parent.addChild(sp);
+                sp.pos(151, 79);
+                sp.zOrder = 50;
+                GoldNode = sp;
+            }));
+        }
+
+        /**增加金币以及节点上的表现*/
+        export function _addGold(number) {
+            _goldNum += number;
+            let Num = GoldNode.getChildByName('Num') as Laya.FontClip;
+            Num.value = _goldNum.toString();
+            Laya.LocalStorage.setItem('_goldNum', _goldNum.toString());
+        }
+        /**增加金币节点上的表现动画，并不会增加金币*/
+        export function _addGoldDisPlay(number) {
+            let Num = GoldNode.getChildByName('Num') as Laya.FontClip;
+            Num.value = (Number(Num.value) + number).toString();
+        }
+        /**增加金币，但是不表现出来*/
+        export function _addGoldNoDisPlay(number) {
+            _goldNum += number;
+            Laya.LocalStorage.setItem('_goldNum', _goldNum.toString());
+        }
+
+        enum SkinUrl {
+            "Frame/Effects/icon_biggold.png"
+        }
+
+        /**
+        * 多个金币移动动画
+        * @param parent 父节点
+        * @param number 产生金币的数量
+        * @param fX 初始位置X
+        * @param fY 初始位置Y
+        * @param tX 目标X
+        * @param tY 目标Y
+        * @param func1 每一个金币产生后执行的回调
+        * @param func2 金币创建完成后的回调
+        */
+        export function getGoldAni(parent, number, fX, fY, tX, tY, func1, func2): void {
+            for (let index = 0; index < number; index++) {
+
+                let ele = Laya.Pool.getItemByClass('addGold', Laya.Image) as Laya.Image;
+                ele.name = 'addGold';//标识符和名称一样
+                let num = Math.floor(Math.random() * 12);
+                ele.alpha = 1;
+                ele.scale(1, 1);
+                ele.skin = SkinUrl[0];
+                parent.addChild(ele);
+                ele.zOrder = 60;
+                ele.pos(fX, fY);
+                let scirpt = ele.addComponent(AddGold);
+                scirpt.line = index;
+                scirpt.targetX = tX;
+                scirpt.targetY = tY;
+                scirpt.timer -= index * 3;
+                scirpt.moveSwitch = true;
+                if (index === number - 1) {
+                    if (func2 !== null) {
+                        scirpt.func = func2;
+                    }
+                } else {
+                    if (func1 !== null) {
+                        scirpt.func = func1;
+                    }
+                }
+            }
+        }
+
+        /**类粒子特效的通用父类*/
+        export class GoldAniBase extends Laya.Script {
+            /**挂载当前脚本的节点*/
+            self: Laya.Sprite;
+            /**所在场景*/
+            selfScene: Laya.Scene;
+            /**移动开关*/
+            moveSwitch: boolean;
+            /**时间线*/
+            timer: number;
+            /**在组中的位置*/
+            group: number;
+            /**在行中的位置*/
+            row: number;
+            /**在列中的位置*/
+            line: number;
+            /**初始角度*/
+            startAngle: number;
+            /**基础速度*/
+            startSpeed: number;
+            /**加速度*/
+            accelerated: number;
+
+            /**随机大小*/
+            startScale: number;
+            /**随机起始透明度*/
+            startAlpha: number;
+            /**初始角度*/
+            startRotat: number;
+
+            /**随机旋转方向*/
+            rotateDir: string;
+            /**随机旋转角度*/
+            rotateRan: number;
+            /**随机消失时间*/
+            continueTime: number;
+
+            onAwake(): void {
+                this.initProperty();
+            }
+            onEnable(): void {
+                this.self = this.owner as Laya.Sprite;
+                this.selfScene = this.self.scene;
+                let calssName = this['__proto__']['constructor'].name;
+                this.self[calssName] = this;
+                // console.log(this.self.getBounds());
+                this.timer = 0;
+                this.lwgInit();
+                this.propertyAssign();
+
+            }
+            /**初始化，在onEnable中执行，重写即可覆盖*/
+            lwgInit(): void {
+            }
+            /**初始化特效单元的属性*/
+            initProperty(): void {
+            }
+            /**一些节点上的初始属性赋值*/
+            propertyAssign(): void {
+                if (this.startAlpha) {
+                    this.self.alpha = this.startAlpha;
+                }
+                if (this.startScale) {
+                    this.self.scale(this.startScale, this.startScale);
+                }
+                if (this.startRotat) {
+                    this.self.rotation = this.startRotat;
+                }
+            }
+            /**
+              * 通用按角度移动移动，按单一角度移动
+              * @param angle 角度
+              * @param basedSpeed 基础速度
+              */
+            commonSpeedXYByAngle(angle, speed) {
+                this.self.x += Tools.speedXYByAngle(angle, speed + this.accelerated).x;
+                this.self.y += Tools.speedXYByAngle(angle, speed + this.accelerated).y;
+            }
+            /**移动规则*/
+            moveRules(): void {
+            }
+            onUpdate(): void {
+                this.moveRules();
+            }
+            onDisable(): void {
+                Laya.Pool.recover(this.self.name, this.self);
+                this.destroy();//删除自己，下次重新添加
+                Laya.Tween.clearAll(this);
+                Laya.timer.clearAll(this);
+            }
+        }
+
+        /**炸开后再前往同一个地点，用于金币增加动画*/
+        export class AddGold extends GoldAniBase {
+            /**属于那一列*/
+            line: number;
+            /**目标位置X*/
+            targetX: number;
+            /**目标位置Y*/
+            targetY: number;
+            /**回调函数*/
+            func: any
+            lwgInit(): void {
+                this.self.width = 115;
+                this.self.height = 111;
+                this.self.pivotX = this.self.width / 2;
+                this.self.pivotY = this.self.height / 2;
+            }
+            initProperty(): void {
+            }
+            moveRules(): void {
+                if (this.moveSwitch) {
+                    this.timer++;
+                    if (this.timer > 0) {
+                        lwg.Animation.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
+                            this.self.removeSelf();
+                            if (this.func !== null) {
+                                this.func();
+                            }
+                        });
+                        this.moveSwitch = false;
+                    }
+                }
+            }
+        }
+    }
+
     /**事件模块*/
     export module EventAdmin {
         /**常用事件枚举*/
@@ -836,9 +1026,11 @@ export module lwg {
                 this.self = this.owner as Laya.Scene;
                 // 类名
                 this.calssName = this['__proto__']['constructor'].name;
+                // 组件变为的self属性
+                this.self[this.calssName] = this;
                 this.gameState(this.calssName);
-                this.lwgOnAwake();
                 this.selfNode();
+                this.lwgOnAwake();
                 this.variateInit();
                 this.adaptive();
             }
@@ -846,11 +1038,9 @@ export module lwg {
 
             }
             onEnable() {
-                // 组件变为的self属性
-                this.self[this.calssName] = this;
+                this.lwgEventReg();
                 this.lwgOnEnable();
                 this.btnAndOpenAni();
-                this.lwgEventReg();
             }
             /**声明场景里的一些节点*/
             selfNode(): void {
@@ -1198,7 +1388,7 @@ export module lwg {
             "Frame/Effects/star_red.png",
             "Frame/Effects/star_white.png",
             "Frame/Effects/star_yellow.png",
-            "Frame/Effects/icon_biggold.png"
+
         }
 
         /**类粒子特效的通用父类*/
@@ -1425,106 +1615,7 @@ export module lwg {
             }
         }
 
-        /**
-         * 多个金币移动动画
-         * @param parent 父节点
-         * @param number 产生金币的数量
-         * @param fX 初始位置X
-         * @param fY 初始位置Y
-         * @param tX 目标X
-         * @param tY 目标Y
-         * @param func1 每一个金币产生后执行的回调
-         * @param func2 金币创建完成后的回调
-         */
-        export function getGoldAni(parent, number, fX, fY, tX, tY, func1, func2): void {
-            for (let index = 0; index < number; index++) {
-                lwg.Effects.createAddGold(parent, index, fX, fY, tX, tY, f => {
-                    if (index === number - 1) {
-                        if (func2 !== null) {
-                            func2();
-                        }
-                    } else {
-                        if (func1 !== null) {
-                            func1();
-                        }
-                    }
-                });
-            }
-        }
 
-        /**
-         * 创建单个金币动画
-         * @param parent 父节点
-         * @param quantity 数量
-         * @param x X轴位置
-         * @param y Y轴位置
-         * @param targeX 目标X位置
-         * @param targeY 目标Y位置
-         */
-        export function createAddGold(parent, index, x, y, targetX, targetY, func): void {
-            let delayed = 0;
-            let ele = Laya.Pool.getItemByClass('addGold', Laya.Image) as Laya.Image;
-            ele.name = 'addGold';//标识符和名称一样
-            let num = Math.floor(Math.random() * 12);
-            ele.alpha = 1;
-            ele.scale(1, 1);
-            ele.skin = SkinUrl[24];
-            parent.addChild(ele);
-            ele.zOrder = 60;
-            ele.pos(x, y);
-            let scirpt = ele.getComponent(AddGold);
-            if (!scirpt) {
-                ele.addComponent(AddGold);
-                let scirpt1 = ele.getComponent(AddGold);
-                scirpt1.line = index;
-                scirpt1.targetX = targetX;
-                scirpt1.targetY = targetY;
-                scirpt1.timer -= index * 3;
-                scirpt1.moveSwitch = true;
-                scirpt1.func = func;
-            } else {
-                scirpt.line = index;
-                scirpt.timer -= index * 3;
-                scirpt.targetX = targetX;
-                scirpt.targetY = targetY;
-                scirpt.moveSwitch = true;
-                scirpt.func = func;
-            }
-        }
-
-        /**炸开后再前往同一个地点，用于金币增加动画*/
-        export class AddGold extends lwg.Effects.EffectsBase {
-            /**属于那一列*/
-            line: number;
-            /**目标位置X*/
-            targetX: number;
-            /**目标位置Y*/
-            targetY: number;
-            /**回调函数*/
-            func: any
-            lwgInit(): void {
-                this.self.width = 115;
-                this.self.height = 111;
-                this.self.pivotX = this.self.width / 2;
-                this.self.pivotY = this.self.height / 2;
-            }
-            initProperty(): void {
-            }
-            moveRules(): void {
-                if (this.moveSwitch) {
-                    this.timer++;
-                    if (this.timer > 0) {
-                        lwg.Animation.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
-                            this.self.removeSelf();
-                            if (this.func !== null) {
-                                this.func();
-                            }
-                        });
-                        this.moveSwitch = false;
-                    }
-                }
-            }
-        }
 
         /**
           * 创建类似于烟花爆炸动画，四周爆炸随机散开

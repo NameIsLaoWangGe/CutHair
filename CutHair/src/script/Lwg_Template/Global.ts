@@ -29,13 +29,27 @@ export module Global {
             taskProgress = 'taskProgress',
         }
     }
+
     /**控制游戏的全局变量*/
     export module GVariate {
-        export let _gameLevel: number = 1;
+        export let _gameLevel: number = 15;
         export let _execution: number = 10;
-        export let _goldNum: number = 10;
+
+        /**金币*/
+        export let _goldNum = {
+            value: 0,
+            get getValue() {
+                return Laya.LocalStorage.getItem('_goldNum') ? Laya.LocalStorage.getItem('_goldNum') : 0;
+            },
+            set setValue(vals) {
+                this.value += vals;
+                Laya.LocalStorage.setItem('_goldNum', this.value);
+            }
+        }
+
         /**当前关卡中的任务顺序集合*/
         export let _taskArr: Array<string> = [];
+        /**进行到第几个任务了*/
         export let _taskNum: number = 0;
     }
 
@@ -65,7 +79,6 @@ export module Global {
                 // 如果没有获取到则第一次上传的默认值
                 GVariate._gameLevel = 1;
                 GVariate._execution = 20;
-                GVariate._goldNum = 0;
                 return null;
             }
         }
@@ -114,13 +127,13 @@ export module Global {
 
         /**头部碰撞框*/
         export let Headcollision: Laya.MeshSprite3D;
-        export let HingeMiddle:Laya.MeshSprite3D; 
-        export let HingeUp:Laya.MeshSprite3D; 
-        export let HingeDown:Laya.MeshSprite3D; 
+        export let HingeMiddle: Laya.MeshSprite3D;
+        export let HingeUp: Laya.MeshSprite3D;
+        export let HingeDown: Laya.MeshSprite3D;
 
         /**头部操作范围*/
         export let HeadSimulate: Laya.MeshSprite3D;
-      
+
 
         /**标记摄像机移动到任务的方位*/
         export let Landmark_Left: Laya.MeshSprite3D;

@@ -144,15 +144,18 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.Dialogue = this.self['Dialogue'];
     }
 
-    lwgOnEnable(): void {
+    lwgOnAwake():void{
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+        this.createProgress();
+    }
+
+    lwgOnEnable(): void {
         this.BtnLast.visible = false;
         this.createTaskContent();
         this.mainCameraMove();
         this.dialogueSet();
-        this.createProgress();
     }
 
     lwgEventReg(): void {
@@ -208,8 +211,8 @@ export default class UIOperation extends lwg.Admin.Scene {
         // 进度条的变化
         EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
             /**进度条*/
-            let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum) as Laya.Sprite;
-            let Bar = TaskBar.getChildByName('Bar') as Laya.Image;
+            let TaskBar0 = this.TaskBar.getChildAt(GVariate._taskNum) as Laya.Sprite;
+            let Bar = TaskBar0.getChildByName('Bar') as Laya.Image;
             let sum;
             let value;
             switch (GVariate._taskArr[GVariate._taskNum]) {
@@ -267,8 +270,8 @@ export default class UIOperation extends lwg.Admin.Scene {
             Bar.width = 80;
             let Mask = new Laya.Sprite();
             Mask.loadImage('Frame/UI/ui_orthogon_black.png');
-            Mask['renderType'] = 'mask'
-            Bar.mask = Mask
+            Mask['renderType'] = 'mask';
+            Bar.mask = Mask;
             Mask.width = Bar.width + 20;
             Mask.x = -(Bar.width + 20);
             Mask.height = 25;
@@ -295,8 +298,6 @@ export default class UIOperation extends lwg.Admin.Scene {
             })
         })
     }
-
-
 
 
     /**

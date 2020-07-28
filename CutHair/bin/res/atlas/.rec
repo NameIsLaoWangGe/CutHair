@@ -179,7 +179,7 @@ P CE088DBD qian_di.png
 P 4D50E06D qiandao.png
 P EE5055A4 qipao.png
 P 28C4757F renwu.png
-P 907D7BF1 shezhi.png
+P BF63B6AC shezhi.png
 P 9179159E xiandin1.png
 P AF643B15 xiandin2.png
 D UI/Gift
@@ -195,9 +195,11 @@ P E4FD158F jieshou.png
 P BCBCAD68 txt_biaoti.png
 R 0B987673 zi.png
 D UI/Loding
-R 85F91FD5 bg.jpg
+R 35C64EB3 bg.jpg
+R 363C3A11 fangchenmi.png
 P CE6D36CE icon_shear_01.png
 P BBEF0321 icon_shear_02.png
+P DCC5AB54 laya.png
 R 2C2625D0 loading(1).jpg
 R F369565E LOGO.png
 P 3A4418BB pro_01.png

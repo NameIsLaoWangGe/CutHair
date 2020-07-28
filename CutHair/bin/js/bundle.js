@@ -574,19 +574,19 @@
                 onAwake() {
                     this.self = this.owner;
                     this.calssName = this['__proto__']['constructor'].name;
+                    this.self[this.calssName] = this;
                     this.gameState(this.calssName);
-                    this.lwgOnAwake();
                     this.selfNode();
+                    this.lwgOnAwake();
                     this.variateInit();
                     this.adaptive();
                 }
                 lwgOnAwake() {
                 }
                 onEnable() {
-                    this.self[this.calssName] = this;
+                    this.lwgEventReg();
                     this.lwgOnEnable();
                     this.btnAndOpenAni();
-                    this.lwgEventReg();
                 }
                 selfNode() {
                 }
@@ -1679,6 +1679,8 @@
                         break;
                     case ClickType.largen:
                         btnEffect = new Btn_LargenEffect();
+                        target.pivotX = target.width / 2;
+                        target.pivotY = target.height / 2;
                         break;
                     case ClickType.balloon:
                         btnEffect = new Btn_Balloon();
@@ -2710,9 +2712,18 @@
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
         (function (GVariate) {
-            GVariate._gameLevel = 1;
+            GVariate._gameLevel = 15;
             GVariate._execution = 10;
-            GVariate._goldNum = 10;
+            GVariate._goldNum = {
+                value: 0,
+                get getValue() {
+                    return Laya.LocalStorage.getItem('_goldNum') ? Laya.LocalStorage.getItem('_goldNum') : 0;
+                },
+                set setValue(vals) {
+                    this.value += vals;
+                    Laya.LocalStorage.setItem('_goldNum', this.value);
+                }
+            };
             GVariate._taskArr = [];
             GVariate._taskNum = 0;
         })(GVariate = Global.GVariate || (Global.GVariate = {}));
@@ -2738,7 +2749,6 @@
                 else {
                     GVariate._gameLevel = 1;
                     GVariate._execution = 20;
-                    GVariate._goldNum = 0;
                     return null;
                 }
             }
@@ -2965,36 +2975,86 @@
     class UILoding extends lwg.Admin.Scene {
         constructor() {
             super();
-            this.LodingList = [];
-            this.maskMoveSwitch = false;
-            this.shearSpeed = 10;
-            this.shearSwitch = false;
-        }
-        lwgOnAwake() {
-            this.LodingList = [];
-        }
-        selfNode() {
-            this.Mask = this.self['Mask'];
-        }
-        lwgOnEnable() {
-            this.lodeMianScene3D();
+            this.lodingList_2D = [];
+            this.lodingList_3D = [];
+            this.lodingList_Data = [];
+            this.LodingType = {
+                Loding3D: 'Loding3D',
+                Loding2D: 'Loding2D',
+                LodingData: 'LodingData',
+                complete: 'complete',
+            };
+            this.maskMoveSwitch = true;
             this.shearSpeed = 10;
             this.shearSwitch = true;
-            this.maskMoveSwitch = true;
+        }
+        lwgOnAwake() {
+            this.lodingList_2D = [
+                "res/atlas/Frame/Effects.png",
+                "res/atlas/Frame/UI.png",
+                "res/atlas/UI/GameStart.png",
+                "res/atlas/UI/Common.png",
+            ];
+            this.lodingList_3D = [
+                "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
+            ];
+            this.lodingList_Data = [];
         }
         adaptive() {
-            this.self['Background'].height = Laya.stage.height;
+            this.self['Bg'].height = Laya.stage.height;
+            this.self['Logo'].y = Laya.stage.height * 0.174;
+            this.self['Progress'].y = Laya.stage.height * 0.763;
+            this.self['FCM'].y = Laya.stage.height * 0.910;
+            this.self['FCM'].y = Laya.stage.height * 0.910;
         }
-        lodeMianScene3D() {
-            Laya.Scene3D.load("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls", Laya.Handler.create(this, this.mianSceneComplete));
+        lwgOnEnable() {
+            EventAdmin.notify(this.LodingType.Loding3D);
         }
-        mianSceneComplete(scene) {
-            Laya.stage.addChildAt(scene, 0);
-            scene[lwg.Admin.SceneName.GameMain3D] = scene.addComponent(GameMain3D);
-            lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D] = scene;
-            this.Mask.x = 0;
-            this.shearSpeed = 3;
-            this.self['Shear'].x = this.Mask.width;
+        lwgEventReg() {
+            EventAdmin.reg(this.LodingType.Loding3D, this, () => { this.lodeScene3D(); });
+            EventAdmin.reg(this.LodingType.Loding2D, this, () => { this.loding2D(); });
+            EventAdmin.reg(this.LodingType.LodingData, this, () => { this.lodingData(); });
+            EventAdmin.reg(this.LodingType.complete, this, () => { this.completeLode(); });
+        }
+        lodeScene3D() {
+            if (this.lodingList_3D.length === 0) {
+                console.log('没有3D场景');
+                EventAdmin.notify(this.LodingType.Loding2D);
+                return;
+            }
+            Laya.Scene3D.load(this.lodingList_3D[0], Laya.Handler.create(this, (scene) => {
+                Laya.stage.addChildAt(scene, 0);
+                scene[Admin.SceneName.GameMain3D] = scene.addComponent(GameMain3D);
+                lwg.Admin._sceneControl[Admin.SceneName.GameMain3D] = scene;
+                console.log('3D场景加载完成！');
+                EventAdmin.notify(this.LodingType.Loding2D);
+            }));
+        }
+        loding2D() {
+            if (this.lodingList_2D.length === 0) {
+                console.log('没有需要加载的2D资源！');
+                EventAdmin.notify(this.LodingType.LodingData);
+                return;
+            }
+            Laya.loader.load(this.lodingList_2D, Laya.Handler.create(this, f => {
+                console.log('2D资源加载完成！');
+                EventAdmin.notify(this.LodingType.LodingData);
+            }));
+        }
+        lodingData() {
+            if (this.lodingList_Data.length === 0) {
+                console.log('没有数据表需要加载！');
+                EventAdmin.notify(this.LodingType.complete);
+                return;
+            }
+            Laya.loader.load(this.lodingList_Data, Laya.Handler.create(this, () => {
+                console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                EventAdmin.notify(this.LodingType.complete);
+            }), null, Laya.Loader.JSON);
+        }
+        completeLode() {
+            this.self['Mask'].x = 0;
+            this.self['Shear'].x = this.self['Mask'].width;
             this.self['Per'].text = 100 + '%';
             Laya.timer.once(500, this, () => {
                 lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
@@ -3003,10 +3063,10 @@
         }
         lwgOnUpdate() {
             if (this.maskMoveSwitch) {
-                if (this.Mask.x < -this.Mask.width * 1 / 5) {
-                    this.Mask.x += this.Mask.width / 25;
-                    this.self['Shear'].x += this.Mask.width / 25;
-                    let str = ((-this.Mask.width - this.Mask.x) / -this.Mask.width * 100).toString().substring(0, 2);
+                if (this.self['Mask'].x < -this.self['Mask'].width * 1 / 5) {
+                    this.self['Mask'].x += this.self['Mask'].width / 25;
+                    this.self['Shear'].x += this.self['Mask'].width / 25;
+                    let str = ((-this.self['Mask'].width - this.self['Mask'].x) / -this.self['Mask'].width * 100).toString().substring(0, 2);
                     this.self['Per'].text = str + '%';
                 }
             }
@@ -3154,15 +3214,17 @@
             this.BtnLast = this.self['BtnLast'];
             this.Dialogue = this.self['Dialogue'];
         }
-        lwgOnEnable() {
+        lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
             GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+            this.createProgress();
+        }
+        lwgOnEnable() {
             this.BtnLast.visible = false;
             this.createTaskContent();
             this.mainCameraMove();
             this.dialogueSet();
-            this.createProgress();
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
@@ -3198,8 +3260,8 @@
                 this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 1;
             });
             EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
-                let TaskBar = this.TaskBar.getChildAt(GVariate._taskNum);
-                let Bar = TaskBar.getChildByName('Bar');
+                let TaskBar0 = this.TaskBar.getChildAt(GVariate._taskNum);
+                let Bar = TaskBar0.getChildByName('Bar');
                 let sum;
                 let value;
                 switch (GVariate._taskArr[GVariate._taskNum]) {
@@ -3484,18 +3546,51 @@
     }
 
     class UIStart extends lwg.Admin.Scene {
+        selfNode() {
+            this.LevelDisplay = this.self['LevelDisplay'];
+            this.LevelStyle = this.self['LevelStyle'];
+        }
         lwgOnEnable() {
+            console.log(GVariate._goldNum.getValue);
+            this.levelStyleDisplay();
+        }
+        levelStyleDisplay() {
+            let location = GVariate._gameLevel % this.LevelStyle.numChildren;
+            for (let index = 0; index < this.LevelStyle.numChildren; index++) {
+                const element = this.LevelStyle.getChildAt(index);
+                let location0 = Number(element.name.substring(element.name.length - 1, element.name.length));
+                let Num = element.getChildByName('Num');
+                if (location0 === location) {
+                    Num.value = GVariate._gameLevel.toString();
+                }
+                else if (location0 < location) {
+                    Num.value = (GVariate._gameLevel - (location - location0)).toString();
+                }
+                else if (location0 > location) {
+                    Num.value = (GVariate._gameLevel + (location0 - location)).toString();
+                    let Pic = element.getChildByName('Pic');
+                    Pic.skin = 'UI/GameStart/jindu_hui.png';
+                    let Color = element.getChildByName('Color');
+                    if (Color !== null) {
+                        Color.visible = false;
+                    }
+                    Num.skin = 'UI/Common/shuzi3.png';
+                }
+            }
         }
         onStageClick() {
             lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
                 this.self.close();
             });
         }
+        lwgDisable() {
+        }
     }
 
     class UIVictory extends lwg.Admin.Scene {
         constructor() { super(); }
         lwgOnEnable() {
+            GVariate._goldNum.setValue = 25;
         }
         btnOnClick() {
             Click.on(Click.ClickType.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
