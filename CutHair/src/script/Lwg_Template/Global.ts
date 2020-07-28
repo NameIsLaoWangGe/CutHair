@@ -35,18 +35,6 @@ export module Global {
         export let _gameLevel: number = 15;
         export let _execution: number = 10;
 
-        /**金币*/
-        export let _goldNum = {
-            value: 0,
-            get getValue() {
-                return Laya.LocalStorage.getItem('_goldNum') ? Laya.LocalStorage.getItem('_goldNum') : 0;
-            },
-            set setValue(vals) {
-                this.value += vals;
-                Laya.LocalStorage.setItem('_goldNum', this.value);
-            }
-        }
-
         /**当前关卡中的任务顺序集合*/
         export let _taskArr: Array<string> = [];
         /**进行到第几个任务了*/
@@ -61,7 +49,6 @@ export module Global {
             storageData = {
                 '_gameLevel': GVariate._gameLevel,
                 '_execution': GVariate._execution,
-                '_goldNum': GVariate._goldNum,
             }
             // 转换成字符串上传
             let data: string = JSON.stringify(storageData);

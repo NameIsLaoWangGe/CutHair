@@ -213,8 +213,6 @@ export module lwg {
             Admin._openScene('UISet', null, null, null);
         }
 
-
-
         /**指代当前剩余体力节点*/
         export let ExecutionNumNode: Laya.Sprite;
         /**
@@ -383,34 +381,6 @@ export module lwg {
             }));
         }
 
-        /**
-         * 创建提示框prefab
-         * @param type 类型，也就是提示文字类型
-         */
-        export function _createHint_01(type): void {
-            let sp: Laya.Sprite;
-            Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                Laya.stage.addChild(sp);
-                sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
-                let dec = sp.getChildByName('dec') as Laya.Label;
-                dec.text = Enum.HintDec[type];
-                sp.zOrder = 100;
-
-                dec.alpha = 0;
-                Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                    Animation.fadeOut(dec, 0, 1, 150, 0, f => {
-                        Animation.fadeOut(dec, 1, 0, 200, 800, f => {
-                            Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
-                                sp.removeSelf();
-                            });
-                        });
-                    });
-                });
-            }));
-        }
 
         /**
         * 创建提示框prefab
@@ -532,10 +502,69 @@ export module lwg {
         }
     }
 
+
+    /**提示模块*/
+    export module Hint {
+        /**提示文字的类型描述*/
+        export enum HintDec {
+            '金币不够了！',
+            '没有可以购买的皮肤了！',
+            '暂时没有广告，过会儿再试试吧！',
+            '暂无皮肤!',
+            '暂无分享!',
+            '暂无提示机会!',
+            '观看完整广告才能获取奖励哦！',
+            '通关上一关才能解锁本关！',
+            '分享成功后才能获取奖励！',
+            '分享成功',
+            '暂无视频，玩一局游戏之后分享！',
+            '消耗2点体力！',
+            '今日体力福利已领取！',
+            '分享成功，获得125金币！',
+            '限定皮肤已经获得，请前往商店查看。',
+            '分享失败！',
+            '兑换码错误！',
+            '获得柯基公主皮肤，前往彩蛋墙查看！',
+            '获得黄皮耗子皮肤，前往彩蛋墙查看！',
+            '获得赛牙人皮肤，前往彩蛋墙查看！',
+            '获得海绵公主皮肤，前往彩蛋墙查看！',
+            '获得仓鼠公主皮肤，前往彩蛋墙查看！',
+            '获得自闭鸭子皮肤，前往彩蛋墙查看！',
+        }
+        /**
+         * 创建提示框prefab
+         * @param describe 类型，也就是提示文字类型
+         */
+        export function createHint_01(describe: number): void {
+            let sp: Laya.Sprite;
+            Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                Laya.stage.addChild(sp);
+                sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
+                let dec = sp.getChildByName('dec') as Laya.Label;
+                dec.text = HintDec[describe];
+                sp.zOrder = 100;
+
+                dec.alpha = 0;
+                Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
+                    Animation.fadeOut(dec, 0, 1, 150, 0, f => {
+                        Animation.fadeOut(dec, 1, 0, 200, 800, f => {
+                            Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                                sp.removeSelf();
+                            });
+                        });
+                    });
+                });
+            }));
+        }
+    }
+
     /**金币模块*/
     export module Gold {
         /**金币数量*/
-        export let _goldNum: number;
+        export let _goldNum: number = 0;
         /**指代当前全局的的金币资源节点*/
         export let GoldNode: Laya.Sprite;
         /**
@@ -548,8 +577,15 @@ export module lwg {
                 let _prefab = new Laya.Prefab();
                 _prefab.json = prefab;
                 sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                let num = sp.getChildByName('Num') as Laya.FontClip;
-                num.value = _goldNum.toString();
+                let num = sp.getChildByName('Num') as Laya.Label;
+
+                let goldNum = Laya.LocalStorage.getItem('_goldNum');
+                if (goldNum) {
+                    _goldNum = Number(goldNum);
+                } else {
+                    Laya.LocalStorage.setItem('_goldNum', '0');
+                }
+                num.text = _goldNum.toString();
                 parent.addChild(sp);
                 sp.pos(151, 79);
                 sp.zOrder = 50;
@@ -558,19 +594,19 @@ export module lwg {
         }
 
         /**增加金币以及节点上的表现*/
-        export function _addGold(number) {
+        export function addGold(number) {
             _goldNum += number;
-            let Num = GoldNode.getChildByName('Num') as Laya.FontClip;
-            Num.value = _goldNum.toString();
+            let Num = GoldNode.getChildByName('Num') as Laya.Text;
+            Num.text = _goldNum.toString();
             Laya.LocalStorage.setItem('_goldNum', _goldNum.toString());
         }
         /**增加金币节点上的表现动画，并不会增加金币*/
-        export function _addGoldDisPlay(number) {
+        export function addGoldDisPlay(number) {
             let Num = GoldNode.getChildByName('Num') as Laya.FontClip;
             Num.value = (Number(Num.value) + number).toString();
         }
         /**增加金币，但是不表现出来*/
-        export function _addGoldNoDisPlay(number) {
+        export function addGoldNoDisPlay(number) {
             _goldNum += number;
             Laya.LocalStorage.setItem('_goldNum', _goldNum.toString());
         }
@@ -983,7 +1019,8 @@ export module lwg {
                 Global._execution -= subEx;
                 let num = Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
                 num.value = Global._execution.toString();
-                Global._createHint_01(lwg.Enum.HintType.consumeEx);
+                Hint.createHint_01(Hint.HintDec["消耗2点体力！"]);
+
                 Global.createConsumeEx(subEx);
             }
 
@@ -1749,6 +1786,8 @@ export module lwg {
         }
     }
 
+
+
     /**加载一些骨骼动画，在loding界面出现的时候执行skLoding()方法*/
     export module Sk {
         /**皮肤的顺序以及名称*/
@@ -2305,7 +2344,7 @@ export module lwg {
          * @param out 出屏幕函数
          * 以上4个只是函数名，不可传递函数，如果没有特殊执行，那么就用此模块定义的4个函数，包括通用效果。
          */
-        export function on(effect, audioUrl, target, caller, down, move, up, out): void {
+        export function on(effect, audioUrl, target, caller, down?: Function, move?: Function, up?: Function, out?: Function): void {
             let btnEffect;
             if (audioUrl) {
                 Click.audioUrl = audioUrl;
@@ -3899,4 +3938,6 @@ export let EventAdmin = lwg.EventAdmin;
 export let Tools = lwg.Tools;
 export let Effects = lwg.Effects;
 export let Animation3D = lwg.Animation3D;
-export let PalyAudio = lwg.PalyAudio; 
+export let PalyAudio = lwg.PalyAudio;
+export let Gold = lwg.Gold;
+export let Hint = lwg.Hint;

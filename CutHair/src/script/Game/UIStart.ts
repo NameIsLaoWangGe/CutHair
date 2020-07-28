@@ -1,4 +1,4 @@
-import { lwg } from "../Lwg_Template/lwg";
+import { lwg, Gold } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -12,7 +12,7 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgOnEnable(): void {
-        console.log(GVariate._goldNum.getValue)
+        Gold._createGoldNode(Laya.stage);
         this.levelStyleDisplay();
     }
 
@@ -49,6 +49,6 @@ export default class UIStart extends lwg.Admin.Scene {
         });
     }
     lwgDisable(): void {
-
+        Gold.GoldNode.visible = false; 
     }
 }
