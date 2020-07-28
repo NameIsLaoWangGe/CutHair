@@ -1915,7 +1915,7 @@
             function simple_Rotate(node, Frotate, Erotate, time, func) {
                 node.rotation = Frotate;
                 Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
-                    if (func !== null) {
+                    if (func && func !== null) {
                         func();
                     }
                 }), 0);
@@ -1926,7 +1926,7 @@
                     Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
                         Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
                             Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
-                                if (func !== null) {
+                                if (func !== null || func !== undefined) {
                                     func();
                                 }
                             }), 0);
@@ -2663,6 +2663,7 @@
     let Tools = lwg.Tools;
     let Effects = lwg.Effects;
     let Animation3D = lwg.Animation3D;
+    let PalyAudio = lwg.PalyAudio;
 
     class UIDefeated extends lwg.Admin.Scene {
         selfNode() {
@@ -2964,24 +2965,70 @@
     class UILoding extends lwg.Admin.Scene {
         constructor() {
             super();
-            this.mianSceneOk = false;
+            this.LodingList = [];
+            this.maskMoveSwitch = false;
+            this.shearSpeed = 10;
+            this.shearSwitch = false;
+        }
+        lwgOnAwake() {
+            this.LodingList = [];
+        }
+        selfNode() {
+            this.Mask = this.self['Mask'];
         }
         lwgOnEnable() {
             this.lodeMianScene3D();
+            this.shearSpeed = 10;
+            this.shearSwitch = true;
+            this.maskMoveSwitch = true;
+        }
+        adaptive() {
+            this.self['Background'].height = Laya.stage.height;
         }
         lodeMianScene3D() {
             Laya.Scene3D.load("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls", Laya.Handler.create(this, this.mianSceneComplete));
         }
         mianSceneComplete(scene) {
             Laya.stage.addChildAt(scene, 0);
-            this.mianSceneOk = true;
-            scene.addComponent(GameMain3D);
+            scene[lwg.Admin.SceneName.GameMain3D] = scene.addComponent(GameMain3D);
             lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D] = scene;
-            scene[lwg.Admin.SceneName.GameMain3D] = scene.getComponent(GameMain3D);
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, null, f => {
+            this.Mask.x = 0;
+            this.shearSpeed = 3;
+            this.self['Shear'].x = this.Mask.width;
+            this.self['Per'].text = 100 + '%';
+            Laya.timer.once(500, this, () => {
+                lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
+                this.self.close();
             });
         }
+        lwgOnUpdate() {
+            if (this.maskMoveSwitch) {
+                if (this.Mask.x < -this.Mask.width * 1 / 5) {
+                    this.Mask.x += this.Mask.width / 25;
+                    this.self['Shear'].x += this.Mask.width / 25;
+                    let str = ((-this.Mask.width - this.Mask.x) / -this.Mask.width * 100).toString().substring(0, 2);
+                    this.self['Per'].text = str + '%';
+                }
+            }
+            if (this.self['Shear_02'].rotation > 15) {
+                this.self['Shear_02']['dir'] = 'up';
+            }
+            else if (this.self['Shear_02'].rotation <= 0) {
+                this.self['Shear_02']['dir'] = 'down';
+            }
+            if (this.self['Shear_02']['dir'] === 'up') {
+                this.self['Shear_02'].rotation -= this.shearSpeed;
+                this.self['Shear_01'].rotation += this.shearSpeed;
+            }
+            else if (this.self['Shear_02']['dir'] === 'down') {
+                this.self['Shear_02'].rotation += this.shearSpeed;
+                this.self['Shear_01'].rotation -= this.shearSpeed;
+            }
+        }
         lwgDisable() {
+            if (PalyAudio._voiceSwitch) {
+                lwg.PalyAudio.playMusic(lwg.Enum.voiceUrl.bgm, 0, 1000);
+            }
         }
     }
 
@@ -3199,7 +3246,7 @@
                 let Bar = TaskPro.getChildByName('Bar');
                 Bar.width = 80;
                 let Mask = new Laya.Sprite();
-                Mask.loadImage('UI/GameMain/bai.png');
+                Mask.loadImage('Frame/UI/ui_orthogon_black.png');
                 Mask['renderType'] = 'mask';
                 Bar.mask = Mask;
                 Mask.width = Bar.width + 20;
@@ -3338,7 +3385,7 @@
                     GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model1 = GSene3D.knife.getChildAt(0);
-                    Model1.transform.localRotationEulerX = -180;
+                    Model1.transform.localRotationEulerX = -200;
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);

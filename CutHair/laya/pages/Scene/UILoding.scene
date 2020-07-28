@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":5,
+    "selectedBox":11,
+    "selecteID":12,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":6,
+    "maxID":33,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -30,6 +30,161 @@
             "compId":3,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,Background,Background",
+            "props":{"y":0,"x":0,"width":720,"var":"Background","skin":"UI/Loding/bg.jpg","sizeGrid":"93,0,1400,0","name":"Background","height":1286,"alpha":1},
+            "nodeParent":2,
+            "label":"Background",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":6,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,Logo,Logo",
+            "props":{"y":205,"x":354,"var":"Logo","texture":"UI/Loding/LOGO.png","pivotY":143,"pivotX":300,"name":"Logo"},
+            "nodeParent":2,
+            "label":"Logo",
+            "isOpen":true,
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":7,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,Progress,Progress",
+            "props":{"y":977,"x":358,"width":478,"var":"Progress","pivotY":28,"pivotX":239,"name":"Progress","height":55},
+            "nodeParent":2,
+            "label":"Progress",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":9,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,Board",
+                    "props":{"y":43,"x":7,"texture":"UI/Loding/pro_02.png","pivotY":28,"name":"Board"},
+                    "nodeParent":9,
+                    "label":"Board",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":10,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,ProgressBar,ProgressBar",
+                    "props":{"y":17,"x":8,"var":"ProgressBar","skin":"UI/Loding/pro_01.png","sizeGrid":"0,18,0,17","name":"ProgressBar"},
+                    "nodeParent":9,
+                    "label":"ProgressBar",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":11,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,Mask,Mask",
+                            "props":{"y":0,"x":-460,"var":"Mask","skin":"UI/Loding/pro_01.png","sizeGrid":"0,12,0,12","renderType":"mask","name":"Mask"},
+                            "nodeParent":11,
+                            "label":"Mask",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":12,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,Word,Word",
+                    "props":{"y":-43,"x":229,"width":134,"var":"Word","texture":"UI/Loding/word_Loding.png","pivotY":16,"pivotX":67,"name":"Word","height":32},
+                    "nodeParent":9,
+                    "label":"Word",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":8,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label,Per,Per",
+                            "props":{"y":11,"x":135,"width":45,"var":"Per","valign":"middle","text":"25%","name":"Per","height":20,"fontSize":20,"color":"#6b5d5d","bold":true,"align":"center"},
+                            "nodeParent":8,
+                            "label":"Per",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":16,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,Shear,Shear",
+                    "props":{"y":26,"x":17,"width":65,"var":"Shear","pivotY":40,"pivotX":42,"name":"Shear","height":68},
+                    "nodeParent":9,
+                    "label":"Shear",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":18,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,Shear_01,Shear_01",
+                            "props":{"y":42,"x":42,"width":89,"var":"Shear_01","skin":"UI/Loding/icon_shear_01.png","pivotY":42,"pivotX":42,"name":"Shear_01","height":60},
+                            "nodeParent":18,
+                            "label":"Shear_01",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":14,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,Shear_02,Shear_02",
+                            "props":{"y":41,"x":44,"width":86,"var":"Shear_02","skin":"UI/Loding/icon_shear_02.png","rotation":0,"pivotY":23,"pivotX":42,"name":"Shear_02","height":64},
+                            "nodeParent":18,
+                            "label":"Shear_02",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":15,
+                            "child":[
+                                ]
+                        }]
+                }]
         }],
     "animations":[
         {

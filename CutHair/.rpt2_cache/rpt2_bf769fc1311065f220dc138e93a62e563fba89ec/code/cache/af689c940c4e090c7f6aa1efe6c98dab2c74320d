@@ -1,0 +1,6 @@
+{
+  "code": "import { lwg } from \"../Lwg_Template/lwg\";\r\nexport default class UIStart extends lwg.Admin.Scene {\r\n    lwgOnEnable() {\r\n    }\r\n    onStageClick() {\r\n        lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {\r\n            this.self.close();\r\n        });\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/lwg.ts"
+  ]
+}

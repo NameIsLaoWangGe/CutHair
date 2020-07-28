@@ -266,7 +266,8 @@ export default class UIOperation extends lwg.Admin.Scene {
             let Bar = TaskPro.getChildByName('Bar') as Laya.Image;
             Bar.width = 80;
             let Mask = new Laya.Sprite();
-            Mask.loadImage('UI/GameMain/bai.png');
+            Mask.loadImage('Frame/UI/ui_orthogon_black.png');
+            Mask['renderType'] = 'mask'
             Bar.mask = Mask
             Mask.width = Bar.width + 20;
             Mask.x = -(Bar.width + 20);
@@ -457,7 +458,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position
                 GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0))
                 let Model1 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
-                Model1.transform.localRotationEulerX = -180
+                Model1.transform.localRotationEulerX = -200
 
                 Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);

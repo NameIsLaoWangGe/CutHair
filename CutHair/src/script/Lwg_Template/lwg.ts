@@ -674,7 +674,7 @@ export module lwg {
           * @param cloesScene 需要关闭的场景，如果不需要关闭，传入null
           * @param func 回调函数
          */
-        export function _openScene(openName: string, zOder: number, cloesScene: Laya.Scene, func): void {
+        export function _openScene(openName: string, zOder?: number, cloesScene?: Laya.Scene, func?: Function): void {
             Laya.Scene.load('Scene/' + openName + '.json', Laya.Handler.create(this, function (scene: Laya.Scene) {
                 scene.width = Laya.stage.width;
                 scene.height = Laya.stage.height;
@@ -2568,10 +2568,10 @@ export module lwg {
           * @param Erotate 最终角度
           * @param time 花费时间
         */
-        export function simple_Rotate(node, Frotate, Erotate, time, func): void {
+        export function simple_Rotate(node, Frotate, Erotate, time, func?: Function): void {
             node.rotation = Frotate;
             Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
-                if (func !== null) {
+                if (func && func !== null) {
                     func();
                 }
             }), 0);
@@ -2582,12 +2582,12 @@ export module lwg {
          * @param node 节点
          * @param time 花费时间
          */
-        export function upDown_Overturn(node, time, func): void {
+        export function upDown_Overturn(node, time, func?: Function): void {
             Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
                 Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
                         Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
-                            if (func !== null) {
+                            if (func !== null || func !== undefined) {
                                 func();
                             }
                         }), 0);
@@ -3808,3 +3808,4 @@ export let EventAdmin = lwg.EventAdmin;
 export let Tools = lwg.Tools;
 export let Effects = lwg.Effects;
 export let Animation3D = lwg.Animation3D;
+export let PalyAudio = lwg.PalyAudio; 
