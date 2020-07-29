@@ -10,6 +10,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         this.GlodNum = this.self['GlodNum'];
     }
     lwgOnEnable(): void {
+        console.log(Laya.stage);
         Gold.GoldNode.visible = true;
         Gold.addGold(25);
         this.getGoldDisPlay();
@@ -30,14 +31,14 @@ export default class UIVictory extends lwg.Admin.Scene {
         Click.on(Click.ClickType.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
         Click.on(Click.ClickType.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
         Click.on(Click.ClickType.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
-
-
     }
+
     btnNormalUp(): void {
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-        EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
+        Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage) })
         this.self.close();
     }
+
     btnSelectUp(): void {
         if (this.self['Dot'].visible) {
             this.self['Dot'].visible = false;
@@ -55,7 +56,7 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     btnAdvUp(): void {
-        Hint.createHint_01(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+        Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
     }
 
     lwgDisable(): void {

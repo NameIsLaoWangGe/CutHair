@@ -38,6 +38,6 @@ export default class UIDefeated extends lwg.Admin.Scene {
     }
 
     btnNextUp():void{
-        Hint.createHint_01(Hint.HintDec["暂时没有广告，过会儿再试试吧！"])
+        Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"])
     }
 }

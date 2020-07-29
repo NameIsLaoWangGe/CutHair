@@ -40,12 +40,6 @@ P DDDDFB9E vslider$bar.png
 P 01BAE7F5 vslider.png
 D Frame
 D UI
-D Voice
-R DF5F5D4D bgm.mp3
-R 626CADAF btn.wav
-R 9B501DC8 chijinbi.wav
-R E23D09D2 guoguan.wav
-R 6E72E92F wancheng.wav
 D Frame/Effects
 P 03F236DC cir_black.png
 P EBB4CAAE cir_blue.png
@@ -121,6 +115,12 @@ P D6262B24 ui_square_c_009.png
 P 7331617A ui_square_c_010.png
 P 87918B79 ui_square_c_011.png
 P B253D6A3 ui_square_c_012.png
+D Frame/Voice
+R DF5F5D4D bgm.mp3
+R 626CADAF btn.wav
+R 9B501DC8 chijinbi.wav
+R E23D09D2 guoguan.wav
+R 6E72E92F wancheng.wav
 D UI/Common
 P 3C9D159B AD.png
 P 7C8C2E05 anniu.png

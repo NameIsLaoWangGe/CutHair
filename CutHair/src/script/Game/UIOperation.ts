@@ -144,7 +144,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.Dialogue = this.self['Dialogue'];
     }
 
-    lwgOnAwake():void{
+    lwgOnAwake(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
@@ -164,7 +164,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
 
                 Laya.timer.frameOnce(60, this, () => {
-                    Admin._openScene(Admin.SceneName.UIVictory, null, null, () => { });
+                    Admin._openScene(Admin.SceneName.UIVictory, null, this.self);
                 });
             } else {
                 //刷新一下属性 

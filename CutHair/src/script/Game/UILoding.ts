@@ -1,35 +1,24 @@
-import { lwg, Animation, PalyAudio, EventAdmin, Admin } from "../Lwg_Template/lwg";
+import { lwg, Animation, PalyAudio, EventAdmin, Admin, Loding } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
-export default class UILoding extends lwg.Admin.Scene {
+import { GSene3D } from "../Lwg_Template/Global";
+export default class UILoding extends Loding.Lode {
     constructor() { super(); }
-
-    /**需要加载的图片资源列表,一般是界面的图片*/
-    lodingList_2D: Array<any> = [];
-    /**3D场景的加载*/
-    lodingList_3D: Array<any> = [];
-    /**数据表的加载*/
-    lodingList_Data: Array<any> = [];
-
-    /**事件类型*/
-    LodingType = {
-        Loding3D: 'Loding3D',
-        Loding2D: 'Loding2D',
-        LodingData: 'LodingData',
-        complete: 'complete',
-    }
-
     lwgOnAwake() {
-        this.lodingList_2D = [
+        Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
             "res/atlas/Frame/UI.png",
             "res/atlas/UI/GameStart.png",
             "res/atlas/UI/Common.png",
         ];
-        this.lodingList_3D = [
+        Loding.lodingList_3D = [
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
         ];
-        this.lodingList_Data = [
+        Loding.lodingList_Data = [
         ];
+    }
+
+    lwgOnEnable(): void {
+        EventAdmin.notify(Loding.LodingType.Loding3D);
     }
 
     adaptive(): void {
@@ -40,70 +29,17 @@ export default class UILoding extends lwg.Admin.Scene {
         this.self['FCM'].y = Laya.stage.height * 0.910;
     }
 
-    lwgOnEnable(): void {
-        EventAdmin.notify(this.LodingType.Loding3D);
-    }
-
-    lwgEventReg(): void {
-        EventAdmin.reg(this.LodingType.Loding3D, this, () => { this.lodeScene3D() });
-        EventAdmin.reg(this.LodingType.Loding2D, this, () => { this.loding2D() });
-        EventAdmin.reg(this.LodingType.LodingData, this, () => { this.lodingData() });
-        EventAdmin.reg(this.LodingType.complete, this, () => { this.completeLode() });
-    }
-
-    /**加载3D场景*/
-    lodeScene3D(): void {
-        if (this.lodingList_3D.length === 0) {
-            console.log('没有3D场景');
-            EventAdmin.notify(this.LodingType.Loding2D);
-            return;
-        }
-        Laya.Scene3D.load(this.lodingList_3D[0], Laya.Handler.create(this, (scene: Laya.Scene3D) => {
-            Laya.stage.addChildAt(scene, 0);
-            scene[Admin.SceneName.GameMain3D] = scene.addComponent(GameMain3D);
-            lwg.Admin._sceneControl[Admin.SceneName.GameMain3D] = scene;
-
-            console.log('3D场景加载完成！');
-            EventAdmin.notify(this.LodingType.Loding2D);
-        }));
-    }
-
-    /**加载2D图片列表*/
-    loding2D(): void {
-        if (this.lodingList_2D.length === 0) {
-            console.log('没有需要加载的2D资源！');
-            EventAdmin.notify(this.LodingType.LodingData);
-            return;
-        }
-        // 加载多张png类型资源
-        Laya.loader.load(
-            this.lodingList_2D,
-            Laya.Handler.create(this, f => {
-
-                console.log('2D资源加载完成！');
-                EventAdmin.notify(this.LodingType.LodingData);
-            }));
-    }
-
-    /**加载数据表*/
-    lodingData(): void {
-        if (this.lodingList_Data.length === 0) {
-            console.log('没有数据表需要加载！');
-            EventAdmin.notify(this.LodingType.complete);
-            return;
-        }
-        /**优先加载数据表*/
-        Laya.loader.load(this.lodingList_Data, Laya.Handler.create(this, () => {
-            console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-            EventAdmin.notify(this.LodingType.complete);
-        }), null, Laya.Loader.JSON);
-    }
-
-    /**加载完成回调,每个游戏不一样*/
-    completeLode(): void {
+    lwgLodeComplete(): void {
         this.self['Mask'].x = 0;
         this.self['Shear'].x = this.self['Mask'].width;
         this.self['Per'].text = 100 + '%';
+
+        // 获取场景
+        let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls") as Laya.Scene3D;
+        Laya.stage.addChildAt(Scene3D, 0);
+        Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
+        Scene3D.addComponent(GameMain3D);
+
         Laya.timer.once(500, this, () => {
             lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
             this.self.close();
@@ -116,15 +52,19 @@ export default class UILoding extends lwg.Admin.Scene {
     shearSpeed: number = 10;
     /**剪刀修剪开关*/
     shearSwitch: boolean = true;
+
+    
+
     lwgOnUpdate(): void {
         // 模拟加载进度
         if (this.maskMoveSwitch) {
-            if (this.self['Mask'].x < -  this.self['Mask'].width * 1 / 5) {
+            if (this.self['Mask'].x < -this.self['Mask'].width * 1 / 5) {
                 this.self['Mask'].x += this.self['Mask'].width / 25;
                 this.self['Shear'].x += this.self['Mask'].width / 25;
                 // 百分比数字
                 let str: string = ((- this.self['Mask'].width - this.self['Mask'].x) / - this.self['Mask'].width * 100).toString().substring(0, 2);
                 this.self['Per'].text = str + '%';
+            } else {
             }
         }
 

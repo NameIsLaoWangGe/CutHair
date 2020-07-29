@@ -121,51 +121,6 @@
         {
             "x":15,
             "type":"Sprite",
-            "searchKey":"Sprite",
-            "props":{"y":79,"x":151,"presetID":1,"preset":"laya/pages/prefab/GoldDisPlay.prefab"},
-            "nodeParent":2,
-            "label":"Sprite(GoldDisPlay)",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":430,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"presetID":2,"preset":"laya/pages/prefab/GoldDisPlay.prefab"},
-                    "nodeParent":430,
-                    "label":"Sprite(GoldDisPlay)",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":432,
-                    "child":[
-                        ],
-                    "$HIDDEN":false
-                },
-                {
-                    "x":30,
-                    "type":"Label",
-                    "searchKey":"Label",
-                    "props":{"presetID":3,"preset":"laya/pages/prefab/GoldDisPlay.prefab"},
-                    "nodeParent":430,
-                    "label":"Label(GoldDisPlay)",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":434,
-                    "child":[
-                        ],
-                    "$HIDDEN":false
-                }],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Sprite",
             "searchKey":"Sprite,LevelDisplay,LevelDisplay",
             "props":{"y":157,"x":111,"width":510,"var":"LevelDisplay","name":"LevelDisplay","height":85},
             "nodeParent":2,

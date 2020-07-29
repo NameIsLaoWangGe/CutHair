@@ -80,7 +80,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     lwgEventReg(): void {
         // 重来
-        EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, GSene3D, () => {
+        EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
             this.refreshScene();
         })
     };

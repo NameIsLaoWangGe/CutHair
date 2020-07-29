@@ -11,7 +11,10 @@ export default class UIStart extends lwg.Admin.Scene {
         this.LevelStyle = this.self['LevelStyle'];
     }
 
+    /**开始游戏延时*/
+    startSwitch: boolean = false;
     lwgOnEnable(): void {
+        Laya.timer.frameOnce(120, this, () => { this.startSwitch = true; })
         Gold._createGoldNode(Laya.stage);
         this.levelStyleDisplay();
     }
@@ -41,14 +44,16 @@ export default class UIStart extends lwg.Admin.Scene {
             }
         }
     }
+    onStageMouseUp(): void {
+        if (this.startSwitch) {
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
+                console.log('开始游戏');
+                this.self.close();
+            });
+        }
 
-
-    onStageClick(): void {
-        lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-            this.self.close();
-        });
     }
     lwgDisable(): void {
-        Gold.GoldNode.visible = false; 
+        Gold.GoldNode.visible = false;
     }
 }

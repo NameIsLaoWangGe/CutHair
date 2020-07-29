@@ -382,10 +382,10 @@
             Gold._goldNum = 0;
             function _createGoldNode(parent) {
                 let sp;
-                Laya.loader.load('prefab/GoldNode.json', Laya.Handler.create(this, function (prefab) {
+                Laya.loader.load('Prefab/GoldNode.json', Laya.Handler.create(this, function (prefab) {
                     let _prefab = new Laya.Prefab();
                     _prefab.json = prefab;
-                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    sp = Laya.Pool.getItemByCreateFun('gold', _prefab.create, _prefab);
                     let num = sp.getChildByName('Num');
                     let goldNum = Laya.LocalStorage.getItem('_goldNum');
                     if (goldNum) {

@@ -503,6 +503,7 @@ export module lwg {
     }
 
 
+
     /**提示模块*/
     export module Hint {
         /**提示文字的类型描述*/
@@ -531,33 +532,69 @@ export module lwg {
             '获得仓鼠公主皮肤，前往彩蛋墙查看！',
             '获得自闭鸭子皮肤，前往彩蛋墙查看！',
         }
+        enum Skin {
+            blackBord = 'Frame/UI/ui_orthogon_black.png'
+        }
+
+        export let Hint_M: Laya.Prefab = new Laya.Prefab();
+
         /**
          * 创建提示框prefab
          * @param describe 类型，也就是提示文字类型
          */
-        export function createHint_01(describe: number): void {
-            let sp: Laya.Sprite;
-            Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                Laya.stage.addChild(sp);
-                sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
-                let dec = sp.getChildByName('dec') as Laya.Label;
-                dec.text = HintDec[describe];
-                sp.zOrder = 100;
+        export function createHint_Middle(describe: number): void {
 
-                dec.alpha = 0;
-                Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                    Animation.fadeOut(dec, 0, 1, 150, 0, f => {
-                        Animation.fadeOut(dec, 1, 0, 200, 800, f => {
-                            Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
-                                sp.removeSelf();
-                            });
+            let Hint_M = Laya.Pool.getItemByClass('Hint_M', Laya.Sprite);
+            Hint_M.name = 'Hint_M';//标识符和名称一样
+
+            Laya.stage.addChild(Hint_M);
+            Hint_M.width = Laya.stage.width;
+            Hint_M.height = 100;
+            Hint_M.pivotY = Hint_M.height / 2;
+            Hint_M.pivotX = Laya.stage.width / 2;
+            Hint_M.x = Laya.stage.width / 2;
+            Hint_M.y = Laya.stage.height / 2;
+            Hint_M.zOrder = 100;
+
+            // 底图
+            let Pic = new Laya.Image();
+            Hint_M.addChild(Pic);
+            Pic.skin = Skin.blackBord;
+            Pic.width = Laya.stage.width;
+            Pic.pivotX = Laya.stage.width / 2;
+            Pic.height = 100;
+            Pic.pivotY = Pic.height / 2;
+            Pic.y = Hint_M.height / 2;
+            Pic.x = Laya.stage.width / 2;
+            Pic.alpha = 0.6;
+
+            // 提示语
+            let Dec = new Laya.Label();
+            Hint_M.addChild(Dec);
+            Dec.width = Laya.stage.width
+            Dec.text = HintDec[describe];
+            Dec.pivotX = Laya.stage.width / 2;
+            Dec.x = Laya.stage.width / 2;
+            Dec.height = 100;
+            Dec.pivotY = 50;
+            Dec.y = Hint_M.height / 2;
+            Dec.bold = true;
+            Dec.fontSize = 35;
+            Dec.color = '#ffffff';
+            Dec.align = 'center';
+            Dec.valign = 'middle';
+
+            // 动画
+            Dec.alpha = 0;
+            Animation.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, 0, f => {
+                Animation.fadeOut(Dec, 0, 1, 150, 0, f => {
+                    Animation.fadeOut(Dec, 1, 0, 200, 800, f => {
+                        Animation.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                            Hint_M.removeSelf();
                         });
                     });
                 });
-            }));
+            });
         }
     }
 
@@ -572,11 +609,14 @@ export module lwg {
          * @param parent 父节点
          */
         export function _createGoldNode(parent): void {
+            if (GoldNode) {
+                return;
+            }
             let sp: Laya.Sprite;
-            Laya.loader.load('prefab/GoldNode.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+            Laya.loader.load('Prefab/GoldNode.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
                 let _prefab = new Laya.Prefab();
                 _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                sp = Laya.Pool.getItemByCreateFun('gold', _prefab.create, _prefab);
                 let num = sp.getChildByName('Num') as Laya.Label;
 
                 let goldNum = Laya.LocalStorage.getItem('_goldNum');
@@ -1019,8 +1059,7 @@ export module lwg {
                 Global._execution -= subEx;
                 let num = Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
                 num.value = Global._execution.toString();
-                Hint.createHint_01(Hint.HintDec["消耗2点体力！"]);
-
+                Hint.createHint_Middle(Hint.HintDec["消耗2点体力！"]);
                 Global.createConsumeEx(subEx);
             }
 
@@ -2349,7 +2388,7 @@ export module lwg {
             if (audioUrl) {
                 Click.audioUrl = audioUrl;
             } else {
-                Click.audioUrl = Enum.voiceUrl.btn;
+                Click.audioUrl = PalyAudio.voiceUrl.btn;
             }
             switch (effect) {
                 case ClickType.noEffect:
@@ -3529,9 +3568,17 @@ export module lwg {
      * 2.音乐播放模块
      */
     export module PalyAudio {
-
         /**音效开关*/
         export let _voiceSwitch = true;
+
+        /**音效地址*/
+        export enum voiceUrl {
+            btn = 'Frame/voice/btn.wav',
+            bgm = 'Frame/voice/bgm.mp3',
+            victory = 'Frame/voice/guoguan.wav',
+            defeated = 'Frame/voice/wancheng.wav',
+        }
+
         /**通用音效播放
          * @param url 音效地址
          * @param number 播放次数
@@ -3928,6 +3975,83 @@ export module lwg {
             return backNum;
         }
     }
+
+    export module Loding {
+        /**需要加载的图片资源列表,一般是界面的图片*/
+        export let lodingList_2D: Array<any> = [];
+        /**3D场景的加载*/
+        export let lodingList_3D: Array<any> = [];
+        /**数据表的加载*/
+        export let lodingList_Data: Array<any> = [];
+
+        /**加载事件类型*/
+        export enum LodingType {
+            Loding3D = 'Loding3D',
+            Loding2D = 'Loding2D',
+            LodingData = 'LodingData',
+            complete = 'complete',
+        }
+        export class Lode extends Admin.Scene {
+
+            /**注册加载事件*/
+            lwgEventReg(): void {
+                EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D() });
+                EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D() });
+                EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData() });
+                EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete() });
+            }
+
+            /**加载3D场景*/
+            lodeScene3D(): void {
+                if (lodingList_3D.length === 0) {
+                    console.log('没有3D场景');
+                    EventAdmin.notify(LodingType.Loding2D);
+                    return;
+                }
+                for (let index = 0; index < lodingList_3D.length; index++) {
+                    Laya.Scene3D.load(lodingList_3D[index], Laya.Handler.create(this, (scene: Laya.Scene3D) => {
+                        console.log('3D场景' + index + '加载完成！');
+                        EventAdmin.notify(LodingType.Loding2D);
+                    }));
+                }
+            }
+
+            /**加载2D图片列表*/
+            loding2D(): void {
+                if (lodingList_2D.length === 0) {
+                    console.log('没有需要加载的2D资源！');
+                    EventAdmin.notify(LodingType.LodingData);
+                    return;
+                }
+                // 加载多张png类型资源
+                Laya.loader.load(
+                    lodingList_2D,
+                    Laya.Handler.create(this, f => {
+
+                        console.log('2D资源加载完成！');
+                        EventAdmin.notify(LodingType.LodingData);
+                    }));
+            }
+
+            /**加载数据表*/
+            lodingData(): void {
+                if (lodingList_Data.length === 0) {
+                    console.log('没有数据表需要加载！');
+                    EventAdmin.notify(LodingType.complete);
+                    return;
+                }
+                /**优先加载数据表*/
+                Laya.loader.load(lodingList_Data, Laya.Handler.create(this, () => {
+                    console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                    EventAdmin.notify(LodingType.complete);
+                }), null, Laya.Loader.JSON);
+            }
+
+            /**加载完成回调,每个游戏不一样*/
+            lwgLodeComplete(): void { }
+        }
+    }
+
 }
 export default lwg;
 export let Admin = lwg.Admin;
@@ -3941,3 +4065,4 @@ export let Animation3D = lwg.Animation3D;
 export let PalyAudio = lwg.PalyAudio;
 export let Gold = lwg.Gold;
 export let Hint = lwg.Hint;
+export let Loding = lwg.Loding;
