@@ -396,7 +396,7 @@
                 HintDec[HintDec["\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01"] = 6] = "\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01";
                 HintDec[HintDec["\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01"] = 7] = "\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01";
                 HintDec[HintDec["\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01"] = 8] = "\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01";
-                HintDec[HintDec["\u5206\u4EAB\u6210\u529F"] = 9] = "\u5206\u4EAB\u6210\u529F";
+                HintDec[HintDec["\u5206\u4EAB\u6210\u529F!"] = 9] = "\u5206\u4EAB\u6210\u529F!";
                 HintDec[HintDec["\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01"] = 10] = "\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01";
                 HintDec[HintDec["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
                 HintDec[HintDec["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
@@ -3431,7 +3431,7 @@
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
                     Laya.timer.frameOnce(60, this, () => {
-                        Admin._openScene(Admin.SceneName.UIVictory, null, this.self);
+                        Admin._openScene(Admin.SceneName.UIShare, null, this.self);
                     });
                 }
                 else {
@@ -3696,6 +3696,40 @@
         }
     }
 
+    class UIShare extends lwg.Admin.Scene {
+        lwgOnEnable() {
+            this.renderPhoto();
+        }
+        renderPhoto() {
+            let PhotoCamera = GSene3D.MainCamera.clone();
+            GSene3D.GameMain3D.addChild(PhotoCamera);
+            PhotoCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
+            PhotoCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+            let renderTargetCamera = PhotoCamera.getChildAt(0);
+            renderTargetCamera.renderTarget = new Laya.RenderTexture(472, 422);
+            renderTargetCamera.renderingOrder = -1;
+            renderTargetCamera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY;
+            var rtex = new Laya.Texture(renderTargetCamera.renderTarget, Laya.Texture.DEF_UV);
+            var sp1 = new Laya.Sprite();
+            this.self['BigPhoto'].addChild(sp1);
+            sp1.graphics.drawTexture(rtex);
+        }
+        btnOnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
+        }
+        btnShareUp() {
+            this.shareFunc();
+        }
+        btnNoShareUp() {
+            this.shareFunc();
+        }
+        shareFunc() {
+            this.self.close();
+            Admin._openScene(Admin.SceneName.UIVictory);
+        }
+    }
+
     class UIStart extends lwg.Admin.Scene {
         selfNode() {
             this.LevelDisplay = this.self['LevelDisplay'];
@@ -3871,6 +3905,7 @@
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
+            reg("script/Game/UIShare.ts", UIShare);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);

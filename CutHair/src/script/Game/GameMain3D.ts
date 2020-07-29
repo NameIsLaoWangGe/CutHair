@@ -182,6 +182,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         }
     }
 
+
     lwgOnUpDate(): void {
 
     }

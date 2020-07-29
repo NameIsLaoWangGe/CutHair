@@ -164,7 +164,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
 
                 Laya.timer.frameOnce(60, this, () => {
-                    Admin._openScene(Admin.SceneName.UIVictory, null, this.self);
+                    Admin._openScene(Admin.SceneName.UIShare, null, this.self);
                 });
             } else {
                 //刷新一下属性 
@@ -300,7 +300,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     /**
-     * 创建每个任务需要的修剪内容,一般是头发的数量
+     * 创建每个任务需要的修剪内容,一般是毛发的数量
      * */
     createTaskContent(): void {
         for (let index = 0; index < GVariate._taskArr.length; index++) {

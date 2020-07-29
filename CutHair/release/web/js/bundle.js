@@ -100,7 +100,7 @@
                     parent.addChild(sp);
                     sp.pos(671, 273);
                     sp.zOrder = 0;
-                    Click.on(Click.ClickType.largen, null, sp, null, null, null, btnSetUp, null);
+                    Click.on(Click.Type.largen, null, sp, null, null, null, btnSetUp, null);
                     Global.BtnSetNode = sp;
                     Global.BtnSetNode.name = 'BtnSetNode';
                 }));
@@ -146,7 +146,7 @@
                     sp.zOrder = 0;
                     Global.BtnPauseNode = sp;
                     Global.BtnPauseNode.name = 'BtnPauseNode';
-                    Click.on(Click.ClickType.largen, null, sp, null, null, null, btnPauseUp, null);
+                    Click.on(Click.Type.largen, null, sp, null, null, null, btnPauseUp, null);
                 }));
             }
             Global._createBtnPause = _createBtnPause;
@@ -167,7 +167,7 @@
                     sp.zOrder = 0;
                     Global.BtnHintNode = sp;
                     Global.BtnHintNode.name = 'BtnHintNode';
-                    Click.on(Click.ClickType.largen, null, sp, null, null, null, btnHintUp, null);
+                    Click.on(Click.Type.largen, null, sp, null, null, null, btnHintUp, null);
                 }));
             }
             Global._createBtnHint = _createBtnHint;
@@ -186,7 +186,7 @@
                     parent.addChild(sp);
                     sp.pos(645, 409);
                     sp.zOrder = 0;
-                    Click.on(Click.ClickType.largen, null, sp, null, btnAgainUp, null, null, null);
+                    Click.on(Click.Type.largen, null, sp, null, btnAgainUp, null, null, null);
                     Global.BtnAgainNode = sp;
                 }));
             }
@@ -324,6 +324,65 @@
             }
             Global._createAddExecution = _createAddExecution;
         })(Global = lwg.Global || (lwg.Global = {}));
+        let EventAdmin;
+        (function (EventAdmin) {
+            let EventType;
+            (function (EventType) {
+                EventType["taskReach"] = "taskReach";
+                EventType["defeated"] = "defeated";
+                EventType["scene3DRefresh"] = "Scene3DRefresh";
+                EventType["operrationRefresh"] = "OperrationRefresh";
+            })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
+            EventAdmin.dispatcher = new Laya.EventDispatcher();
+            function reg(type, caller, listener) {
+                if (!caller) {
+                    console.error("caller must exist!");
+                }
+                EventAdmin.dispatcher.on(type.toString(), caller, listener);
+            }
+            EventAdmin.reg = reg;
+            function notify(type, args) {
+                EventAdmin.dispatcher.event(type.toString(), args);
+            }
+            EventAdmin.notify = notify;
+            function off(type, caller, listener) {
+                this.dispatcher.off(type.toString(), caller, listener);
+            }
+            EventAdmin.off = off;
+            function offAll(type) {
+                EventAdmin.dispatcher.offAll(type.toString());
+            }
+            EventAdmin.offAll = offAll;
+            function offCaller(caller) {
+                EventAdmin.dispatcher.offAllCaller(caller);
+            }
+            EventAdmin.offCaller = offCaller;
+        })(EventAdmin = lwg.EventAdmin || (lwg.EventAdmin = {}));
+        let Game;
+        (function (Game) {
+            Game._gameLevel = {
+                val: 1,
+                get value() {
+                    return this.val = Laya.LocalStorage.getItem('_gameLevel') !== null ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+                },
+                set value(val) {
+                    this.val = Laya.LocalStorage.getItem('_gameLevel');
+                    if (val > this.val) {
+                        Laya.LocalStorage.setItem('_gameLevel', val.toString());
+                    }
+                }
+            };
+            Game._execution = {
+                val: 15,
+                get value() {
+                    return this.val = Laya.LocalStorage.getItem('_execution') !== null ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+                },
+                set value(val) {
+                    this.val = val;
+                    Laya.LocalStorage.setItem('_execution', val.toString());
+                }
+            };
+        })(Game = lwg.Game || (lwg.Game = {}));
         let Hint;
         (function (Hint) {
             let HintDec;
@@ -337,7 +396,7 @@
                 HintDec[HintDec["\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01"] = 6] = "\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01";
                 HintDec[HintDec["\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01"] = 7] = "\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01";
                 HintDec[HintDec["\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01"] = 8] = "\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01";
-                HintDec[HintDec["\u5206\u4EAB\u6210\u529F"] = 9] = "\u5206\u4EAB\u6210\u529F";
+                HintDec[HintDec["\u5206\u4EAB\u6210\u529F!"] = 9] = "\u5206\u4EAB\u6210\u529F!";
                 HintDec[HintDec["\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01"] = 10] = "\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01";
                 HintDec[HintDec["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
                 HintDec[HintDec["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
@@ -352,35 +411,66 @@
                 HintDec[HintDec["\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 21] = "\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
                 HintDec[HintDec["\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 22] = "\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
             })(HintDec = Hint.HintDec || (Hint.HintDec = {}));
-            function createHint_01(describe) {
-                let sp;
-                Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab) {
-                    let _prefab = new Laya.Prefab();
-                    _prefab.json = prefab;
-                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                    Laya.stage.addChild(sp);
-                    sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
-                    let dec = sp.getChildByName('dec');
-                    dec.text = HintDec[describe];
-                    sp.zOrder = 100;
-                    dec.alpha = 0;
-                    Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                        Animation.fadeOut(dec, 0, 1, 150, 0, f => {
-                            Animation.fadeOut(dec, 1, 0, 200, 800, f => {
-                                Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
-                                    sp.removeSelf();
-                                });
+            let Skin;
+            (function (Skin) {
+                Skin["blackBord"] = "Frame/UI/ui_orthogon_black.png";
+            })(Skin || (Skin = {}));
+            Hint.Hint_M = new Laya.Prefab();
+            function createHint_Middle(describe) {
+                let Hint_M = Laya.Pool.getItemByClass('Hint_M', Laya.Sprite);
+                Hint_M.name = 'Hint_M';
+                Laya.stage.addChild(Hint_M);
+                Hint_M.width = Laya.stage.width;
+                Hint_M.height = 100;
+                Hint_M.pivotY = Hint_M.height / 2;
+                Hint_M.pivotX = Laya.stage.width / 2;
+                Hint_M.x = Laya.stage.width / 2;
+                Hint_M.y = Laya.stage.height / 2;
+                Hint_M.zOrder = 100;
+                let Pic = new Laya.Image();
+                Hint_M.addChild(Pic);
+                Pic.skin = Skin.blackBord;
+                Pic.width = Laya.stage.width;
+                Pic.pivotX = Laya.stage.width / 2;
+                Pic.height = 100;
+                Pic.pivotY = Pic.height / 2;
+                Pic.y = Hint_M.height / 2;
+                Pic.x = Laya.stage.width / 2;
+                Pic.alpha = 0.6;
+                let Dec = new Laya.Label();
+                Hint_M.addChild(Dec);
+                Dec.width = Laya.stage.width;
+                Dec.text = HintDec[describe];
+                Dec.pivotX = Laya.stage.width / 2;
+                Dec.x = Laya.stage.width / 2;
+                Dec.height = 100;
+                Dec.pivotY = 50;
+                Dec.y = Hint_M.height / 2;
+                Dec.bold = true;
+                Dec.fontSize = 35;
+                Dec.color = '#ffffff';
+                Dec.align = 'center';
+                Dec.valign = 'middle';
+                Dec.alpha = 0;
+                Animation.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, 0, f => {
+                    Animation.fadeOut(Dec, 0, 1, 150, 0, f => {
+                        Animation.fadeOut(Dec, 1, 0, 200, 800, f => {
+                            Animation.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                                Hint_M.removeSelf();
                             });
                         });
                     });
-                }));
+                });
             }
-            Hint.createHint_01 = createHint_01;
+            Hint.createHint_Middle = createHint_Middle;
         })(Hint = lwg.Hint || (lwg.Hint = {}));
         let Gold;
         (function (Gold) {
             Gold._goldNum = 0;
             function _createGoldNode(parent) {
+                if (Gold.GoldNode) {
+                    return;
+                }
                 let sp;
                 Laya.loader.load('Prefab/GoldNode.json', Laya.Handler.create(this, function (prefab) {
                     let _prefab = new Laya.Prefab();
@@ -523,40 +613,6 @@
             }
             Gold.AddGold = AddGold;
         })(Gold = lwg.Gold || (lwg.Gold = {}));
-        let EventAdmin;
-        (function (EventAdmin) {
-            let EventType;
-            (function (EventType) {
-                EventType["taskReach"] = "taskReach";
-                EventType["defeated"] = "defeated";
-                EventType["scene3DRefresh"] = "Scene3DRefresh";
-                EventType["operrationRefresh"] = "OperrationRefresh";
-            })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
-            EventAdmin.dispatcher = new Laya.EventDispatcher();
-            function reg(type, caller, listener) {
-                if (!caller) {
-                    console.error("caller must exist!");
-                }
-                EventAdmin.dispatcher.on(type.toString(), caller, listener);
-            }
-            EventAdmin.reg = reg;
-            function notify(type, args) {
-                EventAdmin.dispatcher.event(type.toString(), args);
-            }
-            EventAdmin.notify = notify;
-            function off(type, caller, listener) {
-                this.dispatcher.off(type.toString(), caller, listener);
-            }
-            EventAdmin.off = off;
-            function offAll(type) {
-                EventAdmin.dispatcher.offAll(type.toString());
-            }
-            EventAdmin.offAll = offAll;
-            function offCaller(caller) {
-                EventAdmin.dispatcher.offAllCaller(caller);
-            }
-            EventAdmin.offCaller = offCaller;
-        })(EventAdmin = lwg.EventAdmin || (lwg.EventAdmin = {}));
         let Admin;
         (function (Admin) {
             Admin._sceneControl = {};
@@ -694,7 +750,7 @@
                     Global._execution -= subEx;
                     let num = Global.ExecutionNumNode.getChildByName('Num');
                     num.value = Global._execution.toString();
-                    Hint.createHint_01(Hint.HintDec["消耗2点体力！"]);
+                    Hint.createHint_Middle(Hint.HintDec["消耗2点体力！"]);
                     Global.createConsumeEx(subEx);
                 }
                 if (Admin.openLevelNum >= Global._gameLevel) {
@@ -1739,32 +1795,32 @@
         })(Enum = lwg.Enum || (lwg.Enum = {}));
         let Click;
         (function (Click) {
-            let ClickType;
-            (function (ClickType) {
-                ClickType["noEffect"] = "noEffect";
-                ClickType["largen"] = "largen";
-                ClickType["balloon"] = "balloon";
-                ClickType["beetle"] = "beetle";
-            })(ClickType = Click.ClickType || (Click.ClickType = {}));
+            let Type;
+            (function (Type) {
+                Type["noEffect"] = "noEffect";
+                Type["largen"] = "largen";
+                Type["balloon"] = "balloon";
+                Type["beetle"] = "beetle";
+            })(Type = Click.Type || (Click.Type = {}));
             function on(effect, audioUrl, target, caller, down, move, up, out) {
                 let btnEffect;
                 if (audioUrl) {
                     Click.audioUrl = audioUrl;
                 }
                 else {
-                    Click.audioUrl = Enum.voiceUrl.btn;
+                    Click.audioUrl = PalyAudio.voiceUrl.btn;
                 }
                 switch (effect) {
-                    case ClickType.noEffect:
+                    case Type.noEffect:
                         btnEffect = new Btn_NoEffect();
                         break;
-                    case ClickType.largen:
+                    case Type.largen:
                         btnEffect = new Btn_LargenEffect();
                         break;
-                    case ClickType.balloon:
+                    case Type.balloon:
                         btnEffect = new Btn_Balloon();
                         break;
-                    case ClickType.balloon:
+                    case Type.balloon:
                         btnEffect = new Btn_Beetle();
                         break;
                     default:
@@ -1784,16 +1840,16 @@
             function off(effect, target, caller, down, move, up, out) {
                 let btnEffect;
                 switch (effect) {
-                    case ClickType.noEffect:
+                    case Type.noEffect:
                         btnEffect = new Btn_NoEffect();
                         break;
-                    case ClickType.largen:
+                    case Type.largen:
                         btnEffect = new Btn_LargenEffect();
                         break;
-                    case ClickType.balloon:
+                    case Type.balloon:
                         btnEffect = new Btn_Balloon();
                         break;
-                    case ClickType.balloon:
+                    case Type.balloon:
                         btnEffect = new Btn_Beetle();
                         break;
                     default:
@@ -2447,6 +2503,13 @@
         let PalyAudio;
         (function (PalyAudio) {
             PalyAudio._voiceSwitch = true;
+            let voiceUrl;
+            (function (voiceUrl) {
+                voiceUrl["btn"] = "Frame/voice/btn.wav";
+                voiceUrl["bgm"] = "Frame/voice/bgm.mp3";
+                voiceUrl["victory"] = "Frame/voice/guoguan.wav";
+                voiceUrl["defeated"] = "Frame/voice/wancheng.wav";
+            })(voiceUrl = PalyAudio.voiceUrl || (PalyAudio.voiceUrl = {}));
             function playSound(url, number) {
                 if (PalyAudio._voiceSwitch) {
                     Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () { }));
@@ -2735,6 +2798,64 @@
             }
             Tools.converteNum = converteNum;
         })(Tools = lwg.Tools || (lwg.Tools = {}));
+        let Loding;
+        (function (Loding) {
+            Loding.lodingList_2D = [];
+            Loding.lodingList_3D = [];
+            Loding.lodingList_Data = [];
+            let LodingType;
+            (function (LodingType) {
+                LodingType["Loding3D"] = "Loding3D";
+                LodingType["Loding2D"] = "Loding2D";
+                LodingType["LodingData"] = "LodingData";
+                LodingType["complete"] = "complete";
+            })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
+            class Lode extends Admin.Scene {
+                lwgEventReg() {
+                    EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D(); });
+                    EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D(); });
+                    EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData(); });
+                    EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(); });
+                }
+                lodeScene3D() {
+                    if (Loding.lodingList_3D.length === 0) {
+                        console.log('没有3D场景');
+                        EventAdmin.notify(LodingType.Loding2D);
+                        return;
+                    }
+                    for (let index = 0; index < Loding.lodingList_3D.length; index++) {
+                        Laya.Scene3D.load(Loding.lodingList_3D[index], Laya.Handler.create(this, (scene) => {
+                            console.log('3D场景' + index + '加载完成！');
+                            EventAdmin.notify(LodingType.Loding2D);
+                        }));
+                    }
+                }
+                loding2D() {
+                    if (Loding.lodingList_2D.length === 0) {
+                        console.log('没有需要加载的2D资源！');
+                        EventAdmin.notify(LodingType.LodingData);
+                        return;
+                    }
+                    Laya.loader.load(Loding.lodingList_2D, Laya.Handler.create(this, f => {
+                        console.log('2D资源加载完成！');
+                        EventAdmin.notify(LodingType.LodingData);
+                    }));
+                }
+                lodingData() {
+                    if (Loding.lodingList_Data.length === 0) {
+                        console.log('没有数据表需要加载！');
+                        EventAdmin.notify(LodingType.complete);
+                        return;
+                    }
+                    Laya.loader.load(Loding.lodingList_Data, Laya.Handler.create(this, () => {
+                        console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                        EventAdmin.notify(LodingType.complete);
+                    }), null, Laya.Loader.JSON);
+                }
+                lwgLodeComplete() { }
+            }
+            Loding.Lode = Lode;
+        })(Loding = lwg.Loding || (lwg.Loding = {}));
     })(lwg || (lwg = {}));
     let Admin = lwg.Admin;
     let Click = lwg.Click;
@@ -2747,6 +2868,8 @@
     let PalyAudio = lwg.PalyAudio;
     let Gold = lwg.Gold;
     let Hint = lwg.Hint;
+    let Loding = lwg.Loding;
+    let Game = lwg.Game;
 
     class UIDefeated extends lwg.Admin.Scene {
         selfNode() {
@@ -2756,9 +2879,9 @@
             this.self['Dot'].visible = true;
         }
         btnOnClick() {
-            Click.on(Click.ClickType.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
-            Click.on(Click.ClickType.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
-            Click.on(Click.ClickType.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
         }
         btnSelectUp() {
             if (this.self['Dot'].visible) {
@@ -2779,7 +2902,7 @@
             this.self.close();
         }
         btnNextUp() {
-            Hint.createHint_01(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+            Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
         }
     }
 
@@ -2808,56 +2931,26 @@
                 EventType["upLeftBeard"] = "upLeftBeard";
                 EventType["upRightBeard"] = "upRightBeard";
                 EventType["taskProgress"] = "taskProgress";
+                EventType["cameraMove"] = "cameraMove";
             })(EventType = GEnum.EventType || (GEnum.EventType = {}));
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
         (function (GVariate) {
-            GVariate._gameLevel = 15;
-            GVariate._execution = 10;
+            GVariate._firstTask = null;
+            GVariate._stageClick = false;
             GVariate._taskArr = [];
             GVariate._taskNum = 0;
         })(GVariate = Global.GVariate || (Global.GVariate = {}));
-        let GData;
-        (function (GData) {
-            let storageData;
-            function addData() {
-                storageData = {
-                    '_gameLevel': GVariate._gameLevel,
-                    '_execution': GVariate._execution,
-                };
-                let data = JSON.stringify(storageData);
-                Laya.LocalStorage.setJSON('storageData', data);
-            }
-            GData.addData = addData;
-            function getData() {
-                let storageData = Laya.LocalStorage.getJSON('storageData');
-                if (storageData) {
-                    let data = JSON.parse(storageData);
-                    return data;
-                }
-                else {
-                    GVariate._gameLevel = 1;
-                    GVariate._execution = 20;
-                    return null;
-                }
-            }
-            GData.getData = getData;
-            function clearData() {
-                Laya.LocalStorage.clear();
-            }
-            GData.clearData = clearData;
-        })(GData = Global.GData || (Global.GData = {}));
         let GSene3D;
         (function (GSene3D) {
             GSene3D.razorFPos = new Laya.Vector3();
-            GSene3D.knifeFPos = new Laya.Vector3();
+            GSene3D.knifeParentFPos = new Laya.Vector3();
             GSene3D.headFPos = new Laya.Vector3();
             GSene3D.LevelFpos = new Laya.Vector3();
         })(GSene3D = Global.GSene3D || (Global.GSene3D = {}));
     })(Global$1 || (Global$1 = {}));
     let GVariate = Global$1.GVariate;
     let GEnum = Global$1.GEnum;
-    let GData = Global$1.GData;
     let GSene3D = Global$1.GSene3D;
 
     class GameMain3D_Blade extends lwg.Admin.Object3D {
@@ -2892,7 +2985,7 @@
                             cutHairline.name = 'cutHairline';
                             let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
                             rig3D.isKinematic = false;
-                            rig3D.gravity = (new Laya.Vector3(0, -1, -0.3));
+                            rig3D.gravity = (new Laya.Vector3(0, -3, 3));
                             rig3D.rollingFriction = 0;
                             rig3D.restitution = 0;
                             Laya.timer.once(3000, this, f => { cutHair.removeSelf(); });
@@ -2989,11 +3082,13 @@
     }
 
     class GameMain3D extends lwg.Admin.Scene3D {
-        constructor() { super(); }
+        constructor() {
+            super();
+            this.moveSpeed = 1000;
+        }
         lwgOnAwake() {
             GSene3D.GameMain3D = this.self;
             GSene3D.MainCamera = this.MainCamera;
-            console.log(GSene3D.MainCamera);
             GSene3D.LevelTem = this.self.getChildByName('Level_001');
             GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
             GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
@@ -3032,13 +3127,22 @@
             GSene3D.UpRightKnife = this.self.getChildByName('UpRightKnife');
             GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
             GSene3D.TouchScreen = this.self.getChildByName('TouchScreen');
-            GSene3D.Razor = GSene3D.Level.getChildByName('Razor');
-            GSene3D.razorFPos.x = GSene3D.Razor.transform.localPositionX;
-            GSene3D.razorFPos.y = GSene3D.Razor.transform.localPositionY;
-            GSene3D.razorFPos.z = GSene3D.Razor.transform.localPositionZ;
-            GSene3D.razorFEulerY = GSene3D.Razor.transform.localRotationEulerY;
+            GSene3D.Razor = GSene3D.GameMain3D.getChildByName('Razor');
+            if (!GSene3D.razorFPos.x) {
+                GSene3D.razorFPos.x = GSene3D.Razor.transform.localPositionX;
+                GSene3D.razorFPos.y = GSene3D.Razor.transform.localPositionY;
+                GSene3D.razorFPos.z = GSene3D.Razor.transform.localPositionZ;
+                GSene3D.razorFEulerY = GSene3D.Razor.transform.localRotationEulerY;
+            }
+            else {
+                GSene3D.Razor.transform.localPositionX = GSene3D.razorFPos.x;
+                GSene3D.Razor.transform.localPositionY = GSene3D.razorFPos.y;
+                GSene3D.Razor.transform.localPositionZ = GSene3D.razorFPos.z;
+                GSene3D.Razor.transform.localRotationEulerY = GSene3D.razorFEulerY;
+            }
             GSene3D.Floor = GSene3D.Level.getChildByName('Floor');
-            GSene3D.knife = GSene3D.Level.getChildByName('knife');
+            GSene3D.knifeParent = GSene3D.GameMain3D.getChildByName('knifeParent');
+            GSene3D.knife = GSene3D.knifeParent.getChildByName('knife');
         }
         lwgOnEnable() {
             GSene3D.Floor.addComponent(GameMain3D_Floor);
@@ -3046,8 +3150,11 @@
             GSene3D.knife.addComponent(GameMain3D_knife);
         }
         lwgEventReg() {
-            EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, GSene3D, () => {
+            EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
                 this.refreshScene();
+            });
+            EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction) => {
+                this.cameraMove(direction);
             });
         }
         ;
@@ -3057,37 +3164,84 @@
             this.selfNode();
             this.lwgOnEnable();
         }
+        cameraMove(direction) {
+            switch (direction) {
+                case GEnum.TaskType.sideHair:
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.rightBeard:
+                    GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.leftBeard:
+                    GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.middleBeard:
+                    GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.upLeftBeard:
+                    GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                    let Model2 = GSene3D.knife.getChildAt(0);
+                    Model2.transform.localRotationEulerX = -180;
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.upRightBeard:
+                    GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                    let Model1 = GSene3D.knife.getChildAt(0);
+                    Model1.transform.localRotationEulerX = -180;
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                default:
+                    break;
+            }
+        }
         lwgOnUpDate() {
         }
     }
 
-    class UILoding extends lwg.Admin.Scene {
+    class UILoding extends Loding.Lode {
         constructor() {
             super();
-            this.lodingList_2D = [];
-            this.lodingList_3D = [];
-            this.lodingList_Data = [];
-            this.LodingType = {
-                Loding3D: 'Loding3D',
-                Loding2D: 'Loding2D',
-                LodingData: 'LodingData',
-                complete: 'complete',
-            };
             this.maskMoveSwitch = true;
             this.shearSpeed = 10;
             this.shearSwitch = true;
         }
         lwgOnAwake() {
-            this.lodingList_2D = [
+            Loding.lodingList_2D = [
                 "res/atlas/Frame/Effects.png",
                 "res/atlas/Frame/UI.png",
                 "res/atlas/UI/GameStart.png",
                 "res/atlas/UI/Common.png",
             ];
-            this.lodingList_3D = [
+            Loding.lodingList_3D = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
             ];
-            this.lodingList_Data = [];
+            Loding.lodingList_Data = [];
+        }
+        lwgOnEnable() {
+            EventAdmin.notify(Loding.LodingType.Loding3D);
         }
         adaptive() {
             this.self['Bg'].height = Laya.stage.height;
@@ -3096,55 +3250,14 @@
             this.self['FCM'].y = Laya.stage.height * 0.910;
             this.self['FCM'].y = Laya.stage.height * 0.910;
         }
-        lwgOnEnable() {
-            EventAdmin.notify(this.LodingType.Loding3D);
-        }
-        lwgEventReg() {
-            EventAdmin.reg(this.LodingType.Loding3D, this, () => { this.lodeScene3D(); });
-            EventAdmin.reg(this.LodingType.Loding2D, this, () => { this.loding2D(); });
-            EventAdmin.reg(this.LodingType.LodingData, this, () => { this.lodingData(); });
-            EventAdmin.reg(this.LodingType.complete, this, () => { this.completeLode(); });
-        }
-        lodeScene3D() {
-            if (this.lodingList_3D.length === 0) {
-                console.log('没有3D场景');
-                EventAdmin.notify(this.LodingType.Loding2D);
-                return;
-            }
-            Laya.Scene3D.load(this.lodingList_3D[0], Laya.Handler.create(this, (scene) => {
-                Laya.stage.addChildAt(scene, 0);
-                scene[Admin.SceneName.GameMain3D] = scene.addComponent(GameMain3D);
-                lwg.Admin._sceneControl[Admin.SceneName.GameMain3D] = scene;
-                console.log('3D场景加载完成！');
-                EventAdmin.notify(this.LodingType.Loding2D);
-            }));
-        }
-        loding2D() {
-            if (this.lodingList_2D.length === 0) {
-                console.log('没有需要加载的2D资源！');
-                EventAdmin.notify(this.LodingType.LodingData);
-                return;
-            }
-            Laya.loader.load(this.lodingList_2D, Laya.Handler.create(this, f => {
-                console.log('2D资源加载完成！');
-                EventAdmin.notify(this.LodingType.LodingData);
-            }));
-        }
-        lodingData() {
-            if (this.lodingList_Data.length === 0) {
-                console.log('没有数据表需要加载！');
-                EventAdmin.notify(this.LodingType.complete);
-                return;
-            }
-            Laya.loader.load(this.lodingList_Data, Laya.Handler.create(this, () => {
-                console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                EventAdmin.notify(this.LodingType.complete);
-            }), null, Laya.Loader.JSON);
-        }
-        completeLode() {
+        lwgLodeComplete() {
             this.self['Mask'].x = 0;
             this.self['Shear'].x = this.self['Mask'].width;
             this.self['Per'].text = 100 + '%';
+            let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls");
+            Laya.stage.addChildAt(Scene3D, 0);
+            Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
+            Scene3D.addComponent(GameMain3D);
             Laya.timer.once(500, this, () => {
                 lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
                 this.self.close();
@@ -3294,7 +3407,6 @@
                     EventAdmin.notify(GEnum.EventType.taskProgress);
                 }
             };
-            this.moveSpeed = 1000;
             this.moveSwitch = false;
         }
         selfNode() {
@@ -3319,7 +3431,7 @@
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
                     Laya.timer.frameOnce(60, this, () => {
-                        Admin._openScene(Admin.SceneName.UIVictory, null, null, () => { });
+                        Admin._openScene(Admin.SceneName.UIShare, null, this.self);
                     });
                 }
                 else {
@@ -3479,7 +3591,7 @@
                     },
                     set setValue(v) {
                         if (this.detection) {
-                            if (v < 0.17) {
+                            if (v < 0.19) {
                                 this.detection = false;
                                 _sideHairNum.setValue = _sideHairNum.value - 1;
                             }
@@ -3493,60 +3605,10 @@
             if (GVariate._taskNum > GVariate._taskArr.length) {
                 return;
             }
-            switch (GVariate._taskArr[GVariate._taskNum]) {
-                case GEnum.TaskType.sideHair:
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
-                    break;
-                case GEnum.TaskType.rightBeard:
-                    GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
-                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
-                    break;
-                case GEnum.TaskType.leftBeard:
-                    GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
-                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
-                    break;
-                case GEnum.TaskType.middleBeard:
-                    GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
-                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
-                    break;
-                case GEnum.TaskType.upLeftBeard:
-                    GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
-                    let Model2 = GSene3D.knife.getChildAt(0);
-                    Model2.transform.localRotationEulerX = -200;
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
-                    break;
-                case GEnum.TaskType.upRightBeard:
-                    GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
-                    let Model1 = GSene3D.knife.getChildAt(0);
-                    Model1.transform.localRotationEulerX = -200;
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
-                    break;
-                default:
-                    break;
-            }
+            EventAdmin.notify(GEnum.EventType.cameraMove, GVariate._taskArr[GVariate._taskNum]);
         }
         btnOnClick() {
-            lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
+            lwg.Click.on(Click.Type.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
         }
         btnLastUp(e) {
             this.BtnLast.visible = false;
@@ -3634,29 +3696,70 @@
         }
     }
 
+    class UIShare extends lwg.Admin.Scene {
+        lwgOnEnable() {
+            this.renderPhoto();
+        }
+        renderPhoto() {
+            let PhotoCamera = GSene3D.MainCamera.clone();
+            GSene3D.GameMain3D.addChild(PhotoCamera);
+            PhotoCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
+            PhotoCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+            let renderTargetCamera = PhotoCamera.getChildAt(0);
+            renderTargetCamera.renderTarget = new Laya.RenderTexture(472, 422);
+            renderTargetCamera.renderingOrder = -1;
+            renderTargetCamera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY;
+            var rtex = new Laya.Texture(renderTargetCamera.renderTarget, Laya.Texture.DEF_UV);
+            var sp1 = new Laya.Sprite();
+            this.self['BigPhoto'].addChild(sp1);
+            sp1.graphics.drawTexture(rtex);
+        }
+        btnOnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
+        }
+        btnShareUp() {
+            this.shareFunc();
+        }
+        btnNoShareUp() {
+            this.shareFunc();
+        }
+        shareFunc() {
+            this.self.close();
+            Admin._openScene(Admin.SceneName.UIVictory);
+        }
+    }
+
     class UIStart extends lwg.Admin.Scene {
         selfNode() {
             this.LevelDisplay = this.self['LevelDisplay'];
             this.LevelStyle = this.self['LevelStyle'];
         }
         lwgOnEnable() {
+            GVariate._stageClick = false;
+            Laya.timer.frameOnce(30, this, () => { GVariate._stageClick = true; });
             Gold._createGoldNode(Laya.stage);
             this.levelStyleDisplay();
+            EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
+            console.log(window);
         }
         levelStyleDisplay() {
-            let location = GVariate._gameLevel % this.LevelStyle.numChildren;
+            let location = Game._gameLevel.value % this.LevelStyle.numChildren;
             for (let index = 0; index < this.LevelStyle.numChildren; index++) {
                 const element = this.LevelStyle.getChildAt(index);
                 let location0 = Number(element.name.substring(element.name.length - 1, element.name.length));
+                if (Game._gameLevel.value < 5) {
+                    location0 += 1;
+                }
                 let Num = element.getChildByName('Num');
                 if (location0 === location) {
-                    Num.value = GVariate._gameLevel.toString();
+                    Num.value = Game._gameLevel.value.toString();
                 }
                 else if (location0 < location) {
-                    Num.value = (GVariate._gameLevel - (location - location0)).toString();
+                    Num.value = (Game._gameLevel.value - (location - location0)).toString();
                 }
                 else if (location0 > location) {
-                    Num.value = (GVariate._gameLevel + (location0 - location)).toString();
+                    Num.value = (Game._gameLevel.value + (location0 - location)).toString();
                     let Pic = element.getChildByName('Pic');
                     Pic.skin = 'UI/GameStart/jindu_hui.png';
                     let Color = element.getChildByName('Color');
@@ -3667,10 +3770,13 @@
                 }
             }
         }
-        onStageClick() {
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-                this.self.close();
-            });
+        onStageMouseUp() {
+            if (GVariate._stageClick) {
+                lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
+                    console.log('开始游戏');
+                    this.self.close();
+                });
+            }
         }
         lwgDisable() {
             Gold.GoldNode.visible = false;
@@ -3686,6 +3792,7 @@
             Gold.GoldNode.visible = true;
             Gold.addGold(25);
             this.getGoldDisPlay();
+            Game._gameLevel.value++;
             this.self['BtnAdv'].visible = true;
             this.self['BtnNormal'].visible = false;
             this.self['Dot'].visible = true;
@@ -3695,13 +3802,13 @@
             Num.text = (25).toString();
         }
         btnOnClick() {
-            Click.on(Click.ClickType.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-            Click.on(Click.ClickType.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-            Click.on(Click.ClickType.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
         }
         btnNormalUp() {
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-            EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
+            Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
             this.self.close();
         }
         btnSelectUp() {
@@ -3719,7 +3826,7 @@
         btnNextUp() {
         }
         btnAdvUp() {
-            Hint.createHint_01(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+            Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
         }
         lwgDisable() {
         }
@@ -3798,6 +3905,7 @@
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
+            reg("script/Game/UIShare.ts", UIShare);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);
