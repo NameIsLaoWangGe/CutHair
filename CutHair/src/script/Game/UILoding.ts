@@ -53,8 +53,6 @@ export default class UILoding extends Loding.Lode {
     /**剪刀修剪开关*/
     shearSwitch: boolean = true;
 
-    
-
     lwgOnUpdate(): void {
         // 模拟加载进度
         if (this.maskMoveSwitch) {

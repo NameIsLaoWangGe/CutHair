@@ -22,7 +22,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 let length = otherOwnerParent.transform.localScaleY * 2 * otherOwner.transform.localScaleY;
                 // 实际高度，带有角度后的高度必定短于实际长度 
                 let HairlineH = lwg.Tools.dotRotateXY(otherOwnerParent.transform.position.x, otherOwnerParent.transform.position.y, otherOwnerParent.transform.position.x, otherOwnerParent.transform.position.y + length, otherOwnerParent.transform.localRotationEulerZ).y - otherOwnerParent.transform.position.y;
-                // console.log(HairlineH, HairlineH1);
+                // console.log(HairlineH, length);
                 // 剃刀和头发的距离
                 let diffY = Math.abs((this.selfTransform.position.y - this.self.transform.localScaleY / 2) - otherOwnerParent.transform.position.y);
                 //被截掉头发的高度
@@ -52,7 +52,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                         cutHairline.name = 'cutHairline';
                         let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
                         rig3D.isKinematic = false;
-                        rig3D.gravity = (new Laya.Vector3(0, -1, -0.3));
+                        rig3D.gravity = (new Laya.Vector3(0, -3, 3));
                         rig3D.rollingFriction = 0;
                         rig3D.restitution = 0;
 

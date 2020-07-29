@@ -1,5 +1,3 @@
-import { EventAdmin } from "./lwg";
-
 /**全局方法,全局变量，每个游戏不一样*/
 export module Global {
     /**游戏中用到的枚举*/
@@ -18,7 +16,6 @@ export module Global {
         export enum RazorState {
             move = 'move',
         }
-
         /**事件*/
         export enum EventType {
             leftBeard = 'leftBeard',
@@ -27,53 +24,20 @@ export module Global {
             upLeftBeard = 'upLeftBeard',
             upRightBeard = 'upRightBeard',
             taskProgress = 'taskProgress',
+            cameraMove = 'cameraMove',
         }
     }
 
     /**控制游戏的全局变量*/
     export module GVariate {
-        export let _gameLevel: number = 15;
-        export let _execution: number = 10;
-
+        /**第一个任务名称，方便找到开始游戏时候的位置*/
+        export let _firstTask: string = null;
+        /**点击屏幕的开关*/
+        export let _stageClick: boolean = false;
         /**当前关卡中的任务顺序集合*/
         export let _taskArr: Array<string> = [];
         /**进行到第几个任务了*/
         export let _taskNum: number = 0;
-    }
-
-    /**本地信息存储*/
-    export module GData {
-        let storageData: any;
-        /**上传本地数据到缓存,一般在游戏胜利后和购买皮肤后上传*/
-        export function addData(): void {
-            storageData = {
-                '_gameLevel': GVariate._gameLevel,
-                '_execution': GVariate._execution,
-            }
-            // 转换成字符串上传
-            let data: string = JSON.stringify(storageData);
-            Laya.LocalStorage.setJSON('storageData', data);
-        }
-
-        /**获取本地数据，在onlode场景获取*/
-        export function getData(): any {
-            let storageData: string = Laya.LocalStorage.getJSON('storageData');
-            if (storageData) {
-                // 将字符串转换成json
-                let data: any = JSON.parse(storageData);
-                return data;
-            } else {
-                // 如果没有获取到则第一次上传的默认值
-                GVariate._gameLevel = 1;
-                GVariate._execution = 20;
-                return null;
-            }
-        }
-
-        /**清除本地数据*/
-        export function clearData(): void {
-            Laya.LocalStorage.clear();
-        }
     }
 
     /**3D场景中节点的一些引用，方便在2D场景中直接操作,Vector3可以初始化，其他不可以，因为当前脚本中没有Scrip3D，需要在3D脚本中声明*/
@@ -88,9 +52,10 @@ export module Global {
         export let razorFEulerY: number;
 
         /**刮脸的刮刀*/
+        export let knifeParent: Laya.MeshSprite3D;
         export let knife: Laya.MeshSprite3D;
-        export let knifeFPos: Laya.Vector3 = new Laya.Vector3();
-        export let knifeFEulerY: number;
+        export let knifeParentFPos: Laya.Vector3 = new Laya.Vector3();
+        export let knifeParentFEulerY: number;
 
         /**头*/
         export let Head: Laya.MeshSprite3D;
@@ -145,7 +110,6 @@ export module Global {
 export default Global;
 export let GVariate = Global.GVariate;
 export let GEnum = Global.GEnum;
-export let GData = Global.GData;
 export let GSene3D = Global.GSene3D;
 
 

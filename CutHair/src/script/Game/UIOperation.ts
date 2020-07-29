@@ -299,7 +299,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         })
     }
 
-
     /**
      * 创建每个任务需要的修剪内容,一般是头发的数量
      * */
@@ -372,7 +371,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 },
                 set setValue(v: number) {
                     if (this.detection) {
-                        if (v < 0.17) {
+                        if (v < 0.19) {
                             // console.log('这根头发理完了！');
                             this.detection = false;
                             _sideHairNum.setValue = _sideHairNum.value - 1;
@@ -387,8 +386,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
     }
 
-    /**移动时间*/
-    moveSpeed = 1000;
     /**
      * 摄像机的移动规则
      * */
@@ -396,84 +393,11 @@ export default class UIOperation extends lwg.Admin.Scene {
         if (GVariate._taskNum > GVariate._taskArr.length) {
             return;
         }
-        switch (GVariate._taskArr[GVariate._taskNum]) {
-
-            case GEnum.TaskType.sideHair:
-
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
-
-                break;
-
-            case GEnum.TaskType.rightBeard:
-
-                GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position
-                GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
-
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
-
-                break;
-
-            case GEnum.TaskType.leftBeard:
-
-                GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position
-                GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
-
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
-
-                break;
-
-            case GEnum.TaskType.middleBeard:
-
-                GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position
-                GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z)
-                GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
-
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
-
-                break;
-            case GEnum.TaskType.upLeftBeard:
-
-                GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position
-                GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0))
-                let Model2 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
-                Model2.transform.localRotationEulerX = -200
-
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this)
-                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
-
-                break;
-
-            case GEnum.TaskType.upRightBeard:
-
-                GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position
-                GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0))
-                let Model1 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
-                Model1.transform.localRotationEulerX = -200
-
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
-                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
-
-                break;
-
-            default:
-                break;
-        }
+        EventAdmin.notify(GEnum.EventType.cameraMove, GVariate._taskArr[GVariate._taskNum]);
     }
 
     btnOnClick(): void {
-        lwg.Click.on(Click.ClickType.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
+        lwg.Click.on(Click.Type.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
     }
 
     btnLastUp(e: Laya.Event): void {

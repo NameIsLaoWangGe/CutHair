@@ -12,9 +12,9 @@ export default class UIDefeated extends lwg.Admin.Scene {
         this.self['Dot'].visible = true;
     }
     btnOnClick(): void {
-        Click.on(Click.ClickType.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
-        Click.on(Click.ClickType.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
-        Click.on(Click.ClickType.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
         
     }
 

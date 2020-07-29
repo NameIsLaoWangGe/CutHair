@@ -202,7 +202,7 @@ export module lwg {
                 parent.addChild(sp);
                 sp.pos(671, 273);
                 sp.zOrder = 0;
-                Click.on(Click.ClickType.largen, null, sp, null, null, null, btnSetUp, null);
+                Click.on(Click.Type.largen, null, sp, null, null, null, btnSetUp, null);
                 BtnSetNode = sp;
                 BtnSetNode.name = 'BtnSetNode';
             }));
@@ -263,7 +263,7 @@ export module lwg {
                 sp.zOrder = 0;
                 BtnPauseNode = sp;
                 BtnPauseNode.name = 'BtnPauseNode';
-                Click.on(Click.ClickType.largen, null, sp, null, null, null, btnPauseUp, null);
+                Click.on(Click.Type.largen, null, sp, null, null, null, btnPauseUp, null);
             }));
         }
         export function btnPauseUp(event) {
@@ -289,7 +289,7 @@ export module lwg {
                 sp.zOrder = 0;
                 BtnHintNode = sp;
                 BtnHintNode.name = 'BtnHintNode';
-                Click.on(Click.ClickType.largen, null, sp, null, null, null, btnHintUp, null);
+                Click.on(Click.Type.largen, null, sp, null, null, null, btnHintUp, null);
             }));
         }
         export function btnHintUp(event) {
@@ -325,7 +325,7 @@ export module lwg {
                 parent.addChild(sp);
                 sp.pos(645, 409);
                 sp.zOrder = 0;
-                Click.on(Click.ClickType.largen, null, sp, null, btnAgainUp, null, null, null);
+                Click.on(Click.Type.largen, null, sp, null, btnAgainUp, null, null, null);
                 BtnAgainNode = sp;
             }));
         }
@@ -503,6 +503,98 @@ export module lwg {
     }
 
 
+    /**事件模块*/
+    export module EventAdmin {
+        /**常用事件枚举*/
+        export enum EventType {
+            /**完成任务*/
+            taskReach = 'taskReach',
+            /**失败*/
+            defeated = 'defeated',
+            /**刷新3D场景*/
+            scene3DRefresh = 'Scene3DRefresh',
+            /**刷新操作场景*/
+            operrationRefresh = 'OperrationRefresh',
+        }
+
+        /**以节点为单位，在节点内注册事件，节点移除或者关闭后，关闭事件监听；如果需要在节点外注册事件，this为EventAdmin，不要写在节点脚本中，否则每次打开一次就会注册一次*/
+        export let dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
+        /**
+         * 事件注册,总控制事件注册在当前类，每个游戏独有的事件不要注册在这里，防止每关重复注册
+         * @param type 事件类型或者名称
+         * @param caller 事件的执行域
+         * @param listener 响应事件的回调函数,以下写法可以传递参数进来:()=>{}
+         */
+        export function reg(type: any, caller: any, listener: Function) {
+            if (!caller) {
+                console.error("caller must exist!");
+            }
+            dispatcher.on(type.toString(), caller, listener);
+        }
+        /**
+         * 通知事件
+         * @param type 事件类型或者名称
+         * @param args 注册事件中的回调函数中的参数
+         */
+        export function notify(type: any, args?: any) {
+            dispatcher.event(type.toString(), args);
+        }
+        /**
+         * 关闭某个事件
+         * @param type 事件类型或者名称
+         * @param caller 事件的执行域
+         * @param listener 关闭后的回调函数
+         * */
+        export function off(type: any, caller: any, listener: Function) {
+            this.dispatcher.off(type.toString(), caller, listener);
+        }
+
+        /**
+         * 关闭所有执行域中的事件
+         * @param type 事件类型或者名称
+        */
+        export function offAll(type: any) {
+            dispatcher.offAll(type.toString());
+        }
+
+        /**
+         * 移除某个caller上的所有事件
+         * @param caller 执行域
+        */
+        export function offCaller(caller: any) {
+            dispatcher.offAllCaller(caller);
+        }
+    }
+
+
+    /**游戏中的一些基础数据,例如等级，体力等*/
+    export module Game {
+        /**等级*/
+        export let _gameLevel = {
+            val: 1,
+            get value(): number {
+                return this.val = Laya.LocalStorage.getItem('_gameLevel') !== null ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+            },
+            set value(val) {
+                this.val = Laya.LocalStorage.getItem('_gameLevel');
+                if (val > this.val) {
+                    Laya.LocalStorage.setItem('_gameLevel', val.toString());
+                }
+            }
+        };
+
+        /**体力*/
+        export let _execution = {
+            val: 15,
+            get value(): number {
+                return this.val = Laya.LocalStorage.getItem('_execution') !== null ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            },
+            set value(val) {
+                this.val = val;
+                Laya.LocalStorage.setItem('_execution', val.toString());
+            }
+        };
+    }
 
     /**提示模块*/
     export module Hint {
@@ -539,7 +631,7 @@ export module lwg {
         export let Hint_M: Laya.Prefab = new Laya.Prefab();
 
         /**
-         * 创建提示框prefab
+         * 动态创建，第一次创建比较卡，需要优化
          * @param describe 类型，也就是提示文字类型
          */
         export function createHint_Middle(describe: number): void {
@@ -823,68 +915,6 @@ export module lwg {
         }
     }
 
-    /**事件模块*/
-    export module EventAdmin {
-        /**常用事件枚举*/
-        export enum EventType {
-            /**完成任务*/
-            taskReach = 'taskReach',
-            /**失败*/
-            defeated = 'defeated',
-            /**刷新3D场景*/
-            scene3DRefresh = 'Scene3DRefresh',
-            /**刷新操作场景*/
-            operrationRefresh = 'OperrationRefresh',
-        }
-
-        /**以节点为单位，在节点内注册事件，节点移除或者关闭后，关闭事件监听；如果需要在节点外注册事件，this为EventAdmin，不要写在节点脚本中，否则每次打开一次就会注册一次*/
-        export let dispatcher: Laya.EventDispatcher = new Laya.EventDispatcher();
-        /**
-         * 事件注册,总控制事件注册在当前类，每个游戏独有的事件不要注册在这里，防止每关重复注册
-         * @param type 事件类型或者名称
-         * @param caller 事件的执行域
-         * @param listener 响应事件的回调函数,以下写法可以传递参数进来:()=>{}
-         */
-        export function reg(type: any, caller: any, listener: Function) {
-            if (!caller) {
-                console.error("caller must exist!");
-            }
-            dispatcher.on(type.toString(), caller, listener);
-        }
-        /**
-         * 通知事件
-         * @param type 事件类型或者名称
-         * @param args 注册事件中的回调函数中的参数
-         */
-        export function notify(type: any, args?: any) {
-            dispatcher.event(type.toString(), args);
-        }
-        /**
-         * 关闭某个事件
-         * @param type 事件类型或者名称
-         * @param caller 事件的执行域
-         * @param listener 关闭后的回调函数
-         * */
-        export function off(type: any, caller: any, listener: Function) {
-            this.dispatcher.off(type.toString(), caller, listener);
-        }
-
-        /**
-         * 关闭所有执行域中的事件
-         * @param type 事件类型或者名称
-        */
-        export function offAll(type: any) {
-            dispatcher.offAll(type.toString());
-        }
-
-        /**
-         * 移除某个caller上的所有事件
-         * @param caller 执行域
-        */
-        export function offCaller(caller: any) {
-            dispatcher.offAllCaller(caller);
-        }
-    }
 
     /*场景和UI模块的一些通用属性*/
     export module Admin {
@@ -2350,7 +2380,7 @@ export module lwg {
     export module Click {
 
         /**点击事件类型*/
-        export enum ClickType {
+        export enum Type {
             /**无效果*/
             noEffect = 'noEffect',
             /**点击放大*/
@@ -2391,16 +2421,16 @@ export module lwg {
                 Click.audioUrl = PalyAudio.voiceUrl.btn;
             }
             switch (effect) {
-                case ClickType.noEffect:
+                case Type.noEffect:
                     btnEffect = new Btn_NoEffect();
                     break;
-                case ClickType.largen:
+                case Type.largen:
                     btnEffect = new Btn_LargenEffect();
                     break;
-                case ClickType.balloon:
+                case Type.balloon:
                     btnEffect = new Btn_Balloon();
                     break;
-                case ClickType.balloon:
+                case Type.balloon:
                     btnEffect = new Btn_Beetle();
                     break;
                 default:
@@ -2432,16 +2462,16 @@ export module lwg {
         export function off(effect, target, caller, down, move, up, out): void {
             let btnEffect;
             switch (effect) {
-                case ClickType.noEffect:
+                case Type.noEffect:
                     btnEffect = new Btn_NoEffect();
                     break;
-                case ClickType.largen:
+                case Type.largen:
                     btnEffect = new Btn_LargenEffect();
                     break;
-                case ClickType.balloon:
+                case Type.balloon:
                     btnEffect = new Btn_Balloon();
                     break;
-                case ClickType.balloon:
+                case Type.balloon:
                     btnEffect = new Btn_Beetle();
                     break;
                 default:
@@ -4066,3 +4096,4 @@ export let PalyAudio = lwg.PalyAudio;
 export let Gold = lwg.Gold;
 export let Hint = lwg.Hint;
 export let Loding = lwg.Loding;
+export let Game = lwg.Game;

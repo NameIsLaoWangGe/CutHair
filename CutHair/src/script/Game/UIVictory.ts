@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Hint } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 
@@ -10,15 +10,13 @@ export default class UIVictory extends lwg.Admin.Scene {
         this.GlodNum = this.self['GlodNum'];
     }
     lwgOnEnable(): void {
-        console.log(Laya.stage);
         Gold.GoldNode.visible = true;
         Gold.addGold(25);
         this.getGoldDisPlay();
-
+        Game._gameLevel.value++;
         this.self['BtnAdv'].visible = true;
         this.self['BtnNormal'].visible = false;
         this.self['Dot'].visible = true;
-
     }
 
     /**本关获得金币显示*/
@@ -28,9 +26,9 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     btnOnClick(): void {
-        Click.on(Click.ClickType.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-        Click.on(Click.ClickType.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        Click.on(Click.ClickType.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
     }
 
     btnNormalUp(): void {
