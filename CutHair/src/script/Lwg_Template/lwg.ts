@@ -398,7 +398,7 @@ export module lwg {
                 dec.text = Enum.HintDec[type];
                 sp.zOrder = 100;
 
-                Animation.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
+                Animation2D.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
                     sp.removeSelf();
                 });
             }));
@@ -421,10 +421,10 @@ export module lwg {
                 sp.zOrder = 100;
 
                 dec.alpha = 0;
-                Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                    Animation.fadeOut(dec, 0, 1, 150, 0, f => {
-                        Animation.fadeOut(dec, 1, 0, 200, 1500, f => {
-                            Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                Animation2D.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, null, 0, f => {
+                    Animation2D.fadeOut(dec, 0, 1, 150, 0, f => {
+                        Animation2D.fadeOut(dec, 1, 0, 200, 1500, f => {
+                            Animation2D.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, null, 0, f => {
                                 sp.removeSelf();
                             });
                         });
@@ -447,9 +447,9 @@ export module lwg {
             label.x = ExecutionNumNode.x + 100;
             label.y = ExecutionNumNode.y - label.height / 2 + 4;
             label.zOrder = 100;
-            lwg.Animation.fadeOut(label, 0, 1, 200, 150, f => {
-                lwg.Animation.leftRight_Shake(ExecutionNumNode, 15, 60, 0, null);
-                lwg.Animation.fadeOut(label, 1, 0, 600, 400, f => {
+            lwg.Animation2D.fadeOut(label, 0, 1, 200, 150, f => {
+                lwg.Animation2D.leftRight_Shake(ExecutionNumNode, 15, 60, 0, null);
+                lwg.Animation2D.fadeOut(label, 1, 0, 600, 400, f => {
                 });
             });
         }
@@ -489,9 +489,9 @@ export module lwg {
                 sp.y = Laya.stage.height / 2;
                 sp.zOrder = 50;
                 if (ExecutionNumNode) {
-                    Animation.move_Simple_01(sp, sp.x, sp.y, ExecutionNumNode.x, ExecutionNumNode.y, 800, 100, f => {
-                        Animation.fadeOut(sp, 1, 0, 200, 0, f => {
-                            lwg.Animation.upDwon_Shake(ExecutionNumNode, 10, 80, 0, null);
+                    Animation2D.move_Simple_01(sp, sp.x, sp.y, ExecutionNumNode.x, ExecutionNumNode.y, 800, null, 100, f => {
+                        Animation2D.fadeOut(sp, 1, 0, 200, 0, f => {
+                            lwg.Animation2D.upDwon_Shake(ExecutionNumNode, 10, 80, 0, null);
                             if (func) {
                                 func();
                             }
@@ -678,10 +678,10 @@ export module lwg {
 
             // 动画
             Dec.alpha = 0;
-            Animation.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                Animation.fadeOut(Dec, 0, 1, 150, 0, f => {
-                    Animation.fadeOut(Dec, 1, 0, 200, 800, f => {
-                        Animation.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+            Animation2D.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, null, 0, f => {
+                Animation2D.fadeOut(Dec, 0, 1, 150, 0, f => {
+                    Animation2D.fadeOut(Dec, 1, 0, 200, 800, f => {
+                        Animation2D.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, null, 0, f => {
                             Hint_M.removeSelf();
                         });
                     });
@@ -902,7 +902,7 @@ export module lwg {
                 if (this.moveSwitch) {
                     this.timer++;
                     if (this.timer > 0) {
-                        lwg.Animation.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
+                        lwg.Animation2D.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
                             this.self.removeSelf();
                             if (this.func !== null) {
                                 this.func();
@@ -1135,10 +1135,10 @@ export module lwg {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
                 this.gameState(this.calssName);
-                this.selfNode();
+                this.lwgNodeDec();
                 this.lwgOnAwake();
-                this.variateInit();
-                this.adaptive();
+                this.lwgVariateInit();
+                this.lwgAdaptive();
             }
             lwgOnAwake(): void {
 
@@ -1146,16 +1146,16 @@ export module lwg {
             onEnable() {
                 this.lwgEventReg();
                 this.lwgOnEnable();
-                this.btnAndOpenAni();
+                this.btnAndlwgOpenAni();
             }
             /**声明场景里的一些节点*/
-            selfNode(): void {
+            lwgNodeDec(): void {
             }
             /**场景中的一些事件*/
             lwgEventReg(): void {
             }
             /**初始化一些变量*/
-            variateInit() {
+            lwgVariateInit() {
             }
             /**游戏当前的状态,有些页面没有状态*/
             gameState(calssName): void {
@@ -1181,35 +1181,35 @@ export module lwg {
             lwgOnEnable(): void {
             }
             /**通过openni返回的时间来延时开启点击事件*/
-            btnAndOpenAni(): void {
-                let time = this.openAni();
+            btnAndlwgOpenAni(): void {
+                let time = this.lwgOpenAni();
                 if (time) {
                     Laya.timer.once(time, this, f => {
-                        this.btnOnClick();
+                        this.lwgBtnClick();
                     });
                 } else {
-                    this.btnOnClick();
+                    this.lwgBtnClick();
                 }
             }
             /**按钮点击事件注册*/
-            btnOnClick(): void {
+            lwgBtnClick(): void {
             }
 
             /**开场或者离场动画单位时间*/
             aniTime: number = 0;
             /**开场或者离场动画单位延迟时间*/
             aniDelayde: number = 0;
-            /**开场动画,返回的数字用于开启点击事件*/
-            openAni(): number {
+            /**开场动画,返回的数字为时间倒计时，倒计时结束后开启点击事件*/
+            lwgOpenAni(): number {
                 return this.aniTime;
             }
 
             /**一些节点自适应*/
-            adaptive(): void {
+            lwgAdaptive(): void {
             }
 
             /**离场动画*/
-            vanishAni(): number {
+            lwgVanishAni(): number {
                 return 0;
             }
 
@@ -1254,8 +1254,8 @@ export module lwg {
                     this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                 }
                 this.lwgOnAwake();
-                this.selfNode();
-                this.adaptive();
+                this.lwgNodeDec();
+                this.lwgAdaptive();
 
             }
             lwgOnAwake(): void {
@@ -1265,14 +1265,14 @@ export module lwg {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
                 this.lwgOnEnable();
-                this.btnOnClick();
-                this.adaptive();
-                this.openAni();
+                this.lwgBtnClick();
+                this.lwgAdaptive();
+                this.lwgOpenAni();
                 this.lwgEventReg();
                 // printPoint('on', this.calssName);
             }
             /**场景背部全局变量*/
-            selfNode(): void {
+            lwgNodeDec(): void {
             }
 
             /**场景中的一些事件*/
@@ -1304,16 +1304,16 @@ export module lwg {
                 // console.log('父类的初始化！');
             }
             /**点击事件注册*/
-            btnOnClick(): void {
+            lwgBtnClick(): void {
             }
             /**一些节点自适应*/
-            adaptive(): void {
+            lwgAdaptive(): void {
             }
             /**开场动画*/
-            openAni(): void {
+            lwgOpenAni(): void {
             }
             /**离场动画*/
-            vanishAni(): void {
+            lwgVanishAni(): void {
             }
 
             onUpdate(): void {
@@ -1395,14 +1395,14 @@ export module lwg {
             }
             onEnable(): void {
                 this.lwgOnEnable();
-                this.btnOnClick();
+                this.lwgBtnClick();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
             lwgOnEnable(): void {
                 console.log('父类的初始化！');
             }
             /**点击事件注册*/
-            btnOnClick(): void {
+            lwgBtnClick(): void {
             }
             onUpdate(): void {
                 this.lwgOnUpdate();
@@ -2759,21 +2759,23 @@ export module lwg {
     }
 
     /**动画模块*/
-    export module Animation {
+    export module Animation2D {
         /**
           * 按中心点旋转动画
           * @param node 节点
           * @param Frotate 初始角度
           * @param Erotate 最终角度
           * @param time 花费时间
+          * @param delayed 延时时间
+          * @param func 回调函数
         */
-        export function simple_Rotate(node, Frotate, Erotate, time, func?: Function): void {
+        export function simple_Rotate(node, Frotate, Erotate, time, delayed, func?: Function): void {
             node.rotation = Frotate;
             Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
-                if (func && func !== null) {
+                if (func) {
                     func();
                 }
-            }), 0);
+            }), delayed);
         }
 
         /**
@@ -2866,10 +2868,10 @@ export module lwg {
          * @param delayed 延时
          * @param func 回调函数
          */
-        export function fadeOut(node, alpha1, alpha2, time, delayed, func): void {
+        export function fadeOut(node, alpha1, alpha2, time, delayed, func?: Function): void {
             node.alpha = alpha1;
             Laya.Tween.to(node, { alpha: alpha2 }, time, null, Laya.Handler.create(this, function () {
-                if (func !== null) {
+                if (func) {
                     func();
                 }
             }), delayed)
@@ -2987,7 +2989,7 @@ export module lwg {
         }
 
         /**
-         * 旋转形变 旋转+放大缩小 ，类似于纸板被击中倾斜后恢复
+         *旋转+放大缩小 
          * @param target 目标节点
          * @param fRotate 初始角度
          * @param fScaleX 初始X缩放
@@ -2999,17 +3001,18 @@ export module lwg {
          * @param delayed 延迟时间
          * @param func 回调函数
          */
-        export function rotate_Scale(target: Laya.Image, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func): void {
-            target.scaleX = fScaleX;
-            target.scaleY = fScaleY;
-            target.rotation = fRotate;
-            Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, function () {
-                Laya.Tween.to(target, { rotation: 0, scaleX: 1, scaleY: 1 }, time / 2, null, Laya.Handler.create(this, function () {
-                    if (func !== null) {
-                        func();
+        export function rotate_Scale(target, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func?: Function): void {
+            Laya.timer.once(delayed, this, () => {
+                target.scaleX = fScaleX;
+                target.scaleY = fScaleY;
+                target.rotation = fRotate;
+                Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
+                    if (func) {
+                        this.func();
                     }
-                }), delayed)
-            }), 0)
+                }
+                ), 0)
+            })
         }
 
         /**
@@ -3277,7 +3280,7 @@ export module lwg {
          * @param audioType 音效类型
          * @param func 完成后的回调
          */
-        export function bombs_Appear(node, firstAlpha, firstScale, scale1, rotation, time1, time2, delayed, audioType, func): void {
+        export function bombs_Appear(node, firstAlpha, firstScale, scale1, rotation, time1, time2, delayed, audioType?: String, func?: Function): void {
             node.scale(0, 0);
             node.alpha = firstAlpha;
             Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, rotation: rotation }, time1, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
@@ -3295,7 +3298,7 @@ export module lwg {
                     Laya.Tween.to(node, { scaleX: firstScale + (scale1 - firstScale) * 0.2, scaleY: firstScale + (scale1 - firstScale) * 0.2, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
 
                         Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
-                            if (func !== null) {
+                            if (func) {
                                 func()
                             }
                         }), 0);
@@ -3380,14 +3383,21 @@ export module lwg {
          * @param targetX 目标x位置
          * @param targetY 目标y位置
          * @param time 花费时间
+         * @param ease 动画类型
          * @param delayed 延时时间
          * @param func 完成后的回调
          */
-        export function move_Simple_01(node, firstX, firstY, targetX, targetY, time, delayed, func): void {
+        export function move_Simple_01(node, firstX, firstY, targetX, targetY, time, ease?: Function, delayed?: number, func?: Function): void {
+            if (!delayed) {
+                delayed = 0;
+            }
+            if (!ease) {
+                ease = null;
+            }
             node.x = firstX;
             node.y = firstY;
-            Laya.Tween.to(node, { x: targetX, y: targetY }, time, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
-                if (func !== null) {
+            Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease, Laya.Handler.create(this, function () {
+                if (func) {
                     func()
                 }
             }), delayed);
@@ -3547,15 +3557,22 @@ export module lwg {
         * @param endScaleY 最终Y大小
         * @param eAlpha 最终透明度
         * @param time 花费时间
+        * @param ease 效果
         * @param delayed 延迟时间
         * @param func 结束回调
         */
-        export function scale_Alpha(target, fAlpha, fScaleX, fScaleY, eScaleX, eScaleY, eAlpha, time, delayed, func): void {
+        export function scale_Alpha(target, fAlpha, fScaleX, fScaleY, eScaleX, eScaleY, eAlpha, time, ease?: Function, delayed?: number, func?: Function): void {
+            if (!delayed) {
+                delayed = 0;
+            }
+            if (!delayed) {
+                ease = null;
+            }
             target.alpha = fAlpha;
             target.scaleX = fScaleX;
             target.scaleY = fScaleY;
-            Laya.Tween.to(target, { scaleX: eScaleX, scaleY: eScaleY, alpha: eAlpha }, time, null, Laya.Handler.create(this, function () {
-                if (func !== null) {
+            Laya.Tween.to(target, { scaleX: eScaleX, scaleY: eScaleY, alpha: eAlpha }, time, ease, Laya.Handler.create(this, function () {
+                if (func) {
                     func()
                 }
             }), delayed);
@@ -4014,21 +4031,30 @@ export module lwg {
         /**数据表的加载*/
         export let lodingList_Data: Array<any> = [];
 
+        /**进度条总长度,长度为以上三个加载资源类型的数组总长度*/
+        export let sumProgress: number = 0;
+        /**当前进度条进度,起始位0，每加载成功1个，则加1*/
+        export let currentProgress: number = 0;
+
         /**加载事件类型*/
         export enum LodingType {
             Loding3D = 'Loding3D',
             Loding2D = 'Loding2D',
             LodingData = 'LodingData',
             complete = 'complete',
+            progress = 'progress',
         }
+
         export class Lode extends Admin.Scene {
 
             /**注册加载事件*/
             lwgEventReg(): void {
+                sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Data.length;
                 EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D() });
                 EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D() });
                 EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData() });
                 EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete() });
+                EventAdmin.reg(LodingType.progress, this, () => { currentProgress++ , console.log('当前进度条进度:', currentProgress) });
             }
 
             /**加载3D场景*/
@@ -4041,7 +4067,12 @@ export module lwg {
                 for (let index = 0; index < lodingList_3D.length; index++) {
                     Laya.Scene3D.load(lodingList_3D[index], Laya.Handler.create(this, (scene: Laya.Scene3D) => {
                         console.log('3D场景' + index + '加载完成！');
-                        EventAdmin.notify(LodingType.Loding2D);
+                        EventAdmin.notify(LodingType.progress);
+
+                        if (index == lodingList_3D.length - 1) {
+                            console.log('所有3D场景加载完成！');
+                            EventAdmin.notify(LodingType.Loding2D);
+                        }
                     }));
                 }
             }
@@ -4054,13 +4085,26 @@ export module lwg {
                     return;
                 }
                 // 加载多张png类型资源
-                Laya.loader.load(
-                    lodingList_2D,
-                    Laya.Handler.create(this, f => {
+                // Laya.loader.load(
+                //     lodingList_2D,
+                //     Laya.Handler.create(this, f => {
 
-                        console.log('2D资源加载完成！');
-                        EventAdmin.notify(LodingType.LodingData);
+                //         console.log('2D资源加载完成！');
+                //         EventAdmin.notify(LodingType.LodingData);
+                //     }));
+
+                //单张图片依次加载，这样可以使进度条移动的更加美观
+                for (let index = 0; index < lodingList_2D.length; index++) {
+                    Laya.loader.load(lodingList_2D[index], Laya.Handler.create(this, (scene: Laya.Scene3D) => {
+                        console.log('2D资源' + index + '加载完成！');
+                        EventAdmin.notify(LodingType.progress);
+
+                        if (index == lodingList_2D.length - 1) {
+                            console.log('所有2D资源加载完成！');
+                            EventAdmin.notify(LodingType.LodingData);
+                        }
                     }));
+                }
             }
 
             /**加载数据表*/
@@ -4070,11 +4114,26 @@ export module lwg {
                     EventAdmin.notify(LodingType.complete);
                     return;
                 }
-                /**优先加载数据表*/
-                Laya.loader.load(lodingList_Data, Laya.Handler.create(this, () => {
-                    console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                    EventAdmin.notify(LodingType.complete);
-                }), null, Laya.Loader.JSON);
+
+                // 加载多个json
+                // Laya.loader.load(lodingList_Data, Laya.Handler.create(this, () => {
+                //     console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                //     EventAdmin.notify(LodingType.complete);
+                // }), null, Laya.Loader.JSON);
+
+                //单个json依次加载，这样可以使进度条移动的更加美观
+
+                for (let index = 0; index < lodingList_Data.length; index++) {
+                    Laya.loader.load(lodingList_Data[index], Laya.Handler.create(this, () => {
+                        console.log('数据表' + index + '加载完成！可通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                        EventAdmin.notify(LodingType.progress);
+
+                        if (index == lodingList_Data.length - 1) {
+                            console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                            EventAdmin.notify(LodingType.complete);
+                        }
+                    }), null, Laya.Loader.JSON);
+                }
             }
 
             /**加载完成回调,每个游戏不一样*/
@@ -4087,7 +4146,7 @@ export default lwg;
 export let Admin = lwg.Admin;
 export let Click = lwg.Click;
 export let Global = lwg.Global;
-export let Animation = lwg.Animation;
+export let Animation2D = lwg.Animation2D;
 export let EventAdmin = lwg.EventAdmin;
 export let Tools = lwg.Tools;
 export let Effects = lwg.Effects;

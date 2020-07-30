@@ -242,10 +242,12 @@ P F51F9B5D word.png
 P 5DC88460 x10.png
 D UI/Share
 P 98515309 biaoti.png
+P D7E94CD0 fire.png
 P 49EA9E6D kuang.png
-P 9EF597DE kuang_xia.png
+P E8A36E20 kuang_xia.png
+P 9EF597DE kuang_xia2.png
 P 6FC901EA lifaqian_di.png
-P 7CCCC4D2 lifaqian_shang.png
+P D5961863 lifaqian_shang.png
 P 816CA3E2 tubiao_1-2.png
 P 5B234688 tubiao_1.png
 P A5975F10 tubiao_2.png
@@ -293,3 +295,20 @@ R 64187BC7 Skin.png
 R 827F5BCD Task.png
 R B59D3434 victory.png
 R 2D221A41 XDSkin.png
+D UI/Share/Photo
+P 9B156950 photo_1.png
+P 9B156950 photo_10.png
+P 9B156950 photo_11.png
+P 9B156950 photo_12.png
+P 9B156950 photo_13.png
+P 9B156950 photo_14.png
+P 9B156950 photo_15.png
+P 9B156950 photo_16.png
+P 9B156950 photo_2.png
+P 9B156950 photo_3.png
+P 9B156950 photo_4.png
+P 9B156950 photo_5.png
+P 9B156950 photo_6.png
+P 9B156950 photo_7.png
+P 9B156950 photo_8.png
+P 9B156950 photo_9.png

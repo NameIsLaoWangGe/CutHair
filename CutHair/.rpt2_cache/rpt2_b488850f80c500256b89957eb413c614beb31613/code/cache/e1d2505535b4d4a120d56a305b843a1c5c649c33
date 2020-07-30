@@ -1,6 +1,0 @@
-{
-  "code": "import { lwg } from \"../Lwg_Template/lwg\";\r\nexport default class GameMain3D_Moustache extends lwg.Admin.Object3D {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.moveSwitch = false;\r\n    }\r\n    lwgInit() {\r\n        this.timer = 0;\r\n        this.moveSwitch = false;\r\n    }\r\n    lwgOnUpdate() {\r\n        if (this.moveSwitch) {\r\n            this.timer++;\r\n            this.self.transform.localPositionY += 0.1;\r\n            if (this.timer > 100) {\r\n                if (this.self.parent.numChildren === 1) {\r\n                    lwg.Global._gameStart = false;\r\n                }\r\n                this.self.removeSelf();\r\n            }\r\n        }\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/lwg.ts"
-  ]
-}

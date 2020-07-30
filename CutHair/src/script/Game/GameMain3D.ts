@@ -11,6 +11,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     lwgOnAwake(): void {
         GSene3D.GameMain3D = this.self;
         GSene3D.MainCamera = this.MainCamera;
+        GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark') as Laya.MeshSprite3D;
         GSene3D.LevelTem = this.self.getChildByName('Level_001') as Laya.MeshSprite3D;
         GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
         GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
@@ -24,8 +25,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.self.addChild(GSene3D.Level)
         GSene3D.LevelTem.removeSelf();
     }
-    selfNode(): void {
 
+    lwgNodeDec(): void {
         GSene3D.Head = GSene3D.Level.getChildByName('Head') as Laya.MeshSprite3D;
         GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision') as Laya.MeshSprite3D;
         GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle') as Laya.MeshSprite3D;
@@ -35,6 +36,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         TouchHeadRig.restitution = 0;
 
+
         GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
         GSene3D.LeftBeard = GSene3D.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
         GSene3D.RightBeard = GSene3D.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
@@ -42,7 +44,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.UpRightBeard = GSene3D.Head.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
         GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
 
-        GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
 
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
@@ -58,6 +59,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife') as Laya.MeshSprite3D;
 
         GSene3D.TouchScreen = this.self.getChildByName('TouchScreen') as Laya.MeshSprite3D;
+        GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
 
         GSene3D.Razor = GSene3D.GameMain3D.getChildByName('Razor') as Laya.MeshSprite3D;
         if (!GSene3D.razorFPos.x) {
@@ -101,7 +103,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     refreshScene(): void {
         GSene3D.Level.removeSelf();
         this.createLevel();
-        this.selfNode();
+        this.lwgNodeDec();
         this.lwgOnEnable();
     }
 

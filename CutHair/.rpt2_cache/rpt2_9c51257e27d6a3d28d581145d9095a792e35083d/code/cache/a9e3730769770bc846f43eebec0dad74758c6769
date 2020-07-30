@@ -1,8 +1,0 @@
-{
-  "code": "import { lwg } from \"../Lwg_Template/lwg\";\r\nexport default class GameMain3D_knife extends lwg.Admin.Object3D {\r\n    lwgInit() {\r\n    }\r\n    onTriggerEnter(other) {\r\n        let owner = other.owner;\r\n        console.log(owner);\r\n    }\r\n    lwgOnUpdate() {\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/lwg.ts",
-    "D:/Game/project/CutHair/Project/CutHair/src/script/Game/GameMain3D_Blade.ts",
-    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/Global.ts"
-  ]
-}

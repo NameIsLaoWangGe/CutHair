@@ -6,7 +6,7 @@ export default class UIStart extends lwg.Admin.Scene {
     LevelDisplay: Laya.Sprite;
     LevelStyle: Laya.Sprite;
 
-    selfNode(): void {
+    lwgNodeDec(): void {
         this.LevelDisplay = this.self['LevelDisplay'];
         this.LevelStyle = this.self['LevelStyle'];
     }
@@ -19,8 +19,6 @@ export default class UIStart extends lwg.Admin.Scene {
 
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
 
-
-        console.log(window);
     }
 
     /**关卡列表*/

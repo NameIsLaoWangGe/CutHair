@@ -1,21 +1,23 @@
-import { lwg, Click, EventAdmin, Hint } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Hint, Admin, Game } from "../Lwg_Template/lwg";
 import { GEnum } from "../Lwg_Template/Global";
+import ADManager from "../TJ/Admanager";
 
 export default class UIDefeated extends lwg.Admin.Scene {
 
     BtnAgain: Laya.Sprite;
-    selfNode(): void {
+
+    lwgNodeDec(): void {
         this.BtnAgain = this.self['BtnAgain'];
 
         this.self['BtnAdv'].visible = true;
         this.self['BtnAgain'].visible = false;
         this.self['Dot'].visible = true;
     }
-    btnOnClick(): void {
+
+    lwgBtnClick(): void {
         Click.on(Click.Type.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
         Click.on(Click.Type.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
         Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        
     }
 
     btnSelectUp(): void {
@@ -37,7 +39,12 @@ export default class UIDefeated extends lwg.Admin.Scene {
         this.self.close();
     }
 
-    btnNextUp():void{
-        Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"])
+    btnNextUp(): void {
+        ADManager.ShowReward(() => {
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            Game._gameLevel.value += 1;
+            Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage) })
+            this.self.close();
+        })
     }
 }

@@ -1,4 +1,4 @@
-import { lwg, Animation, PalyAudio, EventAdmin, Admin, Loding } from "../Lwg_Template/lwg";
+import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
 export default class UILoding extends Loding.Lode {
@@ -21,7 +21,7 @@ export default class UILoding extends Loding.Lode {
         EventAdmin.notify(Loding.LodingType.Loding3D);
     }
 
-    adaptive(): void {
+    lwgAdaptive(): void {
         this.self['Bg'].height = Laya.stage.height;
         this.self['Logo'].y = Laya.stage.height * 0.174;
         this.self['Progress'].y = Laya.stage.height * 0.763;
@@ -34,6 +34,7 @@ export default class UILoding extends Loding.Lode {
         this.self['Shear'].x = this.self['Mask'].width;
         this.self['Per'].text = 100 + '%';
 
+        this.maskMoveSwitch = false;
         // 获取场景
         let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls") as Laya.Scene3D;
         Laya.stage.addChildAt(Scene3D, 0);
@@ -49,20 +50,19 @@ export default class UILoding extends Loding.Lode {
     /**进度条动画开关*/
     maskMoveSwitch: boolean = true;
     /**剪刀修剪速度*/
-    shearSpeed: number = 10;
+    shearSpeed: number = 5;
     /**剪刀修剪开关*/
     shearSwitch: boolean = true;
 
     lwgOnUpdate(): void {
-        // 模拟加载进度
+        // 模拟加载进度,非真实进度，最后为1时为真实进度
         if (this.maskMoveSwitch) {
-            if (this.self['Mask'].x < -this.self['Mask'].width * 1 / 5) {
-                this.self['Mask'].x += this.self['Mask'].width / 25;
-                this.self['Shear'].x += this.self['Mask'].width / 25;
+            if (this.self['Mask'].x < -20) {
+                this.self['Mask'].x += 10;
+                this.self['Shear'].x += 10;
                 // 百分比数字
                 let str: string = ((- this.self['Mask'].width - this.self['Mask'].x) / - this.self['Mask'].width * 100).toString().substring(0, 2);
                 this.self['Per'].text = str + '%';
-            } else {
             }
         }
 

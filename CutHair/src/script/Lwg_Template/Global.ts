@@ -46,6 +46,14 @@ export module Global {
         export let GameMain3D: Laya.Scene3D;
         /**场景摄像机的父节点*/
         export let MainCamera: Laya.MeshSprite3D;
+        /**当前关卡节点*/
+        export let LevelTem: Laya.MeshSprite3D;
+        export let Level: Laya.MeshSprite3D;
+        export let LevelFpos: Laya.Vector3 = new Laya.Vector3();
+
+        /**照相时候的角度和位置标记*/
+        export let PhotoCameraMark: Laya.MeshSprite3D;
+
         /**剃刀*/
         export let Razor: Laya.MeshSprite3D;
         export let razorFPos: Laya.Vector3 = new Laya.Vector3();
@@ -69,10 +77,6 @@ export module Global {
         export let UpRightBeard: Laya.MeshSprite3D;
         export let UpLeftBeard: Laya.MeshSprite3D;
 
-        /**当前关卡节点*/
-        export let LevelTem: Laya.MeshSprite3D;
-        export let Level: Laya.MeshSprite3D;
-        export let LevelFpos: Laya.Vector3 = new Laya.Vector3();;
 
         /**地板*/
         export let Floor: Laya.MeshSprite3D;
@@ -104,7 +108,6 @@ export module Global {
         export let RightSignknife: Laya.MeshSprite3D;
         export let UpRightKnife: Laya.MeshSprite3D;
         export let UpLeftKnife: Laya.MeshSprite3D;
-
     }
 }
 export default Global;

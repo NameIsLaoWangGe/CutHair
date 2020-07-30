@@ -1,4 +1,4 @@
-import { lwg, Click, Animation, Animation3D, Tools, EventAdmin, Admin } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
@@ -137,7 +137,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
     }
 
-    selfNode() {
+    lwgNodeDec() {
         this.Rocker = this.self['Rocker'];
         this.TaskBar = this.self['TaskBar'];
         this.BtnLast = this.self['BtnLast'];
@@ -147,7 +147,8 @@ export default class UIOperation extends lwg.Admin.Scene {
     lwgOnAwake(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
-        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+        // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+        GVariate._taskArr = [GEnum.TaskType.upLeftBeard];
         this.createProgress();
     }
 
@@ -396,7 +397,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         EventAdmin.notify(GEnum.EventType.cameraMove, GVariate._taskArr[GVariate._taskNum]);
     }
 
-    btnOnClick(): void {
+    lwgBtnClick(): void {
         lwg.Click.on(Click.Type.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
     }
 

@@ -1,7 +1,0 @@
-{
-  "code": "import { lwg } from \"../Lwg_Template/lwg\";\r\nimport GameMain3D from \"./GameMain3D\";\r\nexport default class UILoding extends lwg.Admin.Scene {\r\n    constructor() {\r\n        super();\r\n        this.mianSceneOk = false;\r\n    }\r\n    lwgInit() {\r\n        this.lodeMianScene3D();\r\n    }\r\n    lodeMianScene3D() {\r\n        Laya.Scene3D.load(\"3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls\", Laya.Handler.create(this, this.mianSceneComplete));\r\n    }\r\n    mianSceneComplete(scene) {\r\n        Laya.stage.addChildAt(scene, 0);\r\n        this.mianSceneOk = true;\r\n        scene.addComponent(GameMain3D);\r\n        lwg.Admin._sceneControl[lwg.Admin.SceneName.GameMain3D] = scene;\r\n        scene[lwg.Admin.SceneName.GameMain3D] = scene.getComponent(GameMain3D);\r\n        lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, null);\r\n    }\r\n    onDisable() {\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/Game/project/CutHair/Project/CutHair/src/script/Lwg_Template/lwg.ts",
-    "D:/Game/project/CutHair/Project/CutHair/src/script/Game/GameMain3D.ts"
-  ]
-}

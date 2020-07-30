@@ -13,4 +13,4 @@ loadLib("libs/laya.ani.js")
 loadLib("libs/laya.ui.js")
 loadLib("libs/laya.physics3D.js")
 loadLib("libs/laya.d3.js")//-----libs-end-------
-loadLib("js/bundle.js");
+loadLib("js/TJ.js");loadLib("js/bundle.js");

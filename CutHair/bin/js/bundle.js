@@ -241,7 +241,7 @@
                     let dec = sp.getChildByName('dec');
                     dec.text = Enum.HintDec[type];
                     sp.zOrder = 100;
-                    Animation.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
+                    Animation2D.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
                         sp.removeSelf();
                     });
                 }));
@@ -259,10 +259,10 @@
                     dec.text = input;
                     sp.zOrder = 100;
                     dec.alpha = 0;
-                    Animation.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                        Animation.fadeOut(dec, 0, 1, 150, 0, f => {
-                            Animation.fadeOut(dec, 1, 0, 200, 1500, f => {
-                                Animation.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                    Animation2D.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, null, 0, f => {
+                        Animation2D.fadeOut(dec, 0, 1, 150, 0, f => {
+                            Animation2D.fadeOut(dec, 1, 0, 200, 1500, f => {
+                                Animation2D.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, null, 0, f => {
                                     sp.removeSelf();
                                 });
                             });
@@ -282,9 +282,9 @@
                 label.x = Global.ExecutionNumNode.x + 100;
                 label.y = Global.ExecutionNumNode.y - label.height / 2 + 4;
                 label.zOrder = 100;
-                lwg.Animation.fadeOut(label, 0, 1, 200, 150, f => {
-                    lwg.Animation.leftRight_Shake(Global.ExecutionNumNode, 15, 60, 0, null);
-                    lwg.Animation.fadeOut(label, 1, 0, 600, 400, f => {
+                lwg.Animation2D.fadeOut(label, 0, 1, 200, 150, f => {
+                    lwg.Animation2D.leftRight_Shake(Global.ExecutionNumNode, 15, 60, 0, null);
+                    lwg.Animation2D.fadeOut(label, 1, 0, 600, 400, f => {
                     });
                 });
             }
@@ -311,9 +311,9 @@
                     sp.y = Laya.stage.height / 2;
                     sp.zOrder = 50;
                     if (Global.ExecutionNumNode) {
-                        Animation.move_Simple_01(sp, sp.x, sp.y, Global.ExecutionNumNode.x, Global.ExecutionNumNode.y, 800, 100, f => {
-                            Animation.fadeOut(sp, 1, 0, 200, 0, f => {
-                                lwg.Animation.upDwon_Shake(Global.ExecutionNumNode, 10, 80, 0, null);
+                        Animation2D.move_Simple_01(sp, sp.x, sp.y, Global.ExecutionNumNode.x, Global.ExecutionNumNode.y, 800, null, 100, f => {
+                            Animation2D.fadeOut(sp, 1, 0, 200, 0, f => {
+                                lwg.Animation2D.upDwon_Shake(Global.ExecutionNumNode, 10, 80, 0, null);
                                 if (func) {
                                     func();
                                 }
@@ -452,10 +452,10 @@
                 Dec.align = 'center';
                 Dec.valign = 'middle';
                 Dec.alpha = 0;
-                Animation.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, 0, f => {
-                    Animation.fadeOut(Dec, 0, 1, 150, 0, f => {
-                        Animation.fadeOut(Dec, 1, 0, 200, 800, f => {
-                            Animation.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, 0, f => {
+                Animation2D.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, null, 0, f => {
+                    Animation2D.fadeOut(Dec, 0, 1, 150, 0, f => {
+                        Animation2D.fadeOut(Dec, 1, 0, 200, 800, f => {
+                            Animation2D.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, null, 0, f => {
                                 Hint_M.removeSelf();
                             });
                         });
@@ -600,7 +600,7 @@
                     if (this.moveSwitch) {
                         this.timer++;
                         if (this.timer > 0) {
-                            lwg.Animation.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
+                            lwg.Animation2D.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
                                 this.self.removeSelf();
                                 if (this.func !== null) {
                                     this.func();
@@ -786,23 +786,23 @@
                     this.calssName = this['__proto__']['constructor'].name;
                     this.self[this.calssName] = this;
                     this.gameState(this.calssName);
-                    this.selfNode();
+                    this.lwgNodeDec();
                     this.lwgOnAwake();
-                    this.variateInit();
-                    this.adaptive();
+                    this.lwgVariateInit();
+                    this.lwgAdaptive();
                 }
                 lwgOnAwake() {
                 }
                 onEnable() {
                     this.lwgEventReg();
                     this.lwgOnEnable();
-                    this.btnAndOpenAni();
+                    this.btnAndlwgOpenAni();
                 }
-                selfNode() {
+                lwgNodeDec() {
                 }
                 lwgEventReg() {
                 }
-                variateInit() {
+                lwgVariateInit() {
                 }
                 gameState(calssName) {
                     switch (calssName) {
@@ -824,25 +824,25 @@
                 }
                 lwgOnEnable() {
                 }
-                btnAndOpenAni() {
-                    let time = this.openAni();
+                btnAndlwgOpenAni() {
+                    let time = this.lwgOpenAni();
                     if (time) {
                         Laya.timer.once(time, this, f => {
-                            this.btnOnClick();
+                            this.lwgBtnClick();
                         });
                     }
                     else {
-                        this.btnOnClick();
+                        this.lwgBtnClick();
                     }
                 }
-                btnOnClick() {
+                lwgBtnClick() {
                 }
-                openAni() {
+                lwgOpenAni() {
                     return this.aniTime;
                 }
-                adaptive() {
+                lwgAdaptive() {
                 }
-                vanishAni() {
+                lwgVanishAni() {
                     return 0;
                 }
                 onUpdate() {
@@ -875,20 +875,20 @@
                         this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
                     }
                     this.lwgOnAwake();
-                    this.selfNode();
-                    this.adaptive();
+                    this.lwgNodeDec();
+                    this.lwgAdaptive();
                 }
                 lwgOnAwake() {
                 }
                 onEnable() {
                     this.self[this.calssName] = this;
                     this.lwgOnEnable();
-                    this.btnOnClick();
-                    this.adaptive();
-                    this.openAni();
+                    this.lwgBtnClick();
+                    this.lwgAdaptive();
+                    this.lwgOpenAni();
                     this.lwgEventReg();
                 }
-                selfNode() {
+                lwgNodeDec() {
                 }
                 lwgEventReg() {
                 }
@@ -912,13 +912,13 @@
                 }
                 lwgOnEnable() {
                 }
-                btnOnClick() {
+                lwgBtnClick() {
                 }
-                adaptive() {
+                lwgAdaptive() {
                 }
-                openAni() {
+                lwgOpenAni() {
                 }
-                vanishAni() {
+                lwgVanishAni() {
                 }
                 onUpdate() {
                     this.lwgOnUpDate();
@@ -969,12 +969,12 @@
                 }
                 onEnable() {
                     this.lwgOnEnable();
-                    this.btnOnClick();
+                    this.lwgBtnClick();
                 }
                 lwgOnEnable() {
                     console.log('父类的初始化！');
                 }
-                btnOnClick() {
+                lwgBtnClick() {
                 }
                 onUpdate() {
                     this.lwgOnUpdate();
@@ -2047,17 +2047,17 @@
             }
             Animation3D.ClearTween = ClearTween;
         })(Animation3D = lwg.Animation3D || (lwg.Animation3D = {}));
-        let Animation;
-        (function (Animation) {
-            function simple_Rotate(node, Frotate, Erotate, time, func) {
+        let Animation2D;
+        (function (Animation2D) {
+            function simple_Rotate(node, Frotate, Erotate, time, delayed, func) {
                 node.rotation = Frotate;
                 Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
-                    if (func && func !== null) {
+                    if (func) {
                         func();
                     }
-                }), 0);
+                }), delayed);
             }
-            Animation.simple_Rotate = simple_Rotate;
+            Animation2D.simple_Rotate = simple_Rotate;
             function upDown_Overturn(node, time, func) {
                 Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
@@ -2071,7 +2071,7 @@
                     }), 0);
                 }), 0);
             }
-            Animation.upDown_Overturn = upDown_Overturn;
+            Animation2D.upDown_Overturn = upDown_Overturn;
             function leftRight_Overturn(node, time, func) {
                 Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { scaleX: 1 }, time, null, Laya.Handler.create(this, function () {
@@ -2085,7 +2085,7 @@
                     }), 0);
                 }), 0);
             }
-            Animation.leftRight_Overturn = leftRight_Overturn;
+            Animation2D.leftRight_Overturn = leftRight_Overturn;
             function leftRight_Shake(node, range, time, delayed, func) {
                 Laya.Tween.to(node, { x: node.x - range }, time, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { x: node.x + range * 2 }, time, null, Laya.Handler.create(this, function () {
@@ -2097,7 +2097,7 @@
                     }));
                 }), delayed);
             }
-            Animation.leftRight_Shake = leftRight_Shake;
+            Animation2D.leftRight_Shake = leftRight_Shake;
             function upDwon_Shake(node, range, time, delayed, func) {
                 Laya.Tween.to(node, { y: node.y + range }, time, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { y: node.y - range * 2 }, time, null, Laya.Handler.create(this, function () {
@@ -2109,16 +2109,16 @@
                     }));
                 }), delayed);
             }
-            Animation.upDwon_Shake = upDwon_Shake;
+            Animation2D.upDwon_Shake = upDwon_Shake;
             function fadeOut(node, alpha1, alpha2, time, delayed, func) {
                 node.alpha = alpha1;
                 Laya.Tween.to(node, { alpha: alpha2 }, time, null, Laya.Handler.create(this, function () {
-                    if (func !== null) {
+                    if (func) {
                         func();
                     }
                 }), delayed);
             }
-            Animation.fadeOut = fadeOut;
+            Animation2D.fadeOut = fadeOut;
             function fadeOut_KickBack(node, alpha1, alpha2, time, delayed, func) {
                 node.alpha = alpha1;
                 Laya.Tween.to(node, { alpha: alpha2 }, time, null, Laya.Handler.create(this, function () {
@@ -2127,7 +2127,7 @@
                     }
                 }), delayed);
             }
-            Animation.fadeOut_KickBack = fadeOut_KickBack;
+            Animation2D.fadeOut_KickBack = fadeOut_KickBack;
             function move_FadeOut(node, firstX, firstY, targetX, targetY, time, delayed, func) {
                 node.alpha = 0;
                 node.x = firstX;
@@ -2138,7 +2138,7 @@
                     }
                 }), delayed);
             }
-            Animation.move_FadeOut = move_FadeOut;
+            Animation2D.move_FadeOut = move_FadeOut;
             function move_Fade_Out(node, firstX, firstY, targetX, targetY, time, delayed, func) {
                 node.alpha = 1;
                 node.x = firstX;
@@ -2149,7 +2149,7 @@
                     }
                 }), delayed);
             }
-            Animation.move_Fade_Out = move_Fade_Out;
+            Animation2D.move_Fade_Out = move_Fade_Out;
             function move_FadeOut_Scale_01(node, firstX, firstY, targetX, targetY, time, delayed, func) {
                 node.alpha = 0;
                 node.targetX = 0;
@@ -2162,7 +2162,7 @@
                     }
                 }), delayed);
             }
-            Animation.move_FadeOut_Scale_01 = move_FadeOut_Scale_01;
+            Animation2D.move_FadeOut_Scale_01 = move_FadeOut_Scale_01;
             function move_Scale(node, fScale, fX, fY, tX, tY, eScale, time, delayed, func) {
                 node.scaleX = fScale;
                 node.scaleY = fScale;
@@ -2174,20 +2174,20 @@
                     }
                 }), delayed);
             }
-            Animation.move_Scale = move_Scale;
+            Animation2D.move_Scale = move_Scale;
             function rotate_Scale(target, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func) {
-                target.scaleX = fScaleX;
-                target.scaleY = fScaleY;
-                target.rotation = fRotate;
-                Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, function () {
-                    Laya.Tween.to(target, { rotation: 0, scaleX: 1, scaleY: 1 }, time / 2, null, Laya.Handler.create(this, function () {
-                        if (func !== null) {
-                            func();
+                Laya.timer.once(delayed, this, () => {
+                    target.scaleX = fScaleX;
+                    target.scaleY = fScaleY;
+                    target.rotation = fRotate;
+                    Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
+                        if (func) {
+                            this.func();
                         }
-                    }), delayed);
-                }), 0);
+                    }), 0);
+                });
             }
-            Animation.rotate_Scale = rotate_Scale;
+            Animation2D.rotate_Scale = rotate_Scale;
             function drop_Simple(node, fY, tY, rotation, time, delayed, func) {
                 node.y = fY;
                 Laya.Tween.to(node, { y: tY, rotation: rotation }, time, Laya.Ease.circOut, Laya.Handler.create(this, function () {
@@ -2196,7 +2196,7 @@
                     }
                 }), delayed);
             }
-            Animation.drop_Simple = drop_Simple;
+            Animation2D.drop_Simple = drop_Simple;
             function drop_KickBack(target, fAlpha, firstY, targetY, extendY, time1, delayed, func) {
                 target.alpha = fAlpha;
                 target.y = firstY;
@@ -2210,7 +2210,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.drop_KickBack = drop_KickBack;
+            Animation2D.drop_KickBack = drop_KickBack;
             function drop_Excursion(node, targetY, targetX, rotation, time, delayed, func) {
                 Laya.Tween.to(node, { x: node.x + targetX, y: node.y + targetY * 1 / 6 }, time, Laya.Ease.expoIn, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { x: node.x + targetX + 50, y: targetY, rotation: rotation }, time, null, Laya.Handler.create(this, function () {
@@ -2220,7 +2220,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.drop_Excursion = drop_Excursion;
+            Animation2D.drop_Excursion = drop_Excursion;
             function goUp_Simple(node, initialY, initialR, targetY, time, delayed, func) {
                 node.y = initialY;
                 node.rotation = initialR;
@@ -2230,7 +2230,7 @@
                     }
                 }), delayed);
             }
-            Animation.goUp_Simple = goUp_Simple;
+            Animation2D.goUp_Simple = goUp_Simple;
             function cardRotateX_TowFace(node, arr, func1, time, delayed, func2) {
                 Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
                     if (arr) {
@@ -2263,7 +2263,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.cardRotateX_TowFace = cardRotateX_TowFace;
+            Animation2D.cardRotateX_TowFace = cardRotateX_TowFace;
             function cardRotateX_OneFace(node, func1, time, delayed, func2) {
                 Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
                     if (func1 !== null) {
@@ -2276,7 +2276,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.cardRotateX_OneFace = cardRotateX_OneFace;
+            Animation2D.cardRotateX_OneFace = cardRotateX_OneFace;
             function cardRotateY_TowFace(node, arr, func1, time, delayed, func2) {
                 Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
                     if (arr) {
@@ -2309,7 +2309,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.cardRotateY_TowFace = cardRotateY_TowFace;
+            Animation2D.cardRotateY_TowFace = cardRotateY_TowFace;
             function cardRotateY_OneFace(node, func1, time, delayed, func2) {
                 Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
                     if (func1 !== null) {
@@ -2322,7 +2322,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.cardRotateY_OneFace = cardRotateY_OneFace;
+            Animation2D.cardRotateY_OneFace = cardRotateY_OneFace;
             function move_changeRotate(node, targetX, targetY, per, rotation_pe, time, func) {
                 let targetPerX = targetX * per + node.x * (1 - per);
                 let targetPerY = targetY * per + node.y * (1 - per);
@@ -2334,7 +2334,7 @@
                     }), 0);
                 }), 0);
             }
-            Animation.move_changeRotate = move_changeRotate;
+            Animation2D.move_changeRotate = move_changeRotate;
             function bombs_Appear(node, firstAlpha, firstScale, scale1, rotation, time1, time2, delayed, audioType, func) {
                 node.scale(0, 0);
                 node.alpha = firstAlpha;
@@ -2342,7 +2342,7 @@
                     Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
                         Laya.Tween.to(node, { scaleX: firstScale + (scale1 - firstScale) * 0.2, scaleY: firstScale + (scale1 - firstScale) * 0.2, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
                             Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
-                                if (func !== null) {
+                                if (func) {
                                     func();
                                 }
                             }), 0);
@@ -2350,7 +2350,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.bombs_Appear = bombs_Appear;
+            Animation2D.bombs_Appear = bombs_Appear;
             function bombs_Vanish(node, scale, alpha, rotation, time, delayed, func) {
                 Laya.Tween.to(node, { scaleX: scale, scaleY: scale, alpha: alpha, rotation: rotation }, time, Laya.Ease.cubicOut, Laya.Handler.create(this, function () {
                     if (func !== null) {
@@ -2358,7 +2358,7 @@
                     }
                 }), delayed);
             }
-            Animation.bombs_Vanish = bombs_Vanish;
+            Animation2D.bombs_Vanish = bombs_Vanish;
             function swell_shrink(node, firstScale, scale1, time, delayed, func) {
                 Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, }, time, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
@@ -2372,7 +2372,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.swell_shrink = swell_shrink;
+            Animation2D.swell_shrink = swell_shrink;
             function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, func) {
                 node.x = firstX;
                 node.y = firstY;
@@ -2382,17 +2382,23 @@
                     }
                 }), delayed);
             }
-            Animation.move_Simple = move_Simple;
-            function move_Simple_01(node, firstX, firstY, targetX, targetY, time, delayed, func) {
+            Animation2D.move_Simple = move_Simple;
+            function move_Simple_01(node, firstX, firstY, targetX, targetY, time, ease, delayed, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
+                if (!ease) {
+                    ease = null;
+                }
                 node.x = firstX;
                 node.y = firstY;
-                Laya.Tween.to(node, { x: targetX, y: targetY }, time, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
-                    if (func !== null) {
+                Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease, Laya.Handler.create(this, function () {
+                    if (func) {
                         func();
                     }
                 }), delayed);
             }
-            Animation.move_Simple_01 = move_Simple_01;
+            Animation2D.move_Simple_01 = move_Simple_01;
             function move_Deform_X(node, firstX, firstR, targetX, scaleX, scaleY, time, delayed, func) {
                 node.alpha = 0;
                 node.x = firstX;
@@ -2405,7 +2411,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.move_Deform_X = move_Deform_X;
+            Animation2D.move_Deform_X = move_Deform_X;
             function move_Deform_Y(target, firstY, firstR, targeY, scaleX, scaleY, time, delayed, func) {
                 target.alpha = 0;
                 if (firstY) {
@@ -2420,7 +2426,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.move_Deform_Y = move_Deform_Y;
+            Animation2D.move_Deform_Y = move_Deform_Y;
             function blink_FadeOut_v(target, minAlpha, maXalpha, time, delayed, func) {
                 target.alpha = minAlpha;
                 Laya.Tween.to(target, { alpha: maXalpha }, time, null, Laya.Handler.create(this, function () {
@@ -2431,7 +2437,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.blink_FadeOut_v = blink_FadeOut_v;
+            Animation2D.blink_FadeOut_v = blink_FadeOut_v;
             function blink_FadeOut(target, minAlpha, maXalpha, time, delayed, func) {
                 Laya.Tween.to(target, { alpha: minAlpha }, time, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(target, { alpha: maXalpha }, time, null, Laya.Handler.create(this, function () {
@@ -2441,7 +2447,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.blink_FadeOut = blink_FadeOut;
+            Animation2D.blink_FadeOut = blink_FadeOut;
             function shookHead_Simple(target, rotate, time, delayed, func) {
                 let firstR = target.rotation;
                 Laya.Tween.to(target, { rotation: firstR + rotate }, time, null, Laya.Handler.create(this, function () {
@@ -2456,7 +2462,7 @@
                     }), 0);
                 }), delayed);
             }
-            Animation.shookHead_Simple = shookHead_Simple;
+            Animation2D.shookHead_Simple = shookHead_Simple;
             function HintAni_01(target, upNum, time1, stopTime, downNum, time2, func) {
                 target.alpha = 0;
                 Laya.Tween.to(target, { alpha: 1, y: target.y - upNum }, time1, null, Laya.Handler.create(this, function () {
@@ -2469,18 +2475,24 @@
                     }), 0);
                 }), 0);
             }
-            Animation.HintAni_01 = HintAni_01;
-            function scale_Alpha(target, fAlpha, fScaleX, fScaleY, eScaleX, eScaleY, eAlpha, time, delayed, func) {
+            Animation2D.HintAni_01 = HintAni_01;
+            function scale_Alpha(target, fAlpha, fScaleX, fScaleY, eScaleX, eScaleY, eAlpha, time, ease, delayed, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
+                if (!delayed) {
+                    ease = null;
+                }
                 target.alpha = fAlpha;
                 target.scaleX = fScaleX;
                 target.scaleY = fScaleY;
-                Laya.Tween.to(target, { scaleX: eScaleX, scaleY: eScaleY, alpha: eAlpha }, time, null, Laya.Handler.create(this, function () {
-                    if (func !== null) {
+                Laya.Tween.to(target, { scaleX: eScaleX, scaleY: eScaleY, alpha: eAlpha }, time, ease, Laya.Handler.create(this, function () {
+                    if (func) {
                         func();
                     }
                 }), delayed);
             }
-            Animation.scale_Alpha = scale_Alpha;
+            Animation2D.scale_Alpha = scale_Alpha;
             function rotate_Magnify_KickBack(node, eAngle, eScale, time1, time2, delayed1, delayed2, func) {
                 node.alpha = 0;
                 node.scaleX = 0;
@@ -2498,8 +2510,8 @@
                     }), 0);
                 }), delayed1);
             }
-            Animation.rotate_Magnify_KickBack = rotate_Magnify_KickBack;
-        })(Animation = lwg.Animation || (lwg.Animation = {}));
+            Animation2D.rotate_Magnify_KickBack = rotate_Magnify_KickBack;
+        })(Animation2D = lwg.Animation2D || (lwg.Animation2D = {}));
         let PalyAudio;
         (function (PalyAudio) {
             PalyAudio._voiceSwitch = true;
@@ -2803,19 +2815,24 @@
             Loding.lodingList_2D = [];
             Loding.lodingList_3D = [];
             Loding.lodingList_Data = [];
+            Loding.sumProgress = 0;
+            Loding.currentProgress = 0;
             let LodingType;
             (function (LodingType) {
                 LodingType["Loding3D"] = "Loding3D";
                 LodingType["Loding2D"] = "Loding2D";
                 LodingType["LodingData"] = "LodingData";
                 LodingType["complete"] = "complete";
+                LodingType["progress"] = "progress";
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
             class Lode extends Admin.Scene {
                 lwgEventReg() {
+                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Data.length;
                     EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D(); });
                     EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D(); });
                     EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData(); });
                     EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(); });
+                    EventAdmin.reg(LodingType.progress, this, () => { Loding.currentProgress++, console.log('当前进度条进度:', Loding.currentProgress); });
                 }
                 lodeScene3D() {
                     if (Loding.lodingList_3D.length === 0) {
@@ -2826,7 +2843,11 @@
                     for (let index = 0; index < Loding.lodingList_3D.length; index++) {
                         Laya.Scene3D.load(Loding.lodingList_3D[index], Laya.Handler.create(this, (scene) => {
                             console.log('3D场景' + index + '加载完成！');
-                            EventAdmin.notify(LodingType.Loding2D);
+                            EventAdmin.notify(LodingType.progress);
+                            if (index == Loding.lodingList_3D.length - 1) {
+                                console.log('所有3D场景加载完成！');
+                                EventAdmin.notify(LodingType.Loding2D);
+                            }
                         }));
                     }
                 }
@@ -2836,10 +2857,16 @@
                         EventAdmin.notify(LodingType.LodingData);
                         return;
                     }
-                    Laya.loader.load(Loding.lodingList_2D, Laya.Handler.create(this, f => {
-                        console.log('2D资源加载完成！');
-                        EventAdmin.notify(LodingType.LodingData);
-                    }));
+                    for (let index = 0; index < Loding.lodingList_2D.length; index++) {
+                        Laya.loader.load(Loding.lodingList_2D[index], Laya.Handler.create(this, (scene) => {
+                            console.log('2D资源' + index + '加载完成！');
+                            EventAdmin.notify(LodingType.progress);
+                            if (index == Loding.lodingList_2D.length - 1) {
+                                console.log('所有2D资源加载完成！');
+                                EventAdmin.notify(LodingType.LodingData);
+                            }
+                        }));
+                    }
                 }
                 lodingData() {
                     if (Loding.lodingList_Data.length === 0) {
@@ -2847,10 +2874,16 @@
                         EventAdmin.notify(LodingType.complete);
                         return;
                     }
-                    Laya.loader.load(Loding.lodingList_Data, Laya.Handler.create(this, () => {
-                        console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                        EventAdmin.notify(LodingType.complete);
-                    }), null, Laya.Loader.JSON);
+                    for (let index = 0; index < Loding.lodingList_Data.length; index++) {
+                        Laya.loader.load(Loding.lodingList_Data[index], Laya.Handler.create(this, () => {
+                            console.log('数据表' + index + '加载完成！可通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                            EventAdmin.notify(LodingType.progress);
+                            if (index == Loding.lodingList_Data.length - 1) {
+                                console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
+                                EventAdmin.notify(LodingType.complete);
+                            }
+                        }), null, Laya.Loader.JSON);
+                    }
                 }
                 lwgLodeComplete() { }
             }
@@ -2860,7 +2893,7 @@
     let Admin = lwg.Admin;
     let Click = lwg.Click;
     let Global = lwg.Global;
-    let Animation = lwg.Animation;
+    let Animation2D = lwg.Animation2D;
     let EventAdmin = lwg.EventAdmin;
     let Tools = lwg.Tools;
     let Effects = lwg.Effects;
@@ -2871,14 +2904,157 @@
     let Loding = lwg.Loding;
     let Game = lwg.Game;
 
+    class ADManager {
+        constructor() {
+        }
+        static ShowBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.ShowBanner(p);
+        }
+        static CloseBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.RemoveBanner(p);
+        }
+        static ShowNormal() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static showNormal2() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static ShowReward(rewardAction, CDTime = 500) {
+            if (ADManager.CanShowCD) {
+                PalyAudio.stopMusic();
+                console.log("?????");
+                let p = new TJ.ADS.Param();
+                p.extraAd = true;
+                let getReward = false;
+                p.cbi.Add(TJ.Define.Event.Reward, () => {
+                    getReward = true;
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    if (rewardAction != null)
+                        rewardAction();
+                });
+                p.cbi.Add(TJ.Define.Event.Close, () => {
+                    if (!getReward) {
+                        PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                        Hint.createHint_Middle(Hint.HintDec["观看完整广告才能获取奖励哦！"]);
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.NoAds, () => {
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+                });
+                TJ.ADS.Api.ShowReward(p);
+                ADManager.CanShowCD = false;
+                setTimeout(() => {
+                    ADManager.CanShowCD = true;
+                }, CDTime);
+            }
+        }
+        static Event(param, value) {
+            console.log("Param:>" + param + "Value:>" + value);
+            let p = new TJ.GSA.Param();
+            if (value == null) {
+                p.id = param;
+            }
+            else {
+                p.id = param + value;
+            }
+            console.log(p.id);
+            TJ.GSA.Api.Event(p);
+        }
+        static initShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.onShareAppMessage(() => {
+                    return {
+                        title: this.shareContent,
+                        imageUrl: this.shareImgUrl,
+                        query: ""
+                    };
+                });
+                this.wx.showShareMenu({
+                    withShareTicket: true,
+                    success: null,
+                    fail: null,
+                    complete: null
+                });
+            }
+        }
+        static lureShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.shareAppMessage({
+                    title: this.shareContent,
+                    imageUrl: this.shareImgUrl,
+                    query: ""
+                });
+            }
+        }
+        static VibrateShort() {
+            TJ.API.Vibrate.Short();
+        }
+        static Vibratelong() {
+            TJ.API.Vibrate.Long();
+        }
+        static TAPoint(type, name) {
+            let p = new TJ.API.TA.Param();
+            p.id = name;
+            switch (type) {
+                case TaT.BtnShow:
+                    TJ.API.TA.Event_Button_Show(p);
+                    break;
+                case TaT.BtnClick:
+                    TJ.API.TA.Event_Button_Click(p);
+                    break;
+                case TaT.PageShow:
+                    TJ.API.TA.Event_Page_Show(p);
+                    break;
+                case TaT.PageEnter:
+                    TJ.API.TA.Event_Page_Enter(p);
+                    break;
+                case TaT.PageLeave:
+                    TJ.API.TA.Event_Page_Leave(p);
+                    break;
+                case TaT.LevelStart:
+                    TJ.API.TA.Event_Level_Start(p);
+                    console.log('本关开始打点');
+                    break;
+                case TaT.LevelFail:
+                    TJ.API.TA.Event_Level_Fail(p);
+                    console.log('本关失败打点');
+                    break;
+                case TaT.LevelFinish:
+                    TJ.API.TA.Event_Level_Finish(p);
+                    console.log('本关胜利打点');
+                    break;
+            }
+        }
+    }
+    ADManager.CanShowCD = true;
+    ADManager.wx = Laya.Browser.window.wx;
+    ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
+    ADManager.shareContent = "快把锅甩给队友！";
+    var TaT;
+    (function (TaT) {
+        TaT[TaT["BtnShow"] = 0] = "BtnShow";
+        TaT[TaT["BtnClick"] = 1] = "BtnClick";
+        TaT[TaT["PageShow"] = 2] = "PageShow";
+        TaT[TaT["PageEnter"] = 3] = "PageEnter";
+        TaT[TaT["PageLeave"] = 4] = "PageLeave";
+        TaT[TaT["LevelStart"] = 5] = "LevelStart";
+        TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
+        TaT[TaT["LevelFail"] = 7] = "LevelFail";
+    })(TaT || (TaT = {}));
+
     class UIDefeated extends lwg.Admin.Scene {
-        selfNode() {
+        lwgNodeDec() {
             this.BtnAgain = this.self['BtnAgain'];
             this.self['BtnAdv'].visible = true;
             this.self['BtnAgain'].visible = false;
             this.self['Dot'].visible = true;
         }
-        btnOnClick() {
+        lwgBtnClick() {
             Click.on(Click.Type.largen, null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
             Click.on(Click.Type.largen, null, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
             Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
@@ -2902,7 +3078,12 @@
             this.self.close();
         }
         btnNextUp() {
-            Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+            ADManager.ShowReward(() => {
+                EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+                Game._gameLevel.value += 1;
+                Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
+                this.self.close();
+            });
         }
     }
 
@@ -2943,10 +3124,10 @@
         })(GVariate = Global.GVariate || (Global.GVariate = {}));
         let GSene3D;
         (function (GSene3D) {
+            GSene3D.LevelFpos = new Laya.Vector3();
             GSene3D.razorFPos = new Laya.Vector3();
             GSene3D.knifeParentFPos = new Laya.Vector3();
             GSene3D.headFPos = new Laya.Vector3();
-            GSene3D.LevelFpos = new Laya.Vector3();
         })(GSene3D = Global.GSene3D || (Global.GSene3D = {}));
     })(Global$1 || (Global$1 = {}));
     let GVariate = Global$1.GVariate;
@@ -3089,6 +3270,7 @@
         lwgOnAwake() {
             GSene3D.GameMain3D = this.self;
             GSene3D.MainCamera = this.MainCamera;
+            GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark');
             GSene3D.LevelTem = this.self.getChildByName('Level_001');
             GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
             GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
@@ -3100,7 +3282,7 @@
             this.self.addChild(GSene3D.Level);
             GSene3D.LevelTem.removeSelf();
         }
-        selfNode() {
+        lwgNodeDec() {
             GSene3D.Head = GSene3D.Level.getChildByName('Head');
             GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision');
             GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle');
@@ -3114,7 +3296,6 @@
             GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard');
             GSene3D.UpRightBeard = GSene3D.Head.getChildByName('UpRightBeard');
             GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard');
-            GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate');
             GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
             GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
             GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
@@ -3127,6 +3308,7 @@
             GSene3D.UpRightKnife = this.self.getChildByName('UpRightKnife');
             GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
             GSene3D.TouchScreen = this.self.getChildByName('TouchScreen');
+            GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate');
             GSene3D.Razor = GSene3D.GameMain3D.getChildByName('Razor');
             if (!GSene3D.razorFPos.x) {
                 GSene3D.razorFPos.x = GSene3D.Razor.transform.localPositionX;
@@ -3161,7 +3343,7 @@
         refreshScene() {
             GSene3D.Level.removeSelf();
             this.createLevel();
-            this.selfNode();
+            this.lwgNodeDec();
             this.lwgOnEnable();
         }
         cameraMove(direction) {
@@ -3225,7 +3407,7 @@
         constructor() {
             super();
             this.maskMoveSwitch = true;
-            this.shearSpeed = 10;
+            this.shearSpeed = 5;
             this.shearSwitch = true;
         }
         lwgOnAwake() {
@@ -3243,7 +3425,7 @@
         lwgOnEnable() {
             EventAdmin.notify(Loding.LodingType.Loding3D);
         }
-        adaptive() {
+        lwgAdaptive() {
             this.self['Bg'].height = Laya.stage.height;
             this.self['Logo'].y = Laya.stage.height * 0.174;
             this.self['Progress'].y = Laya.stage.height * 0.763;
@@ -3254,6 +3436,7 @@
             this.self['Mask'].x = 0;
             this.self['Shear'].x = this.self['Mask'].width;
             this.self['Per'].text = 100 + '%';
+            this.maskMoveSwitch = false;
             let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls");
             Laya.stage.addChildAt(Scene3D, 0);
             Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
@@ -3265,9 +3448,9 @@
         }
         lwgOnUpdate() {
             if (this.maskMoveSwitch) {
-                if (this.self['Mask'].x < -this.self['Mask'].width * 1 / 5) {
-                    this.self['Mask'].x += this.self['Mask'].width / 25;
-                    this.self['Shear'].x += this.self['Mask'].width / 25;
+                if (this.self['Mask'].x < -20) {
+                    this.self['Mask'].x += 10;
+                    this.self['Shear'].x += 10;
                     let str = ((-this.self['Mask'].width - this.self['Mask'].x) / -this.self['Mask'].width * 100).toString().substring(0, 2);
                     this.self['Per'].text = str + '%';
                 }
@@ -3409,7 +3592,7 @@
             };
             this.moveSwitch = false;
         }
-        selfNode() {
+        lwgNodeDec() {
             this.Rocker = this.self['Rocker'];
             this.TaskBar = this.self['TaskBar'];
             this.BtnLast = this.self['BtnLast'];
@@ -3418,7 +3601,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+            GVariate._taskArr = [GEnum.TaskType.upLeftBeard];
             this.createProgress();
         }
         lwgOnEnable() {
@@ -3607,7 +3790,7 @@
             }
             EventAdmin.notify(GEnum.EventType.cameraMove, GVariate._taskArr[GVariate._taskNum]);
         }
-        btnOnClick() {
+        lwgBtnClick() {
             lwg.Click.on(Click.Type.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
         }
         btnLastUp(e) {
@@ -3696,17 +3879,147 @@
         }
     }
 
+    class RecordManager {
+        constructor() {
+            this.GRV = null;
+            this.isRecordVideoing = false;
+            this.isVideoRecord = false;
+            this.videoRecordTimer = 0;
+            this.isHasVideoRecord = false;
+        }
+        static Init() {
+            RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();
+        }
+        static startAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.grv == null)
+                RecordManager.Init();
+            if (RecordManager.recording)
+                return;
+            RecordManager.autoRecording = true;
+            console.log("******************开始录屏");
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (!RecordManager.autoRecording) {
+                console.log("RecordManager.autoRecording", RecordManager.autoRecording);
+                return false;
+            }
+            RecordManager.autoRecording = false;
+            RecordManager._end(false);
+            if (Date.now() - RecordManager.lastRecordTime > 6000) {
+                return true;
+            }
+            if (Date.now() - RecordManager.lastRecordTime < 3000) {
+                console.log("小于3秒");
+                return false;
+            }
+            return true;
+        }
+        static startRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.autoRecording) {
+                this.stopAutoRecord();
+            }
+            RecordManager.recording = true;
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("time:" + (Date.now() - RecordManager.lastRecordTime));
+            if (Date.now() - RecordManager.lastRecordTime <= 3000) {
+                return false;
+            }
+            RecordManager.recording = false;
+            RecordManager._end(true);
+            return true;
+        }
+        static _start() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180s  ？？？？？");
+            RecordManager.grv.Start(180);
+        }
+        static _end(share) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180结束 ？？？？？");
+            RecordManager.grv.Stop(share);
+        }
+        static _share(type, successedAc, completedAc = null, failAc = null) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
+            if (RecordManager.grv.videoPath) {
+                let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
+                p.extra.videoTopics = ["解救小王子", "番茄小游戏", "抖音小游戏"];
+                p.channel = "video";
+                p.success = () => {
+                    Hint.createHint_Middle(Hint.HintDec["分享成功!"]);
+                    successedAc();
+                };
+                p.fail = () => {
+                    if (type === 'noAward') {
+                        Hint.createHint_Middle(Hint.HintDec["分享成功后才能获取奖励！"]);
+                    }
+                    else {
+                        Hint.createHint_Middle(Hint.HintDec["分享失败！"]);
+                    }
+                    failAc();
+                };
+                RecordManager.grv.Share(p);
+            }
+            else {
+                Hint.createHint_Middle(Hint.HintDec["暂无视频，玩一局游戏之后分享！"]);
+            }
+        }
+    }
+    RecordManager.recording = false;
+    RecordManager.autoRecording = false;
+
     class UIShare extends lwg.Admin.Scene {
         lwgOnEnable() {
-            this.renderPhoto();
+            this.endPhoto();
+            let url = 'UI/Share/Photo/photo_' + Game._gameLevel.value + '.png';
+            this.self['SmallPhoto'].skin = url;
         }
-        renderPhoto() {
-            let PhotoCamera = GSene3D.MainCamera.clone();
-            GSene3D.GameMain3D.addChild(PhotoCamera);
-            PhotoCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
-            PhotoCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
-            let renderTargetCamera = PhotoCamera.getChildAt(0);
-            renderTargetCamera.renderTarget = new Laya.RenderTexture(472, 422);
+        lwgOpenAni() {
+            this.aniTime = 100;
+            this.aniDelayde = 100;
+            this.self['SmallFram'].x -= 500;
+            this.self['Logo'].y -= 500;
+            this.self['BtnShare'].alpha = 0;
+            Animation2D.scale_Alpha(this.self['BigFrame'], 0, 0, 0, 1, 1, 1, this.aniTime * 4.5, Laya.Ease.cubicOut, this.aniDelayde * 1, () => {
+                Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
+                Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
+                Animation2D.bombs_Appear(this.self['BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
+                let hotAddNum = Math.floor(Math.random() * 100 + 900);
+                Laya.timer.frameLoop(1, this, () => {
+                    if (Number(this.self['HotNum'].text) < hotAddNum) {
+                        this.self['HotNum'].text = Number(this.self['HotNum'].text) + 15;
+                    }
+                });
+                Laya.timer.once(this.aniDelayde * 7, this, () => { this.self['Icon_hand'].skin = 'UI/Share/tubiao_1-2.png'; });
+                Animation2D.rotate_Scale(this.self['Icon_hand'], -10, 2, 2, 0, 1, 1, this.aniTime * 4, this.aniDelayde * 7);
+            });
+            this.self['BtnNoShare'].alpha = 0;
+            Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
+            return this.aniTime * 5;
+        }
+        endPhoto() {
+            this.EndCamera = GSene3D.MainCamera.clone();
+            GSene3D.GameMain3D.addChild(this.EndCamera);
+            this.EndCamera.transform.position = GSene3D.PhotoCameraMark.transform.position;
+            this.EndCamera.transform.localRotationEuler = GSene3D.PhotoCameraMark.transform.localRotationEuler;
+            let renderTargetCamera = this.EndCamera.getChildAt(0);
+            renderTargetCamera.renderTarget = new Laya.RenderTexture(this.self['BigPhoto'].width, this.self['BigPhoto'].height);
             renderTargetCamera.renderingOrder = -1;
             renderTargetCamera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY;
             var rtex = new Laya.Texture(renderTargetCamera.renderTarget, Laya.Texture.DEF_UV);
@@ -3714,12 +4027,16 @@
             this.self['BigPhoto'].addChild(sp1);
             sp1.graphics.drawTexture(rtex);
         }
-        btnOnClick() {
+        lwgBtnClick() {
+            Click.on(Click.Type.noEffect, null, this.self['SmallFram'], this, null, null, this.btnShareUp, null);
+            Click.on(Click.Type.noEffect, null, this.self['BigFrame'], this, null, null, this.btnShareUp, null);
             Click.on(Click.Type.largen, null, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
             Click.on(Click.Type.largen, null, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
         }
         btnShareUp() {
-            this.shareFunc();
+            RecordManager._share('award', () => {
+                this.shareFunc();
+            });
         }
         btnNoShareUp() {
             this.shareFunc();
@@ -3728,10 +4045,13 @@
             this.self.close();
             Admin._openScene(Admin.SceneName.UIVictory);
         }
+        lwgDisable() {
+            this.EndCamera.removeSelf();
+        }
     }
 
     class UIStart extends lwg.Admin.Scene {
-        selfNode() {
+        lwgNodeDec() {
             this.LevelDisplay = this.self['LevelDisplay'];
             this.LevelStyle = this.self['LevelStyle'];
         }
@@ -3741,7 +4061,6 @@
             Gold._createGoldNode(Laya.stage);
             this.levelStyleDisplay();
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
-            console.log(window);
         }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
@@ -3784,49 +4103,92 @@
     }
 
     class UIVictory extends lwg.Admin.Scene {
-        constructor() { super(); }
-        selfNode() {
+        constructor() {
+            super();
+            this.addOrSub = 'add';
+        }
+        lwgNodeDec() {
             this.GlodNum = this.self['GlodNum'];
         }
         lwgOnEnable() {
+            this.getGoldNum = 50;
             Gold.GoldNode.visible = true;
-            Gold.addGold(25);
             this.getGoldDisPlay();
             Game._gameLevel.value++;
             this.self['BtnAdv'].visible = true;
             this.self['BtnNormal'].visible = false;
             this.self['Dot'].visible = true;
+            lwg.Effects.createFireworks(Laya.stage, 40, 430, 200);
+            lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
+            lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
+            lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
+        }
+        lwgOpenAni() {
+            return 0;
         }
         getGoldDisPlay() {
             let Num = this.GlodNum.getChildByName('Num');
-            Num.text = (25).toString();
+            Num.text = (this.getGoldNum * 10).toString();
         }
-        btnOnClick() {
+        lwgBtnClick() {
             Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-            Click.on(Click.Type.largen, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
             Click.on(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
         }
         btnNormalUp() {
-            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-            Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
-            this.self.close();
+            this.advFunc();
         }
         btnSelectUp() {
             if (this.self['Dot'].visible) {
                 this.self['Dot'].visible = false;
                 this.self['BtnAdv'].visible = false;
                 this.self['BtnNormal'].visible = true;
+                this.addOrSub = 'sub';
+                let Multiply10 = this.self['Multiply10'];
+                Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 0, 0, 0, 100);
+                let Num = this.GlodNum.getChildByName('Num');
+                Laya.timer.loop(30, this, () => {
+                    if (this.addOrSub == 'sub') {
+                        if (Number(Num.text) < this.getGoldNum) {
+                            Num.text = (this.getGoldNum).toString();
+                            this.addOrSub = null;
+                        }
+                        else {
+                            Num.text = (Number(Num.text) - 30).toString();
+                        }
+                    }
+                });
             }
             else {
                 this.self['Dot'].visible = true;
                 this.self['BtnAdv'].visible = true;
                 this.self['BtnNormal'].visible = false;
+                this.addOrSub = 'add';
+                let Multiply10 = this.self['Multiply10'];
+                Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 1, 1, 1, 100);
+                let Num = this.GlodNum.getChildByName('Num');
+                Laya.timer.loop(30, this, () => {
+                    if (this.addOrSub == 'add') {
+                        if (Number(Num.text) > this.getGoldNum * 10) {
+                            Num.text = (this.getGoldNum * 10).toString();
+                            this.addOrSub = null;
+                        }
+                        else {
+                            Num.text = (Number(Num.text) + 30).toString();
+                        }
+                    }
+                });
             }
         }
-        btnNextUp() {
-        }
         btnAdvUp() {
-            Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+            ADManager.ShowReward(() => {
+                this.advFunc();
+            });
+        }
+        advFunc() {
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
+            this.self.close();
         }
         lwgDisable() {
         }
