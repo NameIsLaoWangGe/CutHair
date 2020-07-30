@@ -465,10 +465,10 @@
             Hint.createHint_Middle = createHint_Middle;
         })(Hint = lwg.Hint || (lwg.Hint = {}));
         let Gold;
-        (function (Gold) {
-            Gold._goldNum = 0;
+        (function (Gold_1) {
+            Gold_1._goldNum = 0;
             function _createGoldNode(parent) {
-                if (Gold.GoldNode) {
+                if (Gold_1.GoldNode) {
                     return;
                 }
                 let sp;
@@ -479,69 +479,126 @@
                     let num = sp.getChildByName('Num');
                     let goldNum = Laya.LocalStorage.getItem('_goldNum');
                     if (goldNum) {
-                        Gold._goldNum = Number(goldNum);
+                        Gold_1._goldNum = Number(goldNum);
                     }
                     else {
                         Laya.LocalStorage.setItem('_goldNum', '0');
                     }
-                    num.text = Gold._goldNum.toString();
+                    num.text = Gold_1._goldNum.toString();
                     parent.addChild(sp);
-                    sp.pos(151, 79);
+                    let Pic = sp.getChildByName('Pic');
+                    sp.pos(224, 100);
                     sp.zOrder = 50;
-                    Gold.GoldNode = sp;
+                    Gold_1.GoldNode = sp;
                 }));
             }
-            Gold._createGoldNode = _createGoldNode;
-            function addGold(number) {
-                Gold._goldNum += number;
-                let Num = Gold.GoldNode.getChildByName('Num');
-                Num.text = Gold._goldNum.toString();
-                Laya.LocalStorage.setItem('_goldNum', Gold._goldNum.toString());
-            }
-            Gold.addGold = addGold;
-            function addGoldDisPlay(number) {
-                let Num = Gold.GoldNode.getChildByName('Num');
-                Num.value = (Number(Num.value) + number).toString();
-            }
-            Gold.addGoldDisPlay = addGoldDisPlay;
-            function addGoldNoDisPlay(number) {
-                Gold._goldNum += number;
-                Laya.LocalStorage.setItem('_goldNum', Gold._goldNum.toString());
-            }
-            Gold.addGoldNoDisPlay = addGoldNoDisPlay;
-            let SkinUrl;
-            (function (SkinUrl) {
-                SkinUrl[SkinUrl["Frame/Effects/icon_biggold.png"] = 0] = "Frame/Effects/icon_biggold.png";
-            })(SkinUrl || (SkinUrl = {}));
-            function getGoldAni(parent, number, fX, fY, tX, tY, func1, func2) {
-                for (let index = 0; index < number; index++) {
-                    let ele = Laya.Pool.getItemByClass('addGold', Laya.Image);
-                    ele.name = 'addGold';
-                    ele.alpha = 1;
-                    ele.scale(1, 1);
-                    ele.skin = SkinUrl[0];
-                    parent.addChild(ele);
-                    ele.zOrder = 60;
-                    ele.pos(fX, fY);
-                    let scirpt = ele.addComponent(AddGold);
-                    scirpt.line = index;
-                    scirpt.targetX = tX;
-                    scirpt.targetY = tY;
-                    scirpt.timer -= index * 3;
-                    scirpt.moveSwitch = true;
-                    if (index === number - 1) {
-                        if (func2 !== null) {
-                            scirpt.func = func2;
-                        }
-                    }
-                    else {
-                        if (func1 !== null) {
-                            scirpt.func = func1;
-                        }
-                    }
+            Gold_1._createGoldNode = _createGoldNode;
+            function goldAppear(delayed) {
+                Gold_1.GoldNode.visible = true;
+                if (delayed) {
+                    Animation2D.scale_Alpha(Gold_1.GoldNode, 0, 1, 1, 1, 1, 1, 500, null, delayed);
                 }
             }
-            Gold.getGoldAni = getGoldAni;
+            Gold_1.goldAppear = goldAppear;
+            function goldVinish(delayed) {
+                Gold_1.GoldNode.visible = true;
+                if (delayed) {
+                    Animation2D.scale_Alpha(Gold_1.GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
+                }
+            }
+            Gold_1.goldVinish = goldVinish;
+            function addGold(number) {
+                Gold_1._goldNum += number;
+                let Num = Gold_1.GoldNode.getChildByName('Num');
+                Num.text = Gold_1._goldNum.toString();
+                Laya.LocalStorage.setItem('_goldNum', Gold_1._goldNum.toString());
+            }
+            Gold_1.addGold = addGold;
+            function addGoldDisPlay(number) {
+                let Num = Gold_1.GoldNode.getChildByName('Num');
+                Num.value = (Number(Num.value) + number).toString();
+            }
+            Gold_1.addGoldDisPlay = addGoldDisPlay;
+            function addGoldNoDisPlay(number) {
+                Gold_1._goldNum += number;
+                Laya.LocalStorage.setItem('_goldNum', Gold_1._goldNum.toString());
+            }
+            Gold_1.addGoldNoDisPlay = addGoldNoDisPlay;
+            let SkinUrl;
+            (function (SkinUrl) {
+                SkinUrl[SkinUrl["Frame/Effects/icon_gold.png"] = 0] = "Frame/Effects/icon_gold.png";
+            })(SkinUrl || (SkinUrl = {}));
+            function createOneGold() {
+                let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image);
+                Gold.name = 'addGold';
+                Gold.alpha = 1;
+                Gold.scale(1, 1);
+                Gold.zOrder = 60;
+                return Gold;
+            }
+            Gold_1.createOneGold = createOneGold;
+            function getGoldAni_Single(parent, number, url, fX, fY, tX, tY, func1, func2) {
+                for (let index = 0; index < number; index++) {
+                    Laya.timer.once(index * 30, this, () => {
+                        let Gold = createOneGold();
+                        parent.addChild(Gold);
+                        if (!url) {
+                            Gold.skin = SkinUrl[0];
+                        }
+                        else {
+                            Gold.skin = url;
+                        }
+                        Animation2D.move_Scale(Gold, 1, fX, fY, tX, tY, 1, 350, 0, null, () => {
+                            if (index === number - 1) {
+                                Laya.timer.once(200, this, () => {
+                                    if (func2) {
+                                        func2();
+                                    }
+                                });
+                            }
+                            else {
+                                if (func1) {
+                                    func1();
+                                }
+                            }
+                            Gold.removeSelf();
+                        });
+                    });
+                }
+            }
+            Gold_1.getGoldAni_Single = getGoldAni_Single;
+            function getGoldAni_Heap(parent, number, url, fX, fY, tX, tY, func1, func2) {
+                for (let index = 0; index < number; index++) {
+                    let Gold = createOneGold();
+                    parent.addChild(Gold);
+                    if (!url) {
+                        Gold.skin = SkinUrl[0];
+                    }
+                    else {
+                        Gold.skin = url;
+                    }
+                    let x = Math.floor(Math.random() * 2) == 1 ? fX + Math.random() * 100 : fX - Math.random() * 100;
+                    let y = Math.floor(Math.random() * 2) == 1 ? fY + Math.random() * 100 : fY - Math.random() * 100;
+                    Animation2D.move_Scale(Gold, 0.5, fX, fY, x, y, 1, 500, Math.random() * 100 + 100, null, () => {
+                        Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, tX, tY, 1, 500, Math.random() * 100 + 100, null, () => {
+                            if (index === number - 1) {
+                                Laya.timer.once(200, this, () => {
+                                    if (func2) {
+                                        func2();
+                                    }
+                                });
+                            }
+                            else {
+                                if (func1) {
+                                    func1();
+                                }
+                            }
+                            Gold.removeSelf();
+                        });
+                    });
+                }
+            }
+            Gold_1.getGoldAni_Heap = getGoldAni_Heap;
             class GoldAniBase extends Laya.Script {
                 onAwake() {
                     this.initProperty();
@@ -586,7 +643,7 @@
                     Laya.timer.clearAll(this);
                 }
             }
-            Gold.GoldAniBase = GoldAniBase;
+            Gold_1.GoldAniBase = GoldAniBase;
             class AddGold extends GoldAniBase {
                 lwgInit() {
                     this.self.width = 115;
@@ -611,7 +668,7 @@
                     }
                 }
             }
-            Gold.AddGold = AddGold;
+            Gold_1.AddGold = AddGold;
         })(Gold = lwg.Gold || (lwg.Gold = {}));
         let Admin;
         (function (Admin) {
@@ -778,8 +835,8 @@
             class Scene extends Laya.Script {
                 constructor() {
                     super();
-                    this.aniTime = 0;
-                    this.aniDelayde = 0;
+                    this.aniTime = 100;
+                    this.aniDelayde = 100;
                 }
                 onAwake() {
                     this.self = this.owner;
@@ -1837,7 +1894,7 @@
                 target.on(Laya.Event.MOUSE_OUT, caller, btnEffect.out);
             }
             Click.on = on;
-            function off(effect, target, caller, down, move, up, out) {
+            function off(effect, audioUrl, target, caller, down, move, up, out) {
                 let btnEffect;
                 switch (effect) {
                     case Type.noEffect:
@@ -2163,13 +2220,13 @@
                 }), delayed);
             }
             Animation2D.move_FadeOut_Scale_01 = move_FadeOut_Scale_01;
-            function move_Scale(node, fScale, fX, fY, tX, tY, eScale, time, delayed, func) {
+            function move_Scale(node, fScale, fX, fY, tX, tY, eScale, time, delayed, ease, func) {
                 node.scaleX = fScale;
                 node.scaleY = fScale;
                 node.x = fX;
                 node.y = fY;
-                Laya.Tween.to(node, { x: tX, y: tY, scaleX: eScale, scaleY: eScale }, time, null, Laya.Handler.create(this, function () {
-                    if (func !== null) {
+                Laya.Tween.to(node, { x: tX, y: tY, scaleX: eScale, scaleY: eScale }, time, ease ? null : ease, Laya.Handler.create(this, function () {
+                    if (func) {
                         func();
                     }
                 }), delayed);
@@ -2373,11 +2430,11 @@
                 }), delayed);
             }
             Animation2D.swell_shrink = swell_shrink;
-            function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, func) {
+            function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, ease, func) {
                 node.x = firstX;
                 node.y = firstY;
-                Laya.Tween.to(node, { x: targetX, y: targetY }, time, null, Laya.Handler.create(this, function () {
-                    if (func !== null) {
+                Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease ? ease : null, Laya.Handler.create(this, function () {
+                    if (func) {
                         func();
                     }
                 }), delayed);
@@ -3275,6 +3332,21 @@
             GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
             GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
             GSene3D.LevelFpos.z = GSene3D.LevelTem.transform.position.z;
+            GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
+            GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
+            GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
+            GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left');
+            GSene3D.Landmark_UpRight = this.self.getChildByName('Landmark_UpRight');
+            GSene3D.Landmark_UpLeft = this.self.getChildByName('Landmark_UpLeft');
+            GSene3D.LeftSignknife = this.self.getChildByName('LeftSignknife');
+            GSene3D.MiddleSignknife = this.self.getChildByName('MiddleSignknife');
+            GSene3D.RightSignknife = this.self.getChildByName('RightSignknife');
+            GSene3D.UpRightKnife = this.self.getChildByName('UpRightKnife');
+            GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
+            GSene3D.Floor = this.self.getChildByName('Floor');
+            GSene3D.Razor = this.self.getChildByName('Razor');
+            GSene3D.knifeParent = this.self.getChildByName('knifeParent');
+            GSene3D.knife = GSene3D.knifeParent.getChildByName('knife');
             this.createLevel();
         }
         createLevel() {
@@ -3296,35 +3368,8 @@
             GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard');
             GSene3D.UpRightBeard = GSene3D.Head.getChildByName('UpRightBeard');
             GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard');
-            GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
-            GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
-            GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
-            GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left');
-            GSene3D.Landmark_UpRight = this.self.getChildByName('Landmark_UpRight');
-            GSene3D.Landmark_UpLeft = this.self.getChildByName('Landmark_UpLeft');
-            GSene3D.LeftSignknife = this.self.getChildByName('LeftSignknife');
-            GSene3D.MiddleSignknife = this.self.getChildByName('MiddleSignknife');
-            GSene3D.RightSignknife = this.self.getChildByName('RightSignknife');
-            GSene3D.UpRightKnife = this.self.getChildByName('UpRightKnife');
-            GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
             GSene3D.TouchScreen = this.self.getChildByName('TouchScreen');
             GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate');
-            GSene3D.Razor = GSene3D.GameMain3D.getChildByName('Razor');
-            if (!GSene3D.razorFPos.x) {
-                GSene3D.razorFPos.x = GSene3D.Razor.transform.localPositionX;
-                GSene3D.razorFPos.y = GSene3D.Razor.transform.localPositionY;
-                GSene3D.razorFPos.z = GSene3D.Razor.transform.localPositionZ;
-                GSene3D.razorFEulerY = GSene3D.Razor.transform.localRotationEulerY;
-            }
-            else {
-                GSene3D.Razor.transform.localPositionX = GSene3D.razorFPos.x;
-                GSene3D.Razor.transform.localPositionY = GSene3D.razorFPos.y;
-                GSene3D.Razor.transform.localPositionZ = GSene3D.razorFPos.z;
-                GSene3D.Razor.transform.localRotationEulerY = GSene3D.razorFEulerY;
-            }
-            GSene3D.Floor = GSene3D.Level.getChildByName('Floor');
-            GSene3D.knifeParent = GSene3D.GameMain3D.getChildByName('knifeParent');
-            GSene3D.knife = GSene3D.knifeParent.getChildByName('knife');
         }
         lwgOnEnable() {
             GSene3D.Floor.addComponent(GameMain3D_Floor);
@@ -3344,7 +3389,6 @@
             GSene3D.Level.removeSelf();
             this.createLevel();
             this.lwgNodeDec();
-            this.lwgOnEnable();
         }
         cameraMove(direction) {
             switch (direction) {
@@ -4112,8 +4156,8 @@
         }
         lwgOnEnable() {
             this.getGoldNum = 50;
-            Gold.GoldNode.visible = true;
             this.getGoldDisPlay();
+            Gold.goldAppear(500);
             Game._gameLevel.value++;
             this.self['BtnAdv'].visible = true;
             this.self['BtnNormal'].visible = false;
@@ -4124,6 +4168,16 @@
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
         }
         lwgOpenAni() {
+            this.self['Multiply10'].alpha = 0;
+            this.self['GlodNum'].alpha = 0;
+            this.self['BtnAdv'].alpha = 0;
+            this.self['Select'].alpha = 0;
+            Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
+                Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
+                Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
+                Animation2D.bombs_Appear(this.self['BtnAdv'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+                Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
+            });
             return 0;
         }
         getGoldDisPlay() {
@@ -4131,12 +4185,14 @@
             Num.text = (this.getGoldNum * 10).toString();
         }
         lwgBtnClick() {
-            Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
             Click.on(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
             Click.on(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
         }
-        btnNormalUp() {
-            this.advFunc();
+        offClick() {
+            Click.off(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            Click.off(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
+            Click.off(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
         }
         btnSelectUp() {
             if (this.self['Dot'].visible) {
@@ -4180,12 +4236,26 @@
                 });
             }
         }
-        btnAdvUp() {
-            ADManager.ShowReward(() => {
+        btnNormalUp() {
+            this.offClick();
+            Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
                 this.advFunc();
             });
         }
+        btnAdvUp() {
+            ADManager.ShowReward(() => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+                    this.advFunc();
+                });
+            });
+        }
         advFunc() {
+            if (this.self['Dot'].visible) {
+                Gold.addGold(this.getGoldNum * 10);
+            }
+            else {
+                Gold.addGold(this.getGoldNum);
+            }
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
             Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
             this.self.close();

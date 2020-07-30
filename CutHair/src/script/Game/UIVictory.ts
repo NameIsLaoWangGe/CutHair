@@ -15,9 +15,8 @@ export default class UIVictory extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
         this.getGoldNum = 50;
-        Gold.GoldNode.visible = true;
         this.getGoldDisPlay();
-
+        Gold.goldAppear(500);
         Game._gameLevel.value++;
         this.self['BtnAdv'].visible = true;
         this.self['BtnNormal'].visible = false;
@@ -31,8 +30,19 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     lwgOpenAni(): number {
+        this.self['Multiply10'].alpha = 0;
+        this.self['GlodNum'].alpha = 0;
+        this.self['BtnAdv'].alpha = 0;
+        this.self['Select'].alpha = 0;
+        Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
+            Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
 
-        return 0
+            Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
+            Animation2D.bombs_Appear(this.self['BtnAdv'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+            Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
+        });
+
+        return 0;
     }
 
     /**本关获得金币显示*/
@@ -42,13 +52,15 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
         Click.on(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
         Click.on(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
     }
 
-    btnNormalUp(): void {
-        this.advFunc();
+    offClick(): void {
+        Click.off(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.off(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
+        Click.off(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
     }
 
     addOrSub: string = 'add';
@@ -102,13 +114,27 @@ export default class UIVictory extends lwg.Admin.Scene {
         }
     }
 
+    btnNormalUp(): void {
+        this.offClick();
+        Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+            this.advFunc();
+        });
+    }
+
     btnAdvUp(): void {
         ADManager.ShowReward(() => {
-            this.advFunc();
+            Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+                this.advFunc();
+            });
         })
     }
 
     advFunc(): void {
+        if (this.self['Dot'].visible) {
+            Gold.addGold(this.getGoldNum * 10);
+        } else {
+            Gold.addGold(this.getGoldNum);
+        }
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
         Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage) })
         this.self.close();

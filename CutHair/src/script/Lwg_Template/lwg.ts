@@ -719,13 +719,39 @@ export module lwg {
                 }
                 num.text = _goldNum.toString();
                 parent.addChild(sp);
-                sp.pos(151, 79);
+
+                let Pic = sp.getChildByName('Pic') as Laya.Image;
+                sp.pos(224, 100);
                 sp.zOrder = 50;
                 GoldNode = sp;
             }));
         }
 
-        /**增加金币以及节点上的表现*/
+        /**
+         * GoldNode出现动画
+         * @param delayed 延时时间
+        */
+        export function goldAppear(delayed?: number): void {
+            GoldNode.visible = true;
+            if (delayed) {
+                // Animation2D.bombs_Appear(GoldNode, 0, 1, 1.2, 0, 150, 150, 100);
+                Animation2D.scale_Alpha(GoldNode, 0, 1, 1, 1, 1, 1, 500, null, delayed);
+            }
+        }
+
+        /**
+         * GoldNode出现动画
+         * @param ani 是否用启用动画
+         * @param delayed 延时时间
+        */
+        export function goldVinish(delayed?: number): void {
+            GoldNode.visible = true;
+            if (delayed) {
+                Animation2D.scale_Alpha(GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
+            }
+        }
+
+        /**增加金币以并且节点上也表现出来*/
         export function addGold(number) {
             _goldNum += number;
             let Num = GoldNode.getChildByName('Num') as Laya.Text;
@@ -744,13 +770,25 @@ export module lwg {
         }
 
         enum SkinUrl {
-            "Frame/Effects/icon_biggold.png"
+            "Frame/Effects/icon_gold.png"
+        }
+
+        /**创建单个金币*/
+        export function createOneGold(): Laya.Image {
+            let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image) as Laya.Image;
+            Gold.name = 'addGold';//标识符和名称一样
+            let num = Math.floor(Math.random() * 12);
+            Gold.alpha = 1;
+            Gold.scale(1, 1);
+            Gold.zOrder = 60;
+            return Gold;
         }
 
         /**
-        * 多个金币移动动画
+        * 陆续生成单个金币
         * @param parent 父节点
         * @param number 产生金币的数量
+        * @param url 金币的图片地址
         * @param fX 初始位置X
         * @param fY 初始位置Y
         * @param tX 目标X
@@ -758,35 +796,90 @@ export module lwg {
         * @param func1 每一个金币产生后执行的回调
         * @param func2 金币创建完成后的回调
         */
-        export function getGoldAni(parent, number, fX, fY, tX, tY, func1, func2): void {
-            for (let index = 0; index < number; index++) {
+        export function getGoldAni_Single(parent: Laya.Sprite, number: number, url: string, fX: number, fY: number, tX: number, tY: number, func1?: Function, func2?: Function): void {
 
-                let ele = Laya.Pool.getItemByClass('addGold', Laya.Image) as Laya.Image;
-                ele.name = 'addGold';//标识符和名称一样
-                let num = Math.floor(Math.random() * 12);
-                ele.alpha = 1;
-                ele.scale(1, 1);
-                ele.skin = SkinUrl[0];
-                parent.addChild(ele);
-                ele.zOrder = 60;
-                ele.pos(fX, fY);
-                let scirpt = ele.addComponent(AddGold);
-                scirpt.line = index;
-                scirpt.targetX = tX;
-                scirpt.targetY = tY;
-                scirpt.timer -= index * 3;
-                scirpt.moveSwitch = true;
-                if (index === number - 1) {
-                    if (func2 !== null) {
-                        scirpt.func = func2;
+            for (let index = 0; index < number; index++) {
+                Laya.timer.once(index * 30, this, () => {
+
+                    let Gold = createOneGold();
+                    parent.addChild(Gold);
+                    if (!url) {
+                        Gold.skin = SkinUrl[0];
+                    } else {
+                        Gold.skin = url;
                     }
-                } else {
-                    if (func1 !== null) {
-                        scirpt.func = func1;
-                    }
-                }
+                    Animation2D.move_Scale(Gold, 1, fX, fY, tX, tY, 1, 350, 0, null, () => {
+                        if (index === number - 1) {
+
+                            Laya.timer.once(200, this, () => {
+                                if (func2) {
+                                    func2();
+                                }
+                            })
+
+                        } else {
+                            if (func1) {
+                                func1();
+                            }
+                        }
+                        Gold.removeSelf();
+                    })
+                })
             }
         }
+
+
+        /**
+         * 生成一堆金币，然后分别移动到目标位置
+         * @param parent 父节点
+         * @param number 产生金币的数量
+         * @param url 金币的图片地址
+         * @param fX 初始位置X
+         * @param fY 初始位置Y
+         * @param tX 目标X
+         * @param tY 目标Y
+         * @param func1 每一个金币产生后执行的回调
+         * @param func2 金币创建完成后的回调
+         */
+        export function getGoldAni_Heap(parent: Laya.Sprite, number: number, url: string, fX: number, fY: number, tX: number, tY: number, func1?: Function, func2?: Function): void {
+
+            for (let index = 0; index < number; index++) {
+                let Gold = createOneGold();
+                parent.addChild(Gold);
+                if (!url) {
+                    Gold.skin = SkinUrl[0];
+                } else {
+                    Gold.skin = url;
+                }
+
+                let x = Math.floor(Math.random() * 2) == 1 ? fX + Math.random() * 100 : fX - Math.random() * 100;
+                let y = Math.floor(Math.random() * 2) == 1 ? fY + Math.random() * 100 : fY - Math.random() * 100;
+                // Gold.rotation = Math.random() * 360;
+                Animation2D.move_Scale(Gold, 0.5, fX, fY, x, y, 1, 500, Math.random() * 100 + 100, null, () => {
+                    Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, tX, tY, 1, 500, Math.random() * 100 + 100, null, () => {
+                        if (index === number - 1) {
+
+                            Laya.timer.once(200, this, () => {
+                                if (func2) {
+                                    func2();
+                                }
+                            })
+
+                        } else {
+                            if (func1) {
+                                func1();
+                            }
+                        }
+                        Gold.removeSelf();
+                    })
+                });
+            }
+
+
+
+        }
+
+
 
         /**类粒子特效的通用父类*/
         export class GoldAniBase extends Laya.Script {
@@ -1195,10 +1288,10 @@ export module lwg {
             lwgBtnClick(): void {
             }
 
-            /**开场或者离场动画单位时间*/
-            aniTime: number = 0;
-            /**开场或者离场动画单位延迟时间*/
-            aniDelayde: number = 0;
+            /**开场或者离场动画单位时间,默认为100*/
+            aniTime: number = 100;
+            /**开场或者离场动画单位延迟时间,默认为100*/
+            aniDelayde: number = 100;
             /**开场动画,返回的数字为时间倒计时，倒计时结束后开启点击事件*/
             lwgOpenAni(): number {
                 return this.aniTime;
@@ -2459,7 +2552,7 @@ export module lwg {
          * @param out 出屏幕函数
          * 以上4个只是函数名，不可传递函数，如果没有特殊执行，那么就用此模块定义的4个函数，包括通用效果。
          */
-        export function off(effect, target, caller, down, move, up, out): void {
+        export function off(effect, audioUrl, target, caller, down, move, up, out): void {
             let btnEffect;
             switch (effect) {
                 case Type.noEffect:
@@ -2974,15 +3067,16 @@ export module lwg {
          * @param eScale 最终大小
          * @param time 花费时间
          * @param delayed 延时
+         * @param ease 效果函数
          * @param func 回调函数
          */
-        export function move_Scale(node, fScale, fX, fY, tX, tY, eScale, time, delayed, func): void {
+        export function move_Scale(node, fScale, fX, fY, tX, tY, eScale, time, delayed, ease?: Function, func?: Function): void {
             node.scaleX = fScale;
             node.scaleY = fScale;
             node.x = fX;
             node.y = fY;
-            Laya.Tween.to(node, { x: tX, y: tY, scaleX: eScale, scaleY: eScale }, time, null, Laya.Handler.create(this, function () {
-                if (func !== null) {
+            Laya.Tween.to(node, { x: tX, y: tY, scaleX: eScale, scaleY: eScale }, time, ease ? null : ease, Laya.Handler.create(this, function () {
+                if (func) {
                     func();
                 }
             }), delayed)
@@ -3365,11 +3459,12 @@ export module lwg {
          * @param delayed 延时时间
          * @param func 完成后的回调
          */
-        export function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, func): void {
+        export function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, ease?: Function, func?: Function): void {
             node.x = firstX;
             node.y = firstY;
-            Laya.Tween.to(node, { x: targetX, y: targetY }, time, null, Laya.Handler.create(this, function () {
-                if (func !== null) {
+
+            Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease ? ease : null, Laya.Handler.create(this, function () {
+                if (func) {
                     func()
                 }
             }), delayed);

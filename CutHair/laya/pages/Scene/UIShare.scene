@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":25,
-    "selecteID":28,
+    "selectedBox":28,
+    "selecteID":45,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -170,6 +170,20 @@
                             "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
+                            "props":{"y":538,"x":456,"texture":"UI/Share/tubiao_3.png"},
+                            "nodeParent":28,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":45,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
                             "props":{"y":537.5,"x":456,"texture":"UI/Share/tubiao_3.png"},
                             "nodeParent":28,
                             "label":"Sprite",
@@ -208,20 +222,6 @@
                             "child":[
                                 ]
                         }]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":575,"x":492,"texture":"UI/Share/tubiao_3.png"},
-                    "nodeParent":25,
-                    "label":"Sprite",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":45,
-                    "child":[
-                        ]
                 },
                 {
                     "x":30,
