@@ -156,7 +156,7 @@
 						0.1
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -215,7 +215,7 @@
 						0.1000001
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -274,7 +274,7 @@
 						0.1
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -333,7 +333,7 @@
 						0.1
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -392,7 +392,7 @@
 						0.1000001
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -451,7 +451,7 @@
 						0.1
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -510,7 +510,7 @@
 						0.1
 					],
 					"meshPath":"Library/unity default resources-Cube.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
@@ -923,7 +923,7 @@
 						3
 					],
 					"meshPath":"Library/unity default resources-Plane.lm",
-					"enableRender":true,
+					"enableRender":false,
 					"materials":[
 						{
 							"path":"Assets/Material/Floor.lmat"

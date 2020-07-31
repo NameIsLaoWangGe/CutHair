@@ -501,7 +501,7 @@
             }
             Gold_1.goldAppear = goldAppear;
             function goldVinish(delayed) {
-                Gold_1.GoldNode.visible = true;
+                Gold_1.GoldNode.visible = false;
                 if (delayed) {
                     Animation2D.scale_Alpha(Gold_1.GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
                 }
@@ -700,6 +700,7 @@
                 SceneName["UICaiDanQiang"] = "UICaiDanQiang";
                 SceneName["UICaidanPifu"] = "UICaidanPifu";
                 SceneName["UIOperation"] = "UIOperation";
+                SceneName["UIShop"] = "UIShop";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -1107,6 +1108,11 @@
                 SkinUrl[SkinUrl["Frame/Effects/star_white.png"] = 22] = "Frame/Effects/star_white.png";
                 SkinUrl[SkinUrl["Frame/Effects/star_yellow.png"] = 23] = "Frame/Effects/star_yellow.png";
             })(SkinUrl = Effects.SkinUrl || (Effects.SkinUrl = {}));
+            let SkinStyle;
+            (function (SkinStyle) {
+                SkinStyle["star"] = "star";
+                SkinStyle["dot"] = "dot";
+            })(SkinStyle = Effects.SkinStyle || (Effects.SkinStyle = {}));
             class EffectsBase extends Laya.Script {
                 onAwake() {
                     this.initProperty();
@@ -1213,10 +1219,10 @@
                     let ele = Laya.Pool.getItemByClass('ele', Laya.Image);
                     ele.name = 'ele';
                     let num;
-                    if (style === 'star') {
+                    if (style === SkinStyle.star) {
                         num = 12 + Math.floor(Math.random() * 12);
                     }
-                    else if (style === 'dot') {
+                    else if (style === SkinStyle.dot) {
                         num = Math.floor(Math.random() * 12);
                     }
                     ele.skin = SkinUrl[num];
@@ -2869,6 +2875,220 @@
             }
             Tools.converteNum = converteNum;
         })(Tools = lwg.Tools || (lwg.Tools = {}));
+        let Shop;
+        (function (Shop) {
+            Shop.allSkin = [];
+            Shop._currentSkin = {
+                currentSkin: null,
+                get name() {
+                    return this.currentSkin = Laya.LocalStorage.getItem('_currentSkin') !== null ? Laya.LocalStorage.getItem('_currentSkin') : null;
+                },
+                set name(name) {
+                    this.currentSkin = name;
+                }
+            };
+            Shop._haveSkin = {
+                haveArr: [],
+                get array() {
+                    let haveArrStr = Laya.LocalStorage.getJSON('_haveSkin');
+                    if (haveArrStr) {
+                        let data = JSON.parse(haveArrStr);
+                        return data._haveSkin;
+                    }
+                    else {
+                        return Shop.defaultSkin ? [Shop.defaultSkin] : [];
+                    }
+                },
+                set array(arr) {
+                    this.haveArr = arr;
+                },
+                set subSkin(name) {
+                    changeElement(this.haveArr, name, AddOrSub.sub);
+                    Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
+                    console.log('减少后的皮肤数组为', this.haveArr);
+                },
+                set addSkin(name) {
+                    changeElement(this.haveArr, name, AddOrSub.add);
+                    Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
+                    console.log('增加后的皮肤数组为', this.haveArr);
+                }
+            };
+            Shop.allProps = [];
+            Shop._currentProp = {
+                currentProp: null,
+                get name() {
+                    return this.currentProp = Laya.LocalStorage.getItem('_currentProp') !== null ? Laya.LocalStorage.getItem('_currentProp') : null;
+                },
+                set name(name) {
+                    this.currentProp = name;
+                }
+            };
+            Shop._haveProp = {
+                propArr: [],
+                get array() {
+                    let propsArrStr = Laya.LocalStorage.getJSON('_haveProp');
+                    if (propsArrStr) {
+                        let data = JSON.parse(propsArrStr);
+                        return data._haveProp;
+                    }
+                    else {
+                        return Shop.defaultProp ? [Shop.defaultProp] : [];
+                    }
+                },
+                set propArray(arr) {
+                    this.propArr = arr;
+                },
+                set subProp(name) {
+                    changeElement(this.propArr, name, AddOrSub.sub);
+                    Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
+                    console.log('减少后的道具数组为', this.propArr);
+                },
+                set addProp(name) {
+                    changeElement(this.propArr, name, AddOrSub.add);
+                    Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
+                    console.log('增加后的道具数组为', this.propArr);
+                }
+            };
+            Shop.allOther = [];
+            Shop._crrentOther = {
+                crrentOther: null,
+                get name() {
+                    return this.currentProp = Laya.LocalStorage.getItem('_crrentOther') !== null ? Laya.LocalStorage.getItem('_crrentOther') : null;
+                },
+                set name(name) {
+                    this.crrentOther = name;
+                }
+            };
+            Shop._haveOther = {
+                haveOtherArr: [],
+                get array() {
+                    let haveOtherArrStr = Laya.LocalStorage.getJSON('_haveOther');
+                    if (haveOtherArrStr) {
+                        let data = JSON.parse(haveOtherArrStr);
+                        return data._haveOther;
+                    }
+                    else {
+                        return Shop.defaultOther ? [Shop.defaultOther] : [];
+                    }
+                },
+                set otherArray(arr) {
+                    this.haveOtherArr = arr;
+                },
+                set addOther(other) {
+                    changeElement(this.haveOtherArr, other, AddOrSub.sub);
+                    Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
+                    console.log('减少后的道具数组为', this.otherArr);
+                },
+                set subOther(other) {
+                    changeElement(this.haveOtherArr, other, AddOrSub.add);
+                    Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
+                    console.log('增加后的道具数组为', this.propArr);
+                }
+            };
+            function changeElement(elementArr, ele, addOrSub) {
+                if (addOrSub === AddOrSub.add) {
+                    for (let index = 0; index < elementArr.length; index++) {
+                        if (ele === elementArr[index]) {
+                            this.otherArr.splice(index, 1);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    let have = false;
+                    for (let index = 0; index < elementArr.length; index++) {
+                        if (ele === this.arrVar[index]) {
+                            have = true;
+                        }
+                    }
+                    if (!have) {
+                        elementArr.push(ele);
+                    }
+                    else {
+                        console.log('当前道具已经获得！');
+                    }
+                }
+            }
+            Shop.changeElement = changeElement;
+            let AddOrSub;
+            (function (AddOrSub) {
+                AddOrSub["add"] = "add";
+                AddOrSub["sub"] = "sub";
+            })(AddOrSub = Shop.AddOrSub || (Shop.AddOrSub = {}));
+            let GetWay;
+            (function (GetWay) {
+                GetWay["ads"] = "ads";
+                GetWay["customs"] = "customs";
+                GetWay["gold"] = "gold";
+                GetWay["diamond"] = "diamond";
+                GetWay["other"] = "other";
+            })(GetWay = Shop.GetWay || (Shop.GetWay = {}));
+            class ShopScene extends Admin.Scene {
+            }
+            Shop.ShopScene = ShopScene;
+        })(Shop = lwg.Shop || (lwg.Shop = {}));
+        let LocalStorage;
+        (function (LocalStorage) {
+            let storageData;
+            function addData() {
+                storageData = {
+                    '_gameLevel': lwg.Global._gameLevel,
+                    '_goldNum': lwg.Global._goldNum,
+                    '_execution': lwg.Global._execution,
+                    '_exemptExTime': lwg.Global._exemptExTime,
+                    '_freeHintTime': lwg.Global._freeHintTime,
+                    '_hotShareTime': lwg.Global._hotShareTime,
+                    '_addExDate': lwg.Global._addExDate,
+                    '_addExHours': lwg.Global._addExHours,
+                    '_addMinutes': lwg.Global._addMinutes,
+                    '_buyNum': lwg.Global._buyNum,
+                    '_currentPifu': lwg.Global._currentPifu,
+                    '_havePifu': lwg.Global._havePifu,
+                    '_watchAdsNum': lwg.Global._watchAdsNum,
+                    '_huangpihaozi': lwg.Global._huangpihaozi,
+                    '_zibiyazi': lwg.Global._zibiyazi,
+                    '_kejigongzhu': lwg.Global._kejigongzhu,
+                    '_pickPaintedNum': lwg.Global._pickPaintedNum,
+                    '_haimiangongzhu': lwg.Global._haimiangongzhu,
+                };
+                let data = JSON.stringify(storageData);
+                Laya.LocalStorage.setJSON('storageData', data);
+            }
+            LocalStorage.addData = addData;
+            function clearData() {
+                Laya.LocalStorage.clear();
+            }
+            LocalStorage.clearData = clearData;
+            function getData() {
+                let storageData = Laya.LocalStorage.getJSON('storageData');
+                if (storageData) {
+                    let data = JSON.parse(storageData);
+                    return data;
+                }
+                else {
+                    lwg.Global._gameLevel = 1;
+                    lwg.Global._goldNum = 0;
+                    lwg.Global._execution = 15;
+                    lwg.Global._exemptExTime = null;
+                    lwg.Global._freeHintTime = null;
+                    lwg.Global._hotShareTime = null;
+                    lwg.Global._addExDate = (new Date).getDate();
+                    lwg.Global._addExHours = (new Date).getHours();
+                    lwg.Global._addMinutes = (new Date).getMinutes();
+                    lwg.Global._buyNum = 1;
+                    lwg.Global._currentPifu = Enum.PifuAllName[0];
+                    lwg.Global._havePifu = ['01_gongzhu'];
+                    lwg.Global._watchAdsNum = 0;
+                    lwg.Global._huangpihaozi = false;
+                    lwg.Global._zibiyazi = false;
+                    lwg.Global._kejigongzhu = false;
+                    lwg.Global._haimiangongzhu = false;
+                    lwg.Global._pickPaintedNum = 0;
+                    return null;
+                }
+            }
+            LocalStorage.getData = getData;
+        })(LocalStorage = lwg.LocalStorage || (lwg.LocalStorage = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3D = [];
@@ -2882,6 +3102,7 @@
                 set value(v) {
                     this.val = v;
                     if (this.val >= Loding.sumProgress) {
+                        console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
                         console.log('进度条停止！');
                         console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取');
                         EventAdmin.notify(Loding.LodingType.complete);
@@ -2900,14 +3121,13 @@
                 LodingType["loding"] = "loding";
                 LodingType["progress"] = "progress";
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
-            class Lode extends Admin.Scene {
+            class LodeScene extends Admin.Scene {
                 lwgEventReg() {
                     EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
                     EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(); });
                     EventAdmin.reg(LodingType.progress, this, () => {
                         Loding.currentProgress.value++;
-                        if (Loding.currentProgress.value > Loding.sumProgress) ;
-                        else {
+                        if (Loding.currentProgress.value < Loding.sumProgress) {
                             console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
                         }
                     });
@@ -2964,7 +3184,7 @@
                 }
                 lwgLodeComplete() { }
             }
-            Loding.Lode = Lode;
+            Loding.LodeScene = LodeScene;
         })(Loding = lwg.Loding || (lwg.Loding = {}));
     })(lwg || (lwg = {}));
     let Admin = lwg.Admin;
@@ -2980,6 +3200,7 @@
     let Hint = lwg.Hint;
     let Loding = lwg.Loding;
     let Game = lwg.Game;
+    let Shop = lwg.Shop;
 
     class ADManager {
         constructor() {
@@ -3467,7 +3688,7 @@
         }
     }
 
-    class UILoding extends Loding.Lode {
+    class UILoding extends Loding.LodeScene {
         constructor() {
             super();
             this.maskMoveSwitch = true;
@@ -3662,7 +3883,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.upLeftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair];
             this.createProgress();
         }
         lwgOnEnable() {
@@ -4064,7 +4285,7 @@
                 let hotAddNum = Math.floor(Math.random() * 100 + 900);
                 Laya.timer.frameLoop(1, this, () => {
                     if (Number(this.self['HotNum'].text) < hotAddNum) {
-                        this.self['HotNum'].text = Number(this.self['HotNum'].text) + 15;
+                        this.self['HotNum'].text = Number(this.self['HotNum'].text) + 6;
                     }
                 });
                 Laya.timer.once(this.aniDelayde * 7, this, () => { this.self['Icon_hand'].skin = 'UI/Share/tubiao_1-2.png'; });
@@ -4072,6 +4293,7 @@
             });
             this.self['BtnNoShare'].alpha = 0;
             Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
+            Effects.createExplosion_Rotate(this.self['SceneContent'], 40, this.self['SceneContent'].width / 2, this.self['SceneContent'].height / 2 - 100, Effects.SkinStyle.star, 20, 15);
             return this.aniTime * 5;
         }
         endPhoto() {
@@ -4111,6 +4333,56 @@
         }
     }
 
+    class UIShop extends Shop.ShopScene {
+        lwgOnAwake() {
+            Gold.goldVinish(100);
+            GVariate._stageClick = false;
+        }
+        lwgNodeDec() {
+            this.MyTap = this.self['MyTap'];
+            this.MyList = this.self['MyList'];
+            this.Dispaly = this.self['Dispaly'];
+        }
+        lwgOnEnable() {
+            this.createMyList();
+        }
+        ;
+        createMyList() {
+            this.MyList.selectEnable = true;
+            this.MyList.vScrollBarSkin = "";
+            this.MyList.selectHandler = new Laya.Handler(this, this.onSelect_List);
+            this.MyList.renderHandler = new Laya.Handler(this, this.updateList);
+            this.refreshListData();
+        }
+        refreshListData() {
+            var data = [];
+            for (var m = 0; m < 10; m++) {
+                data.push({});
+            }
+            this.MyList.array = data;
+            console.log(data);
+        }
+        onSelect_List(index) {
+        }
+        updateList(cell, index) {
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
+            Click.on(Click.Type.largen, null, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
+            Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnBuyUp() {
+        }
+        btnGetGold() {
+        }
+        btnBackUp() {
+            this.self.close();
+        }
+        lwgDisable() {
+            GVariate._stageClick = true;
+        }
+    }
+
     class UIStart extends lwg.Admin.Scene {
         lwgNodeDec() {
             this.LevelDisplay = this.self['LevelDisplay'];
@@ -4118,7 +4390,7 @@
         }
         lwgOnEnable() {
             GVariate._stageClick = false;
-            Laya.timer.frameOnce(30, this, () => { GVariate._stageClick = true; });
+            Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true; });
             Gold._createGoldNode(Laya.stage);
             this.levelStyleDisplay();
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
@@ -4150,13 +4422,19 @@
                 }
             }
         }
-        onStageMouseUp() {
-            if (GVariate._stageClick) {
-                lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-                    console.log('开始游戏');
-                    this.self.close();
-                });
-            }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
+            Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
+        }
+        btnSkinUp(e) {
+            e.stopPropagation();
+            lwg.Admin._openScene(Admin.SceneName.UIShop);
+        }
+        backgroundUp() {
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
+                console.log('开始游戏');
+                this.self.close();
+            });
         }
         lwgDisable() {
             Gold.GoldNode.visible = false;
@@ -4255,13 +4533,13 @@
         }
         btnNormalUp() {
             this.offClick();
-            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 100, Gold.GoldNode.y), null, () => {
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 this.advFunc();
             });
         }
         btnAdvUp() {
             ADManager.ShowReward(() => {
-                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 100, Gold.GoldNode.y), null, () => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     this.advFunc();
                 });
             });
@@ -4355,6 +4633,7 @@
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
             reg("script/Game/UIShare.ts", UIShare);
+            reg("script/Game/UIShop.ts", UIShop);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);

@@ -32,6 +32,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                 // console.log('截取比例', ratio);
                 // 截取
                 otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
+
                 // ['HairLen']为我们自己赋值的属性
                 if (otherOwnerParent['HairLen']) {
                     otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;

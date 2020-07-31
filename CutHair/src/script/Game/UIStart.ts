@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -13,12 +13,11 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
         GVariate._stageClick = false;
-        Laya.timer.frameOnce(30, this, () => { GVariate._stageClick = true })
+        Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true })
         Gold._createGoldNode(Laya.stage);
         this.levelStyleDisplay();
 
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
-
     }
 
     /**关卡列表*/
@@ -55,14 +54,20 @@ export default class UIStart extends lwg.Admin.Scene {
             }
         }
     }
-    onStageMouseUp(): void {
-        if (GVariate._stageClick) {
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-                console.log('开始游戏');
-                this.self.close();
-            });
-        }
 
+    lwgBtnClick(): void {
+        Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
+        Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp)
+    }
+    btnSkinUp(e: Laya.Event): void {
+        e.stopPropagation();
+        lwg.Admin._openScene(Admin.SceneName.UIShop);
+    }
+    backgroundUp(): void {
+        lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
+            console.log('开始游戏');
+            this.self.close();
+        });
     }
     lwgDisable(): void {
         Gold.GoldNode.visible = false;

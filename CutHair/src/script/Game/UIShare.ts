@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game, Animation2D } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game, Animation2D, Effects } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import RecordManager from "../TJ/RecordManager";
@@ -16,7 +16,6 @@ export default class UIShare extends lwg.Admin.Scene {
     lwgOpenAni(): number {
         this.aniTime = 100;
         this.aniDelayde = 100;
-        // Animation2D.bombs_Appear(this.self['BigFrame'], 0, 1, 1.2, Math.floor(Math.random() * 2) == 1 ? 15 : -15, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 1);
 
         this.self['SmallFram'].x -= 500;
         this.self['Logo'].y -= 500;
@@ -32,7 +31,7 @@ export default class UIShare extends lwg.Admin.Scene {
             let hotAddNum = Math.floor(Math.random() * 100 + 900);
             Laya.timer.frameLoop(1, this, () => {
                 if (Number(this.self['HotNum'].text) < hotAddNum) {
-                    this.self['HotNum'].text = Number(this.self['HotNum'].text) + 15;
+                    this.self['HotNum'].text = Number(this.self['HotNum'].text) + 6;
                 }
             });
 
@@ -45,6 +44,7 @@ export default class UIShare extends lwg.Admin.Scene {
         this.self['BtnNoShare'].alpha = 0;
         Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
 
+        Effects.createExplosion_Rotate(this.self['SceneContent'], 40, this.self['SceneContent'].width / 2, this.self['SceneContent'].height / 2 - 100, Effects.SkinStyle.star, 20, 15);
 
         return this.aniTime * 5;
     }
@@ -68,7 +68,11 @@ export default class UIShare extends lwg.Admin.Scene {
         var sp1 = new Laya.Sprite();
         this.self['BigPhoto'].addChild(sp1);
         sp1.graphics.drawTexture(rtex);
-        // console.log(rtex.bitmap);
+
+        // let mt = new Laya.BlinnPhongMaterial();
+        // GSene3D.TouchScreen.meshRenderer.material = mt;
+        // mt.albedoTexture = renderTargetCamera.renderTarget;
+
     }
 
 

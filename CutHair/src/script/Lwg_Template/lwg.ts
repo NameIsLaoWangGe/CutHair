@@ -596,6 +596,9 @@ export module lwg {
         };
     }
 
+
+
+
     /**提示模块*/
     export module Hint {
         /**提示文字的类型描述*/
@@ -745,7 +748,7 @@ export module lwg {
          * @param delayed 延时时间
         */
         export function goldVinish(delayed?: number): void {
-            GoldNode.visible = true;
+            GoldNode.visible = false;
             if (delayed) {
                 Animation2D.scale_Alpha(GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
             }
@@ -1040,7 +1043,7 @@ export module lwg {
             UICaiDanQiang = 'UICaiDanQiang',
             UICaidanPifu = 'UICaidanPifu',
             UIOperation = 'UIOperation',
-
+            UIShop = 'UIShop'
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -1587,7 +1590,12 @@ export module lwg {
             "Frame/Effects/star_red.png",
             "Frame/Effects/star_white.png",
             "Frame/Effects/star_yellow.png",
+        }
 
+        /**表示需要什么样的图片样式*/
+        export enum SkinStyle {
+            star = 'star',
+            dot = 'dot',
         }
 
         /**类粒子特效的通用父类*/
@@ -1747,25 +1755,22 @@ export module lwg {
         }
 
         /**
-        * 创建爆炸旋转动画，爆炸后会在结尾处旋转几次
-        * @param parent 父节点
-        * @param quantity 数量
-        * @param x X位置
-        * @param Y Y位置
-        * @param speed 速度
-        * @param rotate 旋转最大值
-        * @param continueTime 持续时间（按帧数计算）
-        * @param x X轴位置
-        * @param y Y轴位置
-        */
+          * 创建爆炸旋转动画，爆炸后会在结尾处旋转几次
+          * @param parent 父节点
+          * @param quantity 数量
+          * @param x X位置
+          * @param Y Y位置
+          * @param speed 速度
+          * @param rotate 旋转最大值
+          */
         export function createExplosion_Rotate(parent, quantity, x, y, style, speed, rotate): void {
             for (let index = 0; index < quantity; index++) {
                 let ele = Laya.Pool.getItemByClass('ele', Laya.Image) as Laya.Image;
                 ele.name = 'ele';//标识符和名称一样
                 let num;
-                if (style === 'star') {
+                if (style === SkinStyle.star) {
                     num = 12 + Math.floor(Math.random() * 12);
-                } else if (style === 'dot') {
+                } else if (style === SkinStyle.dot) {
                     num = Math.floor(Math.random() * 12);
                 }
                 ele.skin = SkinUrl[num];
@@ -1813,7 +1818,6 @@ export module lwg {
                 this.commonSpeedXYByAngle(this.startAngle, this.startSpeed - this.accelerated);
             }
         }
-
 
 
         /**
@@ -4116,6 +4120,307 @@ export module lwg {
         }
     }
 
+    /**商城模块,用于购买和穿戴，主要是购买和存储，次要是穿戴*/
+    export module Shop {
+
+        /**所有种类的集合*/
+        export let allData: Array<Array<any>> = [];
+        //皮肤*****************************************************************************************************
+        /**皮肤的总数，存储对象[{名称，获取方式，剩余数量或者次数}]*/
+        export let allSkin: Array<any> = [];
+        /**默认皮肤*/
+        export let defaultSkin: string;
+        /**当前穿戴的皮肤*/
+        export let _currentSkin = {
+            currentSkin: null,
+            get name(): string {
+                return this.currentSkin = Laya.LocalStorage.getItem('_currentSkin') !== null ? Laya.LocalStorage.getItem('_currentSkin') : null;
+            },
+            set name(name: string) {
+                this.currentSkin = name;
+
+            }
+
+        };
+
+        /**当前拥有的皮肤集合*/
+        export let _haveSkin = {
+            haveArr: [],
+            get array(): Array<any> {
+
+                let haveArrStr: string = Laya.LocalStorage.getJSON('_haveSkin');
+                if (haveArrStr) {
+                    // 将字符串转换成json
+                    let data: any = JSON.parse(haveArrStr);
+                    return data._haveSkin;
+                } else {
+                    return defaultSkin ? [defaultSkin] : [];
+                }
+            },
+
+            /**设置皮肤集合*/
+            set array(arr: Array<any>) {
+                this.haveArr = arr;
+            },
+
+            /**减少一个皮肤*/
+            set subSkin(name: string) {
+                changeElement(this.haveArr, name, AddOrSub.sub)
+                Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
+                console.log('减少后的皮肤数组为', this.haveArr);
+            },
+
+            /**增加一个皮肤*/
+            set addSkin(name: string) {
+                changeElement(this.haveArr, name, AddOrSub.add)
+                Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
+                console.log('增加后的皮肤数组为', this.haveArr);
+            }
+        }
+
+        //默认道具**********************************************************************************************************
+        /**所有道具*/
+        export let allProps: Array<any> = [];
+        /**当前道具*/
+        export let defaultProp: string;
+        /**当前道具*/
+        export let _currentProp = {
+            currentProp: null,
+            get name(): string {
+                return this.currentProp = Laya.LocalStorage.getItem('_currentProp') !== null ? Laya.LocalStorage.getItem('_currentProp') : null;
+            },
+            set name(name: string) {
+                this.currentProp = name;
+            }
+        };
+
+        /**皮肤集合*/
+        export let _haveProp = {
+            propArr: [],
+            get array(): Array<any> {
+
+                let propsArrStr: string = Laya.LocalStorage.getJSON('_haveProp');
+                if (propsArrStr) {
+                    // 将字符串转换成json
+                    let data: any = JSON.parse(propsArrStr);
+                    return data._haveProp;
+                } else {
+                    return defaultProp ? [defaultProp] : [];
+                }
+            },
+
+            /**设置皮肤集合*/
+            set propArray(arr: Array<any>) {
+                this.propArr = arr;
+            },
+
+            /**减少一个皮肤*/
+            set subProp(name: string) {
+                changeElement(this.propArr, name, AddOrSub.sub);
+                Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
+                console.log('减少后的道具数组为', this.propArr);
+            },
+
+            /**增加一个皮肤*/
+            set addProp(name: string) {
+                changeElement(this.propArr, name, AddOrSub.add);
+
+                Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
+                console.log('增加后的道具数组为', this.propArr);
+            }
+        }
+
+
+        //其他道具，第三种物品的统称***********************************************************************************
+        /**所有其他道具集合*/
+        export let allOther: Array<any> = [];
+        /**默认穿戴的其他道具*/
+        export let defaultOther: string;
+        /**当前使用的其他物品*/
+        export let _crrentOther = {
+            crrentOther: null,
+            get name(): string {
+                return this.currentProp = Laya.LocalStorage.getItem('_crrentOther') !== null ? Laya.LocalStorage.getItem('_crrentOther') : null;
+            },
+            set name(name: string) {
+                this.crrentOther = name;
+            }
+        };
+
+        /**拥有的第三种物品*/
+        export let _haveOther = {
+            haveOtherArr: [],
+            get array(): Array<any> {
+
+                let haveOtherArrStr: string = Laya.LocalStorage.getJSON('_haveOther');
+                if (haveOtherArrStr) {
+                    // 将字符串转换成json
+                    let data: any = JSON.parse(haveOtherArrStr);
+                    return data._haveOther;
+                } else {
+                    return defaultOther ? [defaultOther] : [];
+                }
+            },
+
+            /**刷新获得总数*/
+            set otherArray(arr: Array<any>) {
+                this.haveOtherArr = arr;
+            },
+
+            /**减少一个*/
+            set addOther(other: string) {
+                changeElement(this.haveOtherArr, other, AddOrSub.sub);
+                Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
+                console.log('减少后的道具数组为', this.otherArr);
+            },
+
+            /**增加一个*/
+            set subOther(other: string) {
+                changeElement(this.haveOtherArr, other, AddOrSub.add);
+                Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
+                console.log('增加后的道具数组为', this.propArr);
+            }
+        }
+
+        /**
+         * 减少或增加一个元素
+         * @param elementArr 元素集合
+         * @param ele 减少或者增加的名称
+         * @param addOrSub 减少或者增加'add'或者'sub'
+         */
+        export function changeElement(elementArr, ele: string, addOrSub: string): void {
+            if (addOrSub === AddOrSub.add) {
+                for (let index = 0; index < elementArr.length; index++) {
+                    if (ele === elementArr[index]) {
+                        this.otherArr.splice(index, 1);
+                        break;
+                    }
+                }
+            } else {
+                let have: boolean = false;
+                for (let index = 0; index < elementArr.length; index++) {
+                    if (ele === this.arrVar[index]) {
+                        have = true;
+                    }
+                }
+                if (!have) {
+                    elementArr.push(ele);
+                } else {
+                    console.log('当前道具已经获得！');
+                }
+            }
+        }
+
+        export enum AddOrSub {
+            add = 'add',
+            sub = 'sub'
+        }
+
+        /**获得方式列举,方式可以添加*/
+        export enum GetWay {
+            /**看广告*/
+            ads = 'ads',
+            /**关卡中获得*/
+            customs = 'customs',
+            /**金币购买*/
+            gold = 'gold',
+            /**钻石购买购买*/
+            diamond = 'diamond',
+            /**其他方式*/
+            other = 'other'
+        }
+
+        export class ShopScene extends Admin.Scene {
+
+            lwgOnAwake(): void {
+                this.shopOnAwake();
+                Shop.allData = [allSkin, allProps, allOther];
+            }
+            /**界面打开前执行一次*/
+            shopOnAwake(): void {
+
+            }
+            lwgOnEnable(): void {
+                this.shopOnEnable();
+            }
+
+            /**游戏开始前执行*/
+            shopOnEnable(): void {
+
+            }
+        }
+    }
+
+    /**本地信息存储*/
+    export module LocalStorage {
+        let storageData: any;
+        /**上传本地数据到缓存,一般在游戏胜利后和购买皮肤后上传*/
+        export function addData(): void {
+            storageData = {
+                '_gameLevel': lwg.Global._gameLevel,
+                '_goldNum': lwg.Global._goldNum,
+                '_execution': lwg.Global._execution,
+                '_exemptExTime': lwg.Global._exemptExTime,
+                '_freeHintTime': lwg.Global._freeHintTime,
+                '_hotShareTime': lwg.Global._hotShareTime,
+                '_addExDate': lwg.Global._addExDate,
+                '_addExHours': lwg.Global._addExHours,
+                '_addMinutes': lwg.Global._addMinutes,
+                '_buyNum': lwg.Global._buyNum,
+                '_currentPifu': lwg.Global._currentPifu,
+                '_havePifu': lwg.Global._havePifu,
+                '_watchAdsNum': lwg.Global._watchAdsNum,
+                '_huangpihaozi': lwg.Global._huangpihaozi,
+                '_zibiyazi': lwg.Global._zibiyazi,
+                '_kejigongzhu': lwg.Global._kejigongzhu,
+                '_pickPaintedNum': lwg.Global._pickPaintedNum,
+                '_haimiangongzhu': lwg.Global._haimiangongzhu,
+
+
+            }
+            // 转换成字符串上传
+            let data: string = JSON.stringify(storageData);
+            Laya.LocalStorage.setJSON('storageData', data);
+        }
+
+        /**清除本地数据*/
+        export function clearData(): void {
+            Laya.LocalStorage.clear();
+        }
+
+        /**获取本地数据，在onlode场景获取*/
+        export function getData(): any {
+            let storageData: string = Laya.LocalStorage.getJSON('storageData');
+            if (storageData) {
+                // 将字符串转换成json
+                let data: any = JSON.parse(storageData);
+                return data;
+            } else {
+                lwg.Global._gameLevel = 1;
+                lwg.Global._goldNum = 0;
+                lwg.Global._execution = 15;
+                lwg.Global._exemptExTime = null;
+                lwg.Global._freeHintTime = null;
+                lwg.Global._hotShareTime = null;
+                lwg.Global._addExDate = (new Date).getDate();
+                lwg.Global._addExHours = (new Date).getHours();
+                lwg.Global._addMinutes = (new Date).getMinutes();
+                lwg.Global._buyNum = 1;
+                lwg.Global._currentPifu = Enum.PifuAllName[0];
+                lwg.Global._havePifu = ['01_gongzhu'];
+                lwg.Global._watchAdsNum = 0;
+                lwg.Global._huangpihaozi = false;
+                lwg.Global._zibiyazi = false;
+                lwg.Global._kejigongzhu = false;
+                lwg.Global._haimiangongzhu = false;
+                lwg.Global._pickPaintedNum = 0;
+
+                return null;
+            }
+        }
+    }
+
+
     export module Loding {
         /**3D场景的加载*/
         export let lodingList_3D: Array<any> = [];
@@ -4142,6 +4447,7 @@ export module lwg {
             set value(v: number) {
                 this.val = v;
                 if (this.val >= sumProgress) {
+                    console.log('当前进度条进度为:', currentProgress.value / sumProgress);
                     console.log('进度条停止！');
                     console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取')
                     EventAdmin.notify(Loding.LodingType.complete);
@@ -4161,17 +4467,14 @@ export module lwg {
             progress = 'progress',
         }
 
-        export class Lode extends Admin.Scene {
+        export class LodeScene extends Admin.Scene {
 
             lwgEventReg(): void {
                 EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule() });
                 EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete() });
                 EventAdmin.reg(LodingType.progress, this, () => {
-
                     currentProgress.value++;
-                    if (currentProgress.value > sumProgress) {
-                    
-                    } else {
+                    if (currentProgress.value < sumProgress) {
                         console.log('当前进度条进度为:', currentProgress.value / sumProgress);
                     }
                 });
@@ -4252,3 +4555,4 @@ export let Gold = lwg.Gold;
 export let Hint = lwg.Hint;
 export let Loding = lwg.Loding;
 export let Game = lwg.Game;
+export let Shop = lwg.Shop;

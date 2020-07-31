@@ -148,7 +148,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        GVariate._taskArr = [GEnum.TaskType.upLeftBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair];
         this.createProgress();
     }
 

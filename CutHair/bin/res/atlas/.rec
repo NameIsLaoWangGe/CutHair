@@ -129,6 +129,7 @@ P 7C8C2E05 anniu.png
 R FF46C806 bg.png
 P A4800B07 biaotidi-2.png
 P A4800B07 biaotidi.png
+P C47406E5 btn_yeqian3.png
 P D8BBDE9D dikuang.png
 P AB639D7A fanhui.png
 P 22D8DDE9 kaung1.png
@@ -207,6 +208,8 @@ R F369565E LOGO.png
 P 3A4418BB pro_01.png
 P D9D3120B pro_02.png
 P DFD6E778 word_Loding.png
+D UI/Props
+P F3E6FD66 yanjing.png
 D UI/Register
 P 035AA6AB biaoti.png
 P F3D8F48B qian.png

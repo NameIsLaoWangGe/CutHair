@@ -1,7 +1,7 @@
 import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
-export default class UILoding extends Loding.Lode {
+export default class UILoding extends Loding.LodeScene {
     constructor() { super(); }
 
     // 
