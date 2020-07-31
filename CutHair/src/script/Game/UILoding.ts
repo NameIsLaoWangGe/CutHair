@@ -3,6 +3,8 @@ import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
 export default class UILoding extends Loding.Lode {
     constructor() { super(); }
+
+    // 
     lwgOnAwake() {
         Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
@@ -17,9 +19,6 @@ export default class UILoding extends Loding.Lode {
         ];
     }
 
-    lwgOnEnable(): void {
-        EventAdmin.notify(Loding.LodingType.Loding3D);
-    }
 
     lwgAdaptive(): void {
         this.self['Bg'].height = Laya.stage.height;

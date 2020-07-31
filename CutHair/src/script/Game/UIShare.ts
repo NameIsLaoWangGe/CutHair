@@ -21,7 +21,7 @@ export default class UIShare extends lwg.Admin.Scene {
         this.self['SmallFram'].x -= 500;
         this.self['Logo'].y -= 500;
         this.self['BtnShare'].alpha = 0;
-        Animation2D.scale_Alpha(this.self['BigFrame'], 0, 0, 0, 1, 1, 1, this.aniTime * 4.5, Laya.Ease.cubicOut, this.aniDelayde * 1, () => {
+        Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
             Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
 
             Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);

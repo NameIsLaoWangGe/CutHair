@@ -528,27 +528,30 @@
             (function (SkinUrl) {
                 SkinUrl[SkinUrl["Frame/Effects/icon_gold.png"] = 0] = "Frame/Effects/icon_gold.png";
             })(SkinUrl || (SkinUrl = {}));
-            function createOneGold() {
+            function createOneGold(width, height, url) {
                 let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image);
                 Gold.name = 'addGold';
                 Gold.alpha = 1;
-                Gold.scale(1, 1);
                 Gold.zOrder = 60;
+                Gold.width = width;
+                Gold.height = height;
+                Gold.pivotX = width / 2;
+                Gold.pivotY = height / 2;
+                if (!url) {
+                    Gold.skin = SkinUrl[0];
+                }
+                else {
+                    Gold.skin = url;
+                }
                 return Gold;
             }
             Gold_1.createOneGold = createOneGold;
-            function getGoldAni_Single(parent, number, url, fX, fY, tX, tY, func1, func2) {
+            function getGoldAni_Single(parent, number, width, height, url, firstPoint, targetPoint, func1, func2) {
                 for (let index = 0; index < number; index++) {
                     Laya.timer.once(index * 30, this, () => {
-                        let Gold = createOneGold();
+                        let Gold = createOneGold(width, height, url);
                         parent.addChild(Gold);
-                        if (!url) {
-                            Gold.skin = SkinUrl[0];
-                        }
-                        else {
-                            Gold.skin = url;
-                        }
-                        Animation2D.move_Scale(Gold, 1, fX, fY, tX, tY, 1, 350, 0, null, () => {
+                        Animation2D.move_Scale(Gold, 1, firstPoint.x, firstPoint.y, targetPoint.x, targetPoint.y, 1, 350, 0, null, () => {
                             if (index === number - 1) {
                                 Laya.timer.once(200, this, () => {
                                     if (func2) {
@@ -567,9 +570,9 @@
                 }
             }
             Gold_1.getGoldAni_Single = getGoldAni_Single;
-            function getGoldAni_Heap(parent, number, url, fX, fY, tX, tY, func1, func2) {
+            function getGoldAni_Heap(parent, number, width, height, url, firstPoint, targetPoint, func1, func2) {
                 for (let index = 0; index < number; index++) {
-                    let Gold = createOneGold();
+                    let Gold = createOneGold(width, height, url);
                     parent.addChild(Gold);
                     if (!url) {
                         Gold.skin = SkinUrl[0];
@@ -577,10 +580,10 @@
                     else {
                         Gold.skin = url;
                     }
-                    let x = Math.floor(Math.random() * 2) == 1 ? fX + Math.random() * 100 : fX - Math.random() * 100;
-                    let y = Math.floor(Math.random() * 2) == 1 ? fY + Math.random() * 100 : fY - Math.random() * 100;
-                    Animation2D.move_Scale(Gold, 0.5, fX, fY, x, y, 1, 500, Math.random() * 100 + 100, null, () => {
-                        Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, tX, tY, 1, 500, Math.random() * 100 + 100, null, () => {
+                    let x = Math.floor(Math.random() * 2) == 1 ? firstPoint.x + Math.random() * 100 : firstPoint.x - Math.random() * 100;
+                    let y = Math.floor(Math.random() * 2) == 1 ? firstPoint.y + Math.random() * 100 : firstPoint.y - Math.random() * 100;
+                    Animation2D.move_Scale(Gold, 0.5, firstPoint.x, firstPoint.y, x, y, 1, 300, Math.random() * 100 + 100, Laya.Ease.expoIn, () => {
+                        Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, targetPoint.x, targetPoint.y, 1, 400, Math.random() * 200 + 100, Laya.Ease.cubicOut, () => {
                             if (index === number - 1) {
                                 Laya.timer.once(200, this, () => {
                                     if (func2) {
@@ -2233,16 +2236,15 @@
             }
             Animation2D.move_Scale = move_Scale;
             function rotate_Scale(target, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func) {
-                Laya.timer.once(delayed, this, () => {
-                    target.scaleX = fScaleX;
-                    target.scaleY = fScaleY;
-                    target.rotation = fRotate;
-                    Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
-                        if (func) {
-                            this.func();
-                        }
-                    }), 0);
-                });
+                target.scaleX = fScaleX;
+                target.scaleY = fScaleY;
+                target.rotation = fRotate;
+                Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
+                    if (func) {
+                        func();
+                    }
+                    target.rotation = 0;
+                }), delayed ? delayed : 0);
             }
             Animation2D.rotate_Scale = rotate_Scale;
             function drop_Simple(node, fY, tY, rotation, time, delayed, func) {
@@ -2869,77 +2871,95 @@
         })(Tools = lwg.Tools || (lwg.Tools = {}));
         let Loding;
         (function (Loding) {
-            Loding.lodingList_2D = [];
             Loding.lodingList_3D = [];
+            Loding.lodingList_2D = [];
             Loding.lodingList_Data = [];
-            Loding.sumProgress = 0;
-            Loding.currentProgress = 0;
+            Loding.currentProgress = {
+                val: 0,
+                get value() {
+                    return this.val;
+                },
+                set value(v) {
+                    this.val = v;
+                    if (this.val >= Loding.sumProgress) {
+                        console.log('进度条停止！');
+                        console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取');
+                        EventAdmin.notify(Loding.LodingType.complete);
+                    }
+                    else {
+                        if (this.val === Loding.loadOrder[Loding.loadOrderIndex].length) {
+                            Loding.loadOrderIndex++;
+                        }
+                        EventAdmin.notify(Loding.LodingType.loding);
+                    }
+                },
+            };
             let LodingType;
             (function (LodingType) {
-                LodingType["Loding3D"] = "Loding3D";
-                LodingType["Loding2D"] = "Loding2D";
-                LodingType["LodingData"] = "LodingData";
                 LodingType["complete"] = "complete";
+                LodingType["loding"] = "loding";
                 LodingType["progress"] = "progress";
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
             class Lode extends Admin.Scene {
                 lwgEventReg() {
-                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Data.length;
-                    EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D(); });
-                    EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D(); });
-                    EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData(); });
+                    EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
                     EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(); });
-                    EventAdmin.reg(LodingType.progress, this, () => { Loding.currentProgress++, console.log('当前进度条进度:', Loding.currentProgress); });
+                    EventAdmin.reg(LodingType.progress, this, () => {
+                        Loding.currentProgress.value++;
+                        if (Loding.currentProgress.value > Loding.sumProgress) ;
+                        else {
+                            console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
+                        }
+                    });
                 }
-                lodeScene3D() {
-                    if (Loding.lodingList_3D.length === 0) {
-                        console.log('没有3D场景');
-                        EventAdmin.notify(LodingType.Loding2D);
-                        return;
-                    }
-                    for (let index = 0; index < Loding.lodingList_3D.length; index++) {
-                        Laya.Scene3D.load(Loding.lodingList_3D[index], Laya.Handler.create(this, (scene) => {
-                            console.log('3D场景' + index + '加载完成！');
-                            EventAdmin.notify(LodingType.progress);
-                            if (index == Loding.lodingList_3D.length - 1) {
-                                console.log('所有3D场景加载完成！');
-                                EventAdmin.notify(LodingType.Loding2D);
-                            }
-                        }));
-                    }
+                lwgOnEnable() {
+                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3D, Loding.lodingList_Data];
+                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Data.length;
+                    Loding.loadOrderIndex = 0;
+                    EventAdmin.notify(Loding.LodingType.loding);
                 }
-                loding2D() {
-                    if (Loding.lodingList_2D.length === 0) {
-                        console.log('没有需要加载的2D资源！');
-                        EventAdmin.notify(LodingType.LodingData);
-                        return;
+                lodingRule() {
+                    let alreadyPro = 0;
+                    for (let index = 0; index < Loding.loadOrderIndex; index++) {
+                        alreadyPro += Loding.loadOrder[index].length;
                     }
-                    for (let index = 0; index < Loding.lodingList_2D.length; index++) {
-                        Laya.loader.load(Loding.lodingList_2D[index], Laya.Handler.create(this, (scene) => {
-                            console.log('2D资源' + index + '加载完成！');
-                            EventAdmin.notify(LodingType.progress);
-                            if (index == Loding.lodingList_2D.length - 1) {
-                                console.log('所有2D资源加载完成！');
-                                EventAdmin.notify(LodingType.LodingData);
-                            }
-                        }));
-                    }
-                }
-                lodingData() {
-                    if (Loding.lodingList_Data.length === 0) {
-                        console.log('没有数据表需要加载！');
-                        EventAdmin.notify(LodingType.complete);
-                        return;
-                    }
-                    for (let index = 0; index < Loding.lodingList_Data.length; index++) {
-                        Laya.loader.load(Loding.lodingList_Data[index], Laya.Handler.create(this, () => {
-                            console.log('数据表' + index + '加载完成！可通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                            EventAdmin.notify(LodingType.progress);
-                            if (index == Loding.lodingList_Data.length - 1) {
-                                console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                                EventAdmin.notify(LodingType.complete);
-                            }
-                        }), null, Laya.Loader.JSON);
+                    let index = Loding.currentProgress.value - alreadyPro;
+                    switch (Loding.loadOrder[Loding.loadOrderIndex]) {
+                        case Loding.lodingList_2D:
+                            Laya.loader.load(Loding.lodingList_2D[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX2D资源' + Loding.lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                }
+                                else {
+                                    console.log('2D资源' + Loding.lodingList_2D[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_3D:
+                            Laya.Scene3D.load(Loding.lodingList_3D[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX3D场景' + Loding.lodingList_3D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                }
+                                else {
+                                    console.log('3D场景' + Loding.lodingList_3D[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_Data:
+                            Laya.loader.load(Loding.lodingList_Data[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX数据表' + Loding.lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                }
+                                else {
+                                    console.log('数据表' + Loding.lodingList_Data[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }), null, Laya.Loader.JSON);
+                            break;
+                        default:
+                            break;
                     }
                 }
                 lwgLodeComplete() { }
@@ -3465,9 +3485,6 @@
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
             ];
             Loding.lodingList_Data = [];
-        }
-        lwgOnEnable() {
-            EventAdmin.notify(Loding.LodingType.Loding3D);
         }
         lwgAdaptive() {
             this.self['Bg'].height = Laya.stage.height;
@@ -4040,7 +4057,7 @@
             this.self['SmallFram'].x -= 500;
             this.self['Logo'].y -= 500;
             this.self['BtnShare'].alpha = 0;
-            Animation2D.scale_Alpha(this.self['BigFrame'], 0, 0, 0, 1, 1, 1, this.aniTime * 4.5, Laya.Ease.cubicOut, this.aniDelayde * 1, () => {
+            Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
                 Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
                 Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
                 Animation2D.bombs_Appear(this.self['BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
@@ -4238,13 +4255,13 @@
         }
         btnNormalUp() {
             this.offClick();
-            Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 100, Gold.GoldNode.y), null, () => {
                 this.advFunc();
             });
         }
         btnAdvUp() {
             ADManager.ShowReward(() => {
-                Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 100, Gold.GoldNode.y), null, () => {
                     this.advFunc();
                 });
             });

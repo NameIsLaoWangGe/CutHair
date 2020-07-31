@@ -116,14 +116,14 @@ export default class UIVictory extends lwg.Admin.Scene {
 
     btnNormalUp(): void {
         this.offClick();
-        Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+        Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 100, Gold.GoldNode.y), null, () => {
             this.advFunc();
         });
     }
 
     btnAdvUp(): void {
         ADManager.ShowReward(() => {
-            Gold.getGoldAni_Heap(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 100, Gold.GoldNode.y, null, () => {
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 100, Gold.GoldNode.y), null, () => {
                 this.advFunc();
             });
         })

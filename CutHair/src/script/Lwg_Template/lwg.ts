@@ -774,13 +774,21 @@ export module lwg {
         }
 
         /**创建单个金币*/
-        export function createOneGold(): Laya.Image {
+        export function createOneGold(width: number, height: number, url: string): Laya.Image {
             let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image) as Laya.Image;
             Gold.name = 'addGold';//标识符和名称一样
             let num = Math.floor(Math.random() * 12);
             Gold.alpha = 1;
-            Gold.scale(1, 1);
             Gold.zOrder = 60;
+            Gold.width = width;
+            Gold.height = height;
+            Gold.pivotX = width / 2;
+            Gold.pivotY = height / 2;
+            if (!url) {
+                Gold.skin = SkinUrl[0];
+            } else {
+                Gold.skin = url;
+            }
             return Gold;
         }
 
@@ -788,27 +796,23 @@ export module lwg {
         * 陆续生成单个金币
         * @param parent 父节点
         * @param number 产生金币的数量
-        * @param url 金币的图片地址
-        * @param fX 初始位置X
-        * @param fY 初始位置Y
-        * @param tX 目标X
-        * @param tY 目标Y
-        * @param func1 每一个金币产生后执行的回调
-        * @param func2 金币创建完成后的回调
+        * @param width 金币的宽度
+        * @param height 金币的宽度
+        * @param url 金币皮肤地址
+        * @param firstPoint 初始位置
+        * @param targetPoint 目标位置
+        * @param func1 每一个金币移动完成后执行的回调
+        * @param func2 金币全部创建完成后的回调
         */
-        export function getGoldAni_Single(parent: Laya.Sprite, number: number, url: string, fX: number, fY: number, tX: number, tY: number, func1?: Function, func2?: Function): void {
+        export function getGoldAni_Single(parent: Laya.Sprite, number: number, width: number, height: number, url: string, firstPoint: Laya.Point, targetPoint: Laya.Point, func1?: Function, func2?: Function): void {
 
             for (let index = 0; index < number; index++) {
                 Laya.timer.once(index * 30, this, () => {
 
-                    let Gold = createOneGold();
+                    let Gold = createOneGold(width, height, url);
                     parent.addChild(Gold);
-                    if (!url) {
-                        Gold.skin = SkinUrl[0];
-                    } else {
-                        Gold.skin = url;
-                    }
-                    Animation2D.move_Scale(Gold, 1, fX, fY, tX, tY, 1, 350, 0, null, () => {
+
+                    Animation2D.move_Scale(Gold, 1, firstPoint.x, firstPoint.y, targetPoint.x, targetPoint.y, 1, 350, 0, null, () => {
                         if (index === number - 1) {
 
                             Laya.timer.once(200, this, () => {
@@ -833,30 +837,28 @@ export module lwg {
          * 生成一堆金币，然后分别移动到目标位置
          * @param parent 父节点
          * @param number 产生金币的数量
-         * @param url 金币的图片地址
-         * @param fX 初始位置X
-         * @param fY 初始位置Y
-         * @param tX 目标X
-         * @param tY 目标Y
-         * @param func1 每一个金币产生后执行的回调
-         * @param func2 金币创建完成后的回调
+         * @param width 金币的宽度
+         * @param height 金币的宽度
+         * @param url 金币皮肤地址
+         * @param firstPoint 初始位置
+         * @param targetPoint 目标位置
+         * @param func1 每一个金币移动完成后执行的回调
+         * @param func2 金币全部创建完成后的回调
          */
-        export function getGoldAni_Heap(parent: Laya.Sprite, number: number, url: string, fX: number, fY: number, tX: number, tY: number, func1?: Function, func2?: Function): void {
-
+        export function getGoldAni_Heap(parent: Laya.Sprite, number: number, width: number, height: number, url: string, firstPoint: Laya.Point, targetPoint: Laya.Point, func1?: Function, func2?: Function): void {
             for (let index = 0; index < number; index++) {
-                let Gold = createOneGold();
+                let Gold = createOneGold(width, height, url);
                 parent.addChild(Gold);
                 if (!url) {
                     Gold.skin = SkinUrl[0];
                 } else {
                     Gold.skin = url;
                 }
-
-                let x = Math.floor(Math.random() * 2) == 1 ? fX + Math.random() * 100 : fX - Math.random() * 100;
-                let y = Math.floor(Math.random() * 2) == 1 ? fY + Math.random() * 100 : fY - Math.random() * 100;
+                let x = Math.floor(Math.random() * 2) == 1 ? firstPoint.x + Math.random() * 100 : firstPoint.x - Math.random() * 100;
+                let y = Math.floor(Math.random() * 2) == 1 ? firstPoint.y + Math.random() * 100 : firstPoint.y - Math.random() * 100;
                 // Gold.rotation = Math.random() * 360;
-                Animation2D.move_Scale(Gold, 0.5, fX, fY, x, y, 1, 500, Math.random() * 100 + 100, null, () => {
-                    Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, tX, tY, 1, 500, Math.random() * 100 + 100, null, () => {
+                Animation2D.move_Scale(Gold, 0.5, firstPoint.x, firstPoint.y, x, y, 1, 300, Math.random() * 100 + 100, Laya.Ease.expoIn, () => {
+                    Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, targetPoint.x, targetPoint.y, 1, 400, Math.random() * 200 + 100, Laya.Ease.cubicOut, () => {
                         if (index === number - 1) {
 
                             Laya.timer.once(200, this, () => {
@@ -874,9 +876,6 @@ export module lwg {
                     })
                 });
             }
-
-
-
         }
 
 
@@ -1233,6 +1232,7 @@ export module lwg {
                 this.lwgVariateInit();
                 this.lwgAdaptive();
             }
+            /**游戏开始前执行一次，重写覆盖*/
             lwgOnAwake(): void {
 
             }
@@ -3088,25 +3088,23 @@ export module lwg {
          * @param fRotate 初始角度
          * @param fScaleX 初始X缩放
          * @param fScaleY 初始Y缩放
-         * @param eRotate 中间角度
+         * @param eRotate 最终角度
          * @param eScaleX 最终X缩放
          * @param eScaleY 最终Y缩放
          * @param time 花费时间
          * @param delayed 延迟时间
          * @param func 回调函数
          */
-        export function rotate_Scale(target, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func?: Function): void {
-            Laya.timer.once(delayed, this, () => {
-                target.scaleX = fScaleX;
-                target.scaleY = fScaleY;
-                target.rotation = fRotate;
-                Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
-                    if (func) {
-                        this.func();
-                    }
+        export function rotate_Scale(target: Laya.Sprite, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed?: number, func?: Function): void {
+            target.scaleX = fScaleX;
+            target.scaleY = fScaleY;
+            target.rotation = fRotate;
+            Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
+                if (func) {
+                    func();
                 }
-                ), 0)
-            })
+                target.rotation = 0;
+            }), delayed ? delayed : 0)
         }
 
         /**
@@ -4119,118 +4117,121 @@ export module lwg {
     }
 
     export module Loding {
-        /**需要加载的图片资源列表,一般是界面的图片*/
-        export let lodingList_2D: Array<any> = [];
         /**3D场景的加载*/
         export let lodingList_3D: Array<any> = [];
+        /**需要加载的图片资源列表,一般是界面的图片*/
+        export let lodingList_2D: Array<any> = [];
         /**数据表的加载*/
         export let lodingList_Data: Array<any> = [];
 
         /**进度条总长度,长度为以上三个加载资源类型的数组总长度*/
-        export let sumProgress: number = 0;
+        export let sumProgress: number;
+        /**加载顺序依次为3d,2d,数据表，可修改*/
+        export let loadOrder: Array<any>[];
+        /**当前加载到哪个分类数组*/
+        export let loadOrderIndex: number;
+
         /**当前进度条进度,起始位0，每加载成功1个，则加1*/
-        export let currentProgress: number = 0;
+        export let currentProgress = {
+            val: 0,
+
+            get value(): number {
+                return this.val;
+            },
+
+            set value(v: number) {
+                this.val = v;
+                if (this.val >= sumProgress) {
+                    console.log('进度条停止！');
+                    console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取')
+                    EventAdmin.notify(Loding.LodingType.complete);
+                } else {
+                    if (this.val === loadOrder[loadOrderIndex].length) {
+                        loadOrderIndex++;
+                    }
+                    EventAdmin.notify(Loding.LodingType.loding);
+                }
+            },
+        };
 
         /**加载事件类型*/
         export enum LodingType {
-            Loding3D = 'Loding3D',
-            Loding2D = 'Loding2D',
-            LodingData = 'LodingData',
             complete = 'complete',
+            loding = 'loding',
             progress = 'progress',
         }
 
         export class Lode extends Admin.Scene {
 
-            /**注册加载事件*/
             lwgEventReg(): void {
-                sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Data.length;
-                EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D() });
-                EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D() });
-                EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData() });
+                EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule() });
                 EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete() });
-                EventAdmin.reg(LodingType.progress, this, () => { currentProgress++ , console.log('当前进度条进度:', currentProgress) });
+                EventAdmin.reg(LodingType.progress, this, () => {
+
+                    currentProgress.value++;
+                    if (currentProgress.value > sumProgress) {
+                    
+                    } else {
+                        console.log('当前进度条进度为:', currentProgress.value / sumProgress);
+                    }
+                });
             }
 
-            /**加载3D场景*/
-            lodeScene3D(): void {
-                if (lodingList_3D.length === 0) {
-                    console.log('没有3D场景');
-                    EventAdmin.notify(LodingType.Loding2D);
-                    return;
-                }
-                for (let index = 0; index < lodingList_3D.length; index++) {
-                    Laya.Scene3D.load(lodingList_3D[index], Laya.Handler.create(this, (scene: Laya.Scene3D) => {
-                        console.log('3D场景' + index + '加载完成！');
-                        EventAdmin.notify(LodingType.progress);
-
-                        if (index == lodingList_3D.length - 1) {
-                            console.log('所有3D场景加载完成！');
-                            EventAdmin.notify(LodingType.Loding2D);
-                        }
-                    }));
-                }
+            lwgOnEnable(): void {
+                loadOrder = [lodingList_2D, lodingList_3D, lodingList_Data];
+                sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Data.length;
+                loadOrderIndex = 0;
+                EventAdmin.notify(Loding.LodingType.loding);
             }
 
-            /**加载2D图片列表*/
-            loding2D(): void {
-                if (lodingList_2D.length === 0) {
-                    console.log('没有需要加载的2D资源！');
-                    EventAdmin.notify(LodingType.LodingData);
-                    return;
+            /**根据加载顺序依次加载*/
+            lodingRule(): void {
+                // 已经加载过的分类数组的长度
+                let alreadyPro: number = 0;
+                for (let index = 0; index < loadOrderIndex; index++) {
+                    alreadyPro += loadOrder[index].length;
                 }
-                // 加载多张png类型资源
-                // Laya.loader.load(
-                //     lodingList_2D,
-                //     Laya.Handler.create(this, f => {
+                //获取到当前分类加载数组的下标 
+                let index = currentProgress.value - alreadyPro;
 
-                //         console.log('2D资源加载完成！');
-                //         EventAdmin.notify(LodingType.LodingData);
-                //     }));
+                switch (loadOrder[loadOrderIndex]) {
+                    case lodingList_2D:
+                        Laya.loader.load(lodingList_2D[index], Laya.Handler.create(this, (any) => {
+                            if (any == null) {
+                                console.log('XXXXXXXXXXX2D资源' + lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                            } else {
+                                console.log('2D资源' + lodingList_2D[index] + '加载完成！', '数组下标为：', index);
+                            }
+                            EventAdmin.notify(LodingType.progress);
+                        }));
+                        break;
+                    case lodingList_3D:
+                        Laya.Scene3D.load(lodingList_3D[index], Laya.Handler.create(this, (any) => {
+                            if (any == null) {
+                                console.log('XXXXXXXXXXX3D场景' + lodingList_3D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                            } else {
+                                console.log('3D场景' + lodingList_3D[index] + '加载完成！', '数组下标为：', index);
+                            }
+                            EventAdmin.notify(LodingType.progress);
 
-                //单张图片依次加载，这样可以使进度条移动的更加美观
-                for (let index = 0; index < lodingList_2D.length; index++) {
-                    Laya.loader.load(lodingList_2D[index], Laya.Handler.create(this, (scene: Laya.Scene3D) => {
-                        console.log('2D资源' + index + '加载完成！');
-                        EventAdmin.notify(LodingType.progress);
+                        }));
+                        break;
+                    case lodingList_Data:
+                        Laya.loader.load(lodingList_Data[index], Laya.Handler.create(this, (any) => {
+                            if (any == null) {
+                                console.log('XXXXXXXXXXX数据表' + lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                            } else {
+                                console.log('数据表' + lodingList_Data[index] + '加载完成！', '数组下标为：', index);
+                            }
+                            EventAdmin.notify(LodingType.progress);
 
-                        if (index == lodingList_2D.length - 1) {
-                            console.log('所有2D资源加载完成！');
-                            EventAdmin.notify(LodingType.LodingData);
-                        }
-                    }));
-                }
-            }
+                        }), null, Laya.Loader.JSON);
+                        break;
 
-            /**加载数据表*/
-            lodingData(): void {
-                if (lodingList_Data.length === 0) {
-                    console.log('没有数据表需要加载！');
-                    EventAdmin.notify(LodingType.complete);
-                    return;
-                }
-
-                // 加载多个json
-                // Laya.loader.load(lodingList_Data, Laya.Handler.create(this, () => {
-                //     console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                //     EventAdmin.notify(LodingType.complete);
-                // }), null, Laya.Loader.JSON);
-
-                //单个json依次加载，这样可以使进度条移动的更加美观
-
-                for (let index = 0; index < lodingList_Data.length; index++) {
-                    Laya.loader.load(lodingList_Data[index], Laya.Handler.create(this, () => {
-                        console.log('数据表' + index + '加载完成！可通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                        EventAdmin.notify(LodingType.progress);
-
-                        if (index == lodingList_Data.length - 1) {
-                            console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                            EventAdmin.notify(LodingType.complete);
-                        }
-                    }), null, Laya.Loader.JSON);
+                    default:
+                        break;
                 }
             }
-
             /**加载完成回调,每个游戏不一样*/
             lwgLodeComplete(): void { }
         }
