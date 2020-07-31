@@ -209,7 +209,6 @@ P 3A4418BB pro_01.png
 P D9D3120B pro_02.png
 P DFD6E778 word_Loding.png
 D UI/Props
-P F3E6FD66 yanjing.png
 D UI/Register
 P 035AA6AB biaoti.png
 P F3D8F48B qian.png
@@ -300,6 +299,31 @@ R 64187BC7 Skin.png
 R 827F5BCD Task.png
 R B59D3434 victory.png
 R 2D221A41 XDSkin.png
+D UI/Props/Other
+P 9F2371CF jundao.png
+P AD557CDF lifadao.png
+P 3347ADDF ruwu.png
+P 9908298E tixudao.png
+P 5965B1B2 tulongdao.png
+P 0CFCA239 xiangsudao.png
+D UI/Props/Props
+P D0E04D87 dianju.png
+P 6002FF12 dianjupian.png
+P 95A91A2C jiandao.png
+P AD557CDF lifadao.png
+P 799AA76E yingguangbang.png
+D UI/Props/Skin
+P DFA66CD0 anquanmao.png
+P 741880CC hamajing.png
+P 3B496C08 jiemao_01.png
+P D3115E2F jiemao_02.png
+P 31399E40 maomaozi.png
+P 8CD7BBE0 xiaochoumao.png
+P 989A4DC3 xingxingyanjing.png
+P BC6BA658 yanshemao.png
+P 62B7B4D3 yanshemao_gangtie.png
+P C9C943B5 yanshemao_shijie.png
+P F3E6FD66 yuanyanjing.png
 D UI/Share/Photo
 P 9B156950 photo_1.png
 P 9B156950 photo_10.png

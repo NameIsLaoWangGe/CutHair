@@ -1,0 +1,40 @@
+{ 
+"RECORDS": 
+[
+  {
+    "name": "yingguangbang",
+    "oder": 0,
+    "getWay": "ads",
+    "condition": 1,
+    "arrange": 5
+  },
+  {
+    "name": "lifadao",
+    "oder": 3,
+    "getWay": "gold",
+    "condition": 800,
+    "arrange": 4
+  },
+  {
+    "name": "jiandao",
+    "oder": 1,
+    "getWay": "free",
+    "condition": 0,
+    "arrange": 1
+  },
+  {
+    "name": "dianjupian",
+    "oder": 2,
+    "getWay": "gold",
+    "condition": 500,
+    "arrange": 3
+  },
+  {
+    "name": "dianju",
+    "oder": 4,
+    "getWay": "gold",
+    "condition": 1000,
+    "arrange": 2
+  }
+]
+}

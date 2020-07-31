@@ -4,7 +4,6 @@ import { GSene3D } from "../Lwg_Template/Global";
 export default class UILoding extends Loding.LodeScene {
     constructor() { super(); }
 
-    // 
     lwgOnAwake() {
         Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
@@ -16,6 +15,9 @@ export default class UILoding extends Loding.LodeScene {
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
         ];
         Loding.lodingList_Data = [
+            "Data/Shop/Other.json",
+            "Data/Shop/Props.json",
+            "Data/Shop/Skin.json",
         ];
     }
 

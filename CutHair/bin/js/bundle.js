@@ -2721,6 +2721,28 @@
                 return point;
             }
             Tools.transitionScreenPointfor3D = transitionScreenPointfor3D;
+            function objPropertySort(array, property) {
+                var compare = function (obj1, obj2) {
+                    var val1 = obj1[property];
+                    var val2 = obj2[property];
+                    if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+                        val1 = Number(val1);
+                        val2 = Number(val2);
+                    }
+                    if (val1 < val2) {
+                        return -1;
+                    }
+                    else if (val1 > val2) {
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+                };
+                array.sort(compare);
+                return array;
+            }
+            Tools.objPropertySort = objPropertySort;
             function random(n, m) {
                 m = m || 10;
                 const c = m - n + 1;
@@ -2877,7 +2899,7 @@
         })(Tools = lwg.Tools || (lwg.Tools = {}));
         let Shop;
         (function (Shop) {
-            Shop.allSkin = [];
+            Shop.allSkin = [{}];
             Shop._currentSkin = {
                 currentSkin: null,
                 get name() {
@@ -3017,78 +3039,43 @@
             })(AddOrSub = Shop.AddOrSub || (Shop.AddOrSub = {}));
             let GetWay;
             (function (GetWay) {
+                GetWay["free"] = "free";
                 GetWay["ads"] = "ads";
+                GetWay["XDads"] = "XDads";
                 GetWay["customs"] = "customs";
                 GetWay["gold"] = "gold";
                 GetWay["diamond"] = "diamond";
                 GetWay["other"] = "other";
             })(GetWay = Shop.GetWay || (Shop.GetWay = {}));
             class ShopScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.shopOnAwake();
+                }
+                shopOnAwake() {
+                }
+                lwgNodeDec() {
+                    this.shopNodeDec();
+                }
+                shopNodeDec() {
+                }
+                lwgOnEnable() {
+                    this.create_MyList();
+                    this.shopOnEnable();
+                }
+                shopOnEnable() { }
+                create_MyList() {
+                    Shop._MyList.selectEnable = true;
+                    Shop._MyList.vScrollBarSkin = "";
+                    Shop._MyList.selectHandler = new Laya.Handler(this, this.onSelectList);
+                    Shop._MyList.renderHandler = new Laya.Handler(this, this.updateList);
+                    this.refreshList();
+                }
+                onSelectList(index) { }
+                updateList(cell, index) { }
+                refreshList() { }
             }
             Shop.ShopScene = ShopScene;
         })(Shop = lwg.Shop || (lwg.Shop = {}));
-        let LocalStorage;
-        (function (LocalStorage) {
-            let storageData;
-            function addData() {
-                storageData = {
-                    '_gameLevel': lwg.Global._gameLevel,
-                    '_goldNum': lwg.Global._goldNum,
-                    '_execution': lwg.Global._execution,
-                    '_exemptExTime': lwg.Global._exemptExTime,
-                    '_freeHintTime': lwg.Global._freeHintTime,
-                    '_hotShareTime': lwg.Global._hotShareTime,
-                    '_addExDate': lwg.Global._addExDate,
-                    '_addExHours': lwg.Global._addExHours,
-                    '_addMinutes': lwg.Global._addMinutes,
-                    '_buyNum': lwg.Global._buyNum,
-                    '_currentPifu': lwg.Global._currentPifu,
-                    '_havePifu': lwg.Global._havePifu,
-                    '_watchAdsNum': lwg.Global._watchAdsNum,
-                    '_huangpihaozi': lwg.Global._huangpihaozi,
-                    '_zibiyazi': lwg.Global._zibiyazi,
-                    '_kejigongzhu': lwg.Global._kejigongzhu,
-                    '_pickPaintedNum': lwg.Global._pickPaintedNum,
-                    '_haimiangongzhu': lwg.Global._haimiangongzhu,
-                };
-                let data = JSON.stringify(storageData);
-                Laya.LocalStorage.setJSON('storageData', data);
-            }
-            LocalStorage.addData = addData;
-            function clearData() {
-                Laya.LocalStorage.clear();
-            }
-            LocalStorage.clearData = clearData;
-            function getData() {
-                let storageData = Laya.LocalStorage.getJSON('storageData');
-                if (storageData) {
-                    let data = JSON.parse(storageData);
-                    return data;
-                }
-                else {
-                    lwg.Global._gameLevel = 1;
-                    lwg.Global._goldNum = 0;
-                    lwg.Global._execution = 15;
-                    lwg.Global._exemptExTime = null;
-                    lwg.Global._freeHintTime = null;
-                    lwg.Global._hotShareTime = null;
-                    lwg.Global._addExDate = (new Date).getDate();
-                    lwg.Global._addExHours = (new Date).getHours();
-                    lwg.Global._addMinutes = (new Date).getMinutes();
-                    lwg.Global._buyNum = 1;
-                    lwg.Global._currentPifu = Enum.PifuAllName[0];
-                    lwg.Global._havePifu = ['01_gongzhu'];
-                    lwg.Global._watchAdsNum = 0;
-                    lwg.Global._huangpihaozi = false;
-                    lwg.Global._zibiyazi = false;
-                    lwg.Global._kejigongzhu = false;
-                    lwg.Global._haimiangongzhu = false;
-                    lwg.Global._pickPaintedNum = 0;
-                    return null;
-                }
-            }
-            LocalStorage.getData = getData;
-        })(LocalStorage = lwg.LocalStorage || (lwg.LocalStorage = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3D = [];
@@ -3108,7 +3095,11 @@
                         EventAdmin.notify(Loding.LodingType.complete);
                     }
                     else {
-                        if (this.val === Loding.loadOrder[Loding.loadOrderIndex].length) {
+                        let number = 0;
+                        for (let index = 0; index <= Loding.loadOrderIndex; index++) {
+                            number += Loding.loadOrder[index].length;
+                        }
+                        if (this.val === number) {
                             Loding.loadOrderIndex++;
                         }
                         EventAdmin.notify(Loding.LodingType.loding);
@@ -3705,7 +3696,11 @@
             Loding.lodingList_3D = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
             ];
-            Loding.lodingList_Data = [];
+            Loding.lodingList_Data = [
+                "Data/Shop/Other.json",
+                "Data/Shop/Props.json",
+                "Data/Shop/Skin.json",
+            ];
         }
         lwgAdaptive() {
             this.self['Bg'].height = Laya.stage.height;
@@ -4334,37 +4329,35 @@
     }
 
     class UIShop extends Shop.ShopScene {
-        lwgOnAwake() {
+        shopOnAwake() {
             Gold.goldVinish(100);
             GVariate._stageClick = false;
+            Shop._MyTap = this.self['MyTap'];
+            Shop._MyList = this.self['MyList'];
+            Shop.allSkin = Laya.loader.getRes("Data/Shop/Skin.json")['RECORDS'];
+            Shop.allProps = Laya.loader.getRes("Data/Shop/Other.json")['RECORDS'];
+            Shop.allOther = Laya.loader.getRes("Data/Shop/Other.json")['RECORDS'];
+            Tools.objPropertySort(Shop.allSkin, 'arrange');
+            Tools.objPropertySort(Shop.allProps, 'arrange');
+            Tools.objPropertySort(Shop.allOther, 'arrange');
+            console.log(Shop.allSkin);
+            console.log(Shop.allProps);
+            console.log(Shop.allOther);
         }
-        lwgNodeDec() {
-            this.MyTap = this.self['MyTap'];
-            this.MyList = this.self['MyList'];
-            this.Dispaly = this.self['Dispaly'];
+        shopNodeDec() {
         }
-        lwgOnEnable() {
-            this.createMyList();
+        shopOnEnable() {
         }
         ;
-        createMyList() {
-            this.MyList.selectEnable = true;
-            this.MyList.vScrollBarSkin = "";
-            this.MyList.selectHandler = new Laya.Handler(this, this.onSelect_List);
-            this.MyList.renderHandler = new Laya.Handler(this, this.updateList);
-            this.refreshListData();
-        }
-        refreshListData() {
-            var data = [];
-            for (var m = 0; m < 10; m++) {
-                data.push({});
-            }
-            this.MyList.array = data;
-            console.log(data);
-        }
-        onSelect_List(index) {
+        refreshList() {
+            Shop._MyList.array = Shop.allSkin;
+            console.log(Shop._MyList.array);
         }
         updateList(cell, index) {
+            let dataSource = cell.dataSource;
+            let Pic = cell.getChildByName('Pic');
+            Pic.skin = 'UI/Props/Skin/' + dataSource.name + '.png';
+            console.log(dataSource);
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, null, this.self['BtnBuy'], this, null, null, this.btnBuyUp);

@@ -3799,7 +3799,6 @@ export module lwg {
             return new Laya.Point(x2, y2);
         }
 
-
         /**
          * RGB三个颜色值转换成16进制的字符串‘000000’，需要加上‘#’；
          * */
@@ -3940,6 +3939,30 @@ export module lwg {
             return point;
         }
 
+        /**
+         * 对象数组按照对象的某个属性排序
+         * @param array 对象数组
+         * @param property 对象名字
+         */
+        export function objPropertySort(array: Array<any>, property: string): Array<any> {
+            var compare = function (obj1, obj2) {
+                var val1 = obj1[property];
+                var val2 = obj2[property];
+                if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+                    val1 = Number(val1);
+                    val2 = Number(val2);
+                }
+                if (val1 < val2) {
+                    return -1;
+                } else if (val1 > val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+            array.sort(compare);
+            return array;
+        }
 
         /**
          * 
@@ -4122,12 +4145,13 @@ export module lwg {
 
     /**商城模块,用于购买和穿戴，主要是购买和存储，次要是穿戴*/
     export module Shop {
-
-        /**所有种类的集合*/
-        export let allData: Array<Array<any>> = [];
+        /**list列表*/
+        export let _MyTap: Laya.List;
+        /**list列表*/
+        export let _MyList: Laya.List;
         //皮肤*****************************************************************************************************
-        /**皮肤的总数，存储对象[{名称，获取方式，剩余数量或者次数}]*/
-        export let allSkin: Array<any> = [];
+        /**皮肤的总数据，存储对象依次为[{名称，获取方式，剩余数量或者次数}]*/
+        export let allSkin: Array<any> = [{}];
         /**默认皮肤*/
         export let defaultSkin: string;
         /**当前穿戴的皮肤*/
@@ -4138,7 +4162,6 @@ export module lwg {
             },
             set name(name: string) {
                 this.currentSkin = name;
-
             }
 
         };
@@ -4318,8 +4341,12 @@ export module lwg {
 
         /**获得方式列举,方式可以添加*/
         export enum GetWay {
+            /**免费获取*/
+            free = 'free',
             /**看广告*/
             ads = 'ads',
+            /**看广告*/
+            XDads = 'XDads',
             /**关卡中获得*/
             customs = 'customs',
             /**金币购买*/
@@ -4327,96 +4354,52 @@ export module lwg {
             /**钻石购买购买*/
             diamond = 'diamond',
             /**其他方式*/
-            other = 'other'
+            other = 'other',
         }
 
         export class ShopScene extends Admin.Scene {
 
             lwgOnAwake(): void {
                 this.shopOnAwake();
-                Shop.allData = [allSkin, allProps, allOther];
             }
             /**界面打开前执行一次*/
             shopOnAwake(): void {
+            }
+
+            lwgNodeDec(): void {
+                this.shopNodeDec();
+            }
+            /**商店中的节点声明*/
+            shopNodeDec(): void {
 
             }
+
             lwgOnEnable(): void {
+                this.create_MyList();
                 this.shopOnEnable();
             }
 
             /**游戏开始前执行*/
-            shopOnEnable(): void {
+            shopOnEnable(): void { }
 
+            /**初始化list*/
+            create_MyList(): void {
+                Shop._MyList.selectEnable = true;
+                Shop._MyList.vScrollBarSkin = "";
+                // this._MyList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
+                // this._MyList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
+                Shop._MyList.selectHandler = new Laya.Handler(this, this.onSelectList);
+                Shop._MyList.renderHandler = new Laya.Handler(this, this.updateList);
+                this.refreshList();
             }
-        }
-    }
 
-    /**本地信息存储*/
-    export module LocalStorage {
-        let storageData: any;
-        /**上传本地数据到缓存,一般在游戏胜利后和购买皮肤后上传*/
-        export function addData(): void {
-            storageData = {
-                '_gameLevel': lwg.Global._gameLevel,
-                '_goldNum': lwg.Global._goldNum,
-                '_execution': lwg.Global._execution,
-                '_exemptExTime': lwg.Global._exemptExTime,
-                '_freeHintTime': lwg.Global._freeHintTime,
-                '_hotShareTime': lwg.Global._hotShareTime,
-                '_addExDate': lwg.Global._addExDate,
-                '_addExHours': lwg.Global._addExHours,
-                '_addMinutes': lwg.Global._addMinutes,
-                '_buyNum': lwg.Global._buyNum,
-                '_currentPifu': lwg.Global._currentPifu,
-                '_havePifu': lwg.Global._havePifu,
-                '_watchAdsNum': lwg.Global._watchAdsNum,
-                '_huangpihaozi': lwg.Global._huangpihaozi,
-                '_zibiyazi': lwg.Global._zibiyazi,
-                '_kejigongzhu': lwg.Global._kejigongzhu,
-                '_pickPaintedNum': lwg.Global._pickPaintedNum,
-                '_haimiangongzhu': lwg.Global._haimiangongzhu,
+            /**list触摸监听*/
+            onSelectList(index: number): void { }
+            /**list列表刷新*/
+            updateList(cell, index: number): void { }
+            /**刷新list数据*/
+            refreshList(): void { }
 
-
-            }
-            // 转换成字符串上传
-            let data: string = JSON.stringify(storageData);
-            Laya.LocalStorage.setJSON('storageData', data);
-        }
-
-        /**清除本地数据*/
-        export function clearData(): void {
-            Laya.LocalStorage.clear();
-        }
-
-        /**获取本地数据，在onlode场景获取*/
-        export function getData(): any {
-            let storageData: string = Laya.LocalStorage.getJSON('storageData');
-            if (storageData) {
-                // 将字符串转换成json
-                let data: any = JSON.parse(storageData);
-                return data;
-            } else {
-                lwg.Global._gameLevel = 1;
-                lwg.Global._goldNum = 0;
-                lwg.Global._execution = 15;
-                lwg.Global._exemptExTime = null;
-                lwg.Global._freeHintTime = null;
-                lwg.Global._hotShareTime = null;
-                lwg.Global._addExDate = (new Date).getDate();
-                lwg.Global._addExHours = (new Date).getHours();
-                lwg.Global._addMinutes = (new Date).getMinutes();
-                lwg.Global._buyNum = 1;
-                lwg.Global._currentPifu = Enum.PifuAllName[0];
-                lwg.Global._havePifu = ['01_gongzhu'];
-                lwg.Global._watchAdsNum = 0;
-                lwg.Global._huangpihaozi = false;
-                lwg.Global._zibiyazi = false;
-                lwg.Global._kejigongzhu = false;
-                lwg.Global._haimiangongzhu = false;
-                lwg.Global._pickPaintedNum = 0;
-
-                return null;
-            }
         }
     }
 
@@ -4452,7 +4435,12 @@ export module lwg {
                     console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取')
                     EventAdmin.notify(Loding.LodingType.complete);
                 } else {
-                    if (this.val === loadOrder[loadOrderIndex].length) {
+                    // 当前进度达到当前长度节点时,去到下一个数组加载
+                    let number = 0;
+                    for (let index = 0; index <= loadOrderIndex; index++) {
+                        number += loadOrder[index].length;
+                    }
+                    if (this.val === number) {
                         loadOrderIndex++;
                     }
                     EventAdmin.notify(Loding.LodingType.loding);
@@ -4496,6 +4484,7 @@ export module lwg {
                 }
                 //获取到当前分类加载数组的下标 
                 let index = currentProgress.value - alreadyPro;
+                // console.log(loadOrder[index], index);
 
                 switch (loadOrder[loadOrderIndex]) {
                     case lodingList_2D:
