@@ -1,3 +1,6 @@
-2020/07/31-20:15:31.765 3904 Reusing MANIFEST D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/MANIFEST-000001
-2020/07/31-20:15:31.766 3904 Recovering log #44
-2020/07/31-20:15:31.767 3904 Reusing old log D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/000044.log 
+2020/08/03-13:39:17.447 1f0c Reusing MANIFEST D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/MANIFEST-000001
+2020/08/03-13:39:17.447 1f0c Recovering log #44
+2020/08/03-13:39:17.448 1f0c Reusing old log D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/000044.log 
+2020/08/03-14:46:07.096 740 Level-0 table #49: started
+2020/08/03-14:46:07.132 740 Level-0 table #49: 10670 bytes OK
+2020/08/03-14:46:07.157 740 Delete type=0 #44

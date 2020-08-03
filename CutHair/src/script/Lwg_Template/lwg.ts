@@ -3980,11 +3980,12 @@ export module lwg {
                 for (var j = 0; j < data2.length; j++) {
                     var obj2 = data2[j];
                     var obj2Name = obj2[property];
-                    if (obj2Name == name) {
+                    if (obj2Name == obj1Name) {
                         isExist = true;
                         break;
                     }
                 }
+
                 if (!isExist) {
                     result.push(obj1);
                 }
@@ -4133,64 +4134,74 @@ export module lwg {
             }
             return backNum;
         }
+
+
+        /**
+          * 获取缓存数据并且和本地数据的对比
+          * @param url 本地数据表地址
+          * @param storageName json名称
+          * @param propertyName 数组中每个对象中同一个属性名，通过这个名称进行对比
+          */
+        export function dataCompare(url: string, storageName: string, propertyName: string): Array<any> {
+            // 第一步，先尝试从本地缓存获取数据，
+            // 第二步，如果本地缓存有，那么需要和数据表中的数据进行对比，把缓存没有的新增对象复制进去
+            // 第三步，如果本地缓存没有，那么直接从数据表获取
+            let dataArr;
+            if (JSON.parse(Laya.LocalStorage.getJSON(storageName))) {
+                dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
+                console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
+                try {
+                    let dataArr_0: Array<any> = Laya.loader.getRes(url)['RECORDS'];
+                    // 如果本地数据条数大于json条数，说明json减东西了，不会对比，json只能增加不能删减
+                    if (dataArr_0.length >= dataArr.length) {
+                        let diffArray = Tools.dataCompareDifferent(dataArr_0, dataArr, propertyName);
+                        console.log('两个数据的差值为：', diffArray);
+                        Tools.data1AddToData2(dataArr, diffArray);
+                    } else {
+                        console.log(storageName + '数据表填写有误，长度不能小于之前的长度');
+                    }
+                } catch (error) {
+                    console.log(storageName, '数据赋值失败！请检查数据表或者手动赋值！')
+                }
+            } else {
+                try {
+                    dataArr = Laya.loader.getRes(url)['RECORDS'];
+                } catch (error) {
+                    console.log(storageName + '数据赋值失败！请检查数据表或者手动赋值！')
+                }
+            }
+            let data = {};
+            data[storageName] = dataArr;
+            Laya.LocalStorage.setJSON(storageName, JSON.stringify(data));
+            return dataArr;
+        }
     }
 
     /**商城模块,用于购买和穿戴，主要是购买和存储，次要是穿戴*/
     export module Shop {
         /**list列表*/
-        export let _MyTap: Laya.List;
+        export let _MyTap: Laya.Tab;
+        /**假如还有一个_OtherTap*/
+        export let _OtherTap: Laya.Tab;
         /**list列表*/
         export let _MyList: Laya.List;
+
         //皮肤*****************************************************************************************************
         /**皮肤的总数据，存储对象依次为[{名称，获取方式，剩余数量或者次数}]*/
-        export let allSkin: Array<any> = [{}];
+        export let allSkin = [];
         /**默认皮肤*/
         export let defaultSkin: string;
         /**当前穿戴的皮肤*/
         export let _currentSkin = {
             currentSkin: null,
             get name(): string {
-                return this.currentSkin = Laya.LocalStorage.getItem('_currentSkin') !== null ? Laya.LocalStorage.getItem('_currentSkin') : null;
+                return this.currentSkin = Laya.LocalStorage.getItem('Shop_currentSkin') !== null ? Laya.LocalStorage.getItem('Shop_currentSkin') : null;
             },
             set name(name: string) {
                 this.currentSkin = name;
+                Laya.LocalStorage.setItem('Shop_currentSkin', this.currentSkin);
             }
         };
-
-        /**当前拥有的皮肤集合*/
-        export let _haveSkin = {
-            haveArr: [],
-            get array(): Array<any> {
-
-                let haveArrStr: string = Laya.LocalStorage.getJSON('_haveSkin');
-                if (haveArrStr) {
-                    // 将字符串转换成json
-                    let data: any = JSON.parse(haveArrStr);
-                    return data._haveSkin;
-                } else {
-                    return defaultSkin ? [defaultSkin] : [];
-                }
-            },
-
-            /**设置皮肤集合*/
-            set array(arr: Array<any>) {
-                this.haveArr = arr;
-            },
-
-            /**减少一个皮肤*/
-            set subSkin(name: string) {
-                changeElement(this.haveArr, name, AddOrSub.sub)
-                Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
-                console.log('减少后的皮肤数组为', this.haveArr);
-            },
-
-            /**增加一个皮肤*/
-            set addSkin(name: string) {
-                changeElement(this.haveArr, name, AddOrSub.add)
-                Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
-                console.log('增加后的皮肤数组为', this.haveArr);
-            }
-        }
 
         //默认道具**********************************************************************************************************
         /**所有道具*/
@@ -4201,49 +4212,13 @@ export module lwg {
         export let _currentProp = {
             currentProp: null,
             get name(): string {
-                return this.currentProp = Laya.LocalStorage.getItem('_currentProp') !== null ? Laya.LocalStorage.getItem('_currentProp') : null;
+                return this.currentProp = Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
             },
             set name(name: string) {
                 this.currentProp = name;
+                Laya.LocalStorage.setItem('Shop_currentProp', this.currentProp);
             }
         };
-
-        /**皮肤集合*/
-        export let _haveProp = {
-            propArr: [],
-            get array(): Array<any> {
-
-                let propsArrStr: string = Laya.LocalStorage.getJSON('_haveProp');
-                if (propsArrStr) {
-                    // 将字符串转换成json
-                    let data: any = JSON.parse(propsArrStr);
-                    return data._haveProp;
-                } else {
-                    return defaultProp ? [defaultProp] : [];
-                }
-            },
-
-            /**设置皮肤集合*/
-            set propArray(arr: Array<any>) {
-                this.propArr = arr;
-            },
-
-            /**减少一个皮肤*/
-            set subProp(name: string) {
-                changeElement(this.propArr, name, AddOrSub.sub);
-                Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
-                console.log('减少后的道具数组为', this.propArr);
-            },
-
-            /**增加一个皮肤*/
-            set addProp(name: string) {
-                changeElement(this.propArr, name, AddOrSub.add);
-
-                Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
-                console.log('增加后的道具数组为', this.propArr);
-            }
-        }
-
 
         //其他道具，第三种物品的统称***********************************************************************************
         /**所有其他道具集合*/
@@ -4254,92 +4229,104 @@ export module lwg {
         export let _crrentOther = {
             crrentOther: null,
             get name(): string {
-                return this.currentProp = Laya.LocalStorage.getItem('_crrentOther') !== null ? Laya.LocalStorage.getItem('_crrentOther') : null;
+                return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
             },
             set name(name: string) {
                 this.crrentOther = name;
+                Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
             }
         };
 
-        /**拥有的第三种物品*/
-        export let _haveOther = {
-            haveOtherArr: [],
-            get array(): Array<any> {
-
-                let haveOtherArrStr: string = Laya.LocalStorage.getJSON('_haveOther');
-                if (haveOtherArrStr) {
-                    // 将字符串转换成json
-                    let data: any = JSON.parse(haveOtherArrStr);
-                    return data._haveOther;
-                } else {
-                    return defaultOther ? [defaultOther] : [];
+        /**
+         * 通过名称获取商品的一个属性值
+         * @param goodsClass 品类名称
+         * @param name 商品名称
+         * @param property 商品属性
+         * */
+        export function getGoodsProperty(goodsClass: string, name: string, property: string): void {
+            let pro;
+            let arr = getGoodsClassArr(goodsClass);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element[name] === name) {
+                    pro = element[property];
+                    break;
                 }
-            },
-
-            /**刷新获得总数*/
-            set otherArray(arr: Array<any>) {
-                this.haveOtherArr = arr;
-            },
-
-            /**减少一个*/
-            set addOther(other: string) {
-                changeElement(this.haveOtherArr, other, AddOrSub.sub);
-                Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
-                console.log('减少后的道具数组为', this.otherArr);
-            },
-
-            /**增加一个*/
-            set subOther(other: string) {
-                changeElement(this.haveOtherArr, other, AddOrSub.add);
-                Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
-                console.log('增加后的道具数组为', this.propArr);
             }
+            if (pro) {
+                return pro;
+            } else {
+                console.log(name + '找不到属性:' + property);
+            }
+
         }
 
         /**
-         * 减少或增加一个元素
-         * @param elementArr 元素集合
-         * @param ele 减少或者增加的名称
-         * @param addOrSub 减少或者增加'add'或者'sub'
-         */
-        export function changeElement(elementArr, ele: string, addOrSub: string): void {
-            if (addOrSub === AddOrSub.add) {
-                for (let index = 0; index < elementArr.length; index++) {
-                    if (ele === elementArr[index]) {
-                        this.otherArr.splice(index, 1);
-                        break;
-                    }
-                }
-            } else {
-                let have: boolean = false;
-                for (let index = 0; index < elementArr.length; index++) {
-                    if (ele === this.arrVar[index]) {
-                        have = true;
-                    }
-                }
-                if (!have) {
-                    elementArr.push(ele);
-                } else {
-                    console.log('当前道具已经获得！');
+         * 通过名称设置或者增加一个商品的一个属性值
+         * @param goodsClass 品类名称
+         * @param name 商品名称
+         * @param property 设置或者增加商品属性名称
+         * @param value 需要设置或者增加的属性值
+         * */
+        export function setGoodsProperty(goodsClass: string, name: string, property: string, value: any): void {
+            let pro;
+            let arr = getGoodsClassArr(goodsClass);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
                 }
             }
+            let data = {};
+            data[goodsClass] = arr;
+            Laya.LocalStorage.setJSON(goodsClass, JSON.stringify(data));
         }
 
-        /**减少或增加*/
-        export enum AddOrSub {
-            add = 'add',
-            sub = 'sub'
+        /**
+         * 返回当前已经拥有的商品
+         * @param   goodsClass 商品品类
+        */
+        export function getHaveArr(goodsClass: string): Array<any> {
+            let arr = getGoodsClassArr(goodsClass);
+            let arrHave = [];
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+
+            }
+            return arrHave
         }
 
+        /**根据品类返回品类名称数组*/
+        export function getGoodsClassArr(goodsClass: string): Array<any> {
+            let arr = [];
+            switch (goodsClass) {
+                case GoodsClass.Skin:
+                    arr = allSkin;
+                    break;
+                case GoodsClass.Props:
+                    arr = allProps;
+                    break;
+                case GoodsClass.Other:
+                    arr = allOther;
+                    break;
 
-        /**属性列表，数据表中应该有哪些属性,可以无限增加*/
+                default:
+                    break;
+            }
+            return arr;
+        }
+
+        /**商品属性列表，数据表中的商品应该有哪些属性,name和have是必须有的属性,可以无限增加*/
         export enum Property {
             /**名称*/
             name = 'name',
             /**获取途径*/
             getway = 'getway',
-            /**根据获取途径，给予需要完成的次数*/
+            /**根据获取途径，给予需要条件的总量*/
             condition = 'condition',
+            /**根据获取途径，剩余需要条件的数量，会平凡改这个数量*/
+            resCondition = 'resCondition',
             /**排列顺序*/
             arrange = 'arrange',
             /**获得顺序，我们可能会给予玩家固定的获得顺序*/
@@ -4366,6 +4353,16 @@ export module lwg {
             other = 'other',
         }
 
+        /**商店中的商品大致类别*/
+        export enum GoodsClass {
+            /**皮肤*/
+            Skin = 'Shop_Skin',
+            /**道具*/
+            Props = 'Shop_Props',
+            /**其他商品*/
+            Other = 'Shop_Other',
+        }
+
         export class ShopScene extends Admin.Scene {
 
             lwgOnAwake(): void {
@@ -4378,49 +4375,15 @@ export module lwg {
                 /**结构，如果没有则为null*/
                 Shop._MyTap = this.self['MyTap'];
                 Shop._MyList = this.self['MyList'];
-
-                // 第一步，先尝试从本地缓存获取数据，
-                // 第二步，如果本地缓存有，那么需要和数据表中的数据进行对比，把缓存没有的新增对象复制进去
-                // 第三步，如果本地缓存没有，那么直接从数据表获取
-                // 皮肤
-                if (JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin'))) {
-                    Shop.allSkin = JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin')).Shop_allSkin;
-                    console.log('从本地表中获取到 Shop.allSkin 数据,将和json文件进行对比');
-                    try {
-                        let allSkin_Josn: Array<any> = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
-                        // 如果本地数据条数大于json条数，说明json减东西了，并不会对比，json只能增加不能删减
-                        if (allSkin_Josn.length > Shop.allSkin.length) {
-                            let diffArray = Tools.dataCompareDifferent(allSkin_Josn, Shop.allSkin, Property.name);
-                            Tools.data1AddToData2(Shop.allSkin, diffArray);
-                        }
-                    } catch (error) {
-                        console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！')
-                    }
-                } else {
-                    try {
-                        Shop.allSkin = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
-                    } catch (error) {
-                        console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！')
-                    }
-                }
-                Laya.LocalStorage.setJSON('Shop_allSkin', JSON.stringify({ Shop_allSkin: Shop.allSkin }));
+                Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
+                Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
+                Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
             }
-
-
-            /**
-             * 对比两张数据表，根据当前给予的数据表进行增加，注意：不要删减，如果不需要这条对象或者属性，可以不用，但不要删减
-             * 通过商品名称进行对比
-            */
-            dataCompare(data, ): void {
-
-            }
-
 
             /**界面初始化前执行一次*/
             shopOnAwake(): void {
 
             }
-
             lwgNodeDec(): void {
                 this.shopNodeDec();
             }
@@ -4430,31 +4393,42 @@ export module lwg {
             }
 
             lwgOnEnable(): void {
-                this.create_MyList();
+                this.myTap_Create();
+                this.myList_Create();
                 this.shopOnEnable();
             }
 
             /**游戏开始前执行*/
             shopOnEnable(): void { }
 
+            /**Tap初始化*/
+            myTap_Create(): void {
+                Shop._MyTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
+            }
+            /**myTap的触摸监听*/
+            myTap_Select(index: number): void {
+            }
             /**初始化list*/
-            create_MyList(): void {
+            myList_Create(): void {
                 Shop._MyList.selectEnable = true;
                 Shop._MyList.vScrollBarSkin = "";
                 // this._MyList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
                 // this._MyList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
-                Shop._MyList.selectHandler = new Laya.Handler(this, this.onSelectList);
-                Shop._MyList.renderHandler = new Laya.Handler(this, this.updateList);
-                this.refreshList();
+                Shop._MyList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
+                Shop._MyList.renderHandler = new Laya.Handler(this, this.myList_Update);
+                this.myList_refresh();
             }
-
-            /**list触摸监听*/
-            onSelectList(index: number): void { }
+            /**list选中监听*/
+            myList_Scelet(index: number): void { }
             /**list列表刷新*/
-            updateList(cell, index: number): void { }
-            /**刷新list数据*/
-            refreshList(): void { }
-
+            myList_Update(cell, index: number): void { }
+            /**刷新list数据,重写覆盖，默认为皮肤*/
+            myList_refresh(): void {
+                if (Shop._MyList) {
+                    Shop._MyList.array = Shop.allSkin;
+                    Shop._MyList.refresh();
+                }
+            }
         }
     }
 

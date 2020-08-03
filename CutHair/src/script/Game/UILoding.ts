@@ -10,6 +10,9 @@ export default class UILoding extends Loding.LodeScene {
             "res/atlas/Frame/UI.png",
             "res/atlas/UI/GameStart.png",
             "res/atlas/UI/Common.png",
+            "res/atlas/UI/Shop/Skin.png",
+            "res/atlas/UI/Shop/Props.png",
+            "res/atlas/UI/Shop/Other.png",
         ];
         Loding.lodingList_3D = [
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"

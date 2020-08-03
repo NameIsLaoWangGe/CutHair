@@ -4,8 +4,8 @@
   {
     "name": "xiangsudao",
     "getway": "adsXD",
-    "condition": 100,
-    "arrange": 6,
+    "condition": 3,
+    "resCondition": 3,
     "getOder": 0,
     "have": false
   },
@@ -13,7 +13,7 @@
     "name": "tixudao",
     "getway": "free",
     "condition": 0,
-    "arrange": 1,
+    "resCondition": 0,
     "getOder": 1,
     "have": false
   },
@@ -21,7 +21,7 @@
     "name": "ruwu",
     "getway": "gold",
     "condition": 500,
-    "arrange": 3,
+    "resCondition": 500,
     "getOder": 2,
     "have": false
   },
@@ -29,7 +29,7 @@
     "name": "lifadao",
     "getway": "gold",
     "condition": 800,
-    "arrange": 4,
+    "resCondition": 800,
     "getOder": 3,
     "have": false
   },
@@ -37,7 +37,7 @@
     "name": "jundao",
     "getway": "gold",
     "condition": 1000,
-    "arrange": 2,
+    "resCondition": 1000,
     "getOder": 4,
     "have": false
   },
@@ -45,7 +45,7 @@
     "name": "tulongdao",
     "getway": "gold",
     "condition": 1200,
-    "arrange": 5,
+    "resCondition": 1200,
     "getOder": 5,
     "have": false
   }

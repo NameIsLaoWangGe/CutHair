@@ -2752,7 +2752,7 @@
                     for (var j = 0; j < data2.length; j++) {
                         var obj2 = data2[j];
                         var obj2Name = obj2[property];
-                        if (obj2Name == name) {
+                        if (obj2Name == obj1Name) {
                             isExist = true;
                             break;
                         }
@@ -2858,152 +2858,141 @@
                 return backNum;
             }
             Tools.converteNum = converteNum;
+            function dataCompare(url, storageName, propertyName) {
+                let dataArr;
+                if (JSON.parse(Laya.LocalStorage.getJSON(storageName))) {
+                    dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
+                    console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
+                    try {
+                        let dataArr_0 = Laya.loader.getRes(url)['RECORDS'];
+                        if (dataArr_0.length >= dataArr.length) {
+                            let diffArray = Tools.dataCompareDifferent(dataArr_0, dataArr, propertyName);
+                            console.log('两个数据的差值为：', diffArray);
+                            Tools.data1AddToData2(dataArr, diffArray);
+                        }
+                        else {
+                            console.log(storageName + '数据表填写有误，长度不能小于之前的长度');
+                        }
+                    }
+                    catch (error) {
+                        console.log(storageName, '数据赋值失败！请检查数据表或者手动赋值！');
+                    }
+                }
+                else {
+                    try {
+                        dataArr = Laya.loader.getRes(url)['RECORDS'];
+                    }
+                    catch (error) {
+                        console.log(storageName + '数据赋值失败！请检查数据表或者手动赋值！');
+                    }
+                }
+                let data = {};
+                data[storageName] = dataArr;
+                Laya.LocalStorage.setJSON(storageName, JSON.stringify(data));
+                return dataArr;
+            }
+            Tools.dataCompare = dataCompare;
         })(Tools = lwg.Tools || (lwg.Tools = {}));
         let Shop;
         (function (Shop) {
-            Shop.allSkin = [{}];
+            Shop.allSkin = [];
             Shop._currentSkin = {
                 currentSkin: null,
                 get name() {
-                    return this.currentSkin = Laya.LocalStorage.getItem('_currentSkin') !== null ? Laya.LocalStorage.getItem('_currentSkin') : null;
+                    return this.currentSkin = Laya.LocalStorage.getItem('Shop_currentSkin') !== null ? Laya.LocalStorage.getItem('Shop_currentSkin') : null;
                 },
                 set name(name) {
                     this.currentSkin = name;
-                }
-            };
-            Shop._haveSkin = {
-                haveArr: [],
-                get array() {
-                    let haveArrStr = Laya.LocalStorage.getJSON('_haveSkin');
-                    if (haveArrStr) {
-                        let data = JSON.parse(haveArrStr);
-                        return data._haveSkin;
-                    }
-                    else {
-                        return Shop.defaultSkin ? [Shop.defaultSkin] : [];
-                    }
-                },
-                set array(arr) {
-                    this.haveArr = arr;
-                },
-                set subSkin(name) {
-                    changeElement(this.haveArr, name, AddOrSub.sub);
-                    Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
-                    console.log('减少后的皮肤数组为', this.haveArr);
-                },
-                set addSkin(name) {
-                    changeElement(this.haveArr, name, AddOrSub.add);
-                    Laya.LocalStorage.setJSON('_haveSkin', JSON.stringify({ _haveSkin: this.haveArr }));
-                    console.log('增加后的皮肤数组为', this.haveArr);
+                    Laya.LocalStorage.setItem('Shop_currentSkin', this.currentSkin);
                 }
             };
             Shop.allProps = [];
             Shop._currentProp = {
                 currentProp: null,
                 get name() {
-                    return this.currentProp = Laya.LocalStorage.getItem('_currentProp') !== null ? Laya.LocalStorage.getItem('_currentProp') : null;
+                    return this.currentProp = Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
                 },
                 set name(name) {
                     this.currentProp = name;
-                }
-            };
-            Shop._haveProp = {
-                propArr: [],
-                get array() {
-                    let propsArrStr = Laya.LocalStorage.getJSON('_haveProp');
-                    if (propsArrStr) {
-                        let data = JSON.parse(propsArrStr);
-                        return data._haveProp;
-                    }
-                    else {
-                        return Shop.defaultProp ? [Shop.defaultProp] : [];
-                    }
-                },
-                set propArray(arr) {
-                    this.propArr = arr;
-                },
-                set subProp(name) {
-                    changeElement(this.propArr, name, AddOrSub.sub);
-                    Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
-                    console.log('减少后的道具数组为', this.propArr);
-                },
-                set addProp(name) {
-                    changeElement(this.propArr, name, AddOrSub.add);
-                    Laya.LocalStorage.setJSON('_haveProp', JSON.stringify({ _haveProp: this.propArr }));
-                    console.log('增加后的道具数组为', this.propArr);
+                    Laya.LocalStorage.setItem('Shop_currentProp', this.currentProp);
                 }
             };
             Shop.allOther = [];
             Shop._crrentOther = {
                 crrentOther: null,
                 get name() {
-                    return this.currentProp = Laya.LocalStorage.getItem('_crrentOther') !== null ? Laya.LocalStorage.getItem('_crrentOther') : null;
+                    return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
                 },
                 set name(name) {
                     this.crrentOther = name;
+                    Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
                 }
             };
-            Shop._haveOther = {
-                haveOtherArr: [],
-                get array() {
-                    let haveOtherArrStr = Laya.LocalStorage.getJSON('_haveOther');
-                    if (haveOtherArrStr) {
-                        let data = JSON.parse(haveOtherArrStr);
-                        return data._haveOther;
+            function getGoodsProperty(goodsClass, name, property) {
+                let pro;
+                let arr = getGoodsClassArr(goodsClass);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element[name] === name) {
+                        pro = element[property];
+                        break;
                     }
-                    else {
-                        return Shop.defaultOther ? [Shop.defaultOther] : [];
-                    }
-                },
-                set otherArray(arr) {
-                    this.haveOtherArr = arr;
-                },
-                set addOther(other) {
-                    changeElement(this.haveOtherArr, other, AddOrSub.sub);
-                    Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
-                    console.log('减少后的道具数组为', this.otherArr);
-                },
-                set subOther(other) {
-                    changeElement(this.haveOtherArr, other, AddOrSub.add);
-                    Laya.LocalStorage.setJSON('_haveOther', JSON.stringify({ _haveOther: this.haveOtherArr }));
-                    console.log('增加后的道具数组为', this.propArr);
                 }
-            };
-            function changeElement(elementArr, ele, addOrSub) {
-                if (addOrSub === AddOrSub.add) {
-                    for (let index = 0; index < elementArr.length; index++) {
-                        if (ele === elementArr[index]) {
-                            this.otherArr.splice(index, 1);
-                            break;
-                        }
-                    }
+                if (pro) {
+                    return pro;
                 }
                 else {
-                    let have = false;
-                    for (let index = 0; index < elementArr.length; index++) {
-                        if (ele === this.arrVar[index]) {
-                            have = true;
-                        }
-                    }
-                    if (!have) {
-                        elementArr.push(ele);
-                    }
-                    else {
-                        console.log('当前道具已经获得！');
-                    }
+                    console.log(name + '找不到属性:' + property);
                 }
             }
-            Shop.changeElement = changeElement;
-            let AddOrSub;
-            (function (AddOrSub) {
-                AddOrSub["add"] = "add";
-                AddOrSub["sub"] = "sub";
-            })(AddOrSub = Shop.AddOrSub || (Shop.AddOrSub = {}));
+            Shop.getGoodsProperty = getGoodsProperty;
+            function setGoodsProperty(goodsClass, name, property, value) {
+                let arr = getGoodsClassArr(goodsClass);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[goodsClass] = arr;
+                Laya.LocalStorage.setJSON(goodsClass, JSON.stringify(data));
+            }
+            Shop.setGoodsProperty = setGoodsProperty;
+            function getHaveArr(goodsClass) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrHave = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                }
+                return arrHave;
+            }
+            Shop.getHaveArr = getHaveArr;
+            function getGoodsClassArr(goodsClass) {
+                let arr = [];
+                switch (goodsClass) {
+                    case GoodsClass.Skin:
+                        arr = Shop.allSkin;
+                        break;
+                    case GoodsClass.Props:
+                        arr = Shop.allProps;
+                        break;
+                    case GoodsClass.Other:
+                        arr = Shop.allOther;
+                        break;
+                    default:
+                        break;
+                }
+                return arr;
+            }
+            Shop.getGoodsClassArr = getGoodsClassArr;
             let Property;
             (function (Property) {
                 Property["name"] = "name";
                 Property["getway"] = "getway";
                 Property["condition"] = "condition";
+                Property["resCondition"] = "resCondition";
                 Property["arrange"] = "arrange";
                 Property["getOder"] = "getOder";
                 Property["have"] = "have";
@@ -3018,6 +3007,12 @@
                 Getway["diamond"] = "diamond";
                 Getway["other"] = "other";
             })(Getway = Shop.Getway || (Shop.Getway = {}));
+            let GoodsClass;
+            (function (GoodsClass) {
+                GoodsClass["Skin"] = "Shop_Skin";
+                GoodsClass["Props"] = "Shop_Props";
+                GoodsClass["Other"] = "Shop_Other";
+            })(GoodsClass = Shop.GoodsClass || (Shop.GoodsClass = {}));
             class ShopScene extends Admin.Scene {
                 lwgOnAwake() {
                     this.initData();
@@ -3026,29 +3021,9 @@
                 initData() {
                     Shop._MyTap = this.self['MyTap'];
                     Shop._MyList = this.self['MyList'];
-                    if (JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin'))) {
-                        Shop.allSkin = JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin')).Shop_allSkin;
-                        console.log('从本地表中获取到 Shop.allSkin 数据,将和json文件进行对比');
-                        try {
-                            let allSkin_Josn = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
-                            let diffArray = Tools.dataCompareDifferent(allSkin_Josn, Shop.allSkin, Property.name);
-                            Tools.data1AddToData2(Shop.allSkin, diffArray);
-                        }
-                        catch (error) {
-                            console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！');
-                        }
-                    }
-                    else {
-                        try {
-                            Shop.allSkin = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
-                        }
-                        catch (error) {
-                            console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！');
-                        }
-                    }
-                    Laya.LocalStorage.setJSON('Shop_allSkin', JSON.stringify({ Shop_allSkin: Shop.allSkin }));
-                }
-                dataCompare(data) {
+                    Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
+                    Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
+                    Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
                 }
                 shopOnAwake() {
                 }
@@ -3058,20 +3033,31 @@
                 shopNodeDec() {
                 }
                 lwgOnEnable() {
-                    this.create_MyList();
+                    this.myTap_Create();
+                    this.myList_Create();
                     this.shopOnEnable();
                 }
                 shopOnEnable() { }
-                create_MyList() {
+                myTap_Create() {
+                    Shop._MyTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
+                }
+                myTap_Select(index) {
+                }
+                myList_Create() {
                     Shop._MyList.selectEnable = true;
                     Shop._MyList.vScrollBarSkin = "";
-                    Shop._MyList.selectHandler = new Laya.Handler(this, this.onSelectList);
-                    Shop._MyList.renderHandler = new Laya.Handler(this, this.updateList);
-                    this.refreshList();
+                    Shop._MyList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
+                    Shop._MyList.renderHandler = new Laya.Handler(this, this.myList_Update);
+                    this.myList_refresh();
                 }
-                onSelectList(index) { }
-                updateList(cell, index) { }
-                refreshList() { }
+                myList_Scelet(index) { }
+                myList_Update(cell, index) { }
+                myList_refresh() {
+                    if (Shop._MyList) {
+                        Shop._MyList.array = Shop.allSkin;
+                        Shop._MyList.refresh();
+                    }
+                }
             }
             Shop.ShopScene = ShopScene;
         })(Shop = lwg.Shop || (lwg.Shop = {}));
@@ -3691,6 +3677,9 @@
                 "res/atlas/Frame/UI.png",
                 "res/atlas/UI/GameStart.png",
                 "res/atlas/UI/Common.png",
+                "res/atlas/UI/Shop/Skin.png",
+                "res/atlas/UI/Shop/Props.png",
+                "res/atlas/UI/Shop/Other.png",
             ];
             Loding.lodingList_3D = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
@@ -4329,27 +4318,110 @@
 
     class UIShop extends Shop.ShopScene {
         shopOnAwake() {
-            Gold.goldVinish(100);
             GVariate._stageClick = false;
+            let SkinName;
+            (function (SkinName) {
+                SkinName["anquanmao"] = "anquanmao";
+                SkinName["yuanyanjing"] = "yuanyanjing";
+                SkinName["jiemao_01"] = "jiemao_01";
+                SkinName["hamajing"] = "hamajing";
+                SkinName["yanshemao_gangtie"] = "yanshemao_gangtie";
+                SkinName["yanshemao"] = "yanshemao";
+                SkinName["jiemao_02"] = "jiemao_02";
+                SkinName["xiaochoumao"] = "xiaochoumao";
+                SkinName["xingxingyanjing"] = "xingxingyanjing";
+                SkinName["yanshemao_shijie"] = "yanshemao_shijie";
+                SkinName["maomaozi"] = "maomaozi";
+            })(SkinName || (SkinName = {}));
+            let PropsName;
+            (function (PropsName) {
+                PropsName["yingguangbang"] = "yingguangbang";
+                PropsName["lifadao"] = "lifadao";
+                PropsName["jiandao"] = "jiandao";
+                PropsName["dianjupian"] = "dianjupian";
+                PropsName["dianju"] = "dianju";
+            })(PropsName || (PropsName = {}));
+            let OtherName;
+            (function (OtherName) {
+                OtherName["xiangsudao"] = "xiangsudao";
+                OtherName["tixudao"] = "tixudao";
+                OtherName["ruwu"] = "ruwu";
+                OtherName["lifadao"] = "lifadao";
+                OtherName["jundao"] = "jundao";
+                OtherName["tulongdao"] = "tulongdao";
+            })(OtherName || (OtherName = {}));
             Tools.objPropertySort(Shop.allSkin, 'arrange');
             Tools.objPropertySort(Shop.allProps, 'arrange');
             Tools.objPropertySort(Shop.allOther, 'arrange');
+            Shop._currentSkin.name = SkinName.anquanmao;
+            Shop._currentProp.name = PropsName.jiandao;
+            Shop._crrentOther.name = OtherName.tixudao;
             console.log(Shop.allSkin);
             console.log(Shop.allProps);
             console.log(Shop.allOther);
         }
-        shopNodeDec() {
+        myTap_Select(index) {
+            switch (index) {
+                case 0:
+                    Shop._MyList.array = Shop.allSkin;
+                    break;
+                case 1:
+                    Shop._MyList.array = Shop.allProps;
+                    break;
+                case 2:
+                    Shop._MyList.array = Shop.allOther;
+                    break;
+                default:
+                    break;
+            }
+            Shop._MyList.refresh();
         }
-        shopOnEnable() {
-        }
-        ;
-        refreshList() {
-            Shop._MyList.array = Shop.allSkin;
-        }
-        updateList(cell, index) {
+        myList_Update(cell, index) {
             let dataSource = cell.dataSource;
             let Pic = cell.getChildByName('Pic');
-            Pic.skin = 'UI/Props/Skin/' + dataSource.name + '.png';
+            switch (Shop._MyTap.selectedIndex) {
+                case 0:
+                    Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    break;
+                case 1:
+                    Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    break;
+                case 2:
+                    Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            let NoHave = cell.getChildByName('NoHave');
+            let Dec = NoHave.getChildByName('Dec');
+            let Icon = NoHave.getChildByName('Icon');
+            if (!cell.dataSource[Shop.Property.have]) {
+                switch (cell.dataSource[Shop.Property.getway]) {
+                    case Shop.Getway.ads || Shop.Getway.adsXD:
+                        Dec.text = cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition];
+                        Dec.x = 88;
+                        Dec.fontSize = 30;
+                        Icon.visible = true;
+                        break;
+                    case Shop.Getway.customs:
+                        Dec.text = '过' + cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition] + '关';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        break;
+                    case Shop.Getway.gold:
+                        Dec.text = '金币抽取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 28;
+                        Icon.visible = false;
+                        break;
+                    default:
+                        Icon.visible = false;
+                        break;
+                }
+            }
+            else {
+                NoHave.visible = false;
+            }
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, null, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
