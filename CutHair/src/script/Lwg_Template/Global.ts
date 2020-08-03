@@ -90,7 +90,6 @@ export module Global {
         /**头部操作范围*/
         export let HeadSimulate: Laya.MeshSprite3D;
 
-
         /**标记摄像机移动到任务的方位*/
         export let Landmark_Left: Laya.MeshSprite3D;
         export let Landmark_Right: Laya.MeshSprite3D;

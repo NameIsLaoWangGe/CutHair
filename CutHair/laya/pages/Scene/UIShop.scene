@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":87,
-    "selecteID":88,
+    "selectedBox":2,
+    "selecteID":68,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":96,
+    "maxID":97,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -172,7 +172,7 @@
                     "x":30,
                     "type":"Box",
                     "searchKey":"Box",
-                    "props":{"width":185,"renderType":"render","height":186},
+                    "props":{"y":93,"x":93,"width":185,"renderType":"render","pivotY":93,"pivotX":93,"height":186},
                     "nodeParent":68,
                     "label":"Box",
                     "isOpen":true,
@@ -198,10 +198,10 @@
                         {
                             "x":45,
                             "type":"Image",
-                            "searchKey":"Image,Scelet",
-                            "props":{"y":7,"x":6,"skin":"UI/Common/xuanzhong.png","name":"Scelet"},
+                            "searchKey":"Image,Select",
+                            "props":{"y":7,"x":6,"skin":"UI/Common/xuanzhong.png","name":"Select"},
                             "nodeParent":67,
-                            "label":"Scelet",
+                            "label":"Select",
                             "isDirectory":false,
                             "isAniNode":false,
                             "hasChild":false,
@@ -264,6 +264,23 @@
                                     "child":[
                                         ]
                                 }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Script",
+                            "switchAble":true,
+                            "source":"src/script/Game/UIShop_Goods.ts",
+                            "searchKey":"Script,UIShop_Goods",
+                            "removeAble":true,
+                            "props":{},
+                            "nodeParent":67,
+                            "label":"UIShop_Goods",
+                            "isDirectory":false,
+                            "isAniNode":false,
+                            "hasChild":false,
+                            "compId":96,
+                            "child":[
+                                ]
                         }]
                 }]
         },

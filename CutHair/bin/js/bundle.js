@@ -410,6 +410,11 @@
                 HintDec[HintDec["\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 20] = "\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
                 HintDec[HintDec["\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 21] = "\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
                 HintDec[HintDec["\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 22] = "\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
+                HintDec[HintDec["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 23] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
+                HintDec[HintDec["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 24] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
+                HintDec[HintDec["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 25] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
+                HintDec[HintDec["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 26] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
+                HintDec[HintDec["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 27] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
             })(HintDec = Hint.HintDec || (Hint.HintDec = {}));
             let Skin;
             (function (Skin) {
@@ -487,7 +492,7 @@
                     num.text = Gold_1._goldNum.toString();
                     parent.addChild(sp);
                     let Pic = sp.getChildByName('Pic');
-                    sp.pos(224, 100);
+                    sp.pos(234, 100);
                     sp.zOrder = 50;
                     Gold_1.GoldNode = sp;
                 }));
@@ -1023,19 +1028,21 @@
                     this.selfScene = this.self.scene;
                     let calssName = this['__proto__']['constructor'].name;
                     this.self[calssName] = this;
-                    this.rig = this.self.getComponent(Laya.RigidBody);
-                    this.selfNode();
+                    this.lwgNodeDec();
                 }
-                selfNode() {
+                lwgNodeDec() {
                 }
                 onEnable() {
                     this.lwgOnEnable();
                     this.lwgBtnClick();
+                    this.lwgEventReg();
                 }
                 lwgOnEnable() {
                     console.log('父类的初始化！');
                 }
                 lwgBtnClick() {
+                }
+                lwgEventReg() {
                 }
                 onUpdate() {
                     this.lwgOnUpdate();
@@ -1044,7 +1051,8 @@
                 }
                 onDisable() {
                     this.lwgDisable();
-                    Laya.Tween.clearTween(this);
+                    Laya.timer.clearAll(this);
+                    EventAdmin.offCaller(this);
                 }
                 lwgDisable() {
                 }
@@ -2918,7 +2926,7 @@
                 }
             };
             Shop.allOther = [];
-            Shop._crrentOther = {
+            Shop._currentOther = {
                 crrentOther: null,
                 get name() {
                     return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
@@ -2965,10 +2973,25 @@
                 let arrHave = [];
                 for (let index = 0; index < arr.length; index++) {
                     const element = arr[index];
+                    if (element[Property.have]) {
+                        arrHave.push(element);
+                    }
                 }
                 return arrHave;
             }
             Shop.getHaveArr = getHaveArr;
+            function getNohaveArr_Gold(goodsClass) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrNoHave = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (!element[Property.have] && element[Property.getway] === Getway.gold) {
+                        arrNoHave.push(element);
+                    }
+                }
+                return arrNoHave;
+            }
+            Shop.getNohaveArr_Gold = getNohaveArr_Gold;
             function getGoodsClassArr(goodsClass) {
                 let arr = [];
                 switch (goodsClass) {
@@ -3002,9 +3025,10 @@
                 Getway["free"] = "free";
                 Getway["ads"] = "ads";
                 Getway["adsXD"] = "adsXD";
-                Getway["customs"] = "customs";
+                Getway["ineedwin"] = "ineedwin";
                 Getway["gold"] = "gold";
                 Getway["diamond"] = "diamond";
+                Getway["easterEgg"] = "easterEgg";
                 Getway["other"] = "other";
             })(Getway = Shop.Getway || (Shop.Getway = {}));
             let GoodsClass;
@@ -3013,25 +3037,31 @@
                 GoodsClass["Props"] = "Shop_Props";
                 GoodsClass["Other"] = "Shop_Other";
             })(GoodsClass = Shop.GoodsClass || (Shop.GoodsClass = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["select"] = "select";
+            })(EventType = Shop.EventType || (Shop.EventType = {}));
             class ShopScene extends Admin.Scene {
                 lwgOnAwake() {
                     this.initData();
                     this.shopOnAwake();
                 }
                 initData() {
-                    Shop._MyTap = this.self['MyTap'];
-                    Shop._MyList = this.self['MyList'];
+                    Shop._ShopTap = this.self['MyTap'];
+                    Shop._ShopList = this.self['MyList'];
                     Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
                     Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
                     Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
                 }
-                shopOnAwake() {
+                lwgEventReg() {
+                    this.shopEventReg();
                 }
+                shopEventReg() { }
+                shopOnAwake() { }
                 lwgNodeDec() {
                     this.shopNodeDec();
                 }
-                shopNodeDec() {
-                }
+                shopNodeDec() { }
                 lwgOnEnable() {
                     this.myTap_Create();
                     this.myList_Create();
@@ -3039,23 +3069,22 @@
                 }
                 shopOnEnable() { }
                 myTap_Create() {
-                    Shop._MyTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
+                    Shop._ShopTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
                 }
-                myTap_Select(index) {
-                }
+                myTap_Select(index) { }
                 myList_Create() {
-                    Shop._MyList.selectEnable = true;
-                    Shop._MyList.vScrollBarSkin = "";
-                    Shop._MyList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
-                    Shop._MyList.renderHandler = new Laya.Handler(this, this.myList_Update);
+                    Shop._ShopList.selectEnable = true;
+                    Shop._ShopList.vScrollBarSkin = "";
+                    Shop._ShopList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
+                    Shop._ShopList.renderHandler = new Laya.Handler(this, this.myList_Update);
                     this.myList_refresh();
                 }
                 myList_Scelet(index) { }
                 myList_Update(cell, index) { }
                 myList_refresh() {
-                    if (Shop._MyList) {
-                        Shop._MyList.array = Shop.allSkin;
-                        Shop._MyList.refresh();
+                    if (Shop._ShopList) {
+                        Shop._ShopList.array = Shop.allSkin;
+                        Shop._ShopList.refresh();
                     }
                 }
             }
@@ -4316,6 +4345,19 @@
         }
     }
 
+    class UIShop_Goods extends Admin.Object {
+        lwgOnEnable() {
+            this.Select = this.self.getChildByName('Select');
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self, this, null, null, this.up, null);
+        }
+        up() {
+            EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']]);
+            console.log(this.self['_dataSource']);
+        }
+    }
+
     class UIShop extends Shop.ShopScene {
         shopOnAwake() {
             GVariate._stageClick = false;
@@ -4353,74 +4395,157 @@
             Tools.objPropertySort(Shop.allSkin, 'arrange');
             Tools.objPropertySort(Shop.allProps, 'arrange');
             Tools.objPropertySort(Shop.allOther, 'arrange');
-            Shop._currentSkin.name = SkinName.anquanmao;
-            Shop._currentProp.name = PropsName.jiandao;
-            Shop._crrentOther.name = OtherName.tixudao;
+            if (!Shop._currentSkin.name) {
+                Shop._currentSkin.name = SkinName.anquanmao;
+            }
+            if (!Shop._currentProp.name) {
+                Shop._currentProp.name = PropsName.jiandao;
+            }
+            if (Shop._currentOther.name) {
+                Shop._currentOther.name = OtherName.tixudao;
+            }
             console.log(Shop.allSkin);
             console.log(Shop.allProps);
             console.log(Shop.allOther);
         }
+        shopEventReg() {
+            EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
+                if (dataSource.have) {
+                    switch (Shop._ShopTap.selectedIndex) {
+                        case 0:
+                            Shop._currentSkin.name = dataSource.name;
+                            this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                            break;
+                        case 1:
+                            Shop._currentProp.name = dataSource.name;
+                            this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                            break;
+                        case 2:
+                            Shop._currentOther.name = dataSource.name;
+                            this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                            break;
+                        default:
+                            break;
+                    }
+                    Shop._ShopList.refresh();
+                }
+                else {
+                    console.log(dataSource[Shop.Getway.ads], Shop.Getway.ads);
+                    if (dataSource[Shop.Property.getway] === Shop.Getway.ads) {
+                        Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+                    }
+                    else if (dataSource[Shop.Property.getway] === Shop.Getway.adsXD) {
+                        Hint.createHint_Middle(Hint.HintDec["请前往皮肤限定界面获取!"]);
+                    }
+                    else if (dataSource[Shop.Property.getway] === Shop.Getway.ineedwin) {
+                        Hint.createHint_Middle(Hint.HintDec["通过相应的关卡数达到就可以得到了!"]);
+                    }
+                    else if (dataSource[Shop.Property.getway] === Shop.Getway.gold) {
+                        Hint.createHint_Middle(Hint.HintDec["点击金币抽奖按钮购买!"]);
+                    }
+                }
+            });
+        }
         myTap_Select(index) {
             switch (index) {
                 case 0:
-                    Shop._MyList.array = Shop.allSkin;
+                    Shop._ShopList.array = Shop.allSkin;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
                     break;
                 case 1:
-                    Shop._MyList.array = Shop.allProps;
+                    Shop._ShopList.array = Shop.allProps;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
                     break;
                 case 2:
-                    Shop._MyList.array = Shop.allOther;
+                    Shop._ShopList.array = Shop.allOther;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
                     break;
                 default:
                     break;
             }
-            Shop._MyList.refresh();
+            Shop._ShopList.refresh();
         }
         myList_Update(cell, index) {
             let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            Select.visible = false;
             let Pic = cell.getChildByName('Pic');
-            switch (Shop._MyTap.selectedIndex) {
+            switch (Shop._ShopTap.selectedIndex) {
                 case 0:
                     Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.Property.name] == Shop._currentSkin.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
                     break;
                 case 1:
                     Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.Property.name] == Shop._currentProp.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
                     break;
                 case 2:
                     Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.Property.name] == Shop._currentOther.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
                     break;
                 default:
                     break;
             }
             let NoHave = cell.getChildByName('NoHave');
+            let Board = cell.getChildByName('Board');
             let Dec = NoHave.getChildByName('Dec');
             let Icon = NoHave.getChildByName('Icon');
             if (!cell.dataSource[Shop.Property.have]) {
                 switch (cell.dataSource[Shop.Property.getway]) {
-                    case Shop.Getway.ads || Shop.Getway.adsXD:
+                    case Shop.Getway.ads:
                         Dec.text = cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition];
                         Dec.x = 88;
                         Dec.fontSize = 30;
                         Icon.visible = true;
                         break;
-                    case Shop.Getway.customs:
+                    case Shop.Getway.adsXD:
+                        Dec.text = '限定获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.easterEgg:
+                        Dec.text = '彩蛋获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.ineedwin:
                         Dec.text = '过' + cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition] + '关';
                         Dec.x = NoHave.width / 2;
                         Dec.fontSize = 23;
+                        Icon.visible = false;
                         break;
                     case Shop.Getway.gold:
                         Dec.text = '金币抽取';
                         Dec.x = NoHave.width / 2;
-                        Dec.fontSize = 28;
+                        Dec.fontSize = 23;
                         Icon.visible = false;
                         break;
                     default:
                         Icon.visible = false;
                         break;
                 }
+                Board.skin = 'UI/Common/kuang2.png';
             }
             else {
                 NoHave.visible = false;
+                Board.skin = 'UI/Common/kuang1.png';
             }
         }
         lwgBtnClick() {
@@ -4429,8 +4554,50 @@
             Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
         btnBuyUp() {
+            let noHaveGold = [];
+            switch (Shop._ShopTap.selectedIndex) {
+                case 0:
+                    noHaveGold = Shop.getNohaveArr_Gold(Shop.GoodsClass.Skin);
+                    break;
+                case 1:
+                    noHaveGold = Shop.getNohaveArr_Gold(Shop.GoodsClass.Props);
+                    break;
+                case 2:
+                    noHaveGold = Shop.getNohaveArr_Gold(Shop.GoodsClass.Other);
+                    break;
+                default:
+                    break;
+            }
+            if (noHaveGold.length <= 0) {
+                Hint.HintDec["没有可以购买的皮肤了！"];
+            }
+            else {
+                Tools.objPropertySort(noHaveGold, Shop.Property.getOder);
+                let price = noHaveGold[0][Shop.Property.condition];
+                if (Gold._goldNum < price) {
+                    Hint.createHint_Middle(Hint.HintDec["金币不够了！"]);
+                }
+                else {
+                    Hint.createHint_Middle(Hint.HintDec["恭喜获得新皮肤!"]);
+                    switch (Shop._ShopTap.selectedIndex) {
+                        case 0:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.Property.have, true);
+                            break;
+                        case 1:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.Property.have, true);
+                            break;
+                        case 2:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.Property.have, true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                Shop._ShopList.refresh();
+            }
         }
         btnGetGold() {
+            Hint.HintDec["暂时没有广告，过会儿再试试吧！"];
         }
         btnBackUp() {
             this.self.close();
@@ -4690,6 +4857,7 @@
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
             reg("script/Game/UIShare.ts", UIShare);
+            reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
             reg("script/Game/UIShop.ts", UIShop);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UIVictory.ts", UIVictory);

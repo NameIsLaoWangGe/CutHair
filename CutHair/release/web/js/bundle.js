@@ -410,6 +410,11 @@
                 HintDec[HintDec["\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 20] = "\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
                 HintDec[HintDec["\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 21] = "\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
                 HintDec[HintDec["\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 22] = "\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
+                HintDec[HintDec["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 23] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
+                HintDec[HintDec["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 24] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
+                HintDec[HintDec["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 25] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
+                HintDec[HintDec["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 26] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
+                HintDec[HintDec["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 27] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
             })(HintDec = Hint.HintDec || (Hint.HintDec = {}));
             let Skin;
             (function (Skin) {
@@ -487,7 +492,7 @@
                     num.text = Gold_1._goldNum.toString();
                     parent.addChild(sp);
                     let Pic = sp.getChildByName('Pic');
-                    sp.pos(224, 100);
+                    sp.pos(234, 100);
                     sp.zOrder = 50;
                     Gold_1.GoldNode = sp;
                 }));
@@ -501,7 +506,7 @@
             }
             Gold_1.goldAppear = goldAppear;
             function goldVinish(delayed) {
-                Gold_1.GoldNode.visible = true;
+                Gold_1.GoldNode.visible = false;
                 if (delayed) {
                     Animation2D.scale_Alpha(Gold_1.GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
                 }
@@ -528,27 +533,30 @@
             (function (SkinUrl) {
                 SkinUrl[SkinUrl["Frame/Effects/icon_gold.png"] = 0] = "Frame/Effects/icon_gold.png";
             })(SkinUrl || (SkinUrl = {}));
-            function createOneGold() {
+            function createOneGold(width, height, url) {
                 let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image);
                 Gold.name = 'addGold';
                 Gold.alpha = 1;
-                Gold.scale(1, 1);
                 Gold.zOrder = 60;
+                Gold.width = width;
+                Gold.height = height;
+                Gold.pivotX = width / 2;
+                Gold.pivotY = height / 2;
+                if (!url) {
+                    Gold.skin = SkinUrl[0];
+                }
+                else {
+                    Gold.skin = url;
+                }
                 return Gold;
             }
             Gold_1.createOneGold = createOneGold;
-            function getGoldAni_Single(parent, number, url, fX, fY, tX, tY, func1, func2) {
+            function getGoldAni_Single(parent, number, width, height, url, firstPoint, targetPoint, func1, func2) {
                 for (let index = 0; index < number; index++) {
                     Laya.timer.once(index * 30, this, () => {
-                        let Gold = createOneGold();
+                        let Gold = createOneGold(width, height, url);
                         parent.addChild(Gold);
-                        if (!url) {
-                            Gold.skin = SkinUrl[0];
-                        }
-                        else {
-                            Gold.skin = url;
-                        }
-                        Animation2D.move_Scale(Gold, 1, fX, fY, tX, tY, 1, 350, 0, null, () => {
+                        Animation2D.move_Scale(Gold, 1, firstPoint.x, firstPoint.y, targetPoint.x, targetPoint.y, 1, 350, 0, null, () => {
                             if (index === number - 1) {
                                 Laya.timer.once(200, this, () => {
                                     if (func2) {
@@ -567,9 +575,9 @@
                 }
             }
             Gold_1.getGoldAni_Single = getGoldAni_Single;
-            function getGoldAni_Heap(parent, number, url, fX, fY, tX, tY, func1, func2) {
+            function getGoldAni_Heap(parent, number, width, height, url, firstPoint, targetPoint, func1, func2) {
                 for (let index = 0; index < number; index++) {
-                    let Gold = createOneGold();
+                    let Gold = createOneGold(width, height, url);
                     parent.addChild(Gold);
                     if (!url) {
                         Gold.skin = SkinUrl[0];
@@ -577,6 +585,25 @@
                     else {
                         Gold.skin = url;
                     }
+                    let x = Math.floor(Math.random() * 2) == 1 ? firstPoint.x + Math.random() * 100 : firstPoint.x - Math.random() * 100;
+                    let y = Math.floor(Math.random() * 2) == 1 ? firstPoint.y + Math.random() * 100 : firstPoint.y - Math.random() * 100;
+                    Animation2D.move_Scale(Gold, 0.5, firstPoint.x, firstPoint.y, x, y, 1, 300, Math.random() * 100 + 100, Laya.Ease.expoIn, () => {
+                        Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, targetPoint.x, targetPoint.y, 1, 400, Math.random() * 200 + 100, Laya.Ease.cubicOut, () => {
+                            if (index === number - 1) {
+                                Laya.timer.once(200, this, () => {
+                                    if (func2) {
+                                        func2();
+                                    }
+                                });
+                            }
+                            else {
+                                if (func1) {
+                                    func1();
+                                }
+                            }
+                            Gold.removeSelf();
+                        });
+                    });
                 }
             }
             Gold_1.getGoldAni_Heap = getGoldAni_Heap;
@@ -678,6 +705,7 @@
                 SceneName["UICaiDanQiang"] = "UICaiDanQiang";
                 SceneName["UICaidanPifu"] = "UICaidanPifu";
                 SceneName["UIOperation"] = "UIOperation";
+                SceneName["UIShop"] = "UIShop";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -1000,19 +1028,21 @@
                     this.selfScene = this.self.scene;
                     let calssName = this['__proto__']['constructor'].name;
                     this.self[calssName] = this;
-                    this.rig = this.self.getComponent(Laya.RigidBody);
-                    this.selfNode();
+                    this.lwgNodeDec();
                 }
-                selfNode() {
+                lwgNodeDec() {
                 }
                 onEnable() {
                     this.lwgOnEnable();
                     this.lwgBtnClick();
+                    this.lwgEventReg();
                 }
                 lwgOnEnable() {
                     console.log('父类的初始化！');
                 }
                 lwgBtnClick() {
+                }
+                lwgEventReg() {
                 }
                 onUpdate() {
                     this.lwgOnUpdate();
@@ -1021,7 +1051,8 @@
                 }
                 onDisable() {
                     this.lwgDisable();
-                    Laya.Tween.clearTween(this);
+                    Laya.timer.clearAll(this);
+                    EventAdmin.offCaller(this);
                 }
                 lwgDisable() {
                 }
@@ -1085,6 +1116,11 @@
                 SkinUrl[SkinUrl["Frame/Effects/star_white.png"] = 22] = "Frame/Effects/star_white.png";
                 SkinUrl[SkinUrl["Frame/Effects/star_yellow.png"] = 23] = "Frame/Effects/star_yellow.png";
             })(SkinUrl = Effects.SkinUrl || (Effects.SkinUrl = {}));
+            let SkinStyle;
+            (function (SkinStyle) {
+                SkinStyle["star"] = "star";
+                SkinStyle["dot"] = "dot";
+            })(SkinStyle = Effects.SkinStyle || (Effects.SkinStyle = {}));
             class EffectsBase extends Laya.Script {
                 onAwake() {
                     this.initProperty();
@@ -1191,10 +1227,10 @@
                     let ele = Laya.Pool.getItemByClass('ele', Laya.Image);
                     ele.name = 'ele';
                     let num;
-                    if (style === 'star') {
+                    if (style === SkinStyle.star) {
                         num = 12 + Math.floor(Math.random() * 12);
                     }
-                    else if (style === 'dot') {
+                    else if (style === SkinStyle.dot) {
                         num = Math.floor(Math.random() * 12);
                     }
                     ele.skin = SkinUrl[num];
@@ -2214,16 +2250,15 @@
             }
             Animation2D.move_Scale = move_Scale;
             function rotate_Scale(target, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func) {
-                Laya.timer.once(delayed, this, () => {
-                    target.scaleX = fScaleX;
-                    target.scaleY = fScaleY;
-                    target.rotation = fRotate;
-                    Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
-                        if (func) {
-                            this.func();
-                        }
-                    }), 0);
-                });
+                target.scaleX = fScaleX;
+                target.scaleY = fScaleY;
+                target.rotation = fRotate;
+                Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
+                    if (func) {
+                        func();
+                    }
+                    target.rotation = 0;
+                }), delayed ? delayed : 0);
             }
             Animation2D.rotate_Scale = rotate_Scale;
             function drop_Simple(node, fY, tY, rotation, time, delayed, func) {
@@ -2694,68 +2729,91 @@
                 return point;
             }
             Tools.transitionScreenPointfor3D = transitionScreenPointfor3D;
-            function random(n, m) {
-                m = m || 10;
-                const c = m - n + 1;
-                return Math.floor(Math.random() * c + n);
+            function objPropertySort(array, property) {
+                var compare = function (obj1, obj2) {
+                    var val1 = obj1[property];
+                    var val2 = obj2[property];
+                    if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+                        val1 = Number(val1);
+                        val2 = Number(val2);
+                    }
+                    if (val1 < val2) {
+                        return -1;
+                    }
+                    else if (val1 > val2) {
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+                };
+                array.sort(compare);
+                return array;
             }
-            Tools.random = random;
-            function getRandomArrayElements(arr, count) {
-                var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
-                while (i-- > min) {
-                    index = Math.floor((i + 1) * Math.random());
-                    temp = shuffled[index];
-                    shuffled[index] = shuffled[i];
-                    shuffled[i] = temp;
-                }
-                return shuffled.slice(min);
-            }
-            Tools.getRandomArrayElements = getRandomArrayElements;
-            function getArrayDifElements(arr, count) {
-                const result = [];
-                let i = 0;
-                for (i; i < count; i++) {
-                    const temp = getDiffEle(arr.slice(), result, i);
-                    result.push(temp);
+            Tools.objPropertySort = objPropertySort;
+            function dataCompareDifferent(data1, data2, property) {
+                var result = [];
+                for (var i = 0; i < data1.length; i++) {
+                    var obj1 = data1[i];
+                    var obj1Name = obj1[property];
+                    var isExist = false;
+                    for (var j = 0; j < data2.length; j++) {
+                        var obj2 = data2[j];
+                        var obj2Name = obj2[property];
+                        if (obj2Name == obj1Name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (!isExist) {
+                        result.push(obj1);
+                    }
                 }
                 return result;
             }
-            Tools.getArrayDifElements = getArrayDifElements;
-            function getDiffEle(arr, result, place) {
-                let indexArr = [];
-                let i = 0;
-                for (i; i < arr.length - place; i++) {
-                    indexArr.push(i);
+            Tools.dataCompareDifferent = dataCompareDifferent;
+            function dataComparEidentical(data1, data2, property) {
+                var result = [];
+                for (var i = 0; i < data1.length; i++) {
+                    var obj1 = data1[i];
+                    var obj1Name = obj1[property];
+                    var isExist = false;
+                    for (var j = 0; j < data2.length; j++) {
+                        var obj2 = data2[j];
+                        var obj2Name = obj2[property];
+                        if (obj2Name == name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (isExist) {
+                        result.push(obj1);
+                    }
                 }
-                const ranIndex = Math.floor(Math.random() * indexArr.length);
-                if (result.indexOf(arr[ranIndex]) === -1) {
-                    const backNum = arr[ranIndex];
-                    arr[ranIndex] = arr[indexArr.length - 1];
-                    return backNum;
-                }
-                else {
-                    arr.splice(ranIndex, 1);
-                    return getDiffEle(arr, result, place);
+                return result;
+            }
+            Tools.dataComparEidentical = dataComparEidentical;
+            function data1AddToData2(data1, data2) {
+                for (let index = 0; index < data2.length; index++) {
+                    const element = data2[index];
+                    data1.push(element);
                 }
             }
-            Tools.getDiffEle = getDiffEle;
-            Tools.roleDragCan = false;
-            function copydata(obj) {
-                const ret = {};
-                Object.getOwnPropertyNames(obj).forEach(name => {
-                    ret[name] = obj[name];
-                });
-                return ret;
+            Tools.data1AddToData2 = data1AddToData2;
+            function random(range1, range2) {
+                range1 = range1 || 10;
+                const c = range1 - range2 + 1;
+                return Math.floor(Math.random() * c + range1);
             }
-            Tools.copydata = copydata;
-            function fillArray(value, len) {
+            Tools.random = random;
+            function copyArray(arr1) {
                 var arr = [];
-                for (var i = 0; i < len; i++) {
-                    arr.push(value);
+                for (var i = 0; i < arr1.length; i++) {
+                    arr.push(arr1[i]);
                 }
                 return arr;
             }
-            Tools.fillArray = fillArray;
+            Tools.copyArray = copyArray;
             function speedByAngle(angle, XY) {
                 if (angle % 90 === 0 || !angle) {
                     console.error("计算的角度异常,需要查看：", angle);
@@ -2774,51 +2832,12 @@
                 return speedXY;
             }
             Tools.speedXYByAngle = speedXYByAngle;
-            function speedLabelByAngle(angle, speed, speedBate) {
-                const speedXY = { x: 0, y: 0 };
-                const selfAngle = angle;
-                const defaultSpeed = speed;
-                const bate = speedBate || 1;
-                if (selfAngle % 90 === 0) {
-                    if (selfAngle === 0 || selfAngle === 360) {
-                        speedXY.x = Math.abs(defaultSpeed) * bate;
-                    }
-                    else if (selfAngle === 90) {
-                        speedXY.y = Math.abs(defaultSpeed) * bate;
-                    }
-                    else if (selfAngle === 180) {
-                        speedXY.x = -Math.abs(defaultSpeed) * bate;
-                    }
-                    else {
-                        speedXY.y = -Math.abs(defaultSpeed) * bate;
-                    }
-                }
-                else {
-                    const tempXY = Tools.speedXYByAngle(selfAngle, defaultSpeed);
-                    speedXY.x = tempXY.x;
-                    speedXY.y = tempXY.y;
-                    if (selfAngle > 0 && selfAngle < 180) {
-                        speedXY.y = Math.abs(speedXY.y) * bate;
-                    }
-                    else {
-                        speedXY.y = -Math.abs(speedXY.y) * bate;
-                    }
-                    if (selfAngle > 90 && selfAngle < 270) {
-                        speedXY.x = -Math.abs(speedXY.x) * bate;
-                    }
-                    else {
-                        speedXY.x = Math.abs(speedXY.x) * bate;
-                    }
-                }
-                return speedXY;
-            }
-            Tools.speedLabelByAngle = speedLabelByAngle;
             function getRad(degree) {
                 return degree / 180 * Math.PI;
             }
             Tools.getRad = getRad;
-            function getRoundPos(angle, radius, centPos) {
-                var center = centPos;
+            function getRoundPos(angle, radius, centerPos) {
+                var center = centerPos;
                 var radius = radius;
                 var hudu = (2 * Math.PI / 360) * angle;
                 var X = center.x + Math.sin(hudu) * radius;
@@ -2826,106 +2845,351 @@
                 return { x: X, y: Y };
             }
             Tools.getRoundPos = getRoundPos;
-            function converteNum(num) {
-                if (typeof (num) !== "number") {
+            function converteNum(number) {
+                if (typeof (number) !== "number") {
                     console.warn("要转化的数字并不为number");
-                    return num;
+                    return number;
                 }
                 let backNum;
-                if (num < 1000) {
-                    backNum = "" + num;
+                if (number < 1000) {
+                    backNum = "" + number;
                 }
-                else if (num < 1000000) {
-                    backNum = "" + (num / 1000).toFixed(1) + "k";
+                else if (number < 1000000) {
+                    backNum = "" + (number / 1000).toFixed(1) + "k";
                 }
-                else if (num < 10e8) {
-                    backNum = "" + (num / 1000000).toFixed(1) + "m";
+                else if (number < 10e8) {
+                    backNum = "" + (number / 1000000).toFixed(1) + "m";
                 }
                 else {
-                    backNum = "" + num;
+                    backNum = "" + number;
                 }
                 return backNum;
             }
             Tools.converteNum = converteNum;
+            function dataCompare(url, storageName, propertyName) {
+                let dataArr;
+                if (JSON.parse(Laya.LocalStorage.getJSON(storageName))) {
+                    dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
+                    console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
+                    try {
+                        let dataArr_0 = Laya.loader.getRes(url)['RECORDS'];
+                        if (dataArr_0.length >= dataArr.length) {
+                            let diffArray = Tools.dataCompareDifferent(dataArr_0, dataArr, propertyName);
+                            console.log('两个数据的差值为：', diffArray);
+                            Tools.data1AddToData2(dataArr, diffArray);
+                        }
+                        else {
+                            console.log(storageName + '数据表填写有误，长度不能小于之前的长度');
+                        }
+                    }
+                    catch (error) {
+                        console.log(storageName, '数据赋值失败！请检查数据表或者手动赋值！');
+                    }
+                }
+                else {
+                    try {
+                        dataArr = Laya.loader.getRes(url)['RECORDS'];
+                    }
+                    catch (error) {
+                        console.log(storageName + '数据赋值失败！请检查数据表或者手动赋值！');
+                    }
+                }
+                let data = {};
+                data[storageName] = dataArr;
+                Laya.LocalStorage.setJSON(storageName, JSON.stringify(data));
+                return dataArr;
+            }
+            Tools.dataCompare = dataCompare;
         })(Tools = lwg.Tools || (lwg.Tools = {}));
+        let Shop;
+        (function (Shop) {
+            Shop.allSkin = [];
+            Shop._currentSkin = {
+                currentSkin: null,
+                get name() {
+                    return this.currentSkin = Laya.LocalStorage.getItem('Shop_currentSkin') !== null ? Laya.LocalStorage.getItem('Shop_currentSkin') : null;
+                },
+                set name(name) {
+                    this.currentSkin = name;
+                    Laya.LocalStorage.setItem('Shop_currentSkin', this.currentSkin);
+                }
+            };
+            Shop.allProps = [];
+            Shop._currentProp = {
+                currentProp: null,
+                get name() {
+                    return this.currentProp = Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
+                },
+                set name(name) {
+                    this.currentProp = name;
+                    Laya.LocalStorage.setItem('Shop_currentProp', this.currentProp);
+                }
+            };
+            Shop.allOther = [];
+            Shop._currentOther = {
+                crrentOther: null,
+                get name() {
+                    return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
+                },
+                set name(name) {
+                    this.crrentOther = name;
+                    Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
+                }
+            };
+            function getGoodsProperty(goodsClass, name, property) {
+                let pro;
+                let arr = getGoodsClassArr(goodsClass);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element[name] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property);
+                }
+            }
+            Shop.getGoodsProperty = getGoodsProperty;
+            function setGoodsProperty(goodsClass, name, property, value) {
+                let arr = getGoodsClassArr(goodsClass);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[goodsClass] = arr;
+                Laya.LocalStorage.setJSON(goodsClass, JSON.stringify(data));
+            }
+            Shop.setGoodsProperty = setGoodsProperty;
+            function getHaveArr(goodsClass) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrHave = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element[Property.have]) {
+                        arrHave.push(element);
+                    }
+                }
+                return arrHave;
+            }
+            Shop.getHaveArr = getHaveArr;
+            function getNohaveArr_Gold(goodsClass) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrNoHave = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (!element[Property.have] && element[Property.getway] === Getway.gold) {
+                        arrNoHave.push(element);
+                    }
+                }
+                return arrNoHave;
+            }
+            Shop.getNohaveArr_Gold = getNohaveArr_Gold;
+            function getGoodsClassArr(goodsClass) {
+                let arr = [];
+                switch (goodsClass) {
+                    case GoodsClass.Skin:
+                        arr = Shop.allSkin;
+                        break;
+                    case GoodsClass.Props:
+                        arr = Shop.allProps;
+                        break;
+                    case GoodsClass.Other:
+                        arr = Shop.allOther;
+                        break;
+                    default:
+                        break;
+                }
+                return arr;
+            }
+            Shop.getGoodsClassArr = getGoodsClassArr;
+            let Property;
+            (function (Property) {
+                Property["name"] = "name";
+                Property["getway"] = "getway";
+                Property["condition"] = "condition";
+                Property["resCondition"] = "resCondition";
+                Property["arrange"] = "arrange";
+                Property["getOder"] = "getOder";
+                Property["have"] = "have";
+            })(Property = Shop.Property || (Shop.Property = {}));
+            let Getway;
+            (function (Getway) {
+                Getway["free"] = "free";
+                Getway["ads"] = "ads";
+                Getway["adsXD"] = "adsXD";
+                Getway["ineedwin"] = "ineedwin";
+                Getway["gold"] = "gold";
+                Getway["diamond"] = "diamond";
+                Getway["easterEgg"] = "easterEgg";
+                Getway["other"] = "other";
+            })(Getway = Shop.Getway || (Shop.Getway = {}));
+            let GoodsClass;
+            (function (GoodsClass) {
+                GoodsClass["Skin"] = "Shop_Skin";
+                GoodsClass["Props"] = "Shop_Props";
+                GoodsClass["Other"] = "Shop_Other";
+            })(GoodsClass = Shop.GoodsClass || (Shop.GoodsClass = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["select"] = "select";
+            })(EventType = Shop.EventType || (Shop.EventType = {}));
+            class ShopScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.shopOnAwake();
+                }
+                initData() {
+                    Shop._ShopTap = this.self['MyTap'];
+                    Shop._ShopList = this.self['MyList'];
+                    Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
+                    Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
+                    Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
+                }
+                lwgEventReg() {
+                    this.shopEventReg();
+                }
+                shopEventReg() { }
+                shopOnAwake() { }
+                lwgNodeDec() {
+                    this.shopNodeDec();
+                }
+                shopNodeDec() { }
+                lwgOnEnable() {
+                    this.myTap_Create();
+                    this.myList_Create();
+                    this.shopOnEnable();
+                }
+                shopOnEnable() { }
+                myTap_Create() {
+                    Shop._ShopTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
+                }
+                myTap_Select(index) { }
+                myList_Create() {
+                    Shop._ShopList.selectEnable = true;
+                    Shop._ShopList.vScrollBarSkin = "";
+                    Shop._ShopList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
+                    Shop._ShopList.renderHandler = new Laya.Handler(this, this.myList_Update);
+                    this.myList_refresh();
+                }
+                myList_Scelet(index) { }
+                myList_Update(cell, index) { }
+                myList_refresh() {
+                    if (Shop._ShopList) {
+                        Shop._ShopList.array = Shop.allSkin;
+                        Shop._ShopList.refresh();
+                    }
+                }
+            }
+            Shop.ShopScene = ShopScene;
+        })(Shop = lwg.Shop || (lwg.Shop = {}));
         let Loding;
         (function (Loding) {
-            Loding.lodingList_2D = [];
             Loding.lodingList_3D = [];
+            Loding.lodingList_2D = [];
             Loding.lodingList_Data = [];
-            Loding.sumProgress = 0;
-            Loding.currentProgress = 0;
+            Loding.currentProgress = {
+                val: 0,
+                get value() {
+                    return this.val;
+                },
+                set value(v) {
+                    this.val = v;
+                    if (this.val >= Loding.sumProgress) {
+                        console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
+                        console.log('进度条停止！');
+                        console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取');
+                        EventAdmin.notify(Loding.LodingType.complete);
+                    }
+                    else {
+                        let number = 0;
+                        for (let index = 0; index <= Loding.loadOrderIndex; index++) {
+                            number += Loding.loadOrder[index].length;
+                        }
+                        if (this.val === number) {
+                            Loding.loadOrderIndex++;
+                        }
+                        EventAdmin.notify(Loding.LodingType.loding);
+                    }
+                },
+            };
             let LodingType;
             (function (LodingType) {
-                LodingType["Loding3D"] = "Loding3D";
-                LodingType["Loding2D"] = "Loding2D";
-                LodingType["LodingData"] = "LodingData";
                 LodingType["complete"] = "complete";
+                LodingType["loding"] = "loding";
                 LodingType["progress"] = "progress";
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
-            class Lode extends Admin.Scene {
+            class LodeScene extends Admin.Scene {
                 lwgEventReg() {
-                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Data.length;
-                    EventAdmin.reg(LodingType.Loding3D, this, () => { this.lodeScene3D(); });
-                    EventAdmin.reg(LodingType.Loding2D, this, () => { this.loding2D(); });
-                    EventAdmin.reg(LodingType.LodingData, this, () => { this.lodingData(); });
+                    EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
                     EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(); });
-                    EventAdmin.reg(LodingType.progress, this, () => { Loding.currentProgress++, console.log('当前进度条进度:', Loding.currentProgress); });
+                    EventAdmin.reg(LodingType.progress, this, () => {
+                        Loding.currentProgress.value++;
+                        if (Loding.currentProgress.value < Loding.sumProgress) {
+                            console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
+                        }
+                    });
                 }
-                lodeScene3D() {
-                    if (Loding.lodingList_3D.length === 0) {
-                        console.log('没有3D场景');
-                        EventAdmin.notify(LodingType.Loding2D);
-                        return;
-                    }
-                    for (let index = 0; index < Loding.lodingList_3D.length; index++) {
-                        Laya.Scene3D.load(Loding.lodingList_3D[index], Laya.Handler.create(this, (scene) => {
-                            console.log('3D场景' + index + '加载完成！');
-                            EventAdmin.notify(LodingType.progress);
-                            if (index == Loding.lodingList_3D.length - 1) {
-                                console.log('所有3D场景加载完成！');
-                                EventAdmin.notify(LodingType.Loding2D);
-                            }
-                        }));
-                    }
+                lwgOnEnable() {
+                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3D, Loding.lodingList_Data];
+                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Data.length;
+                    Loding.loadOrderIndex = 0;
+                    EventAdmin.notify(Loding.LodingType.loding);
                 }
-                loding2D() {
-                    if (Loding.lodingList_2D.length === 0) {
-                        console.log('没有需要加载的2D资源！');
-                        EventAdmin.notify(LodingType.LodingData);
-                        return;
+                lodingRule() {
+                    let alreadyPro = 0;
+                    for (let index = 0; index < Loding.loadOrderIndex; index++) {
+                        alreadyPro += Loding.loadOrder[index].length;
                     }
-                    for (let index = 0; index < Loding.lodingList_2D.length; index++) {
-                        Laya.loader.load(Loding.lodingList_2D[index], Laya.Handler.create(this, (scene) => {
-                            console.log('2D资源' + index + '加载完成！');
-                            EventAdmin.notify(LodingType.progress);
-                            if (index == Loding.lodingList_2D.length - 1) {
-                                console.log('所有2D资源加载完成！');
-                                EventAdmin.notify(LodingType.LodingData);
-                            }
-                        }));
-                    }
-                }
-                lodingData() {
-                    if (Loding.lodingList_Data.length === 0) {
-                        console.log('没有数据表需要加载！');
-                        EventAdmin.notify(LodingType.complete);
-                        return;
-                    }
-                    for (let index = 0; index < Loding.lodingList_Data.length; index++) {
-                        Laya.loader.load(Loding.lodingList_Data[index], Laya.Handler.create(this, () => {
-                            console.log('数据表' + index + '加载完成！可通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                            EventAdmin.notify(LodingType.progress);
-                            if (index == Loding.lodingList_Data.length - 1) {
-                                console.log('数据表加载完成！通过 Laya.loader.getRes("Data/levelsData.json")["RECORDS"]获取');
-                                EventAdmin.notify(LodingType.complete);
-                            }
-                        }), null, Laya.Loader.JSON);
+                    let index = Loding.currentProgress.value - alreadyPro;
+                    switch (Loding.loadOrder[Loding.loadOrderIndex]) {
+                        case Loding.lodingList_2D:
+                            Laya.loader.load(Loding.lodingList_2D[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX2D资源' + Loding.lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                }
+                                else {
+                                    console.log('2D资源' + Loding.lodingList_2D[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_3D:
+                            Laya.Scene3D.load(Loding.lodingList_3D[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX3D场景' + Loding.lodingList_3D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                }
+                                else {
+                                    console.log('3D场景' + Loding.lodingList_3D[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_Data:
+                            Laya.loader.load(Loding.lodingList_Data[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX数据表' + Loding.lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                }
+                                else {
+                                    console.log('数据表' + Loding.lodingList_Data[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }), null, Laya.Loader.JSON);
+                            break;
+                        default:
+                            break;
                     }
                 }
                 lwgLodeComplete() { }
             }
-            Loding.Lode = Lode;
+            Loding.LodeScene = LodeScene;
         })(Loding = lwg.Loding || (lwg.Loding = {}));
     })(lwg || (lwg = {}));
     let Admin = lwg.Admin;
@@ -2941,6 +3205,7 @@
     let Hint = lwg.Hint;
     let Loding = lwg.Loding;
     let Game = lwg.Game;
+    let Shop = lwg.Shop;
 
     class ADManager {
         constructor() {
@@ -3428,7 +3693,7 @@
         }
     }
 
-    class UILoding extends Loding.Lode {
+    class UILoding extends Loding.LodeScene {
         constructor() {
             super();
             this.maskMoveSwitch = true;
@@ -3441,14 +3706,18 @@
                 "res/atlas/Frame/UI.png",
                 "res/atlas/UI/GameStart.png",
                 "res/atlas/UI/Common.png",
+                "res/atlas/UI/Shop/Skin.png",
+                "res/atlas/UI/Shop/Props.png",
+                "res/atlas/UI/Shop/Other.png",
             ];
             Loding.lodingList_3D = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
             ];
-            Loding.lodingList_Data = [];
-        }
-        lwgOnEnable() {
-            EventAdmin.notify(Loding.LodingType.Loding3D);
+            Loding.lodingList_Data = [
+                "GameData/Shop/Other.json",
+                "GameData/Shop/Props.json",
+                "GameData/Shop/Skin.json",
+            ];
         }
         lwgAdaptive() {
             this.self['Bg'].height = Laya.stage.height;
@@ -3626,7 +3895,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair];
             this.createProgress();
         }
         lwgOnEnable() {
@@ -4021,14 +4290,14 @@
             this.self['SmallFram'].x -= 500;
             this.self['Logo'].y -= 500;
             this.self['BtnShare'].alpha = 0;
-            Animation2D.scale_Alpha(this.self['BigFrame'], 0, 0, 0, 1, 1, 1, this.aniTime * 4.5, Laya.Ease.cubicOut, this.aniDelayde * 1, () => {
+            Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
                 Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
                 Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
                 Animation2D.bombs_Appear(this.self['BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
                 let hotAddNum = Math.floor(Math.random() * 100 + 900);
                 Laya.timer.frameLoop(1, this, () => {
                     if (Number(this.self['HotNum'].text) < hotAddNum) {
-                        this.self['HotNum'].text = Number(this.self['HotNum'].text) + 15;
+                        this.self['HotNum'].text = Number(this.self['HotNum'].text) + 6;
                     }
                 });
                 Laya.timer.once(this.aniDelayde * 7, this, () => { this.self['Icon_hand'].skin = 'UI/Share/tubiao_1-2.png'; });
@@ -4036,6 +4305,7 @@
             });
             this.self['BtnNoShare'].alpha = 0;
             Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
+            Effects.createExplosion_Rotate(this.self['SceneContent'], 40, this.self['SceneContent'].width / 2, this.self['SceneContent'].height / 2 - 100, Effects.SkinStyle.star, 20, 15);
             return this.aniTime * 5;
         }
         endPhoto() {
@@ -4075,6 +4345,268 @@
         }
     }
 
+    class UIShop_Goods extends Admin.Object {
+        lwgOnEnable() {
+            this.Select = this.self.getChildByName('Select');
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self, this, null, null, this.up, null);
+        }
+        up() {
+            EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']]);
+            console.log(this.self['_dataSource']);
+        }
+    }
+
+    class UIShop extends Shop.ShopScene {
+        shopOnAwake() {
+            GVariate._stageClick = false;
+            let SkinName;
+            (function (SkinName) {
+                SkinName["anquanmao"] = "anquanmao";
+                SkinName["yuanyanjing"] = "yuanyanjing";
+                SkinName["jiemao_01"] = "jiemao_01";
+                SkinName["hamajing"] = "hamajing";
+                SkinName["yanshemao_gangtie"] = "yanshemao_gangtie";
+                SkinName["yanshemao"] = "yanshemao";
+                SkinName["jiemao_02"] = "jiemao_02";
+                SkinName["xiaochoumao"] = "xiaochoumao";
+                SkinName["xingxingyanjing"] = "xingxingyanjing";
+                SkinName["yanshemao_shijie"] = "yanshemao_shijie";
+                SkinName["maomaozi"] = "maomaozi";
+            })(SkinName || (SkinName = {}));
+            let PropsName;
+            (function (PropsName) {
+                PropsName["yingguangbang"] = "yingguangbang";
+                PropsName["lifadao"] = "lifadao";
+                PropsName["jiandao"] = "jiandao";
+                PropsName["dianjupian"] = "dianjupian";
+                PropsName["dianju"] = "dianju";
+            })(PropsName || (PropsName = {}));
+            let OtherName;
+            (function (OtherName) {
+                OtherName["xiangsudao"] = "xiangsudao";
+                OtherName["tixudao"] = "tixudao";
+                OtherName["ruwu"] = "ruwu";
+                OtherName["lifadao"] = "lifadao";
+                OtherName["jundao"] = "jundao";
+                OtherName["tulongdao"] = "tulongdao";
+            })(OtherName || (OtherName = {}));
+            Tools.objPropertySort(Shop.allSkin, 'arrange');
+            Tools.objPropertySort(Shop.allProps, 'arrange');
+            Tools.objPropertySort(Shop.allOther, 'arrange');
+            if (!Shop._currentSkin.name) {
+                Shop._currentSkin.name = SkinName.anquanmao;
+            }
+            if (!Shop._currentProp.name) {
+                Shop._currentProp.name = PropsName.jiandao;
+            }
+            if (Shop._currentOther.name) {
+                Shop._currentOther.name = OtherName.tixudao;
+            }
+            console.log(Shop.allSkin);
+            console.log(Shop.allProps);
+            console.log(Shop.allOther);
+        }
+        shopEventReg() {
+            EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
+                if (dataSource.have) {
+                    switch (Shop._ShopTap.selectedIndex) {
+                        case 0:
+                            Shop._currentSkin.name = dataSource.name;
+                            this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                            break;
+                        case 1:
+                            Shop._currentProp.name = dataSource.name;
+                            this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                            break;
+                        case 2:
+                            Shop._currentOther.name = dataSource.name;
+                            this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                            break;
+                        default:
+                            break;
+                    }
+                    Shop._ShopList.refresh();
+                }
+                else {
+                    console.log(dataSource[Shop.Getway.ads], Shop.Getway.ads);
+                    if (dataSource[Shop.Property.getway] === Shop.Getway.ads) {
+                        Hint.createHint_Middle(Hint.HintDec["暂时没有广告，过会儿再试试吧！"]);
+                    }
+                    else if (dataSource[Shop.Property.getway] === Shop.Getway.adsXD) {
+                        Hint.createHint_Middle(Hint.HintDec["请前往皮肤限定界面获取!"]);
+                    }
+                    else if (dataSource[Shop.Property.getway] === Shop.Getway.ineedwin) {
+                        Hint.createHint_Middle(Hint.HintDec["通过相应的关卡数达到就可以得到了!"]);
+                    }
+                    else if (dataSource[Shop.Property.getway] === Shop.Getway.gold) {
+                        Hint.createHint_Middle(Hint.HintDec["点击金币抽奖按钮购买!"]);
+                    }
+                }
+            });
+        }
+        myTap_Select(index) {
+            switch (index) {
+                case 0:
+                    Shop._ShopList.array = Shop.allSkin;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
+                    break;
+                case 1:
+                    Shop._ShopList.array = Shop.allProps;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
+                    break;
+                case 2:
+                    Shop._ShopList.array = Shop.allOther;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            Shop._ShopList.refresh();
+        }
+        myList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            Select.visible = false;
+            let Pic = cell.getChildByName('Pic');
+            switch (Shop._ShopTap.selectedIndex) {
+                case 0:
+                    Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.Property.name] == Shop._currentSkin.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 1:
+                    Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.Property.name] == Shop._currentProp.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 2:
+                    Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.Property.name] == Shop._currentOther.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            let NoHave = cell.getChildByName('NoHave');
+            let Board = cell.getChildByName('Board');
+            let Dec = NoHave.getChildByName('Dec');
+            let Icon = NoHave.getChildByName('Icon');
+            if (!cell.dataSource[Shop.Property.have]) {
+                switch (cell.dataSource[Shop.Property.getway]) {
+                    case Shop.Getway.ads:
+                        Dec.text = cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition];
+                        Dec.x = 88;
+                        Dec.fontSize = 30;
+                        Icon.visible = true;
+                        break;
+                    case Shop.Getway.adsXD:
+                        Dec.text = '限定获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.easterEgg:
+                        Dec.text = '彩蛋获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.ineedwin:
+                        Dec.text = '过' + cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition] + '关';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.gold:
+                        Dec.text = '金币抽取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    default:
+                        Icon.visible = false;
+                        break;
+                }
+                Board.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                NoHave.visible = false;
+                Board.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
+            Click.on(Click.Type.largen, null, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
+            Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnBuyUp() {
+            let noHaveGold = [];
+            switch (Shop._ShopTap.selectedIndex) {
+                case 0:
+                    noHaveGold = Shop.getNohaveArr_Gold(Shop.GoodsClass.Skin);
+                    break;
+                case 1:
+                    noHaveGold = Shop.getNohaveArr_Gold(Shop.GoodsClass.Props);
+                    break;
+                case 2:
+                    noHaveGold = Shop.getNohaveArr_Gold(Shop.GoodsClass.Other);
+                    break;
+                default:
+                    break;
+            }
+            if (noHaveGold.length <= 0) {
+                Hint.HintDec["没有可以购买的皮肤了！"];
+            }
+            else {
+                Tools.objPropertySort(noHaveGold, Shop.Property.getOder);
+                let price = noHaveGold[0][Shop.Property.condition];
+                if (Gold._goldNum < price) {
+                    Hint.createHint_Middle(Hint.HintDec["金币不够了！"]);
+                }
+                else {
+                    Hint.createHint_Middle(Hint.HintDec["恭喜获得新皮肤!"]);
+                    switch (Shop._ShopTap.selectedIndex) {
+                        case 0:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.Property.have, true);
+                            break;
+                        case 1:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.Property.have, true);
+                            break;
+                        case 2:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.Property.have, true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                Shop._ShopList.refresh();
+            }
+        }
+        btnGetGold() {
+            Hint.HintDec["暂时没有广告，过会儿再试试吧！"];
+        }
+        btnBackUp() {
+            this.self.close();
+        }
+        lwgDisable() {
+            GVariate._stageClick = true;
+        }
+    }
+
     class UIStart extends lwg.Admin.Scene {
         lwgNodeDec() {
             this.LevelDisplay = this.self['LevelDisplay'];
@@ -4082,7 +4614,7 @@
         }
         lwgOnEnable() {
             GVariate._stageClick = false;
-            Laya.timer.frameOnce(30, this, () => { GVariate._stageClick = true; });
+            Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true; });
             Gold._createGoldNode(Laya.stage);
             this.levelStyleDisplay();
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
@@ -4114,13 +4646,19 @@
                 }
             }
         }
-        onStageMouseUp() {
-            if (GVariate._stageClick) {
-                lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-                    console.log('开始游戏');
-                    this.self.close();
-                });
-            }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
+            Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
+        }
+        btnSkinUp(e) {
+            e.stopPropagation();
+            lwg.Admin._openScene(Admin.SceneName.UIShop);
+        }
+        backgroundUp() {
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
+                console.log('开始游戏');
+                this.self.close();
+            });
         }
         lwgDisable() {
             Gold.GoldNode.visible = false;
@@ -4219,13 +4757,13 @@
         }
         btnNormalUp() {
             this.offClick();
-            Gold.getGoldAni_Single(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 50, Gold.GoldNode.y, null, () => {
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 this.advFunc();
             });
         }
         btnAdvUp() {
             ADManager.ShowReward(() => {
-                Gold.getGoldAni_Single(Laya.stage, 15, 'UI/GameStart/qian.png', Laya.stage.width / 2, Laya.stage.height / 2, Gold.GoldNode.x - 50, Gold.GoldNode.y, null, () => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     this.advFunc();
                 });
             });
@@ -4319,6 +4857,8 @@
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
             reg("script/Game/UIShare.ts", UIShare);
+            reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
+            reg("script/Game/UIShop.ts", UIShop);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);

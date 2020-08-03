@@ -3,6 +3,7 @@ import UIDefeated from "./script/Game/UIDefeated"
 import UILoding from "./script/Game/UILoding"
 import UIOperation from "./script/Game/UIOperation"
 import UIShare from "./script/Game/UIShare"
+import UIShop_Goods from "./script/Game/UIShop_Goods"
 import UIShop from "./script/Game/UIShop"
 import UIStart from "./script/Game/UIStart"
 import UIVictory from "./script/Game/UIVictory"
@@ -30,6 +31,7 @@ export default class GameConfig{
         reg("script/Game/UILoding.ts",UILoding);
         reg("script/Game/UIOperation.ts",UIOperation);
         reg("script/Game/UIShare.ts",UIShare);
+        reg("script/Game/UIShop_Goods.ts",UIShop_Goods);
         reg("script/Game/UIShop.ts",UIShop);
         reg("script/Game/UIStart.ts",UIStart);
         reg("script/Game/UIVictory.ts",UIVictory);

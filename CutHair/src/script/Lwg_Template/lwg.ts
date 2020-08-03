@@ -597,8 +597,6 @@ export module lwg {
     }
 
 
-
-
     /**提示模块*/
     export module Hint {
         /**提示文字的类型描述*/
@@ -626,6 +624,12 @@ export module lwg {
             '获得海绵公主皮肤，前往彩蛋墙查看！',
             '获得仓鼠公主皮肤，前往彩蛋墙查看！',
             '获得自闭鸭子皮肤，前往彩蛋墙查看！',
+            '尚未获得该商品!',
+            '恭喜获得新皮肤!',
+            '请前往皮肤限定界面获取!',
+            '通过相应的关卡数达到就可以得到了!',
+            '点击金币抽奖按钮购买!',
+            
         }
         enum Skin {
             blackBord = 'Frame/UI/ui_orthogon_black.png'
@@ -724,7 +728,7 @@ export module lwg {
                 parent.addChild(sp);
 
                 let Pic = sp.getChildByName('Pic') as Laya.Image;
-                sp.pos(224, 100);
+                sp.pos(234, 100);
                 sp.zOrder = 50;
                 GoldNode = sp;
             }));
@@ -1474,7 +1478,6 @@ export module lwg {
             constructor() {
                 super();
             }
-
             onAwake(): void {
                 this.self = this.owner as Laya.Sprite;
                 this.selfScene = this.self.scene;
@@ -1482,16 +1485,18 @@ export module lwg {
                 let calssName = this['__proto__']['constructor'].name;
                 // 组件变为的self属性
                 this.self[calssName] = this;
-                this.rig = this.self.getComponent(Laya.RigidBody);
-                this.selfNode();
+                // this.rig = this.self.getComponent(Laya.RigidBody);
+                this.lwgNodeDec();
             }
             /**声明场景里的一些节点*/
-            selfNode(): void {
+            lwgNodeDec(): void {
 
             }
             onEnable(): void {
                 this.lwgOnEnable();
                 this.lwgBtnClick();
+                this.lwgEventReg();
+
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
             lwgOnEnable(): void {
@@ -1499,6 +1504,9 @@ export module lwg {
             }
             /**点击事件注册*/
             lwgBtnClick(): void {
+            }
+            /**事件注册*/
+            lwgEventReg(): void {
             }
             onUpdate(): void {
                 this.lwgOnUpdate();
@@ -1508,7 +1516,8 @@ export module lwg {
             }
             onDisable(): void {
                 this.lwgDisable();
-                Laya.Tween.clearTween(this);
+                Laya.timer.clearAll(this);
+                EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgDisable(): void {
@@ -3942,7 +3951,7 @@ export module lwg {
         /**
          * 对象数组按照对象的某个属性排序
          * @param array 对象数组
-         * @param property 对象名字
+         * @param property 对象中一个相同的属性名称
          */
         export function objPropertySort(array: Array<any>, property: string): Array<any> {
             var compare = function (obj1, obj2) {
@@ -4135,11 +4144,10 @@ export module lwg {
             return backNum;
         }
 
-
         /**
-          * 获取缓存数据并且和本地数据的对比
+          * 获取本地存储数据并且和文件中数据表的的对比
           * @param url 本地数据表地址
-          * @param storageName json名称
+          * @param storageName 本地存储中的json名称
           * @param propertyName 数组中每个对象中同一个属性名，通过这个名称进行对比
           */
         export function dataCompare(url: string, storageName: string, propertyName: string): Array<any> {
@@ -4179,12 +4187,12 @@ export module lwg {
 
     /**商城模块,用于购买和穿戴，主要是购买和存储，次要是穿戴*/
     export module Shop {
-        /**list列表*/
-        export let _MyTap: Laya.Tab;
-        /**假如还有一个_OtherTap*/
+        /**商品种类切换页*/
+        export let _ShopTap: Laya.Tab;
+        /**假如还有一个商品切换页_OtherTap*/
         export let _OtherTap: Laya.Tab;
-        /**list列表*/
-        export let _MyList: Laya.List;
+        /**商品列表*/
+        export let _ShopList: Laya.List;
 
         //皮肤*****************************************************************************************************
         /**皮肤的总数据，存储对象依次为[{名称，获取方式，剩余数量或者次数}]*/
@@ -4226,7 +4234,7 @@ export module lwg {
         /**默认穿戴的其他道具*/
         export let defaultOther: string;
         /**当前使用的其他物品*/
-        export let _crrentOther = {
+        export let _currentOther = {
             crrentOther: null,
             get name(): string {
                 return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
@@ -4258,7 +4266,6 @@ export module lwg {
             } else {
                 console.log(name + '找不到属性:' + property);
             }
-
         }
 
         /**
@@ -4284,7 +4291,7 @@ export module lwg {
         }
 
         /**
-         * 返回当前已经拥有的商品
+         * 返回当前品类中已经拥有的商品
          * @param   goodsClass 商品品类
         */
         export function getHaveArr(goodsClass: string): Array<any> {
@@ -4292,9 +4299,28 @@ export module lwg {
             let arrHave = [];
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
-
+                if (element[Property.have]) {
+                    arrHave.push(element);
+                }
             }
-            return arrHave
+            return arrHave;
+        }
+
+
+        /**
+         * 返回当前只能用金币购买的、并且尚未获得的商品数组
+         * @param goodsClass 商品品类
+         * */
+        export function getNohaveArr_Gold(goodsClass: string) {
+            let arr = getGoodsClassArr(goodsClass);
+            let arrNoHave = [];
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (!element[Property.have] && element[Property.getway] === Getway.gold) {
+                    arrNoHave.push(element);
+                }
+            }
+            return arrNoHave;
         }
 
         /**根据品类返回品类名称数组*/
@@ -4344,11 +4370,13 @@ export module lwg {
             /**看广告*/
             adsXD = 'adsXD',
             /**关卡中获得*/
-            customs = 'customs',
+            ineedwin = 'ineedwin',
             /**金币购买*/
             gold = 'gold',
             /**钻石购买购买*/
             diamond = 'diamond',
+            /**彩蛋获取*/
+            easterEgg = 'easterEgg',
             /**其他方式*/
             other = 'other',
         }
@@ -4363,6 +4391,11 @@ export module lwg {
             Other = 'Shop_Other',
         }
 
+        /**事件名称*/
+        export enum EventType {
+            select = 'select',
+        }
+
         export class ShopScene extends Admin.Scene {
 
             lwgOnAwake(): void {
@@ -4373,49 +4406,50 @@ export module lwg {
             /**初始化json数据*/
             initData(): void {
                 /**结构，如果没有则为null*/
-                Shop._MyTap = this.self['MyTap'];
-                Shop._MyList = this.self['MyList'];
+                Shop._ShopTap = this.self['MyTap'];
+                Shop._ShopList = this.self['MyList'];
                 Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
                 Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
                 Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
             }
 
-            /**界面初始化前执行一次*/
-            shopOnAwake(): void {
-
+            lwgEventReg(): void {
+                this.shopEventReg();
             }
+            /**商店中注册的一些事件*/
+            shopEventReg(): void { }
+
+            /**界面初始化前执行一次*/
+            shopOnAwake(): void { }
             lwgNodeDec(): void {
                 this.shopNodeDec();
             }
-            /**商店中的节点声明*/
-            shopNodeDec(): void {
 
-            }
+            /**商店中的节点声明*/
+            shopNodeDec(): void { }
 
             lwgOnEnable(): void {
                 this.myTap_Create();
                 this.myList_Create();
                 this.shopOnEnable();
             }
-
             /**游戏开始前执行*/
             shopOnEnable(): void { }
 
             /**Tap初始化*/
             myTap_Create(): void {
-                Shop._MyTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
+                Shop._ShopTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
             }
             /**myTap的触摸监听*/
-            myTap_Select(index: number): void {
-            }
+            myTap_Select(index: number): void { }
             /**初始化list*/
             myList_Create(): void {
-                Shop._MyList.selectEnable = true;
-                Shop._MyList.vScrollBarSkin = "";
-                // this._MyList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
-                // this._MyList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
-                Shop._MyList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
-                Shop._MyList.renderHandler = new Laya.Handler(this, this.myList_Update);
+                Shop._ShopList.selectEnable = true;
+                Shop._ShopList.vScrollBarSkin = "";
+                // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
+                // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
+                Shop._ShopList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
+                Shop._ShopList.renderHandler = new Laya.Handler(this, this.myList_Update);
                 this.myList_refresh();
             }
             /**list选中监听*/
@@ -4424,9 +4458,9 @@ export module lwg {
             myList_Update(cell, index: number): void { }
             /**刷新list数据,重写覆盖，默认为皮肤*/
             myList_refresh(): void {
-                if (Shop._MyList) {
-                    Shop._MyList.array = Shop.allSkin;
-                    Shop._MyList.refresh();
+                if (Shop._ShopList) {
+                    Shop._ShopList.array = Shop.allSkin;
+                    Shop._ShopList.refresh();
                 }
             }
         }
