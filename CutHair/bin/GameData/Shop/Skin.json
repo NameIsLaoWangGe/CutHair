@@ -1,0 +1,93 @@
+{ 
+"RECORDS": 
+[
+  {
+    "name": "anquanmao",
+    "getway": "free",
+    "condition": 0,
+    "arrange": 1,
+    "getOder": 1,
+    "have": true
+  },
+  {
+    "name": "yuanyanjing",
+    "getway": "gold",
+    "condition": 500,
+    "arrange": 8,
+    "getOder": 2,
+    "have": false
+  },
+  {
+    "name": "jiemao_01",
+    "getway": "gold",
+    "condition": 800,
+    "arrange": 10,
+    "getOder": 3,
+    "have": false
+  },
+  {
+    "name": "hamajing",
+    "getway": "gold",
+    "condition": 1000,
+    "arrange": 7,
+    "getOder": 4,
+    "have": false
+  },
+  {
+    "name": "yanshemao_gangtie",
+    "getway": "gold",
+    "condition": 1200,
+    "arrange": 4,
+    "getOder": 5,
+    "have": false
+  },
+  {
+    "name": "yanshemao",
+    "getway": "gold",
+    "condition": 1500,
+    "arrange": 3,
+    "getOder": 6,
+    "have": false
+  },
+  {
+    "name": "jiemao_02",
+    "getway": "gold",
+    "condition": 1800,
+    "arrange": 12,
+    "getOder": 7,
+    "have": false
+  },
+  {
+    "name": "xiaochoumao",
+    "getway": "gold",
+    "condition": 2000,
+    "arrange": 2,
+    "getOder": 8,
+    "have": false
+  },
+  {
+    "name": "xingxingyanjing",
+    "getway": "ads",
+    "condition": 1,
+    "arrange": 9,
+    "getOder": 0,
+    "have": false
+  },
+  {
+    "name": "yanshemao_shijie",
+    "getway": "ads",
+    "condition": 3,
+    "arrange": 5,
+    "getOder": 0,
+    "have": false
+  },
+  {
+    "name": "maomaozi",
+    "getway": "ads",
+    "condition": 2,
+    "arrange": 6,
+    "getOder": 0,
+    "have": false
+  }
+]
+}

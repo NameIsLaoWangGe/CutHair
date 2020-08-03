@@ -15,9 +15,9 @@ export default class UILoding extends Loding.LodeScene {
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
         ];
         Loding.lodingList_Data = [
-            "Data/Shop/Other.json",
-            "Data/Shop/Props.json",
-            "Data/Shop/Skin.json",
+            "GameData/Shop/Other.json",
+            "GameData/Shop/Props.json",
+            "GameData/Shop/Skin.json",
         ];
     }
 

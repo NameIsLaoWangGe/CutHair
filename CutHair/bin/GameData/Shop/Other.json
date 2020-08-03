@@ -1,0 +1,53 @@
+{ 
+"RECORDS": 
+[
+  {
+    "name": "xiangsudao",
+    "getway": "adsXD",
+    "condition": 100,
+    "arrange": 6,
+    "getOder": 0,
+    "have": false
+  },
+  {
+    "name": "tixudao",
+    "getway": "free",
+    "condition": 0,
+    "arrange": 1,
+    "getOder": 1,
+    "have": false
+  },
+  {
+    "name": "ruwu",
+    "getway": "gold",
+    "condition": 500,
+    "arrange": 3,
+    "getOder": 2,
+    "have": false
+  },
+  {
+    "name": "lifadao",
+    "getway": "gold",
+    "condition": 800,
+    "arrange": 4,
+    "getOder": 3,
+    "have": false
+  },
+  {
+    "name": "jundao",
+    "getway": "gold",
+    "condition": 1000,
+    "arrange": 2,
+    "getOder": 4,
+    "have": false
+  },
+  {
+    "name": "tulongdao",
+    "getway": "gold",
+    "condition": 1200,
+    "arrange": 5,
+    "getOder": 5,
+    "have": false
+  }
+]
+}

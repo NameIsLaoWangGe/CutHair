@@ -7,18 +7,12 @@ export default class UIShop extends Shop.ShopScene {
         Gold.goldVinish(100);
         GVariate._stageClick = false;
 
-        /**结构相关*/
-        Shop._MyTap = this.self['MyTap'];
-        Shop._MyList = this.self['MyList'];
-        Shop.allSkin = Laya.loader.getRes("Data/Shop/Skin.json")['RECORDS'];
-        Shop.allProps = Laya.loader.getRes("Data/Shop/Other.json")['RECORDS'];
-        Shop.allOther = Laya.loader.getRes("Data/Shop/Other.json")['RECORDS'];
 
-
+        /**根据内部结构进行排序*/
         Tools.objPropertySort(Shop.allSkin, 'arrange');
         Tools.objPropertySort(Shop.allProps, 'arrange');
         Tools.objPropertySort(Shop.allOther, 'arrange');
-        
+
         console.log(Shop.allSkin);
         console.log(Shop.allProps);
         console.log(Shop.allOther);
@@ -34,7 +28,7 @@ export default class UIShop extends Shop.ShopScene {
 
     refreshList(): void {
         Shop._MyList.array = Shop.allSkin;
-        console.log(Shop._MyList.array);
+        // console.log(Shop._MyList.array);
     }
 
     updateList(cell, index: number): void {
@@ -46,7 +40,6 @@ export default class UIShop extends Shop.ShopScene {
         // // 信息赋值
         // pifuImg.skin = dataSource.pifuUrl;
         // cell.scale(dataSource.scale, dataSource.scale);
-        console.log(dataSource);
     }
 
     lwgBtnClick(): void {

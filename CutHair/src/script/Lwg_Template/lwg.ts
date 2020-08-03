@@ -3965,72 +3965,92 @@ export module lwg {
         }
 
         /**
-         * 
-         * @param n 
-         * @param m 第二个随机数不存在的话默认为10
-         */
-        export function random(n: number, m?: number) {
-            m = m || 10;
-            const c: number = m - n + 1;
-            return Math.floor(Math.random() * c + n)
-        }
-        /**
-         * 
-         * @param arr 
-         * @param count
-         * 从数组中随机取出count个数 
-         */
-        export function getRandomArrayElements(arr, count) {
-            var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
-            while (i-- > min) {
-                index = Math.floor((i + 1) * Math.random());
-                temp = shuffled[index];
-                shuffled[index] = shuffled[i];
-                shuffled[i] = temp;
-            }
-            return shuffled.slice(min);
-        }
-        export function getArrayDifElements(arr, count): any {
-            const result = [];
-            let i: number = 0;
-            for (i; i < count; i++) {
-                const temp = getDiffEle(arr.slice(), result, i);
-                result.push(temp);
+         * 对比两个对象数组中的对象属性，返回相对第一个数组中，第二个数组没有这个属性的对象
+         * @param data1 对象数组1
+         * @param data2 对象数组2
+         * @param property 需要对比的属性名称
+        */
+        export function dataCompareDifferent(data1: Array<any>, data2: Array<any>, property: string): Array<any> {
+            var result = [];
+            for (var i = 0; i < data1.length; i++) {
+                var obj1 = data1[i];
+                var obj1Name = obj1[property];
+                var isExist = false;
+
+                for (var j = 0; j < data2.length; j++) {
+                    var obj2 = data2[j];
+                    var obj2Name = obj2[property];
+                    if (obj2Name == name) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (!isExist) {
+                    result.push(obj1);
+                }
             }
             return result;
         }
-        export function getDiffEle(arr, result, place) {
-            let indexArr = [];
-            let i: number = 0;
-            for (i; i < arr.length - place; i++) {
-                indexArr.push(i);
+
+        /**
+         * 返回两个数组对象中，有相同属性的对象集合
+         * @param data1 对象数组1
+         * @param data2 对象数组2
+         * @param property 需要对比的属性名称
+         */
+        export function dataComparEidentical(data1: Array<any>, data2: Array<any>, property: string): Array<any> {
+            var result = [];
+            for (var i = 0; i < data1.length; i++) {
+                var obj1 = data1[i];
+                var obj1Name = obj1[property];
+                var isExist = false;
+
+                for (var j = 0; j < data2.length; j++) {
+                    var obj2 = data2[j];
+                    var obj2Name = obj2[property];
+                    if (obj2Name == name) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (isExist) {
+                    result.push(obj1);
+                }
             }
-            const ranIndex = Math.floor(Math.random() * indexArr.length);
-            if (result.indexOf(arr[ranIndex]) === -1) {
-                const backNum = arr[ranIndex];
-                arr[ranIndex] = arr[indexArr.length - 1];
-                return backNum;
-            } else {
-                arr.splice(ranIndex, 1);
-                return getDiffEle(arr, result, place);
+            return result;
+        }
+
+        /**
+         * 往第一个数组中陆续添加第二个数组中的元素
+         * @param data1 
+         * @param data2 
+         */
+        export function data1AddToData2(data1, data2): void {
+            for (let index = 0; index < data2.length; index++) {
+                const element = data2[index];
+                data1.push(element);
             }
         }
-        export let roleDragCan: boolean = false;
-        export function copydata(obj): any {
-            const ret = {};
-            Object.getOwnPropertyNames(obj).forEach(name => {
-                ret[name] = obj[name];
-            });
-            return ret;
+
+        /**
+         * 返回一个数值区间内两个随机数
+         * @param range1 第一个随机数
+         * @param range2 第二个随机数不存在的话默认为10
+         */
+        export function random(range1: number, range2?: number) {
+            range1 = range1 || 10;
+            const c: number = range1 - range2 + 1;
+            return Math.floor(Math.random() * c + range1)
         }
 
         /**
          * 数组复制 
+         * @param arr1 需要复制的数组
          */
-        export function fillArray(value, len) {
+        export function copyArray(arr1): Array<any> {
             var arr = [];
-            for (var i = 0; i < len; i++) {
-                arr.push(value);
+            for (var i = 0; i < arr1.length; i++) {
+                arr.push(arr1[i]);
             }
             return arr;
         }
@@ -4038,7 +4058,7 @@ export module lwg {
         /**
          * 根据不同的角度，
          * @param angle 角度
-         * @param XY 必须包含y上的速度
+         * @param XY XY坐标，同时存在
          */
         export function speedByAngle(angle: number, XY: any) {
             if (angle % 90 === 0 || !angle) {
@@ -4053,7 +4073,9 @@ export module lwg {
         }
 
         /**
-         * 根据不同的角度和速度计算坐标
+         * 根据不同的角度和速度计算坐标,从而产生位移
+         * @param angle 角度
+         * @param speed 移动速度
          * */
         export function speedXYByAngle(angle: number, speed: number) {
             if (angle % 90 === 0 || !angle) {
@@ -4065,41 +4087,6 @@ export module lwg {
             return speedXY;
         }
 
-        export function speedLabelByAngle(angle: number, speed: number, speedBate?: number) {
-            // if (angle % 90 === 0 || !angle) {
-            //     debugger
-            // }
-            const speedXY = { x: 0, y: 0 };
-            const selfAngle = angle;
-            const defaultSpeed = speed;
-            const bate = speedBate || 1;
-            if (selfAngle % 90 === 0) {
-                if (selfAngle === 0 || selfAngle === 360) {
-                    speedXY.x = Math.abs(defaultSpeed) * bate;
-                } else if (selfAngle === 90) {
-                    speedXY.y = Math.abs(defaultSpeed) * bate;
-                } else if (selfAngle === 180) {
-                    speedXY.x = -Math.abs(defaultSpeed) * bate;
-                } else {
-                    speedXY.y = -Math.abs(defaultSpeed) * bate;
-                }
-            } else {
-                const tempXY = Tools.speedXYByAngle(selfAngle, defaultSpeed);
-                speedXY.x = tempXY.x;
-                speedXY.y = tempXY.y;
-                if (selfAngle > 0 && selfAngle < 180) {
-                    speedXY.y = Math.abs(speedXY.y) * bate;
-                } else {
-                    speedXY.y = -Math.abs(speedXY.y) * bate;
-                }
-                if (selfAngle > 90 && selfAngle < 270) {
-                    speedXY.x = -Math.abs(speedXY.x) * bate;
-                } else {
-                    speedXY.x = Math.abs(speedXY.x) * bate;
-                }
-            }
-            return speedXY;
-        }
         /**
          * 
          * @param degree 角度
@@ -4108,11 +4095,15 @@ export module lwg {
         export function getRad(degree) {
             return degree / 180 * Math.PI;
         }
+
         /**
-         * 求圆上的点的坐标~
+         * 求圆上的点的坐标，可以根据角度和半径作出圆形位移
+         * @param angle 角度
+         * @param radius 半径
+         * @param centerPos 原点
          */
-        export function getRoundPos(angle: number, radius: number, centPos: any) {
-            var center = centPos; //圆心坐标
+        export function getRoundPos(angle: number, radius: number, centerPos: any) {
+            var center = centerPos; //圆心坐标
             var radius = radius; //半径
             var hudu = (2 * Math.PI / 360) * angle; //90度角的弧度
 
@@ -4120,24 +4111,25 @@ export module lwg {
             var Y = center.y - Math.cos(hudu) * radius; //求出90度角的y坐标
             return { x: X, y: Y };
         }
+
         /**
-         * 转化大的数字
+         * 将数字格式化，例如1000 = 1k；
+         * @param number 数字
          */
-        export function converteNum(num: number): string {
-            if (typeof (num) !== "number") {
+        export function converteNum(number: number): string {
+            if (typeof (number) !== "number") {
                 console.warn("要转化的数字并不为number");
-                return num;
+                return number;
             }
             let backNum: string;
-
-            if (num < 1000) {
-                backNum = "" + num;
-            } else if (num < 1000000) {
-                backNum = "" + (num / 1000).toFixed(1) + "k";
-            } else if (num < 10e8) {
-                backNum = "" + (num / 1000000).toFixed(1) + "m";
+            if (number < 1000) {
+                backNum = "" + number;
+            } else if (number < 1000000) {
+                backNum = "" + (number / 1000).toFixed(1) + "k";
+            } else if (number < 10e8) {
+                backNum = "" + (number / 1000000).toFixed(1) + "m";
             } else {
-                backNum = "" + num;
+                backNum = "" + number;
             }
             return backNum;
         }
@@ -4163,7 +4155,6 @@ export module lwg {
             set name(name: string) {
                 this.currentSkin = name;
             }
-
         };
 
         /**当前拥有的皮肤集合*/
@@ -4334,19 +4325,37 @@ export module lwg {
             }
         }
 
+        /**减少或增加*/
         export enum AddOrSub {
             add = 'add',
             sub = 'sub'
         }
 
+
+        /**属性列表，数据表中应该有哪些属性,可以无限增加*/
+        export enum Property {
+            /**名称*/
+            name = 'name',
+            /**获取途径*/
+            getway = 'getway',
+            /**根据获取途径，给予需要完成的次数*/
+            condition = 'condition',
+            /**排列顺序*/
+            arrange = 'arrange',
+            /**获得顺序，我们可能会给予玩家固定的获得顺序*/
+            getOder = 'getOder',
+            /**是否已经拥有*/
+            have = 'have',
+        }
+
         /**获得方式列举,方式可以添加*/
-        export enum GetWay {
+        export enum Getway {
             /**免费获取*/
             free = 'free',
             /**看广告*/
             ads = 'ads',
             /**看广告*/
-            XDads = 'XDads',
+            adsXD = 'adsXD',
             /**关卡中获得*/
             customs = 'customs',
             /**金币购买*/
@@ -4360,10 +4369,56 @@ export module lwg {
         export class ShopScene extends Admin.Scene {
 
             lwgOnAwake(): void {
+                this.initData();
                 this.shopOnAwake();
             }
-            /**界面打开前执行一次*/
+
+            /**初始化json数据*/
+            initData(): void {
+                /**结构，如果没有则为null*/
+                Shop._MyTap = this.self['MyTap'];
+                Shop._MyList = this.self['MyList'];
+
+                // 第一步，先尝试从本地缓存获取数据，
+                // 第二步，如果本地缓存有，那么需要和数据表中的数据进行对比，把缓存没有的新增对象复制进去
+                // 第三步，如果本地缓存没有，那么直接从数据表获取
+                // 皮肤
+                if (JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin'))) {
+                    Shop.allSkin = JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin')).Shop_allSkin;
+                    console.log('从本地表中获取到 Shop.allSkin 数据,将和json文件进行对比');
+                    try {
+                        let allSkin_Josn: Array<any> = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
+                        // 如果本地数据条数大于json条数，说明json减东西了，并不会对比，json只能增加不能删减
+                        if (allSkin_Josn.length > Shop.allSkin.length) {
+                            let diffArray = Tools.dataCompareDifferent(allSkin_Josn, Shop.allSkin, Property.name);
+                            Tools.data1AddToData2(Shop.allSkin, diffArray);
+                        }
+                    } catch (error) {
+                        console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！')
+                    }
+                } else {
+                    try {
+                        Shop.allSkin = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
+                    } catch (error) {
+                        console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！')
+                    }
+                }
+                Laya.LocalStorage.setJSON('Shop_allSkin', JSON.stringify({ Shop_allSkin: Shop.allSkin }));
+            }
+
+
+            /**
+             * 对比两张数据表，根据当前给予的数据表进行增加，注意：不要删减，如果不需要这条对象或者属性，可以不用，但不要删减
+             * 通过商品名称进行对比
+            */
+            dataCompare(data, ): void {
+
+            }
+
+
+            /**界面初始化前执行一次*/
             shopOnAwake(): void {
+
             }
 
             lwgNodeDec(): void {

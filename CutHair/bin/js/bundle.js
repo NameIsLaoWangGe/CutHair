@@ -2743,68 +2743,69 @@
                 return array;
             }
             Tools.objPropertySort = objPropertySort;
-            function random(n, m) {
-                m = m || 10;
-                const c = m - n + 1;
-                return Math.floor(Math.random() * c + n);
-            }
-            Tools.random = random;
-            function getRandomArrayElements(arr, count) {
-                var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
-                while (i-- > min) {
-                    index = Math.floor((i + 1) * Math.random());
-                    temp = shuffled[index];
-                    shuffled[index] = shuffled[i];
-                    shuffled[i] = temp;
-                }
-                return shuffled.slice(min);
-            }
-            Tools.getRandomArrayElements = getRandomArrayElements;
-            function getArrayDifElements(arr, count) {
-                const result = [];
-                let i = 0;
-                for (i; i < count; i++) {
-                    const temp = getDiffEle(arr.slice(), result, i);
-                    result.push(temp);
+            function dataCompareDifferent(data1, data2, property) {
+                var result = [];
+                for (var i = 0; i < data1.length; i++) {
+                    var obj1 = data1[i];
+                    var obj1Name = obj1[property];
+                    var isExist = false;
+                    for (var j = 0; j < data2.length; j++) {
+                        var obj2 = data2[j];
+                        var obj2Name = obj2[property];
+                        if (obj2Name == name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (!isExist) {
+                        result.push(obj1);
+                    }
                 }
                 return result;
             }
-            Tools.getArrayDifElements = getArrayDifElements;
-            function getDiffEle(arr, result, place) {
-                let indexArr = [];
-                let i = 0;
-                for (i; i < arr.length - place; i++) {
-                    indexArr.push(i);
+            Tools.dataCompareDifferent = dataCompareDifferent;
+            function dataComparEidentical(data1, data2, property) {
+                var result = [];
+                for (var i = 0; i < data1.length; i++) {
+                    var obj1 = data1[i];
+                    var obj1Name = obj1[property];
+                    var isExist = false;
+                    for (var j = 0; j < data2.length; j++) {
+                        var obj2 = data2[j];
+                        var obj2Name = obj2[property];
+                        if (obj2Name == name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (isExist) {
+                        result.push(obj1);
+                    }
                 }
-                const ranIndex = Math.floor(Math.random() * indexArr.length);
-                if (result.indexOf(arr[ranIndex]) === -1) {
-                    const backNum = arr[ranIndex];
-                    arr[ranIndex] = arr[indexArr.length - 1];
-                    return backNum;
-                }
-                else {
-                    arr.splice(ranIndex, 1);
-                    return getDiffEle(arr, result, place);
+                return result;
+            }
+            Tools.dataComparEidentical = dataComparEidentical;
+            function data1AddToData2(data1, data2) {
+                for (let index = 0; index < data2.length; index++) {
+                    const element = data2[index];
+                    data1.push(element);
                 }
             }
-            Tools.getDiffEle = getDiffEle;
-            Tools.roleDragCan = false;
-            function copydata(obj) {
-                const ret = {};
-                Object.getOwnPropertyNames(obj).forEach(name => {
-                    ret[name] = obj[name];
-                });
-                return ret;
+            Tools.data1AddToData2 = data1AddToData2;
+            function random(range1, range2) {
+                range1 = range1 || 10;
+                const c = range1 - range2 + 1;
+                return Math.floor(Math.random() * c + range1);
             }
-            Tools.copydata = copydata;
-            function fillArray(value, len) {
+            Tools.random = random;
+            function copyArray(arr1) {
                 var arr = [];
-                for (var i = 0; i < len; i++) {
-                    arr.push(value);
+                for (var i = 0; i < arr1.length; i++) {
+                    arr.push(arr1[i]);
                 }
                 return arr;
             }
-            Tools.fillArray = fillArray;
+            Tools.copyArray = copyArray;
             function speedByAngle(angle, XY) {
                 if (angle % 90 === 0 || !angle) {
                     console.error("计算的角度异常,需要查看：", angle);
@@ -2823,51 +2824,12 @@
                 return speedXY;
             }
             Tools.speedXYByAngle = speedXYByAngle;
-            function speedLabelByAngle(angle, speed, speedBate) {
-                const speedXY = { x: 0, y: 0 };
-                const selfAngle = angle;
-                const defaultSpeed = speed;
-                const bate = speedBate || 1;
-                if (selfAngle % 90 === 0) {
-                    if (selfAngle === 0 || selfAngle === 360) {
-                        speedXY.x = Math.abs(defaultSpeed) * bate;
-                    }
-                    else if (selfAngle === 90) {
-                        speedXY.y = Math.abs(defaultSpeed) * bate;
-                    }
-                    else if (selfAngle === 180) {
-                        speedXY.x = -Math.abs(defaultSpeed) * bate;
-                    }
-                    else {
-                        speedXY.y = -Math.abs(defaultSpeed) * bate;
-                    }
-                }
-                else {
-                    const tempXY = Tools.speedXYByAngle(selfAngle, defaultSpeed);
-                    speedXY.x = tempXY.x;
-                    speedXY.y = tempXY.y;
-                    if (selfAngle > 0 && selfAngle < 180) {
-                        speedXY.y = Math.abs(speedXY.y) * bate;
-                    }
-                    else {
-                        speedXY.y = -Math.abs(speedXY.y) * bate;
-                    }
-                    if (selfAngle > 90 && selfAngle < 270) {
-                        speedXY.x = -Math.abs(speedXY.x) * bate;
-                    }
-                    else {
-                        speedXY.x = Math.abs(speedXY.x) * bate;
-                    }
-                }
-                return speedXY;
-            }
-            Tools.speedLabelByAngle = speedLabelByAngle;
             function getRad(degree) {
                 return degree / 180 * Math.PI;
             }
             Tools.getRad = getRad;
-            function getRoundPos(angle, radius, centPos) {
-                var center = centPos;
+            function getRoundPos(angle, radius, centerPos) {
+                var center = centerPos;
                 var radius = radius;
                 var hudu = (2 * Math.PI / 360) * angle;
                 var X = center.x + Math.sin(hudu) * radius;
@@ -2875,23 +2837,23 @@
                 return { x: X, y: Y };
             }
             Tools.getRoundPos = getRoundPos;
-            function converteNum(num) {
-                if (typeof (num) !== "number") {
+            function converteNum(number) {
+                if (typeof (number) !== "number") {
                     console.warn("要转化的数字并不为number");
-                    return num;
+                    return number;
                 }
                 let backNum;
-                if (num < 1000) {
-                    backNum = "" + num;
+                if (number < 1000) {
+                    backNum = "" + number;
                 }
-                else if (num < 1000000) {
-                    backNum = "" + (num / 1000).toFixed(1) + "k";
+                else if (number < 1000000) {
+                    backNum = "" + (number / 1000).toFixed(1) + "k";
                 }
-                else if (num < 10e8) {
-                    backNum = "" + (num / 1000000).toFixed(1) + "m";
+                else if (number < 10e8) {
+                    backNum = "" + (number / 1000000).toFixed(1) + "m";
                 }
                 else {
-                    backNum = "" + num;
+                    backNum = "" + number;
                 }
                 return backNum;
             }
@@ -3037,19 +2999,56 @@
                 AddOrSub["add"] = "add";
                 AddOrSub["sub"] = "sub";
             })(AddOrSub = Shop.AddOrSub || (Shop.AddOrSub = {}));
-            let GetWay;
-            (function (GetWay) {
-                GetWay["free"] = "free";
-                GetWay["ads"] = "ads";
-                GetWay["XDads"] = "XDads";
-                GetWay["customs"] = "customs";
-                GetWay["gold"] = "gold";
-                GetWay["diamond"] = "diamond";
-                GetWay["other"] = "other";
-            })(GetWay = Shop.GetWay || (Shop.GetWay = {}));
+            let Property;
+            (function (Property) {
+                Property["name"] = "name";
+                Property["getway"] = "getway";
+                Property["condition"] = "condition";
+                Property["arrange"] = "arrange";
+                Property["getOder"] = "getOder";
+                Property["have"] = "have";
+            })(Property = Shop.Property || (Shop.Property = {}));
+            let Getway;
+            (function (Getway) {
+                Getway["free"] = "free";
+                Getway["ads"] = "ads";
+                Getway["adsXD"] = "adsXD";
+                Getway["customs"] = "customs";
+                Getway["gold"] = "gold";
+                Getway["diamond"] = "diamond";
+                Getway["other"] = "other";
+            })(Getway = Shop.Getway || (Shop.Getway = {}));
             class ShopScene extends Admin.Scene {
                 lwgOnAwake() {
+                    this.initData();
                     this.shopOnAwake();
+                }
+                initData() {
+                    Shop._MyTap = this.self['MyTap'];
+                    Shop._MyList = this.self['MyList'];
+                    if (JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin'))) {
+                        Shop.allSkin = JSON.parse(Laya.LocalStorage.getJSON('Shop_allSkin')).Shop_allSkin;
+                        console.log('从本地表中获取到 Shop.allSkin 数据,将和json文件进行对比');
+                        try {
+                            let allSkin_Josn = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
+                            let diffArray = Tools.dataCompareDifferent(allSkin_Josn, Shop.allSkin, Property.name);
+                            Tools.data1AddToData2(Shop.allSkin, diffArray);
+                        }
+                        catch (error) {
+                            console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！');
+                        }
+                    }
+                    else {
+                        try {
+                            Shop.allSkin = Laya.loader.getRes("GameData/Shop/Skin.json")['RECORDS'];
+                        }
+                        catch (error) {
+                            console.log('Shop.allSkin 数据赋值失败！请检查数据表或者手动赋值！');
+                        }
+                    }
+                    Laya.LocalStorage.setJSON('Shop_allSkin', JSON.stringify({ Shop_allSkin: Shop.allSkin }));
+                }
+                dataCompare(data) {
                 }
                 shopOnAwake() {
                 }
@@ -3697,9 +3696,9 @@
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
             ];
             Loding.lodingList_Data = [
-                "Data/Shop/Other.json",
-                "Data/Shop/Props.json",
-                "Data/Shop/Skin.json",
+                "GameData/Shop/Other.json",
+                "GameData/Shop/Props.json",
+                "GameData/Shop/Skin.json",
             ];
         }
         lwgAdaptive() {
@@ -4332,11 +4331,6 @@
         shopOnAwake() {
             Gold.goldVinish(100);
             GVariate._stageClick = false;
-            Shop._MyTap = this.self['MyTap'];
-            Shop._MyList = this.self['MyList'];
-            Shop.allSkin = Laya.loader.getRes("Data/Shop/Skin.json")['RECORDS'];
-            Shop.allProps = Laya.loader.getRes("Data/Shop/Other.json")['RECORDS'];
-            Shop.allOther = Laya.loader.getRes("Data/Shop/Other.json")['RECORDS'];
             Tools.objPropertySort(Shop.allSkin, 'arrange');
             Tools.objPropertySort(Shop.allProps, 'arrange');
             Tools.objPropertySort(Shop.allOther, 'arrange');
@@ -4351,13 +4345,11 @@
         ;
         refreshList() {
             Shop._MyList.array = Shop.allSkin;
-            console.log(Shop._MyList.array);
         }
         updateList(cell, index) {
             let dataSource = cell.dataSource;
             let Pic = cell.getChildByName('Pic');
             Pic.skin = 'UI/Props/Skin/' + dataSource.name + '.png';
-            console.log(dataSource);
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, null, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
