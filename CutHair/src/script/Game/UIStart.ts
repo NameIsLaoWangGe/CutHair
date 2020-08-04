@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -16,6 +16,8 @@ export default class UIStart extends lwg.Admin.Scene {
         Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true })
         Gold._createGoldNode(Laya.stage);
         this.levelStyleDisplay();
+
+        // Shop.useSkinType.push()
 
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
     }

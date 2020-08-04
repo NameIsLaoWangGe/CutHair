@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game, Animation2D, Shop } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game, Animation2D, Shop, Task } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
@@ -18,7 +18,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         this.getGoldDisPlay();
         Gold.goldAppear(500);
         Game._gameLevel.value++;
-       
+
         this.self['BtnAdv'].visible = true;
         this.self['BtnNormal'].visible = false;
         this.self['Dot'].visible = true;
@@ -28,6 +28,19 @@ export default class UIVictory extends lwg.Admin.Scene {
 
         lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
         lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
+
+        // 每日任务
+        let name = Task.TaskName.每日服务10位客人;
+        let resCondition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
+        let condition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.condition);
+        if (Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get) !== -1) {
+            if (condition <= resCondition + 1) {
+                Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
+                Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get, 1);
+            } else {
+                Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
+            }
+        }
     }
 
     lwgOpenAni(): number {

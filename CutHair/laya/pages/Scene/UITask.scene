@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":161,
-    "selecteID":159,
+    "selectedBox":164,
+    "selecteID":162,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":166,
+    "maxID":168,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -113,7 +113,7 @@
                                     "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Board",
-                                    "props":{"y":2,"x":0,"width":545,"skin":"UI/Task/di.png","sizeGrid":"0,36,0,48","name":"Board","height":140,"alpha":1},
+                                    "props":{"y":0,"x":0,"width":545,"skin":"UI/Task/di.png","sizeGrid":"0,36,0,48","name":"Board","height":140,"alpha":1},
                                     "nodeParent":161,
                                     "label":"Board",
                                     "isOpen":true,
@@ -183,9 +183,23 @@
                                 },
                                 {
                                     "x":60,
+                                    "type":"Label",
+                                    "searchKey":"Label,ProNum",
+                                    "props":{"y":84.5,"x":180.5,"width":90,"valign":"middle","text":"1/2","name":"ProNum","height":25,"fontSize":18,"bold":true,"align":"center"},
+                                    "nodeParent":161,
+                                    "label":"ProNum",
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":167,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,BtnGet,BtnGet",
-                                    "props":{"y":75,"x":453,"width":139,"var":"BtnGet","skin":"UI/Task/jinxing.png","pivotY":36,"pivotX":70,"name":"BtnGet","height":72},
+                                    "props":{"y":75,"x":453,"width":139,"var":"BtnGet","skin":"UI/Shop/icon_ads.png","pivotY":36,"pivotX":70,"name":"BtnGet","height":72},
                                     "nodeParent":161,
                                     "label":"BtnGet",
                                     "isDirectory":false,
@@ -220,6 +234,23 @@
                                     "isAniNode":false,
                                     "hasChild":false,
                                     "compId":160,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/script/Game/UITask_GetAward.ts",
+                                    "searchKey":"Script,UITask_GetAward",
+                                    "removeAble":true,
+                                    "props":{},
+                                    "nodeParent":161,
+                                    "label":"UITask_GetAward",
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":166,
                                     "child":[
                                         ]
                                 }]

@@ -1,4 +1,4 @@
-import { lwg, Click, EventAdmin, Hint, Admin, Game, Task } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Hint, Admin, Game, Task, Gold, Shop } from "../Lwg_Template/lwg";
 import ADManager from "../TJ/Admanager";
 import { GVariate } from "../Lwg_Template/Global";
 
@@ -7,6 +7,27 @@ export default class UITask extends lwg.Task.TaskScene {
     taskOnAwake(): void {
         GVariate._stageClick = false;
     }
+    taskEventReg(): void {
+        // 点击领取奖励
+        EventAdmin.reg(Task.EventType.getAward, this, (dataSource) => {
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                Task.setTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.get, -1);
+                Gold.addGold(dataSource[Task.TaskProperty.rewardNum]);
+                Task._TaskList.refresh();
+            });
+        })
+
+        // 看广告领取金币
+        EventAdmin.reg(Task.EventType.adsGetAward, this, (dataSource) => {
+            ADManager.ShowReward(() => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
+                    Task._TaskList.refresh();
+                });
+            })
+        })
+
+    }
 
     taskList_Update(cell: Laya.Box, index: number): void {
         let dataSource = cell.dataSource;
@@ -14,6 +35,7 @@ export default class UITask extends lwg.Task.TaskScene {
         Name.text = dataSource.name;
 
         let BtnGet = cell.getChildByName('BtnGet') as Laya.Image;
+
         if (dataSource.get === 0) {
             BtnGet.skin = 'UI/Task/jinxing.png';
         } else if (dataSource.get === 1) {
@@ -24,15 +46,27 @@ export default class UITask extends lwg.Task.TaskScene {
 
         let ProgressBar = cell.getChildByName('ProgressBar') as Laya.Image;
         ProgressBar.width = dataSource.resCondition / dataSource.condition * 169;
+
+        let ProNum = cell.getChildByName('ProNum') as Laya.Label;
+        ProNum.text = dataSource.resCondition + '/' + dataSource.condition;
+
         let AwardNum = cell.getChildByName('AwardNum') as Laya.Label;
         AwardNum.text = dataSource.rewardNum;
+
+        if (index === 0) {
+            ProgressBar.width = 169;
+            ProNum.text = '1/1';
+            BtnGet.skin = 'UI/Shop/icon_ads.png';
+        }
+
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, null, this.self['BtnBack'], this, null, null, this.btnBackeUp);
+        Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
 
     };
-    btnBackeUp(): void {
+
+    btnBackUp(): void {
         this.self.close();
     }
 

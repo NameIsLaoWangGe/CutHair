@@ -6,6 +6,7 @@ import UIShare from "./script/Game/UIShare"
 import UIShop_Goods from "./script/Game/UIShop_Goods"
 import UIShop from "./script/Game/UIShop"
 import UIStart from "./script/Game/UIStart"
+import UITask_GetAward from "./script/Game/UITask_GetAward"
 import UITask from "./script/Game/UITask"
 import UIVictory from "./script/Game/UIVictory"
 import GameUI from "./script/GameUI"
@@ -35,6 +36,7 @@ export default class GameConfig{
         reg("script/Game/UIShop_Goods.ts",UIShop_Goods);
         reg("script/Game/UIShop.ts",UIShop);
         reg("script/Game/UIStart.ts",UIStart);
+        reg("script/Game/UITask_GetAward.ts",UITask_GetAward);
         reg("script/Game/UITask.ts",UITask);
         reg("script/Game/UIVictory.ts",UIVictory);
         reg("script/GameUI.ts",GameUI);

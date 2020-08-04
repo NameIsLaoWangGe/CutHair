@@ -1039,7 +1039,6 @@
                     this.lwgEventReg();
                 }
                 lwgOnEnable() {
-                    console.log('父类的初始化！');
                 }
                 lwgBtnClick() {
                 }
@@ -2905,7 +2904,65 @@
         let Task;
         (function (Task) {
             Task.TaskClassArr = [];
-            Task.everydayTask = {};
+            Task.todayData = {
+                d: null,
+                get date() {
+                    return this.d = Laya.LocalStorage.getItem('Task_todayData') !== null ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
+                },
+                set date(date) {
+                    this.d = date;
+                    Laya.LocalStorage.setItem('Task_todayData', this.d);
+                }
+            };
+            function getTaskProperty(ClassName, name, property) {
+                let pro = null;
+                let arr = getTaskClassArr(ClassName);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            Task.getTaskProperty = getTaskProperty;
+            function setTaskProperty(ClassName, name, property, value) {
+                let arr = getTaskClassArr(ClassName);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        console.log(element);
+                        break;
+                    }
+                }
+                let data = {};
+                data[ClassName] = arr;
+                Laya.LocalStorage.setJSON(ClassName, JSON.stringify(data));
+            }
+            Task.setTaskProperty = setTaskProperty;
+            function getTaskClassArr(ClassName) {
+                let arr = [];
+                switch (ClassName) {
+                    case TaskClass.everyday:
+                        arr = Task.everydayTask;
+                        break;
+                    case TaskClass.perpetual:
+                        arr = Task.perpetualTask;
+                        break;
+                    default:
+                        break;
+                }
+                return arr;
+            }
+            Task.getTaskClassArr = getTaskClassArr;
             let TaskType;
             (function (TaskType) {
                 TaskType["ads"] = "ads";
@@ -2933,8 +2990,29 @@
             })(TaskClass = Task.TaskClass || (Task.TaskClass = {}));
             let EventType;
             (function (EventType) {
-                EventType["select"] = "select";
+                EventType["getAward"] = "getAward";
+                EventType["adsGetAward"] = "adsGetAward";
             })(EventType = Task.EventType || (Task.EventType = {}));
+            let TaskName;
+            (function (TaskName) {
+                TaskName["\u89C2\u770B\u5E7F\u544A\u83B7\u5F97\u91D1\u5E01"] = "\u89C2\u770B\u5E7F\u544A\u83B7\u5F97\u91D1\u5E01";
+                TaskName["\u6BCF\u65E5\u670D\u52A110\u4F4D\u5BA2\u4EBA"] = "\u6BCF\u65E5\u670D\u52A110\u4F4D\u5BA2\u4EBA";
+                TaskName["\u6BCF\u65E5\u89C2\u770B\u4E24\u4E2A\u5E7F\u544A"] = "\u6BCF\u65E5\u89C2\u770B\u4E24\u4E2A\u5E7F\u544A";
+                TaskName["\u6BCF\u65E5\u4F7F\u75283\u79CD\u76AE\u80A4"] = "\u6BCF\u65E5\u4F7F\u75283\u79CD\u76AE\u80A4";
+                TaskName["\u6BCF\u65E5\u5F00\u542F10\u4E2A\u5B9D\u7BB1"] = "\u6BCF\u65E5\u5F00\u542F10\u4E2A\u5B9D\u7BB1";
+            })(TaskName = Task.TaskName || (Task.TaskName = {}));
+            function initTask() {
+                if (Task.todayData.date !== (new Date).getDate()) {
+                    Task.everydayTask = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS'];
+                    console.log('不是同一天，每日任务重制！');
+                    Task.todayData.date = (new Date).getDate();
+                }
+                else {
+                    Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
+                    console.log('是同一天！，每日继续任务');
+                }
+            }
+            Task.initTask = initTask;
             class TaskScene extends Admin.Scene {
                 lwgOnAwake() {
                     this.initData();
@@ -2943,7 +3021,6 @@
                 initData() {
                     Task._TaskTap = this.self['TaskTap'];
                     Task._TaskList = this.self['TaskList'];
-                    Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
                     Task.TaskClassArr = [Task.everydayTask];
                 }
                 lwgEventReg() {
@@ -3263,7 +3340,7 @@
             class LodeScene extends Admin.Scene {
                 lwgEventReg() {
                     EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
-                    EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(); });
+                    EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(), this.LodeInterior(); });
                     EventAdmin.reg(LodingType.progress, this, () => {
                         Loding.currentProgress.value++;
                         if (Loding.currentProgress.value < Loding.sumProgress) {
@@ -3323,6 +3400,9 @@
                     }
                 }
                 lwgLodePhaseComplete() { }
+                LodeInterior() {
+                    Task.initTask();
+                }
                 lwgLodeComplete() { }
             }
             Loding.LodeScene = LodeScene;
@@ -4863,9 +4943,48 @@
         }
     }
 
+    class UITask_GetAward extends Admin.Object {
+        lwgBtnClick() {
+            let BtnGet = this.self.getChildByName('BtnGet');
+            Click.on(Click.Type.largen, null, BtnGet, this, null, null, this.btnGetUp);
+        }
+        btnGetUp() {
+            if (this.self['dataSource'][Task.TaskProperty.name] === '观看广告获得金币') {
+                EventAdmin.notify(Task.EventType.adsGetAward, [this.self['dataSource']]);
+                return;
+            }
+            if (this.self['dataSource'][Task.TaskProperty.get] === 1) {
+                EventAdmin.notify(Task.EventType.getAward, [this.self['dataSource']]);
+            }
+            else if (this.self['dataSource'][Task.TaskProperty.get] === 0) {
+                console.log('任务没有完成');
+            }
+            else if (this.self['dataSource'][Task.TaskProperty.get] === -1) {
+                console.log('或者已经领取过！');
+            }
+        }
+    }
+
     class UITask extends lwg.Task.TaskScene {
         taskOnAwake() {
             GVariate._stageClick = false;
+        }
+        taskEventReg() {
+            EventAdmin.reg(Task.EventType.getAward, this, (dataSource) => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Task.setTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.get, -1);
+                    Gold.addGold(dataSource[Task.TaskProperty.rewardNum]);
+                    Task._TaskList.refresh();
+                });
+            });
+            EventAdmin.reg(Task.EventType.adsGetAward, this, (dataSource) => {
+                ADManager.ShowReward(() => {
+                    Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                        Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
+                        Task._TaskList.refresh();
+                    });
+                });
+            });
         }
         taskList_Update(cell, index) {
             let dataSource = cell.dataSource;
@@ -4883,14 +5002,21 @@
             }
             let ProgressBar = cell.getChildByName('ProgressBar');
             ProgressBar.width = dataSource.resCondition / dataSource.condition * 169;
+            let ProNum = cell.getChildByName('ProNum');
+            ProNum.text = dataSource.resCondition + '/' + dataSource.condition;
             let AwardNum = cell.getChildByName('AwardNum');
             AwardNum.text = dataSource.rewardNum;
+            if (index === 0) {
+                ProgressBar.width = 169;
+                ProNum.text = '1/1';
+                BtnGet.skin = 'UI/Shop/icon_ads.png';
+            }
         }
         lwgBtnClick() {
-            Click.on(Click.Type.noEffect, null, this.self['BtnBack'], this, null, null, this.btnBackeUp);
+            Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
         ;
-        btnBackeUp() {
+        btnBackUp() {
             this.self.close();
         }
         taskDisable() {
@@ -4918,6 +5044,18 @@
             lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
+            let name = Task.TaskName.每日服务10位客人;
+            let resCondition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
+            let condition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.condition);
+            if (Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get) !== -1) {
+                if (condition <= resCondition + 1) {
+                    Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
+                    Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get, 1);
+                }
+                else {
+                    Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
+                }
+            }
         }
         lwgOpenAni() {
             this.self['Multiply10'].alpha = 0;
@@ -5093,6 +5231,7 @@
             reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
             reg("script/Game/UIShop.ts", UIShop);
             reg("script/Game/UIStart.ts", UIStart);
+            reg("script/Game/UITask_GetAward.ts", UITask_GetAward);
             reg("script/Game/UITask.ts", UITask);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);

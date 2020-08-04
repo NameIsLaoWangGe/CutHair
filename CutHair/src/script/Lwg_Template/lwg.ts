@@ -1502,7 +1502,7 @@ export module lwg {
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
             lwgOnEnable(): void {
-                console.log('父类的初始化！');
+                // console.log('父类的初始化！');
             }
             /**点击事件注册*/
             lwgBtnClick(): void {
@@ -4187,7 +4187,7 @@ export module lwg {
         }
     }
 
-
+    /**任务模块*/
     export module Task {
         /**任务种类集合*/
         export let TaskClassArr = [];
@@ -4200,17 +4200,84 @@ export module lwg {
 
         /**每日任务数据集合*/
         export let everydayTask: Array<any>;
+        /**非每日任务集合*/
+        export let perpetualTask: Array<any>;
+
         /**今日日期*/
         export let todayData = {
             d: null,
-            get data(): number {
+            /**获取存储的日期*/
+            get date(): number {
                 return this.d = Laya.LocalStorage.getItem('Task_todayData') !== null ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
             },
-            set data(name: number) {
-                this.currentSkin = name;
+            /**设置存储的日期*/
+            set date(date: number) {
+                this.d = date;
                 Laya.LocalStorage.setItem('Task_todayData', this.d);
             }
         };
+
+        /**
+        * 通过名称获取任务的一个属性值
+        * @param ClassName 任务类型名称
+        * @param name 任务名称
+        * @param property 任务属性
+        * */
+        export function getTaskProperty(ClassName: string, name: string, property: string): any {
+            let pro = null;
+            let arr = getTaskClassArr(ClassName);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            } else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+
+        /**
+         * 通过名称设置或者增加一个任务的一个属性值
+         * @param goodsClass 任务类型
+         * @param ClassName 任务名称
+         * @param property 设置或者增加任务属性名称
+         * @param value 需要设置或者增加的属性值
+         * */
+        export function setTaskProperty(ClassName: string, name: string, property: string, value: any): void {
+            let arr = getTaskClassArr(ClassName);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    console.log(element)
+                    break;
+                }
+            }
+            let data = {};
+            data[ClassName] = arr;
+            Laya.LocalStorage.setJSON(ClassName, JSON.stringify(data));
+        }
+
+        /**根据任务类型返回任务数组*/
+        export function getTaskClassArr(ClassName: string): Array<any> {
+            let arr = [];
+            switch (ClassName) {
+                case TaskClass.everyday:
+                    arr = everydayTask;
+                    break;
+                case TaskClass.perpetual:
+                    arr = perpetualTask;
+                    break;
+                default:
+                    break;
+            }
+            return arr;
+        }
 
         /**获得方式列举,方式可以添加*/
         export enum TaskType {
@@ -4253,10 +4320,40 @@ export module lwg {
             /**永久性任务*/
             perpetual = 'Task_Perpetual',
         }
+
         /**事件名称*/
         export enum EventType {
-            select = 'select',
+            getAward = 'getAward',
+            adsGetAward = 'adsGetAward',
         }
+
+        /**任务类型名称*/
+        export enum TaskName {
+            "观看广告获得金币" = "观看广告获得金币",
+            "每日服务10位客人" = "每日服务10位客人",
+            "每日观看两个广告" = "每日观看两个广告",
+            "每日使用3种皮肤" = "每日使用3种皮肤",
+            "每日开启10个宝箱" = "每日开启10个宝箱"
+        }
+
+        /**在loding界面或者开始界面执行一次！*/
+        export function initTask(): void {
+            //如果上个日期等于今天的日期，那么从存储中获取，如果不相等则直接从数据表中获取
+            if (todayData.date !== (new Date).getDate()) {
+                Task.everydayTask = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS']
+                console.log('不是同一天，每日任务重制！');
+                todayData.date = (new Date).getDate();
+            } else {
+                Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
+                console.log('是同一天！，每日继续任务');
+            }
+        }
+
+        /**全局任务事件注册*/
+        export interface EventReg {
+            func(): void;
+        }
+
         export class TaskScene extends Admin.Scene {
             lwgOnAwake(): void {
                 this.initData();
@@ -4267,27 +4364,21 @@ export module lwg {
                 /**结构，如果没有则为null*/
                 Task._TaskTap = this.self['TaskTap'];
                 Task._TaskList = this.self['TaskList'];
-                //如果上个日期等于今天的日期，那么从存储中获取，如果不相等则直接从数据表中获取
-                if (todayData.data !== (new Date).getDate()) {
-                    Task._TaskList = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS']
-                } else {
-                    Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
-                    console.log('是同一天！');
-                }
                 TaskClassArr = [Task.everydayTask];
             }
+
             lwgEventReg(): void {
                 this.taskEventReg();
             }
-            /**商店中注册的一些事件*/
+            /**任务中注册的一些事件*/
             taskEventReg(): void { }
 
-            /**界面初始化前执行一次*/
+            /**任务界面初始化前执行一次*/
             taskOnAwake(): void { }
             lwgNodeDec(): void {
                 this.taskNodeDec();
             }
-            /**商店中的节点声明*/
+            /**任务中的节点声明*/
             taskNodeDec(): void { }
 
             lwgOnEnable(): void {
@@ -4295,14 +4386,14 @@ export module lwg {
                 this.taskList_Create();
                 this.taskOnEnable();
             }
-            /**游戏开始前执行*/
+            /**任务界面开始后执行*/
             taskOnEnable(): void {
             }
             /**Tap初始化*/
             taskTap_Create(): void {
                 Task._TaskList.selectHandler = new Laya.Handler(this, this.taskTap_Select);
             }
-            /**myTap的触摸监听*/
+            /**taskTap的触摸监听*/
             taskTap_Select(index: number): void { }
             /**初始化list*/
             taskList_Create(): void {
@@ -4398,6 +4489,12 @@ export module lwg {
                 Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
             }
         };
+
+        /**今日用了商品的种类，用在开始游戏界面，可能会有些任务需要用到*/
+        export let useSkinType: number;
+        export function setUseSkinType(): void {
+
+        }
 
         /**
          * 通过名称获取商品的一个属性值
@@ -4606,7 +4703,6 @@ export module lwg {
                 Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
                 goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
                 classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
-
             }
 
             lwgEventReg(): void {
@@ -4669,7 +4765,6 @@ export module lwg {
         }
     }
 
-
     export module Loding {
         /**3D场景的加载*/
         export let lodingList_3D: Array<any> = [];
@@ -4727,7 +4822,7 @@ export module lwg {
 
             lwgEventReg(): void {
                 EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule() });
-                EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete() });
+                EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(), this.LodeInterior() });
                 EventAdmin.reg(LodingType.progress, this, () => {
                     currentProgress.value++;
                     if (currentProgress.value < sumProgress) {
@@ -4742,6 +4837,7 @@ export module lwg {
                 sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Data.length;
                 loadOrderIndex = 0;
                 EventAdmin.notify(Loding.LodingType.loding);
+
             }
 
             /**根据加载顺序依次加载*/
@@ -4795,6 +4891,11 @@ export module lwg {
             }
             /**每加载成功一次后、进度条每次增加后的回调*/
             lwgLodePhaseComplete(): void { }
+
+            /**完成后，内部结构初始化*/
+            LodeInterior(): void {
+                Task.initTask();
+            }
             /**加载完成回调,每个游戏不一样*/
             lwgLodeComplete(): void { }
         }
