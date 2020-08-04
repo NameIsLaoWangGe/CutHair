@@ -24,13 +24,17 @@ export default class UILoding extends Loding.LodeScene {
         ];
     }
 
-
     lwgAdaptive(): void {
         this.self['Bg'].height = Laya.stage.height;
         this.self['Logo'].y = Laya.stage.height * 0.174;
         this.self['Progress'].y = Laya.stage.height * 0.763;
         this.self['FCM'].y = Laya.stage.height * 0.910;
         this.self['FCM'].y = Laya.stage.height * 0.910;
+    }
+
+
+    lwgLodePhaseComplete():void{
+        // console.log(Loding.currentProgress.value);
     }
 
     lwgLodeComplete(): void {

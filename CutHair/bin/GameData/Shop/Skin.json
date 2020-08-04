@@ -77,7 +77,7 @@
     "name": "xingxingyanjing",
     "getway": "ads",
     "condition": 1,
-    "resCondition": 1,
+    "resCondition": 0,
     "arrange": 9,
     "getOder": -1,
     "have": false
@@ -86,7 +86,7 @@
     "name": "yanshemao_shijie",
     "getway": "ads",
     "condition": 3,
-    "resCondition": 3,
+    "resCondition": 0,
     "arrange": 5,
     "getOder": -1,
     "have": false
@@ -95,7 +95,7 @@
     "name": "maomaozi",
     "getway": "ads",
     "condition": 2,
-    "resCondition": 2,
+    "resCondition": 0,
     "arrange": 6,
     "getOder": -1,
     "have": false

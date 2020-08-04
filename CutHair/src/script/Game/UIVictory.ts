@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game, Animation2D } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Hint, Game, Animation2D, Shop } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
@@ -18,6 +18,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         this.getGoldDisPlay();
         Gold.goldAppear(500);
         Game._gameLevel.value++;
+       
         this.self['BtnAdv'].visible = true;
         this.self['BtnNormal'].visible = false;
         this.self['Dot'].visible = true;

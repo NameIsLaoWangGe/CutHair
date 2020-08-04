@@ -629,7 +629,7 @@ export module lwg {
             '请前往皮肤限定界面获取!',
             '通过相应的关卡数达到就可以得到了!',
             '点击金币抽奖按钮购买!',
-            
+
         }
         enum Skin {
             blackBord = 'Frame/UI/ui_orthogon_black.png'
@@ -4187,6 +4187,12 @@ export module lwg {
 
     /**商城模块,用于购买和穿戴，主要是购买和存储，次要是穿戴*/
     export module Shop {
+
+
+        /**商品品类集合，重写则规定列表顺序*/
+        export let goodsClassArr: Array<Array<any>> = [];
+        /**商品图片对应的文件夹名称集合，顺序必须和商品品类顺序一样*/
+        export let classWarehouse: Array<string> = [];
         /**商品种类切换页*/
         export let _ShopTap: Laya.Tab;
         /**假如还有一个商品切换页_OtherTap*/
@@ -4251,12 +4257,12 @@ export module lwg {
          * @param name 商品名称
          * @param property 商品属性
          * */
-        export function getGoodsProperty(goodsClass: string, name: string, property: string): void {
+        export function getGoodsProperty(goodsClass: string, name: string, property: string): any {
             let pro;
             let arr = getGoodsClassArr(goodsClass);
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
-                if (element[name] === name) {
+                if (element['name'] === name) {
                     pro = element[property];
                     break;
                 }
@@ -4306,21 +4312,60 @@ export module lwg {
             return arrHave;
         }
 
-
         /**
-         * 返回当前只能用金币购买的、并且尚未获得的商品数组
+         * 返回当前只能用金币购买的商品数组
          * @param goodsClass 商品品类
+         * @param have 是否显示获取到的，true为已获得，flase为没有获得，不传则是全部
          * */
-        export function getNohaveArr_Gold(goodsClass: string) {
+        export function getwayGoldArr(goodsClass: string, have?: boolean) {
             let arr = getGoodsClassArr(goodsClass);
             let arrNoHave = [];
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
-                if (!element[Property.have] && element[Property.getway] === Getway.gold) {
-                    arrNoHave.push(element);
+                if (have && have !== undefined) {
+                    if (element[Property.have] && element[Property.getway] === Getway.gold) {
+                        arrNoHave.push(element);
+                    }
+                }
+                else if (!have && have !== undefined) {
+                    if (!element[Property.have] && element[Property.getway] === Getway.gold) {
+                        arrNoHave.push(element);
+                    }
+                }
+                else if (have == undefined) {
+                    if (element[Property.getway] === Getway.gold) {
+                        arrNoHave.push(element);
+                    }
                 }
             }
             return arrNoHave;
+        }
+
+        /**
+         * 返回当前只能通过关卡进度获取的商品品类
+         * @param goodsClass 商品品类
+         * @param have 是否显示获取到的，true为已获得，flase为没有获得，不传则是全部
+         * */
+        export function getwayIneedwinArr(goodsClass: string, have?: boolean) {
+            let arr = getGoodsClassArr(goodsClass);
+            let arrIneedwin = [];
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (have && have !== undefined) {
+                    if (element[Property.have] && element[Property.getway] === Getway.ineedwin) {
+                        arrIneedwin.push(element);
+                    }
+                } else if (!have && have !== undefined) {
+                    if (!element[Property.have] && element[Property.getway] === Getway.ineedwin) {
+                        arrIneedwin.push(element);
+                    }
+                } else if (have == undefined) {
+                    if (element[Property.getway] === Getway.ineedwin) {
+                        arrIneedwin.push(element);
+                    }
+                }
+            }
+            return arrIneedwin;
         }
 
         /**根据品类返回品类名称数组*/
@@ -4381,7 +4426,7 @@ export module lwg {
             other = 'other',
         }
 
-        /**商店中的商品大致类别*/
+        /**商店中的商品大致类别,同时对应图片地址的文件夹*/
         export enum GoodsClass {
             /**皮肤*/
             Skin = 'Shop_Skin',
@@ -4411,6 +4456,9 @@ export module lwg {
                 Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
                 Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
                 Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
+                goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
+                classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
+
             }
 
             lwgEventReg(): void {
@@ -4458,8 +4506,8 @@ export module lwg {
             myList_Update(cell, index: number): void { }
             /**刷新list数据,重写覆盖，默认为皮肤*/
             myList_refresh(): void {
-                if (Shop._ShopList) {
-                    Shop._ShopList.array = Shop.allSkin;
+                if (Shop._ShopList && goodsClassArr.length > 0) {
+                    Shop._ShopList.array = goodsClassArr[0];
                     Shop._ShopList.refresh();
                 }
             }
@@ -4482,14 +4530,16 @@ export module lwg {
         /**当前加载到哪个分类数组*/
         export let loadOrderIndex: number;
 
-        /**当前进度条进度,起始位0，每加载成功1个，则加1*/
+        /**当前进度条进度,起始位0，每加载成功1个资源，则加1*/
         export let currentProgress = {
             val: 0,
 
+            /**获取进度条的值*/
             get value(): number {
                 return this.val;
             },
 
+            /**设置进度条的值*/
             set value(v: number) {
                 this.val = v;
                 if (this.val >= sumProgress) {
@@ -4527,6 +4577,7 @@ export module lwg {
                     currentProgress.value++;
                     if (currentProgress.value < sumProgress) {
                         console.log('当前进度条进度为:', currentProgress.value / sumProgress);
+                        this.lwgLodePhaseComplete();
                     }
                 });
             }
@@ -4587,6 +4638,8 @@ export module lwg {
                         break;
                 }
             }
+            /**每加载成功一次后、进度条每次增加后的回调*/
+            lwgLodePhaseComplete(): void { }
             /**加载完成回调,每个游戏不一样*/
             lwgLodeComplete(): void { }
         }
