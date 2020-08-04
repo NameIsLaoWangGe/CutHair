@@ -12,6 +12,5 @@ export default class UIShop_Goods extends Admin.Object {
     }
     up(): void {
         EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']])
-        console.log(this.self['_dataSource']);
     }
 }

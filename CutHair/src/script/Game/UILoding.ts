@@ -21,6 +21,7 @@ export default class UILoding extends Loding.LodeScene {
             "GameData/Shop/Other.json",
             "GameData/Shop/Props.json",
             "GameData/Shop/Skin.json",
+            'GameData/Task/everydayTask.json',
         ];
     }
 

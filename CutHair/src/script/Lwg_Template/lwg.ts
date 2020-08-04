@@ -1047,7 +1047,9 @@ export module lwg {
             UICaiDanQiang = 'UICaiDanQiang',
             UICaidanPifu = 'UICaidanPifu',
             UIOperation = 'UIOperation',
-            UIShop = 'UIShop'
+            UIShop = 'UIShop',
+            UITask = 'UITask'
+
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -4185,10 +4187,156 @@ export module lwg {
         }
     }
 
+
+    export module Task {
+        /**任务种类集合*/
+        export let TaskClassArr = [];
+        /**任种类切换页*/
+        export let _TaskTap: Laya.Tab;
+        /**假如还有一个任切换页_OtherTap*/
+        export let _OtherTap: Laya.Tab;
+        /**任务列表*/
+        export let _TaskList: Laya.List;
+
+        /**每日任务数据集合*/
+        export let everydayTask: Array<any>;
+        /**今日日期*/
+        export let todayData = {
+            d: null,
+            get data(): number {
+                return this.d = Laya.LocalStorage.getItem('Task_todayData') !== null ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
+            },
+            set data(name: number) {
+                this.currentSkin = name;
+                Laya.LocalStorage.setItem('Task_todayData', this.d);
+            }
+        };
+
+        /**获得方式列举,方式可以添加*/
+        export enum TaskType {
+            /**看广告*/
+            ads = 'ads',
+            /**胜利次数*/
+            victory = 'victory',
+            /**使用皮肤次数*/
+            useSkins = 'useSkins',
+            /**开宝箱次数*/
+            treasureBox = 'treasureBox',
+        }
+        /**任务属性列表，数据表中的任务应该有哪些属性,name和have是必须有的属性,可以无限增加*/
+        export enum TaskProperty {
+            /**名称*/
+            name = 'name',
+            /**任务解释*/
+            explain = 'explain',
+            /**任务类型*/
+            taskType = 'taskType',
+            condition = 'condition',
+            /**根据获取途径，剩余需要条件的数量，会平凡改这个数量*/
+            resCondition = 'resCondition',
+            /**奖励类型*/
+            rewardType = 'rewardType',
+            /**奖励数量*/
+            rewardNum = 'rewardNum',
+            /**排列顺序*/
+            arrange = 'arrange',
+            /**剩余可完成次数,为零时将不可继续进行*/
+            time = 'time',
+            /**是否有可领取的奖励,有三种状态，1代表有奖励未领取，0表示任务没有完成，-1代表今天任务完成了也领取了奖励*/
+            get = 'get',
+        }
+
+        /**商店中的商品大致类别,同时对应图片地址的文件夹*/
+        export enum TaskClass {
+            /**每日任务*/
+            everyday = 'Task_Everyday',
+            /**永久性任务*/
+            perpetual = 'Task_Perpetual',
+        }
+        /**事件名称*/
+        export enum EventType {
+            select = 'select',
+        }
+        export class TaskScene extends Admin.Scene {
+            lwgOnAwake(): void {
+                this.initData();
+                this.taskOnAwake();
+            }
+            /**初始化json数据*/
+            initData(): void {
+                /**结构，如果没有则为null*/
+                Task._TaskTap = this.self['TaskTap'];
+                Task._TaskList = this.self['TaskList'];
+                //如果上个日期等于今天的日期，那么从存储中获取，如果不相等则直接从数据表中获取
+                if (todayData.data !== (new Date).getDate()) {
+                    Task._TaskList = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS']
+                } else {
+                    Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
+                    console.log('是同一天！');
+                }
+                TaskClassArr = [Task.everydayTask];
+            }
+            lwgEventReg(): void {
+                this.taskEventReg();
+            }
+            /**商店中注册的一些事件*/
+            taskEventReg(): void { }
+
+            /**界面初始化前执行一次*/
+            taskOnAwake(): void { }
+            lwgNodeDec(): void {
+                this.taskNodeDec();
+            }
+            /**商店中的节点声明*/
+            taskNodeDec(): void { }
+
+            lwgOnEnable(): void {
+                this.taskTap_Create();
+                this.taskList_Create();
+                this.taskOnEnable();
+            }
+            /**游戏开始前执行*/
+            taskOnEnable(): void {
+            }
+            /**Tap初始化*/
+            taskTap_Create(): void {
+                Task._TaskList.selectHandler = new Laya.Handler(this, this.taskTap_Select);
+            }
+            /**myTap的触摸监听*/
+            taskTap_Select(index: number): void { }
+            /**初始化list*/
+            taskList_Create(): void {
+                Task._TaskList.selectEnable = true;
+                Task._TaskList.vScrollBarSkin = "";
+                // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
+                // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
+                Task._TaskList.selectHandler = new Laya.Handler(this, this.taskList_Scelet);
+                Task._TaskList.renderHandler = new Laya.Handler(this, this.taskList_Update);
+                this.taskList_refresh();
+            }
+            /**list选中监听*/
+            taskList_Scelet(index: number): void { }
+            /**list列表刷新*/
+            taskList_Update(cell: Laya.Box, index: number): void { }
+            /**刷新list数据,重写覆盖，默认为皮肤*/
+            taskList_refresh(): void {
+                if (Task._TaskList && TaskClassArr.length > 0) {
+                    Task._TaskList.array = TaskClassArr[0];
+                    Task._TaskList.refresh();
+                }
+            }
+            lwgDisable(): void {
+                this.taskDisable();
+            }
+            /**页面关闭后执行*/
+            taskDisable(): void {
+            }
+        }
+    }
+
+
     /**商城模块,用于购买和穿戴，主要是购买和存储，次要是穿戴*/
     export module Shop {
-
-
         /**商品品类集合，重写则规定列表顺序*/
         export let goodsClassArr: Array<Array<any>> = [];
         /**商品图片对应的文件夹名称集合，顺序必须和商品品类顺序一样*/
@@ -4258,7 +4406,7 @@ export module lwg {
          * @param property 商品属性
          * */
         export function getGoodsProperty(goodsClass: string, name: string, property: string): any {
-            let pro;
+            let pro = null;
             let arr = getGoodsClassArr(goodsClass);
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
@@ -4267,10 +4415,11 @@ export module lwg {
                     break;
                 }
             }
-            if (pro) {
+            if (pro !== null) {
                 return pro;
             } else {
-                console.log(name + '找不到属性:' + property);
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
             }
         }
 
@@ -4282,7 +4431,6 @@ export module lwg {
          * @param value 需要设置或者增加的属性值
          * */
         export function setGoodsProperty(goodsClass: string, name: string, property: string, value: any): void {
-            let pro;
             let arr = getGoodsClassArr(goodsClass);
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
@@ -4305,7 +4453,7 @@ export module lwg {
             let arrHave = [];
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
-                if (element[Property.have]) {
+                if (element[GoodsProperty.have]) {
                     arrHave.push(element);
                 }
             }
@@ -4323,17 +4471,17 @@ export module lwg {
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
                 if (have && have !== undefined) {
-                    if (element[Property.have] && element[Property.getway] === Getway.gold) {
+                    if (element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.gold) {
                         arrNoHave.push(element);
                     }
                 }
                 else if (!have && have !== undefined) {
-                    if (!element[Property.have] && element[Property.getway] === Getway.gold) {
+                    if (!element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.gold) {
                         arrNoHave.push(element);
                     }
                 }
                 else if (have == undefined) {
-                    if (element[Property.getway] === Getway.gold) {
+                    if (element[GoodsProperty.getway] === Getway.gold) {
                         arrNoHave.push(element);
                     }
                 }
@@ -4352,15 +4500,15 @@ export module lwg {
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
                 if (have && have !== undefined) {
-                    if (element[Property.have] && element[Property.getway] === Getway.ineedwin) {
+                    if (element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.ineedwin) {
                         arrIneedwin.push(element);
                     }
                 } else if (!have && have !== undefined) {
-                    if (!element[Property.have] && element[Property.getway] === Getway.ineedwin) {
+                    if (!element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.ineedwin) {
                         arrIneedwin.push(element);
                     }
                 } else if (have == undefined) {
-                    if (element[Property.getway] === Getway.ineedwin) {
+                    if (element[GoodsProperty.getway] === Getway.ineedwin) {
                         arrIneedwin.push(element);
                     }
                 }
@@ -4389,7 +4537,7 @@ export module lwg {
         }
 
         /**商品属性列表，数据表中的商品应该有哪些属性,name和have是必须有的属性,可以无限增加*/
-        export enum Property {
+        export enum GoodsProperty {
             /**名称*/
             name = 'name',
             /**获取途径*/
@@ -4453,9 +4601,9 @@ export module lwg {
                 /**结构，如果没有则为null*/
                 Shop._ShopTap = this.self['MyTap'];
                 Shop._ShopList = this.self['MyList'];
-                Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
-                Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
-                Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
+                Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
                 goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
                 classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
 
@@ -4510,6 +4658,13 @@ export module lwg {
                     Shop._ShopList.array = goodsClassArr[0];
                     Shop._ShopList.refresh();
                 }
+            }
+            lwgDisable(): void {
+                this.shopDisable();
+            }
+            /**页面关闭后执行*/
+            shopDisable(): void {
+
             }
         }
     }
@@ -4661,3 +4816,6 @@ export let Hint = lwg.Hint;
 export let Loding = lwg.Loding;
 export let Game = lwg.Game;
 export let Shop = lwg.Shop;
+export let ShopScene = lwg.Shop.ShopScene;
+export let Task = lwg.Task;
+export let TaskScene = lwg.Task.TaskScene;

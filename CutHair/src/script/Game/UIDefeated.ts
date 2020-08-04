@@ -1,5 +1,5 @@
 import { lwg, Click, EventAdmin, Hint, Admin, Game } from "../Lwg_Template/lwg";
-import { GEnum } from "../Lwg_Template/Global";
+import { GEnum, GVariate } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
 
 export default class UIDefeated extends lwg.Admin.Scene {
@@ -34,6 +34,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
     btnAgainUp(): void {
         console.log('重新开始！');
+       
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
         EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
         this.self.close();

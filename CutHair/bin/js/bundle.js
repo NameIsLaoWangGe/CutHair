@@ -706,6 +706,7 @@
                 SceneName["UICaidanPifu"] = "UICaidanPifu";
                 SceneName["UIOperation"] = "UIOperation";
                 SceneName["UIShop"] = "UIShop";
+                SceneName["UITask"] = "UITask";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -2901,6 +2902,93 @@
             }
             Tools.dataCompare = dataCompare;
         })(Tools = lwg.Tools || (lwg.Tools = {}));
+        let Task;
+        (function (Task) {
+            Task.TaskClassArr = [];
+            Task.everydayTask = {};
+            let TaskType;
+            (function (TaskType) {
+                TaskType["ads"] = "ads";
+                TaskType["victory"] = "victory";
+                TaskType["useSkins"] = "useSkins";
+                TaskType["treasureBox"] = "treasureBox";
+            })(TaskType = Task.TaskType || (Task.TaskType = {}));
+            let TaskProperty;
+            (function (TaskProperty) {
+                TaskProperty["name"] = "name";
+                TaskProperty["explain"] = "explain";
+                TaskProperty["taskType"] = "taskType";
+                TaskProperty["condition"] = "condition";
+                TaskProperty["resCondition"] = "resCondition";
+                TaskProperty["rewardType"] = "rewardType";
+                TaskProperty["rewardNum"] = "rewardNum";
+                TaskProperty["arrange"] = "arrange";
+                TaskProperty["time"] = "time";
+                TaskProperty["get"] = "get";
+            })(TaskProperty = Task.TaskProperty || (Task.TaskProperty = {}));
+            let TaskClass;
+            (function (TaskClass) {
+                TaskClass["everyday"] = "Task_Everyday";
+                TaskClass["perpetual"] = "Task_Perpetual";
+            })(TaskClass = Task.TaskClass || (Task.TaskClass = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["select"] = "select";
+            })(EventType = Task.EventType || (Task.EventType = {}));
+            class TaskScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.taskOnAwake();
+                }
+                initData() {
+                    Task._TaskTap = this.self['TaskTap'];
+                    Task._TaskList = this.self['TaskList'];
+                    Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
+                    Task.TaskClassArr = [Task.everydayTask];
+                }
+                lwgEventReg() {
+                    this.taskEventReg();
+                }
+                taskEventReg() { }
+                taskOnAwake() { }
+                lwgNodeDec() {
+                    this.taskNodeDec();
+                }
+                taskNodeDec() { }
+                lwgOnEnable() {
+                    this.taskTap_Create();
+                    this.taskList_Create();
+                    this.taskOnEnable();
+                }
+                taskOnEnable() {
+                }
+                taskTap_Create() {
+                    Task._TaskList.selectHandler = new Laya.Handler(this, this.taskTap_Select);
+                }
+                taskTap_Select(index) { }
+                taskList_Create() {
+                    Task._TaskList.selectEnable = true;
+                    Task._TaskList.vScrollBarSkin = "";
+                    Task._TaskList.selectHandler = new Laya.Handler(this, this.taskList_Scelet);
+                    Task._TaskList.renderHandler = new Laya.Handler(this, this.taskList_Update);
+                    this.taskList_refresh();
+                }
+                taskList_Scelet(index) { }
+                taskList_Update(cell, index) { }
+                taskList_refresh() {
+                    if (Task._TaskList && Task.TaskClassArr.length > 0) {
+                        Task._TaskList.array = Task.TaskClassArr[0];
+                        Task._TaskList.refresh();
+                    }
+                }
+                lwgDisable() {
+                    this.taskDisable();
+                }
+                taskDisable() {
+                }
+            }
+            Task.TaskScene = TaskScene;
+        })(Task = lwg.Task || (lwg.Task = {}));
         let Shop;
         (function (Shop) {
             Shop.goodsClassArr = [];
@@ -2939,7 +3027,7 @@
                 }
             };
             function getGoodsProperty(goodsClass, name, property) {
-                let pro;
+                let pro = null;
                 let arr = getGoodsClassArr(goodsClass);
                 for (let index = 0; index < arr.length; index++) {
                     const element = arr[index];
@@ -2948,11 +3036,12 @@
                         break;
                     }
                 }
-                if (pro) {
+                if (pro !== null) {
                     return pro;
                 }
                 else {
-                    console.log(name + '找不到属性:' + property);
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
                 }
             }
             Shop.getGoodsProperty = getGoodsProperty;
@@ -2975,7 +3064,7 @@
                 let arrHave = [];
                 for (let index = 0; index < arr.length; index++) {
                     const element = arr[index];
-                    if (element[Property.have]) {
+                    if (element[GoodsProperty.have]) {
                         arrHave.push(element);
                     }
                 }
@@ -2988,17 +3077,17 @@
                 for (let index = 0; index < arr.length; index++) {
                     const element = arr[index];
                     if (have && have !== undefined) {
-                        if (element[Property.have] && element[Property.getway] === Getway.gold) {
+                        if (element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.gold) {
                             arrNoHave.push(element);
                         }
                     }
                     else if (!have && have !== undefined) {
-                        if (!element[Property.have] && element[Property.getway] === Getway.gold) {
+                        if (!element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.gold) {
                             arrNoHave.push(element);
                         }
                     }
                     else if (have == undefined) {
-                        if (element[Property.getway] === Getway.gold) {
+                        if (element[GoodsProperty.getway] === Getway.gold) {
                             arrNoHave.push(element);
                         }
                     }
@@ -3012,17 +3101,17 @@
                 for (let index = 0; index < arr.length; index++) {
                     const element = arr[index];
                     if (have && have !== undefined) {
-                        if (element[Property.have] && element[Property.getway] === Getway.ineedwin) {
+                        if (element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.ineedwin) {
                             arrIneedwin.push(element);
                         }
                     }
                     else if (!have && have !== undefined) {
-                        if (!element[Property.have] && element[Property.getway] === Getway.ineedwin) {
+                        if (!element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.ineedwin) {
                             arrIneedwin.push(element);
                         }
                     }
                     else if (have == undefined) {
-                        if (element[Property.getway] === Getway.ineedwin) {
+                        if (element[GoodsProperty.getway] === Getway.ineedwin) {
                             arrIneedwin.push(element);
                         }
                     }
@@ -3048,16 +3137,16 @@
                 return arr;
             }
             Shop.getGoodsClassArr = getGoodsClassArr;
-            let Property;
-            (function (Property) {
-                Property["name"] = "name";
-                Property["getway"] = "getway";
-                Property["condition"] = "condition";
-                Property["resCondition"] = "resCondition";
-                Property["arrange"] = "arrange";
-                Property["getOder"] = "getOder";
-                Property["have"] = "have";
-            })(Property = Shop.Property || (Shop.Property = {}));
+            let GoodsProperty;
+            (function (GoodsProperty) {
+                GoodsProperty["name"] = "name";
+                GoodsProperty["getway"] = "getway";
+                GoodsProperty["condition"] = "condition";
+                GoodsProperty["resCondition"] = "resCondition";
+                GoodsProperty["arrange"] = "arrange";
+                GoodsProperty["getOder"] = "getOder";
+                GoodsProperty["have"] = "have";
+            })(GoodsProperty = Shop.GoodsProperty || (Shop.GoodsProperty = {}));
             let Getway;
             (function (Getway) {
                 Getway["free"] = "free";
@@ -3087,9 +3176,9 @@
                 initData() {
                     Shop._ShopTap = this.self['MyTap'];
                     Shop._ShopList = this.self['MyList'];
-                    Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, Property.name);
-                    Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, Property.name);
-                    Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, Property.name);
+                    Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                    Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                    Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
                     Shop.goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
                     Shop.classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
                 }
@@ -3126,6 +3215,11 @@
                         Shop._ShopList.array = Shop.goodsClassArr[0];
                         Shop._ShopList.refresh();
                     }
+                }
+                lwgDisable() {
+                    this.shopDisable();
+                }
+                shopDisable() {
                 }
             }
             Shop.ShopScene = ShopScene;
@@ -3248,6 +3342,9 @@
     let Loding = lwg.Loding;
     let Game = lwg.Game;
     let Shop = lwg.Shop;
+    let ShopScene = lwg.Shop.ShopScene;
+    let Task = lwg.Task;
+    let TaskScene = lwg.Task.TaskScene;
 
     class ADManager {
         constructor() {
@@ -3759,6 +3856,7 @@
                 "GameData/Shop/Other.json",
                 "GameData/Shop/Props.json",
                 "GameData/Shop/Skin.json",
+                'GameData/Task/everydayTask.json',
             ];
         }
         lwgAdaptive() {
@@ -3950,18 +4048,23 @@
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
-                if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-                    Laya.timer.frameOnce(60, this, () => {
-                        Admin._openScene(Admin.SceneName.UIShare, null, this.self);
-                    });
-                }
-                else {
-                    this.BtnLast.visible = true;
+                if (Admin._gameStart) {
+                    if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                        Laya.timer.frameOnce(60, this, () => {
+                            Admin._openScene(Admin.SceneName.UIShare, null, this.self);
+                        });
+                    }
+                    else {
+                        this.BtnLast.visible = true;
+                    }
+                    Admin._gameStart = false;
                 }
             });
             EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
-                Admin._gameStart = false;
-                Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+                if (Admin._gameStart) {
+                    Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+                    Admin._gameStart = false;
+                }
             });
             EventAdmin.reg(EventAdmin.EventType.operrationRefresh, this, () => {
                 lwg.Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => { });
@@ -4398,7 +4501,6 @@
         }
         up() {
             EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']]);
-            console.log(this.self['_dataSource']);
         }
     }
 
@@ -4449,54 +4551,62 @@
             if (!Shop._currentOther.name) {
                 Shop._currentOther.name = OtherName.tixudao;
             }
-            let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.Property.condition);
+            let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
             if (Game._gameLevel.value >= condition) {
-                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.Property.have, true);
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.have, true);
             }
             else {
-                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.Property.resCondition, Game._gameLevel.value);
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
             }
         }
         shopEventReg() {
             EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
+                console.log(dataSource.have);
                 if (dataSource.have) {
-                    switch (Shop._ShopTap.selectedIndex) {
-                        case 2:
-                            Shop._currentSkin.name = dataSource.name;
-                            this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
-                            break;
-                        case 1:
-                            Shop._currentProp.name = dataSource.name;
-                            this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
-                            break;
-                        case 0:
-                            Shop._currentOther.name = dataSource.name;
-                            this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
-                            break;
-                        default:
-                            break;
-                    }
+                    this.sceletDisplay(dataSource, false);
                 }
                 else {
-                    if (dataSource[Shop.Property.getway] === Shop.Getway.ads) {
+                    if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
                         ADManager.ShowReward(() => {
-                            this.adsAcquisition(dataSource.name);
+                            this.adsAcquisition(dataSource);
                         });
                     }
-                    else if (dataSource[Shop.Property.getway] === Shop.Getway.adsXD) {
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
                         Hint.createHint_Middle(Hint.HintDec["请前往皮肤限定界面获取!"]);
                     }
-                    else if (dataSource[Shop.Property.getway] === Shop.Getway.ineedwin) {
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
                         Hint.createHint_Middle(Hint.HintDec["通过相应的关卡数达到就可以得到了!"]);
                     }
-                    else if (dataSource[Shop.Property.getway] === Shop.Getway.gold) {
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
                         Hint.createHint_Middle(Hint.HintDec["点击金币抽奖按钮购买!"]);
                     }
                 }
             });
             Shop._ShopList.refresh();
         }
-        adsAcquisition(name) {
+        sceletDisplay(dataSource, scrollTo) {
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    Shop._currentSkin.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    break;
+                case 1:
+                    Shop._currentProp.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    break;
+                case 0:
+                    Shop._currentOther.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            if (scrollTo) {
+                let index = dataSource.arrange - 1;
+                Shop._ShopList.scrollTo(index);
+            }
+        }
+        adsAcquisition(dataSource) {
             let claName;
             switch (Shop._ShopTap.selectedIndex) {
                 case 2:
@@ -4511,12 +4621,14 @@
                 default:
                     break;
             }
-            let condition = Shop.getGoodsProperty(claName, name, Shop.Property.condition);
-            let resCondition = Shop.getGoodsProperty(claName, name, Shop.Property.resCondition);
-            Shop.setGoodsProperty(claName, name, Shop.Property.resCondition, resCondition + 1);
+            let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
+            let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
+            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
             if (condition <= resCondition + 1) {
-                Shop.setGoodsProperty(claName, name, Shop.Property.have, true);
+                Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
+                this.sceletDisplay(dataSource.name, false);
             }
+            Shop._ShopList.refresh();
         }
         myTap_Select(index) {
             switch (index) {
@@ -4545,7 +4657,7 @@
             switch (Shop._ShopTap.selectedIndex) {
                 case 2:
                     Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
-                    if (cell.dataSource[Shop.Property.name] == Shop._currentSkin.name) {
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentSkin.name) {
                         Select.visible = true;
                     }
                     else {
@@ -4554,7 +4666,7 @@
                     break;
                 case 1:
                     Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
-                    if (cell.dataSource[Shop.Property.name] == Shop._currentProp.name) {
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentProp.name) {
                         Select.visible = true;
                     }
                     else {
@@ -4563,7 +4675,7 @@
                     break;
                 case 0:
                     Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
-                    if (cell.dataSource[Shop.Property.name] == Shop._currentOther.name) {
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentOther.name) {
                         Select.visible = true;
                     }
                     else {
@@ -4578,11 +4690,10 @@
             let Board = cell.getChildByName('Board');
             let Dec = NoHave.getChildByName('Dec');
             let Icon = NoHave.getChildByName('Icon');
-            if (!cell.dataSource[Shop.Property.have]) {
-                switch (cell.dataSource[Shop.Property.getway]) {
+            if (!cell.dataSource[Shop.GoodsProperty.have]) {
+                switch (cell.dataSource[Shop.GoodsProperty.getway]) {
                     case Shop.Getway.ads:
-                        console.log(cell.dataSource[Shop.Property.resCondition], cell.dataSource[Shop.Property.condition]);
-                        Dec.text = cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition];
+                        Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
                         Dec.x = 88;
                         Dec.fontSize = 30;
                         Icon.visible = true;
@@ -4600,7 +4711,7 @@
                         Icon.visible = false;
                         break;
                     case Shop.Getway.ineedwin:
-                        Dec.text = '过' + cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition] + '关';
+                        Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
                         Dec.x = NoHave.width / 2;
                         Dec.fontSize = 23;
                         Icon.visible = false;
@@ -4646,8 +4757,8 @@
                 Hint.createHint_Middle(Hint.HintDec["没有可以购买的皮肤了！"]);
             }
             else {
-                Tools.objPropertySort(noHaveGold, Shop.Property.getOder);
-                let price = noHaveGold[0][Shop.Property.condition];
+                Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
+                let price = noHaveGold[0][Shop.GoodsProperty.condition];
                 if (Gold._goldNum < price) {
                     Hint.createHint_Middle(Hint.HintDec["金币不够了！"]);
                 }
@@ -4655,18 +4766,18 @@
                     Hint.createHint_Middle(Hint.HintDec["恭喜获得新皮肤!"]);
                     switch (Shop._ShopTap.selectedIndex) {
                         case 2:
-                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.Property.have, true);
-                            Shop._currentSkin.name = noHaveGold[0].name;
+                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.GoodsProperty.have, true);
                             break;
                         case 1:
-                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.Property.have, true);
+                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.GoodsProperty.have, true);
                             break;
                         case 0:
-                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.Property.have, true);
+                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.GoodsProperty.have, true);
                             break;
                         default:
                             break;
                     }
+                    this.sceletDisplay(noHaveGold[0], true);
                 }
                 Shop._ShopList.refresh();
             }
@@ -4684,7 +4795,7 @@
         btnBackUp() {
             this.self.close();
         }
-        lwgDisable() {
+        shopDisable() {
             GVariate._stageClick = true;
         }
     }
@@ -4731,6 +4842,7 @@
         lwgBtnClick() {
             Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
             Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
+            Click.on(Click.Type.noEffect, null, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
         }
         btnSkinUp(e) {
             e.stopPropagation();
@@ -4742,8 +4854,47 @@
                 this.self.close();
             });
         }
+        btnTaskeUp(e) {
+            e.stopPropagation();
+            lwg.Admin._openScene(Admin.SceneName.UITask);
+        }
         lwgDisable() {
             Gold.GoldNode.visible = false;
+        }
+    }
+
+    class UITask extends lwg.Task.TaskScene {
+        taskOnAwake() {
+            GVariate._stageClick = false;
+        }
+        taskList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Name = cell.getChildByName('Name');
+            Name.text = dataSource.name;
+            let BtnGet = cell.getChildByName('BtnGet');
+            if (dataSource.get === 0) {
+                BtnGet.skin = 'UI/Task/jinxing.png';
+            }
+            else if (dataSource.get === 1) {
+                BtnGet.skin = 'UI/Task/linqu.png';
+            }
+            else if (dataSource.get === -1) {
+                BtnGet.skin = 'UI/Task/yilingqu.png';
+            }
+            let ProgressBar = cell.getChildByName('ProgressBar');
+            ProgressBar.width = dataSource.resCondition / dataSource.condition * 169;
+            let AwardNum = cell.getChildByName('AwardNum');
+            AwardNum.text = dataSource.rewardNum;
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.noEffect, null, this.self['BtnBack'], this, null, null, this.btnBackeUp);
+        }
+        ;
+        btnBackeUp() {
+            this.self.close();
+        }
+        taskDisable() {
+            GVariate._stageClick = true;
         }
     }
 
@@ -4942,6 +5093,7 @@
             reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
             reg("script/Game/UIShop.ts", UIShop);
             reg("script/Game/UIStart.ts", UIStart);
+            reg("script/Game/UITask.ts", UITask);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/GameUI.ts", GameUI);
         }

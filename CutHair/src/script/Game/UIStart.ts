@@ -57,18 +57,27 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgBtnClick(): void {
         Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
-        Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp)
+        Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
+        Click.on(Click.Type.noEffect, null, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
     }
+
     btnSkinUp(e: Laya.Event): void {
         e.stopPropagation();
         lwg.Admin._openScene(Admin.SceneName.UIShop);
     }
+
     backgroundUp(): void {
         lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
             console.log('开始游戏');
             this.self.close();
         });
     }
+
+    btnTaskeUp(e): void {
+        e.stopPropagation();
+        lwg.Admin._openScene(Admin.SceneName.UITask);
+    }
+
     lwgDisable(): void {
         Gold.GoldNode.visible = false;
     }

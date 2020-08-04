@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Hint } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Hint, Effects } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
 
@@ -57,60 +57,70 @@ export default class UIShop extends Shop.ShopScene {
         }
 
         // 设置通过关卡获取的显示,目前就一个
-        let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.Property.condition);
+        let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
         if (Game._gameLevel.value >= condition) {
-            Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.Property.have, true);
+            Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.have, true);
         } else {
-            Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.Property.resCondition, Game._gameLevel.value);
+            Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
         }
     }
 
     shopEventReg(): void {
         //box被选中后出发
         EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
+            console.log(dataSource.have);
             if (dataSource.have) {
-                switch (Shop._ShopTap.selectedIndex) {
-                    case 2:
-                        Shop._currentSkin.name = dataSource.name;
-                        this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
-                        break;
-                    case 1:
-                        Shop._currentProp.name = dataSource.name;
-                        this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
-
-                        break;
-                    case 0:
-                        Shop._currentOther.name = dataSource.name;
-                        this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
-
-                        break;
-
-                    default:
-                        break;
-                }
+                this.sceletDisplay(dataSource, false);
             } else {
 
-                if (dataSource[Shop.Property.getway] === Shop.Getway.ads) {
+                if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
                     ADManager.ShowReward(() => {
-                        this.adsAcquisition(dataSource.name);
+                        this.adsAcquisition(dataSource);
                     })
-                } else if (dataSource[Shop.Property.getway] === Shop.Getway.adsXD) {
+                } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
                     Hint.createHint_Middle(Hint.HintDec["请前往皮肤限定界面获取!"])
 
-                } else if (dataSource[Shop.Property.getway] === Shop.Getway.ineedwin) {
+                } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
                     Hint.createHint_Middle(Hint.HintDec["通过相应的关卡数达到就可以得到了!"])
 
-                } else if (dataSource[Shop.Property.getway] === Shop.Getway.gold) {
+                } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
                     Hint.createHint_Middle(Hint.HintDec["点击金币抽奖按钮购买!"])
-
                 }
             }
         })
         Shop._ShopList.refresh();
     }
 
+    /**选中并且展示,并且移动到当前的cell*/
+    sceletDisplay(dataSource: any, scrollTo: boolean): void {
+        switch (Shop._ShopTap.selectedIndex) {
+            case 2:
+                Shop._currentSkin.name = dataSource.name;
+                this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                break;
+            case 1:
+                Shop._currentProp.name = dataSource.name;
+                this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+
+                break;
+            case 0:
+                Shop._currentOther.name = dataSource.name;
+                this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+
+                break;
+
+            default:
+                break;
+        }
+        if (scrollTo) {
+            let index = dataSource.arrange - 1;
+            Shop._ShopList.scrollTo(index);
+        }
+
+    }
+
     /**看广告获得*/
-    adsAcquisition(name): void {
+    adsAcquisition(dataSource): void {
         let claName;
         switch (Shop._ShopTap.selectedIndex) {
             case 2:
@@ -126,12 +136,27 @@ export default class UIShop extends Shop.ShopScene {
             default:
                 break;
         }
-        let condition = Shop.getGoodsProperty(claName, name, Shop.Property.condition);
-        let resCondition = Shop.getGoodsProperty(claName, name, Shop.Property.resCondition);
-        Shop.setGoodsProperty(claName, name, Shop.Property.resCondition, resCondition + 1);
+        let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
+        let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
+        Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
         if (condition <= resCondition + 1) {
-            Shop.setGoodsProperty(claName, name, Shop.Property.have, true);
+            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
+
+            // let diffX = dataSource.arrange % 3;
+            // if (diffX == 0) {
+            //     diffX = 3;
+            // }
+            // console.log(dataSource.arrange);
+            // let diffY = Math.floor(dataSource.arrange / 3 + 0.5);
+            // console.log(diffY);
+
+            // let x = Shop._ShopList.x + Shop._ShopList.width / 3 * diffX - 92;
+            // let y = Shop._ShopList.y + Shop._ShopList.height / 3 * diffY - 92;
+
+            // Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
+            this.sceletDisplay(dataSource.name, false);
         }
+        Shop._ShopList.refresh();
     }
 
     myTap_Select(index): void {
@@ -154,7 +179,6 @@ export default class UIShop extends Shop.ShopScene {
             default:
                 break;
         }
-
         Shop._ShopList.refresh();
     }
 
@@ -167,7 +191,7 @@ export default class UIShop extends Shop.ShopScene {
         switch (Shop._ShopTap.selectedIndex) {
             case 2:
                 Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
-                if (cell.dataSource[Shop.Property.name] == Shop._currentSkin.name) {
+                if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentSkin.name) {
                     Select.visible = true;
                 } else {
                     Select.visible = false;
@@ -175,7 +199,7 @@ export default class UIShop extends Shop.ShopScene {
                 break;
             case 1:
                 Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
-                if (cell.dataSource[Shop.Property.name] == Shop._currentProp.name) {
+                if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentProp.name) {
                     Select.visible = true;
                 } else {
                     Select.visible = false;
@@ -183,7 +207,7 @@ export default class UIShop extends Shop.ShopScene {
                 break;
             case 0:
                 Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
-                if (cell.dataSource[Shop.Property.name] == Shop._currentOther.name) {
+                if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentOther.name) {
                     Select.visible = true;
                 } else {
                     Select.visible = false;
@@ -199,10 +223,10 @@ export default class UIShop extends Shop.ShopScene {
         let Board = cell.getChildByName('Board') as Laya.Image;
         let Dec = NoHave.getChildByName('Dec') as Laya.Label;
         let Icon = NoHave.getChildByName('Icon') as Laya.Label;
-        if (!cell.dataSource[Shop.Property.have]) {
-            switch (cell.dataSource[Shop.Property.getway]) {
+        if (!cell.dataSource[Shop.GoodsProperty.have]) {
+            switch (cell.dataSource[Shop.GoodsProperty.getway]) {
                 case Shop.Getway.ads:
-                    Dec.text = cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition];
+                    Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
                     Dec.x = 88;
                     Dec.fontSize = 30;
                     Icon.visible = true;
@@ -223,7 +247,7 @@ export default class UIShop extends Shop.ShopScene {
 
                     break;
                 case Shop.Getway.ineedwin:
-                    Dec.text = '过' + cell.dataSource[Shop.Property.resCondition] + '/' + cell.dataSource[Shop.Property.condition] + '关';
+                    Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
                     Dec.x = NoHave.width / 2;
                     Dec.fontSize = 23;
                     Icon.visible = false;
@@ -270,26 +294,26 @@ export default class UIShop extends Shop.ShopScene {
         if (noHaveGold.length <= 0) {
             Hint.createHint_Middle(Hint.HintDec["没有可以购买的皮肤了！"]);
         } else {
-            Tools.objPropertySort(noHaveGold, Shop.Property.getOder);
-            let price = noHaveGold[0][Shop.Property.condition];
+            Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
+            let price = noHaveGold[0][Shop.GoodsProperty.condition];
             if (Gold._goldNum < price) {
                 Hint.createHint_Middle(Hint.HintDec["金币不够了！"]);
             } else {
                 Hint.createHint_Middle(Hint.HintDec["恭喜获得新皮肤!"]);
                 switch (Shop._ShopTap.selectedIndex) {
                     case 2:
-                        Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.Property.have, true);
-                        Shop._currentSkin.name = noHaveGold[0].name;
+                        Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.GoodsProperty.have, true);
                         break;
                     case 1:
-                        Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.Property.have, true);
+                        Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.GoodsProperty.have, true);
                         break;
                     case 0:
-                        Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.Property.have, true);
+                        Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.GoodsProperty.have, true);
                         break;
                     default:
                         break;
                 }
+                this.sceletDisplay(noHaveGold[0], true);
             }
             Shop._ShopList.refresh();
         }
@@ -310,7 +334,7 @@ export default class UIShop extends Shop.ShopScene {
         this.self.close();
     }
 
-    lwgDisable(): void {
+    shopDisable(): void {
         GVariate._stageClick = true;
     }
 }

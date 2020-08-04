@@ -162,21 +162,25 @@ export default class UIOperation extends lwg.Admin.Scene {
     lwgEventReg(): void {
         // 胜利
         EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
-            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-
-                Laya.timer.frameOnce(60, this, () => {
-                    Admin._openScene(Admin.SceneName.UIShare, null, this.self);
-                });
-            } else {
-                //刷新一下属性 
-                this.BtnLast.visible = true;
+            if (Admin._gameStart) {
+                if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                    Laya.timer.frameOnce(60, this, () => {
+                        Admin._openScene(Admin.SceneName.UIShare, null, this.self);
+                    });
+                } else {
+                    //刷新一下属性 
+                    this.BtnLast.visible = true;
+                }
+                Admin._gameStart = false;
             }
         })
 
         // 失败
         EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
-            Admin._gameStart = false;
-            Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+            if (Admin._gameStart) {
+                Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+                Admin._gameStart = false;
+            }
         })
 
         // 重来
