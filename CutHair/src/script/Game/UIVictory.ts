@@ -29,18 +29,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
         lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
 
-        // 每日任务
-        let name = Task.TaskName.每日服务10位客人;
-        let resCondition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
-        let condition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.condition);
-        if (Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get) !== -1) {
-            if (condition <= resCondition + 1) {
-                Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
-                Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get, 1);
-            } else {
-                Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
-            }
-        }
+        EventAdmin.notify(Task.TaskType.victory);
     }
 
     lwgOpenAni(): number {

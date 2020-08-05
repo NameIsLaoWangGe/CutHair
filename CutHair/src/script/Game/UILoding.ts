@@ -1,10 +1,9 @@
-import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding } from "../Lwg_Template/lwg";
+import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding, Task, Shop } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
 export default class UILoding extends Loding.LodeScene {
-    constructor() { super(); }
 
-    lwgOnAwake() {
+    lodingOnAwake(): void {
         Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
             "res/atlas/Frame/UI.png",
@@ -25,20 +24,11 @@ export default class UILoding extends Loding.LodeScene {
         ];
     }
 
-    lwgAdaptive(): void {
-        this.self['Bg'].height = Laya.stage.height;
-        this.self['Logo'].y = Laya.stage.height * 0.174;
-        this.self['Progress'].y = Laya.stage.height * 0.763;
-        this.self['FCM'].y = Laya.stage.height * 0.910;
-        this.self['FCM'].y = Laya.stage.height * 0.910;
-    }
-
-
-    lwgLodePhaseComplete():void{
+    lodingPhaseComplete(): void {
         // console.log(Loding.currentProgress.value);
     }
 
-    lwgLodeComplete(): void {
+    lodingComplete(): void {
         this.self['Mask'].x = 0;
         this.self['Shear'].x = this.self['Mask'].width;
         this.self['Per'].text = 100 + '%';
@@ -54,6 +44,34 @@ export default class UILoding extends Loding.LodeScene {
             lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
             this.self.close();
         })
+    }
+
+    lodingTaskEventReg(): void {
+        EventAdmin.reg(Task.EventType.useSkins, Task, () => {
+            let num = Shop.setUseSkinType();
+            let name = Task.TaskName.每日使用5种皮肤;
+            let num1 = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
+            if (num > num1) {
+                Task.doDetectionTask(Task.TaskClass.everyday, name, num - num1);
+            }
+        });
+        EventAdmin.reg(Task.EventType.victory, Task, () => {
+            let name = Task.TaskName.每日服务10位客人;
+            Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+        })
+        EventAdmin.reg(Task.EventType.adsTime, Task, () => {
+            let name = Task.TaskName.每日观看两个广告;
+            Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            console.log('每日2次广告任务');
+        })
+    }
+
+    lwgAdaptive(): void {
+        this.self['Bg'].height = Laya.stage.height;
+        this.self['Logo'].y = Laya.stage.height * 0.174;
+        this.self['Progress'].y = Laya.stage.height * 0.763;
+        this.self['FCM'].y = Laya.stage.height * 0.910;
+        this.self['FCM'].y = Laya.stage.height * 0.910;
     }
 
     /**进度条动画开关*/

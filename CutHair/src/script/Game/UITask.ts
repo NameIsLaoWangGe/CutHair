@@ -18,7 +18,7 @@ export default class UITask extends lwg.Task.TaskScene {
         })
 
         // 看广告领取金币
-        EventAdmin.reg(Task.EventType.adsGetAward, this, (dataSource) => {
+        EventAdmin.reg(Task.EventType.adsGetAward_Every, this, (dataSource) => {
             ADManager.ShowReward(() => {
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
@@ -56,9 +56,8 @@ export default class UITask extends lwg.Task.TaskScene {
         if (index === 0) {
             ProgressBar.width = 169;
             ProNum.text = '1/1';
-            BtnGet.skin = 'UI/Shop/icon_ads.png';
+            BtnGet.skin = 'UI/Task/adslingqu.png';
         }
-
     }
 
     lwgBtnClick(): void {

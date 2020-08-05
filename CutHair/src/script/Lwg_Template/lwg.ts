@@ -1306,7 +1306,7 @@ export module lwg {
                 return this.aniTime;
             }
 
-            /**一些节点自适应*/
+            /**一些节点的自适应*/
             lwgAdaptive(): void {
             }
 
@@ -1962,7 +1962,6 @@ export module lwg {
             }
         }
     }
-
 
 
     /**加载一些骨骼动画，在loding界面出现的时候执行skLoding()方法*/
@@ -4146,6 +4145,37 @@ export module lwg {
             return backNum;
         }
 
+        /**数组去重*/
+        export function arrayUnique_01(arr): Array<any> {
+            for (var i = 0, len = arr.length; i < len; i++) {
+                for (var j = i + 1, len = arr.length; j < len; j++) {
+                    if (arr[i] === arr[j]) {
+                        arr.splice(j, 1);
+                        j--;        // 每删除一个数j的值就减1
+                        len--;      // j值减小时len也要相应减1（减少循环次数，节省性能）   
+                    }
+                }
+            }
+            return arr;
+        }
+
+        /**数组去重*/
+        export function arrayUnique_02(arr): Array<any> {
+            arr = arr.sort();
+            var arr1 = [arr[0]];
+            for (var i = 1, len = arr.length; i < len; i++) {
+                if (arr[i] !== arr[i - 1]) {
+                    arr1.push(arr[i]);
+                }
+            }
+            return arr1;
+        }
+
+        /**ES6数组去重*/
+        export function arrayUnique_03(arr): Array<any> {
+            return Array.from(new Set(arr));
+        }
+
         /**
           * 获取本地存储数据并且和文件中数据表的的对比
           * @param url 本地数据表地址
@@ -4254,7 +4284,6 @@ export module lwg {
                 const element = arr[index];
                 if (element['name'] === name) {
                     element[property] = value;
-                    console.log(element)
                     break;
                 }
             }
@@ -4279,17 +4308,31 @@ export module lwg {
             return arr;
         }
 
-        /**获得方式列举,方式可以添加*/
-        export enum TaskType {
-            /**看广告*/
-            ads = 'ads',
-            /**胜利次数*/
-            victory = 'victory',
-            /**使用皮肤次数*/
-            useSkins = 'useSkins',
-            /**开宝箱次数*/
-            treasureBox = 'treasureBox',
+        /**
+         * 通过resCondition/condition，做任务并且完成了这次任务，然后检总进度是否完成,并且设置成完成状态,返回0表示任务没有完成，1代表刚好完成奖励未领取，-1代表任务完成了也领取了奖励
+         * @param calssName 任务种类
+         * @param name 任务名称
+         * @param number 做几次任务
+         */
+        export function doDetectionTask(calssName: string, name: string, number: number): number {
+            let bool = false;
+            let resCondition = Task.getTaskProperty(calssName, name, Task.TaskProperty.resCondition);
+            let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
+            if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
+                if (condition <= resCondition + number) {
+                    Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                    Task.setTaskProperty(calssName, name, Task.TaskProperty.get, 1);
+                    return 1;
+                } else {
+                    Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                    return 0;
+                }
+            } else {
+                return -1;
+            }
         }
+
+
         /**任务属性列表，数据表中的任务应该有哪些属性,name和have是必须有的属性,可以无限增加*/
         export enum TaskProperty {
             /**名称*/
@@ -4298,6 +4341,7 @@ export module lwg {
             explain = 'explain',
             /**任务类型*/
             taskType = 'taskType',
+            /**需要完成任务的总数*/
             condition = 'condition',
             /**根据获取途径，剩余需要条件的数量，会平凡改这个数量*/
             resCondition = 'resCondition',
@@ -4323,8 +4367,27 @@ export module lwg {
 
         /**事件名称*/
         export enum EventType {
+            /**领取奖励*/
             getAward = 'getAward',
-            adsGetAward = 'adsGetAward',
+            /**每次点击广告获得金币*/
+            adsGetAward_Every = 'adsGetAward_Every',
+            /**试用皮肤*/
+            useSkins = 'useSkins',
+            /**胜利*/
+            victory = 'victory',
+            /**看广告的次数*/
+            adsTime = 'adsTime',
+        }
+        /**获得方式列举,方式可以添加*/
+        export enum TaskType {
+            /**看广告*/
+            ads = 'ads',
+            /**胜利次数*/
+            victory = 'victory',
+            /**使用皮肤次数*/
+            useSkins = 'useSkins',
+            /**开宝箱次数*/
+            treasureBox = 'treasureBox',
         }
 
         /**任务类型名称*/
@@ -4332,7 +4395,7 @@ export module lwg {
             "观看广告获得金币" = "观看广告获得金币",
             "每日服务10位客人" = "每日服务10位客人",
             "每日观看两个广告" = "每日观看两个广告",
-            "每日使用3种皮肤" = "每日使用3种皮肤",
+            "每日使用5种皮肤" = "每日使用5种皮肤",
             "每日开启10个宝箱" = "每日开启10个宝箱"
         }
 
@@ -4347,11 +4410,6 @@ export module lwg {
                 Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
                 console.log('是同一天！，每日继续任务');
             }
-        }
-
-        /**全局任务事件注册*/
-        export interface EventReg {
-            func(): void;
         }
 
         export class TaskScene extends Admin.Scene {
@@ -4491,9 +4549,24 @@ export module lwg {
         };
 
         /**今日用了商品的种类，用在开始游戏界面，可能会有些任务需要用到*/
-        export let useSkinType: number;
-        export function setUseSkinType(): void {
-
+        export let useSkinType = [];
+        /**
+         * 用过的皮肤都放进useSkinType，会自动去重
+         * @param skin 皮肤名称
+         */
+        export function setUseSkinType(): number {
+            // 拉取
+            let arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+            useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
+            // 去重
+            useSkinType.push(_currentOther.name, _currentProp.name, _currentSkin.name);
+            useSkinType = Tools.arrayUnique_03(useSkinType);
+            // 上传
+            let data = {
+                Shop_useSkinType: useSkinType,
+            }
+            Laya.LocalStorage.setJSON('Shop_useSkinType', JSON.stringify(data));
+            return useSkinType.length;
         }
 
         /**
@@ -4820,14 +4893,21 @@ export module lwg {
 
         export class LodeScene extends Admin.Scene {
 
+            lwgOnAwake(): void {
+                this.lodingOnAwake();
+            }
+            /**初始化的时候填写需要加载的内容，在三种加载数组中填写资源地址*/
+            lodingOnAwake(): void {
+
+            }
             lwgEventReg(): void {
                 EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule() });
-                EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(), this.LodeInterior() });
+                EventAdmin.reg(LodingType.complete, this, () => { this.lodingComplete(); this.lwgInterior(); this.lodingTaskEventReg() });
                 EventAdmin.reg(LodingType.progress, this, () => {
                     currentProgress.value++;
                     if (currentProgress.value < sumProgress) {
                         console.log('当前进度条进度为:', currentProgress.value / sumProgress);
-                        this.lwgLodePhaseComplete();
+                        this.lodingPhaseComplete();
                     }
                 });
             }
@@ -4890,14 +4970,18 @@ export module lwg {
                 }
             }
             /**每加载成功一次后、进度条每次增加后的回调*/
-            lwgLodePhaseComplete(): void { }
+            lodingPhaseComplete(): void { }
 
             /**完成后，内部结构初始化*/
-            LodeInterior(): void {
+            lwgInterior(): void {
                 Task.initTask();
             }
+            /**任务系统中的事件注册，caller指向Task模块*/
+            lodingTaskEventReg(): void {
+            }
+
             /**加载完成回调,每个游戏不一样*/
-            lwgLodeComplete(): void { }
+            lodingComplete(): void { }
         }
     }
 

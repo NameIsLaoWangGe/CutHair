@@ -17,8 +17,6 @@ export default class UIStart extends lwg.Admin.Scene {
         Gold._createGoldNode(Laya.stage);
         this.levelStyleDisplay();
 
-        // Shop.useSkinType.push()
-
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
     }
 

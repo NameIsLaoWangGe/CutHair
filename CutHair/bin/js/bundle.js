@@ -2866,6 +2866,34 @@
                 return backNum;
             }
             Tools.converteNum = converteNum;
+            function arrayUnique_01(arr) {
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    for (var j = i + 1, len = arr.length; j < len; j++) {
+                        if (arr[i] === arr[j]) {
+                            arr.splice(j, 1);
+                            j--;
+                            len--;
+                        }
+                    }
+                }
+                return arr;
+            }
+            Tools.arrayUnique_01 = arrayUnique_01;
+            function arrayUnique_02(arr) {
+                arr = arr.sort();
+                var arr1 = [arr[0]];
+                for (var i = 1, len = arr.length; i < len; i++) {
+                    if (arr[i] !== arr[i - 1]) {
+                        arr1.push(arr[i]);
+                    }
+                }
+                return arr1;
+            }
+            Tools.arrayUnique_02 = arrayUnique_02;
+            function arrayUnique_03(arr) {
+                return Array.from(new Set(arr));
+            }
+            Tools.arrayUnique_03 = arrayUnique_03;
             function dataCompare(url, storageName, propertyName) {
                 let dataArr;
                 if (JSON.parse(Laya.LocalStorage.getJSON(storageName))) {
@@ -2939,7 +2967,6 @@
                     const element = arr[index];
                     if (element['name'] === name) {
                         element[property] = value;
-                        console.log(element);
                         break;
                     }
                 }
@@ -2963,13 +2990,25 @@
                 return arr;
             }
             Task.getTaskClassArr = getTaskClassArr;
-            let TaskType;
-            (function (TaskType) {
-                TaskType["ads"] = "ads";
-                TaskType["victory"] = "victory";
-                TaskType["useSkins"] = "useSkins";
-                TaskType["treasureBox"] = "treasureBox";
-            })(TaskType = Task.TaskType || (Task.TaskType = {}));
+            function doDetectionTask(calssName, name, number) {
+                let resCondition = Task.getTaskProperty(calssName, name, Task.TaskProperty.resCondition);
+                let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
+                if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
+                    if (condition <= resCondition + number) {
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.get, 1);
+                        return 1;
+                    }
+                    else {
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                        return 0;
+                    }
+                }
+                else {
+                    return -1;
+                }
+            }
+            Task.doDetectionTask = doDetectionTask;
             let TaskProperty;
             (function (TaskProperty) {
                 TaskProperty["name"] = "name";
@@ -2991,14 +3030,24 @@
             let EventType;
             (function (EventType) {
                 EventType["getAward"] = "getAward";
-                EventType["adsGetAward"] = "adsGetAward";
+                EventType["adsGetAward_Every"] = "adsGetAward_Every";
+                EventType["useSkins"] = "useSkins";
+                EventType["victory"] = "victory";
+                EventType["adsTime"] = "adsTime";
             })(EventType = Task.EventType || (Task.EventType = {}));
+            let TaskType;
+            (function (TaskType) {
+                TaskType["ads"] = "ads";
+                TaskType["victory"] = "victory";
+                TaskType["useSkins"] = "useSkins";
+                TaskType["treasureBox"] = "treasureBox";
+            })(TaskType = Task.TaskType || (Task.TaskType = {}));
             let TaskName;
             (function (TaskName) {
                 TaskName["\u89C2\u770B\u5E7F\u544A\u83B7\u5F97\u91D1\u5E01"] = "\u89C2\u770B\u5E7F\u544A\u83B7\u5F97\u91D1\u5E01";
                 TaskName["\u6BCF\u65E5\u670D\u52A110\u4F4D\u5BA2\u4EBA"] = "\u6BCF\u65E5\u670D\u52A110\u4F4D\u5BA2\u4EBA";
                 TaskName["\u6BCF\u65E5\u89C2\u770B\u4E24\u4E2A\u5E7F\u544A"] = "\u6BCF\u65E5\u89C2\u770B\u4E24\u4E2A\u5E7F\u544A";
-                TaskName["\u6BCF\u65E5\u4F7F\u75283\u79CD\u76AE\u80A4"] = "\u6BCF\u65E5\u4F7F\u75283\u79CD\u76AE\u80A4";
+                TaskName["\u6BCF\u65E5\u4F7F\u75285\u79CD\u76AE\u80A4"] = "\u6BCF\u65E5\u4F7F\u75285\u79CD\u76AE\u80A4";
                 TaskName["\u6BCF\u65E5\u5F00\u542F10\u4E2A\u5B9D\u7BB1"] = "\u6BCF\u65E5\u5F00\u542F10\u4E2A\u5B9D\u7BB1";
             })(TaskName = Task.TaskName || (Task.TaskName = {}));
             function initTask() {
@@ -3103,6 +3152,19 @@
                     Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
                 }
             };
+            Shop.useSkinType = [];
+            function setUseSkinType() {
+                let arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                Shop.useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
+                Shop.useSkinType.push(Shop._currentOther.name, Shop._currentProp.name, Shop._currentSkin.name);
+                Shop.useSkinType = Tools.arrayUnique_03(Shop.useSkinType);
+                let data = {
+                    Shop_useSkinType: Shop.useSkinType,
+                };
+                Laya.LocalStorage.setJSON('Shop_useSkinType', JSON.stringify(data));
+                return Shop.useSkinType.length;
+            }
+            Shop.setUseSkinType = setUseSkinType;
             function getGoodsProperty(goodsClass, name, property) {
                 let pro = null;
                 let arr = getGoodsClassArr(goodsClass);
@@ -3338,14 +3400,19 @@
                 LodingType["progress"] = "progress";
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
             class LodeScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.lodingOnAwake();
+                }
+                lodingOnAwake() {
+                }
                 lwgEventReg() {
                     EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
-                    EventAdmin.reg(LodingType.complete, this, () => { this.lwgLodeComplete(), this.LodeInterior(); });
+                    EventAdmin.reg(LodingType.complete, this, () => { this.lodingComplete(); this.lwgInterior(); this.lodingTaskEventReg(); });
                     EventAdmin.reg(LodingType.progress, this, () => {
                         Loding.currentProgress.value++;
                         if (Loding.currentProgress.value < Loding.sumProgress) {
                             console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
-                            this.lwgLodePhaseComplete();
+                            this.lodingPhaseComplete();
                         }
                     });
                 }
@@ -3399,11 +3466,13 @@
                             break;
                     }
                 }
-                lwgLodePhaseComplete() { }
-                LodeInterior() {
+                lodingPhaseComplete() { }
+                lwgInterior() {
                     Task.initTask();
                 }
-                lwgLodeComplete() { }
+                lodingTaskEventReg() {
+                }
+                lodingComplete() { }
             }
             Loding.LodeScene = LodeScene;
         })(Loding = lwg.Loding || (lwg.Loding = {}));
@@ -3446,6 +3515,7 @@
             TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
         }
         static ShowReward(rewardAction, CDTime = 500) {
+            EventAdmin.notify(Task.EventType.adsTime);
             if (ADManager.CanShowCD) {
                 PalyAudio.stopMusic();
                 console.log("?????");
@@ -3455,8 +3525,9 @@
                 p.cbi.Add(TJ.Define.Event.Reward, () => {
                     getReward = true;
                     PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                    if (rewardAction != null)
+                    if (rewardAction != null) {
                         rewardAction();
+                    }
                 });
                 p.cbi.Add(TJ.Define.Event.Close, () => {
                     if (!getReward) {
@@ -3914,12 +3985,12 @@
 
     class UILoding extends Loding.LodeScene {
         constructor() {
-            super();
+            super(...arguments);
             this.maskMoveSwitch = true;
             this.shearSpeed = 5;
             this.shearSwitch = true;
         }
-        lwgOnAwake() {
+        lodingOnAwake() {
             Loding.lodingList_2D = [
                 "res/atlas/Frame/Effects.png",
                 "res/atlas/Frame/UI.png",
@@ -3939,16 +4010,9 @@
                 'GameData/Task/everydayTask.json',
             ];
         }
-        lwgAdaptive() {
-            this.self['Bg'].height = Laya.stage.height;
-            this.self['Logo'].y = Laya.stage.height * 0.174;
-            this.self['Progress'].y = Laya.stage.height * 0.763;
-            this.self['FCM'].y = Laya.stage.height * 0.910;
-            this.self['FCM'].y = Laya.stage.height * 0.910;
+        lodingPhaseComplete() {
         }
-        lwgLodePhaseComplete() {
-        }
-        lwgLodeComplete() {
+        lodingComplete() {
             this.self['Mask'].x = 0;
             this.self['Shear'].x = this.self['Mask'].width;
             this.self['Per'].text = 100 + '%';
@@ -3961,6 +4025,32 @@
                 lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
                 this.self.close();
             });
+        }
+        lodingTaskEventReg() {
+            EventAdmin.reg(Task.EventType.useSkins, Task, () => {
+                let num = Shop.setUseSkinType();
+                let name = Task.TaskName.每日使用5种皮肤;
+                let num1 = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
+                if (num > num1) {
+                    Task.doDetectionTask(Task.TaskClass.everyday, name, num - num1);
+                }
+            });
+            EventAdmin.reg(Task.EventType.victory, Task, () => {
+                let name = Task.TaskName.每日服务10位客人;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
+            EventAdmin.reg(Task.EventType.adsTime, Task, () => {
+                let name = Task.TaskName.每日观看两个广告;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+                console.log('每日2次广告任务');
+            });
+        }
+        lwgAdaptive() {
+            this.self['Bg'].height = Laya.stage.height;
+            this.self['Logo'].y = Laya.stage.height * 0.174;
+            this.self['Progress'].y = Laya.stage.height * 0.763;
+            this.self['FCM'].y = Laya.stage.height * 0.910;
+            this.self['FCM'].y = Laya.stage.height * 0.910;
         }
         lwgOnUpdate() {
             if (this.maskMoveSwitch) {
@@ -4119,6 +4209,7 @@
             lwg.Admin._gameStart = true;
             GVariate._taskArr = [GEnum.TaskType.sideHair];
             this.createProgress();
+            EventAdmin.notify(Task.TaskType.useSkins);
         }
         lwgOnEnable() {
             this.BtnLast.visible = false;
@@ -4950,7 +5041,7 @@
         }
         btnGetUp() {
             if (this.self['dataSource'][Task.TaskProperty.name] === '观看广告获得金币') {
-                EventAdmin.notify(Task.EventType.adsGetAward, [this.self['dataSource']]);
+                EventAdmin.notify(Task.EventType.adsGetAward_Every, [this.self['dataSource']]);
                 return;
             }
             if (this.self['dataSource'][Task.TaskProperty.get] === 1) {
@@ -4977,7 +5068,7 @@
                     Task._TaskList.refresh();
                 });
             });
-            EventAdmin.reg(Task.EventType.adsGetAward, this, (dataSource) => {
+            EventAdmin.reg(Task.EventType.adsGetAward_Every, this, (dataSource) => {
                 ADManager.ShowReward(() => {
                     Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                         Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
@@ -5009,7 +5100,7 @@
             if (index === 0) {
                 ProgressBar.width = 169;
                 ProNum.text = '1/1';
-                BtnGet.skin = 'UI/Shop/icon_ads.png';
+                BtnGet.skin = 'UI/Task/adslingqu.png';
             }
         }
         lwgBtnClick() {
@@ -5044,18 +5135,7 @@
             lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
-            let name = Task.TaskName.每日服务10位客人;
-            let resCondition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
-            let condition = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.condition);
-            if (Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get) !== -1) {
-                if (condition <= resCondition + 1) {
-                    Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
-                    Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.get, 1);
-                }
-                else {
-                    Task.setTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition, resCondition + 1);
-                }
-            }
+            EventAdmin.notify(Task.TaskType.victory);
         }
         lwgOpenAni() {
             this.self['Multiply10'].alpha = 0;

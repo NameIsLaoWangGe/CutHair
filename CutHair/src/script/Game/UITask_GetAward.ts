@@ -11,7 +11,7 @@ export default class UITask_GetAward extends Admin.Object {
     }
     btnGetUp(): void {
         if (this.self['dataSource'][Task.TaskProperty.name] === '观看广告获得金币') {
-            EventAdmin.notify(Task.EventType.adsGetAward, [this.self['dataSource']]);
+            EventAdmin.notify(Task.EventType.adsGetAward_Every, [this.self['dataSource']]);
             return;
         }
         if (this.self['dataSource'][Task.TaskProperty.get] === 1) {

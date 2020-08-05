@@ -1,4 +1,4 @@
-import { PalyAudio, Hint } from "../Lwg_Template/lwg";
+import { PalyAudio, Hint, EventAdmin, Task } from "../Lwg_Template/lwg";
 
 export default class ADManager {
     constructor() {
@@ -45,8 +45,10 @@ export default class ADManager {
             p.cbi.Add(TJ.Define.Event.Reward, () => {
                 getReward = true;
                 PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                if (rewardAction != null)
+                if (rewardAction != null){
                     rewardAction();
+                    EventAdmin.notify(Task.EventType.adsTime);
+                }
             });
 
             p.cbi.Add(TJ.Define.Event.Close, () => {

@@ -1,4 +1,4 @@
-import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
@@ -150,6 +150,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
         GVariate._taskArr = [GEnum.TaskType.sideHair];
         this.createProgress();
+        EventAdmin.notify(Task.TaskType.useSkins);
     }
 
     lwgOnEnable(): void {

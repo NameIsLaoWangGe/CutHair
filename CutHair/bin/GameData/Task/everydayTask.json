@@ -38,10 +38,10 @@
     "get": 0
   },
   {
-    "name": "每日使用3种皮肤",
+    "name": "每日使用5种皮肤",
     "explain": "三种不同皮肤",
     "taskType": "useSkins",
-    "condition": 3,
+    "condition": 5,
     "resCondition": 0,
     "rewardType": "gold",
     "rewardNum": 30,
