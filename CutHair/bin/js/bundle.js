@@ -712,6 +712,7 @@
                 SceneName["UIShop"] = "UIShop";
                 SceneName["UITask"] = "UITask";
                 SceneName["UIVictoryBox"] = "UIVictoryBox";
+                SceneName["UICheckIn"] = "UICheckIn";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -3446,7 +3447,9 @@
                         break;
                     }
                 }
-                VictoryBox._BoxList.refresh();
+                if (VictoryBox._BoxList) {
+                    VictoryBox._BoxList.refresh();
+                }
             }
             VictoryBox.setBoxProperty = setBoxProperty;
             let BoxProperty;
@@ -3519,6 +3522,152 @@
             }
             VictoryBox.VictoryBoxScene = VictoryBoxScene;
         })(VictoryBox = lwg.VictoryBox || (lwg.VictoryBox = {}));
+        let CheckIn;
+        (function (CheckIn) {
+            CheckIn._todayCheckIn = false;
+            CheckIn._lastCheckDate = {
+                d: null,
+                get date() {
+                    return this.d = Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+                },
+                set date(date) {
+                    this.d = date;
+                    Laya.LocalStorage.setItem('Check_lastCheckDate', this.d);
+                }
+            };
+            CheckIn._checkInNum = {
+                num: 0,
+                get number() {
+                    return this.num = Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+                },
+                set number(num) {
+                    this.num = num;
+                    Laya.LocalStorage.setItem('Check_checkInNum', this.num);
+                }
+            };
+            function getCheckProperty(name, property) {
+                let pro = null;
+                for (let index = 0; index < CheckIn._checkArray.length; index++) {
+                    const element = CheckIn._checkArray[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            CheckIn.getCheckProperty = getCheckProperty;
+            function setCheckProperty(className, name, property, value) {
+                for (let index = 0; index < CheckIn._checkArray.length; index++) {
+                    const element = CheckIn._checkArray[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[className] = CheckIn._checkArray;
+                Laya.LocalStorage.setJSON(className, JSON.stringify(data));
+                if (CheckIn._checkList) {
+                    CheckIn._checkList.refresh();
+                }
+            }
+            CheckIn.setCheckProperty = setCheckProperty;
+            function openCheckIn() {
+                let todayDate = (new Date).getDate();
+                if (todayDate !== CheckIn._lastCheckDate.date) {
+                    console.log('没有签到过，弹出签到页面！');
+                    Admin._openScene(Admin.SceneName.UICheckIn);
+                }
+                else {
+                    console.log('签到过了，今日不可以再签到');
+                }
+            }
+            CheckIn.openCheckIn = openCheckIn;
+            function todayCheckIn_7Days() {
+                let todayDate = (new Date).getDate();
+                CheckIn._lastCheckDate.date = todayDate;
+                CheckIn._checkInNum.number++;
+                if (CheckIn._checkInNum.number === 7) {
+                    CheckIn._checkInNum.number = 0;
+                }
+                setCheckProperty(CheckClass.chek_7Days, 'day' + CheckIn._checkInNum.number, CheckProPerty.checkInState, true);
+                return getCheckProperty('day' + CheckIn._checkInNum.number, CheckProPerty.rewardNum);
+            }
+            CheckIn.todayCheckIn_7Days = todayCheckIn_7Days;
+            let CheckClass;
+            (function (CheckClass) {
+                CheckClass["chek_7Days"] = "Chek_7Days";
+                CheckClass["chek_15Days"] = "Chek_15Days";
+                CheckClass["chek_30Days"] = "Chek_30Days";
+            })(CheckClass = CheckIn.CheckClass || (CheckIn.CheckClass = {}));
+            let CheckProPerty;
+            (function (CheckProPerty) {
+                CheckProPerty["name"] = "name";
+                CheckProPerty["rewardType"] = "rewardType";
+                CheckProPerty["rewardNum"] = "rewardNum";
+                CheckProPerty["checkInState"] = "checkInState";
+                CheckProPerty["arrange"] = "arrange";
+            })(CheckProPerty = CheckIn.CheckProPerty || (CheckIn.CheckProPerty = {}));
+            class CheckInScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.checkInOnAwake();
+                }
+                initData() {
+                    CheckIn._checkList = this.self['CheckList'];
+                    CheckIn._checkArray = Tools.dataCompare('GameData/CheckIn/CheckIn.json', CheckClass.chek_7Days, CheckProPerty.name);
+                }
+                checkInOnAwake() { }
+                lwgOnEnable() {
+                    this.checkList_Create();
+                    this.checkInOnEnable();
+                }
+                checkInOnEnable() { }
+                checkList_Create() {
+                    CheckIn._checkList.selectEnable = false;
+                    CheckIn._checkList.vScrollBarSkin = "";
+                    CheckIn._checkList.selectHandler = new Laya.Handler(this, this.checkList_Scelet);
+                    CheckIn._checkList.renderHandler = new Laya.Handler(this, this.checkList_Update);
+                    this.checkList_refresh();
+                }
+                checkList_Scelet(index) { }
+                checkList_Update(cell, index) { }
+                checkList_refresh() {
+                    if (CheckIn._checkList) {
+                        CheckIn._checkList.array = CheckIn._checkArray;
+                        CheckIn._checkList.refresh();
+                    }
+                }
+                lwgNodeDec() {
+                    this.checkInNodeDec();
+                }
+                checkInNodeDec() { }
+                lwgBtnClick() {
+                    this.checkInBtnClick();
+                }
+                checkInBtnClick() { }
+                lwgEventReg() {
+                    this.checkInEventReg();
+                }
+                checkInEventReg() { }
+                lwgOnDisable() {
+                    this.checkInOnDisable();
+                }
+                checkInOnDisable() { }
+                lwgOnUpdate() {
+                    this.checkInOnUpdate();
+                }
+                checkInOnUpdate() { }
+            }
+            CheckIn.CheckInScene = CheckInScene;
+        })(CheckIn = lwg.CheckIn || (lwg.CheckIn = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3D = [];
@@ -3652,6 +3801,8 @@
     let TaskScene = lwg.Task.TaskScene;
     let VictoryBox = lwg.VictoryBox;
     let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
+    let CheckIn = lwg.CheckIn;
+    let CheckInScene = lwg.CheckIn.CheckInScene;
 
     class ADManager {
         constructor() {
@@ -3797,6 +3948,99 @@
         TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
         TaT[TaT["LevelFail"] = 7] = "LevelFail";
     })(TaT || (TaT = {}));
+
+    class UICheckIn extends CheckIn.CheckInScene {
+        checkInOnEnable() {
+            let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
+            ChinkTip.visible = false;
+        }
+        checkList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Pic_Board = cell.getChildByName('Pic_Board');
+            let Pic_Gold = cell.getChildByName('Pic_Gold');
+            let Num = cell.getChildByName('Num');
+            let ChinkTip = cell.getChildByName('ChinkTip');
+            let DayNum = cell.getChildByName('DayNum');
+            if (dataSource[CheckIn.CheckProPerty.checkInState]) {
+                Pic_Gold.visible = false;
+                Num.visible = false;
+                ChinkTip.visible = true;
+                Pic_Board.skin = 'UI/Common/kuang1.png';
+            }
+            else {
+                Pic_Gold.visible = true;
+                Num.visible = true;
+                Num.text = dataSource[CheckIn.CheckProPerty.rewardNum];
+                ChinkTip.visible = false;
+                Pic_Board.skin = 'UI/Common/kuang2.png';
+            }
+            switch (dataSource[CheckIn.CheckProPerty.name]) {
+                case 'day1':
+                    DayNum.text = '第一天';
+                    break;
+                case 'day2':
+                    DayNum.text = '第二天';
+                    break;
+                case 'day3':
+                    DayNum.text = '第三天';
+                    break;
+                case 'day4':
+                    DayNum.text = '第四天';
+                    break;
+                case 'day5':
+                    DayNum.text = '第五天';
+                    break;
+                case 'day6':
+                    DayNum.text = '第六天';
+                    break;
+                case 'day7':
+                    DayNum.text = '第七天';
+                    break;
+                default:
+                    break;
+            }
+        }
+        checkInBtnClick() {
+            lwg.Click.on('largen', null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+            lwg.Click.on('largen', null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            lwg.Click.on('largen', null, this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+        }
+        btnBackUp(event) {
+            this.self.close();
+        }
+        btnGetUp(event) {
+            if (this.self['Dot'].visible) {
+                ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_sign');
+                ADManager.ShowReward(() => {
+                    this.btnGetUpFunc(3);
+                });
+            }
+            else {
+                this.btnGetUpFunc(1);
+            }
+        }
+        btnGetUpFunc(number) {
+            let rewardNum = CheckIn.todayCheckIn_7Days();
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                Gold.addGold(rewardNum * number);
+                this.self.close();
+            });
+        }
+        btnSelectUp() {
+            if (this.self['Dot'].visible) {
+                this.self['Dot'].visible = false;
+            }
+            else {
+                this.self['Dot'].visible = true;
+            }
+        }
+        checkInOnUpdate() {
+            lwg.Global._stageClick = false;
+        }
+        checkInOnDisable() {
+            lwg.Global._stageClick = true;
+        }
+    }
 
     class UIDefeated extends lwg.Admin.Scene {
         lwgNodeDec() {
@@ -4166,7 +4410,8 @@
                 "GameData/Shop/Props.json",
                 "GameData/Shop/Skin.json",
                 'GameData/Task/everydayTask.json',
-                "GameData/VictoryBox/VictoryBox.json"
+                "GameData/VictoryBox/VictoryBox.json",
+                "GameData/CheckIn/CheckIn.json",
             ];
         }
         lodingPhaseComplete() {
@@ -5144,6 +5389,7 @@
             Gold._createGoldNode(Laya.stage);
             this.levelStyleDisplay();
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
+            CheckIn.openCheckIn();
         }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
@@ -5615,6 +5861,7 @@
         constructor() { }
         static init() {
             var reg = Laya.ClassUtils.regClass;
+            reg("script/Game/UICheckIn.ts", UICheckIn);
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);

@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -18,6 +18,7 @@ export default class UIStart extends lwg.Admin.Scene {
         this.levelStyleDisplay();
 
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
+        CheckIn.openCheckIn();
     }
 
     /**关卡列表*/

@@ -761,7 +761,7 @@ export module lwg {
             }
         }
 
-        /**增加金币以并且节点上也表现出来*/
+        /**增加金币以并且在节点上也表现出来*/
         export function addGold(number: number) {
             _goldNum += number;
             let Num = GoldNode.getChildByName('Num') as Laya.Text;
@@ -1052,7 +1052,8 @@ export module lwg {
             UIOperation = 'UIOperation',
             UIShop = 'UIShop',
             UITask = 'UITask',
-            UIVictoryBox = 'UIVictoryBox'
+            UIVictoryBox = 'UIVictoryBox',
+            UICheckIn = 'UICheckIn',
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -4224,7 +4225,7 @@ export module lwg {
         }
 
         /**
-          * 获取本地存储数据并且和文件中数据表的的对比
+          * 获取本地存储数据并且和文件中数据表的的对比,对比后会上传
           * @param url 本地数据表地址
           * @param storageName 本地存储中的json名称
           * @param propertyName 数组中每个对象中同一个属性名，通过这个名称进行对比
@@ -4953,7 +4954,9 @@ export module lwg {
                     break;
                 }
             }
-            _BoxList.refresh();
+            if (_BoxList) {
+                _BoxList.refresh();
+            }
         }
 
         /**宝箱属性*/
@@ -4989,7 +4992,6 @@ export module lwg {
                 /**结构，如果没有则为null*/
                 VictoryBox._BoxList = this.self['BoxList'];
                 //注意这里要复制数组，不可以直接赋值
-                // Laya.loader.load('"GameData/VictoryBox/VictoryBox.json');
                 _BoxArray = Tools.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json")['RECORDS']);
                 _selectBox = null;
                 _openNum = 3;
@@ -5056,7 +5058,209 @@ export module lwg {
             /**每帧执行*/
             victoryOnUpdate(): void { }
         }
+    }
 
+    export module CheckIn {
+
+        /**签到list*/
+        export let _checkList: Laya.List;
+        /**列表信息*/
+        export let _checkArray: Array<any>;
+        /**今日是否已经签到了！*/
+        export let _todayCheckIn: boolean = false;
+        /**上次的签到日期，主要判断今日会不会弹出签到，不一样则弹出签到，一样则不弹出签到*/
+        export let _lastCheckDate = {
+            d: null,
+            get date(): number {
+                return this.d = Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+            },
+            // 日期写数字
+            set date(date: number) {
+                this.d = date;
+                Laya.LocalStorage.setItem('Check_lastCheckDate', this.d);
+            }
+        }
+        /**当前签到第几天了，7日签到为7天一个循环*/
+        export let _checkInNum = {
+            num: 0,
+            get number(): number {
+                return this.num = Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+            },
+            /**次数写数字*/
+            set number(num: number) {
+                this.num = num;
+                Laya.LocalStorage.setItem('Check_checkInNum', this.num);
+            }
+        }
+
+        /**
+         * 通过名称获取签到的一个属性值
+         * @param name 签到名称
+         * @param property 签到属性名称
+         * */
+        export function getCheckProperty(name: string, property: string): any {
+            let pro = null;
+            for (let index = 0; index < _checkArray.length; index++) {
+                const element = _checkArray[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            } else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+
+        /**
+         * 通过名称设置或者增加一个签到的一个属性值
+         * @param className 签到种类
+         * @param name 签到类型
+         * @param property 签到属性名称
+         * @param value 需要设置或者增加的属性值
+         * */
+        export function setCheckProperty(className, name: string, property: string, value: any): void {
+            for (let index = 0; index < _checkArray.length; index++) {
+                const element = _checkArray[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
+                }
+            }
+            let data = {};
+            data[className] = _checkArray;
+            Laya.LocalStorage.setJSON(className, JSON.stringify(data));
+            if (_checkList) {
+                _checkList.refresh();
+            }
+        }
+
+        /**
+         * 是否弹出签到页面
+         */
+        export function openCheckIn(): void {
+            let todayDate = (new Date).getDate();
+            let bool;
+            if (todayDate !== _lastCheckDate.date) {
+                console.log('没有签到过，弹出签到页面！');
+                Admin._openScene(Admin.SceneName.UICheckIn);
+            } else {
+                console.log('签到过了，今日不可以再签到');
+            }
+        }
+
+        /**
+         * 七日签到，签到一次
+         * 返回今天的奖励
+        */
+        export function todayCheckIn_7Days(): number {
+            let todayDate = (new Date).getDate();
+            _lastCheckDate.date = todayDate;
+            _checkInNum.number++;
+            if (_checkInNum.number === 7) {
+                _checkInNum.number = 0;
+            }
+            setCheckProperty(CheckClass.chek_7Days, 'day' + _checkInNum.number, CheckProPerty.checkInState, true);
+            return getCheckProperty('day' + _checkInNum.number, CheckProPerty.rewardNum);
+        }
+
+        /**签到种类*/
+        export enum CheckClass {
+            chek_7Days = 'Chek_7Days',
+            chek_15Days = 'Chek_15Days',
+            chek_30Days = 'Chek_30Days',
+        }
+
+        /**签到中的属性*/
+        export enum CheckProPerty {
+            /**名称，第几天*/
+            name = 'name',
+            /**奖励类型*/
+            rewardType = 'rewardType',
+            /**签到奖励*/
+            rewardNum = 'rewardNum',
+            /**是否签到过了*/
+            checkInState = 'checkInState',
+            /**排列顺序*/
+            arrange = 'arrange',
+
+        }
+
+        export class CheckInScene extends Admin.Scene {
+            lwgOnAwake(): void {
+                this.initData();
+                this.checkInOnAwake();
+            }
+            /**初始化json数据*/
+            initData(): void {
+                /**结构，如果没有则为null*/
+                CheckIn._checkList = this.self['CheckList'];
+                //注意这里要复制数组，不可以直接赋值
+                _checkArray = Tools.dataCompare('GameData/CheckIn/CheckIn.json', CheckClass.chek_7Days, CheckProPerty.name);
+            }
+            /**CheckInScene开始前执行一次，重写覆盖*/
+            checkInOnAwake(): void { }
+
+            lwgOnEnable(): void {
+                this.checkList_Create();
+                this.checkInOnEnable();
+            }
+
+            checkInOnEnable(): void { }
+            /**初始化list*/
+            checkList_Create(): void {
+                CheckIn._checkList.selectEnable = false;
+                CheckIn._checkList.vScrollBarSkin = "";
+                // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
+                // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
+                CheckIn._checkList.selectHandler = new Laya.Handler(this, this.checkList_Scelet);
+                CheckIn._checkList.renderHandler = new Laya.Handler(this, this.checkList_Update);
+                this.checkList_refresh();
+            }
+            /**list选中监听*/
+            checkList_Scelet(index: number): void { }
+            /**list列表刷新*/
+            checkList_Update(cell, index: number): void { }
+            /**刷新list数据,重写覆盖，默认为皮肤*/
+            checkList_refresh(): void {
+                if (CheckIn._checkList) {
+                    CheckIn._checkList.array = _checkArray;
+                    CheckIn._checkList.refresh();
+                }
+            }
+
+            lwgNodeDec(): void {
+                this.checkInNodeDec();
+            }
+            /**NodeDec*/
+            checkInNodeDec(): void { }
+
+            lwgBtnClick(): void {
+                this.checkInBtnClick();
+            }
+            checkInBtnClick(): void { }
+
+            lwgEventReg(): void {
+                this.checkInEventReg();
+            }
+            /**场景中的一些事件*/
+            checkInEventReg(): void { }
+
+            lwgOnDisable(): void {
+                this.checkInOnDisable();
+            }
+            /**离开时执行，子类不执行onDisable，只执行checkInDisable*/
+            checkInOnDisable(): void { }
+
+            lwgOnUpdate(): void {
+                this.checkInOnUpdate();
+            }
+            /**每帧执行*/
+            checkInOnUpdate(): void { }
+        }
     }
 
     export module Loding {
@@ -5227,5 +5431,7 @@ export let Task = lwg.Task;
 export let TaskScene = lwg.Task.TaskScene;
 export let VictoryBox = lwg.VictoryBox;
 export let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
+export let CheckIn = lwg.CheckIn;
+export let CheckInScene = lwg.CheckIn.CheckInScene;
 
 

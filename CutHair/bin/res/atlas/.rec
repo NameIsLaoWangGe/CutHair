@@ -123,6 +123,11 @@ R 626CADAF btn.wav
 R 9B501DC8 chijinbi.wav
 R E23D09D2 guoguan.wav
 R 6E72E92F wancheng.wav
+D UI/CheckIn
+P 035AA6AB biaoti.png
+P F3D8F48B qian.png
+P DAFB264A txt_lingqu.png
+P 1790304B wordsthree.png
 D UI/Common
 P 3C9D159B AD.png
 P 7C8C2E05 anniu.png
@@ -201,10 +206,6 @@ R F369565E LOGO.png
 P 3A4418BB pro_01.png
 P D9D3120B pro_02.png
 P DFD6E778 word_Loding.png
-D UI/Register
-P 035AA6AB biaoti.png
-P F3D8F48B qian.png
-P DAFB264A txt_lingqu.png
 D UI/Resurgence
 R 1C81BD00 anniu.png
 P E5E4038C biaoti.png
@@ -299,7 +300,6 @@ R E763A2E2 register.png
 R 10BFE6FE Resurgence.png
 R 346A2476 Set.png
 R BE7B7D82 shop.png
-R 64187BC7 Skin.png
 R 827F5BCD Task.png
 R B59D3434 victory.png
 R 2D221A41 XDSkin.png
