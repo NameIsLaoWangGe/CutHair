@@ -143,7 +143,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         this.self.close();
     }
 
-    lwgDisable(): void {
+    lwgOnDisable(): void {
 
     }
 }

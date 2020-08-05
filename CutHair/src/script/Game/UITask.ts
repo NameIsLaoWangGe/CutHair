@@ -69,7 +69,7 @@ export default class UITask extends lwg.Task.TaskScene {
         this.self.close();
     }
 
-    taskDisable(): void {
+    taskOnDisable(): void {
         GVariate._stageClick = true;
     }
 }

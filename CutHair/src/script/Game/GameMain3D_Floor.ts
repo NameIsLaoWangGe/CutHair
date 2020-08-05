@@ -21,6 +21,6 @@ export default class GameMain3D_Floor extends lwg.Admin.Object3D {
 
     lwgOnUpdate(): void {
     }
-    lwgDisable(): void {
+    lwgOnDisable(): void {
     }
 }

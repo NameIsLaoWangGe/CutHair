@@ -9,6 +9,8 @@ import UIStart from "./script/Game/UIStart"
 import UITask_GetAward from "./script/Game/UITask_GetAward"
 import UITask from "./script/Game/UITask"
 import UIVictory from "./script/Game/UIVictory"
+import UIVictoryBox_Cell from "./script/Game/UIVictoryBox_Cell"
+import UIVictoryBox from "./script/Game/UIVictoryBox"
 import GameUI from "./script/GameUI"
 /*
 * 游戏初始化配置;
@@ -39,6 +41,8 @@ export default class GameConfig{
         reg("script/Game/UITask_GetAward.ts",UITask_GetAward);
         reg("script/Game/UITask.ts",UITask);
         reg("script/Game/UIVictory.ts",UIVictory);
+        reg("script/Game/UIVictoryBox_Cell.ts",UIVictoryBox_Cell);
+        reg("script/Game/UIVictoryBox.ts",UIVictoryBox);
         reg("script/GameUI.ts",GameUI);
     }
 }

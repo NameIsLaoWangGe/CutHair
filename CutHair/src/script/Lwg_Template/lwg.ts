@@ -629,7 +629,10 @@ export module lwg {
             '请前往皮肤限定界面获取!',
             '通过相应的关卡数达到就可以得到了!',
             '点击金币抽奖按钮购买!',
-
+            '没有领取次数了！',
+            '增加三次开启宝箱次数！',
+            '观看广告可以获得三次开宝箱次数！',
+            '没有宝箱领可以领了！',
         }
         enum Skin {
             blackBord = 'Frame/UI/ui_orthogon_black.png'
@@ -759,7 +762,7 @@ export module lwg {
         }
 
         /**增加金币以并且节点上也表现出来*/
-        export function addGold(number) {
+        export function addGold(number: number) {
             _goldNum += number;
             let Num = GoldNode.getChildByName('Num') as Laya.Text;
             Num.text = _goldNum.toString();
@@ -1048,8 +1051,8 @@ export module lwg {
             UICaidanPifu = 'UICaidanPifu',
             UIOperation = 'UIOperation',
             UIShop = 'UIShop',
-            UITask = 'UITask'
-
+            UITask = 'UITask',
+            UIVictoryBox = 'UIVictoryBox'
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -1319,17 +1322,19 @@ export module lwg {
                 this.lwgOnUpdate();
             }
 
+            /**每帧执行*/
             lwgOnUpdate(): void {
 
             }
 
             onDisable(): void {
-                this.lwgDisable();
+                this.lwgOnDisable();
                 Laya.timer.clearAll(this);
+                Laya.Tween.clearAll(this);
                 EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgDisable(): void {
+            lwgOnDisable(): void {
 
             }
         }
@@ -1428,10 +1433,10 @@ export module lwg {
 
             onDisable(): void {
                 // printPoint('dis', this.calssName);
-                this.lwgDisable();
+                this.lwgOnDisable();
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgDisable(): void {
+            lwgOnDisable(): void {
 
             }
         }
@@ -1517,12 +1522,12 @@ export module lwg {
 
             }
             onDisable(): void {
-                this.lwgDisable();
+                this.lwgOnDisable();
                 Laya.timer.clearAll(this);
                 EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgDisable(): void {
+            lwgOnDisable(): void {
 
             }
         }
@@ -1567,7 +1572,7 @@ export module lwg {
             onDisable(): void {
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgDisable(): void {
+            lwgOnDisable(): void {
 
             }
         }
@@ -3762,6 +3767,27 @@ export module lwg {
 
     /**工具模块*/
     export module Tools {
+
+        /**
+         * 从一个数组中随机取出几个数，如果刚好是数组长度，则等于是乱序
+         * @param arr 
+         * @param num 
+         */
+        export function randomNumOfArray(arr: Array<any>, num: number): any {
+            let arr0 = [];
+            if (num > arr.length) {
+                return '数组长度小于取出的数！';
+            } else {
+                for (let index = 0; index < num; index++) {
+                    let ran = Math.floor(Math.random() * (arr.length - 1));
+                    let a1 = arr[ran];
+                    arr.splice(ran, 1);
+                    arr0.push(a1);
+                }
+                return arr0;
+            }
+        }
+
         /**
          * 射线检测
          * @param camera 摄像机
@@ -4056,14 +4082,35 @@ export module lwg {
 
         /**
          * 数组复制 
-         * @param arr1 需要复制的数组
+         * @param arr1 被复制的数组
          */
-        export function copyArray(arr1): Array<any> {
+        export function array_Copy(arr1): Array<any> {
             var arr = [];
             for (var i = 0; i < arr1.length; i++) {
                 arr.push(arr1[i]);
             }
             return arr;
+        }
+
+        /**
+         * 对象数组的拷贝
+         * @param ObjArray 需要拷贝的对象数组 
+         */
+        export function objArray_Copy(source): any {
+            var sourceCopy = source instanceof Array ? [] : {};
+            for (var item in source) {
+                sourceCopy[item] = typeof source[item] === 'object' ? obj_DeepCopy(source[item]) : source[item];
+            }
+            return sourceCopy;
+        }
+        /**
+         * 对象的拷贝
+         * @param source 需要拷贝的对象
+         */
+        export function obj_DeepCopy(source) {
+            var sourceCopy = {};
+            for (var item in source) sourceCopy[item] = typeof source[item] === 'object' ? obj_DeepCopy(source[item]) : source[item];
+            return sourceCopy;
         }
 
         /**
@@ -4171,7 +4218,7 @@ export module lwg {
             return arr1;
         }
 
-        /**ES6数组去重*/
+        /**ES6数组去重,返回的数组是新数组，需接收*/
         export function arrayUnique_03(arr): Array<any> {
             return Array.from(new Set(arr));
         }
@@ -4272,7 +4319,7 @@ export module lwg {
         }
 
         /**
-         * 通过名称设置或者增加一个任务的一个属性值
+         * 通过名称设置或者增加一个任务的一个属性值,并且刷新list列表
          * @param goodsClass 任务类型
          * @param ClassName 任务名称
          * @param property 设置或者增加任务属性名称
@@ -4290,6 +4337,10 @@ export module lwg {
             let data = {};
             data[ClassName] = arr;
             Laya.LocalStorage.setJSON(ClassName, JSON.stringify(data));
+
+            if (_TaskList) {
+                _TaskList.refresh();
+            }
         }
 
         /**根据任务类型返回任务数组*/
@@ -4320,11 +4371,17 @@ export module lwg {
             let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
             if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
                 if (condition <= resCondition + number) {
-                    Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                    Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, condition);
                     Task.setTaskProperty(calssName, name, Task.TaskProperty.get, 1);
+                    if (_TaskList) {
+                        _TaskList.refresh();
+                    }
                     return 1;
                 } else {
                     Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                    if (_TaskList) {
+                        _TaskList.refresh();
+                    }
                     return 0;
                 }
             } else {
@@ -4357,7 +4414,7 @@ export module lwg {
             get = 'get',
         }
 
-        /**商店中的商品大致类别,同时对应图片地址的文件夹*/
+        /**任务中的任务大致类别,同时对应图片地址的文件夹*/
         export enum TaskClass {
             /**每日任务*/
             everyday = 'Task_Everyday',
@@ -4377,6 +4434,8 @@ export module lwg {
             victory = 'victory',
             /**看广告的次数*/
             adsTime = 'adsTime',
+            /**看广告的次数*/
+            victoryBox = 'victoryBox',
         }
         /**获得方式列举,方式可以添加*/
         export enum TaskType {
@@ -4474,11 +4533,11 @@ export module lwg {
                     Task._TaskList.refresh();
                 }
             }
-            lwgDisable(): void {
-                this.taskDisable();
+            lwgOnDisable(): void {
+                this.taskOnDisable();
             }
             /**页面关闭后执行*/
-            taskDisable(): void {
+            taskOnDisable(): void {
             }
         }
     }
@@ -4612,6 +4671,9 @@ export module lwg {
             let data = {};
             data[goodsClass] = arr;
             Laya.LocalStorage.setJSON(goodsClass, JSON.stringify(data));
+            if (_ShopList) {
+                _ShopList.refresh();
+            }
         }
 
         /**
@@ -4828,14 +4890,173 @@ export module lwg {
                     Shop._ShopList.refresh();
                 }
             }
-            lwgDisable(): void {
-                this.shopDisable();
+            lwgOnDisable(): void {
+                this.shopOnDisable();
             }
             /**页面关闭后执行*/
-            shopDisable(): void {
+            shopOnDisable(): void {
 
             }
         }
+    }
+
+    /**胜利宝箱模块*/
+    export module VictoryBox {
+        /**宝箱列表组件*/
+        export let _BoxList: Laya.List;
+        /**宝箱数据集合*/
+        export let _BoxArray = [];
+        /**领取次数,默认为三次，重写覆盖*/
+        export let _openNum: number = 3;
+        /**已经领取了几次奖励*/
+        export let _alreadyOpenNum: number = 0;
+        /**看宝箱可以领取的最大次数*/
+        export let _adsMaxOpenNum: number = 6;
+        /**第几次打开宝箱界面*/
+        export let _openVictoryBoxNum: number = 0;
+
+        /**当前被选中的那个宝箱是什么宝箱*/
+        export let _selectBox: string;
+        /**
+         * 通过名称获取宝箱的一个属性值
+         * @param name 宝箱名称
+         * @param property 宝箱属性名称
+         * */
+        export function getBoxProperty(name: string, property: string): any {
+            let pro = null;
+            for (let index = 0; index < _BoxArray.length; index++) {
+                const element = _BoxArray[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            } else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+
+        /**
+         * 通过名称设置或者增加一个宝箱的一个属性值
+         * @param name 宝箱名称
+         * @param property 宝箱属性名称
+         * @param value 需要设置或者增加的属性值
+         * */
+        export function setBoxProperty(name: string, property: string, value: any): void {
+            for (let index = 0; index < _BoxArray.length; index++) {
+                const element = _BoxArray[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
+                }
+            }
+            _BoxList.refresh();
+        }
+
+        /**宝箱属性*/
+        export enum BoxProperty {
+            /**奖励名称*/
+            name = 'name',
+            /**奖励类型*/
+            rewardType = 'rewardType',
+            /**奖励数量*/
+            rewardNum = 'rewardNum',
+            /**是否已经被打开*/
+            openState = 'openState',
+            /**是否需要看广告*/
+            ads = 'ads',
+            /**是否被选中*/
+            select = 'select',
+        }
+
+        /**事件类型*/
+        export enum EventType {
+            /**开宝箱*/
+            openBox = 'openBox',
+        }
+
+        /**胜利宝箱场景父类*/
+        export class VictoryBoxScene extends Admin.Scene {
+            lwgOnAwake(): void {
+                this.initData();
+                this.victoryBoxOnAwake();
+            }
+            /**初始化json数据*/
+            initData(): void {
+                /**结构，如果没有则为null*/
+                VictoryBox._BoxList = this.self['BoxList'];
+                //注意这里要复制数组，不可以直接赋值
+                // Laya.loader.load('"GameData/VictoryBox/VictoryBox.json');
+                _BoxArray = Tools.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json")['RECORDS']);
+                _selectBox = null;
+                _openNum = 3;
+                _openVictoryBoxNum++;
+                _adsMaxOpenNum = 6;
+            }
+            /**VictoryBoxScene开始前执行一次，重写覆盖*/
+            victoryBoxOnAwake(): void { }
+
+            lwgOnEnable(): void {
+                this.boxList_Create();
+                this.victoryBoxOnEnable();
+            }
+
+            victoryBoxOnEnable(): void { }
+            /**初始化list*/
+            boxList_Create(): void {
+                VictoryBox._BoxList.selectEnable = false;
+                VictoryBox._BoxList.vScrollBarSkin = "";
+                // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
+                // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
+                VictoryBox._BoxList.selectHandler = new Laya.Handler(this, this.boxList_Scelet);
+                VictoryBox._BoxList.renderHandler = new Laya.Handler(this, this.boxList_Update);
+                this.boxList_refresh();
+            }
+            /**list选中监听*/
+            boxList_Scelet(index: number): void { }
+            /**list列表刷新*/
+            boxList_Update(cell, index: number): void { }
+            /**刷新list数据,重写覆盖，默认为皮肤*/
+            boxList_refresh(): void {
+                if (VictoryBox._BoxList) {
+                    VictoryBox._BoxList.array = _BoxArray;
+                    VictoryBox._BoxList.refresh();
+                }
+            }
+
+            lwgNodeDec(): void {
+                this.victoryBoxNodeDec();
+            }
+            /**NodeDec*/
+            victoryBoxNodeDec(): void { }
+
+            lwgBtnClick(): void {
+                this.victoryBoxBtnClick();
+            }
+            victoryBoxBtnClick(): void { }
+
+            lwgEventReg(): void {
+                this.victoryBoxEventReg();
+            }
+            /**场景中的一些事件*/
+            victoryBoxEventReg(): void { }
+
+            lwgOnDisable(): void {
+                this.victoryBoxOnDisable();
+            }
+            /**离开时执行，子类不执行onDisable，只执行victoryBoxDisable*/
+            victoryBoxOnDisable(): void { }
+
+            lwgOnUpdate(): void {
+                this.victoryOnUpdate();
+            }
+            /**每帧执行*/
+            victoryOnUpdate(): void { }
+        }
+
     }
 
     export module Loding {
@@ -5004,3 +5225,7 @@ export let Shop = lwg.Shop;
 export let ShopScene = lwg.Shop.ShopScene;
 export let Task = lwg.Task;
 export let TaskScene = lwg.Task.TaskScene;
+export let VictoryBox = lwg.VictoryBox;
+export let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
+
+

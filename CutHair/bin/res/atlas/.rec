@@ -185,13 +185,6 @@ P 28C4757F renwu.png
 P BF63B6AC shezhi.png
 P 9179159E xiandin1.png
 P AF643B15 xiandin2.png
-D UI/Gift
-P 5CD14092 baoxian2.png
-P 213C8C48 baoxian3.png
-P 00F0F762 baoxiang.png
-P 4E99B0E5 biaoti.png
-P 3196043F txt_xiexie.png
-P BA257865 txt_zaikai.png
 D UI/Inherit
 P ECE7E04E bupei.png
 P E4FD158F jieshou.png
@@ -275,6 +268,14 @@ P 1E3220B7 jinxing.png
 P 4C0C1CAF kuang.png
 P EC6FE0FE linqu.png
 P 102BB7CB yilingqu.png
+D UI/VictoryBox
+P 5CD14092 baoxian2.png
+P 213C8C48 baoxian3.png
+P 780D4550 baoxian_adv.png
+P 00F0F762 baoxiang.png
+P 4E99B0E5 biaoti.png
+P 3196043F txt_xiexie.png
+P BA257865 txt_zaikai.png
 D UI/XDSkin
 R 42EE976B beijing.png
 P 30EBF5DD biaoti.png

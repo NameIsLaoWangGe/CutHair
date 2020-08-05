@@ -78,7 +78,7 @@ export default class UIStart extends lwg.Admin.Scene {
         lwg.Admin._openScene(Admin.SceneName.UITask);
     }
 
-    lwgDisable(): void {
+    lwgOnDisable(): void {
         Gold.GoldNode.visible = false;
     }
 }

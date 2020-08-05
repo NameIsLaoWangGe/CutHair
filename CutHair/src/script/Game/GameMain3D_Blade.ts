@@ -73,7 +73,7 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
     lwgOnUpdate(): void {
     }
-    lwgDisable(): void {
+    lwgOnDisable(): void {
 
     }
 }

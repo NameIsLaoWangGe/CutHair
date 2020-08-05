@@ -124,10 +124,10 @@ export default class UIShare extends lwg.Admin.Scene {
 
     shareFunc(): void {
         this.self.close();
-        Admin._openScene(Admin.SceneName.UIVictory);
+        Admin._openScene(Admin.SceneName.UIVictoryBox);
     }
 
-    lwgDisable(): void {
+    lwgOnDisable(): void {
         this.EndCamera.removeSelf();
         // this.CopyLevel.removeSelf();
         // this.StartCamara.removeSelf();

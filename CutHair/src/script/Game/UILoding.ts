@@ -21,6 +21,7 @@ export default class UILoding extends Loding.LodeScene {
             "GameData/Shop/Props.json",
             "GameData/Shop/Skin.json",
             'GameData/Task/everydayTask.json',
+            "GameData/VictoryBox/VictoryBox.json"
         ];
     }
 
@@ -62,7 +63,10 @@ export default class UILoding extends Loding.LodeScene {
         EventAdmin.reg(Task.EventType.adsTime, Task, () => {
             let name = Task.TaskName.每日观看两个广告;
             Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-            console.log('每日2次广告任务');
+        })
+        EventAdmin.reg(Task.EventType.victoryBox, Task, () => {
+            let name = Task.TaskName.每日开启10个宝箱;
+            Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
         })
     }
 
@@ -108,7 +112,7 @@ export default class UILoding extends Loding.LodeScene {
         }
     }
 
-    lwgDisable(): void {
+    lwgOnDisable(): void {
         if (PalyAudio._voiceSwitch) {
             lwg.PalyAudio.playMusic(lwg.Enum.voiceUrl.bgm, 0, 1000);
         }

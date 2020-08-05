@@ -415,6 +415,10 @@
                 HintDec[HintDec["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 25] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
                 HintDec[HintDec["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 26] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
                 HintDec[HintDec["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 27] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
+                HintDec[HintDec["\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01"] = 28] = "\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01";
+                HintDec[HintDec["\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 29] = "\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintDec[HintDec["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 30] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintDec[HintDec["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 31] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
             })(HintDec = Hint.HintDec || (Hint.HintDec = {}));
             let Skin;
             (function (Skin) {
@@ -707,6 +711,7 @@
                 SceneName["UIOperation"] = "UIOperation";
                 SceneName["UIShop"] = "UIShop";
                 SceneName["UITask"] = "UITask";
+                SceneName["UIVictoryBox"] = "UIVictoryBox";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -918,11 +923,12 @@
                 lwgOnUpdate() {
                 }
                 onDisable() {
-                    this.lwgDisable();
+                    this.lwgOnDisable();
                     Laya.timer.clearAll(this);
+                    Laya.Tween.clearAll(this);
                     EventAdmin.offCaller(this);
                 }
-                lwgDisable() {
+                lwgOnDisable() {
                 }
             }
             Admin.Scene = Scene;
@@ -993,9 +999,9 @@
                 lwgOnUpDate() {
                 }
                 onDisable() {
-                    this.lwgDisable();
+                    this.lwgOnDisable();
                 }
-                lwgDisable() {
+                lwgOnDisable() {
                 }
             }
             Admin.Scene3D = Scene3D;
@@ -1050,11 +1056,11 @@
                 lwgOnUpdate() {
                 }
                 onDisable() {
-                    this.lwgDisable();
+                    this.lwgOnDisable();
                     Laya.timer.clearAll(this);
                     EventAdmin.offCaller(this);
                 }
-                lwgDisable() {
+                lwgOnDisable() {
                 }
             }
             Admin.Object = Object;
@@ -1082,7 +1088,7 @@
                 }
                 onDisable() {
                 }
-                lwgDisable() {
+                lwgOnDisable() {
                 }
             }
             Admin.Object3D = Object3D;
@@ -2614,6 +2620,22 @@
         })(PalyAudio = lwg.PalyAudio || (lwg.PalyAudio = {}));
         let Tools;
         (function (Tools) {
+            function randomNumOfArray(arr, num) {
+                let arr0 = [];
+                if (num > arr.length) {
+                    return '数组长度小于取出的数！';
+                }
+                else {
+                    for (let index = 0; index < num; index++) {
+                        let ran = Math.floor(Math.random() * (arr.length - 1));
+                        let a1 = arr[ran];
+                        arr.splice(ran, 1);
+                        arr0.push(a1);
+                    }
+                    return arr0;
+                }
+            }
+            Tools.randomNumOfArray = randomNumOfArray;
             function rayScanning(camera, scene3D, point, filtrate) {
                 let _ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
                 let outs = new Array();
@@ -2806,14 +2828,29 @@
                 return Math.floor(Math.random() * c + range1);
             }
             Tools.random = random;
-            function copyArray(arr1) {
+            function array_Copy(arr1) {
                 var arr = [];
                 for (var i = 0; i < arr1.length; i++) {
                     arr.push(arr1[i]);
                 }
                 return arr;
             }
-            Tools.copyArray = copyArray;
+            Tools.array_Copy = array_Copy;
+            function objArray_Copy(source) {
+                var sourceCopy = source instanceof Array ? [] : {};
+                for (var item in source) {
+                    sourceCopy[item] = typeof source[item] === 'object' ? obj_DeepCopy(source[item]) : source[item];
+                }
+                return sourceCopy;
+            }
+            Tools.objArray_Copy = objArray_Copy;
+            function obj_DeepCopy(source) {
+                var sourceCopy = {};
+                for (var item in source)
+                    sourceCopy[item] = typeof source[item] === 'object' ? obj_DeepCopy(source[item]) : source[item];
+                return sourceCopy;
+            }
+            Tools.obj_DeepCopy = obj_DeepCopy;
             function speedByAngle(angle, XY) {
                 if (angle % 90 === 0 || !angle) {
                     console.error("计算的角度异常,需要查看：", angle);
@@ -2973,6 +3010,9 @@
                 let data = {};
                 data[ClassName] = arr;
                 Laya.LocalStorage.setJSON(ClassName, JSON.stringify(data));
+                if (Task._TaskList) {
+                    Task._TaskList.refresh();
+                }
             }
             Task.setTaskProperty = setTaskProperty;
             function getTaskClassArr(ClassName) {
@@ -2995,12 +3035,18 @@
                 let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
                 if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
                     if (condition <= resCondition + number) {
-                        Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, condition);
                         Task.setTaskProperty(calssName, name, Task.TaskProperty.get, 1);
+                        if (Task._TaskList) {
+                            Task._TaskList.refresh();
+                        }
                         return 1;
                     }
                     else {
                         Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                        if (Task._TaskList) {
+                            Task._TaskList.refresh();
+                        }
                         return 0;
                     }
                 }
@@ -3034,6 +3080,7 @@
                 EventType["useSkins"] = "useSkins";
                 EventType["victory"] = "victory";
                 EventType["adsTime"] = "adsTime";
+                EventType["victoryBox"] = "victoryBox";
             })(EventType = Task.EventType || (Task.EventType = {}));
             let TaskType;
             (function (TaskType) {
@@ -3107,10 +3154,10 @@
                         Task._TaskList.refresh();
                     }
                 }
-                lwgDisable() {
-                    this.taskDisable();
+                lwgOnDisable() {
+                    this.taskOnDisable();
                 }
-                taskDisable() {
+                taskOnDisable() {
                 }
             }
             Task.TaskScene = TaskScene;
@@ -3196,6 +3243,9 @@
                 let data = {};
                 data[goodsClass] = arr;
                 Laya.LocalStorage.setJSON(goodsClass, JSON.stringify(data));
+                if (Shop._ShopList) {
+                    Shop._ShopList.refresh();
+                }
             }
             Shop.setGoodsProperty = setGoodsProperty;
             function getHaveArr(goodsClass) {
@@ -3355,14 +3405,120 @@
                         Shop._ShopList.refresh();
                     }
                 }
-                lwgDisable() {
-                    this.shopDisable();
+                lwgOnDisable() {
+                    this.shopOnDisable();
                 }
-                shopDisable() {
+                shopOnDisable() {
                 }
             }
             Shop.ShopScene = ShopScene;
         })(Shop = lwg.Shop || (lwg.Shop = {}));
+        let VictoryBox;
+        (function (VictoryBox) {
+            VictoryBox._BoxArray = [];
+            VictoryBox._openNum = 3;
+            VictoryBox._alreadyOpenNum = 0;
+            VictoryBox._adsMaxOpenNum = 6;
+            VictoryBox._openVictoryBoxNum = 0;
+            function getBoxProperty(name, property) {
+                let pro = null;
+                for (let index = 0; index < VictoryBox._BoxArray.length; index++) {
+                    const element = VictoryBox._BoxArray[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            VictoryBox.getBoxProperty = getBoxProperty;
+            function setBoxProperty(name, property, value) {
+                for (let index = 0; index < VictoryBox._BoxArray.length; index++) {
+                    const element = VictoryBox._BoxArray[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                VictoryBox._BoxList.refresh();
+            }
+            VictoryBox.setBoxProperty = setBoxProperty;
+            let BoxProperty;
+            (function (BoxProperty) {
+                BoxProperty["name"] = "name";
+                BoxProperty["rewardType"] = "rewardType";
+                BoxProperty["rewardNum"] = "rewardNum";
+                BoxProperty["openState"] = "openState";
+                BoxProperty["ads"] = "ads";
+                BoxProperty["select"] = "select";
+            })(BoxProperty = VictoryBox.BoxProperty || (VictoryBox.BoxProperty = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["openBox"] = "openBox";
+            })(EventType = VictoryBox.EventType || (VictoryBox.EventType = {}));
+            class VictoryBoxScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.victoryBoxOnAwake();
+                }
+                initData() {
+                    VictoryBox._BoxList = this.self['BoxList'];
+                    VictoryBox._BoxArray = Tools.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json")['RECORDS']);
+                    VictoryBox._selectBox = null;
+                    VictoryBox._openNum = 3;
+                    VictoryBox._openVictoryBoxNum++;
+                    VictoryBox._adsMaxOpenNum = 6;
+                }
+                victoryBoxOnAwake() { }
+                lwgOnEnable() {
+                    this.boxList_Create();
+                    this.victoryBoxOnEnable();
+                }
+                victoryBoxOnEnable() { }
+                boxList_Create() {
+                    VictoryBox._BoxList.selectEnable = false;
+                    VictoryBox._BoxList.vScrollBarSkin = "";
+                    VictoryBox._BoxList.selectHandler = new Laya.Handler(this, this.boxList_Scelet);
+                    VictoryBox._BoxList.renderHandler = new Laya.Handler(this, this.boxList_Update);
+                    this.boxList_refresh();
+                }
+                boxList_Scelet(index) { }
+                boxList_Update(cell, index) { }
+                boxList_refresh() {
+                    if (VictoryBox._BoxList) {
+                        VictoryBox._BoxList.array = VictoryBox._BoxArray;
+                        VictoryBox._BoxList.refresh();
+                    }
+                }
+                lwgNodeDec() {
+                    this.victoryBoxNodeDec();
+                }
+                victoryBoxNodeDec() { }
+                lwgBtnClick() {
+                    this.victoryBoxBtnClick();
+                }
+                victoryBoxBtnClick() { }
+                lwgEventReg() {
+                    this.victoryBoxEventReg();
+                }
+                victoryBoxEventReg() { }
+                lwgOnDisable() {
+                    this.victoryBoxOnDisable();
+                }
+                victoryBoxOnDisable() { }
+                lwgOnUpdate() {
+                    this.victoryOnUpdate();
+                }
+                victoryOnUpdate() { }
+            }
+            VictoryBox.VictoryBoxScene = VictoryBoxScene;
+        })(VictoryBox = lwg.VictoryBox || (lwg.VictoryBox = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3D = [];
@@ -3494,6 +3650,8 @@
     let ShopScene = lwg.Shop.ShopScene;
     let Task = lwg.Task;
     let TaskScene = lwg.Task.TaskScene;
+    let VictoryBox = lwg.VictoryBox;
+    let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
 
     class ADManager {
         constructor() {
@@ -3515,7 +3673,6 @@
             TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
         }
         static ShowReward(rewardAction, CDTime = 500) {
-            EventAdmin.notify(Task.EventType.adsTime);
             if (ADManager.CanShowCD) {
                 PalyAudio.stopMusic();
                 console.log("?????");
@@ -3527,6 +3684,7 @@
                     PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
                     if (rewardAction != null) {
                         rewardAction();
+                        EventAdmin.notify(Task.EventType.adsTime);
                     }
                 });
                 p.cbi.Add(TJ.Define.Event.Close, () => {
@@ -3776,7 +3934,7 @@
         }
         lwgOnUpdate() {
         }
-        lwgDisable() {
+        lwgOnDisable() {
         }
     }
 
@@ -3810,7 +3968,7 @@
         }
         lwgOnUpdate() {
         }
-        lwgDisable() {
+        lwgOnDisable() {
         }
     }
 
@@ -4008,6 +4166,7 @@
                 "GameData/Shop/Props.json",
                 "GameData/Shop/Skin.json",
                 'GameData/Task/everydayTask.json',
+                "GameData/VictoryBox/VictoryBox.json"
             ];
         }
         lodingPhaseComplete() {
@@ -4042,7 +4201,10 @@
             EventAdmin.reg(Task.EventType.adsTime, Task, () => {
                 let name = Task.TaskName.每日观看两个广告;
                 Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-                console.log('每日2次广告任务');
+            });
+            EventAdmin.reg(Task.EventType.victoryBox, Task, () => {
+                let name = Task.TaskName.每日开启10个宝箱;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
             });
         }
         lwgAdaptive() {
@@ -4076,7 +4238,7 @@
                 this.self['Shear_01'].rotation -= this.shearSpeed;
             }
         }
-        lwgDisable() {
+        lwgOnDisable() {
             if (PalyAudio._voiceSwitch) {
                 lwg.PalyAudio.playMusic(lwg.Enum.voiceUrl.bgm, 0, 1000);
             }
@@ -4207,7 +4369,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.sideHair];
+            GVariate._taskArr = [GEnum.TaskType.rightBeard];
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
         }
@@ -4656,9 +4818,9 @@
         }
         shareFunc() {
             this.self.close();
-            Admin._openScene(Admin.SceneName.UIVictory);
+            Admin._openScene(Admin.SceneName.UIVictoryBox);
         }
-        lwgDisable() {
+        lwgOnDisable() {
             this.EndCamera.removeSelf();
         }
     }
@@ -4966,7 +5128,7 @@
         btnBackUp() {
             this.self.close();
         }
-        shopDisable() {
+        shopOnDisable() {
             GVariate._stageClick = true;
         }
     }
@@ -5029,7 +5191,7 @@
             e.stopPropagation();
             lwg.Admin._openScene(Admin.SceneName.UITask);
         }
-        lwgDisable() {
+        lwgOnDisable() {
             Gold.GoldNode.visible = false;
         }
     }
@@ -5110,7 +5272,7 @@
         btnBackUp() {
             this.self.close();
         }
-        taskDisable() {
+        taskOnDisable() {
             GVariate._stageClick = true;
         }
     }
@@ -5230,7 +5392,156 @@
             Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
             this.self.close();
         }
+        lwgOnDisable() {
+        }
+    }
+
+    class UIVictoryBox_Cell extends Admin.Object {
+        constructor() { super(); }
+        lwgBtnClick() {
+            Click.on(Click.Type.noEffect, null, this.self, this, null, null, this.up, null);
+        }
+        up(e) {
+            if (VictoryBox._openNum > 0) {
+                let Pic_Box = this.self.getChildByName('Pic_Box');
+                if (!this.self['_dataSource'][VictoryBox.BoxProperty.ads]) {
+                    Pic_Box.skin = 'UI/VictoryBox/baoxian3.png';
+                }
+                Animation2D.shookHead_Simple(Pic_Box, 10, 100, 0, f => {
+                    EventAdmin.notify(VictoryBox.EventType.openBox, [this.self['_dataSource']]);
+                });
+            }
+            else {
+                Hint.createHint_Middle(Hint.HintDec["观看广告可以获得三次开宝箱次数！"]);
+            }
+        }
         lwgDisable() {
+        }
+    }
+
+    class UIVictoryBox extends VictoryBox.VictoryBoxScene {
+        constructor() {
+            super();
+            this.getNum = 3;
+            this.ranArray = [];
+        }
+        victoryBoxOnAwake() {
+            this.self['BtnAgain'].visible = false;
+            this.self['BtnNo'].visible = false;
+            if (VictoryBox._openVictoryBoxNum > 1) {
+                let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    VictoryBox.setBoxProperty('box' + arr[index], VictoryBox.BoxProperty.ads, true);
+                }
+            }
+        }
+        victoryBoxEventReg() {
+            EventAdmin.reg(VictoryBox.EventType.openBox, this, (dataSource) => {
+                console.log(dataSource, VictoryBox._openNum);
+                if (VictoryBox._openNum > 0) {
+                    if (dataSource[VictoryBox.BoxProperty.ads]) {
+                        ADManager.ShowReward(() => {
+                            this.getRewardFunc(dataSource);
+                        });
+                    }
+                    else {
+                        this.getRewardFunc(dataSource);
+                    }
+                }
+                else {
+                    Hint.createHint_Middle(Hint.HintDec["观看广告可以获得三次开宝箱次数！"]);
+                }
+            });
+        }
+        getRewardFunc(dataSource) {
+            VictoryBox._openNum--;
+            VictoryBox._selectBox = dataSource[VictoryBox.BoxProperty.name];
+            let diffX = dataSource.arrange % 3;
+            if (diffX == 0) {
+                diffX = 3;
+            }
+            let diffY = Math.floor(dataSource.arrange / 3 + 0.5);
+            let x = VictoryBox._BoxList.x + VictoryBox._BoxList.width / 3 * diffX - 45;
+            let y = VictoryBox._BoxList.y + VictoryBox._BoxList.height / 3 * diffY + 92;
+            Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
+            VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
+            VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
+            VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.select, true);
+            Laya.timer.frameOnce(20, this, f => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
+                });
+            });
+            EventAdmin.notify(Task.EventType.victoryBox);
+        }
+        boxList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            if (VictoryBox._selectBox === dataSource[VictoryBox.BoxProperty.name]) {
+                Select.visible = true;
+            }
+            else {
+                Select.visible = false;
+            }
+            let Num = cell.getChildByName('Num');
+            let Pic_Gold = cell.getChildByName('Pic_Gold');
+            let Pic_Box = cell.getChildByName('Pic_Box');
+            let BordPic = cell.getChildByName('BordPic');
+            if (!dataSource[VictoryBox.BoxProperty.openState]) {
+                if (dataSource[VictoryBox.BoxProperty.ads]) {
+                    Pic_Box.skin = 'UI/VictoryBox/baoxian_adv.png';
+                }
+                else {
+                    Pic_Box.skin = 'UI/VictoryBox/baoxian2.png';
+                }
+                Pic_Box.visible = true;
+                Pic_Gold.visible = false;
+                Num.visible = false;
+                BordPic.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                Pic_Box.visible = false;
+                Pic_Gold.visible = true;
+                Num.visible = true;
+                Num.text = dataSource[VictoryBox.BoxProperty.rewardNum];
+                BordPic.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        victoryBoxBtnClick() {
+            Click.on('largen', null, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+            Click.on('largen', null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        }
+        btnOffClick() {
+            Click.off('largen', null, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+            Click.off('largen', null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        }
+        btnNoUp(event) {
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIVictory, null, null, null);
+            this.self.close();
+        }
+        btnAgainUp(event) {
+            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
+            if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
+                ADManager.ShowReward(() => {
+                    Hint.createHint_Middle(Hint.HintDec["增加三次开启宝箱次数！"]);
+                    VictoryBox._openNum += 3;
+                    VictoryBox._adsMaxOpenNum -= 3;
+                });
+            }
+            else {
+                Hint.createHint_Middle(Hint.HintDec["没有宝箱领可以领了！"]);
+            }
+        }
+        victoryOnUpdate() {
+            if (VictoryBox._openNum > 0) {
+                this.self['BtnAgain'].visible = false;
+                this.self['BtnNo'].visible = false;
+            }
+            else {
+                this.self['BtnAgain'].visible = true;
+                this.self['BtnNo'].visible = true;
+            }
         }
     }
 
@@ -5314,6 +5625,8 @@
             reg("script/Game/UITask_GetAward.ts", UITask_GetAward);
             reg("script/Game/UITask.ts", UITask);
             reg("script/Game/UIVictory.ts", UIVictory);
+            reg("script/Game/UIVictoryBox_Cell.ts", UIVictoryBox_Cell);
+            reg("script/Game/UIVictoryBox.ts", UIVictoryBox);
             reg("script/GameUI.ts", GameUI);
         }
     }

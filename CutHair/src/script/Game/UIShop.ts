@@ -116,7 +116,6 @@ export default class UIShop extends Shop.ShopScene {
             let index = dataSource.arrange - 1;
             Shop._ShopList.scrollTo(index);
         }
-
     }
 
     /**看广告获得*/
@@ -141,19 +140,6 @@ export default class UIShop extends Shop.ShopScene {
         Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
         if (condition <= resCondition + 1) {
             Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
-
-            // let diffX = dataSource.arrange % 3;
-            // if (diffX == 0) {
-            //     diffX = 3;
-            // }
-            // console.log(dataSource.arrange);
-            // let diffY = Math.floor(dataSource.arrange / 3 + 0.5);
-            // console.log(diffY);
-
-            // let x = Shop._ShopList.x + Shop._ShopList.width / 3 * diffX - 92;
-            // let y = Shop._ShopList.y + Shop._ShopList.height / 3 * diffY - 92;
-
-            // Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
             this.sceletDisplay(dataSource.name, false);
         }
         Shop._ShopList.refresh();
@@ -334,7 +320,7 @@ export default class UIShop extends Shop.ShopScene {
         this.self.close();
     }
 
-    shopDisable(): void {
+    shopOnDisable(): void {
         GVariate._stageClick = true;
     }
 }
