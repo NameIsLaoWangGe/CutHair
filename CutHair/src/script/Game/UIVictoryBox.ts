@@ -2,11 +2,6 @@ import { lwg, Admin, Hint, VictoryBox, EventAdmin, Animation2D, Effects, Gold, C
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
-    /**初始剩余点击次数为三次*/
-    getNum: number = 3;
-    /**随机三个作为看广告宝箱*/
-    ranArray: Array<number> = [];
-
     constructor() { super(); }
 
     victoryBoxOnAwake(): void {
@@ -54,8 +49,6 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
 
         VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
-        VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
-        VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.select, true);
 
         Laya.timer.frameOnce(20, this, f => {
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {

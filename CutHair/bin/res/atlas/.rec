@@ -40,6 +40,7 @@ P DDDDFB9E vslider$bar.png
 P 01BAE7F5 vslider.png
 D Frame
 D UI
+R E3EF6B9C bg2.png
 D Frame/Effects
 P 03F236DC cir_black.png
 P EBB4CAAE cir_blue.png
@@ -196,12 +197,13 @@ P E4FD158F jieshou.png
 P BCBCAD68 txt_biaoti.png
 R 0B987673 zi.png
 D UI/Loding
-R 35C64EB3 bg.jpg
+P E81ED0DF bg1.jpg
+R C94CCDE8 bg2.jpg
+P 2E8D4482 bg3.png
 R 363C3A11 fangchenmi.png
 P CE6D36CE icon_shear_01.png
 P BBEF0321 icon_shear_02.png
 P DCC5AB54 laya.png
-R 2C2625D0 loading(1).jpg
 R F369565E LOGO.png
 P 3A4418BB pro_01.png
 P D9D3120B pro_02.png
@@ -326,6 +328,7 @@ P AD557CDF lifadao.png
 P 3347ADDF ruwu.png
 P 9908298E tixudao.png
 P 5965B1B2 tulongdao.png
+P 74F9EE98 xiandanren.png
 P 0CFCA239 xiangsudao.png
 D UI/Shop/Props
 P D0E04D87 dianju.png

@@ -3,12 +3,6 @@ import { GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class GameMain3D_Blade extends lwg.Admin.Object3D {
 
-    /**头发的总数*/
-    hairsNumber: any;
-    lwgOnEnable(): void {
-
-    }
-
     onTriggerEnter(other): void {
         if (!lwg.Admin._gameStart) {
             return;
@@ -71,9 +65,4 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
         }
     }
 
-    lwgOnUpdate(): void {
-    }
-    lwgOnDisable(): void {
-
-    }
 }

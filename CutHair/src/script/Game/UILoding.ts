@@ -72,10 +72,9 @@ export default class UILoding extends Loding.LodeScene {
     }
 
     lwgAdaptive(): void {
-        this.self['Bg'].height = Laya.stage.height;
+        this.self['Bg'].y = Laya.stage.height/2;
         this.self['Logo'].y = Laya.stage.height * 0.174;
-        this.self['Progress'].y = Laya.stage.height * 0.763;
-        this.self['FCM'].y = Laya.stage.height * 0.910;
+        this.self['Progress'].y = Laya.stage.height *0.827;
         this.self['FCM'].y = Laya.stage.height * 0.910;
     }
 

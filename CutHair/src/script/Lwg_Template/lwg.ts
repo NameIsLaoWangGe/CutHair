@@ -803,7 +803,7 @@ export module lwg {
         }
 
         /**
-        * 陆续生成单个金币
+        *  金币表现动画，陆续生成单个金币
         * @param parent 父节点
         * @param number 产生金币的数量
         * @param width 金币的宽度
@@ -844,7 +844,7 @@ export module lwg {
 
 
         /**
-         * 生成一堆金币，然后分别移动到目标位置
+         * 金币表现动画，生成一堆金币，然后分别移动到目标位置
          * @param parent 父节点
          * @param number 产生金币的数量
          * @param width 金币的宽度
@@ -887,8 +887,6 @@ export module lwg {
                 });
             }
         }
-
-
 
         /**类粒子特效的通用父类*/
         export class GoldAniBase extends Laya.Script {
@@ -1042,7 +1040,7 @@ export module lwg {
             UIPuase = 'UIPuase',
             UIShare = 'UIShare',
             UISmallHint = 'UISmallHint',
-            UIXDpifu = 'UIXDpifu',
+            UIXDSkin = 'UIXDSkin',
             UIPifuTry = 'UIPifuTry',
             UIRedeem = 'UIRedeem',
             UIAnchorXD = 'UIAnchorXD',
@@ -3448,8 +3446,11 @@ export module lwg {
          * @param delayed 延时时间
          * @param func 完成后的回调
          */
-        export function swell_shrink(node, firstScale, scale1, time, delayed, func): void {
+        export function swell_shrink(node, firstScale, scale1, time, delayed?: number, func?: Function): void {
             // PalyAudio.playSound(Enum.AudioName.commonPopup, 1);
+            if (!delayed) {
+                delayed = 0;
+            }
             Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, }, time, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
 
                 Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
@@ -5009,8 +5010,8 @@ export module lwg {
             victoryBoxOnEnable(): void { }
             /**初始化list*/
             boxList_Create(): void {
-                VictoryBox._BoxList.selectEnable = false;
-                VictoryBox._BoxList.vScrollBarSkin = "";
+                VictoryBox._BoxList.selectEnable = true;
+                // VictoryBox._BoxList.vScrollBarSkin = "";//不需要移动时，就不设置移动条
                 // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
                 // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
                 VictoryBox._BoxList.selectHandler = new Laya.Handler(this, this.boxList_Scelet);
@@ -5060,6 +5061,7 @@ export module lwg {
         }
     }
 
+    /**签到模块*/
     export module CheckIn {
 
         /**签到list*/
@@ -5070,26 +5072,22 @@ export module lwg {
         export let _todayCheckIn: boolean = false;
         /**上次的签到日期，主要判断今日会不会弹出签到，不一样则弹出签到，一样则不弹出签到*/
         export let _lastCheckDate = {
-            d: null,
             get date(): number {
-                return this.d = Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+                return Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
             },
             // 日期写数字
             set date(date: number) {
-                this.d = date;
-                Laya.LocalStorage.setItem('Check_lastCheckDate', this.d);
+                Laya.LocalStorage.setItem('Check_lastCheckDate', date.toString());
             }
         }
         /**当前签到第几天了，7日签到为7天一个循环*/
         export let _checkInNum = {
-            num: 0,
             get number(): number {
-                return this.num = Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+                return Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
             },
             /**次数写数字*/
             set number(num: number) {
-                this.num = num;
-                Laya.LocalStorage.setItem('Check_checkInNum', this.num);
+                Laya.LocalStorage.setItem('Check_checkInNum', num.toString());
             }
         }
 
@@ -5153,18 +5151,19 @@ export module lwg {
         }
 
         /**
-         * 七日签到，签到一次
-         * 返回今天的奖励
+         * 七日签到，签到一次并且返回今天的奖励
         */
         export function todayCheckIn_7Days(): number {
             let todayDate = (new Date).getDate();
             _lastCheckDate.date = todayDate;
             _checkInNum.number++;
+            setCheckProperty(CheckClass.chek_7Days, 'day' + _checkInNum.number, CheckProPerty.checkInState, true);
+            let rewardNum = getCheckProperty('day' + _checkInNum.number, CheckProPerty.rewardNum)
             if (_checkInNum.number === 7) {
                 _checkInNum.number = 0;
+                Laya.LocalStorage.removeItem(CheckClass.chek_7Days);
             }
-            setCheckProperty(CheckClass.chek_7Days, 'day' + _checkInNum.number, CheckProPerty.checkInState, true);
-            return getCheckProperty('day' + _checkInNum.number, CheckProPerty.rewardNum);
+            return rewardNum;
         }
 
         /**签到种类*/
@@ -5212,8 +5211,8 @@ export module lwg {
             checkInOnEnable(): void { }
             /**初始化list*/
             checkList_Create(): void {
-                CheckIn._checkList.selectEnable = false;
-                CheckIn._checkList.vScrollBarSkin = "";
+                CheckIn._checkList.selectEnable = true;
+                // CheckIn._checkList.vScrollBarSkin = "";//不需要移动时，就不设置移动条
                 // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
                 // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
                 CheckIn._checkList.selectHandler = new Laya.Handler(this, this.checkList_Scelet);
@@ -5260,6 +5259,86 @@ export module lwg {
             }
             /**每帧执行*/
             checkInOnUpdate(): void { }
+        }
+    }
+
+    /**限定皮肤模块*/
+    export module XDSkin {
+        /**从哪个界面弹出了XDSkin*/
+        export let _fromScene: string;
+        /**需要看几次广告才可以获得限定皮肤*/
+        export let _needAdsNum: number;
+        /**已经几次看广告*/
+        export let _adsNum = {
+            get value(): number {
+                return Laya.LocalStorage.getItem('XDSKin_adsNum') !== null ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
+            },
+            /**次数写数字*/
+            set value(value: number) {
+                Laya.LocalStorage.setItem('XDSKin_adsNum', value.toString());
+            }
+        }
+
+        /**
+         * 是否弹出限定皮肤界面
+         * @param fromScene 从哪个界面进来的
+        */
+        export function openXDSkin(fromScene): void {
+            if (_adsNum.value >= _needAdsNum) {
+                return;
+            } else {
+                Admin._openScene(Admin.SceneName.UIXDSkin);
+                _fromScene = fromScene;
+            }
+        }
+
+        /**限定皮肤场景父类*/
+        export class XDSkinScene extends Admin.Scene {
+            lwgOnAwake(): void {
+                this.initData();
+                this.xdSkinOnAwake();
+            }
+            /**初始化json数据*/
+            initData(): void {
+                _needAdsNum = 3;
+            }
+            /**CheckInScene开始前执行一次，重写覆盖*/
+            xdSkinOnAwake(): void { }
+
+            lwgOnEnable(): void {
+            }
+
+            xdSkinOnEnable(): void { }
+
+
+            lwgNodeDec(): void {
+                this.xdSkinNodeDec();
+            }
+            /**NodeDec*/
+            xdSkinNodeDec(): void { }
+
+            lwgBtnClick(): void {
+                this.xdSkinBtnClick();
+            }
+            xdSkinBtnClick(): void { }
+
+            lwgEventReg(): void {
+                this.xdSkinEventReg();
+            }
+            /**场景中的一些事件*/
+            xdSkinEventReg(): void { }
+
+            lwgOnDisable(): void {
+                this.xdSkinOnDisable();
+            }
+            /**离开时执行，子类不执行onDisable，只执行xdSkinDisable*/
+            xdSkinOnDisable(): void { }
+
+            lwgOnUpdate(): void {
+                this.xdSkinOnUpdate();
+            }
+            /**每帧执行*/
+            xdSkinOnUpdate(): void { }
         }
     }
 
@@ -5433,5 +5512,7 @@ export let VictoryBox = lwg.VictoryBox;
 export let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
 export let CheckIn = lwg.CheckIn;
 export let CheckInScene = lwg.CheckIn.CheckInScene;
+export let XDSkin = lwg.XDSkin;
+export let XDSkinScene = lwg.XDSkin.XDSkinScene;
 
 

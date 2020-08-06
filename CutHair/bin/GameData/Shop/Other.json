@@ -3,9 +3,9 @@
 [
   {
     "name": "xiangsudao",
-    "getway": "easterEgg",
-    "condition": -1,
-    "resCondition": -1,
+    "getway": "ads",
+    "condition": 3,
+    "resCondition": 0,
     "arrange": 6,
     "getOder": -1,
     "have": false
@@ -53,6 +53,15 @@
     "resCondition": 1200,
     "arrange": 5,
     "getOder": 5,
+    "have": false
+  },
+  {
+    "name": "xiandanren",
+    "getway": "adsXD",
+    "condition": 3,
+    "resCondition": 0,
+    "arrange": 7,
+    "getOder": -1,
     "have": false
   }
 ]

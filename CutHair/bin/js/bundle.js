@@ -2440,6 +2440,9 @@
             }
             Animation2D.bombs_Vanish = bombs_Vanish;
             function swell_shrink(node, firstScale, scale1, time, delayed, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
                 Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, }, time, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
                     Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
                         Laya.Tween.to(node, { scaleX: firstScale + (scale1 - firstScale) * 0.5, scaleY: firstScale + (scale1 - firstScale) * 0.5, rotation: 0 }, time * 0.5, null, Laya.Handler.create(this, function () {
@@ -3485,8 +3488,7 @@
                 }
                 victoryBoxOnEnable() { }
                 boxList_Create() {
-                    VictoryBox._BoxList.selectEnable = false;
-                    VictoryBox._BoxList.vScrollBarSkin = "";
+                    VictoryBox._BoxList.selectEnable = true;
                     VictoryBox._BoxList.selectHandler = new Laya.Handler(this, this.boxList_Scelet);
                     VictoryBox._BoxList.renderHandler = new Laya.Handler(this, this.boxList_Update);
                     this.boxList_refresh();
@@ -3594,11 +3596,13 @@
                 let todayDate = (new Date).getDate();
                 CheckIn._lastCheckDate.date = todayDate;
                 CheckIn._checkInNum.number++;
+                setCheckProperty(CheckClass.chek_7Days, 'day' + CheckIn._checkInNum.number, CheckProPerty.checkInState, true);
+                let rewardNum = getCheckProperty('day' + CheckIn._checkInNum.number, CheckProPerty.rewardNum);
                 if (CheckIn._checkInNum.number === 7) {
                     CheckIn._checkInNum.number = 0;
+                    Laya.LocalStorage.removeItem(CheckClass.chek_7Days);
                 }
-                setCheckProperty(CheckClass.chek_7Days, 'day' + CheckIn._checkInNum.number, CheckProPerty.checkInState, true);
-                return getCheckProperty('day' + CheckIn._checkInNum.number, CheckProPerty.rewardNum);
+                return rewardNum;
             }
             CheckIn.todayCheckIn_7Days = todayCheckIn_7Days;
             let CheckClass;
@@ -3631,8 +3635,7 @@
                 }
                 checkInOnEnable() { }
                 checkList_Create() {
-                    CheckIn._checkList.selectEnable = false;
-                    CheckIn._checkList.vScrollBarSkin = "";
+                    CheckIn._checkList.selectEnable = true;
                     CheckIn._checkList.selectHandler = new Laya.Handler(this, this.checkList_Scelet);
                     CheckIn._checkList.renderHandler = new Laya.Handler(this, this.checkList_Update);
                     this.checkList_refresh();
@@ -4002,28 +4005,55 @@
         }
         checkInBtnClick() {
             lwg.Click.on('largen', null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-            lwg.Click.on('largen', null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            lwg.Click.on('largen', null, this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+            lwg.Click.on(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
             lwg.Click.on('largen', null, this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+        }
+        btnOffClick() {
+            lwg.Click.off('largen', null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+            lwg.Click.off('largen', null, this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+            lwg.Click.off(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            lwg.Click.off('largen', null, this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+        }
+        btnTenGetUp() {
+            ADManager.ShowReward(() => {
+                this.btnGetUpFunc(3);
+            });
         }
         btnBackUp(event) {
             this.self.close();
         }
         btnGetUp(event) {
-            if (this.self['Dot'].visible) {
-                ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_sign');
-                ADManager.ShowReward(() => {
-                    this.btnGetUpFunc(3);
-                });
-            }
-            else {
-                this.btnGetUpFunc(1);
-            }
+            this.btnGetUpFunc(1);
         }
         btnGetUpFunc(number) {
-            let rewardNum = CheckIn.todayCheckIn_7Days();
-            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                Gold.addGold(rewardNum * number);
-                this.self.close();
+            this.btnOffClick();
+            let index = CheckIn._checkInNum.number;
+            let target;
+            if (index < 6) {
+                target = CheckIn._checkList.getCell(index);
+            }
+            else {
+                target = this.self['BtnSeven'];
+            }
+            Animation2D.swell_shrink(target, 1, 1.1, 100, 0, () => {
+                let arr = [[111, 191], [296, 191], [486, 191], [111, 394], [296, 394], [486, 394], [306, 597
+                    ]];
+                Effects.createExplosion_Rotate(this.self['SceneContent'], 25, arr[index][0], arr[index][1], 'star', 10, 15);
+                let rewardNum = CheckIn.todayCheckIn_7Days();
+                if (CheckIn._checkInNum.number === 7) {
+                    let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
+                    ChinkTip.visible = true;
+                    let Num = this.self['BtnSeven'].getChildByName('Num');
+                    Num.visible = false;
+                    let Pic_Gold = this.self['BtnSeven'].getChildByName('Pic_Gold');
+                    Pic_Gold.visible = false;
+                    this.self['BtnSeven'].skin = 'UI/Common/kuang1.png';
+                }
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Gold.addGold(rewardNum * number);
+                    this.self.close();
+                });
             });
         }
         btnSelectUp() {
@@ -4036,6 +4066,14 @@
         }
         checkInOnUpdate() {
             lwg.Global._stageClick = false;
+            if (this.self['Dot'].visible) {
+                this.self['BtnGet'].visible = false;
+                this.self['BtnTenGet'].visible = true;
+            }
+            else {
+                this.self['BtnGet'].visible = true;
+                this.self['BtnTenGet'].visible = false;
+            }
         }
         checkInOnDisable() {
             lwg.Global._stageClick = true;
@@ -4130,8 +4168,6 @@
     let GSene3D = Global$1.GSene3D;
 
     class GameMain3D_Blade extends lwg.Admin.Object3D {
-        lwgOnEnable() {
-        }
         onTriggerEnter(other) {
             if (!lwg.Admin._gameStart) {
                 return;
@@ -4176,10 +4212,6 @@
                     break;
             }
         }
-        lwgOnUpdate() {
-        }
-        lwgOnDisable() {
-        }
     }
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
@@ -4209,10 +4241,6 @@
                 default:
                     break;
             }
-        }
-        lwgOnUpdate() {
-        }
-        lwgOnDisable() {
         }
     }
 
@@ -4453,10 +4481,9 @@
             });
         }
         lwgAdaptive() {
-            this.self['Bg'].height = Laya.stage.height;
+            this.self['Bg'].y = Laya.stage.height / 2;
             this.self['Logo'].y = Laya.stage.height * 0.174;
-            this.self['Progress'].y = Laya.stage.height * 0.763;
-            this.self['FCM'].y = Laya.stage.height * 0.910;
+            this.self['Progress'].y = Laya.stage.height * 0.827;
             this.self['FCM'].y = Laya.stage.height * 0.910;
         }
         lwgOnUpdate() {
@@ -5647,18 +5674,28 @@
         lwgBtnClick() {
             Click.on(Click.Type.noEffect, null, this.self, this, null, null, this.up, null);
         }
+        btnoff() {
+            Click.off(Click.Type.noEffect, null, this.self, this, null, null, this.up, null);
+        }
         up(e) {
-            if (VictoryBox._openNum > 0) {
-                let Pic_Box = this.self.getChildByName('Pic_Box');
-                if (!this.self['_dataSource'][VictoryBox.BoxProperty.ads]) {
-                    Pic_Box.skin = 'UI/VictoryBox/baoxian3.png';
-                }
-                Animation2D.shookHead_Simple(Pic_Box, 10, 100, 0, f => {
-                    EventAdmin.notify(VictoryBox.EventType.openBox, [this.self['_dataSource']]);
-                });
+            if (this.self['_dataSource'][VictoryBox.BoxProperty.openState]) {
+                return;
             }
             else {
-                Hint.createHint_Middle(Hint.HintDec["观看广告可以获得三次开宝箱次数！"]);
+                if (VictoryBox._openNum > 0) {
+                    let Pic_Box = this.self.getChildByName('Pic_Box');
+                    if (!this.self['_dataSource'][VictoryBox.BoxProperty.ads]) {
+                        Pic_Box.skin = 'UI/VictoryBox/baoxian3.png';
+                    }
+                    this.btnoff();
+                    Animation2D.shookHead_Simple(Pic_Box, 10, 100, 0, f => {
+                        EventAdmin.notify(VictoryBox.EventType.openBox, [this.self['_dataSource']]);
+                        this.lwgBtnClick();
+                    });
+                }
+                else {
+                    Hint.createHint_Middle(Hint.HintDec["观看广告可以获得三次开宝箱次数！"]);
+                }
             }
         }
         lwgDisable() {
@@ -5666,11 +5703,7 @@
     }
 
     class UIVictoryBox extends VictoryBox.VictoryBoxScene {
-        constructor() {
-            super();
-            this.getNum = 3;
-            this.ranArray = [];
-        }
+        constructor() { super(); }
         victoryBoxOnAwake() {
             this.self['BtnAgain'].visible = false;
             this.self['BtnNo'].visible = false;
@@ -5712,8 +5745,6 @@
             let y = VictoryBox._BoxList.y + VictoryBox._BoxList.height / 3 * diffY + 92;
             Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
             VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
-            VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
-            VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.select, true);
             Laya.timer.frameOnce(20, this, f => {
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
@@ -5788,6 +5819,70 @@
                 this.self['BtnAgain'].visible = true;
                 this.self['BtnNo'].visible = true;
             }
+        }
+    }
+
+    class UIXDSkin extends lwg.Admin.Scene {
+        constructor() { super(); }
+        selfVars() {
+            this.BtnBack = this.self['BtnBack'];
+            this.BtnGet = this.self['BtnGet'];
+            this.SceneContent = this.self['SceneContent'];
+            this.background = this.self['background'];
+            this.logo = this.self['logo'];
+        }
+        lwgInit() {
+            lwg.Global._openXD = true;
+            lwg.Global.GoldNumNode.alpha = 0;
+            lwg.Global.ExecutionNumNode.alpha = 0;
+            ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_limitskin');
+            ADManager.TAPoint(TaT.BtnShow, 'close_limitskin');
+            this.btnGetNum();
+        }
+        adaptive() {
+            this.SceneContent.y = Laya.stage.height * 0.528;
+            this.self['background_01'].height = Laya.stage.height;
+        }
+        openAniFunc() {
+        }
+        btnGetNum() {
+            let num = this.BtnGet.getChildByName('Num');
+            num.text = '(' + lwg.Global._watchAdsNum + '/' + 3 + ')';
+        }
+        btnOnClick() {
+            lwg.Click.on('largen', null, this.BtnBack, this, null, null, this.btnBackUp, null);
+            lwg.Click.on('largen', null, this.BtnGet, this, null, null, this.btnGetUp, null);
+        }
+        btnBackUp(event) {
+            ADManager.TAPoint(TaT.BtnClick, 'close_limitskin');
+            event.currentTarget.scale(1, 1);
+            this.self.close();
+        }
+        btnGetUp(event) {
+            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_limitskin');
+            event.currentTarget.scale(1, 1);
+            ADManager.ShowReward(() => {
+                this.btnGetFunc();
+            });
+        }
+        btnGetFunc() {
+            lwg.Global._watchAdsNum += 1;
+            this.btnGetNum();
+            if (lwg.Global._watchAdsNum >= 3) {
+                lwg.Global._havePifu.push('09_aisha');
+                lwg.Global._currentPifu = lwg.Enum.PifuAllName[8];
+                this.self.close();
+                lwg.Admin._sceneControl[lwg.Admin.SceneName.UIStart]['UIStart'].self['BtnXD'].removeSelf();
+                lwg.Global._createHint_01(lwg.Enum.HintType.getXD);
+            }
+            lwg.LocalStorage.addData();
+        }
+        lwgOnUpdta() {
+        }
+        lwgDisable() {
+            lwg.Global._openXD = false;
+            lwg.Global.GoldNumNode.alpha = 1;
+            lwg.Global.ExecutionNumNode.alpha = 1;
         }
     }
 
@@ -5874,6 +5969,7 @@
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/Game/UIVictoryBox_Cell.ts", UIVictoryBox_Cell);
             reg("script/Game/UIVictoryBox.ts", UIVictoryBox);
+            reg("script/Game/UIXDSkin.ts", UIXDSkin);
             reg("script/GameUI.ts", GameUI);
         }
     }

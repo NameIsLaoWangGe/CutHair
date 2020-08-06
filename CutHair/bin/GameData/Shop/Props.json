@@ -39,9 +39,9 @@
   },
   {
     "name": "yingguangbang",
-    "getway": "adsXD",
+    "getway": "ads",
     "condition": 3,
-    "resCondition": 3,
+    "resCondition": 0,
     "arrange": 5,
     "getOder": -1,
     "have": false

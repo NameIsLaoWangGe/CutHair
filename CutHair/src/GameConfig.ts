@@ -12,6 +12,7 @@ import UITask from "./script/Game/UITask"
 import UIVictory from "./script/Game/UIVictory"
 import UIVictoryBox_Cell from "./script/Game/UIVictoryBox_Cell"
 import UIVictoryBox from "./script/Game/UIVictoryBox"
+import UIXDSkin from "./script/Game/UIXDSkin"
 import GameUI from "./script/GameUI"
 /*
 * 游戏初始化配置;
@@ -45,6 +46,7 @@ export default class GameConfig{
         reg("script/Game/UIVictory.ts",UIVictory);
         reg("script/Game/UIVictoryBox_Cell.ts",UIVictoryBox_Cell);
         reg("script/Game/UIVictoryBox.ts",UIVictoryBox);
+        reg("script/Game/UIXDSkin.ts",UIXDSkin);
         reg("script/GameUI.ts",GameUI);
     }
 }
