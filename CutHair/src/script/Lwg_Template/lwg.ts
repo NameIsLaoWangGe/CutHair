@@ -2,136 +2,6 @@
 export module lwg {
     /**全局方法,全局变量，每个游戏不一样*/
     export module Global {
-        /**当前的关卡是第几关*/
-        export let _gameLevel: number = 1;
-        /**当前的关卡是第几关*/
-        export let _yuanpifu: string = null;
-        /**游戏是否处于开始状态*/
-        export let _gameStart = false;
-        /**当前剩余行动力的数量*/
-        export let _execution = 100;
-        /**当前免体力进游戏的日期，只要当前日期和下次日期不同，说明不是同一天，则给予一次免体力进入彩蛋机会*/
-        export let _exemptExTime: number;
-        /**当前是否可以免体力进入一次*/
-        export let _exemptEx: boolean = true;
-
-        /**用于今天是否进行了热门分享的日期*/
-        export let _hotShareTime: number;
-        /**当前是否可以免体力进入一次*/
-        export let _hotShare: boolean = true;
-
-        /**当前免费双击关卡提示，只要当前日期和下次日期不同，说明不是同一天，则给予一次免体力进入彩蛋机会*/
-        export let _freeHintTime: number;
-        /**当前是否可以免体力进入一次*/
-        export let _freetHint: boolean = true;
-
-        /**记录上传体力的时间，用于对比下次进入游戏时时间差，补偿多少体力*/
-        export let _addExDate: number;
-        export let _addExHours: number;
-        export let _addMinutes: number;
-
-        /**最后一次被拾取的房间，用于被吸附到另一个房间*/
-        export let _roomPickup: Laya.Image;
-        /**关卡总数*/
-        export let _CustomsNum: number = 999;
-        /**关闭舞台点击事件*/
-        export let _stageClick: boolean = true;
-        /**限定皮肤界面是否打开了*/
-        export let _openXD: boolean = false;
-
-        /**在体力提示界面中，用于判断在失败界面时，判断从哪个按钮进去，是通过重来按钮还是下一关按钮进来的*/
-        export let intoBtn: string;
-
-        /**当前金币总数数量*/
-        export let _goldNum = 0;
-        /**提示内容集合*/
-        export let _hintDec: any;
-        /**心灵鸡汤内容集合*/
-        export let _stimulateDec: any;
-
-        /**互推开关*/
-        export let _elect: boolean = true;
-
-        /**手机震动开关*/
-        export let _shakeSwitch: boolean = true;
-
-        /**某些按钮延迟出现时间*/
-        export let _btnDelayed: number = 2000;
-
-        /**当前选中的皮肤样式*/
-        export let _currentPifu: string = '01_gongzhu';
-        /**当前拥有的皮肤名称集合*/
-        export let _havePifu: Array<string> = ['01_gongzhu'];
-        /**当前未拥有皮肤名称集合*/
-        export let _notHavePifu: Array<string>;
-        /**当前未拥有皮肤名称，删除限定的皮肤，是最后一个皮肤*/
-        export let _notHavePifuSubXD: Array<string> = [];
-        /**所有的皮肤的和排列顺序*/
-        export let _allPifu: Array<string> = ['01_gongzhu', '02_chiji', '03_change', '04_huiguniang', '05_tianshi', '06_xiaohongmao', '07_xiaohuangya', '08_zhenzi', '09_aisha'];
-
-        /**购买次数,随着购买次数的增加，消耗金币也会增加,超人皮肤是看广告获得，暂时不可买到*/
-        export let _buyNum: number = 1;
-
-        /**限定皮肤剩余点击看广告的次数*/
-        export let _watchAdsNum: number = 0;
-
-        /**皮卡丘的皮肤是否存在了！*/
-        export let _huangpihaozi: boolean = false;
-
-        /**皮卡丘的皮肤是否存在了！*/
-        export let _zibiyazi: boolean = false;
-
-        /**皮卡丘的皮肤是否存在了！*/
-        export let _kejigongzhu: boolean = false;
-        /**皮卡丘的皮肤是否存在了！*/
-        export let _haimiangongzhu: boolean = false;
-
-        /**第二批彩蛋皮肤获取*/
-        export let _paintedPifu: Array<string> = [];
-
-        /**当前选中的皮肤编号*/
-        export let _pickPaintedNum: number = 0;
-
-        /**当前在游戏结束后，看广告的模式*/
-        export let _gameOverAdvModel: number;
-
-        /**当前是否为评测版本,隐藏某些功能*/
-        export let pingceV: boolean = true;
-
-        /**屏幕震动*/
-        export function _vibratingScreen(): void {
-        }
-
-        /**找出还没有获得的皮肤,不包括限定皮肤*/
-        export function notHavePifuSubXD(): void {
-            // 所有皮肤赋值给新数组
-            let allArray = [];
-            for (let i = 0; i < lwg.Global._allPifu.length; i++) {
-                const element = lwg.Global._allPifu[i];
-                allArray.push(element);
-            }
-            // 删除已经有的皮肤，得出还没有的皮肤
-            for (let j = 0; j < allArray.length; j++) {
-                let element1 = allArray[j];
-                for (let k = 0; k < lwg.Global._havePifu.length; k++) {
-                    let element2 = lwg.Global._havePifu[k];
-                    if (element1 === element2) {
-                        allArray.splice(j, 1);
-                        j--;
-                    }
-                }
-            }
-            lwg.Global._notHavePifu = allArray;
-            // 去除超人皮肤
-            for (let k = 0; k < allArray.length; k++) {
-                const element = allArray[k];
-                if (element === '09_aisha') {
-                    allArray.splice(k, 1);
-                }
-            }
-            lwg.Global._notHavePifuSubXD = allArray;
-            // console.log(lwg.Global._notHavePifuSubXD);
-        }
 
         /**指代当前界面的等级节点*/
         export let LevelNode: Laya.Sprite;
@@ -151,7 +21,7 @@ export module lwg {
                 sp.pos(x, y);
                 sp.zOrder = 0;
                 let level = sp.getChildByName('level') as Laya.Label;
-                level.text = 'NO.' + lwg.Global._gameLevel;
+                // level.text = 'NO.' + lwg.Global._gameLevel;
                 LevelNode = sp;
             }));
         }
@@ -174,44 +44,11 @@ export module lwg {
                 sp.pos(x, y);
                 sp.zOrder = 0;
                 let num = sp.getChildByName('Num') as Laya.Label;
-                num.text = lwg.Global._execution + '/' + '5';
+                // num.text = lwg.Global._execution + '/' + '5';
                 KeyNumNode = sp;
             }));
         }
 
-        /**指代当前界面的重来按钮*/
-        export let BtnSetNode: Laya.Sprite;
-        /**
-         * 创建通用剩余钥匙数量prefab
-         * @param parent 父节点
-         * @param x x位置
-         * @param y y位置
-         * @param soundUrl 音效的地址
-         * @param caller 指向脚本（this）引用
-         * @param down 按下函数
-         * @param move 移动函数
-         * @param up 抬起函数
-         * @param out 出屏幕函数
-         */
-        export function _createBtnSet(parent): void {
-            let sp: Laya.Sprite;
-            Laya.loader.load('prefab/BtnSet.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                parent.addChild(sp);
-                sp.pos(671, 273);
-                sp.zOrder = 0;
-                Click.on(Click.Type.largen, null, sp, null, null, null, btnSetUp, null);
-                BtnSetNode = sp;
-                BtnSetNode.name = 'BtnSetNode';
-            }));
-        }
-
-        /**设置按钮抬起*/
-        export function btnSetUp(): void {
-            Admin._openScene('UISet', null, null, null);
-        }
 
         /**指代当前剩余体力节点*/
         export let ExecutionNumNode: Laya.Sprite;
@@ -227,7 +64,7 @@ export module lwg {
                 sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
                 parent.addChild(sp);
                 let num = sp.getChildByName('Num') as Laya.FontClip;
-                num.value = Global._execution.toString();
+                // num.value = Global._execution.toString();
                 sp.pos(297, 90);
                 sp.zOrder = 50;
                 ExecutionNumNode = sp;
@@ -237,12 +74,12 @@ export module lwg {
 
         /**增加体力*/
         export function _addExecution(number) {
-            lwg.Global._execution += number;
-            if (lwg.Global._execution > 15) {
-                lwg.Global._execution = 15;
-            }
-            let num = lwg.Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
-            num.value = lwg.Global._execution.toString();
+            // lwg.Global._execution += number;
+            // if (lwg.Global._execution > 15) {
+            //     lwg.Global._execution = 15;
+            // }
+            // let num = lwg.Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
+            // num.value = lwg.Global._execution.toString();
 
         }
 
@@ -263,7 +100,7 @@ export module lwg {
                 sp.zOrder = 0;
                 BtnPauseNode = sp;
                 BtnPauseNode.name = 'BtnPauseNode';
-                Click.on(Click.Type.largen, null, sp, null, null, null, btnPauseUp, null);
+                Click.on(Click.Type.largen, sp, null, null, null, btnPauseUp, null);
             }));
         }
         export function btnPauseUp(event) {
@@ -289,7 +126,7 @@ export module lwg {
                 sp.zOrder = 0;
                 BtnHintNode = sp;
                 BtnHintNode.name = 'BtnHintNode';
-                Click.on(Click.Type.largen, null, sp, null, null, null, btnHintUp, null);
+                Click.on(Click.Type.largen, sp, null, null, null, btnHintUp, null);
             }));
         }
         export function btnHintUp(event) {
@@ -325,16 +162,16 @@ export module lwg {
                 parent.addChild(sp);
                 sp.pos(645, 409);
                 sp.zOrder = 0;
-                Click.on(Click.Type.largen, null, sp, null, btnAgainUp, null, null, null);
+                Click.on(Click.Type.largen, sp, null, btnAgainUp, null, null, null);
                 BtnAgainNode = sp;
             }));
         }
         export function btnAgainUp(event): void {
             event.stopPropagation();
             event.currentTarget.scale(1, 1);
-            if (!_gameStart) {
-                return;
-            }
+            // if (!_gameStart) {
+            //     return;
+            // }
             refreshNum++;
             Admin._refreshScene();
         }
@@ -372,8 +209,8 @@ export module lwg {
                 _prefab.json = prefab;
                 sp = Laya.Pool.getItemByCreateFun('StimulateDec', _prefab.create, _prefab);
                 let dec = sp.getChildByName('Dec') as Laya.Label;
-                let num = lwg.Admin.openCustomName.substring(lwg.Admin.openCustomName.length - 3, lwg.Admin.openCustomName.length);
-                dec.text = lwg.Global._stimulateDec[Number(num) - 1]['dec'];
+                // let num = lwg.Admin.openCustomName.substring(lwg.Admin.openCustomName.length - 3, lwg.Admin.openCustomName.length);
+                // dec.text = lwg.Global._stimulateDec[Number(num) - 1]['dec'];
                 parent.addChild(sp);
                 sp.pos(35, 150);
                 sp.zOrder = 65;
@@ -714,7 +551,7 @@ export module lwg {
          * 创建通用剩余金币资源数量prefab
          * @param parent 父节点
          */
-        export function _createGoldNode(parent): void {
+        export function createGoldNode(parent): void {
             if (GoldNode) {
                 return;
             }
@@ -1108,128 +945,44 @@ export module lwg {
             }));
         }
 
-        /**记录当前实际打开的场景名称，因为超过一定的关卡后，会循环当前的关卡，或者重玩之前的关卡*/
-        export let openCustomName: string;
-        /**记录实际打开的关卡数*/
-        export let openLevelNum: number;
-        /**
-        * 打开与当前等级相匹配的关卡,包含游戏开始的一些参数
-        **/
-        export function _openGLCustoms(): void {
-            let sceneName;
-            let num;
-            // 大于30关后从第一关开始循环
-            if (lwg.Global._gameLevel > 30) {
-                num = lwg.Global._gameLevel - 30;
-            } else {
-                num = lwg.Global._gameLevel;
-            }
-            openLevelNum = lwg.Global._gameLevel;
-            // 格式
-            if (num <= 9) {
-                sceneName = 'UIMain_00' + num;
-            } else if (9 < num || num <= 99) {
-                sceneName = 'UIMain_0' + num;
-            }
-            openCustomName = sceneName;
-            // console.log('打开', sceneName);
-            _openScene(sceneName, null, null, f => {
-                lwg.Global._gameStart = true;
-            });
-        }
-
-        /**
-        * 打开指定的关卡数,在开始游戏的时进行
-        **/
-        export function _openNumCustom(num): void {
-            let sceneName;
-            // 大于30关后从第一关开始循环
-            openLevelNum = num;
-            if (num > 30) {
-                num = num - 30;
-            }
-            // 格式
-            if (num <= 9) {
-                sceneName = 'UIMain_00' + num;
-            } else if (9 < num || num <= 99) {
-                sceneName = 'UIMain_0' + num;
-            }
-            if (num <= 9) {
-                sceneName = 'UIMain_00' + num;
-            } else if (9 < num || num <= 99) {
-                sceneName = 'UIMain_0' + num;
-            }
-            openCustomName = sceneName;
-            _openScene(sceneName, null, null, f => {
-                lwg.Global._gameStart = true;
-
-                if (lwg.Global._yuanpifu !== null) {
-                    Global._currentPifu = lwg.Global._yuanpifu;
-                    lwg.Global._yuanpifu = null;
-                }
-            });
-        }
-
-        /**
-          * 当前实际打开的关卡数，不受等级控制，用于重玩之前的关卡。
-          * 通过openLevelNum打开的场景
-         **/
-        export function _openLevelNumCustom(): void {
-            let sceneName;
-            // 格式
-            if (openLevelNum <= 9) {
-                sceneName = 'UIMain_00' + openLevelNum;
-            } else if (9 < openLevelNum || openLevelNum <= 99) {
-                sceneName = 'UIMain_0' + openLevelNum;
-            }
-            if (openLevelNum <= 9) {
-                sceneName = 'UIMain_00' + openLevelNum;
-            } else if (9 < openLevelNum || openLevelNum <= 99) {
-                sceneName = 'UIMain_0' + openLevelNum;
-            }
-            openCustomName = sceneName;
-            _openScene(sceneName, null, null, f => {
-                lwg.Global._gameStart = true;
-            });
-        }
 
         /**打开下一关场景，并且上传信息
          * @param subEx 消耗多少体力值
         */
         export function _nextCustomScene(subEx): void {
-            if (subEx > 0) {
-                Global._execution -= subEx;
-                let num = Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
-                num.value = Global._execution.toString();
-                Hint.createHint_Middle(Hint.HintDec["消耗2点体力！"]);
-                Global.createConsumeEx(subEx);
-            }
+            // if (subEx > 0) {
+            //     Global._execution -= subEx;
+            //     let num = Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
+            //     num.value = Global._execution.toString();
+            //     Hint.createHint_Middle(Hint.HintDec["消耗2点体力！"]);
+            //     Global.createConsumeEx(subEx);
+            // }
 
-            if (Admin.openLevelNum >= Global._gameLevel) {
-                Admin._closeCustomScene();
-                Global._gameLevel++;
-                Admin._openGLCustoms();
-            } else {
-                Admin._closeCustomScene();
-                Admin.openLevelNum++;
-                Admin._openLevelNumCustom();
-            }
+            // if (Admin.openLevelNum >= Global._gameLevel) {
+            //     Admin._closeCustomScene();
+            //     Global._gameLevel++;
+            //     Admin._openGLCustoms();
+            // } else {
+            //     Admin._closeCustomScene();
+            //     Admin.openLevelNum++;
+            //     Admin._openLevelNumCustom();
+            // }
         }
 
         /**
           * 刷新当前实际打开的关卡场景
           **/
         export function _refreshScene(): void {
-            _sceneControl[openCustomName].close();
-            _openScene(openCustomName, null, null, null);
+            // _sceneControl[openCustomName].close();
+            // _openScene(openCustomName, null, null, null);
         }
 
         /**
         * 关闭当前实际打开的关卡场景
         **/
         export function _closeCustomScene(): void {
-            console.log('关闭当前关卡' + openCustomName);
-            _sceneControl[openCustomName].close();
+            // console.log('关闭当前关卡' + openCustomName);
+            // _sceneControl[openCustomName].close();
         }
 
         /**2D场景通用父类*/
@@ -2511,7 +2264,7 @@ export module lwg {
             beetle = 'beetle',
         }
 
-        /**音乐的url*/
+        /**设置按钮音效*/
         export let audioUrl: string;
         /**
          * 当前气球被缩放的比例
@@ -2533,13 +2286,8 @@ export module lwg {
          * @param out 出屏幕函数
          * 以上4个只是函数名，不可传递函数，如果没有特殊执行，那么就用此模块定义的4个函数，包括通用效果。
          */
-        export function on(effect, audioUrl, target, caller, down?: Function, move?: Function, up?: Function, out?: Function): void {
+        export function on(effect, target, caller, down?: Function, move?: Function, up?: Function, out?: Function): void {
             let btnEffect;
-            if (audioUrl) {
-                Click.audioUrl = audioUrl;
-            } else {
-                Click.audioUrl = PalyAudio.voiceUrl.btn;
-            }
             switch (effect) {
                 case Type.noEffect:
                     btnEffect = new Btn_NoEffect();
@@ -2579,7 +2327,7 @@ export module lwg {
          * @param out 出屏幕函数
          * 以上4个只是函数名，不可传递函数，如果没有特殊执行，那么就用此模块定义的4个函数，包括通用效果。
          */
-        export function off(effect, audioUrl, target, caller, down, move, up, out): void {
+        export function off(effect, target, caller, down, move, up, out): void {
             let btnEffect;
             switch (effect) {
                 case Type.noEffect:
@@ -2641,14 +2389,10 @@ export module lwg {
         /**按下*/
         down(event): void {
             event.currentTarget.scale(1.1, 1.1);
-            if (lwg.PalyAudio._voiceSwitch) {
-                Laya.SoundManager.playSound(Click.audioUrl, 1, Laya.Handler.create(this, function () { }));
-            }
+            PalyAudio.playSound(Click.audioUrl);
         }
         /**移动*/
         move(event): void {
-            // event.currentTarget.scale(1, 1);
-            // console.log('不做处理')
         }
 
         /**抬起*/
@@ -2672,7 +2416,7 @@ export module lwg {
         /**按下*/
         down(event): void {
             event.currentTarget.scale(Click.balloonScale + 0.06, Click.balloonScale + 0.06);
-            Laya.SoundManager.playSound(Click.audioUrl, 1, Laya.Handler.create(this, function () { }));
+            PalyAudio.playSound(Click.audioUrl);
         }
         /**抬起*/
         up(event): void {
@@ -2697,7 +2441,7 @@ export module lwg {
         /**按下*/
         down(event): void {
             event.currentTarget.scale(Click.beetleScale + 0.06, Click.beetleScale + 0.06);
-            Laya.SoundManager.playSound(Click.audioUrl, 1, Laya.Handler.create(this, function () { }));
+            PalyAudio.playSound(Click.audioUrl);
         }
         /**抬起*/
         up(event): void {
@@ -3738,8 +3482,6 @@ export module lwg {
      * 2.音乐播放模块
      */
     export module PalyAudio {
-        /**音效开关*/
-        export let _voiceSwitch = true;
 
         /**音效地址*/
         export enum voiceUrl {
@@ -3752,22 +3494,40 @@ export module lwg {
         /**通用音效播放
          * @param url 音效地址
          * @param number 播放次数
+         * @param func 播放完毕回调
          */
-        export function playSound(url, number) {
-            if (_voiceSwitch) {
-                Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () { }));
+        export function playSound(url?: string, number?: number, func?: Function) {
+            if (!url) {
+                url = voiceUrl.btn;
+            }
+            if (!number) {
+                number = 1;
+            }
+            if (Setting._sound.switch) {
+                Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }));
             }
         }
 
         /**通用背景音乐播放
         * @param url 音效地址
         * @param number 循环次数，0表示无限循环
-        * @param deley 延时时间
+        * @param delayed 延时时间
         */
-        export function playMusic(url, number, deley) {
-            if (_voiceSwitch) {
-                Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), deley);
+        export function playMusic(url?: string, number?: number, delayed?: number) {
+            if (!url) {
+                url = voiceUrl.bgm;
             }
+            if (!number) {
+                number = 0;
+            }
+            if (!delayed) {
+                delayed = 0;
+            }
+            Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), delayed);
         }
 
         /**停止播放背景音乐*/
@@ -5438,6 +5198,145 @@ export module lwg {
         }
     }
 
+    /**设置模块*/
+    export module Setting {
+        /**音效设置*/
+        export let _sound = {
+            get switch(): boolean {
+                return Laya.LocalStorage.getItem('Setting_sound') == '0' ? false : true;
+            },
+            /**次数写数字*/
+            set switch(value: boolean) {
+                let val;
+                if (value) {
+                    val = 1;
+                } else {
+                    val = 0;
+                }
+                Laya.LocalStorage.setItem('Setting_sound', val.toString());
+            }
+        };
+
+        /**背景音乐开关*/
+        export let _bgMusic = {
+            get switch(): boolean {
+                return Laya.LocalStorage.getItem('Setting_bgMusic') == '0' ? false : true;
+            },
+            /**次数写数字*/
+            set switch(value: boolean) {
+                let val;
+                if (value) {
+                    val = 1;
+                    PalyAudio.playMusic();
+                } else {
+                    val = 0;
+                    PalyAudio.stopMusic();
+                }
+                Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
+            }
+        };
+
+        /**震动开关*/
+        export let _shake = {
+            get switch(): boolean {
+                return Laya.LocalStorage.getItem('Setting_shake') == '0' ? false : true;
+            },
+            /**次数写数字*/
+            set switch(value: boolean) {
+                let val;
+                if (value) {
+                    val = 1;
+                } else {
+                    val = 0;
+                }
+                Laya.LocalStorage.setItem('Setting_shake', val.toString());
+            }
+        };
+
+        /**设置按钮节点*/
+        export let BtnSetNode: Laya.Sprite;
+        /**
+         * 创建一个设置按钮
+         * @param x X轴坐标
+         * @param y Y轴坐标
+         * @param width 宽度，不传则默认是100
+         * @param height 高度，不传则默认是100
+         * @param url 图片地址没有则是默认图片
+         * @param parent 父节点，不传则就在舞台上
+        */
+        export function createSetBtn(x, y, width?: number, height?: number, url?: string, parent?: Laya.Sprite): void {
+            let _url = 'Frame/UI/icon_set.png';
+            let btn = new Laya.Image;
+            if (width) {
+                btn.width = width;
+            } else {
+                btn.width = 100;
+            }
+            if (height) {
+                btn.height = height;
+            } else {
+                btn.height = 100;
+            }
+            if (url) {
+                btn.skin = url;
+            } else {
+                btn.skin = _url;
+            }
+            if (parent) {
+                parent.addChild(btn);
+            } else {
+                Laya.stage.addChild(btn);
+            }
+
+            btn.pivotX = btn.width / 2;
+            btn.pivotY = btn.height / 2;
+
+            btn.x = x;
+            btn.y = y;
+            var btnSetUp = function (): void {
+                Admin._openScene(Admin.SceneName.UISet);
+            }
+            Click.on(Click.Type.largen, btn, null, null, null, btnSetUp, null);
+            BtnSetNode = btn;
+            BtnSetNode.name = 'BtnSetNode';
+
+        }
+
+        // /**设置按钮点击抬起*/
+        // export function btnSetUp(): void {
+        //     Admin._openScene(Admin.SceneName.UISet);
+        // }
+
+        /**
+         * 设置按钮的出现
+         * @param delayed 延时时间
+        */
+        export function setBtnAppear(delayed?: number): void {
+            if (delayed) {
+                Animation2D.scale_Alpha(BtnSetNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
+                    BtnSetNode.visible = true;
+                });
+            } else {
+                BtnSetNode.visible = true;
+            }
+        }
+
+        /**
+         * 设置按钮的消失
+         * @param delayed 延时时间
+        */
+        export function setBtnVinish(delayed?: number): void {
+            if (delayed) {
+                Animation2D.scale_Alpha(BtnSetNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
+                    BtnSetNode.visible = false;
+                });
+            } else {
+                BtnSetNode.visible = false;
+            }
+        }
+
+    }
+
     export module Loding {
         /**3D场景的加载*/
         export let lodingList_3D: Array<any> = [];
@@ -5611,5 +5510,6 @@ export let CheckIn = lwg.CheckIn;
 export let CheckInScene = lwg.CheckIn.CheckInScene;
 export let SkinXD = lwg.SkinXD;
 export let SkinXDScene = lwg.SkinXD.SkinXDScene;
+export let Setting = lwg.Setting;
 
 

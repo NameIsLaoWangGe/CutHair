@@ -64,17 +64,17 @@ export default class UICheckIn extends CheckIn.CheckInScene {
     }
 
     checkInBtnClick(): void {
-        lwg.Click.on('largen', null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-        lwg.Click.on('largen', null, this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
-        lwg.Click.on(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        lwg.Click.on('largen', null, this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+        lwg.Click.on('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+        lwg.Click.on('largen', this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+        lwg.Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
     }
 
     btnOffClick(): void {
-        lwg.Click.off('largen', null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-        lwg.Click.off('largen', null, this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
-        lwg.Click.off(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        lwg.Click.off('largen', null, this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+        lwg.Click.off('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+        lwg.Click.off('largen', this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+        lwg.Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
     }
     btnTenGetUp(): void {
         ADManager.ShowReward(() => {
@@ -130,7 +130,6 @@ export default class UICheckIn extends CheckIn.CheckInScene {
     }
 
     checkInOnUpdate(): void {
-        lwg.Global._stageClick = false;
         if (this.self['Dot'].visible) {
             this.self['BtnGet'].visible = false;
             this.self['BtnTenGet'].visible = true;
@@ -139,7 +138,5 @@ export default class UICheckIn extends CheckIn.CheckInScene {
             this.self['BtnTenGet'].visible = false;
         }
     }
-    checkInOnDisable(): void {
-        lwg.Global._stageClick = true;
-    }
+  
 }

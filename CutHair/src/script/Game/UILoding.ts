@@ -72,9 +72,9 @@ export default class UILoding extends Loding.LodeScene {
     }
 
     lwgAdaptive(): void {
-        this.self['Bg'].y = Laya.stage.height/2;
+        this.self['Bg'].y = Laya.stage.height / 2;
         this.self['Logo'].y = Laya.stage.height * 0.174;
-        this.self['Progress'].y = Laya.stage.height *0.827;
+        this.self['Progress'].y = Laya.stage.height * 0.827;
         this.self['FCM'].y = Laya.stage.height * 0.910;
     }
 
@@ -113,9 +113,7 @@ export default class UILoding extends Loding.LodeScene {
     }
 
     lwgOnDisable(): void {
-        if (PalyAudio._voiceSwitch) {
-            lwg.PalyAudio.playMusic(lwg.Enum.voiceUrl.bgm, 0, 1000);
-        }
+        lwg.PalyAudio.playMusic();
     }
 }
 

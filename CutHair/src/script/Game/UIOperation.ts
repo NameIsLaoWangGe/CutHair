@@ -411,7 +411,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        lwg.Click.on(Click.Type.largen, null, this.BtnLast, this, null, null, this.btnLastUp, null);
+        lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, this.btnLastUp, null);
     }
 
     btnLastUp(e: Laya.Event): void {

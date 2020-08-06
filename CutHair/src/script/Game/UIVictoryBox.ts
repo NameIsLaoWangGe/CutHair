@@ -95,12 +95,12 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     }
 
     victoryBoxBtnClick(): void {
-        Click.on('largen', null, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-        Click.on('largen', null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        Click.on('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+        Click.on('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
     }
     btnOffClick(): void {
-        Click.off('largen', null, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-        Click.off('largen', null, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        Click.off('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+        Click.off('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
     }
 
     btnNoUp(event): void {

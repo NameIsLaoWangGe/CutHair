@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Hint, Effects } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Hint, Effects, PalyAudio } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
 
@@ -146,6 +146,7 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     myTap_Select(index): void {
+        PalyAudio.playSound();
         switch (index) {
             case 2:
                 Shop._ShopList.array = Shop.allSkin;
@@ -257,9 +258,9 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, null, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
-        Click.on(Click.Type.largen, null, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
-        Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        Click.on(Click.Type.largen, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
+        Click.on(Click.Type.largen, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
+        Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
     }
 
     btnBuyUp(): void {

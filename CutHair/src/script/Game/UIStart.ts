@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -23,7 +23,9 @@ export default class UIStart extends lwg.Admin.Scene {
     lwgOnEnable(): void {
         GVariate._stageClick = false;
         Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true })
-        Gold._createGoldNode(Laya.stage);
+        Gold.createGoldNode(Laya.stage);
+        Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
+
         this.levelStyleDisplay();
 
         if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
@@ -74,11 +76,11 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
-        Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
-        Click.on(Click.Type.noEffect, null, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
-        Click.on(Click.Type.noEffect, null, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
-        Click.on(Click.Type.noEffect, null, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+        Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
+        Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.backgroundUp);
+        Click.on(Click.Type.noEffect, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
+        Click.on(Click.Type.noEffect, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
+        Click.on(Click.Type.noEffect, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
     }
 
     btnCheckUp(e: Laya.Event): void {
@@ -97,8 +99,7 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     backgroundUp(): void {
-        Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self, f => {
-        });
+        Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
     }
 
     btnTaskeUp(e): void {

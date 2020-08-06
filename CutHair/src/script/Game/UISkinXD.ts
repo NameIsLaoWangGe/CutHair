@@ -27,14 +27,14 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
 
     skinXDBtnClick(): void {
-        Click.on(Click.Type.largen, null, this.self['BtnGet'], this, null, null, this.btnGetUp);
-        Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        Click.on(Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp);
+        Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
     }
 
     btnGetUp(): void {
-        // ADManager.ShowReward(() => {
-        this.btnGetFunc();
-        // })
+        ADManager.ShowReward(() => {
+            this.btnGetFunc();
+        })
     }
 
     btnBackUp(): void {

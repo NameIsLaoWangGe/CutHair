@@ -104,11 +104,11 @@ export default class UIShare extends lwg.Admin.Scene {
     // }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, null, this.self['SmallFram'], this, null, null, this.btnShareUp, null);
-        Click.on(Click.Type.noEffect, null, this.self['BigFrame'], this, null, null, this.btnShareUp, null);
-        Click.on(Click.Type.largen, null, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
+        Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp, null);
+        Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp, null);
+        Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
 
-        Click.on(Click.Type.largen, null, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
+        Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
 
     }
 

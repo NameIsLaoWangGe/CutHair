@@ -1,102 +1,57 @@
-import { lwg } from "../Lwg_Template/lwg";
+import { lwg, Click, Setting } from "../Lwg_Template/lwg";
 
 export default class UISet extends lwg.Admin.Scene {
-    /**震动按钮*/
-    private BtnShake: Laya.Sprite;
-    /**声音按钮*/
-    private BtnVoice: Laya.Sprite;
-    /**关闭按钮*/
-    private BtnClose: Laya.Sprite;
-
-    lwgInit(): void {
-        this.self = this.owner as Laya.Scene;
-        this.BtnVoice = this.self['BtnVoice'];
-        this.BtnShake = this.self['BtnShake'];
-        this.BtnClose = this.self['BtnClose'];
-        this.btnVoiceAndBtnShake();
-        if (!lwg.Global._elect) {
-            this.self['P204'].visible = false;
-        }
+    lwgOnAwake(): void {
+        this.audioOnOff();
+        this.bgmOnOff();
     }
 
-    adaptive(): void {
-        this.self['P204'].y = Laya.stage.height - 75;
-        this.self['SceneContent'].y = Laya.stage.height * 0.471;
-    }
 
-    /**声音按钮和震动按钮的样式初始化*/
-    btnVoiceAndBtnShake(): void {
-        let voiceImg = this.BtnVoice.getChildAt(0) as Laya.Image;
-        let voiceUrl1 = 'UI_new/Set/icon_voice_on.png';
-        let voiceUrl2 = 'UI_new/Set/icon_voice_off.png';
-        if (lwg.PalyAudio._voiceSwitch) {
-            voiceImg.skin = voiceUrl1;
+    /**音效*/
+    audioOnOff(): void {
+        console.log(Setting._sound.switch);
+        if (Setting._sound.switch) {
+            this.self['AudioOff'].visible = false;
         } else {
-            voiceImg.skin = voiceUrl2;
+            this.self['AudioOff'].visible = true;
         }
+    }
 
-        // 震动图标初始化
-        let shakeImg = this.BtnShake.getChildAt(0) as Laya.Image;
-        let shakeUrl1 = 'UI_new/Set/icon_shake_on.png';
-        let shakeUrl2 = 'UI_new/Set/icon_shake_off.png';
-        if (lwg.Global._shakeSwitch) {
-            shakeImg.skin = shakeUrl1;
+    /**背景音乐*/
+    bgmOnOff(): void {
+        console.log(Setting._bgMusic.switch);
+        if (Setting._bgMusic.switch) {
+            this.self['BgmOff'].visible = false;
         } else {
-            shakeImg.skin = shakeUrl2;
+            this.self['BgmOff'].visible = true;
         }
     }
 
-    btnOnClick(): void {
-        lwg.Click.on('largen', null, this.BtnVoice, this, null, null, this.btnVoiceClickUP, null);
-        lwg.Click.on('largen', null, this.BtnShake, this, null, null, this.btnShakeClickUP, null);
-        lwg.Click.on('largen', null, this.BtnClose, this, null, null, this.btnCloseClickUP, null);
-        lwg.Click.on('largen', null, this.self['BtnRedeem'], this, null, null, this.btnRedeemClickUP, null);
+    lwgBtnClick(): void {
+        Click.on(Click.Type.largen, this.self['BtnAudio'], this, null, null, this.btnAudioUp, null);
+        Click.on(Click.Type.largen, this.self['BtnBgm'], this, null, null, this.btnBgmUp, null);
+        Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp, null);
     }
 
-    btnRedeemClickUP(event): void {
-        event.currentTarget.scale(1, 1);
-        lwg.Admin._openScene(lwg.Admin.SceneName.UIRedeem, null, null, null);
-    }
-
-    /**声音控制按钮抬起*/
-    btnVoiceClickUP(event): void {
-        event.currentTarget.scale(1, 1);
-        // 声音图标初始化
-        let voiceImg = this.BtnVoice.getChildAt(0) as Laya.Image;
-        let voiceUrl1 = 'UI_new/Set/icon_voice_on.png';
-        let voiceUrl2 = 'UI_new/Set/icon_voice_off.png';
-        if (voiceImg.skin === voiceUrl1) {
-            voiceImg.skin = voiceUrl2;
-            lwg.PalyAudio._voiceSwitch = false;
-            lwg.PalyAudio.stopMusic();
-        } else if (voiceImg.skin === voiceUrl2) {
-            voiceImg.skin = voiceUrl1;
-            lwg.PalyAudio._voiceSwitch = true;
-            lwg.PalyAudio.playMusic(lwg.Enum.voiceUrl.bgm, 0, 0);
+    btnAudioUp(): void {
+        if (Setting._sound.switch) {
+            Setting._sound.switch = false;
+        } else {
+            Setting._sound.switch = true;
         }
+        this.audioOnOff();
     }
-
-    /**手机震动按钮抬起*/
-    btnShakeClickUP(event): void {
-        event.currentTarget.scale(1, 1);
-        let img = this.BtnShake.getChildAt(0) as Laya.Image;
-        let url1 = 'UI_new/Set/icon_shake_on.png';
-        let url2 = 'UI_new/Set/icon_shake_off.png';
-        if (img.skin === url1) {
-            img.skin = url2;
-            lwg.Global._shakeSwitch = false;
-        } else if (img.skin === url2) {
-            img.skin = url1;
-            lwg.Global._shakeSwitch = true;
+    btnBgmUp(): void {
+        if (Setting._bgMusic.switch) {
+            Setting._bgMusic.switch = false;
+        } else {
+            Setting._bgMusic.switch = true;
         }
+        this.bgmOnOff();
     }
 
-    /**设置按钮抬起*/
-    btnCloseClickUP(event): void {
-        event.currentTarget.scale(1, 1);
+    btnCloseUp(): void {
         this.self.close();
     }
 
-    onDisable(): void {
-    }
 }

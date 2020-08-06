@@ -8,7 +8,7 @@ export default class UIShop_Goods extends Admin.Object {
         this.Select = this.self.getChildByName('Select') as Laya.Image;
     }
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, null, this.self, this, null, null, this.up, null);
+        Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
     }
     up(): void {
         EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']])

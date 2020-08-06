@@ -61,7 +61,7 @@ export default class UITask extends lwg.Task.TaskScene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
 
     };
 

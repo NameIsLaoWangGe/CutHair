@@ -7,7 +7,7 @@ export default class UITask_GetAward extends Admin.Object {
 
     lwgBtnClick(): void {
         let BtnGet = this.self.getChildByName('BtnGet') as Laya.Image;
-        Click.on(Click.Type.largen, null, BtnGet, this, null, null, this.btnGetUp);
+        Click.on(Click.Type.largen, BtnGet, this, null, null, this.btnGetUp);
     }
     btnGetUp(): void {
         if (this.self['dataSource'][Task.TaskProperty.name] === '观看广告获得金币') {

@@ -55,15 +55,15 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        Click.on(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-        Click.on(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+        Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.on(Click.Type.largen, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
+        Click.on(Click.Type.largen, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
     }
 
     offClick(): void {
-        Click.off(Click.Type.noEffect, null, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        Click.off(Click.Type.largen, null, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-        Click.off(Click.Type.largen, null, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+        Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.off(Click.Type.largen, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
+        Click.off(Click.Type.largen, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
     }
 
     addOrSub: string = 'add';

@@ -5,10 +5,10 @@ export default class UIVictoryBox_Cell extends Admin.Object {
     constructor() { super(); }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, null, this.self, this, null, null, this.up, null);
+        Click.on(Click.Type.noEffect, this.self, this, null, null, this.up, null);
     }
     btnoff(): void {
-        Click.off(Click.Type.noEffect, null, this.self, this, null, null, this.up, null);
+        Click.off(Click.Type.noEffect, this.self, this, null, null, this.up, null);
     }
 
     up(e: Laya.Event): void {

@@ -25,8 +25,8 @@ export default class UISkinTry extends Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(lwg.Click.Type.largen, null, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-        Click.on(lwg.Click.Type.largen, null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+        Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+        Click.on(lwg.Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
     }
 
     btnGetUp(event): void {
