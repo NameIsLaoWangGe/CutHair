@@ -3,16 +3,18 @@ import UICheckIn from "./script/Game/UICheckIn"
 import UIDefeated from "./script/Game/UIDefeated"
 import UILoding from "./script/Game/UILoding"
 import UIOperation from "./script/Game/UIOperation"
+import UIResurgence from "./script/Game/UIResurgence"
 import UIShare from "./script/Game/UIShare"
 import UIShop_Goods from "./script/Game/UIShop_Goods"
 import UIShop from "./script/Game/UIShop"
+import UISkinTry from "./script/Game/UISkinTry"
+import UISkinXD from "./script/Game/UISkinXD"
 import UIStart from "./script/Game/UIStart"
 import UITask_GetAward from "./script/Game/UITask_GetAward"
 import UITask from "./script/Game/UITask"
 import UIVictory from "./script/Game/UIVictory"
 import UIVictoryBox_Cell from "./script/Game/UIVictoryBox_Cell"
 import UIVictoryBox from "./script/Game/UIVictoryBox"
-import UIXDSkin from "./script/Game/UIXDSkin"
 import GameUI from "./script/GameUI"
 /*
 * 游戏初始化配置;
@@ -37,16 +39,18 @@ export default class GameConfig{
         reg("script/Game/UIDefeated.ts",UIDefeated);
         reg("script/Game/UILoding.ts",UILoding);
         reg("script/Game/UIOperation.ts",UIOperation);
+        reg("script/Game/UIResurgence.ts",UIResurgence);
         reg("script/Game/UIShare.ts",UIShare);
         reg("script/Game/UIShop_Goods.ts",UIShop_Goods);
         reg("script/Game/UIShop.ts",UIShop);
+        reg("script/Game/UISkinTry.ts",UISkinTry);
+        reg("script/Game/UISkinXD.ts",UISkinXD);
         reg("script/Game/UIStart.ts",UIStart);
         reg("script/Game/UITask_GetAward.ts",UITask_GetAward);
         reg("script/Game/UITask.ts",UITask);
         reg("script/Game/UIVictory.ts",UIVictory);
         reg("script/Game/UIVictoryBox_Cell.ts",UIVictoryBox_Cell);
         reg("script/Game/UIVictoryBox.ts",UIVictoryBox);
-        reg("script/Game/UIXDSkin.ts",UIXDSkin);
         reg("script/GameUI.ts",GameUI);
     }
 }

@@ -36,7 +36,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
         console.log('重新开始！');
        
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-        EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
+        EventAdmin.notify(EventAdmin.EventType.operationRefresh);
         this.self.close();
     }
 

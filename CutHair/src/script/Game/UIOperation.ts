@@ -148,7 +148,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        GVariate._taskArr = [GEnum.TaskType.rightBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard];
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
     }
@@ -172,21 +172,29 @@ export default class UIOperation extends lwg.Admin.Scene {
                     //刷新一下属性 
                     this.BtnLast.visible = true;
                 }
-                Admin._gameStart = false;
+                // Admin._gameStart = false;
             }
         })
 
         // 失败
         EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
             if (Admin._gameStart) {
-                Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+                Admin._openScene(Admin.SceneName.UIDefeated);
+                Admin._gameStart = false;
+            }
+        })
+
+        // 复活
+        EventAdmin.reg(EventAdmin.EventType.resurgence, this, () => {
+            if (Admin._gameStart) {
+                Admin._openScene(Admin.SceneName.UIResurgence);
                 Admin._gameStart = false;
             }
         })
 
         // 重来
-        EventAdmin.reg(EventAdmin.EventType.operrationRefresh, this, () => {
-            lwg.Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => { })
+        EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
+            lwg.Admin._openScene(Admin.SceneName.UIOperation)
         })
 
         // 左侧胡子修剪

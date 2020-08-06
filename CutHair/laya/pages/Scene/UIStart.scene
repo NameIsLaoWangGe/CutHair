@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":426,
+    "selectedBox":426,
+    "selecteID":495,
     "searchKey":"View",
     "props":{"y":0,"x":0,"width":720,"visible":true,"sceneColor":"#494949","height":1280},
     "nodeParent":-1,
@@ -88,11 +88,11 @@
             "child":[
                 {
                     "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":9,"x":28,"width":99,"texture":"UI/Shop/Other/xiandanren.png","height":112},
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"y":3,"x":27,"width":100,"skin":"UI/Shop/Other/xiandanren.png","height":120},
                     "nodeParent":426,
-                    "label":"Sprite",
+                    "label":"Image",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,

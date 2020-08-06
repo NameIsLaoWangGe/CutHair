@@ -331,7 +331,9 @@
                 EventType["taskReach"] = "taskReach";
                 EventType["defeated"] = "defeated";
                 EventType["scene3DRefresh"] = "Scene3DRefresh";
-                EventType["operrationRefresh"] = "OperrationRefresh";
+                EventType["scene3DResurgence"] = "scene3DResurgence";
+                EventType["operationRefresh"] = "operationRefresh";
+                EventType["resurgence"] = "resurgence";
             })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
             EventAdmin.dispatcher = new Laya.EventDispatcher();
             function reg(type, caller, listener) {
@@ -401,7 +403,7 @@
                 HintDec[HintDec["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
                 HintDec[HintDec["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
                 HintDec[HintDec["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01"] = 13] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01";
-                HintDec[HintDec["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u5546\u5E97\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u5546\u5E97\u67E5\u770B\u3002";
+                HintDec[HintDec["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002";
                 HintDec[HintDec["\u5206\u4EAB\u5931\u8D25\uFF01"] = 15] = "\u5206\u4EAB\u5931\u8D25\uFF01";
                 HintDec[HintDec["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 16] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
                 HintDec[HintDec["\u83B7\u5F97\u67EF\u57FA\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 17] = "\u83B7\u5F97\u67EF\u57FA\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
@@ -503,16 +505,24 @@
             }
             Gold_1._createGoldNode = _createGoldNode;
             function goldAppear(delayed) {
-                Gold_1.GoldNode.visible = true;
                 if (delayed) {
-                    Animation2D.scale_Alpha(Gold_1.GoldNode, 0, 1, 1, 1, 1, 1, 500, null, delayed);
+                    Animation2D.scale_Alpha(Gold_1.GoldNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
+                        Gold_1.GoldNode.visible = true;
+                    });
+                }
+                else {
+                    Gold_1.GoldNode.visible = true;
                 }
             }
             Gold_1.goldAppear = goldAppear;
             function goldVinish(delayed) {
-                Gold_1.GoldNode.visible = false;
                 if (delayed) {
-                    Animation2D.scale_Alpha(Gold_1.GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
+                    Animation2D.scale_Alpha(Gold_1.GoldNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
+                        Gold_1.GoldNode.visible = false;
+                    });
+                }
+                else {
+                    Gold_1.GoldNode.visible = false;
                 }
             }
             Gold_1.goldVinish = goldVinish;
@@ -701,8 +711,8 @@
                 SceneName["UIPuase"] = "UIPuase";
                 SceneName["UIShare"] = "UIShare";
                 SceneName["UISmallHint"] = "UISmallHint";
-                SceneName["UIXDpifu"] = "UIXDpifu";
-                SceneName["UIPifuTry"] = "UIPifuTry";
+                SceneName["UISkinXD"] = "UISkinXD";
+                SceneName["UISkinTry"] = "UISkinTry";
                 SceneName["UIRedeem"] = "UIRedeem";
                 SceneName["UIAnchorXD"] = "UIAnchorXD";
                 SceneName["UITurntable"] = "UITurntable";
@@ -713,6 +723,7 @@
                 SceneName["UITask"] = "UITask";
                 SceneName["UIVictoryBox"] = "UIVictoryBox";
                 SceneName["UICheckIn"] = "UICheckIn";
+                SceneName["UIResurgence"] = "UIResurgence";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -3035,6 +3046,9 @@
             }
             Task.getTaskClassArr = getTaskClassArr;
             function doDetectionTask(calssName, name, number) {
+                if (!number) {
+                    number = 1;
+                }
                 let resCondition = Task.getTaskProperty(calssName, name, Task.TaskProperty.resCondition);
                 let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
                 if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
@@ -3183,24 +3197,20 @@
             };
             Shop.allProps = [];
             Shop._currentProp = {
-                currentProp: null,
                 get name() {
-                    return this.currentProp = Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
+                    return Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
                 },
                 set name(name) {
-                    this.currentProp = name;
-                    Laya.LocalStorage.setItem('Shop_currentProp', this.currentProp);
+                    Laya.LocalStorage.setItem('Shop_currentProp', name);
                 }
             };
             Shop.allOther = [];
             Shop._currentOther = {
-                crrentOther: null,
                 get name() {
-                    return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
+                    return Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
                 },
                 set name(name) {
-                    this.crrentOther = name;
-                    Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
+                    Laya.LocalStorage.setItem('Shop_crrentOther', name);
                 }
             };
             Shop.useSkinType = [];
@@ -3264,7 +3274,7 @@
                 return arrHave;
             }
             Shop.getHaveArr = getHaveArr;
-            function getwayGoldArr(goodsClass, have) {
+            function getwayGoldArr(goodsClass, have, excludeCurrent) {
                 let arr = getGoodsClassArr(goodsClass);
                 let arrNoHave = [];
                 for (let index = 0; index < arr.length; index++) {
@@ -3282,6 +3292,15 @@
                     else if (have == undefined) {
                         if (element[GoodsProperty.getway] === Getway.gold) {
                             arrNoHave.push(element);
+                        }
+                    }
+                }
+                if (excludeCurrent && excludeCurrent !== undefined) {
+                    for (let index = 0; index < arrNoHave.length; index++) {
+                        const element = arrNoHave[index];
+                        if (element[GoodsProperty.name] === get_Current(goodsClass)) {
+                            arrNoHave.splice(index, 1);
+                            break;
                         }
                     }
                 }
@@ -3312,6 +3331,24 @@
                 return arrIneedwin;
             }
             Shop.getwayIneedwinArr = getwayIneedwinArr;
+            function get_Current(goodsClass) {
+                let _current = null;
+                switch (goodsClass) {
+                    case GoodsClass.Skin:
+                        _current = Shop._currentSkin.name;
+                        break;
+                    case GoodsClass.Props:
+                        _current = Shop._currentProp.name;
+                        break;
+                    case GoodsClass.Other:
+                        _current = Shop._currentOther.name;
+                        break;
+                    default:
+                        break;
+                }
+                return _current;
+            }
+            Shop.get_Current = get_Current;
             function getGoodsClassArr(goodsClass) {
                 let arr = [];
                 switch (goodsClass) {
@@ -3330,6 +3367,41 @@
                 return arr;
             }
             Shop.getGoodsClassArr = getGoodsClassArr;
+            function buyGoods(calssName, name, number) {
+                if (!number) {
+                    number = 1;
+                }
+                let resCondition = getGoodsProperty(calssName, name, GoodsProperty.resCondition);
+                let condition = getGoodsProperty(calssName, name, GoodsProperty.condition);
+                let have = getGoodsProperty(calssName, name, GoodsProperty.have);
+                if (have !== true && have !== null) {
+                    if (condition <= resCondition + number) {
+                        setGoodsProperty(calssName, name, GoodsProperty.resCondition, condition);
+                        setGoodsProperty(calssName, name, GoodsProperty.have, true);
+                        if (Shop._ShopList) {
+                            Shop._ShopList.refresh();
+                        }
+                        return 1;
+                    }
+                    else {
+                        setGoodsProperty(calssName, name, GoodsProperty.resCondition, resCondition + number);
+                        if (Shop._ShopList) {
+                            Shop._ShopList.refresh();
+                        }
+                        return 0;
+                    }
+                }
+                else {
+                    return -1;
+                }
+            }
+            Shop.buyGoods = buyGoods;
+            function initShop() {
+                Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+            }
+            Shop.initShop = initShop;
             let GoodsProperty;
             (function (GoodsProperty) {
                 GoodsProperty["name"] = "name";
@@ -3369,9 +3441,15 @@
                 initData() {
                     Shop._ShopTap = this.self['MyTap'];
                     Shop._ShopList = this.self['MyList'];
-                    Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
-                    Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
-                    Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+                    if (!Shop.allSkin) {
+                        Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                    }
+                    if (!Shop.allProps) {
+                        Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                    }
+                    if (!Shop.allOther) {
+                        Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+                    }
                     Shop.goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
                     Shop.classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
                 }
@@ -3526,25 +3604,20 @@
         })(VictoryBox = lwg.VictoryBox || (lwg.VictoryBox = {}));
         let CheckIn;
         (function (CheckIn) {
-            CheckIn._todayCheckIn = false;
             CheckIn._lastCheckDate = {
-                d: null,
                 get date() {
-                    return this.d = Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+                    return Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
                 },
                 set date(date) {
-                    this.d = date;
-                    Laya.LocalStorage.setItem('Check_lastCheckDate', this.d);
+                    Laya.LocalStorage.setItem('Check_lastCheckDate', date.toString());
                 }
             };
             CheckIn._checkInNum = {
-                num: 0,
                 get number() {
-                    return this.num = Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+                    return Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
                 },
                 set number(num) {
-                    this.num = num;
-                    Laya.LocalStorage.setItem('Check_checkInNum', this.num);
+                    Laya.LocalStorage.setItem('Check_checkInNum', num.toString());
                 }
             };
             function getCheckProperty(name, property) {
@@ -3619,6 +3692,10 @@
                 CheckProPerty["checkInState"] = "checkInState";
                 CheckProPerty["arrange"] = "arrange";
             })(CheckProPerty = CheckIn.CheckProPerty || (CheckIn.CheckProPerty = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["removeCheckBtn"] = "removeCheckBtn";
+            })(EventType = CheckIn.EventType || (CheckIn.EventType = {}));
             class CheckInScene extends Admin.Scene {
                 lwgOnAwake() {
                     this.initData();
@@ -3671,6 +3748,71 @@
             }
             CheckIn.CheckInScene = CheckInScene;
         })(CheckIn = lwg.CheckIn || (lwg.CheckIn = {}));
+        let SkinXD;
+        (function (SkinXD) {
+            SkinXD._adsNum = {
+                get value() {
+                    return Laya.LocalStorage.getItem('XDSKin_adsNum') !== null ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
+                },
+                set value(value) {
+                    Laya.LocalStorage.setItem('XDSKin_adsNum', value.toString());
+                }
+            };
+            function openXDSkin(fromScene) {
+                if (SkinXD._adsNum.value >= SkinXD._needAdsNum) {
+                    return;
+                }
+                else {
+                    Admin._openScene(Admin.SceneName.UISkinXD);
+                    SkinXD._fromScene = fromScene;
+                }
+            }
+            SkinXD.openXDSkin = openXDSkin;
+            let EventType;
+            (function (EventType) {
+                EventType["acquisition"] = "acquisition";
+            })(EventType = SkinXD.EventType || (SkinXD.EventType = {}));
+            class SkinXDScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.skinXDOnAwake();
+                }
+                initData() {
+                    SkinXD._needAdsNum = 3;
+                }
+                skinXDOnAwake() { }
+                lwgAdaptive() {
+                    this.skinXDAdaptive();
+                }
+                skinXDAdaptive() { }
+                ;
+                lwgOnEnable() {
+                    this.skinXDOnEnable();
+                }
+                skinXDOnEnable() { }
+                lwgNodeDec() {
+                    this.skinXDNodeDec();
+                }
+                skinXDNodeDec() { }
+                lwgBtnClick() {
+                    this.skinXDBtnClick();
+                }
+                skinXDBtnClick() { }
+                lwgEventReg() {
+                    this.skinXDEventReg();
+                }
+                skinXDEventReg() { }
+                lwgOnDisable() {
+                    this.skinXDOnDisable();
+                }
+                skinXDOnDisable() { }
+                lwgOnUpdate() {
+                    this.skinXDOnUpdate();
+                }
+                skinXDOnUpdate() { }
+            }
+            SkinXD.SkinXDScene = SkinXDScene;
+        })(SkinXD = lwg.SkinXD || (lwg.SkinXD = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3D = [];
@@ -3777,6 +3919,7 @@
                 lodingPhaseComplete() { }
                 lwgInterior() {
                     Task.initTask();
+                    Shop.initShop();
                 }
                 lodingTaskEventReg() {
                 }
@@ -3806,6 +3949,8 @@
     let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
     let CheckIn = lwg.CheckIn;
     let CheckInScene = lwg.CheckIn.CheckInScene;
+    let SkinXD = lwg.SkinXD;
+    let SkinXDScene = lwg.SkinXD.SkinXDScene;
 
     class ADManager {
         constructor() {
@@ -4050,6 +4195,7 @@
                     Pic_Gold.visible = false;
                     this.self['BtnSeven'].skin = 'UI/Common/kuang1.png';
                 }
+                EventAdmin.notify(CheckIn.EventType.removeCheckBtn);
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     Gold.addGold(rewardNum * number);
                     this.self.close();
@@ -4107,7 +4253,7 @@
         btnAgainUp() {
             console.log('重新开始！');
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-            EventAdmin.notify(EventAdmin.EventType.operrationRefresh);
+            EventAdmin.notify(EventAdmin.EventType.operationRefresh);
             this.self.close();
         }
         btnNextUp() {
@@ -4206,7 +4352,7 @@
                     break;
                 case 'standard':
                     console.log('碰到线了，游戏失败！');
-                    EventAdmin.notify(EventAdmin.EventType.defeated);
+                    EventAdmin.notify(EventAdmin.EventType.resurgence);
                     break;
                 default:
                     break;
@@ -4311,6 +4457,9 @@
             GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
             GSene3D.Floor = this.self.getChildByName('Floor');
             GSene3D.Razor = this.self.getChildByName('Razor');
+            GSene3D.razorFPos.x = GSene3D.Razor.transform.position.x;
+            GSene3D.razorFPos.y = GSene3D.Razor.transform.position.y;
+            GSene3D.razorFPos.z = GSene3D.Razor.transform.position.z;
             GSene3D.knifeParent = this.self.getChildByName('knifeParent');
             GSene3D.knife = GSene3D.knifeParent.getChildByName('knife');
             this.createLevel();
@@ -4349,17 +4498,23 @@
             EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction) => {
                 this.cameraMove(direction);
             });
+            EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction) => {
+                GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
+            });
         }
         ;
         refreshScene() {
             GSene3D.Level.removeSelf();
             this.createLevel();
             this.lwgNodeDec();
+            GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
         }
         cameraMove(direction) {
             switch (direction) {
                 case GEnum.TaskType.sideHair:
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                    });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
                     break;
@@ -4367,7 +4522,9 @@
                     GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
                     GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
                     GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                    });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     break;
@@ -4375,7 +4532,9 @@
                     GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
                     GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
                     GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                    });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     break;
@@ -4383,7 +4542,9 @@
                     GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
                     GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
                     GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                    });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     break;
@@ -4392,7 +4553,9 @@
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model2 = GSene3D.knife.getChildAt(0);
                     Model2.transform.localRotationEulerX = -180;
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, null, () => {
+                        Admin._gameStart = true;
+                    });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
                     break;
@@ -4401,7 +4564,9 @@
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model1 = GSene3D.knife.getChildAt(0);
                     Model1.transform.localRotationEulerX = -180;
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                    });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                     break;
@@ -4641,7 +4806,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.rightBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard];
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
         }
@@ -4662,17 +4827,22 @@
                     else {
                         this.BtnLast.visible = true;
                     }
-                    Admin._gameStart = false;
                 }
             });
             EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
                 if (Admin._gameStart) {
-                    Admin._openScene(Admin.SceneName.UIDefeated, null, null, f => { });
+                    Admin._openScene(Admin.SceneName.UIDefeated);
                     Admin._gameStart = false;
                 }
             });
-            EventAdmin.reg(EventAdmin.EventType.operrationRefresh, this, () => {
-                lwg.Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => { });
+            EventAdmin.reg(EventAdmin.EventType.resurgence, this, () => {
+                if (Admin._gameStart) {
+                    Admin._openScene(Admin.SceneName.UIResurgence);
+                    Admin._gameStart = false;
+                }
+            });
+            EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
+                lwg.Admin._openScene(Admin.SceneName.UIOperation);
             });
             EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
                 this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
@@ -4922,6 +5092,22 @@
             this.touchPosX = null;
             this.touchPosY = null;
             this.moveSwitch = false;
+        }
+    }
+
+    class UIResurgence extends Admin.Scene {
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnResurgence'], this, null, null, this.btnResurgenceUp);
+            Click.on(Click.Type.largen, null, this.self['BtnNo'], this, null, null, this.btnNoUp);
+        }
+        btnResurgenceUp() {
+            Admin._gameStart = true;
+            EventAdmin.notify(EventAdmin.EventType.scene3DResurgence);
+            this.self.close();
+        }
+        btnNoUp() {
+            Admin._openScene(Admin.SceneName.UIDefeated);
+            this.self.close();
         }
     }
 
@@ -5405,16 +5591,112 @@
         }
     }
 
+    class UISkinTry extends Admin.Scene {
+        lwgOnAwake() {
+            this.randomNoHave();
+        }
+        randomNoHave() {
+            let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
+            let arrProp = Shop.getwayGoldArr(Shop.GoodsClass.Props, undefined, true);
+            let ele;
+            if (Math.floor(Math.random() * 2) === 1) {
+                ele = arrOther[Math.floor(Math.random() * arrOther.length)];
+                this.self['SkinPic'].skin = 'UI/Shop/Other/' + ele.name + '.png';
+                Shop._tryName = Shop._currentOther.name;
+            }
+            else {
+                ele = arrProp[Math.floor(Math.random() * arrProp.length)];
+                this.self['SkinPic'].skin = 'UI/Shop/Props/' + ele.name + '.png';
+                Shop._tryName = Shop._currentOther.name;
+            }
+        }
+        lwgBtnClick() {
+            Click.on(lwg.Click.Type.largen, null, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+            Click.on(lwg.Click.Type.largen, null, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+        }
+        btnGetUp(event) {
+            ADManager.ShowReward(() => {
+                Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => {
+                });
+            });
+        }
+        btnNoUp(event) {
+            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+        }
+        onDisable() {
+        }
+    }
+
+    class UISkinXD extends SkinXD.SkinXDScene {
+        skinXDOnAwake() {
+            Gold.goldVinish();
+        }
+        skinXDOnEnable() {
+            this.progressDisplay();
+        }
+        skinXDAdaptive() {
+            this.self['SceneContent'].y = Laya.stage.height / 2;
+        }
+        progressDisplay() {
+            let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.resCondition);
+            if (resCondition > 0) {
+                for (let index = 0; index < resCondition; index++) {
+                    let name = 'Bar' + (index + 1);
+                    this.self[name].skin = 'UI/XDSkin/tiao1.png';
+                }
+            }
+        }
+        skinXDBtnClick() {
+            Click.on(Click.Type.largen, null, this.self['BtnGet'], this, null, null, this.btnGetUp);
+            Click.on(Click.Type.largen, null, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnGetUp() {
+            this.btnGetFunc();
+        }
+        btnBackUp() {
+            this.self.close();
+        }
+        btnGetFunc() {
+            let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
+            if (have === 1) {
+                this.progressDisplay();
+                Hint.createHint_Middle(Hint.HintDec["限定皮肤已经获得，请前往皮肤界面查看。"]);
+                Shop._currentOther.name = 'xiandanren';
+                EventAdmin.notify(SkinXD.EventType.acquisition);
+                Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {
+                    this.self.close();
+                });
+            }
+            else {
+                this.progressDisplay();
+            }
+        }
+    }
+
     class UIStart extends lwg.Admin.Scene {
         lwgNodeDec() {
             this.LevelDisplay = this.self['LevelDisplay'];
             this.LevelStyle = this.self['LevelStyle'];
+        }
+        lwgEventReg() {
+            EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
+                this.self['BtnXDSkin'].visible = false;
+            });
+            EventAdmin.reg(CheckIn.EventType.removeCheckBtn, this, () => {
+                this.self['BtnCheck'].visible = false;
+            });
         }
         lwgOnEnable() {
             GVariate._stageClick = false;
             Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true; });
             Gold._createGoldNode(Laya.stage);
             this.levelStyleDisplay();
+            if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
+                this.self['BtnXDSkin'].visible = false;
+            }
+            if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
+                this.self['BtnCheck'].visible = false;
+            }
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
             CheckIn.openCheckIn();
         }
@@ -5449,15 +5731,23 @@
             Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
             Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
             Click.on(Click.Type.noEffect, null, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
+            Click.on(Click.Type.noEffect, null, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
+            Click.on(Click.Type.noEffect, null, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+        }
+        btnCheckUp(e) {
+            e.stopPropagation();
+            lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+        }
+        btnXDSkinUp(e) {
+            e.stopPropagation();
+            lwg.Admin._openScene(Admin.SceneName.UISkinXD);
         }
         btnSkinUp(e) {
             e.stopPropagation();
             lwg.Admin._openScene(Admin.SceneName.UIShop);
         }
         backgroundUp() {
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-                console.log('开始游戏');
-                this.self.close();
+            Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self, f => {
             });
         }
         btnTaskeUp(e) {
@@ -5822,70 +6112,6 @@
         }
     }
 
-    class UIXDSkin extends lwg.Admin.Scene {
-        constructor() { super(); }
-        selfVars() {
-            this.BtnBack = this.self['BtnBack'];
-            this.BtnGet = this.self['BtnGet'];
-            this.SceneContent = this.self['SceneContent'];
-            this.background = this.self['background'];
-            this.logo = this.self['logo'];
-        }
-        lwgInit() {
-            lwg.Global._openXD = true;
-            lwg.Global.GoldNumNode.alpha = 0;
-            lwg.Global.ExecutionNumNode.alpha = 0;
-            ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_limitskin');
-            ADManager.TAPoint(TaT.BtnShow, 'close_limitskin');
-            this.btnGetNum();
-        }
-        adaptive() {
-            this.SceneContent.y = Laya.stage.height * 0.528;
-            this.self['background_01'].height = Laya.stage.height;
-        }
-        openAniFunc() {
-        }
-        btnGetNum() {
-            let num = this.BtnGet.getChildByName('Num');
-            num.text = '(' + lwg.Global._watchAdsNum + '/' + 3 + ')';
-        }
-        btnOnClick() {
-            lwg.Click.on('largen', null, this.BtnBack, this, null, null, this.btnBackUp, null);
-            lwg.Click.on('largen', null, this.BtnGet, this, null, null, this.btnGetUp, null);
-        }
-        btnBackUp(event) {
-            ADManager.TAPoint(TaT.BtnClick, 'close_limitskin');
-            event.currentTarget.scale(1, 1);
-            this.self.close();
-        }
-        btnGetUp(event) {
-            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_limitskin');
-            event.currentTarget.scale(1, 1);
-            ADManager.ShowReward(() => {
-                this.btnGetFunc();
-            });
-        }
-        btnGetFunc() {
-            lwg.Global._watchAdsNum += 1;
-            this.btnGetNum();
-            if (lwg.Global._watchAdsNum >= 3) {
-                lwg.Global._havePifu.push('09_aisha');
-                lwg.Global._currentPifu = lwg.Enum.PifuAllName[8];
-                this.self.close();
-                lwg.Admin._sceneControl[lwg.Admin.SceneName.UIStart]['UIStart'].self['BtnXD'].removeSelf();
-                lwg.Global._createHint_01(lwg.Enum.HintType.getXD);
-            }
-            lwg.LocalStorage.addData();
-        }
-        lwgOnUpdta() {
-        }
-        lwgDisable() {
-            lwg.Global._openXD = false;
-            lwg.Global.GoldNumNode.alpha = 1;
-            lwg.Global.ExecutionNumNode.alpha = 1;
-        }
-    }
-
     var REG = Laya.ClassUtils.regClass;
     var ui;
     (function (ui) {
@@ -5960,16 +6186,18 @@
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
+            reg("script/Game/UIResurgence.ts", UIResurgence);
             reg("script/Game/UIShare.ts", UIShare);
             reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
             reg("script/Game/UIShop.ts", UIShop);
+            reg("script/Game/UISkinTry.ts", UISkinTry);
+            reg("script/Game/UISkinXD.ts", UISkinXD);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UITask_GetAward.ts", UITask_GetAward);
             reg("script/Game/UITask.ts", UITask);
             reg("script/Game/UIVictory.ts", UIVictory);
             reg("script/Game/UIVictoryBox_Cell.ts", UIVictoryBox_Cell);
             reg("script/Game/UIVictoryBox.ts", UIVictoryBox);
-            reg("script/Game/UIXDSkin.ts", UIXDSkin);
             reg("script/GameUI.ts", GameUI);
         }
     }

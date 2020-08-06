@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -11,11 +11,28 @@ export default class UIStart extends lwg.Admin.Scene {
         this.LevelStyle = this.self['LevelStyle'];
     }
 
+    lwgEventReg(): void {
+        EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
+            this.self['BtnXDSkin'].visible = false;
+        })
+        EventAdmin.reg(CheckIn.EventType.removeCheckBtn, this, () => {
+            this.self['BtnCheck'].visible = false;
+        })
+    }
+
     lwgOnEnable(): void {
         GVariate._stageClick = false;
         Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true })
         Gold._createGoldNode(Laya.stage);
         this.levelStyleDisplay();
+
+        if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
+            this.self['BtnXDSkin'].visible = false;
+        }
+
+        if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
+            this.self['BtnCheck'].visible = false;
+        }
 
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
         CheckIn.openCheckIn();
@@ -60,6 +77,18 @@ export default class UIStart extends lwg.Admin.Scene {
         Click.on(Click.Type.largen, null, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
         Click.on(Click.Type.noEffect, null, this.self['Background'], this, null, null, this.backgroundUp);
         Click.on(Click.Type.noEffect, null, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
+        Click.on(Click.Type.noEffect, null, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
+        Click.on(Click.Type.noEffect, null, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+    }
+
+    btnCheckUp(e: Laya.Event): void {
+        e.stopPropagation();
+        lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+    }
+
+    btnXDSkinUp(e: Laya.Event): void {
+        e.stopPropagation();
+        lwg.Admin._openScene(Admin.SceneName.UISkinXD);
     }
 
     btnSkinUp(e: Laya.Event): void {
@@ -68,9 +97,7 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     backgroundUp(): void {
-        lwg.Admin._openScene(lwg.Admin.SceneName.UIOperation, null, null, f => {
-            console.log('开始游戏');
-            this.self.close();
+        Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self, f => {
         });
     }
 

@@ -54,11 +54,10 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                         Laya.timer.once(3000, this, f => { cutHair.removeSelf() });
                     }
                 }
-
                 break;
             case 'standard':
                 console.log('碰到线了，游戏失败！');
-                EventAdmin.notify(EventAdmin.EventType.defeated);
+                EventAdmin.notify(EventAdmin.EventType.resurgence);
                 break;
             default:
                 break;

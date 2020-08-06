@@ -513,8 +513,12 @@ export module lwg {
             defeated = 'defeated',
             /**刷新3D场景*/
             scene3DRefresh = 'Scene3DRefresh',
+            /**刷新3D场景*/
+            scene3DResurgence = 'scene3DResurgence',
             /**刷新操作场景*/
-            operrationRefresh = 'OperrationRefresh',
+            operationRefresh = 'operationRefresh',
+            /**复活*/
+            resurgence = 'resurgence',
         }
 
         /**以节点为单位，在节点内注册事件，节点移除或者关闭后，关闭事件监听；如果需要在节点外注册事件，this为EventAdmin，不要写在节点脚本中，否则每次打开一次就会注册一次*/
@@ -615,7 +619,7 @@ export module lwg {
             '消耗2点体力！',
             '今日体力福利已领取！',
             '分享成功，获得125金币！',
-            '限定皮肤已经获得，请前往商店查看。',
+            '限定皮肤已经获得，请前往皮肤界面查看。',
             '分享失败！',
             '兑换码错误！',
             '获得柯基公主皮肤，前往彩蛋墙查看！',
@@ -742,22 +746,26 @@ export module lwg {
          * @param delayed 延时时间
         */
         export function goldAppear(delayed?: number): void {
-            GoldNode.visible = true;
             if (delayed) {
-                // Animation2D.bombs_Appear(GoldNode, 0, 1, 1.2, 0, 150, 150, 100);
-                Animation2D.scale_Alpha(GoldNode, 0, 1, 1, 1, 1, 1, 500, null, delayed);
+                Animation2D.scale_Alpha(GoldNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
+                    GoldNode.visible = true;
+                });
+            } else {
+                GoldNode.visible = true;
             }
         }
 
         /**
-         * GoldNode出现动画
-         * @param ani 是否用启用动画
+         * GoldNode消失动画
          * @param delayed 延时时间
         */
         export function goldVinish(delayed?: number): void {
-            GoldNode.visible = false;
             if (delayed) {
-                Animation2D.scale_Alpha(GoldNode, 1, 1, 1, 1, 1, 0, 500, null, delayed);
+                Animation2D.scale_Alpha(GoldNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
+                    GoldNode.visible = false;
+                });
+            } else {
+                GoldNode.visible = false;
             }
         }
 
@@ -1040,8 +1048,8 @@ export module lwg {
             UIPuase = 'UIPuase',
             UIShare = 'UIShare',
             UISmallHint = 'UISmallHint',
-            UIXDSkin = 'UIXDSkin',
-            UIPifuTry = 'UIPifuTry',
+            UISkinXD = 'UISkinXD',
+            UISkinTry = 'UISkinTry',
             UIRedeem = 'UIRedeem',
             UIAnchorXD = 'UIAnchorXD',
             UITurntable = 'UITurntable',
@@ -1052,6 +1060,7 @@ export module lwg {
             UITask = 'UITask',
             UIVictoryBox = 'UIVictoryBox',
             UICheckIn = 'UICheckIn',
+            UIResurgence = 'UIResurgence',
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -3867,11 +3876,11 @@ export module lwg {
         }
 
         /**
-             * 返回相同坐标系中两个三维向量的相减向量（obj1-obj2）
-             * @param V3_01 向量1
-             * @param V3_02 向量2
-             * @param normalizing 是否是单位向量
-             */
+          * 返回相同坐标系中两个三维向量的相减向量（obj1-obj2）
+          * @param V3_01 向量1
+          * @param V3_02 向量2
+          * @param normalizing 是否是单位向量
+          */
         export function twoSubV3_3D(V3_01: Laya.Vector3, V3_02: Laya.Vector3, normalizing: boolean): Laya.Vector3 {
             let p = new Laya.Vector3();
             // 向量相减后计算长度
@@ -4365,10 +4374,12 @@ export module lwg {
          * 通过resCondition/condition，做任务并且完成了这次任务，然后检总进度是否完成,并且设置成完成状态,返回0表示任务没有完成，1代表刚好完成奖励未领取，-1代表任务完成了也领取了奖励
          * @param calssName 任务种类
          * @param name 任务名称
-         * @param number 做几次任务
+         * @param number 做几次任务，不传则默认为1次
          */
-        export function doDetectionTask(calssName: string, name: string, number: number): number {
-            let bool = false;
+        export function doDetectionTask(calssName: string, name: string, number?: number): number {
+            if (!number) {
+                number = 1;
+            }
             let resCondition = Task.getTaskProperty(calssName, name, Task.TaskProperty.resCondition);
             let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
             if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
@@ -4558,6 +4569,9 @@ export module lwg {
         /**商品列表*/
         export let _ShopList: Laya.List;
 
+        /**试用皮肤名称记录，一般用于皮肤试用*/
+        export let _tryName: string;
+
         //皮肤*****************************************************************************************************
         /**皮肤的总数据，存储对象依次为[{名称，获取方式，剩余数量或者次数}]*/
         export let allSkin = [];
@@ -4582,13 +4596,11 @@ export module lwg {
         export let defaultProp: string;
         /**当前道具*/
         export let _currentProp = {
-            currentProp: null,
             get name(): string {
-                return this.currentProp = Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
+                return Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
             },
             set name(name: string) {
-                this.currentProp = name;
-                Laya.LocalStorage.setItem('Shop_currentProp', this.currentProp);
+                Laya.LocalStorage.setItem('Shop_currentProp', name);
             }
         };
 
@@ -4599,13 +4611,11 @@ export module lwg {
         export let defaultOther: string;
         /**当前使用的其他物品*/
         export let _currentOther = {
-            crrentOther: null,
             get name(): string {
-                return this.currentProp = Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
+                return Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
             },
             set name(name: string) {
-                this.crrentOther = name;
-                Laya.LocalStorage.setItem('Shop_crrentOther', this.crrentOther);
+                Laya.LocalStorage.setItem('Shop_crrentOther', name);
             }
         };
 
@@ -4698,8 +4708,9 @@ export module lwg {
          * 返回当前只能用金币购买的商品数组
          * @param goodsClass 商品品类
          * @param have 是否显示获取到的，true为已获得，flase为没有获得，不传则是全部
+         * @param excludeCurrent 假设当前的装扮的皮肤恰好是金币购买的，是否排除这个皮肤
          * */
-        export function getwayGoldArr(goodsClass: string, have?: boolean) {
+        export function getwayGoldArr(goodsClass: string, have?: boolean, excludeCurrent?: boolean) {
             let arr = getGoodsClassArr(goodsClass);
             let arrNoHave = [];
             for (let index = 0; index < arr.length; index++) {
@@ -4717,6 +4728,16 @@ export module lwg {
                 else if (have == undefined) {
                     if (element[GoodsProperty.getway] === Getway.gold) {
                         arrNoHave.push(element);
+                    }
+                }
+            }
+
+            if (excludeCurrent && excludeCurrent !== undefined) {
+                for (let index = 0; index < arrNoHave.length; index++) {
+                    const element = arrNoHave[index];
+                    if (element[GoodsProperty.name] === get_Current(goodsClass)) {
+                        arrNoHave.splice(index, 1);
+                        break;
                     }
                 }
             }
@@ -4750,6 +4771,25 @@ export module lwg {
             return arrIneedwin;
         }
 
+        /**根据品类返回当前使用的皮肤*/
+        export function get_Current(goodsClass: string): string {
+            let _current = null;
+            switch (goodsClass) {
+                case GoodsClass.Skin:
+                    _current = _currentSkin.name;
+                    break;
+                case GoodsClass.Props:
+                    _current = _currentProp.name;
+                    break;
+                case GoodsClass.Other:
+                    _current = _currentOther.name;
+                    break;
+                default:
+                    break;
+            }
+            return _current;
+        }
+
         /**根据品类返回品类名称数组*/
         export function getGoodsClassArr(goodsClass: string): Array<any> {
             let arr = [];
@@ -4768,6 +4808,47 @@ export module lwg {
                     break;
             }
             return arr;
+        }
+
+        /**
+         * 通过resCondition/condition，购买商品，有些商品需要购买很多次，购买后，并且设置成购买状态，返回0表示没有购买完成，刚好完成，-1已经拥有或者是没有改商品
+         * @param calssName 商品种类
+         * @param name 商品名称
+         * @param number 购买几次，不传则默认为1次
+         */
+        export function buyGoods(calssName: string, name: string, number?: number): number {
+            if (!number) {
+                number = 1;
+            }
+            let resCondition = getGoodsProperty(calssName, name, GoodsProperty.resCondition);
+            let condition = getGoodsProperty(calssName, name, GoodsProperty.condition);
+            let have = getGoodsProperty(calssName, name, GoodsProperty.have);
+            if (have !== true && have !== null) {
+                if (condition <= resCondition + number) {
+                    setGoodsProperty(calssName, name, GoodsProperty.resCondition, condition);
+                    setGoodsProperty(calssName, name, GoodsProperty.have, true);
+                    if (_ShopList) {
+                        _ShopList.refresh();
+                    }
+                    return 1;
+                } else {
+                    setGoodsProperty(calssName, name, GoodsProperty.resCondition, resCondition + number);
+                    if (_ShopList) {
+                        _ShopList.refresh();
+                    }
+                    return 0;
+                }
+            } else {
+                return -1;
+            }
+        }
+
+        /**在loding界面或者开始界面执行一次！*/
+        export function initShop(): void {
+            //如果上个日期等于今天的日期，那么从存储中获取，如果不相等则直接从数据表中获取
+            Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+            Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+            Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
         }
 
         /**商品属性列表，数据表中的商品应该有哪些属性,name和have是必须有的属性,可以无限增加*/
@@ -4835,9 +4916,15 @@ export module lwg {
                 /**结构，如果没有则为null*/
                 Shop._ShopTap = this.self['MyTap'];
                 Shop._ShopList = this.self['MyList'];
-                Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
-                Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
-                Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+                if (!Shop.allSkin) {
+                    Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                }
+                if (!Shop.allProps) {
+                    Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                }
+                if (!Shop.allOther) {
+                    Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+                }
                 goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
                 classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
             }
@@ -5063,13 +5150,10 @@ export module lwg {
 
     /**签到模块*/
     export module CheckIn {
-
         /**签到list*/
         export let _checkList: Laya.List;
         /**列表信息*/
         export let _checkArray: Array<any>;
-        /**今日是否已经签到了！*/
-        export let _todayCheckIn: boolean = false;
         /**上次的签到日期，主要判断今日会不会弹出签到，不一样则弹出签到，一样则不弹出签到*/
         export let _lastCheckDate = {
             get date(): number {
@@ -5185,7 +5269,12 @@ export module lwg {
             checkInState = 'checkInState',
             /**排列顺序*/
             arrange = 'arrange',
+        }
 
+        /**事件类型*/
+        export enum EventType {
+            /**移除签到按钮*/
+            removeCheckBtn = 'removeCheckBtn',
         }
 
         export class CheckInScene extends Admin.Scene {
@@ -5263,10 +5352,10 @@ export module lwg {
     }
 
     /**限定皮肤模块*/
-    export module XDSkin {
+    export module SkinXD {
         /**从哪个界面弹出了XDSkin*/
         export let _fromScene: string;
-        /**需要看几次广告才可以获得限定皮肤*/
+        /**需要看几次广告才可以获得限定皮肤,默认三次，重写覆盖*/
         export let _needAdsNum: number;
         /**已经几次看广告*/
         export let _adsNum = {
@@ -5287,58 +5376,65 @@ export module lwg {
             if (_adsNum.value >= _needAdsNum) {
                 return;
             } else {
-                Admin._openScene(Admin.SceneName.UIXDSkin);
+                Admin._openScene(Admin.SceneName.UISkinXD);
                 _fromScene = fromScene;
             }
         }
 
+        export enum EventType {
+            /**获得限定皮肤*/
+            acquisition = 'acquisition',
+        }
+
         /**限定皮肤场景父类*/
-        export class XDSkinScene extends Admin.Scene {
+        export class SkinXDScene extends Admin.Scene {
             lwgOnAwake(): void {
                 this.initData();
-                this.xdSkinOnAwake();
+                this.skinXDOnAwake();
             }
             /**初始化json数据*/
             initData(): void {
                 _needAdsNum = 3;
             }
             /**CheckInScene开始前执行一次，重写覆盖*/
-            xdSkinOnAwake(): void { }
+            skinXDOnAwake(): void { }
 
+            lwgAdaptive(): void {
+                this.skinXDAdaptive();
+            }
+            skinXDAdaptive(): void { };
             lwgOnEnable(): void {
+                this.skinXDOnEnable();
             }
-
-            xdSkinOnEnable(): void { }
-
-
+            skinXDOnEnable(): void { }
             lwgNodeDec(): void {
-                this.xdSkinNodeDec();
+                this.skinXDNodeDec();
             }
-            /**NodeDec*/
-            xdSkinNodeDec(): void { }
+            /**节点声明*/
+            skinXDNodeDec(): void { }
 
             lwgBtnClick(): void {
-                this.xdSkinBtnClick();
+                this.skinXDBtnClick();
             }
-            xdSkinBtnClick(): void { }
+            skinXDBtnClick(): void { }
 
             lwgEventReg(): void {
-                this.xdSkinEventReg();
+                this.skinXDEventReg();
             }
             /**场景中的一些事件*/
-            xdSkinEventReg(): void { }
+            skinXDEventReg(): void { }
 
             lwgOnDisable(): void {
-                this.xdSkinOnDisable();
+                this.skinXDOnDisable();
             }
-            /**离开时执行，子类不执行onDisable，只执行xdSkinDisable*/
-            xdSkinOnDisable(): void { }
+            /**离开时执行，子类不执行onDisable，只执行skinXDDisable*/
+            skinXDOnDisable(): void { }
 
             lwgOnUpdate(): void {
-                this.xdSkinOnUpdate();
+                this.skinXDOnUpdate();
             }
             /**每帧执行*/
-            xdSkinOnUpdate(): void { }
+            skinXDOnUpdate(): void { }
         }
     }
 
@@ -5479,6 +5575,7 @@ export module lwg {
             /**完成后，内部结构初始化*/
             lwgInterior(): void {
                 Task.initTask();
+                Shop.initShop();
             }
             /**任务系统中的事件注册，caller指向Task模块*/
             lodingTaskEventReg(): void {
@@ -5512,7 +5609,7 @@ export let VictoryBox = lwg.VictoryBox;
 export let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
 export let CheckIn = lwg.CheckIn;
 export let CheckInScene = lwg.CheckIn.CheckInScene;
-export let XDSkin = lwg.XDSkin;
-export let XDSkinScene = lwg.XDSkin.XDSkinScene;
+export let SkinXD = lwg.SkinXD;
+export let SkinXDScene = lwg.SkinXD.SkinXDScene;
 
 

@@ -30,6 +30,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife') as Laya.MeshSprite3D;
         GSene3D.Floor = this.self.getChildByName('Floor') as Laya.MeshSprite3D;
         GSene3D.Razor = this.self.getChildByName('Razor') as Laya.MeshSprite3D;
+        GSene3D.razorFPos.x = GSene3D.Razor.transform.position.x;
+        GSene3D.razorFPos.y = GSene3D.Razor.transform.position.y;
+        GSene3D.razorFPos.z = GSene3D.Razor.transform.position.z;
+
         GSene3D.knifeParent = this.self.getChildByName('knifeParent') as Laya.MeshSprite3D;
         GSene3D.knife = GSene3D.knifeParent.getChildByName('knife') as Laya.MeshSprite3D;
 
@@ -62,7 +66,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         GSene3D.TouchScreen = this.self.getChildByName('TouchScreen') as Laya.MeshSprite3D;
         GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
-
     }
 
     lwgOnEnable(): void {
@@ -78,10 +81,13 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
             this.refreshScene();
         })
-
         //摄像机的移动,参数为方向
         EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction: string) => {
             this.cameraMove(direction);
+        })
+        //摄像机的移动,参数为方向
+        EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction: string) => {
+            GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
         })
     };
 
@@ -89,6 +95,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.Level.removeSelf();
         this.createLevel();
         this.lwgNodeDec();
+        GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
     }
 
     /**摄像机的移动规则*/
@@ -96,7 +103,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         switch (direction) {
             case GEnum.TaskType.sideHair:
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this);
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this, null, () => {
+                    Admin._gameStart = true;
+                });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
 
@@ -108,7 +117,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
                 GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this);
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this, null, () => {
+                    Admin._gameStart = true;
+                });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
 
@@ -120,7 +131,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
                 GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this);
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this, null, () => {
+                    Admin._gameStart = true;
+                });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
 
@@ -132,7 +145,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z)
                 GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this);
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this, null, () => {
+                    Admin._gameStart = true;
+                });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
 
@@ -144,7 +159,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 let Model2 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
                 Model2.transform.localRotationEulerX = -180
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this)
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, null, () => {
+                    Admin._gameStart = true;
+                });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
 
@@ -157,7 +174,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 let Model1 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
                 Model1.transform.localRotationEulerX = -180
 
-                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this);
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
+                    Admin._gameStart = true;
+                });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
 

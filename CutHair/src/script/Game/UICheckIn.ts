@@ -1,5 +1,5 @@
 import ADManager, { TaT } from "../TJ/Admanager";
-import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects } from "../Lwg_Template/lwg";
+import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin } from "../Lwg_Template/lwg";
 
 export default class UICheckIn extends CheckIn.CheckInScene {
 
@@ -113,6 +113,7 @@ export default class UICheckIn extends CheckIn.CheckInScene {
                 Pic_Gold.visible = false;
                 this.self['BtnSeven'].skin = 'UI/Common/kuang1.png';
             }
+            EventAdmin.notify(CheckIn.EventType.removeCheckBtn);
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 Gold.addGold(rewardNum * number);
                 this.self.close();
