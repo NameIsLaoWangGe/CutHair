@@ -5,7 +5,7 @@ import ADManager from "../TJ/Admanager";
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
 
-        Dialog.createDialogue(150, 334, Dialog.UseWhere.scene3, this.self);
+        Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
 
         let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
 
@@ -22,8 +22,6 @@ export default class UISkin extends SkinScene {
                 Skin._eyeSkinArr.push(element);
             }
         }
-
-        Skin._SkinList.array = Skin._headSkinArr;
     }
 
     skinEventReg(): void {
@@ -179,6 +177,7 @@ export default class UISkin extends SkinScene {
     }
 
     skinOnEnable(): void {
+        Skin._SkinList.array = Skin._eyeSkinArr;
         Skin._SkinList.refresh();
     }
 

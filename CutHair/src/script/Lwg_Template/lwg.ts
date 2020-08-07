@@ -604,54 +604,64 @@ export module lwg {
 
         export let DialogueNode;
         /**
-         * 动态创建一个对话框
+         * 动态创建一个自动播放的对话框
          * @param x x位置
          * @param y y位置
          * @param useWhere 适用场景
          * @param parent 父节点
          * @param content 内容
-         * @param mode 播放模式
+         * @param startDelayed 起始延时时间
+         * @param delayed 每段文字延迟时间，默认为2秒
          */
-        export function createDialogue(x: number, y: number, useWhere: string, parent?: Laya.Sprite, content?: Array<string>, mode?: string): void {
-            let Pre_Dialogue;
-            Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
-                if (parent) {
-                    parent.addChild(Pre_Dialogue);
-                } else {
-                    Laya.stage.addChild(Pre_Dialogue);
-                }
-                Pre_Dialogue.x = x;
-                Pre_Dialogue.y = y;
-                let ContentLabel = Pre_Dialogue.getChildByName('Content') as Laya.Label;
-                let contentArr;
-                if (content !== undefined) {
-                    ContentLabel.text = content[0];
-                } else {
-                    contentArr = getDialogContent_Random(useWhere);
-                    ContentLabel.text = contentArr[0];
-                }
-                Pre_Dialogue.zOrder = 100;
-                Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 200, null, 1000, () => {
-                    if (mode == undefined || mode == PlayMode.voluntarily) {
+        export function createVoluntarilyDialogue(x: number, y: number, useWhere: string, startDelayed?: number, delayed?: number, parent?: Laya.Sprite, content?: Array<string>): void {
+            if (startDelayed == undefined) {
+                startDelayed = 0;
+            }
+            Laya.timer.once(startDelayed, this, () => {
+                let Pre_Dialogue;
+                Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
+                    if (parent) {
+                        parent.addChild(Pre_Dialogue);
+                    } else {
+                        Laya.stage.addChild(Pre_Dialogue);
+                    }
+                    Pre_Dialogue.x = x;
+                    Pre_Dialogue.y = y;
+                    let ContentLabel = Pre_Dialogue.getChildByName('Content') as Laya.Label;
+                    let contentArr;
+                    if (content !== undefined) {
+                        ContentLabel.text = content[0];
+                    } else {
+                        contentArr = getDialogContent_Random(useWhere);
+                        ContentLabel.text = contentArr[0];
+                    }
+                    Pre_Dialogue.zOrder = 100;
+
+                    if (delayed == undefined) {
+                        delayed = 1000;
+                    }
+                    Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 1000, () => {
                         for (let index = 0; index < contentArr.length; index++) {
-                            
-                            Laya.timer.once(index * 1000, this, () => {
+
+                            Laya.timer.once(index * delayed, this, () => {
                                 ContentLabel.text = contentArr[index];
 
                                 if (index == contentArr.length - 1) {
-                                    Laya.timer.once(1000, this, () => {
-                                        Pre_Dialogue.removeSelf();
+                                    Laya.timer.once(delayed, this, () => {
+                                        Animation2D.scale_Alpha(Pre_Dialogue, 1, 1, 1, 0, 0, 0, 150, null, 1000, () => {
+                                            Pre_Dialogue.removeSelf();
+                                        })
                                     })
                                 }
                             })
                         }
-                    }
-                });
-                DialogueNode = Pre_Dialogue;
-            }));
+                    });
+                    DialogueNode = Pre_Dialogue;
+                }));
+            })
         }
     }
 
@@ -1069,7 +1079,6 @@ export module lwg {
             }));
         }
 
-
         /**打开下一关场景，并且上传信息
          * @param subEx 消耗多少体力值
         */
@@ -1130,9 +1139,7 @@ export module lwg {
                 this.lwgAdaptive();
             }
             /**游戏开始前执行一次，重写覆盖*/
-            lwgOnAwake(): void {
-
-            }
+            lwgOnAwake(): void {}
             onEnable() {
                 this.lwgEventReg();
                 this.lwgOnEnable();
@@ -1219,9 +1226,7 @@ export module lwg {
                 EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgOnDisable(): void {
-
-            }
+            lwgOnDisable(): void {}
         }
 
         /**3D场景通用父类*/
@@ -1432,7 +1437,7 @@ export module lwg {
             constructor() {
                 super();
             }
-            onEnable(): void {
+            onAwake(): void {
                 this.self = this.owner as Laya.MeshSprite3D;
                 this.selfTransform = this.self.transform;
                 this.selfScene = this.self.scene;
@@ -1442,19 +1447,31 @@ export module lwg {
                 this.self[calssName] = this;
                 this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
                 this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider) as Laya.PhysicsCollider;
+                this.lwgNodeDec();
+            }
+            lwgNodeDec(): void {}
+            onEnable() {
+                this.lwgEventReg();
                 this.lwgOnEnable();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgOnEnable(): void {
-                console.log('父类的初始化！');
+            lwgOnEnable(): void {}
+            /**点击事件注册*/
+            lwgBtnClick(): void {
             }
-
+            /**事件注册*/
+            lwgEventReg(): void {
+            }
             onUpdate(): void {
                 this.lwgOnUpdate();
             }
             lwgOnUpdate(): void {
+
             }
             onDisable(): void {
+                this.lwgOnDisable();
+                Laya.timer.clearAll(this);
+                EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgOnDisable(): void {

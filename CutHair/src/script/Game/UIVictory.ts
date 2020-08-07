@@ -140,8 +140,7 @@ export default class UIVictory extends lwg.Admin.Scene {
             Gold.addGold(this.getGoldNum);
         }
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-        Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage) })
-        this.self.close();
+        Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }
 
     lwgOnDisable(): void {

@@ -1,4 +1,4 @@
-import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, Dialog } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UIOperation extends lwg.Admin.Scene {
@@ -6,8 +6,6 @@ export default class UIOperation extends lwg.Admin.Scene {
     public TaskProgress: Laya.Prefab;
     /**摇杆*/
     Rocker: Laya.Sprite;
-    /**角色对话框*/
-    Dialogue: Laya.Sprite;
     /**任务进度条父节点*/
     TaskBar: Laya.Sprite;
     /**下一个任务按钮*/
@@ -141,7 +139,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.Rocker = this.self['Rocker'];
         this.TaskBar = this.self['TaskBar'];
         this.BtnLast = this.self['BtnLast'];
-        this.Dialogue = this.self['Dialogue'];
     }
 
     lwgOnAwake(): void {
@@ -157,7 +154,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.BtnLast.visible = false;
         this.createTaskContent();
         this.mainCameraMove();
-        this.dialogueSet();
+        Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
     }
 
     lwgEventReg(): void {
@@ -295,22 +292,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.TaskBar.pivotX = this.TaskBar.width / 2;
         this.TaskBar.x = Laya.stage.width / 2;
 
-    }
-
-    /**说话*/
-    dialogueSet(): void {
-        this.Dialogue.visible = false;
-        Laya.timer.once(3000, this, () => {
-            this.Dialogue.visible = true;
-            Laya.timer.once(2000, this, () => {
-                let Dec = this.Dialogue.getChildByName('Dec') as Laya.Label;
-                Dec.text = ' 理发剃须看广告!';
-
-                Laya.timer.once(2000, this, () => {
-                    this.Dialogue.visible = false;
-                })
-            })
-        })
     }
 
     /**

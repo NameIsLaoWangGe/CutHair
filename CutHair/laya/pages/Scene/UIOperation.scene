@@ -2,7 +2,7 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":10,
+    "selecteID":6,
     "searchKey":"Scene",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
@@ -59,34 +59,6 @@
             "compId":5,
             "child":[
                 ]
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,Dialogue,Dialogue",
-            "props":{"y":267,"x":439,"width":260,"var":"Dialogue","texture":"UI/GameStart/qipao.png","pivotY":145,"pivotX":45,"name":"Dialogue","height":145},
-            "nodeParent":2,
-            "label":"Dialogue",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":6,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Label",
-                    "searchKey":"Label,Dec",
-                    "props":{"y":29,"x":20,"width":224,"valign":"middle","text":"理发三部曲！","name":"Dec","height":57,"fontSize":28,"color":"#d9501b","bold":true,"align":"center"},
-                    "nodeParent":6,
-                    "label":"Dec",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":9,
-                    "child":[
-                        ]
-                }]
         },
         {
             "x":15,

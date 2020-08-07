@@ -321,6 +321,8 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     shopOnDisable(): void {
+        EventAdmin.notify(GEnum.EventType.changeOther);
+        EventAdmin.notify(GEnum.EventType.changeProp);
         GVariate._stageClick = true;
     }
 }

@@ -25,6 +25,11 @@ export module Global {
             upRightBeard = 'upRightBeard',
             taskProgress = 'taskProgress',
             cameraMove = 'cameraMove',
+            /**更换剃刀*/
+            changeProp = 'changeProp',
+            /**更换推刀*/
+            changeOther = 'changeOther',
+
         }
     }
 
@@ -76,7 +81,6 @@ export module Global {
         export let MiddleBeard: Laya.MeshSprite3D;
         export let UpRightBeard: Laya.MeshSprite3D;
         export let UpLeftBeard: Laya.MeshSprite3D;
-
 
         /**地板*/
         export let Floor: Laya.MeshSprite3D;

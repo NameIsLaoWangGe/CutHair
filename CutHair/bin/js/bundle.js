@@ -433,48 +433,56 @@
                 PlayMode["manual"] = "manual";
                 PlayMode["clickContent"] = "clickContent";
             })(PlayMode = Dialog.PlayMode || (Dialog.PlayMode = {}));
-            function createDialogue(x, y, useWhere, parent, content, mode) {
-                let Pre_Dialogue;
-                Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
-                    let _prefab = new Laya.Prefab();
-                    _prefab.json = prefab;
-                    Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
-                    if (parent) {
-                        parent.addChild(Pre_Dialogue);
-                    }
-                    else {
-                        Laya.stage.addChild(Pre_Dialogue);
-                    }
-                    Pre_Dialogue.x = x;
-                    Pre_Dialogue.y = y;
-                    let ContentLabel = Pre_Dialogue.getChildByName('Content');
-                    let contentArr;
-                    if (content !== undefined) {
-                        ContentLabel.text = content[0];
-                    }
-                    else {
-                        contentArr = getDialogContent_Random(useWhere);
-                        ContentLabel.text = contentArr[0];
-                    }
-                    Pre_Dialogue.zOrder = 100;
-                    Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 200, null, 1000, () => {
-                        if (mode == undefined || mode == PlayMode.voluntarily) {
+            function createVoluntarilyDialogue(x, y, useWhere, startDelayed, delayed, parent, content) {
+                if (startDelayed == undefined) {
+                    startDelayed = 0;
+                }
+                Laya.timer.once(startDelayed, this, () => {
+                    let Pre_Dialogue;
+                    Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                        let _prefab = new Laya.Prefab();
+                        _prefab.json = prefab;
+                        Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
+                        if (parent) {
+                            parent.addChild(Pre_Dialogue);
+                        }
+                        else {
+                            Laya.stage.addChild(Pre_Dialogue);
+                        }
+                        Pre_Dialogue.x = x;
+                        Pre_Dialogue.y = y;
+                        let ContentLabel = Pre_Dialogue.getChildByName('Content');
+                        let contentArr;
+                        if (content !== undefined) {
+                            ContentLabel.text = content[0];
+                        }
+                        else {
+                            contentArr = getDialogContent_Random(useWhere);
+                            ContentLabel.text = contentArr[0];
+                        }
+                        Pre_Dialogue.zOrder = 100;
+                        if (delayed == undefined) {
+                            delayed = 1000;
+                        }
+                        Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 1000, () => {
                             for (let index = 0; index < contentArr.length; index++) {
-                                Laya.timer.once(index * 1000, this, () => {
+                                Laya.timer.once(index * delayed, this, () => {
                                     ContentLabel.text = contentArr[index];
                                     if (index == contentArr.length - 1) {
-                                        Laya.timer.once(1000, this, () => {
-                                            Pre_Dialogue.removeSelf();
+                                        Laya.timer.once(delayed, this, () => {
+                                            Animation2D.scale_Alpha(Pre_Dialogue, 1, 1, 1, 0, 0, 0, 150, null, 1000, () => {
+                                                Pre_Dialogue.removeSelf();
+                                            });
                                         });
                                     }
                                 });
                             }
-                        }
-                    });
-                    Dialog.DialogueNode = Pre_Dialogue;
-                }));
+                        });
+                        Dialog.DialogueNode = Pre_Dialogue;
+                    }));
+                });
             }
-            Dialog.createDialogue = createDialogue;
+            Dialog.createVoluntarilyDialogue = createVoluntarilyDialogue;
         })(Dialog = lwg.Dialog || (lwg.Dialog = {}));
         let Gold;
         (function (Gold_1) {
@@ -792,8 +800,7 @@
                     this.lwgVariateInit();
                     this.lwgAdaptive();
                 }
-                lwgOnAwake() {
-                }
+                lwgOnAwake() { }
                 onEnable() {
                     this.lwgEventReg();
                     this.lwgOnEnable();
@@ -857,8 +864,7 @@
                     Laya.Tween.clearAll(this);
                     EventAdmin.offCaller(this);
                 }
-                lwgOnDisable() {
-                }
+                lwgOnDisable() { }
             }
             Admin.Scene = Scene;
             class Scene3D extends Laya.Script3D {
@@ -997,7 +1003,7 @@
                 constructor() {
                     super();
                 }
-                onEnable() {
+                onAwake() {
                     this.self = this.owner;
                     this.selfTransform = this.self.transform;
                     this.selfScene = this.self.scene;
@@ -1005,10 +1011,17 @@
                     this.self[calssName] = this;
                     this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
                     this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider);
+                    this.lwgNodeDec();
+                }
+                lwgNodeDec() { }
+                onEnable() {
+                    this.lwgEventReg();
                     this.lwgOnEnable();
                 }
-                lwgOnEnable() {
-                    console.log('父类的初始化！');
+                lwgOnEnable() { }
+                lwgBtnClick() {
+                }
+                lwgEventReg() {
                 }
                 onUpdate() {
                     this.lwgOnUpdate();
@@ -1016,6 +1029,9 @@
                 lwgOnUpdate() {
                 }
                 onDisable() {
+                    this.lwgOnDisable();
+                    Laya.timer.clearAll(this);
+                    EventAdmin.offCaller(this);
                 }
                 lwgOnDisable() {
                 }
@@ -4021,6 +4037,8 @@
                 EventType["upRightBeard"] = "upRightBeard";
                 EventType["taskProgress"] = "taskProgress";
                 EventType["cameraMove"] = "cameraMove";
+                EventType["changeProp"] = "changeProp";
+                EventType["changeOther"] = "changeOther";
             })(EventType = GEnum.EventType || (GEnum.EventType = {}));
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
@@ -4090,12 +4108,31 @@
     }
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
+        lwgEventReg() {
+            EventAdmin.reg(GEnum.EventType.changeProp, this, () => {
+                let name;
+                for (let index = 0; index < this.self.numChildren; index++) {
+                    const element = this.self.getChildAt(index);
+                    if (element.name !== 'Blade') {
+                        if (element.name !== Shop._currentProp.name) {
+                            element.active = false;
+                        }
+                        else {
+                            name = element.name;
+                            element.active = true;
+                        }
+                    }
+                }
+                if (!name) {
+                    this.self.getChildByName('jiandao').active = true;
+                }
+            });
+        }
         lwgOnEnable() {
             this.RazorState = GEnum.RazorState.move;
             let Blade = this.self.getChildByName('Blade');
             Blade.addComponent(GameMain3D_Blade);
-        }
-        onTriggerEnter(other) {
+            EventAdmin.notify(GEnum.EventType.changeProp);
         }
         lwgOnUpdate() {
         }
@@ -4349,8 +4386,7 @@
             Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
             Scene3D.addComponent(GameMain3D);
             Laya.timer.once(500, this, () => {
-                lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
-                this.self.close();
+                lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
             });
         }
         lodingTaskEventReg() {
@@ -4529,7 +4565,6 @@
             this.Rocker = this.self['Rocker'];
             this.TaskBar = this.self['TaskBar'];
             this.BtnLast = this.self['BtnLast'];
-            this.Dialogue = this.self['Dialogue'];
         }
         lwgOnAwake() {
             GVariate._taskNum = 0;
@@ -4542,7 +4577,7 @@
             this.BtnLast.visible = false;
             this.createTaskContent();
             this.mainCameraMove();
-            this.dialogueSet();
+            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
@@ -4646,19 +4681,6 @@
             this.TaskBar.width = GVariate._taskArr.length * spacing;
             this.TaskBar.pivotX = this.TaskBar.width / 2;
             this.TaskBar.x = Laya.stage.width / 2;
-        }
-        dialogueSet() {
-            this.Dialogue.visible = false;
-            Laya.timer.once(3000, this, () => {
-                this.Dialogue.visible = true;
-                Laya.timer.once(2000, this, () => {
-                    let Dec = this.Dialogue.getChildByName('Dec');
-                    Dec.text = ' 理发剃须看广告!';
-                    Laya.timer.once(2000, this, () => {
-                        this.Dialogue.visible = false;
-                    });
-                });
-            });
         }
         createTaskContent() {
             for (let index = 0; index < GVariate._taskArr.length; index++) {
@@ -5365,6 +5387,8 @@
             this.self.close();
         }
         shopOnDisable() {
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
             GVariate._stageClick = true;
         }
     }
@@ -5380,7 +5404,7 @@
 
     class UISkin extends SkinScene {
         skinOnAwake() {
-            Dialog.createDialogue(150, 334, Dialog.UseWhere.scene3, this.self);
+            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
             let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
             Skin._headSkinArr = [];
             Skin._eyeSkinArr = [];
@@ -5395,7 +5419,6 @@
                     Skin._eyeSkinArr.push(element);
                 }
             }
-            Skin._SkinList.array = Skin._headSkinArr;
         }
         skinEventReg() {
             EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
@@ -5539,6 +5562,7 @@
             }
         }
         skinOnEnable() {
+            Skin._SkinList.array = Skin._eyeSkinArr;
             Skin._SkinList.refresh();
         }
         skinBtnClick() {
@@ -5648,7 +5672,6 @@
         }
         lwgOnEnable() {
             GVariate._stageClick = false;
-            Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true; });
             Gold.createGoldNode(Laya.stage);
             Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
             this.levelStyleDisplay();
@@ -5657,6 +5680,7 @@
             }
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
             CheckIn.openCheckIn();
+            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
         }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
@@ -5911,8 +5935,7 @@
                 Gold.addGold(this.getGoldNum);
             }
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-            Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
-            this.self.close();
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         lwgOnDisable() {
             Setting.setBtnVinish();

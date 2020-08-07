@@ -44,8 +44,7 @@ export default class UILoding extends Loding.LodeScene {
         Scene3D.addComponent(GameMain3D);
 
         Laya.timer.once(500, this, () => {
-            lwg.Admin._openScene(lwg.Admin.SceneName.UIStart);
-            this.self.close();
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
         })
     }
 

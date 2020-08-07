@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -22,7 +22,6 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
         GVariate._stageClick = false;
-        Laya.timer.frameOnce(3, this, () => { GVariate._stageClick = true })
         Gold.createGoldNode(Laya.stage);
         Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
 
@@ -32,9 +31,10 @@ export default class UIStart extends lwg.Admin.Scene {
             this.self['BtnXDSkin'].visible = false;
         }
 
-
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
         CheckIn.openCheckIn();
+
+        Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
     }
 
     /**关卡列表*/
