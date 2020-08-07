@@ -3,6 +3,14 @@ import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin } fro
 
 export default class UICheckIn extends CheckIn.CheckInScene {
 
+    checkInNodeDec(): void {
+        if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
+            this.self['BtnTenGet'].visible = false;
+            this.self['BtnGet'].visible = false;
+            this.self['Select'].visible = false;
+        }
+    }
+
     checkInOnEnable(): void {
         let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip') as Laya.Image;
         ChinkTip.visible = false;
@@ -113,7 +121,7 @@ export default class UICheckIn extends CheckIn.CheckInScene {
                 Pic_Gold.visible = false;
                 this.self['BtnSeven'].skin = 'UI/Common/kuang1.png';
             }
-            EventAdmin.notify(CheckIn.EventType.removeCheckBtn);
+            // EventAdmin.notify(CheckIn.EventType.removeCheckBtn);
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 Gold.addGold(rewardNum * number);
                 this.self.close();
@@ -130,13 +138,14 @@ export default class UICheckIn extends CheckIn.CheckInScene {
     }
 
     checkInOnUpdate(): void {
-        if (this.self['Dot'].visible) {
-            this.self['BtnGet'].visible = false;
-            this.self['BtnTenGet'].visible = true;
-        } else {
-            this.self['BtnGet'].visible = true;
-            this.self['BtnTenGet'].visible = false;
+        if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
+            if (this.self['Dot'].visible) {
+                this.self['BtnGet'].visible = false;
+                this.self['BtnTenGet'].visible = true;
+            } else {
+                this.self['BtnGet'].visible = true;
+                this.self['BtnTenGet'].visible = false;
+            }
         }
     }
-  
 }

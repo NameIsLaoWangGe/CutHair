@@ -161,11 +161,6 @@ P B7535474 qiandui.png
 P FA08FDE4 sanbei.png
 P 516ED890 txt_zhijie.png
 P 63B58DAD 标题.png
-D UI/DressUp
-P DF56DB24 biaoti.png
-P 6388FD1D shipin.png
-P 0A9AD531 txt_wancheng.png
-P 81B28711 xin.png
 D UI/GameMain
 P C942384B bai.png
 P F5FCFD0A hui.png
@@ -271,6 +266,11 @@ P 1E3220B7 jinxing.png
 P 4C0C1CAF kuang.png
 P EC6FE0FE linqu.png
 P 102BB7CB yilingqu.png
+D UI/UISkin
+P DF56DB24 biaoti.png
+P 6388FD1D shipin.png
+P 0A9AD531 txt_wancheng.png
+P 81B28711 xin.png
 D UI/VictoryBox
 P 5CD14092 baoxian2.png
 P 213C8C48 baoxian3.png

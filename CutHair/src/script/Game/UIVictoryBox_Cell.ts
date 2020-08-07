@@ -26,7 +26,7 @@ export default class UIVictoryBox_Cell extends Admin.Object {
                     this.lwgBtnClick();
                 })
             } else {
-                Dialog.createHint_Middle(Dialog.Content["观看广告可以获得三次开宝箱次数！"]);
+                Dialog.createHint_Middle(Dialog.HintContent["观看广告可以获得三次开宝箱次数！"]);
             }
         }
 

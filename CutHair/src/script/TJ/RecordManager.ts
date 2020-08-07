@@ -89,21 +89,21 @@ export default class RecordManager {
             p.extra.videoTopics = ["解救小王子", "番茄小游戏", "抖音小游戏"]
             p.channel = "video";
             p.success = () => {
-                Dialog.createHint_Middle(Dialog.Content["分享成功!"]);
+                Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
                 successedAc();
             };
             p.fail = () => {
                 if (type === 'noAward') {
-                    Dialog.createHint_Middle(Dialog.Content["分享成功后才能获取奖励！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
                 } else {
-                    Dialog.createHint_Middle(Dialog.Content["分享失败！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
                 }
                 failAc();
             }
             RecordManager.grv.Share(p);
         }
         else {
-            Dialog.createHint_Middle(Dialog.Content["暂无视频，玩一局游戏之后分享！"]);
+            Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
             // UIMgr.tip("暂无录屏，玩一局游戏可以分享");
         }
     }

@@ -4,6 +4,7 @@ import ADManager from "../TJ/Admanager";
 
 export default class UIShop extends Shop.ShopScene {
     shopOnAwake(): void {
+        Gold.goldAppear();
         GVariate._stageClick = false;
 
         /**设置品类顺序*/
@@ -71,19 +72,18 @@ export default class UIShop extends Shop.ShopScene {
             if (dataSource.have) {
                 this.sceletDisplay(dataSource, false);
             } else {
-
                 if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
                     ADManager.ShowReward(() => {
                         this.adsAcquisition(dataSource);
                     })
                 } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
-                    Dialog.createHint_Middle(Dialog.Content["请前往皮肤限定界面获取!"])
+                    Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤限定界面获取!"])
 
                 } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
-                    Dialog.createHint_Middle(Dialog.Content["通过相应的关卡数达到就可以得到了!"])
+                    Dialog.createHint_Middle(Dialog.HintContent["通过相应的关卡数达到就可以得到了!"])
 
                 } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
-                    Dialog.createHint_Middle(Dialog.Content["点击金币抽奖按钮购买!"])
+                    Dialog.createHint_Middle(Dialog.HintContent["点击金币抽奖按钮购买!"])
                 }
             }
         })
@@ -278,14 +278,14 @@ export default class UIShop extends Shop.ShopScene {
                 break;
         }
         if (noHaveGold.length <= 0) {
-            Dialog.createHint_Middle(Dialog.Content["没有可以购买的皮肤了！"]);
+            Dialog.createHint_Middle(Dialog.HintContent["没有可以购买的皮肤了！"]);
         } else {
             Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
             let price = noHaveGold[0][Shop.GoodsProperty.condition];
             if (Gold._goldNum < price) {
-                Dialog.createHint_Middle(Dialog.Content["金币不够了！"]);
+                Dialog.createHint_Middle(Dialog.HintContent["金币不够了！"]);
             } else {
-                Dialog.createHint_Middle(Dialog.Content["恭喜获得新皮肤!"]);
+                Dialog.createHint_Middle(Dialog.HintContent["恭喜获得新皮肤!"]);
                 switch (Shop._ShopTap.selectedIndex) {
                     case 2:
                         Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.GoodsProperty.have, true);

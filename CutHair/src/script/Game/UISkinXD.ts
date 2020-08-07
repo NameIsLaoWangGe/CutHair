@@ -45,7 +45,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
         let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
         if (have === 1) {
             this.progressDisplay();
-            Dialog.createHint_Middle(Dialog.Content["限定皮肤已经获得，请前往皮肤界面查看。"]);
+            Dialog.createHint_Middle(Dialog.HintContent["限定皮肤已经获得，请前往皮肤界面查看。"]);
             Shop._currentOther.name = 'xiandanren';
             EventAdmin.notify(SkinXD.EventType.acquisition);
             Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {

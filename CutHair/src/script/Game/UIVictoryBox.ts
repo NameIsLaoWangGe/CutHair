@@ -29,7 +29,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
                     this.getRewardFunc(dataSource);
                 }
             } else {
-                Dialog.createHint_Middle(Dialog.Content["观看广告可以获得三次开宝箱次数！"])
+                Dialog.createHint_Middle(Dialog.HintContent["观看广告可以获得三次开宝箱次数！"])
             }
         })
     }
@@ -114,12 +114,12 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
         if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
             ADManager.ShowReward(() => {
-                Dialog.createHint_Middle(Dialog.Content["增加三次开启宝箱次数！"])
+                Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"])
                 VictoryBox._openNum += 3;
                 VictoryBox._adsMaxOpenNum -= 3;
             })
         } else {
-            Dialog.createHint_Middle(Dialog.Content["没有宝箱领可以领了！"])
+            Dialog.createHint_Middle(Dialog.HintContent["没有宝箱领可以领了！"])
         }
     }
 

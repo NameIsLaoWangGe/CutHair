@@ -220,28 +220,6 @@ export module lwg {
 
         /**
         * 创建提示框prefab
-        * @param type 类型，也就是提示文字类型
-        */
-        export function _createHint_02(type): void {
-            let sp: Laya.Sprite;
-            Laya.loader.load('prefab/HintPre_02.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                Laya.stage.addChild(sp);
-                sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
-                let dec = sp.getChildByName('dec') as Laya.Label;
-                dec.text = Enum.HintContent[type];
-                sp.zOrder = 100;
-
-                Animation2D.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
-                    sp.removeSelf();
-                });
-            }));
-        }
-
-        /**
-        * 创建提示框prefab
         * @param input 类型，也就是提示文字类型
         */
         export function _createHint_InPut(input: string): void {
@@ -458,12 +436,6 @@ export module lwg {
             '限定皮肤已经获得，请前往皮肤界面查看。',
             '分享失败！',
             '兑换码错误！',
-            '获得柯基公主皮肤，前往彩蛋墙查看！',
-            '获得黄皮耗子皮肤，前往彩蛋墙查看！',
-            '获得赛牙人皮肤，前往彩蛋墙查看！',
-            '获得海绵公主皮肤，前往彩蛋墙查看！',
-            '获得仓鼠公主皮肤，前往彩蛋墙查看！',
-            '获得自闭鸭子皮肤，前往彩蛋墙查看！',
             '尚未获得该商品!',
             '恭喜获得新皮肤!',
             '请前往皮肤限定界面获取!',
@@ -473,12 +445,11 @@ export module lwg {
             '增加三次开启宝箱次数！',
             '观看广告可以获得三次开宝箱次数！',
             '没有宝箱领可以领了！',
+            '请前往皮肤界面购买！',
         }
         enum Skin {
             blackBord = 'Frame/UI/ui_orthogon_black.png'
         }
-
-        export let Hint_M: Laya.Prefab = new Laya.Prefab();
 
         /**
          * 动态创建，第一次创建比较卡，需要优化
@@ -539,33 +510,68 @@ export module lwg {
             });
         }
 
-        /**对话框内容*/
-        export let _dialogContentArr = Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'];
+        /**获取对话框内容，内容必须已经预加载*/
+        export let _dialogContent = {
+            get Array(): Array<any> {
+                return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] !== null ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
+            },
+        };
 
         /**
-         * 获取对单个话框中的内容条目数组，通过适用场景和序号获取
+         * 获取对单个话框中指定的内容条目数组，通过适用场景和序号获取
          * @param useWhere 适用场景
-         * @param number 序号
+         * @param name 对话的名称
          * */
-        export function getDialogContent(useWhere: string, number: number): Array<string> {
-            let arr0;
-            for (let index = 0; index < _dialogContentArr.length; index++) {
-                const element = _dialogContentArr[index];
-                if (element['useWhere'] == useWhere) {
-                    arr0.push
+        export function getDialogContent(useWhere: string, name: number): Array<string> {
+            let dia;
+            for (let index = 0; index < _dialogContent.Array.length; index++) {
+                const element = _dialogContent.Array[index];
+                if (element['useWhere'] == useWhere && element['name'] == name) {
+                    dia = element;
+                    break;
                 }
             }
-            return;
+            let arr = [];
+            for (const key in dia) {
+                if (dia.hasOwnProperty(key)) {
+                    const value = dia[key];
+                    if (key.substring(0, 7) == 'content' || value !== -1) {
+                        arr.push(value);
+                    }
+                }
+            }
+            return arr;
         }
 
         /**
-         * 获取对话框中的属性
-         * @param dialogScene 适用场景
-         * @param name 名称
-         * @param property 属性名
-        */
-        export function getDialogProperty(useWhere: string, number: number, property: string): void {
+          * 随机从列表中获取一个内容数组
+          * @param useWhere 适用场景
+          * */
+        export function getDialogContent_Random(useWhere: string): Array<string> {
+            let contentArr = [];
+            let whereArr = getUseWhere(useWhere);
+            let index = Math.floor(Math.random() * whereArr.length);
+            for (const key in whereArr[index]) {
+                if (whereArr[index].hasOwnProperty(key)) {
+                    const value = whereArr[index][key];
+                    if (key.substring(0, 7) == 'content' && value !== "-1") {
+                        contentArr.push(value);
+                    }
+                }
+            }
+            return contentArr;
+        }
 
+        /**根据适用场景取出所有该场景下的数组*/
+        export function getUseWhere(useWhere: string): Array<any> {
+            let arr = [];
+            for (let index = 0; index < _dialogContent.Array.length; index++) {
+                const element = _dialogContent.Array[index];
+                if (element['useWhere'] == useWhere) {
+                    arr.push(element);
+                }
+            }
+            return arr;
         }
 
         /**对话框中应用的场景类型*/
@@ -577,16 +583,76 @@ export module lwg {
 
         /**对话框中的属性*/
         export enum DialogProperty {
-            /**序号*/
-            number = 'number',
+            /**名称，必须有*/
+            name = 'name',
             /**试用场景*/
             useWhere = 'useWhere',
             /**内容条数，内容条数是content+数字，contentMax为最大条数*/
             content = 'content',
             /**语句的最大条目数，配合content属性查找*/
-            contentMax = 'contentMax',
+            max = 'max',
         }
 
+        export enum PlayMode {
+            /**自动播放，随即消失*/
+            voluntarily = 'voluntarily',
+            /**不点击屏幕则不会消失*/
+            manual = 'manual',
+            /**点击变换内容*/
+            clickContent = 'clickContent',
+        }
+
+        export let DialogueNode;
+        /**
+         * 动态创建一个对话框
+         * @param x x位置
+         * @param y y位置
+         * @param useWhere 适用场景
+         * @param parent 父节点
+         * @param content 内容
+         * @param mode 播放模式
+         */
+        export function createDialogue(x: number, y: number, useWhere: string, parent?: Laya.Sprite, content?: Array<string>, mode?: string): void {
+            let Pre_Dialogue;
+            Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
+                if (parent) {
+                    parent.addChild(Pre_Dialogue);
+                } else {
+                    Laya.stage.addChild(Pre_Dialogue);
+                }
+                Pre_Dialogue.x = x;
+                Pre_Dialogue.y = y;
+                let ContentLabel = Pre_Dialogue.getChildByName('Content') as Laya.Label;
+                let contentArr;
+                if (content !== undefined) {
+                    ContentLabel.text = content[0];
+                } else {
+                    contentArr = getDialogContent_Random(useWhere);
+                    ContentLabel.text = contentArr[0];
+                }
+                Pre_Dialogue.zOrder = 100;
+                Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 200, null, 1000, () => {
+                    if (mode == undefined || mode == PlayMode.voluntarily) {
+                        for (let index = 0; index < contentArr.length; index++) {
+                            
+                            Laya.timer.once(index * 1000, this, () => {
+                                ContentLabel.text = contentArr[index];
+
+                                if (index == contentArr.length - 1) {
+                                    Laya.timer.once(1000, this, () => {
+                                        Pre_Dialogue.removeSelf();
+                                    })
+                                }
+                            })
+                        }
+                    }
+                });
+                DialogueNode = Pre_Dialogue;
+            }));
+        }
     }
 
     /**金币模块*/
@@ -955,6 +1021,7 @@ export module lwg {
             UIVictoryBox = 'UIVictoryBox',
             UICheckIn = 'UICheckIn',
             UIResurgence = 'UIResurgence',
+            UISkin = 'UISkin',
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -1789,520 +1856,15 @@ export module lwg {
 
     /**加载一些骨骼动画，在loding界面出现的时候执行skLoding()方法*/
     export module Sk {
-        /**皮肤的顺序以及名称*/
-        export enum PifuMatching {
-            gongzhu = '01_gongzhu',
-            chiji = '02_chiji',
-            change = '03_change',
-            huiguniang = '04_huiguniang',
-            tianshi = '05_tianshi',
-            xiaohongmao = '06_xiaohongmao',
-            xiaohuangya = '07_xiaohuangya',
-            zhenzi = '08_zhenzi',
-            aisha = '09_aisha'
-        }
-        /**皮肤的顺序以及名称*/
-        export enum PaintedPifu {
-            daji = 'P_001_daji',
-            shizi = 'P_002_shizi',
-            pikaqiu = 'P_003_pikaqiu',
-            cangshu = 'P_004_cangshu',
-            haimianbaobao = 'P_005_haimianbaobao',
-            keji = 'P_006_keji',
-            kedaya = 'P_007_kedaya',
-        }
-
-        /**公主骨骼动画*/
-        export let gongzhuTem: Laya.Templet = new Laya.Templet();
-        export let aishaTem: Laya.Templet = new Laya.Templet();
-        export let changeTem: Laya.Templet = new Laya.Templet();
-        export let chijiTem: Laya.Templet = new Laya.Templet();
-        export let huiguniangTem: Laya.Templet = new Laya.Templet();
-        export let tianshiTem: Laya.Templet = new Laya.Templet();
-        export let xiaohongmaoTem: Laya.Templet = new Laya.Templet();
-        export let xiaohuangyaTem: Laya.Templet = new Laya.Templet();
-        export let zhenziTem: Laya.Templet = new Laya.Templet();
-        export let kedayaTem: Laya.Templet = new Laya.Templet();
-
-        // 第二批
-        export let cangshuTem: Laya.Templet = new Laya.Templet();
-        export let dajiTem: Laya.Templet = new Laya.Templet();
-        export let haimianbaobaoTem: Laya.Templet = new Laya.Templet();
-        export let pikaqiuTem: Laya.Templet = new Laya.Templet();
-        export let shiziTem: Laya.Templet = new Laya.Templet();
-        export let kejiTem: Laya.Templet = new Laya.Templet();
-
-        /**王子骨骼动画*/
-        export let wangziTem: Laya.Templet = new Laya.Templet();
-        /**狗骨骼动画*/
-        export let gouTem: Laya.Templet = new Laya.Templet();
-        /**情敌1*/
-        export let qingdi_01Tem: Laya.Templet = new Laya.Templet();
-        /**情敌2*/
-        export let qingdi_02Tem: Laya.Templet = new Laya.Templet();
-        /**后妈*/
-        export let houmaTem: Laya.Templet = new Laya.Templet();
-        /**猴子*/
-        export let houziTem: Laya.Templet = new Laya.Templet();
-
         export function skLoding(): void {
-            createGongzhuTem();
-            createAishaTem();
-            createChijiTem();
-            createChangeTem();
-            createHuiguniangTem();
-            createTianshiTem();
-            createXiaohongmaoTem();
-            createXiaohuangyaTem();
-            createZhenziTem();
-
-            // 第二批
-            createCangshuTem();
-            createPikaqiuTem();
-            createDajiTem();
-            createHaimianbaobaoTem();
-            createShiziTem();
-            createKejiTem();
-            createKedayaTem();
-
-            createWangziTem();
-            createGouTem();
-            createQingdi_01Tem();
-            createQingdi_02Tem();
-            createHoumaTem();
-            createHouziTem();
-
         }
-
-        /**全部加载*/
-        export function createGongzhuTem(): void {
-            gongzhuTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            gongzhuTem.on(Laya.Event.ERROR, this, onError);
-            gongzhuTem.loadAni("SK/gongzhu.sk");
-
-        }
-        export function createAishaTem(): void {
-            aishaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            aishaTem.on(Laya.Event.ERROR, this, onError);
-            aishaTem.loadAni("SK/aisha.sk");
-        }
-        export function createChangeTem(): void {
-            changeTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            changeTem.on(Laya.Event.ERROR, this, onError);
-            changeTem.loadAni("SK/change.sk");
-        }
-        export function createChijiTem(): void {
-            chijiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            chijiTem.on(Laya.Event.ERROR, this, onError);
-            chijiTem.loadAni("SK/chiji.sk");
-        }
-        export function createHuiguniangTem(): void {
-            huiguniangTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            huiguniangTem.on(Laya.Event.ERROR, this, onError);
-            huiguniangTem.loadAni("SK/huiguniang.sk");
-        }
-        export function createTianshiTem(): void {
-            tianshiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            tianshiTem.on(Laya.Event.ERROR, this, onError);
-            tianshiTem.loadAni("SK/tianshi.sk");
-        }
-        export function createXiaohongmaoTem(): void {
-            xiaohongmaoTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            xiaohongmaoTem.on(Laya.Event.ERROR, this, onError);
-            xiaohongmaoTem.loadAni("SK/xiaohongmao.sk");
-        }
-        export function createXiaohuangyaTem(): void {
-            xiaohuangyaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            xiaohuangyaTem.on(Laya.Event.ERROR, this, onError);
-            xiaohuangyaTem.loadAni("SK/xiaohuangya.sk");
-        }
-        export function createZhenziTem(): void {
-            zhenziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            zhenziTem.on(Laya.Event.ERROR, this, onError);
-            zhenziTem.loadAni("SK/zhenzi.sk");
-        }
-
-        // 第二批
-        export function createCangshuTem(): void {
-            cangshuTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            cangshuTem.on(Laya.Event.ERROR, this, onError);
-            cangshuTem.loadAni("SK/cangshu.sk");
-        }
-
-        export function createDajiTem(): void {
-            dajiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            dajiTem.on(Laya.Event.ERROR, this, onError);
-            dajiTem.loadAni("SK/daji.sk");
-        }
-
-        export function createHaimianbaobaoTem(): void {
-            haimianbaobaoTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            haimianbaobaoTem.on(Laya.Event.ERROR, this, onError);
-            haimianbaobaoTem.loadAni("SK/haimianbaobao.sk");
-        }
-
-        export function createPikaqiuTem(): void {
-            pikaqiuTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            pikaqiuTem.on(Laya.Event.ERROR, this, onError);
-            pikaqiuTem.loadAni("SK/pikaqiu.sk");
-        }
-
-        export function createShiziTem(): void {
-            shiziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            shiziTem.on(Laya.Event.ERROR, this, onError);
-            shiziTem.loadAni("SK/shizi.sk");
-        }
-        export function createKejiTem(): void {
-            kejiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            kejiTem.on(Laya.Event.ERROR, this, onError);
-            kejiTem.loadAni("SK/keji.sk");
-        }
-
-        export function createKedayaTem(): void {
-            kedayaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            kedayaTem.on(Laya.Event.ERROR, this, onError);
-            kedayaTem.loadAni("SK/kedaya.sk");
-        }
-
-
-        export function createWangziTem(): void {
-            wangziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            wangziTem.on(Laya.Event.ERROR, this, onError);
-            wangziTem.loadAni("SK/wangzi.sk");
-        }
-        export function createGouTem(): void {
-            gouTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            gouTem.on(Laya.Event.ERROR, this, onError);
-            gouTem.loadAni("SK/gou.sk");
-        }
-        export function createQingdi_01Tem(): void {
-            qingdi_01Tem.on(Laya.Event.COMPLETE, this, onCompelet);
-            qingdi_01Tem.on(Laya.Event.ERROR, this, onError);
-            qingdi_01Tem.loadAni("SK/qingdi.sk");
-        }
-        export function createQingdi_02Tem(): void {
-            qingdi_02Tem.on(Laya.Event.COMPLETE, this, onCompelet);
-            qingdi_02Tem.on(Laya.Event.ERROR, this, onError);
-            qingdi_02Tem.loadAni("SK/qingdi1.sk");
-        }
-        export function createHoumaTem(): void {
-            houmaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            houmaTem.on(Laya.Event.ERROR, this, onError);
-            houmaTem.loadAni("SK/houma.sk");
-        }
-        export function createHouziTem(): void {
-            houziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-            houziTem.on(Laya.Event.ERROR, this, onError);
-            houziTem.loadAni("SK/houzi.sk");
-        }
-
         export function onCompelet(tem: Laya.Templet): void {
             console.log(tem['_skBufferUrl'], '加载成功');
         }
-
         export function onError(url): void {
             console.log(url, '加载失败！');
         }
     }
-
-    /**枚举，常量*/
-    export module Enum {
-        /**提示文字的类型描述*/
-        export enum HintContent {
-            '金币不够了！',
-            '没有可以购买的皮肤了！',
-            '暂时没有广告，过会儿再试试吧！',
-            '暂无皮肤!',
-            '暂无分享!',
-            '暂无提示机会!',
-            '观看完整广告才能获取奖励哦！',
-            '通关上一关才能解锁本关！',
-            '分享成功后才能获取奖励！',
-            '分享成功',
-            '暂无视频，玩一局游戏之后分享！',
-            '消耗2点体力！',
-            '今日体力福利已领取！',
-            '分享成功，获得125金币！',
-            '限定皮肤已经获得，请前往商店查看。',
-            '分享失败！',
-            '兑换码错误！',
-            '获得柯基公主皮肤，前往彩蛋墙查看！',
-            '获得黄皮耗子皮肤，前往彩蛋墙查看！',
-            '获得赛牙人皮肤，前往彩蛋墙查看！',
-            '获得海绵公主皮肤，前往彩蛋墙查看！',
-            '获得仓鼠公主皮肤，前往彩蛋墙查看！',
-            '获得自闭鸭子皮肤，前往彩蛋墙查看！',
-        }
-
-        /**提示类型*/
-        export enum HintType {
-            'noGold',
-            'noGetPifu',
-            'noAdv',
-            'noPifu',
-            'noShare',
-            'noHint',
-            'lookend',
-            'nopass',
-            'sharefail',
-            'sharesuccess',
-            'novideo',
-            'consumeEx',
-            'no_exemptExTime',
-            'shareyes',
-            "getXD",
-            "sharefailNoAward",
-            "inputerr",
-            'kejigongzhu',
-            'huangpihaozi',
-            'saiyaren',
-            'haimiangongzhu',
-            'cangshugongzhu',
-            'zibiyazi',
-        }
-        /**皮肤的顺序以及名称*/
-        export enum PifuOrder {
-            '01_gongzhu', '02_chiji', '03_change', '04_huiguniang', '05_tianshi', '06_xiaohongmao', '07_xiaohuangya', '08_zhenzi', '09_aisha'
-        }
-        /**皮肤的顺序以及名称*/
-        export enum PifuAllName {
-            '01_gongzhu', '02_chiji', '03_change', '04_huiguniang', '05_tianshi', '06_xiaohongmao', '07_xiaohuangya', '08_zhenzi', '09_aisha'
-        }
-
-
-        /**皮肤图片顺序对应的地址*/
-        export enum PifuSkin {
-            'UI_new/Pifu/pifu_01_gongzhu.png',
-            'UI_new/Pifu/pifu_02_chiji.png',
-            'UI_new/Pifu/pifu_03_change.png',
-            'UI_new/Pifu/pifu_04_huiguniang.png',
-            'UI_new/Pifu/pifu_05_tianshi.png',
-            'UI_new/Pifu/pifu_06_xiaohongmao.png',
-            'UI_new/Pifu/pifu_07_xiaohuangya.png',
-            'UI_new/Pifu/pifu_08_zhenzi.png',
-            'UI_new/Pifu/pifu_09_aisha.png'
-        }
-
-        /**灰色皮肤顺序对应的地址*/
-        export enum PifuSkin_No {
-            'UI_new/Pifu/pifu_01_gongzhu_h.png',
-            'UI_new/Pifu/pifu_02_chiji_h.png',
-            'UI_new/Pifu/pifu_03_change_h.png',
-            'UI_new/Pifu/pifu_04_huiguniang_h.png',
-            'UI_new/Pifu/pifu_05_tianshi_h.png',
-            'UI_new/Pifu/pifu_06_xiaohongmao_h.png',
-            'UI_new/Pifu/pifu_07_xiaohuangya_h.png',
-            'UI_new/Pifu/pifu_08_zhenzi_h.png',
-            'UI_new/Pifu/pifu_09_aisha_h.png'
-        }
-
-        /**名称图片对应地址*/
-        export enum PifuNameSkin {
-            'UI_new/Pifu/word_xueer.png',
-            'UI_new/Pifu/word_jingying.png',
-            'UI_new/Pifu/word_change.png',
-            'UI_new/Pifu/word_hui.png',
-            'UI_new/Pifu/word_tianshi.png',
-            'UI_new/Pifu/wrod_hongmao.png',
-            'UI_new/Pifu/word_huangya.png',
-            'UI_new/Pifu/word_changfa.png',
-            'UI_new/Pifu/word_bingjing.png'
-        }
-
-        /**彩蛋皮肤顺序对应的地址*/
-        export enum CaidanPifuName {
-            huangpihaozi = '01_huangpihaozi',
-            zibiyazi = '02_zibiyazi',
-            cangshugongzhu = '03_cangshugongzhu',
-            kejigongzhu = '04_kejigongzhu',
-            saiyaren = '05_saiyaren',
-            haimiangongzhu = '06_haimiangongzhu',
-            daji = '07_daji'
-        }
-
-        /**音效*/
-        export enum voiceUrl {
-            btn = 'voice/btn.wav',
-            bgm = 'voice/bgm.mp3',
-            victory = 'voice/guoguan.wav',
-            defeated = 'voice/wancheng.wav',
-        }
-
-        /**皮肤的顺序以及名称*/
-        export enum PifuAllName_Ch {
-            '同桌',
-            '小恐龙',
-            '雪人',
-            '啾啾',
-            '小芊',
-            '麦尔',
-            '棒球小子',
-            '陆肥',
-            '英雄'
-        }
-
-        /**角色当前的状态，状态唯一，状态不会改变移动方向，需要手动改*/
-        export enum MoveState {
-            /**在地板上，优先级最高*/
-            onFloor = 'onFloor',
-            /**在梯子上，优先级第二*/
-            onLadder = 'onLadder',
-            /**在空中，优先级最后*/
-            inAir = 'inAir'
-        }
-
-        /**角色当前的buff状态*/
-        export enum BuffState {
-            /**拿着棍子*/
-            stick = 'stick',
-            /**拿着水壶*/
-            kettle = 'kettle',
-        }
-
-        /**房子的颜色*/
-        export enum RoomColor {
-            blue = 'blue',
-            bluish = 'bluish',
-            grass = 'grass',
-            green = 'green',
-            pink = 'pink',
-            purple = 'purple',
-            red = 'red',
-            yellow = 'yellow',
-            yellowish = 'yellowish'
-        }
-
-        /**房子的皮肤地址*/
-        export enum RoomSkin {
-            blue = 'Room/room_blue.png',
-            bluish = 'Room/room_bluish.png',
-            grass = 'Room/room_grass.png',
-            green = 'Room/room_green.png',
-            pink = 'Room/room_pink.png',
-            purple = 'Room/room_purple.png',
-            red = 'Room/room_red.png',
-            yellow = 'Room/room_yellow.png',
-            yellowish = 'Room/room_yellowish.png'
-        }
-
-        /**房子的皮肤地址顺序*/
-        export enum RoomSkinZoder {
-            'Room/room_blue.png' = 0,
-            'Room/room_bluish.png' = 1,
-            'Room/room_grass.png' = 2,
-            'Room/room_green.png' = 3,
-            'Room/room_pink.png' = 4,
-            'Room/room_purple.png' = 5,
-            'Room/room_red.png' = 6,
-            'Room/room_yellow.png' = 7,
-            'Room/room_yellowish.png' = 8
-        }
-        /**房子的皮肤地址对应的墙纸地址*/
-        export enum WallpaperSkin {
-            'Room/room_blue_wallpaper.png',
-            'Room/room_bluish_wallpaper.png',
-            'Room/room_grass_wallpaper.png',
-            'Room/room_green_wallpaper.png',
-            'Room/room_pink_wallpaper.png',
-            'Room/room_purple_wallpaper.png',
-            'Room/room_red_wallpaper.png',
-            'Room/room_yellow_wallpaper.png',
-            'Room/room_yellowish_wallpaper.png'
-        }
-
-
-        /**通道上的墙壁的皮肤地址*/
-        export enum WallSkin {
-            blue = 'Room/room_blue_wall.png',
-            bluish = 'Room/room_bluish_wall.png',
-            grass = 'Room/room_grass_wall.png',
-            green = 'Room/room_green_wall.png',
-            pink = 'Room/room_pink_wall.png',
-            purple = 'Room/room_purple_wall.png',
-            red = 'Room/room_red_wall.png',
-            yellow = 'Room/room_yellow_wall.png',
-            yellowish = 'Room/room_yellowish_wall.png',
-            common = 'Room/room_common_wall.png'
-        }
-
-        /**通道颜色的皮肤地址*/
-        export enum AisleColorSkin {
-            blue = 'Room/room_blue_color.png',
-            bluish = 'Room/room_bluish_color.png',
-            grass = 'Room/room_grass_color.png',
-            green = 'Room/room_green_color.png',
-            pink = 'Room/room_pink_color.png',
-            purple = 'Room/room_purple_color.png',
-            red = 'Room/room_red_color.png',
-            yellow = 'Room/room_yellow_color.png',
-            yellowish = 'Room/room_yellowish_color.png',
-            common = 'Room/room_common_color.png'
-        }
-
-        /**公主的动画类型*/
-        export enum gongzhuAni {
-            /**行走*/
-            walk = "walk",
-            /**死亡*/
-            die = "die",
-            die_xianglian = "die_xianglian",
-            /**带着棍棒走路*/
-            walk_gun = "walk_gun",
-            walk_shuihu = "walk_shuihu",
-            walk_xianglian = "walk_xianglian",
-            /**棍棒攻击*/
-            attack_gun = "attack_gun",
-            attack_shuihu = "attack_shuihu",
-            /**棍棒攻击*/
-            win = 'win',
-            win_xianglian = "win_xianglian"
-        }
-
-        /**狗的动画类型*/
-        export enum dogAni {
-            standby = "standby",
-            walk = "walk",
-            die = "die",
-        }
-
-        /**狗的动画类型*/
-        export enum wangziAni {
-            standby = "standby",
-            win = "win",
-            walk = "walk",
-        }
-
-        /**公主的动画类型*/
-        export enum houseAni {
-            box_01_open = "box_01_open",
-            box_02_open = "box_02_open",
-            box_01_static = "box_01_static",
-            box_02_static = "box_02_static"
-        }
-
-        // export enum bulletType {
-        //     yellow = 'yellow',
-        //     bule = 'bule',
-        //     green = 'green',
-        // }
-        // export enum bulletSkin {
-        //     yellow = 'Frame/UI/ui_circle_c_008.png',
-        //     bule = 'Frame/UI/ui_circle_006.png',
-        //     green = 'Frame/UI/ui_circle_001.png',
-        // }
-        // export enum enemyType {
-        //     yellow = 'yellow',
-        //     bule = 'bule',
-        //     green = 'green',
-        // }
-        // export enum enemySkin {
-        //     yellow = 'Frame/UI/ui_square_011.png',
-        //     bule = 'Frame/UI/ui_square_002.png',
-        //     green = 'Frame/UI/ui_square_009.png',
-        // }
-
-    }
-
     /**
     * 1.这里导出的是模块不是类，没有this，所以此模块的回调函数要写成func=>{}这种箭头函数，箭头函数会把{}里面的this指向原来的this。
     * 2.点击事件模块
@@ -4901,6 +4463,8 @@ export module lwg {
             Other = 'Shop_Other',
         }
 
+
+
         /**事件名称*/
         export enum EventType {
             select = 'select',
@@ -5440,6 +5004,149 @@ export module lwg {
         }
     }
 
+    /**皮肤装扮界面*/
+    export module Skin {
+        /**皮肤list*/
+        export let _SkinList: Laya.List;
+        /**皮肤切换页*/
+        export let _SkinTap: Laya.Tab;
+        /**皮肤总数集合*/
+        export let _skinClassArr = [];
+
+        /**头部装饰数组*/
+        export let _headSkinArr = [];
+        /**当前眼部的装扮*/
+        export let _currentHead = {
+            get name(): string {
+                return Laya.LocalStorage.getItem('Skin_currentHead') !== null ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
+            },
+            set name(name: string) {
+                Laya.LocalStorage.setItem('Skin_currentHead', name);
+            }
+
+        };
+        /**眼部装饰数组*/
+        export let _eyeSkinArr = [];
+        /**当前眼部的装扮*/
+        export let _currentEye = {
+            get name(): string {
+                return Laya.LocalStorage.getItem('Skin_currentEye') !== null ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
+            },
+            set name(name: string) {
+                Laya.LocalStorage.setItem('Skin_currentEye', name);
+            }
+        };
+
+        /**装饰类别*/
+        export enum SkinClass {
+            head = 'head',
+            eye = 'eye',
+            body = 'body',
+            upperBody = 'upperBody',
+            lowerBody = 'lowerBody',
+        }
+
+        export enum SkinProperty {
+            /**名称*/
+            name = 'name',
+            /**获取途径*/
+            getway = 'getway',
+            /**根据获取途径，给予需要条件的总量*/
+            condition = 'condition',
+            /**根据获取途径，剩余需要条件的数量，会平凡改这个数量*/
+            resCondition = 'resCondition',
+            /**排列顺序*/
+            arrange = 'arrange',
+            /**获得顺序，我们可能会给予玩家固定的获得顺序*/
+            getOder = 'getOder',
+            /**类别*/
+            classify = 'classify',
+            /**是否已经拥有*/
+            have = 'have',
+        }
+
+        /**事件名称*/
+        export enum EventType {
+            /**购买*/
+            purchase = 'purchase',
+            /**选择*/
+            select = 'select',
+        }
+        export class SkinScene extends Admin.Scene {
+            lwgOnAwake(): void {
+                this.initData();
+                this.skinOnAwake();
+            }
+            /**初始化json数据*/
+            initData(): void {
+                /**结构，如果没有则为null*/
+                Skin._SkinTap = this.self['SkinTap'];
+                Skin._SkinList = this.self['SkinList'];
+                _skinClassArr = [_eyeSkinArr, _headSkinArr];
+            }
+
+            lwgEventReg(): void {
+                this.skinEventReg();
+            }
+            /**任务中注册的一些事件*/
+            skinEventReg(): void { }
+
+            /**初始化前执行一次*/
+            skinOnAwake(): void { }
+            lwgNodeDec(): void {
+                this.skinNodeDec();
+            }
+            /**节点声明*/
+            skinNodeDec(): void { }
+
+            lwgOnEnable(): void {
+                this.skinList_Create();
+                this.skinTap_Create();
+                this.skinOnEnable();
+            }
+            /**开始后执行*/
+            skinOnEnable(): void { }
+            lwgOpenAni(): number { return this.skinOpenAin(); }
+            /**开场动画*/
+            skinOpenAin(): number { return 0; }
+            /**按钮点击事件*/
+            lwgBtnClick(): void { this.skinBtnClick() }
+            skinBtnClick(): void { };
+            /**Tap初始化*/
+            skinTap_Create(): void {
+                Skin._SkinTap.selectHandler = new Laya.Handler(this, this.skinTap_Select);
+            }
+            /**skinTap的触摸监听*/
+            skinTap_Select(index: number): void { }
+            /**初始化list*/
+            skinList_Create(): void {
+                Skin._SkinList.selectEnable = true;
+                // Skin._SkinList.vScrollBarSkin = "";
+                // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
+                // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
+                Skin._SkinList.selectHandler = new Laya.Handler(this, this.skinList_Scelet);
+                Skin._SkinList.renderHandler = new Laya.Handler(this, this.skinList_Update);
+                this.skinList_refresh();
+            }
+            /**list选中监听*/
+            skinList_Scelet(index: number): void { }
+            /**list列表刷新*/
+            skinList_Update(cell: Laya.Box, index: number): void { }
+            /**刷新list数据,重写覆盖，默认为皮肤*/
+            skinList_refresh(): void {
+                if (Skin._SkinList && _skinClassArr.length > 0) {
+                    Skin._SkinList.array = _skinClassArr[0];
+                    Skin._SkinList.refresh();
+                }
+            }
+            lwgOnDisable(): void {
+                this.skinOnDisable();
+            }
+            /**页面关闭后执行*/
+            skinOnDisable(): void {
+            }
+        }
+    }
 
 
     export module Loding {
@@ -5617,5 +5324,7 @@ export let CheckIn = lwg.CheckIn;
 export let CheckInScene = lwg.CheckIn.CheckInScene;
 export let SkinXD = lwg.SkinXD;
 export let SkinXDScene = lwg.SkinXD.SkinXDScene;
+export let Skin = lwg.Skin;
+export let SkinScene = lwg.Skin.SkinScene;
 
 

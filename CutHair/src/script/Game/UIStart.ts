@@ -32,9 +32,6 @@ export default class UIStart extends lwg.Admin.Scene {
             this.self['BtnXDSkin'].visible = false;
         }
 
-        if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-            this.self['BtnCheck'].visible = false;
-        }
 
         EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
         CheckIn.openCheckIn();

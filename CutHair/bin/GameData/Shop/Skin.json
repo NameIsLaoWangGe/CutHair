@@ -8,7 +8,8 @@
     "resCondition": 0,
     "arrange": 1,
     "getOder": 1,
-    "have": true
+    "have": true,
+    "classify": "head"
   },
   {
     "name": "yuanyanjing",
@@ -17,7 +18,8 @@
     "resCondition": 500,
     "arrange": 8,
     "getOder": 2,
-    "have": false
+    "have": false,
+    "classify": "eye"
   },
   {
     "name": "jiemao_01",
@@ -26,7 +28,8 @@
     "resCondition": 800,
     "arrange": 10,
     "getOder": 3,
-    "have": false
+    "have": false,
+    "classify": "eye"
   },
   {
     "name": "hamajing",
@@ -35,7 +38,8 @@
     "resCondition": 1000,
     "arrange": 7,
     "getOder": 4,
-    "have": false
+    "have": false,
+    "classify": "eye"
   },
   {
     "name": "yanshemao_gangtie",
@@ -44,7 +48,8 @@
     "resCondition": 1200,
     "arrange": 4,
     "getOder": 5,
-    "have": false
+    "have": false,
+    "classify": "head"
   },
   {
     "name": "yanshemao",
@@ -53,7 +58,8 @@
     "resCondition": 1500,
     "arrange": 3,
     "getOder": 6,
-    "have": false
+    "have": false,
+    "classify": "head"
   },
   {
     "name": "jiemao_02",
@@ -62,7 +68,8 @@
     "resCondition": 1800,
     "arrange": 11,
     "getOder": 7,
-    "have": false
+    "have": false,
+    "classify": "eye"
   },
   {
     "name": "xiaochoumao",
@@ -71,7 +78,8 @@
     "resCondition": 0,
     "arrange": 2,
     "getOder": -1,
-    "have": false
+    "have": false,
+    "classify": "head"
   },
   {
     "name": "xingxingyanjing",
@@ -80,7 +88,8 @@
     "resCondition": 0,
     "arrange": 9,
     "getOder": -1,
-    "have": false
+    "have": false,
+    "classify": "eye"
   },
   {
     "name": "yanshemao_shijie",
@@ -89,7 +98,8 @@
     "resCondition": 0,
     "arrange": 5,
     "getOder": -1,
-    "have": false
+    "have": false,
+    "classify": "head"
   },
   {
     "name": "maomaozi",
@@ -98,7 +108,8 @@
     "resCondition": 0,
     "arrange": 6,
     "getOder": -1,
-    "have": false
+    "have": false,
+    "classify": "head"
   }
 ]
 }

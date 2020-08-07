@@ -141,23 +141,6 @@
                 }));
             }
             Global._createStimulateDec = _createStimulateDec;
-            function _createHint_02(type) {
-                let sp;
-                Laya.loader.load('prefab/HintPre_02.json', Laya.Handler.create(this, function (prefab) {
-                    let _prefab = new Laya.Prefab();
-                    _prefab.json = prefab;
-                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                    Laya.stage.addChild(sp);
-                    sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
-                    let dec = sp.getChildByName('dec');
-                    dec.text = Enum.Content[type];
-                    sp.zOrder = 100;
-                    Animation2D.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
-                        sp.removeSelf();
-                    });
-                }));
-            }
-            Global._createHint_02 = _createHint_02;
             function _createHint_InPut(input) {
                 let sp;
                 Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab) {
@@ -298,46 +281,40 @@
         })(Game = lwg.Game || (lwg.Game = {}));
         let Dialog;
         (function (Dialog) {
-            let Content;
-            (function (Content) {
-                Content[Content["\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01"] = 0] = "\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01";
-                Content[Content["\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01"] = 1] = "\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01";
-                Content[Content["\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01"] = 2] = "\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01";
-                Content[Content["\u6682\u65E0\u76AE\u80A4!"] = 3] = "\u6682\u65E0\u76AE\u80A4!";
-                Content[Content["\u6682\u65E0\u5206\u4EAB!"] = 4] = "\u6682\u65E0\u5206\u4EAB!";
-                Content[Content["\u6682\u65E0\u63D0\u793A\u673A\u4F1A!"] = 5] = "\u6682\u65E0\u63D0\u793A\u673A\u4F1A!";
-                Content[Content["\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01"] = 6] = "\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01";
-                Content[Content["\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01"] = 7] = "\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01";
-                Content[Content["\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01"] = 8] = "\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01";
-                Content[Content["\u5206\u4EAB\u6210\u529F!"] = 9] = "\u5206\u4EAB\u6210\u529F!";
-                Content[Content["\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01"] = 10] = "\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01";
-                Content[Content["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
-                Content[Content["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
-                Content[Content["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01"] = 13] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01";
-                Content[Content["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002";
-                Content[Content["\u5206\u4EAB\u5931\u8D25\uFF01"] = 15] = "\u5206\u4EAB\u5931\u8D25\uFF01";
-                Content[Content["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 16] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
-                Content[Content["\u83B7\u5F97\u67EF\u57FA\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 17] = "\u83B7\u5F97\u67EF\u57FA\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u9EC4\u76AE\u8017\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 18] = "\u83B7\u5F97\u9EC4\u76AE\u8017\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u8D5B\u7259\u4EBA\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 19] = "\u83B7\u5F97\u8D5B\u7259\u4EBA\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 20] = "\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 21] = "\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 22] = "\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 23] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
-                Content[Content["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 24] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
-                Content[Content["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 25] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
-                Content[Content["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 26] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
-                Content[Content["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 27] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
-                Content[Content["\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01"] = 28] = "\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01";
-                Content[Content["\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 29] = "\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01";
-                Content[Content["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 30] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
-                Content[Content["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 31] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
-            })(Content = Dialog.Content || (Dialog.Content = {}));
+            let HintContent;
+            (function (HintContent) {
+                HintContent[HintContent["\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01"] = 0] = "\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01";
+                HintContent[HintContent["\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01"] = 1] = "\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01";
+                HintContent[HintContent["\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01"] = 2] = "\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01";
+                HintContent[HintContent["\u6682\u65E0\u76AE\u80A4!"] = 3] = "\u6682\u65E0\u76AE\u80A4!";
+                HintContent[HintContent["\u6682\u65E0\u5206\u4EAB!"] = 4] = "\u6682\u65E0\u5206\u4EAB!";
+                HintContent[HintContent["\u6682\u65E0\u63D0\u793A\u673A\u4F1A!"] = 5] = "\u6682\u65E0\u63D0\u793A\u673A\u4F1A!";
+                HintContent[HintContent["\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01"] = 6] = "\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01";
+                HintContent[HintContent["\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01"] = 7] = "\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01"] = 8] = "\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F!"] = 9] = "\u5206\u4EAB\u6210\u529F!";
+                HintContent[HintContent["\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01"] = 10] = "\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01";
+                HintContent[HintContent["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
+                HintContent[HintContent["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01"] = 13] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01";
+                HintContent[HintContent["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002";
+                HintContent[HintContent["\u5206\u4EAB\u5931\u8D25\uFF01"] = 15] = "\u5206\u4EAB\u5931\u8D25\uFF01";
+                HintContent[HintContent["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 16] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
+                HintContent[HintContent["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 17] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
+                HintContent[HintContent["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 18] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
+                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 19] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
+                HintContent[HintContent["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 20] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
+                HintContent[HintContent["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 21] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
+                HintContent[HintContent["\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01"] = 22] = "\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01";
+                HintContent[HintContent["\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 23] = "\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintContent[HintContent["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 24] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintContent[HintContent["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 25] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
+                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01"] = 26] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01";
+            })(HintContent = Dialog.HintContent || (Dialog.HintContent = {}));
             let Skin;
             (function (Skin) {
                 Skin["blackBord"] = "Frame/UI/ui_orthogon_black.png";
             })(Skin || (Skin = {}));
-            Dialog.Hint_M = new Laya.Prefab();
             function createHint_Middle(describe) {
                 let Hint_M = Laya.Pool.getItemByClass('Hint_M', Laya.Sprite);
                 Hint_M.name = 'Hint_M';
@@ -362,7 +339,7 @@
                 let Dec = new Laya.Label();
                 Hint_M.addChild(Dec);
                 Dec.width = Laya.stage.width;
-                Dec.text = Content[describe];
+                Dec.text = HintContent[describe];
                 Dec.pivotX = Laya.stage.width / 2;
                 Dec.x = Laya.stage.width / 2;
                 Dec.height = 100;
@@ -385,6 +362,119 @@
                 });
             }
             Dialog.createHint_Middle = createHint_Middle;
+            Dialog._dialogContent = {
+                get Array() {
+                    return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] !== null ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
+                },
+            };
+            function getDialogContent(useWhere, name) {
+                let dia;
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element['useWhere'] == useWhere && element['name'] == name) {
+                        dia = element;
+                        break;
+                    }
+                }
+                let arr = [];
+                for (const key in dia) {
+                    if (dia.hasOwnProperty(key)) {
+                        const value = dia[key];
+                        if (key.substring(0, 7) == 'content' || value !== -1) {
+                            arr.push(value);
+                        }
+                    }
+                }
+                return arr;
+            }
+            Dialog.getDialogContent = getDialogContent;
+            function getDialogContent_Random(useWhere) {
+                let contentArr = [];
+                let whereArr = getUseWhere(useWhere);
+                let index = Math.floor(Math.random() * whereArr.length);
+                for (const key in whereArr[index]) {
+                    if (whereArr[index].hasOwnProperty(key)) {
+                        const value = whereArr[index][key];
+                        if (key.substring(0, 7) == 'content' && value !== "-1") {
+                            contentArr.push(value);
+                        }
+                    }
+                }
+                return contentArr;
+            }
+            Dialog.getDialogContent_Random = getDialogContent_Random;
+            function getUseWhere(useWhere) {
+                let arr = [];
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element['useWhere'] == useWhere) {
+                        arr.push(element);
+                    }
+                }
+                return arr;
+            }
+            Dialog.getUseWhere = getUseWhere;
+            let UseWhere;
+            (function (UseWhere) {
+                UseWhere["scene1"] = "scene1";
+                UseWhere["scene2"] = "scene2";
+                UseWhere["scene3"] = "scene3";
+            })(UseWhere = Dialog.UseWhere || (Dialog.UseWhere = {}));
+            let DialogProperty;
+            (function (DialogProperty) {
+                DialogProperty["name"] = "name";
+                DialogProperty["useWhere"] = "useWhere";
+                DialogProperty["content"] = "content";
+                DialogProperty["max"] = "max";
+            })(DialogProperty = Dialog.DialogProperty || (Dialog.DialogProperty = {}));
+            let PlayMode;
+            (function (PlayMode) {
+                PlayMode["voluntarily"] = "voluntarily";
+                PlayMode["manual"] = "manual";
+                PlayMode["clickContent"] = "clickContent";
+            })(PlayMode = Dialog.PlayMode || (Dialog.PlayMode = {}));
+            function createDialogue(x, y, useWhere, parent, content, mode) {
+                let Pre_Dialogue;
+                Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
+                    if (parent) {
+                        parent.addChild(Pre_Dialogue);
+                    }
+                    else {
+                        Laya.stage.addChild(Pre_Dialogue);
+                    }
+                    Pre_Dialogue.x = x;
+                    Pre_Dialogue.y = y;
+                    let ContentLabel = Pre_Dialogue.getChildByName('Content');
+                    let contentArr;
+                    if (content !== undefined) {
+                        ContentLabel.text = content[0];
+                    }
+                    else {
+                        contentArr = getDialogContent_Random(useWhere);
+                        ContentLabel.text = contentArr[0];
+                    }
+                    Pre_Dialogue.zOrder = 100;
+                    Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 200, null, 1000, () => {
+                        if (mode == undefined || mode == PlayMode.voluntarily) {
+                            for (let index = 0; index < contentArr.length; index++) {
+                                Laya.timer.once(index * 1000, this, () => {
+                                    ContentLabel.text = contentArr[index];
+                                    if (index == contentArr.length - 1) {
+                                        Laya.timer.once(1000, this, () => {
+                                            Pre_Dialogue.removeSelf();
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    Dialog.DialogueNode = Pre_Dialogue;
+                }));
+            }
+            Dialog.createDialogue = createDialogue;
         })(Dialog = lwg.Dialog || (lwg.Dialog = {}));
         let Gold;
         (function (Gold_1) {
@@ -641,6 +731,7 @@
                 SceneName["UIVictoryBox"] = "UIVictoryBox";
                 SceneName["UICheckIn"] = "UICheckIn";
                 SceneName["UIResurgence"] = "UIResurgence";
+                SceneName["UISkin"] = "UISkin";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -1240,207 +1331,9 @@
         })(Effects = lwg.Effects || (lwg.Effects = {}));
         let Sk;
         (function (Sk) {
-            let PifuMatching;
-            (function (PifuMatching) {
-                PifuMatching["gongzhu"] = "01_gongzhu";
-                PifuMatching["chiji"] = "02_chiji";
-                PifuMatching["change"] = "03_change";
-                PifuMatching["huiguniang"] = "04_huiguniang";
-                PifuMatching["tianshi"] = "05_tianshi";
-                PifuMatching["xiaohongmao"] = "06_xiaohongmao";
-                PifuMatching["xiaohuangya"] = "07_xiaohuangya";
-                PifuMatching["zhenzi"] = "08_zhenzi";
-                PifuMatching["aisha"] = "09_aisha";
-            })(PifuMatching = Sk.PifuMatching || (Sk.PifuMatching = {}));
-            let PaintedPifu;
-            (function (PaintedPifu) {
-                PaintedPifu["daji"] = "P_001_daji";
-                PaintedPifu["shizi"] = "P_002_shizi";
-                PaintedPifu["pikaqiu"] = "P_003_pikaqiu";
-                PaintedPifu["cangshu"] = "P_004_cangshu";
-                PaintedPifu["haimianbaobao"] = "P_005_haimianbaobao";
-                PaintedPifu["keji"] = "P_006_keji";
-                PaintedPifu["kedaya"] = "P_007_kedaya";
-            })(PaintedPifu = Sk.PaintedPifu || (Sk.PaintedPifu = {}));
-            Sk.gongzhuTem = new Laya.Templet();
-            Sk.aishaTem = new Laya.Templet();
-            Sk.changeTem = new Laya.Templet();
-            Sk.chijiTem = new Laya.Templet();
-            Sk.huiguniangTem = new Laya.Templet();
-            Sk.tianshiTem = new Laya.Templet();
-            Sk.xiaohongmaoTem = new Laya.Templet();
-            Sk.xiaohuangyaTem = new Laya.Templet();
-            Sk.zhenziTem = new Laya.Templet();
-            Sk.kedayaTem = new Laya.Templet();
-            Sk.cangshuTem = new Laya.Templet();
-            Sk.dajiTem = new Laya.Templet();
-            Sk.haimianbaobaoTem = new Laya.Templet();
-            Sk.pikaqiuTem = new Laya.Templet();
-            Sk.shiziTem = new Laya.Templet();
-            Sk.kejiTem = new Laya.Templet();
-            Sk.wangziTem = new Laya.Templet();
-            Sk.gouTem = new Laya.Templet();
-            Sk.qingdi_01Tem = new Laya.Templet();
-            Sk.qingdi_02Tem = new Laya.Templet();
-            Sk.houmaTem = new Laya.Templet();
-            Sk.houziTem = new Laya.Templet();
             function skLoding() {
-                createGongzhuTem();
-                createAishaTem();
-                createChijiTem();
-                createChangeTem();
-                createHuiguniangTem();
-                createTianshiTem();
-                createXiaohongmaoTem();
-                createXiaohuangyaTem();
-                createZhenziTem();
-                createCangshuTem();
-                createPikaqiuTem();
-                createDajiTem();
-                createHaimianbaobaoTem();
-                createShiziTem();
-                createKejiTem();
-                createKedayaTem();
-                createWangziTem();
-                createGouTem();
-                createQingdi_01Tem();
-                createQingdi_02Tem();
-                createHoumaTem();
-                createHouziTem();
             }
             Sk.skLoding = skLoding;
-            function createGongzhuTem() {
-                Sk.gongzhuTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.gongzhuTem.on(Laya.Event.ERROR, this, onError);
-                Sk.gongzhuTem.loadAni("SK/gongzhu.sk");
-            }
-            Sk.createGongzhuTem = createGongzhuTem;
-            function createAishaTem() {
-                Sk.aishaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.aishaTem.on(Laya.Event.ERROR, this, onError);
-                Sk.aishaTem.loadAni("SK/aisha.sk");
-            }
-            Sk.createAishaTem = createAishaTem;
-            function createChangeTem() {
-                Sk.changeTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.changeTem.on(Laya.Event.ERROR, this, onError);
-                Sk.changeTem.loadAni("SK/change.sk");
-            }
-            Sk.createChangeTem = createChangeTem;
-            function createChijiTem() {
-                Sk.chijiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.chijiTem.on(Laya.Event.ERROR, this, onError);
-                Sk.chijiTem.loadAni("SK/chiji.sk");
-            }
-            Sk.createChijiTem = createChijiTem;
-            function createHuiguniangTem() {
-                Sk.huiguniangTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.huiguniangTem.on(Laya.Event.ERROR, this, onError);
-                Sk.huiguniangTem.loadAni("SK/huiguniang.sk");
-            }
-            Sk.createHuiguniangTem = createHuiguniangTem;
-            function createTianshiTem() {
-                Sk.tianshiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.tianshiTem.on(Laya.Event.ERROR, this, onError);
-                Sk.tianshiTem.loadAni("SK/tianshi.sk");
-            }
-            Sk.createTianshiTem = createTianshiTem;
-            function createXiaohongmaoTem() {
-                Sk.xiaohongmaoTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.xiaohongmaoTem.on(Laya.Event.ERROR, this, onError);
-                Sk.xiaohongmaoTem.loadAni("SK/xiaohongmao.sk");
-            }
-            Sk.createXiaohongmaoTem = createXiaohongmaoTem;
-            function createXiaohuangyaTem() {
-                Sk.xiaohuangyaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.xiaohuangyaTem.on(Laya.Event.ERROR, this, onError);
-                Sk.xiaohuangyaTem.loadAni("SK/xiaohuangya.sk");
-            }
-            Sk.createXiaohuangyaTem = createXiaohuangyaTem;
-            function createZhenziTem() {
-                Sk.zhenziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.zhenziTem.on(Laya.Event.ERROR, this, onError);
-                Sk.zhenziTem.loadAni("SK/zhenzi.sk");
-            }
-            Sk.createZhenziTem = createZhenziTem;
-            function createCangshuTem() {
-                Sk.cangshuTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.cangshuTem.on(Laya.Event.ERROR, this, onError);
-                Sk.cangshuTem.loadAni("SK/cangshu.sk");
-            }
-            Sk.createCangshuTem = createCangshuTem;
-            function createDajiTem() {
-                Sk.dajiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.dajiTem.on(Laya.Event.ERROR, this, onError);
-                Sk.dajiTem.loadAni("SK/daji.sk");
-            }
-            Sk.createDajiTem = createDajiTem;
-            function createHaimianbaobaoTem() {
-                Sk.haimianbaobaoTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.haimianbaobaoTem.on(Laya.Event.ERROR, this, onError);
-                Sk.haimianbaobaoTem.loadAni("SK/haimianbaobao.sk");
-            }
-            Sk.createHaimianbaobaoTem = createHaimianbaobaoTem;
-            function createPikaqiuTem() {
-                Sk.pikaqiuTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.pikaqiuTem.on(Laya.Event.ERROR, this, onError);
-                Sk.pikaqiuTem.loadAni("SK/pikaqiu.sk");
-            }
-            Sk.createPikaqiuTem = createPikaqiuTem;
-            function createShiziTem() {
-                Sk.shiziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.shiziTem.on(Laya.Event.ERROR, this, onError);
-                Sk.shiziTem.loadAni("SK/shizi.sk");
-            }
-            Sk.createShiziTem = createShiziTem;
-            function createKejiTem() {
-                Sk.kejiTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.kejiTem.on(Laya.Event.ERROR, this, onError);
-                Sk.kejiTem.loadAni("SK/keji.sk");
-            }
-            Sk.createKejiTem = createKejiTem;
-            function createKedayaTem() {
-                Sk.kedayaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.kedayaTem.on(Laya.Event.ERROR, this, onError);
-                Sk.kedayaTem.loadAni("SK/kedaya.sk");
-            }
-            Sk.createKedayaTem = createKedayaTem;
-            function createWangziTem() {
-                Sk.wangziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.wangziTem.on(Laya.Event.ERROR, this, onError);
-                Sk.wangziTem.loadAni("SK/wangzi.sk");
-            }
-            Sk.createWangziTem = createWangziTem;
-            function createGouTem() {
-                Sk.gouTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.gouTem.on(Laya.Event.ERROR, this, onError);
-                Sk.gouTem.loadAni("SK/gou.sk");
-            }
-            Sk.createGouTem = createGouTem;
-            function createQingdi_01Tem() {
-                Sk.qingdi_01Tem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.qingdi_01Tem.on(Laya.Event.ERROR, this, onError);
-                Sk.qingdi_01Tem.loadAni("SK/qingdi.sk");
-            }
-            Sk.createQingdi_01Tem = createQingdi_01Tem;
-            function createQingdi_02Tem() {
-                Sk.qingdi_02Tem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.qingdi_02Tem.on(Laya.Event.ERROR, this, onError);
-                Sk.qingdi_02Tem.loadAni("SK/qingdi1.sk");
-            }
-            Sk.createQingdi_02Tem = createQingdi_02Tem;
-            function createHoumaTem() {
-                Sk.houmaTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.houmaTem.on(Laya.Event.ERROR, this, onError);
-                Sk.houmaTem.loadAni("SK/houma.sk");
-            }
-            Sk.createHoumaTem = createHoumaTem;
-            function createHouziTem() {
-                Sk.houziTem.on(Laya.Event.COMPLETE, this, onCompelet);
-                Sk.houziTem.on(Laya.Event.ERROR, this, onError);
-                Sk.houziTem.loadAni("SK/houzi.sk");
-            }
-            Sk.createHouziTem = createHouziTem;
             function onCompelet(tem) {
                 console.log(tem['_skBufferUrl'], '加载成功');
             }
@@ -1450,267 +1343,6 @@
             }
             Sk.onError = onError;
         })(Sk = lwg.Sk || (lwg.Sk = {}));
-        let Enum;
-        (function (Enum) {
-            let Content;
-            (function (Content) {
-                Content[Content["\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01"] = 0] = "\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01";
-                Content[Content["\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01"] = 1] = "\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01";
-                Content[Content["\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01"] = 2] = "\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01";
-                Content[Content["\u6682\u65E0\u76AE\u80A4!"] = 3] = "\u6682\u65E0\u76AE\u80A4!";
-                Content[Content["\u6682\u65E0\u5206\u4EAB!"] = 4] = "\u6682\u65E0\u5206\u4EAB!";
-                Content[Content["\u6682\u65E0\u63D0\u793A\u673A\u4F1A!"] = 5] = "\u6682\u65E0\u63D0\u793A\u673A\u4F1A!";
-                Content[Content["\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01"] = 6] = "\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01";
-                Content[Content["\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01"] = 7] = "\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01";
-                Content[Content["\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01"] = 8] = "\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01";
-                Content[Content["\u5206\u4EAB\u6210\u529F"] = 9] = "\u5206\u4EAB\u6210\u529F";
-                Content[Content["\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01"] = 10] = "\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01";
-                Content[Content["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
-                Content[Content["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
-                Content[Content["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01"] = 13] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01";
-                Content[Content["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u5546\u5E97\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u5546\u5E97\u67E5\u770B\u3002";
-                Content[Content["\u5206\u4EAB\u5931\u8D25\uFF01"] = 15] = "\u5206\u4EAB\u5931\u8D25\uFF01";
-                Content[Content["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 16] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
-                Content[Content["\u83B7\u5F97\u67EF\u57FA\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 17] = "\u83B7\u5F97\u67EF\u57FA\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u9EC4\u76AE\u8017\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 18] = "\u83B7\u5F97\u9EC4\u76AE\u8017\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u8D5B\u7259\u4EBA\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 19] = "\u83B7\u5F97\u8D5B\u7259\u4EBA\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 20] = "\u83B7\u5F97\u6D77\u7EF5\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 21] = "\u83B7\u5F97\u4ED3\u9F20\u516C\u4E3B\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-                Content[Content["\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01"] = 22] = "\u83B7\u5F97\u81EA\u95ED\u9E2D\u5B50\u76AE\u80A4\uFF0C\u524D\u5F80\u5F69\u86CB\u5899\u67E5\u770B\uFF01";
-            })(Content = Enum.Content || (Enum.Content = {}));
-            let HintType;
-            (function (HintType) {
-                HintType[HintType["noGold"] = 0] = "noGold";
-                HintType[HintType["noGetPifu"] = 1] = "noGetPifu";
-                HintType[HintType["noAdv"] = 2] = "noAdv";
-                HintType[HintType["noPifu"] = 3] = "noPifu";
-                HintType[HintType["noShare"] = 4] = "noShare";
-                HintType[HintType["noHint"] = 5] = "noHint";
-                HintType[HintType["lookend"] = 6] = "lookend";
-                HintType[HintType["nopass"] = 7] = "nopass";
-                HintType[HintType["sharefail"] = 8] = "sharefail";
-                HintType[HintType["sharesuccess"] = 9] = "sharesuccess";
-                HintType[HintType["novideo"] = 10] = "novideo";
-                HintType[HintType["consumeEx"] = 11] = "consumeEx";
-                HintType[HintType["no_exemptExTime"] = 12] = "no_exemptExTime";
-                HintType[HintType["shareyes"] = 13] = "shareyes";
-                HintType[HintType["getXD"] = 14] = "getXD";
-                HintType[HintType["sharefailNoAward"] = 15] = "sharefailNoAward";
-                HintType[HintType["inputerr"] = 16] = "inputerr";
-                HintType[HintType["kejigongzhu"] = 17] = "kejigongzhu";
-                HintType[HintType["huangpihaozi"] = 18] = "huangpihaozi";
-                HintType[HintType["saiyaren"] = 19] = "saiyaren";
-                HintType[HintType["haimiangongzhu"] = 20] = "haimiangongzhu";
-                HintType[HintType["cangshugongzhu"] = 21] = "cangshugongzhu";
-                HintType[HintType["zibiyazi"] = 22] = "zibiyazi";
-            })(HintType = Enum.HintType || (Enum.HintType = {}));
-            let PifuOrder;
-            (function (PifuOrder) {
-                PifuOrder[PifuOrder["01_gongzhu"] = 0] = "01_gongzhu";
-                PifuOrder[PifuOrder["02_chiji"] = 1] = "02_chiji";
-                PifuOrder[PifuOrder["03_change"] = 2] = "03_change";
-                PifuOrder[PifuOrder["04_huiguniang"] = 3] = "04_huiguniang";
-                PifuOrder[PifuOrder["05_tianshi"] = 4] = "05_tianshi";
-                PifuOrder[PifuOrder["06_xiaohongmao"] = 5] = "06_xiaohongmao";
-                PifuOrder[PifuOrder["07_xiaohuangya"] = 6] = "07_xiaohuangya";
-                PifuOrder[PifuOrder["08_zhenzi"] = 7] = "08_zhenzi";
-                PifuOrder[PifuOrder["09_aisha"] = 8] = "09_aisha";
-            })(PifuOrder = Enum.PifuOrder || (Enum.PifuOrder = {}));
-            let PifuAllName;
-            (function (PifuAllName) {
-                PifuAllName[PifuAllName["01_gongzhu"] = 0] = "01_gongzhu";
-                PifuAllName[PifuAllName["02_chiji"] = 1] = "02_chiji";
-                PifuAllName[PifuAllName["03_change"] = 2] = "03_change";
-                PifuAllName[PifuAllName["04_huiguniang"] = 3] = "04_huiguniang";
-                PifuAllName[PifuAllName["05_tianshi"] = 4] = "05_tianshi";
-                PifuAllName[PifuAllName["06_xiaohongmao"] = 5] = "06_xiaohongmao";
-                PifuAllName[PifuAllName["07_xiaohuangya"] = 6] = "07_xiaohuangya";
-                PifuAllName[PifuAllName["08_zhenzi"] = 7] = "08_zhenzi";
-                PifuAllName[PifuAllName["09_aisha"] = 8] = "09_aisha";
-            })(PifuAllName = Enum.PifuAllName || (Enum.PifuAllName = {}));
-            let PifuSkin;
-            (function (PifuSkin) {
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_01_gongzhu.png"] = 0] = "UI_new/Pifu/pifu_01_gongzhu.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_02_chiji.png"] = 1] = "UI_new/Pifu/pifu_02_chiji.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_03_change.png"] = 2] = "UI_new/Pifu/pifu_03_change.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_04_huiguniang.png"] = 3] = "UI_new/Pifu/pifu_04_huiguniang.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_05_tianshi.png"] = 4] = "UI_new/Pifu/pifu_05_tianshi.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_06_xiaohongmao.png"] = 5] = "UI_new/Pifu/pifu_06_xiaohongmao.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_07_xiaohuangya.png"] = 6] = "UI_new/Pifu/pifu_07_xiaohuangya.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_08_zhenzi.png"] = 7] = "UI_new/Pifu/pifu_08_zhenzi.png";
-                PifuSkin[PifuSkin["UI_new/Pifu/pifu_09_aisha.png"] = 8] = "UI_new/Pifu/pifu_09_aisha.png";
-            })(PifuSkin = Enum.PifuSkin || (Enum.PifuSkin = {}));
-            let PifuSkin_No;
-            (function (PifuSkin_No) {
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_01_gongzhu_h.png"] = 0] = "UI_new/Pifu/pifu_01_gongzhu_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_02_chiji_h.png"] = 1] = "UI_new/Pifu/pifu_02_chiji_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_03_change_h.png"] = 2] = "UI_new/Pifu/pifu_03_change_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_04_huiguniang_h.png"] = 3] = "UI_new/Pifu/pifu_04_huiguniang_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_05_tianshi_h.png"] = 4] = "UI_new/Pifu/pifu_05_tianshi_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_06_xiaohongmao_h.png"] = 5] = "UI_new/Pifu/pifu_06_xiaohongmao_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_07_xiaohuangya_h.png"] = 6] = "UI_new/Pifu/pifu_07_xiaohuangya_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_08_zhenzi_h.png"] = 7] = "UI_new/Pifu/pifu_08_zhenzi_h.png";
-                PifuSkin_No[PifuSkin_No["UI_new/Pifu/pifu_09_aisha_h.png"] = 8] = "UI_new/Pifu/pifu_09_aisha_h.png";
-            })(PifuSkin_No = Enum.PifuSkin_No || (Enum.PifuSkin_No = {}));
-            let PifuNameSkin;
-            (function (PifuNameSkin) {
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_xueer.png"] = 0] = "UI_new/Pifu/word_xueer.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_jingying.png"] = 1] = "UI_new/Pifu/word_jingying.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_change.png"] = 2] = "UI_new/Pifu/word_change.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_hui.png"] = 3] = "UI_new/Pifu/word_hui.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_tianshi.png"] = 4] = "UI_new/Pifu/word_tianshi.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/wrod_hongmao.png"] = 5] = "UI_new/Pifu/wrod_hongmao.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_huangya.png"] = 6] = "UI_new/Pifu/word_huangya.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_changfa.png"] = 7] = "UI_new/Pifu/word_changfa.png";
-                PifuNameSkin[PifuNameSkin["UI_new/Pifu/word_bingjing.png"] = 8] = "UI_new/Pifu/word_bingjing.png";
-            })(PifuNameSkin = Enum.PifuNameSkin || (Enum.PifuNameSkin = {}));
-            let CaidanPifuName;
-            (function (CaidanPifuName) {
-                CaidanPifuName["huangpihaozi"] = "01_huangpihaozi";
-                CaidanPifuName["zibiyazi"] = "02_zibiyazi";
-                CaidanPifuName["cangshugongzhu"] = "03_cangshugongzhu";
-                CaidanPifuName["kejigongzhu"] = "04_kejigongzhu";
-                CaidanPifuName["saiyaren"] = "05_saiyaren";
-                CaidanPifuName["haimiangongzhu"] = "06_haimiangongzhu";
-                CaidanPifuName["daji"] = "07_daji";
-            })(CaidanPifuName = Enum.CaidanPifuName || (Enum.CaidanPifuName = {}));
-            let voiceUrl;
-            (function (voiceUrl) {
-                voiceUrl["btn"] = "voice/btn.wav";
-                voiceUrl["bgm"] = "voice/bgm.mp3";
-                voiceUrl["victory"] = "voice/guoguan.wav";
-                voiceUrl["defeated"] = "voice/wancheng.wav";
-            })(voiceUrl = Enum.voiceUrl || (Enum.voiceUrl = {}));
-            let PifuAllName_Ch;
-            (function (PifuAllName_Ch) {
-                PifuAllName_Ch[PifuAllName_Ch["\u540C\u684C"] = 0] = "\u540C\u684C";
-                PifuAllName_Ch[PifuAllName_Ch["\u5C0F\u6050\u9F99"] = 1] = "\u5C0F\u6050\u9F99";
-                PifuAllName_Ch[PifuAllName_Ch["\u96EA\u4EBA"] = 2] = "\u96EA\u4EBA";
-                PifuAllName_Ch[PifuAllName_Ch["\u557E\u557E"] = 3] = "\u557E\u557E";
-                PifuAllName_Ch[PifuAllName_Ch["\u5C0F\u828A"] = 4] = "\u5C0F\u828A";
-                PifuAllName_Ch[PifuAllName_Ch["\u9EA6\u5C14"] = 5] = "\u9EA6\u5C14";
-                PifuAllName_Ch[PifuAllName_Ch["\u68D2\u7403\u5C0F\u5B50"] = 6] = "\u68D2\u7403\u5C0F\u5B50";
-                PifuAllName_Ch[PifuAllName_Ch["\u9646\u80A5"] = 7] = "\u9646\u80A5";
-                PifuAllName_Ch[PifuAllName_Ch["\u82F1\u96C4"] = 8] = "\u82F1\u96C4";
-            })(PifuAllName_Ch = Enum.PifuAllName_Ch || (Enum.PifuAllName_Ch = {}));
-            let MoveState;
-            (function (MoveState) {
-                MoveState["onFloor"] = "onFloor";
-                MoveState["onLadder"] = "onLadder";
-                MoveState["inAir"] = "inAir";
-            })(MoveState = Enum.MoveState || (Enum.MoveState = {}));
-            let BuffState;
-            (function (BuffState) {
-                BuffState["stick"] = "stick";
-                BuffState["kettle"] = "kettle";
-            })(BuffState = Enum.BuffState || (Enum.BuffState = {}));
-            let RoomColor;
-            (function (RoomColor) {
-                RoomColor["blue"] = "blue";
-                RoomColor["bluish"] = "bluish";
-                RoomColor["grass"] = "grass";
-                RoomColor["green"] = "green";
-                RoomColor["pink"] = "pink";
-                RoomColor["purple"] = "purple";
-                RoomColor["red"] = "red";
-                RoomColor["yellow"] = "yellow";
-                RoomColor["yellowish"] = "yellowish";
-            })(RoomColor = Enum.RoomColor || (Enum.RoomColor = {}));
-            let RoomSkin;
-            (function (RoomSkin) {
-                RoomSkin["blue"] = "Room/room_blue.png";
-                RoomSkin["bluish"] = "Room/room_bluish.png";
-                RoomSkin["grass"] = "Room/room_grass.png";
-                RoomSkin["green"] = "Room/room_green.png";
-                RoomSkin["pink"] = "Room/room_pink.png";
-                RoomSkin["purple"] = "Room/room_purple.png";
-                RoomSkin["red"] = "Room/room_red.png";
-                RoomSkin["yellow"] = "Room/room_yellow.png";
-                RoomSkin["yellowish"] = "Room/room_yellowish.png";
-            })(RoomSkin = Enum.RoomSkin || (Enum.RoomSkin = {}));
-            let RoomSkinZoder;
-            (function (RoomSkinZoder) {
-                RoomSkinZoder[RoomSkinZoder["Room/room_blue.png"] = 0] = "Room/room_blue.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_bluish.png"] = 1] = "Room/room_bluish.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_grass.png"] = 2] = "Room/room_grass.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_green.png"] = 3] = "Room/room_green.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_pink.png"] = 4] = "Room/room_pink.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_purple.png"] = 5] = "Room/room_purple.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_red.png"] = 6] = "Room/room_red.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_yellow.png"] = 7] = "Room/room_yellow.png";
-                RoomSkinZoder[RoomSkinZoder["Room/room_yellowish.png"] = 8] = "Room/room_yellowish.png";
-            })(RoomSkinZoder = Enum.RoomSkinZoder || (Enum.RoomSkinZoder = {}));
-            let WallpaperSkin;
-            (function (WallpaperSkin) {
-                WallpaperSkin[WallpaperSkin["Room/room_blue_wallpaper.png"] = 0] = "Room/room_blue_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_bluish_wallpaper.png"] = 1] = "Room/room_bluish_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_grass_wallpaper.png"] = 2] = "Room/room_grass_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_green_wallpaper.png"] = 3] = "Room/room_green_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_pink_wallpaper.png"] = 4] = "Room/room_pink_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_purple_wallpaper.png"] = 5] = "Room/room_purple_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_red_wallpaper.png"] = 6] = "Room/room_red_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_yellow_wallpaper.png"] = 7] = "Room/room_yellow_wallpaper.png";
-                WallpaperSkin[WallpaperSkin["Room/room_yellowish_wallpaper.png"] = 8] = "Room/room_yellowish_wallpaper.png";
-            })(WallpaperSkin = Enum.WallpaperSkin || (Enum.WallpaperSkin = {}));
-            let WallSkin;
-            (function (WallSkin) {
-                WallSkin["blue"] = "Room/room_blue_wall.png";
-                WallSkin["bluish"] = "Room/room_bluish_wall.png";
-                WallSkin["grass"] = "Room/room_grass_wall.png";
-                WallSkin["green"] = "Room/room_green_wall.png";
-                WallSkin["pink"] = "Room/room_pink_wall.png";
-                WallSkin["purple"] = "Room/room_purple_wall.png";
-                WallSkin["red"] = "Room/room_red_wall.png";
-                WallSkin["yellow"] = "Room/room_yellow_wall.png";
-                WallSkin["yellowish"] = "Room/room_yellowish_wall.png";
-                WallSkin["common"] = "Room/room_common_wall.png";
-            })(WallSkin = Enum.WallSkin || (Enum.WallSkin = {}));
-            let AisleColorSkin;
-            (function (AisleColorSkin) {
-                AisleColorSkin["blue"] = "Room/room_blue_color.png";
-                AisleColorSkin["bluish"] = "Room/room_bluish_color.png";
-                AisleColorSkin["grass"] = "Room/room_grass_color.png";
-                AisleColorSkin["green"] = "Room/room_green_color.png";
-                AisleColorSkin["pink"] = "Room/room_pink_color.png";
-                AisleColorSkin["purple"] = "Room/room_purple_color.png";
-                AisleColorSkin["red"] = "Room/room_red_color.png";
-                AisleColorSkin["yellow"] = "Room/room_yellow_color.png";
-                AisleColorSkin["yellowish"] = "Room/room_yellowish_color.png";
-                AisleColorSkin["common"] = "Room/room_common_color.png";
-            })(AisleColorSkin = Enum.AisleColorSkin || (Enum.AisleColorSkin = {}));
-            let gongzhuAni;
-            (function (gongzhuAni) {
-                gongzhuAni["walk"] = "walk";
-                gongzhuAni["die"] = "die";
-                gongzhuAni["die_xianglian"] = "die_xianglian";
-                gongzhuAni["walk_gun"] = "walk_gun";
-                gongzhuAni["walk_shuihu"] = "walk_shuihu";
-                gongzhuAni["walk_xianglian"] = "walk_xianglian";
-                gongzhuAni["attack_gun"] = "attack_gun";
-                gongzhuAni["attack_shuihu"] = "attack_shuihu";
-                gongzhuAni["win"] = "win";
-                gongzhuAni["win_xianglian"] = "win_xianglian";
-            })(gongzhuAni = Enum.gongzhuAni || (Enum.gongzhuAni = {}));
-            let dogAni;
-            (function (dogAni) {
-                dogAni["standby"] = "standby";
-                dogAni["walk"] = "walk";
-                dogAni["die"] = "die";
-            })(dogAni = Enum.dogAni || (Enum.dogAni = {}));
-            let wangziAni;
-            (function (wangziAni) {
-                wangziAni["standby"] = "standby";
-                wangziAni["win"] = "win";
-                wangziAni["walk"] = "walk";
-            })(wangziAni = Enum.wangziAni || (Enum.wangziAni = {}));
-            let houseAni;
-            (function (houseAni) {
-                houseAni["box_01_open"] = "box_01_open";
-                houseAni["box_02_open"] = "box_02_open";
-                houseAni["box_01_static"] = "box_01_static";
-                houseAni["box_02_static"] = "box_02_static";
-            })(houseAni = Enum.houseAni || (Enum.houseAni = {}));
-        })(Enum = lwg.Enum || (lwg.Enum = {}));
         let Click;
         (function (Click) {
             let Type;
@@ -3796,6 +3428,107 @@
             }
             SkinXD.SkinXDScene = SkinXDScene;
         })(SkinXD = lwg.SkinXD || (lwg.SkinXD = {}));
+        let Skin;
+        (function (Skin) {
+            Skin._skinClassArr = [];
+            Skin._headSkinArr = [];
+            Skin._currentHead = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Skin_currentHead') !== null ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Skin_currentHead', name);
+                }
+            };
+            Skin._eyeSkinArr = [];
+            Skin._currentEye = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Skin_currentEye') !== null ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Skin_currentEye', name);
+                }
+            };
+            let SkinClass;
+            (function (SkinClass) {
+                SkinClass["head"] = "head";
+                SkinClass["eye"] = "eye";
+                SkinClass["body"] = "body";
+                SkinClass["upperBody"] = "upperBody";
+                SkinClass["lowerBody"] = "lowerBody";
+            })(SkinClass = Skin.SkinClass || (Skin.SkinClass = {}));
+            let SkinProperty;
+            (function (SkinProperty) {
+                SkinProperty["name"] = "name";
+                SkinProperty["getway"] = "getway";
+                SkinProperty["condition"] = "condition";
+                SkinProperty["resCondition"] = "resCondition";
+                SkinProperty["arrange"] = "arrange";
+                SkinProperty["getOder"] = "getOder";
+                SkinProperty["classify"] = "classify";
+                SkinProperty["have"] = "have";
+            })(SkinProperty = Skin.SkinProperty || (Skin.SkinProperty = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["purchase"] = "purchase";
+                EventType["select"] = "select";
+            })(EventType = Skin.EventType || (Skin.EventType = {}));
+            class SkinScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.skinOnAwake();
+                }
+                initData() {
+                    Skin._SkinTap = this.self['SkinTap'];
+                    Skin._SkinList = this.self['SkinList'];
+                    Skin._skinClassArr = [Skin._eyeSkinArr, Skin._headSkinArr];
+                }
+                lwgEventReg() {
+                    this.skinEventReg();
+                }
+                skinEventReg() { }
+                skinOnAwake() { }
+                lwgNodeDec() {
+                    this.skinNodeDec();
+                }
+                skinNodeDec() { }
+                lwgOnEnable() {
+                    this.skinList_Create();
+                    this.skinTap_Create();
+                    this.skinOnEnable();
+                }
+                skinOnEnable() { }
+                lwgOpenAni() { return this.skinOpenAin(); }
+                skinOpenAin() { return 0; }
+                lwgBtnClick() { this.skinBtnClick(); }
+                skinBtnClick() { }
+                ;
+                skinTap_Create() {
+                    Skin._SkinTap.selectHandler = new Laya.Handler(this, this.skinTap_Select);
+                }
+                skinTap_Select(index) { }
+                skinList_Create() {
+                    Skin._SkinList.selectEnable = true;
+                    Skin._SkinList.selectHandler = new Laya.Handler(this, this.skinList_Scelet);
+                    Skin._SkinList.renderHandler = new Laya.Handler(this, this.skinList_Update);
+                    this.skinList_refresh();
+                }
+                skinList_Scelet(index) { }
+                skinList_Update(cell, index) { }
+                skinList_refresh() {
+                    if (Skin._SkinList && Skin._skinClassArr.length > 0) {
+                        Skin._SkinList.array = Skin._skinClassArr[0];
+                        Skin._SkinList.refresh();
+                    }
+                }
+                lwgOnDisable() {
+                    this.skinOnDisable();
+                }
+                skinOnDisable() {
+                }
+            }
+            Skin.SkinScene = SkinScene;
+        })(Skin = lwg.Skin || (lwg.Skin = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3D = [];
@@ -3935,6 +3668,8 @@
     let CheckInScene = lwg.CheckIn.CheckInScene;
     let SkinXD = lwg.SkinXD;
     let SkinXDScene = lwg.SkinXD.SkinXDScene;
+    let Skin = lwg.Skin;
+    let SkinScene = lwg.Skin.SkinScene;
 
     class ADManager {
         constructor() {
@@ -3973,12 +3708,12 @@
                 p.cbi.Add(TJ.Define.Event.Close, () => {
                     if (!getReward) {
                         PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                        Dialog.createHint_Middle(Dialog.Content["观看完整广告才能获取奖励哦！"]);
+                        Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
                     }
                 });
                 p.cbi.Add(TJ.Define.Event.NoAds, () => {
                     PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                    Dialog.createHint_Middle(Dialog.Content["暂时没有广告，过会儿再试试吧！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
                 });
                 TJ.ADS.Api.ShowReward(p);
                 ADManager.CanShowCD = false;
@@ -4082,6 +3817,13 @@
     })(TaT || (TaT = {}));
 
     class UICheckIn extends CheckIn.CheckInScene {
+        checkInNodeDec() {
+            if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
+                this.self['BtnTenGet'].visible = false;
+                this.self['BtnGet'].visible = false;
+                this.self['Select'].visible = false;
+            }
+        }
         checkInOnEnable() {
             let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
             ChinkTip.visible = false;
@@ -4179,7 +3921,6 @@
                     Pic_Gold.visible = false;
                     this.self['BtnSeven'].skin = 'UI/Common/kuang1.png';
                 }
-                EventAdmin.notify(CheckIn.EventType.removeCheckBtn);
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     Gold.addGold(rewardNum * number);
                     this.self.close();
@@ -4195,13 +3936,15 @@
             }
         }
         checkInOnUpdate() {
-            if (this.self['Dot'].visible) {
-                this.self['BtnGet'].visible = false;
-                this.self['BtnTenGet'].visible = true;
-            }
-            else {
-                this.self['BtnGet'].visible = true;
-                this.self['BtnTenGet'].visible = false;
+            if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
+                if (this.self['Dot'].visible) {
+                    this.self['BtnGet'].visible = false;
+                    this.self['BtnTenGet'].visible = true;
+                }
+                else {
+                    this.self['BtnGet'].visible = true;
+                    this.self['BtnTenGet'].visible = false;
+                }
             }
         }
     }
@@ -4252,18 +3995,6 @@
         }
     }
 
-    class UIShop_Goods extends Admin.Object {
-        lwgOnEnable() {
-            this.Select = this.self.getChildByName('Select');
-        }
-        lwgBtnClick() {
-            Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
-        }
-        up() {
-            EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']]);
-        }
-    }
-
     var Global;
     (function (Global) {
         let GEnum;
@@ -4310,302 +4041,6 @@
     let GVariate = Global.GVariate;
     let GEnum = Global.GEnum;
     let GSene3D = Global.GSene3D;
-
-    class UIShop extends Shop.ShopScene {
-        shopOnAwake() {
-            GVariate._stageClick = false;
-            Shop.goodsClassArr = [Shop.allOther, Shop.allProps, Shop.allSkin];
-            let SkinName;
-            (function (SkinName) {
-                SkinName["anquanmao"] = "anquanmao";
-                SkinName["yuanyanjing"] = "yuanyanjing";
-                SkinName["jiemao_01"] = "jiemao_01";
-                SkinName["hamajing"] = "hamajing";
-                SkinName["yanshemao_gangtie"] = "yanshemao_gangtie";
-                SkinName["yanshemao"] = "yanshemao";
-                SkinName["jiemao_02"] = "jiemao_02";
-                SkinName["xiaochoumao"] = "xiaochoumao";
-                SkinName["xingxingyanjing"] = "xingxingyanjing";
-                SkinName["yanshemao_shijie"] = "yanshemao_shijie";
-                SkinName["maomaozi"] = "maomaozi";
-            })(SkinName || (SkinName = {}));
-            let PropsName;
-            (function (PropsName) {
-                PropsName["yingguangbang"] = "yingguangbang";
-                PropsName["lifadao"] = "lifadao";
-                PropsName["jiandao"] = "jiandao";
-                PropsName["dianjupian"] = "dianjupian";
-                PropsName["dianju"] = "dianju";
-            })(PropsName || (PropsName = {}));
-            let OtherName;
-            (function (OtherName) {
-                OtherName["xiangsudao"] = "xiangsudao";
-                OtherName["tixudao"] = "tixudao";
-                OtherName["ruwu"] = "ruwu";
-                OtherName["lifadao"] = "lifadao";
-                OtherName["jundao"] = "jundao";
-                OtherName["tulongdao"] = "tulongdao";
-            })(OtherName || (OtherName = {}));
-            Tools.objPropertySort(Shop.allSkin, 'arrange');
-            Tools.objPropertySort(Shop.allProps, 'arrange');
-            Tools.objPropertySort(Shop.allOther, 'arrange');
-            if (!Shop._currentSkin.name) {
-                Shop._currentSkin.name = SkinName.anquanmao;
-            }
-            if (!Shop._currentProp.name) {
-                Shop._currentProp.name = PropsName.jiandao;
-            }
-            if (!Shop._currentOther.name) {
-                Shop._currentOther.name = OtherName.tixudao;
-            }
-            let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
-            if (Game._gameLevel.value >= condition) {
-                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.have, true);
-            }
-            else {
-                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
-            }
-        }
-        shopEventReg() {
-            EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
-                if (dataSource.have) {
-                    this.sceletDisplay(dataSource, false);
-                }
-                else {
-                    if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
-                        ADManager.ShowReward(() => {
-                            this.adsAcquisition(dataSource);
-                        });
-                    }
-                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
-                        Dialog.createHint_Middle(Dialog.Content["请前往皮肤限定界面获取!"]);
-                    }
-                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
-                        Dialog.createHint_Middle(Dialog.Content["通过相应的关卡数达到就可以得到了!"]);
-                    }
-                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
-                        Dialog.createHint_Middle(Dialog.Content["点击金币抽奖按钮购买!"]);
-                    }
-                }
-            });
-            Shop._ShopList.refresh();
-        }
-        sceletDisplay(dataSource, scrollTo) {
-            switch (Shop._ShopTap.selectedIndex) {
-                case 2:
-                    Shop._currentSkin.name = dataSource.name;
-                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
-                    break;
-                case 1:
-                    Shop._currentProp.name = dataSource.name;
-                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
-                    break;
-                case 0:
-                    Shop._currentOther.name = dataSource.name;
-                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
-                    break;
-                default:
-                    break;
-            }
-            if (scrollTo) {
-                let index = dataSource.arrange - 1;
-                Shop._ShopList.scrollTo(index);
-            }
-        }
-        adsAcquisition(dataSource) {
-            let claName;
-            switch (Shop._ShopTap.selectedIndex) {
-                case 2:
-                    claName = Shop.GoodsClass.Skin;
-                    break;
-                case 1:
-                    claName = Shop.GoodsClass.Props;
-                    break;
-                case 0:
-                    claName = Shop.GoodsClass.Other;
-                    break;
-                default:
-                    break;
-            }
-            let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
-            let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
-            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
-            if (condition <= resCondition + 1) {
-                Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
-                this.sceletDisplay(dataSource.name, false);
-            }
-            Shop._ShopList.refresh();
-        }
-        myTap_Select(index) {
-            PalyAudio.playSound();
-            switch (index) {
-                case 2:
-                    Shop._ShopList.array = Shop.allSkin;
-                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
-                    break;
-                case 1:
-                    Shop._ShopList.array = Shop.allProps;
-                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
-                    break;
-                case 0:
-                    Shop._ShopList.array = Shop.allOther;
-                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
-                    break;
-                default:
-                    break;
-            }
-            Shop._ShopList.refresh();
-        }
-        myList_Update(cell, index) {
-            let dataSource = cell.dataSource;
-            let Select = cell.getChildByName('Select');
-            Select.visible = false;
-            let Pic = cell.getChildByName('Pic');
-            switch (Shop._ShopTap.selectedIndex) {
-                case 2:
-                    Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
-                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentSkin.name) {
-                        Select.visible = true;
-                    }
-                    else {
-                        Select.visible = false;
-                    }
-                    break;
-                case 1:
-                    Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
-                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentProp.name) {
-                        Select.visible = true;
-                    }
-                    else {
-                        Select.visible = false;
-                    }
-                    break;
-                case 0:
-                    Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
-                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentOther.name) {
-                        Select.visible = true;
-                    }
-                    else {
-                        Select.visible = false;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            let NoHave = cell.getChildByName('NoHave');
-            NoHave.visible = true;
-            let Board = cell.getChildByName('Board');
-            let Dec = NoHave.getChildByName('Dec');
-            let Icon = NoHave.getChildByName('Icon');
-            if (!cell.dataSource[Shop.GoodsProperty.have]) {
-                switch (cell.dataSource[Shop.GoodsProperty.getway]) {
-                    case Shop.Getway.ads:
-                        Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
-                        Dec.x = 88;
-                        Dec.fontSize = 30;
-                        Icon.visible = true;
-                        break;
-                    case Shop.Getway.adsXD:
-                        Dec.text = '限定获取';
-                        Dec.x = NoHave.width / 2;
-                        Dec.fontSize = 23;
-                        Icon.visible = false;
-                        break;
-                    case Shop.Getway.easterEgg:
-                        Dec.text = '彩蛋获取';
-                        Dec.x = NoHave.width / 2;
-                        Dec.fontSize = 23;
-                        Icon.visible = false;
-                        break;
-                    case Shop.Getway.ineedwin:
-                        Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
-                        Dec.x = NoHave.width / 2;
-                        Dec.fontSize = 23;
-                        Icon.visible = false;
-                        break;
-                    case Shop.Getway.gold:
-                        Dec.text = '金币抽取';
-                        Dec.x = NoHave.width / 2;
-                        Dec.fontSize = 23;
-                        Icon.visible = false;
-                        break;
-                    default:
-                        Icon.visible = false;
-                        break;
-                }
-                Board.skin = 'UI/Common/kuang2.png';
-            }
-            else {
-                NoHave.visible = false;
-                Board.skin = 'UI/Common/kuang1.png';
-            }
-        }
-        lwgBtnClick() {
-            Click.on(Click.Type.largen, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
-            Click.on(Click.Type.largen, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
-            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
-        }
-        btnBuyUp() {
-            let noHaveGold = [];
-            switch (Shop._ShopTap.selectedIndex) {
-                case 2:
-                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Skin, false);
-                    break;
-                case 1:
-                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Props, false);
-                    break;
-                case 0:
-                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Other, false);
-                    break;
-                default:
-                    break;
-            }
-            if (noHaveGold.length <= 0) {
-                Dialog.createHint_Middle(Dialog.Content["没有可以购买的皮肤了！"]);
-            }
-            else {
-                Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
-                let price = noHaveGold[0][Shop.GoodsProperty.condition];
-                if (Gold._goldNum < price) {
-                    Dialog.createHint_Middle(Dialog.Content["金币不够了！"]);
-                }
-                else {
-                    Dialog.createHint_Middle(Dialog.Content["恭喜获得新皮肤!"]);
-                    switch (Shop._ShopTap.selectedIndex) {
-                        case 2:
-                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.GoodsProperty.have, true);
-                            break;
-                        case 1:
-                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.GoodsProperty.have, true);
-                            break;
-                        case 0:
-                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.GoodsProperty.have, true);
-                            break;
-                        default:
-                            break;
-                    }
-                    this.sceletDisplay(noHaveGold[0], true);
-                }
-                Shop._ShopList.refresh();
-            }
-        }
-        btnGetGold() {
-            ADManager.ShowReward(() => {
-                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                    this.advFunc();
-                });
-            });
-        }
-        advFunc() {
-            Gold.addGold(500);
-        }
-        btnBackUp() {
-            this.self.close();
-        }
-        shopOnDisable() {
-            GVariate._stageClick = true;
-        }
-    }
 
     class GameMain3D_Blade extends lwg.Admin.Object3D {
         onTriggerEnter(other) {
@@ -5099,7 +4534,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard];
+            GVariate._taskArr = [GEnum.TaskType.rightBeard];
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
         }
@@ -5114,7 +4549,7 @@
                 if (Admin._gameStart) {
                     if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
                         Laya.timer.frameOnce(60, this, () => {
-                            Admin._openScene(Admin.SceneName.UIShare, null, this.self);
+                            Admin._openScene(Admin.SceneName.UISkin, null, this.self);
                         });
                     }
                     else {
@@ -5536,22 +4971,22 @@
                 p.extra.videoTopics = ["解救小王子", "番茄小游戏", "抖音小游戏"];
                 p.channel = "video";
                 p.success = () => {
-                    Dialog.createHint_Middle(Dialog.Content["分享成功!"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
                     successedAc();
                 };
                 p.fail = () => {
                     if (type === 'noAward') {
-                        Dialog.createHint_Middle(Dialog.Content["分享成功后才能获取奖励！"]);
+                        Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
                     }
                     else {
-                        Dialog.createHint_Middle(Dialog.Content["分享失败！"]);
+                        Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
                     }
                     failAc();
                 };
                 RecordManager.grv.Share(p);
             }
             else {
-                Dialog.createHint_Middle(Dialog.Content["暂无视频，玩一局游戏之后分享！"]);
+                Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
             }
         }
     }
@@ -5622,6 +5057,495 @@
         }
         lwgOnDisable() {
             this.EndCamera.removeSelf();
+        }
+    }
+
+    class UIShop_Goods extends Admin.Object {
+        lwgOnEnable() {
+            this.Select = this.self.getChildByName('Select');
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
+        }
+        up() {
+            EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']]);
+        }
+    }
+
+    class UIShop extends Shop.ShopScene {
+        shopOnAwake() {
+            Gold.goldAppear();
+            GVariate._stageClick = false;
+            Shop.goodsClassArr = [Shop.allOther, Shop.allProps, Shop.allSkin];
+            let SkinName;
+            (function (SkinName) {
+                SkinName["anquanmao"] = "anquanmao";
+                SkinName["yuanyanjing"] = "yuanyanjing";
+                SkinName["jiemao_01"] = "jiemao_01";
+                SkinName["hamajing"] = "hamajing";
+                SkinName["yanshemao_gangtie"] = "yanshemao_gangtie";
+                SkinName["yanshemao"] = "yanshemao";
+                SkinName["jiemao_02"] = "jiemao_02";
+                SkinName["xiaochoumao"] = "xiaochoumao";
+                SkinName["xingxingyanjing"] = "xingxingyanjing";
+                SkinName["yanshemao_shijie"] = "yanshemao_shijie";
+                SkinName["maomaozi"] = "maomaozi";
+            })(SkinName || (SkinName = {}));
+            let PropsName;
+            (function (PropsName) {
+                PropsName["yingguangbang"] = "yingguangbang";
+                PropsName["lifadao"] = "lifadao";
+                PropsName["jiandao"] = "jiandao";
+                PropsName["dianjupian"] = "dianjupian";
+                PropsName["dianju"] = "dianju";
+            })(PropsName || (PropsName = {}));
+            let OtherName;
+            (function (OtherName) {
+                OtherName["xiangsudao"] = "xiangsudao";
+                OtherName["tixudao"] = "tixudao";
+                OtherName["ruwu"] = "ruwu";
+                OtherName["lifadao"] = "lifadao";
+                OtherName["jundao"] = "jundao";
+                OtherName["tulongdao"] = "tulongdao";
+            })(OtherName || (OtherName = {}));
+            Tools.objPropertySort(Shop.allSkin, 'arrange');
+            Tools.objPropertySort(Shop.allProps, 'arrange');
+            Tools.objPropertySort(Shop.allOther, 'arrange');
+            if (!Shop._currentSkin.name) {
+                Shop._currentSkin.name = SkinName.anquanmao;
+            }
+            if (!Shop._currentProp.name) {
+                Shop._currentProp.name = PropsName.jiandao;
+            }
+            if (!Shop._currentOther.name) {
+                Shop._currentOther.name = OtherName.tixudao;
+            }
+            let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
+            if (Game._gameLevel.value >= condition) {
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.have, true);
+            }
+            else {
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
+            }
+        }
+        shopEventReg() {
+            EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
+                if (dataSource.have) {
+                    this.sceletDisplay(dataSource, false);
+                }
+                else {
+                    if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
+                        ADManager.ShowReward(() => {
+                            this.adsAcquisition(dataSource);
+                        });
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
+                        Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤限定界面获取!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
+                        Dialog.createHint_Middle(Dialog.HintContent["通过相应的关卡数达到就可以得到了!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
+                        Dialog.createHint_Middle(Dialog.HintContent["点击金币抽奖按钮购买!"]);
+                    }
+                }
+            });
+            Shop._ShopList.refresh();
+        }
+        sceletDisplay(dataSource, scrollTo) {
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    Shop._currentSkin.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    break;
+                case 1:
+                    Shop._currentProp.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    break;
+                case 0:
+                    Shop._currentOther.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            if (scrollTo) {
+                let index = dataSource.arrange - 1;
+                Shop._ShopList.scrollTo(index);
+            }
+        }
+        adsAcquisition(dataSource) {
+            let claName;
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    claName = Shop.GoodsClass.Skin;
+                    break;
+                case 1:
+                    claName = Shop.GoodsClass.Props;
+                    break;
+                case 0:
+                    claName = Shop.GoodsClass.Other;
+                    break;
+                default:
+                    break;
+            }
+            let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
+            let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
+            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
+            if (condition <= resCondition + 1) {
+                Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
+                this.sceletDisplay(dataSource.name, false);
+            }
+            Shop._ShopList.refresh();
+        }
+        myTap_Select(index) {
+            PalyAudio.playSound();
+            switch (index) {
+                case 2:
+                    Shop._ShopList.array = Shop.allSkin;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
+                    break;
+                case 1:
+                    Shop._ShopList.array = Shop.allProps;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
+                    break;
+                case 0:
+                    Shop._ShopList.array = Shop.allOther;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            Shop._ShopList.refresh();
+        }
+        myList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            Select.visible = false;
+            let Pic = cell.getChildByName('Pic');
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentSkin.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 1:
+                    Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentProp.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 0:
+                    Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentOther.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            let NoHave = cell.getChildByName('NoHave');
+            NoHave.visible = true;
+            let Board = cell.getChildByName('Board');
+            let Dec = NoHave.getChildByName('Dec');
+            let Icon = NoHave.getChildByName('Icon');
+            if (!cell.dataSource[Shop.GoodsProperty.have]) {
+                switch (cell.dataSource[Shop.GoodsProperty.getway]) {
+                    case Shop.Getway.ads:
+                        Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
+                        Dec.x = 88;
+                        Dec.fontSize = 30;
+                        Icon.visible = true;
+                        break;
+                    case Shop.Getway.adsXD:
+                        Dec.text = '限定获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.easterEgg:
+                        Dec.text = '彩蛋获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.ineedwin:
+                        Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.gold:
+                        Dec.text = '金币抽取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    default:
+                        Icon.visible = false;
+                        break;
+                }
+                Board.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                NoHave.visible = false;
+                Board.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
+            Click.on(Click.Type.largen, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnBuyUp() {
+            let noHaveGold = [];
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Skin, false);
+                    break;
+                case 1:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Props, false);
+                    break;
+                case 0:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Other, false);
+                    break;
+                default:
+                    break;
+            }
+            if (noHaveGold.length <= 0) {
+                Dialog.createHint_Middle(Dialog.HintContent["没有可以购买的皮肤了！"]);
+            }
+            else {
+                Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
+                let price = noHaveGold[0][Shop.GoodsProperty.condition];
+                if (Gold._goldNum < price) {
+                    Dialog.createHint_Middle(Dialog.HintContent["金币不够了！"]);
+                }
+                else {
+                    Dialog.createHint_Middle(Dialog.HintContent["恭喜获得新皮肤!"]);
+                    switch (Shop._ShopTap.selectedIndex) {
+                        case 2:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.GoodsProperty.have, true);
+                            break;
+                        case 1:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.GoodsProperty.have, true);
+                            break;
+                        case 0:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.GoodsProperty.have, true);
+                            break;
+                        default:
+                            break;
+                    }
+                    this.sceletDisplay(noHaveGold[0], true);
+                }
+                Shop._ShopList.refresh();
+            }
+        }
+        btnGetGold() {
+            ADManager.ShowReward(() => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    this.advFunc();
+                });
+            });
+        }
+        advFunc() {
+            Gold.addGold(500);
+        }
+        btnBackUp() {
+            this.self.close();
+        }
+        shopOnDisable() {
+            GVariate._stageClick = true;
+        }
+    }
+
+    class UISKin_Goods extends Admin.Object {
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
+        }
+        up() {
+            EventAdmin.notify(Skin.EventType.select, [this.self['_dataSource']]);
+        }
+    }
+
+    class UISkin extends SkinScene {
+        skinOnAwake() {
+            Dialog.createDialogue(150, 334, Dialog.UseWhere.scene3, this.self);
+            let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
+            Skin._headSkinArr = [];
+            Skin._eyeSkinArr = [];
+            Skin._currentEye.name = null;
+            Skin._currentHead.name = null;
+            for (let index = 0; index < skinArr.length; index++) {
+                const element = skinArr[index];
+                if (element[Skin.SkinProperty.classify] === Skin.SkinClass.head) {
+                    Skin._headSkinArr.push(element);
+                }
+                else if (element[Skin.SkinProperty.classify] === Skin.SkinClass.eye) {
+                    Skin._eyeSkinArr.push(element);
+                }
+            }
+            Skin._SkinList.array = Skin._headSkinArr;
+        }
+        skinEventReg() {
+            EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
+                if (dataSource[Shop.GoodsProperty.have]) {
+                    switch (Skin._SkinTap.selectedIndex) {
+                        case 0:
+                            Skin._currentEye.name = dataSource[Shop.GoodsProperty.name];
+                            break;
+                        case 1:
+                            Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
+                        ADManager.ShowReward(() => {
+                            this.adsAcquisition(dataSource);
+                        });
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
+                        Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤限定界面获取!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
+                        Dialog.createHint_Middle(Dialog.HintContent["通过相应的关卡数达到就可以得到了!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
+                        Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤界面购买！"]);
+                    }
+                }
+            });
+            Skin._SkinList.refresh();
+        }
+        adsAcquisition(dataSource) {
+            let claName = Shop.GoodsClass.Skin;
+            let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
+            let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
+            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
+            if (condition <= resCondition + 1) {
+                Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
+                switch (Skin._SkinTap.selectedIndex) {
+                    case 0:
+                        Skin._currentEye.name = dataSource[Shop.GoodsProperty.name];
+                        break;
+                    case 1:
+                        Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Skin._SkinList.refresh();
+        }
+        skinTap_Select(index) {
+            PalyAudio.playSound();
+            switch (index) {
+                case 0:
+                    Skin._SkinList.array = Skin._eyeSkinArr;
+                    break;
+                case 1:
+                    Skin._SkinList.array = Skin._headSkinArr;
+                    break;
+                default:
+                    break;
+            }
+            Skin._SkinList.refresh();
+        }
+        skinList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            Select.visible = false;
+            let Pic = cell.getChildByName('Pic');
+            Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+            switch (Skin._SkinTap.selectedIndex) {
+                case 0:
+                    if (cell.dataSource['name'] == Skin._currentEye.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 1:
+                    if (cell.dataSource['name'] == Skin._currentHead.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            let NoHave = cell.getChildByName('NoHave');
+            NoHave.visible = true;
+            let Board = cell.getChildByName('Board');
+            let Dec = NoHave.getChildByName('Dec');
+            let Icon = NoHave.getChildByName('Icon');
+            if (!cell.dataSource[Shop.GoodsProperty.have]) {
+                switch (cell.dataSource[Shop.GoodsProperty.getway]) {
+                    case Shop.Getway.ads:
+                        Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
+                        Dec.x = 88;
+                        Dec.fontSize = 30;
+                        Icon.visible = true;
+                        break;
+                    case Shop.Getway.adsXD:
+                        Dec.text = '限定获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.easterEgg:
+                        Dec.text = '彩蛋获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.ineedwin:
+                        Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.gold:
+                        Dec.text = '金币抽取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    default:
+                        Icon.visible = false;
+                        break;
+                }
+                Board.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                NoHave.visible = false;
+                Board.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        skinOnEnable() {
+            Skin._SkinList.refresh();
+        }
+        skinBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, this.btnCompleteUp, null);
+        }
+        btnCompleteUp() {
+            Admin._openScene(Admin.SceneName.UIShare, null, this.self);
         }
     }
 
@@ -5696,7 +5620,7 @@
             let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
             if (have === 1) {
                 this.progressDisplay();
-                Dialog.createHint_Middle(Dialog.Content["限定皮肤已经获得，请前往皮肤界面查看。"]);
+                Dialog.createHint_Middle(Dialog.HintContent["限定皮肤已经获得，请前往皮肤界面查看。"]);
                 Shop._currentOther.name = 'xiandanren';
                 EventAdmin.notify(SkinXD.EventType.acquisition);
                 Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {
@@ -5730,9 +5654,6 @@
             this.levelStyleDisplay();
             if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
                 this.self['BtnXDSkin'].visible = false;
-            }
-            if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-                this.self['BtnCheck'].visible = false;
             }
             EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
             CheckIn.openCheckIn();
@@ -6023,7 +5944,7 @@
                     });
                 }
                 else {
-                    Dialog.createHint_Middle(Dialog.Content["观看广告可以获得三次开宝箱次数！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["观看广告可以获得三次开宝箱次数！"]);
                 }
             }
         }
@@ -6058,7 +5979,7 @@
                     }
                 }
                 else {
-                    Dialog.createHint_Middle(Dialog.Content["观看广告可以获得三次开宝箱次数！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["观看广告可以获得三次开宝箱次数！"]);
                 }
             });
         }
@@ -6130,13 +6051,13 @@
             ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
             if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
                 ADManager.ShowReward(() => {
-                    Dialog.createHint_Middle(Dialog.Content["增加三次开启宝箱次数！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
                     VictoryBox._openNum += 3;
                     VictoryBox._adsMaxOpenNum -= 3;
                 });
             }
             else {
-                Dialog.createHint_Middle(Dialog.Content["没有宝箱领可以领了！"]);
+                Dialog.createHint_Middle(Dialog.HintContent["没有宝箱领可以领了！"]);
             }
         }
         victoryOnUpdate() {
@@ -6223,13 +6144,15 @@
             var reg = Laya.ClassUtils.regClass;
             reg("script/Game/UICheckIn.ts", UICheckIn);
             reg("script/Game/UIDefeated.ts", UIDefeated);
-            reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
-            reg("script/Game/UIShop.ts", UIShop);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
             reg("script/Game/UIResurgence.ts", UIResurgence);
             reg("script/Game/UISet.ts", UISet);
             reg("script/Game/UIShare.ts", UIShare);
+            reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
+            reg("script/Game/UIShop.ts", UIShop);
+            reg("script/Game/UISKin_Goods.ts", UISKin_Goods);
+            reg("script/Game/UISkin.ts", UISkin);
             reg("script/Game/UISkinTry.ts", UISkinTry);
             reg("script/Game/UISkinXD.ts", UISkinXD);
             reg("script/Game/UIStart.ts", UIStart);

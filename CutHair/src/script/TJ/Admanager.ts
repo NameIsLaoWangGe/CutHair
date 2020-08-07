@@ -56,7 +56,7 @@ export default class ADManager {
                 if (!getReward) {
                     PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
                     //UIMgr.show("UISubSkinTry", 2);
-                    Dialog.createHint_Middle(Dialog.Content["观看完整广告才能获取奖励哦！"]);
+                    Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
                     //TipPanel.ins.showString("观看完整广告才能获取奖励哦！");
                 }
             });
@@ -64,7 +64,7 @@ export default class ADManager {
                 PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
 
                 //UIMgr.show("UISubSkinTry", 1);
-                Dialog.createHint_Middle(Dialog.Content["暂时没有广告，过会儿再试试吧！"]);
+                Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
                 //TipPanel.ins.showString("暂时没有广告，过会儿再试试吧！");
             });
 

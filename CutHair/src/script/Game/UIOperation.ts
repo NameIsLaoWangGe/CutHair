@@ -148,7 +148,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard];
+        GVariate._taskArr = [GEnum.TaskType.rightBeard];
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
     }
@@ -166,7 +166,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             if (Admin._gameStart) {
                 if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
                     Laya.timer.frameOnce(60, this, () => {
-                        Admin._openScene(Admin.SceneName.UIShare, null, this.self);
+                        Admin._openScene(Admin.SceneName.UISkin, null, this.self);
                     });
                 } else {
                     //刷新一下属性 
