@@ -3,7 +3,7 @@ import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
 export default class UILoding extends Loding.LodeScene {
 
-    lodingOnAwake(): void {
+    lodingResList(): void {
         Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
             "res/atlas/Frame/UI.png",
@@ -23,6 +23,7 @@ export default class UILoding extends Loding.LodeScene {
             'GameData/Task/everydayTask.json',
             "GameData/VictoryBox/VictoryBox.json",
             "GameData/CheckIn/CheckIn.json",
+            "GameData/Dialog/Dialog.json",
         ];
     }
 

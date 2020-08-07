@@ -218,7 +218,6 @@ export module lwg {
             }));
         }
 
-
         /**
         * 创建提示框prefab
         * @param type 类型，也就是提示文字类型
@@ -232,7 +231,7 @@ export module lwg {
                 Laya.stage.addChild(sp);
                 sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
                 let dec = sp.getChildByName('dec') as Laya.Label;
-                dec.text = Enum.HintDec[type];
+                dec.text = Enum.HintContent[type];
                 sp.zOrder = 100;
 
                 Animation2D.HintAni_01(sp, 100, 100, 1000, 50, 100, f => {
@@ -439,9 +438,9 @@ export module lwg {
 
 
     /**提示模块*/
-    export module Hint {
+    export module Dialog {
         /**提示文字的类型描述*/
-        export enum HintDec {
+        export enum HintContent {
             '金币不够了！',
             '没有可以购买的皮肤了！',
             '暂时没有广告，过会儿再试试吧！',
@@ -515,7 +514,7 @@ export module lwg {
             let Dec = new Laya.Label();
             Hint_M.addChild(Dec);
             Dec.width = Laya.stage.width
-            Dec.text = HintDec[describe];
+            Dec.text = HintContent[describe];
             Dec.pivotX = Laya.stage.width / 2;
             Dec.x = Laya.stage.width / 2;
             Dec.height = 100;
@@ -539,6 +538,55 @@ export module lwg {
                 });
             });
         }
+
+        /**对话框内容*/
+        export let _dialogContentArr = Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'];
+
+        /**
+         * 获取对单个话框中的内容条目数组，通过适用场景和序号获取
+         * @param useWhere 适用场景
+         * @param number 序号
+         * */
+        export function getDialogContent(useWhere: string, number: number): Array<string> {
+            let arr0;
+            for (let index = 0; index < _dialogContentArr.length; index++) {
+                const element = _dialogContentArr[index];
+                if (element['useWhere'] == useWhere) {
+                    arr0.push
+                }
+            }
+            return;
+        }
+
+        /**
+         * 获取对话框中的属性
+         * @param dialogScene 适用场景
+         * @param name 名称
+         * @param property 属性名
+        */
+        export function getDialogProperty(useWhere: string, number: number, property: string): void {
+
+        }
+
+        /**对话框中应用的场景类型*/
+        export enum UseWhere {
+            scene1 = 'scene1',
+            scene2 = 'scene2',
+            scene3 = 'scene3',
+        }
+
+        /**对话框中的属性*/
+        export enum DialogProperty {
+            /**序号*/
+            number = 'number',
+            /**试用场景*/
+            useWhere = 'useWhere',
+            /**内容条数，内容条数是content+数字，contentMax为最大条数*/
+            content = 'content',
+            /**语句的最大条目数，配合content属性查找*/
+            contentMax = 'contentMax',
+        }
+
     }
 
     /**金币模块*/
@@ -581,14 +629,24 @@ export module lwg {
         /**
          * GoldNode出现动画
          * @param delayed 延时时间
+         * @param x 允许改变一次X轴位置
+         * @param y 允许改变一次Y轴位置
         */
-        export function goldAppear(delayed?: number): void {
+        export function goldAppear(delayed?: number, x?: number, y?: number): void {
             if (delayed) {
                 Animation2D.scale_Alpha(GoldNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
                     GoldNode.visible = true;
                 });
             } else {
                 GoldNode.visible = true;
+            }
+
+            if (x) {
+                GoldNode.x = x;
+            }
+
+            if (y) {
+                GoldNode.y = y;
             }
         }
 
@@ -860,8 +918,7 @@ export module lwg {
         }
     }
 
-
-    /*场景和UI模块的一些通用属性*/
+    /**场景和UI模块的一些通用属性*/
     export module Admin {
         /**场景控制,访问特定场景用_sceneControl[name]方位*/
         export let _sceneControl: any = {};
@@ -954,7 +1011,7 @@ export module lwg {
             //     Global._execution -= subEx;
             //     let num = Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
             //     num.value = Global._execution.toString();
-            //     Hint.createHint_Middle(Hint.HintDec["消耗2点体力！"]);
+            //     Dialog.createHint_Middle(Dialog.HintContent["消耗2点体力！"]);
             //     Global.createConsumeEx(subEx);
             // }
 
@@ -1951,7 +2008,7 @@ export module lwg {
     /**枚举，常量*/
     export module Enum {
         /**提示文字的类型描述*/
-        export enum HintDec {
+        export enum HintContent {
             '金币不够了！',
             '没有可以购买的皮肤了！',
             '暂时没有广告，过会儿再试试吧！',
@@ -3477,6 +3534,149 @@ export module lwg {
             }), delayed1);
         }
     }
+
+    /**设置模块*/
+    export module Setting {
+        /**音效设置*/
+        export let _sound = {
+            get switch(): boolean {
+                return Laya.LocalStorage.getItem('Setting_sound') == '0' ? false : true;
+            },
+            /**次数写数字*/
+            set switch(value: boolean) {
+                let val;
+                if (value) {
+                    val = 1;
+                } else {
+                    val = 0;
+                }
+                Laya.LocalStorage.setItem('Setting_sound', val.toString());
+            }
+        };
+
+        /**背景音乐开关*/
+        export let _bgMusic = {
+            get switch(): boolean {
+                return Laya.LocalStorage.getItem('Setting_bgMusic') == '0' ? false : true;
+            },
+            /**次数写数字*/
+            set switch(value: boolean) {
+                let val;
+                if (value) {
+                    val = 1;
+                    PalyAudio.playMusic();
+                } else {
+                    val = 0;
+                    PalyAudio.stopMusic();
+                }
+                Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
+            }
+        };
+
+        /**震动开关*/
+        export let _shake = {
+            get switch(): boolean {
+                return Laya.LocalStorage.getItem('Setting_shake') == '0' ? false : true;
+            },
+            /**次数写数字*/
+            set switch(value: boolean) {
+                let val;
+                if (value) {
+                    val = 1;
+                } else {
+                    val = 0;
+                }
+                Laya.LocalStorage.setItem('Setting_shake', val.toString());
+            }
+        };
+
+        /**设置按钮节点*/
+        export let BtnSetNode: Laya.Sprite;
+        /**
+         * 创建一个设置按钮
+         * @param x X轴坐标
+         * @param y Y轴坐标
+         * @param width 宽度，不传则默认是100
+         * @param height 高度，不传则默认是100
+         * @param url 图片地址没有则是默认图片
+         * @param parent 父节点，不传则就在舞台上
+        */
+        export function createSetBtn(x: number, y: number, width?: number, height?: number, url?: string, parent?: Laya.Sprite): void {
+            let _url = 'Frame/UI/icon_set.png';
+            let btn = new Laya.Image;
+            if (width) {
+                btn.width = width;
+            } else {
+                btn.width = 100;
+            }
+            if (height) {
+                btn.height = height;
+            } else {
+                btn.height = 100;
+            }
+            if (url) {
+                btn.skin = url;
+            } else {
+                btn.skin = _url;
+            }
+            if (parent) {
+                parent.addChild(btn);
+            } else {
+                Laya.stage.addChild(btn);
+            }
+
+            btn.pivotX = btn.width / 2;
+            btn.pivotY = btn.height / 2;
+
+            btn.x = x;
+            btn.y = y;
+
+            var btnSetUp = function (): void {
+                Admin._openScene(Admin.SceneName.UISet);
+            }
+            Click.on(Click.Type.largen, btn, null, null, null, btnSetUp, null);
+
+            BtnSetNode = btn;
+            BtnSetNode.name = 'BtnSetNode';
+        }
+
+        /**
+         * 设置按钮的出现
+         * @param delayed 延时时间
+         * @param x 改变一次X轴位置
+         * @param y 改变一次Y轴位置
+        */
+        export function setBtnAppear(delayed?: number, x?: number, y?: number): void {
+            if (delayed) {
+                Animation2D.scale_Alpha(BtnSetNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
+                    BtnSetNode.visible = true;
+                });
+            } else {
+                BtnSetNode.visible = true;
+            }
+            if (x) {
+                BtnSetNode.x = x;
+            }
+            if (y) {
+                BtnSetNode.y = y;
+            }
+        }
+
+        /**
+         * 设置按钮的消失
+         * @param delayed 延时时间
+        */
+        export function setBtnVinish(delayed?: number): void {
+            if (delayed) {
+                Animation2D.scale_Alpha(BtnSetNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
+                    BtnSetNode.visible = false;
+                });
+            } else {
+                BtnSetNode.visible = false;
+            }
+        }
+    }
+
     /**
      * number.这里导出的是模块不是类，没有this，所以此模块的回调函数要写成func=>{}这种箭头函数，箭头函数会把{}里面的this指向原来的this。
      * 2.音乐播放模块
@@ -3492,8 +3692,8 @@ export module lwg {
         }
 
         /**通用音效播放
-         * @param url 音效地址
-         * @param number 播放次数
+         * @param url 音效地址，不传则是默认音效
+         * @param number 播放次数，默认1次
          * @param func 播放完毕回调
          */
         export function playSound(url?: string, number?: number, func?: Function) {
@@ -3512,10 +3712,52 @@ export module lwg {
             }
         }
 
+        /**通用音效播放
+         * @param url 音效地址，不传则是默认音效
+         * @param number 播放次数，默认1次
+         * @param func 播放完毕回调
+         */
+        export function playDefeatedSound(url?: string, number?: number, func?: Function) {
+            if (!url) {
+                url = voiceUrl.defeated;
+            }
+            if (!number) {
+                number = 1;
+            }
+            if (Setting._sound.switch) {
+                Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }));
+            }
+        }
+
+        /**胜利音效播放
+          * @param url 音效地址，不传则是默认音效
+          * @param number 播放次数，默认1次
+          * @param func 播放完毕回调
+          */
+        export function playVictorySound(url?: string, number?: number, func?: Function) {
+            if (!url) {
+                url = voiceUrl.victory;
+            }
+            if (!number) {
+                number = 1;
+            }
+            if (Setting._sound.switch) {
+                Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }));
+            }
+        }
+
         /**通用背景音乐播放
-        * @param url 音效地址
+        * @param url 音效地址，不传则是默认音效
         * @param number 循环次数，0表示无限循环
-        * @param delayed 延时时间
+        * @param delayed 延时时间，默认0
         */
         export function playMusic(url?: string, number?: number, delayed?: number) {
             if (!url) {
@@ -5198,144 +5440,7 @@ export module lwg {
         }
     }
 
-    /**设置模块*/
-    export module Setting {
-        /**音效设置*/
-        export let _sound = {
-            get switch(): boolean {
-                return Laya.LocalStorage.getItem('Setting_sound') == '0' ? false : true;
-            },
-            /**次数写数字*/
-            set switch(value: boolean) {
-                let val;
-                if (value) {
-                    val = 1;
-                } else {
-                    val = 0;
-                }
-                Laya.LocalStorage.setItem('Setting_sound', val.toString());
-            }
-        };
 
-        /**背景音乐开关*/
-        export let _bgMusic = {
-            get switch(): boolean {
-                return Laya.LocalStorage.getItem('Setting_bgMusic') == '0' ? false : true;
-            },
-            /**次数写数字*/
-            set switch(value: boolean) {
-                let val;
-                if (value) {
-                    val = 1;
-                    PalyAudio.playMusic();
-                } else {
-                    val = 0;
-                    PalyAudio.stopMusic();
-                }
-                Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
-            }
-        };
-
-        /**震动开关*/
-        export let _shake = {
-            get switch(): boolean {
-                return Laya.LocalStorage.getItem('Setting_shake') == '0' ? false : true;
-            },
-            /**次数写数字*/
-            set switch(value: boolean) {
-                let val;
-                if (value) {
-                    val = 1;
-                } else {
-                    val = 0;
-                }
-                Laya.LocalStorage.setItem('Setting_shake', val.toString());
-            }
-        };
-
-        /**设置按钮节点*/
-        export let BtnSetNode: Laya.Sprite;
-        /**
-         * 创建一个设置按钮
-         * @param x X轴坐标
-         * @param y Y轴坐标
-         * @param width 宽度，不传则默认是100
-         * @param height 高度，不传则默认是100
-         * @param url 图片地址没有则是默认图片
-         * @param parent 父节点，不传则就在舞台上
-        */
-        export function createSetBtn(x, y, width?: number, height?: number, url?: string, parent?: Laya.Sprite): void {
-            let _url = 'Frame/UI/icon_set.png';
-            let btn = new Laya.Image;
-            if (width) {
-                btn.width = width;
-            } else {
-                btn.width = 100;
-            }
-            if (height) {
-                btn.height = height;
-            } else {
-                btn.height = 100;
-            }
-            if (url) {
-                btn.skin = url;
-            } else {
-                btn.skin = _url;
-            }
-            if (parent) {
-                parent.addChild(btn);
-            } else {
-                Laya.stage.addChild(btn);
-            }
-
-            btn.pivotX = btn.width / 2;
-            btn.pivotY = btn.height / 2;
-
-            btn.x = x;
-            btn.y = y;
-            var btnSetUp = function (): void {
-                Admin._openScene(Admin.SceneName.UISet);
-            }
-            Click.on(Click.Type.largen, btn, null, null, null, btnSetUp, null);
-            BtnSetNode = btn;
-            BtnSetNode.name = 'BtnSetNode';
-
-        }
-
-        // /**设置按钮点击抬起*/
-        // export function btnSetUp(): void {
-        //     Admin._openScene(Admin.SceneName.UISet);
-        // }
-
-        /**
-         * 设置按钮的出现
-         * @param delayed 延时时间
-        */
-        export function setBtnAppear(delayed?: number): void {
-            if (delayed) {
-                Animation2D.scale_Alpha(BtnSetNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
-                    BtnSetNode.visible = true;
-                });
-            } else {
-                BtnSetNode.visible = true;
-            }
-        }
-
-        /**
-         * 设置按钮的消失
-         * @param delayed 延时时间
-        */
-        export function setBtnVinish(delayed?: number): void {
-            if (delayed) {
-                Animation2D.scale_Alpha(BtnSetNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
-                    BtnSetNode.visible = false;
-                });
-            } else {
-                BtnSetNode.visible = false;
-            }
-        }
-
-    }
 
     export module Loding {
         /**3D场景的加载*/
@@ -5393,10 +5498,10 @@ export module lwg {
         export class LodeScene extends Admin.Scene {
 
             lwgOnAwake(): void {
-                this.lodingOnAwake();
+                this.lodingResList();
             }
             /**初始化的时候填写需要加载的内容，在三种加载数组中填写资源地址*/
-            lodingOnAwake(): void {
+            lodingResList(): void {
 
             }
             lwgEventReg(): void {
@@ -5434,7 +5539,7 @@ export module lwg {
                     case lodingList_2D:
                         Laya.loader.load(lodingList_2D[index], Laya.Handler.create(this, (any) => {
                             if (any == null) {
-                                console.log('XXXXXXXXXXX2D资源' + lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                console.log('XXXXXXXXXXX2D资源' + lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                             } else {
                                 console.log('2D资源' + lodingList_2D[index] + '加载完成！', '数组下标为：', index);
                             }
@@ -5444,7 +5549,7 @@ export module lwg {
                     case lodingList_3D:
                         Laya.Scene3D.load(lodingList_3D[index], Laya.Handler.create(this, (any) => {
                             if (any == null) {
-                                console.log('XXXXXXXXXXX3D场景' + lodingList_3D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                console.log('XXXXXXXXXXX3D场景' + lodingList_3D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                             } else {
                                 console.log('3D场景' + lodingList_3D[index] + '加载完成！', '数组下标为：', index);
                             }
@@ -5455,7 +5560,7 @@ export module lwg {
                     case lodingList_Data:
                         Laya.loader.load(lodingList_Data[index], Laya.Handler.create(this, (any) => {
                             if (any == null) {
-                                console.log('XXXXXXXXXXX数据表' + lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index);
+                                console.log('XXXXXXXXXXX数据表' + lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                             } else {
                                 console.log('数据表' + lodingList_Data[index] + '加载完成！', '数组下标为：', index);
                             }
@@ -5468,7 +5573,7 @@ export module lwg {
                         break;
                 }
             }
-            /**每加载成功一次后、进度条每次增加后的回调*/
+            /**每个资源加载成功后，进度条每次增加后的回调*/
             lodingPhaseComplete(): void { }
 
             /**完成后，内部结构初始化*/
@@ -5488,18 +5593,20 @@ export module lwg {
 }
 export default lwg;
 export let Admin = lwg.Admin;
+export let Game = lwg.Game;
+export let Gold = lwg.Gold;
 export let Click = lwg.Click;
-export let Global = lwg.Global;
-export let Animation2D = lwg.Animation2D;
 export let EventAdmin = lwg.EventAdmin;
 export let Tools = lwg.Tools;
 export let Effects = lwg.Effects;
-export let Animation3D = lwg.Animation3D;
 export let PalyAudio = lwg.PalyAudio;
-export let Gold = lwg.Gold;
-export let Hint = lwg.Hint;
+export let Setting = lwg.Setting;
+export let Dialog = lwg.Dialog;
+export let Animation2D = lwg.Animation2D;
+export let Animation3D = lwg.Animation3D;
+//场景相关 
 export let Loding = lwg.Loding;
-export let Game = lwg.Game;
+export let LodeScene = lwg.Loding.LodeScene;
 export let Shop = lwg.Shop;
 export let ShopScene = lwg.Shop.ShopScene;
 export let Task = lwg.Task;
@@ -5510,6 +5617,5 @@ export let CheckIn = lwg.CheckIn;
 export let CheckInScene = lwg.CheckIn.CheckInScene;
 export let SkinXD = lwg.SkinXD;
 export let SkinXDScene = lwg.SkinXD.SkinXDScene;
-export let Setting = lwg.Setting;
 
 

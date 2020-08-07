@@ -1,5 +1,5 @@
 import ADManager, { TaT } from "../TJ/Admanager";
-import { Admin, lwg, Hint, Animation2D, Effects, VictoryBox, EventAdmin, Click } from "../Lwg_Template/lwg";
+import { Admin, lwg, Dialog, Animation2D, Effects, VictoryBox, EventAdmin, Click } from "../Lwg_Template/lwg";
 
 export default class UIVictoryBox_Cell extends Admin.Object {
     constructor() { super(); }
@@ -26,7 +26,7 @@ export default class UIVictoryBox_Cell extends Admin.Object {
                     this.lwgBtnClick();
                 })
             } else {
-                Hint.createHint_Middle(Hint.HintDec["观看广告可以获得三次开宝箱次数！"]);
+                Dialog.createHint_Middle(Dialog.Content["观看广告可以获得三次开宝箱次数！"]);
             }
         }
 

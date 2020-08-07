@@ -1,4 +1,4 @@
-import { lwg, Click, EventAdmin, Hint, Admin, Game, Task, Gold, Shop } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Dialog, Admin, Game, Task, Gold, Shop } from "../Lwg_Template/lwg";
 import ADManager from "../TJ/Admanager";
 import { GVariate } from "../Lwg_Template/Global";
 

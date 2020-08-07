@@ -1,4 +1,4 @@
-import { lwg, EventAdmin, Global } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin } from "../Lwg_Template/lwg";
 import { GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class GameMain3D_Blade extends lwg.Admin.Object3D {

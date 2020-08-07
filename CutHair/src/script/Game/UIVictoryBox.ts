@@ -1,4 +1,4 @@
-import { lwg, Admin, Hint, VictoryBox, EventAdmin, Animation2D, Effects, Gold, Click, Task, Tools } from "../Lwg_Template/lwg";
+import { lwg, Admin, Dialog, VictoryBox, EventAdmin, Animation2D, Effects, Gold, Click, Task, Tools } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
@@ -29,7 +29,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
                     this.getRewardFunc(dataSource);
                 }
             } else {
-                Hint.createHint_Middle(Hint.HintDec["观看广告可以获得三次开宝箱次数！"])
+                Dialog.createHint_Middle(Dialog.Content["观看广告可以获得三次开宝箱次数！"])
             }
         })
     }
@@ -114,12 +114,12 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
         if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
             ADManager.ShowReward(() => {
-                Hint.createHint_Middle(Hint.HintDec["增加三次开启宝箱次数！"])
+                Dialog.createHint_Middle(Dialog.Content["增加三次开启宝箱次数！"])
                 VictoryBox._openNum += 3;
                 VictoryBox._adsMaxOpenNum -= 3;
             })
         } else {
-            Hint.createHint_Middle(Hint.HintDec["没有宝箱领可以领了！"])
+            Dialog.createHint_Middle(Dialog.Content["没有宝箱领可以领了！"])
         }
     }
 

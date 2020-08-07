@@ -109,5 +109,6 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgOnDisable(): void {
         Gold.GoldNode.visible = false;
+        Setting.setBtnVinish();
     }
 }

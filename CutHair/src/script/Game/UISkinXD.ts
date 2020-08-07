@@ -1,4 +1,4 @@
-import { lwg, SkinXD, Gold, Click, Hint, Shop, Animation2D, EventAdmin } from "../Lwg_Template/lwg";
+import { lwg, SkinXD, Gold, Click, Dialog, Shop, Animation2D, EventAdmin } from "../Lwg_Template/lwg";
 import UIStart from "./UIStart";
 import ADManager, { TaT } from "../TJ/Admanager";
 
@@ -45,7 +45,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
         let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
         if (have === 1) {
             this.progressDisplay();
-            Hint.createHint_Middle(Hint.HintDec["限定皮肤已经获得，请前往皮肤界面查看。"]);
+            Dialog.createHint_Middle(Dialog.Content["限定皮肤已经获得，请前往皮肤界面查看。"]);
             Shop._currentOther.name = 'xiandanren';
             EventAdmin.notify(SkinXD.EventType.acquisition);
             Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {

@@ -6,10 +6,8 @@ export default class UISet extends lwg.Admin.Scene {
         this.bgmOnOff();
     }
 
-
     /**音效*/
     audioOnOff(): void {
-        console.log(Setting._sound.switch);
         if (Setting._sound.switch) {
             this.self['AudioOff'].visible = false;
         } else {
@@ -19,7 +17,6 @@ export default class UISet extends lwg.Admin.Scene {
 
     /**背景音乐*/
     bgmOnOff(): void {
-        console.log(Setting._bgMusic.switch);
         if (Setting._bgMusic.switch) {
             this.self['BgmOff'].visible = false;
         } else {
@@ -53,5 +50,4 @@ export default class UISet extends lwg.Admin.Scene {
     btnCloseUp(): void {
         this.self.close();
     }
-
 }

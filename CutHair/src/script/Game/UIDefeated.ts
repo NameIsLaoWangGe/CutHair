@@ -1,17 +1,18 @@
-import { lwg, Click, EventAdmin, Hint, Admin, Game } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Dialog, Admin, Game, PalyAudio, Setting } from "../Lwg_Template/lwg";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
 
 export default class UIDefeated extends lwg.Admin.Scene {
 
-    BtnAgain: Laya.Sprite;
-
     lwgNodeDec(): void {
-        this.BtnAgain = this.self['BtnAgain'];
-
         this.self['BtnAdv'].visible = true;
         this.self['BtnAgain'].visible = false;
         this.self['Dot'].visible = true;
+    }
+
+    lwgOnEnable(): void {
+        Setting.setBtnAppear();
+        PalyAudio.playDefeatedSound();
     }
 
     lwgBtnClick(): void {
@@ -34,7 +35,6 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
     btnAgainUp(): void {
         console.log('重新开始！');
-       
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
         EventAdmin.notify(EventAdmin.EventType.operationRefresh);
         this.self.close();
@@ -47,5 +47,9 @@ export default class UIDefeated extends lwg.Admin.Scene {
             Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage) })
             this.self.close();
         })
+    }
+
+    lwgOnDisable(): void {
+        Setting.setBtnVinish();
     }
 }
