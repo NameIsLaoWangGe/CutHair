@@ -21,7 +21,7 @@
 		"textures":[
 			{
 				"name":"albedoTexture",
-				"path":"ti xv dao.jpg",
+				"path":"tixudao.jpg",
 				"constructParams":[
 					256,
 					256,

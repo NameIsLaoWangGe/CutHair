@@ -1,4 +1,4 @@
-import { lwg, EventAdmin, Admin, Animation3D } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Admin, Animation3D, Shop } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
@@ -35,7 +35,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.razorFPos.z = GSene3D.Razor.transform.position.z;
 
         GSene3D.knifeParent = this.self.getChildByName('knifeParent') as Laya.MeshSprite3D;
-        GSene3D.knife = GSene3D.knifeParent.getChildByName('knife') as Laya.MeshSprite3D;
+        GSene3D.knife = GSene3D.knifeParent.getChildByName('tixudao') as Laya.MeshSprite3D;
 
         this.createLevel();
     }
@@ -68,14 +68,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
     }
 
-    lwgOnEnable(): void {
-        GSene3D.Floor.addComponent(GameMain3D_Floor);
-        GSene3D.Razor.addComponent(GameMain3D_Razor);
-        GSene3D.knife.addComponent(GameMain3D_knife);
-    }
-
-    /**摄像机移动速度*/
-    moveSpeed: number = 1000;
     lwgEventReg(): void {
         // 重来
         EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
@@ -85,11 +77,53 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction: string) => {
             this.cameraMove(direction);
         })
-        //摄像机的移动,参数为方向
+        //重来
         EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction: string) => {
             GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
         })
+        // 更换剃刀
+        EventAdmin.reg(GEnum.EventType.changeProp, this, () => {
+            console.log('换理发刀');
+            let name;
+            for (let index = 0; index < GSene3D.Razor.numChildren; index++) {
+                const element = GSene3D.Razor.getChildAt(index);
+                if (element.name !== 'Blade') {
+                    if (element.name !== Shop._currentProp.name) {
+                        element.active = false;
+                    } else {
+                        name = element.name;
+                        element.active = true;
+                    }
+                }
+            }
+            if (!name) {
+                GSene3D.Razor.getChildByName('jiandao').active = true;
+            }
+        });
+        EventAdmin.reg(GEnum.EventType.changeOther, this, () => {
+            console.log('换剃须刀');
+            for (let index = 0; index < GSene3D.knifeParent.numChildren; index++) {
+                const element = GSene3D.knifeParent.getChildAt(index) as Laya.MeshSprite3D;
+                if (element.name == Shop._currentOther.name) {
+                    element.active = true;
+                    GSene3D.knife = element;
+                    let script = GSene3D.knife.getComponent(GameMain3D_knife);
+                    if (!script) {
+                        GSene3D.knife.addComponent(GameMain3D_knife);
+                    }
+                } else {
+                    element.active = false;
+                }
+            }
+        })
     };
+
+
+    lwgOnEnable(): void {
+        GSene3D.Floor.addComponent(GameMain3D_Floor);
+        GSene3D.Razor.addComponent(GameMain3D_Razor);
+        EventAdmin.notify(GEnum.EventType.changeOther);
+    }
 
     refreshScene(): void {
         GSene3D.Level.removeSelf();
@@ -98,6 +132,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
     }
 
+    /**摄像机移动速度*/
+    moveSpeed: number = 1000;
     /**摄像机的移动规则*/
     cameraMove(direction): void {
         switch (direction) {
@@ -113,7 +149,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
             case GEnum.TaskType.rightBeard:
 
-                GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position
+                GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
                 GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0))
 
@@ -168,7 +204,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 break;
 
             case GEnum.TaskType.upRightBeard:
-
                 GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position
                 GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0))
                 let Model1 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D
@@ -185,11 +220,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
             default:
                 break;
         }
-    }
-
-
-    lwgOnUpDate(): void {
-
     }
 
 }

@@ -1139,7 +1139,7 @@ export module lwg {
                 this.lwgAdaptive();
             }
             /**游戏开始前执行一次，重写覆盖*/
-            lwgOnAwake(): void {}
+            lwgOnAwake(): void { }
             onEnable() {
                 this.lwgEventReg();
                 this.lwgOnEnable();
@@ -1148,7 +1148,7 @@ export module lwg {
             /**声明场景里的一些节点*/
             lwgNodeDec(): void {
             }
-            /**场景中的一些事件*/
+            /**场景中的一些事件，在lwgOnAwake和lwgOnEnable之间执行*/
             lwgEventReg(): void {
             }
             /**初始化一些变量*/
@@ -1226,7 +1226,7 @@ export module lwg {
                 EventAdmin.offCaller(this);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgOnDisable(): void {}
+            lwgOnDisable(): void { }
         }
 
         /**3D场景通用父类*/
@@ -1261,12 +1261,11 @@ export module lwg {
             onEnable() {
                 // 组件变为的self属性
                 this.self[this.calssName] = this;
+                this.lwgEventReg();
                 this.lwgOnEnable();
                 this.lwgBtnClick();
                 this.lwgAdaptive();
                 this.lwgOpenAni();
-                this.lwgEventReg();
-                // printPoint('on', this.calssName);
             }
             /**场景背部全局变量*/
             lwgNodeDec(): void {
@@ -1449,13 +1448,13 @@ export module lwg {
                 this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider) as Laya.PhysicsCollider;
                 this.lwgNodeDec();
             }
-            lwgNodeDec(): void {}
+            lwgNodeDec(): void { }
             onEnable() {
                 this.lwgEventReg();
                 this.lwgOnEnable();
             }
             /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgOnEnable(): void {}
+            lwgOnEnable(): void { }
             /**点击事件注册*/
             lwgBtnClick(): void {
             }
@@ -3210,6 +3209,7 @@ export module lwg {
             btn.x = x;
             btn.y = y;
 
+            btn.zOrder = 100;
             var btnSetUp = function (): void {
                 Admin._openScene(Admin.SceneName.UISet);
             }
@@ -3217,6 +3217,7 @@ export module lwg {
 
             BtnSetNode = btn;
             BtnSetNode.name = 'BtnSetNode';
+
         }
 
         /**

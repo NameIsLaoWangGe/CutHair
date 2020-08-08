@@ -75,9 +75,9 @@ export default class UIStart extends lwg.Admin.Scene {
     lwgBtnClick(): void {
         Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
         Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.backgroundUp);
-        Click.on(Click.Type.noEffect, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
-        Click.on(Click.Type.noEffect, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
-        Click.on(Click.Type.noEffect, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+        Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
+        Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
+        Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
     }
 
     btnCheckUp(e: Laya.Event): void {

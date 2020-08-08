@@ -3,8 +3,6 @@ import GameMain3D_Blade from "./GameMain3D_Blade";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 var notify;
 export default class GameMain3D_knife extends lwg.Admin.Object3D {
-    /**当前剃须刀的状态*/
-    RazorState: string;
     lwgOnEnable(): void {
     }
     onTriggerEnter(other: Laya.Rigidbody3D): void {

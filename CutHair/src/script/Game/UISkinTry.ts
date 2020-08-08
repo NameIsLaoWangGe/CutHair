@@ -1,4 +1,4 @@
-import { lwg, Admin, Shop, Click } from "../Lwg_Template/lwg";
+import { lwg, Admin, Shop, Click, Setting } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UISkinTry extends Admin.Scene {

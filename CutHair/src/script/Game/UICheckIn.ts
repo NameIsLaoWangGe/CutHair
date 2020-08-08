@@ -1,5 +1,5 @@
 import ADManager, { TaT } from "../TJ/Admanager";
-import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin } from "../Lwg_Template/lwg";
+import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin, Setting } from "../Lwg_Template/lwg";
 
 export default class UICheckIn extends CheckIn.CheckInScene {
 
@@ -12,6 +12,7 @@ export default class UICheckIn extends CheckIn.CheckInScene {
     }
 
     checkInOnEnable(): void {
+        Setting.setBtnVinish();
         let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip') as Laya.Image;
         ChinkTip.visible = false;
     }
@@ -147,5 +148,9 @@ export default class UICheckIn extends CheckIn.CheckInScene {
                 this.self['BtnTenGet'].visible = false;
             }
         }
+    }
+
+    checkInOnDisable(): void {
+        Setting.setBtnAppear();
     }
 }

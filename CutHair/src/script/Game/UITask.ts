@@ -1,4 +1,4 @@
-import { lwg, Click, EventAdmin, Dialog, Admin, Game, Task, Gold, Shop } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Dialog, Admin, Game, Task, Gold, Shop, Setting } from "../Lwg_Template/lwg";
 import ADManager from "../TJ/Admanager";
 import { GVariate } from "../Lwg_Template/Global";
 
@@ -6,6 +6,7 @@ export default class UITask extends lwg.Task.TaskScene {
 
     taskOnAwake(): void {
         GVariate._stageClick = false;
+        Setting.setBtnVinish();
     }
     taskEventReg(): void {
         // 点击领取奖励
@@ -70,6 +71,7 @@ export default class UITask extends lwg.Task.TaskScene {
     }
 
     taskOnDisable(): void {
+        Setting.setBtnAppear();
         GVariate._stageClick = true;
     }
 }

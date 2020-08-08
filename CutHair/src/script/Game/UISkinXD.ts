@@ -1,4 +1,4 @@
-import { lwg, SkinXD, Gold, Click, Dialog, Shop, Animation2D, EventAdmin } from "../Lwg_Template/lwg";
+import { lwg, SkinXD, Gold, Click, Dialog, Shop, Animation2D, EventAdmin, Setting } from "../Lwg_Template/lwg";
 import UIStart from "./UIStart";
 import ADManager, { TaT } from "../TJ/Admanager";
 
@@ -6,6 +6,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
 
     skinXDOnAwake(): void {
         Gold.goldVinish();
+        Setting.setBtnVinish();
     }
 
     skinXDOnEnable(): void {
@@ -54,5 +55,9 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
         } else {
             this.progressDisplay();
         }
+    }
+
+    skinXDOnDisable():void{
+        Setting.setBtnAppear();
     }
 }

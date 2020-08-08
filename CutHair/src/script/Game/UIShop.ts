@@ -1,10 +1,11 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Dialog, Effects, PalyAudio } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Dialog, Effects, PalyAudio, Setting } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
 
 export default class UIShop extends Shop.ShopScene {
     shopOnAwake(): void {
         Gold.goldAppear();
+        Setting.setBtnVinish();
         GVariate._stageClick = false;
 
         /**设置品类顺序*/
@@ -324,5 +325,6 @@ export default class UIShop extends Shop.ShopScene {
         EventAdmin.notify(GEnum.EventType.changeOther);
         EventAdmin.notify(GEnum.EventType.changeProp);
         GVariate._stageClick = true;
+        Setting.setBtnAppear();
     }
 }

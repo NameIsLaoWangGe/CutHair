@@ -890,11 +890,11 @@
                 }
                 onEnable() {
                     this.self[this.calssName] = this;
+                    this.lwgEventReg();
                     this.lwgOnEnable();
                     this.lwgBtnClick();
                     this.lwgAdaptive();
                     this.lwgOpenAni();
-                    this.lwgEventReg();
                 }
                 lwgNodeDec() {
                 }
@@ -2152,6 +2152,7 @@
                 btn.pivotY = btn.height / 2;
                 btn.x = x;
                 btn.y = y;
+                btn.zOrder = 100;
                 var btnSetUp = function () {
                     Admin._openScene(Admin.SceneName.UISet);
                 };
@@ -3841,6 +3842,7 @@
             }
         }
         checkInOnEnable() {
+            Setting.setBtnVinish();
             let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
             ChinkTip.visible = false;
         }
@@ -3962,6 +3964,9 @@
                     this.self['BtnTenGet'].visible = false;
                 }
             }
+        }
+        checkInOnDisable() {
+            Setting.setBtnAppear();
         }
     }
 
@@ -4108,26 +4113,6 @@
     }
 
     class GameMain3D_Razor extends lwg.Admin.Object3D {
-        lwgEventReg() {
-            EventAdmin.reg(GEnum.EventType.changeProp, this, () => {
-                let name;
-                for (let index = 0; index < this.self.numChildren; index++) {
-                    const element = this.self.getChildAt(index);
-                    if (element.name !== 'Blade') {
-                        if (element.name !== Shop._currentProp.name) {
-                            element.active = false;
-                        }
-                        else {
-                            name = element.name;
-                            element.active = true;
-                        }
-                    }
-                }
-                if (!name) {
-                    this.self.getChildByName('jiandao').active = true;
-                }
-            });
-        }
         lwgOnEnable() {
             this.RazorState = GEnum.RazorState.move;
             let Blade = this.self.getChildByName('Blade');
@@ -4227,7 +4212,7 @@
             GSene3D.razorFPos.y = GSene3D.Razor.transform.position.y;
             GSene3D.razorFPos.z = GSene3D.Razor.transform.position.z;
             GSene3D.knifeParent = this.self.getChildByName('knifeParent');
-            GSene3D.knife = GSene3D.knifeParent.getChildByName('knife');
+            GSene3D.knife = GSene3D.knifeParent.getChildByName('tixudao');
             this.createLevel();
         }
         createLevel() {
@@ -4252,11 +4237,6 @@
             GSene3D.TouchScreen = this.self.getChildByName('TouchScreen');
             GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate');
         }
-        lwgOnEnable() {
-            GSene3D.Floor.addComponent(GameMain3D_Floor);
-            GSene3D.Razor.addComponent(GameMain3D_Razor);
-            GSene3D.knife.addComponent(GameMain3D_knife);
-        }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
                 this.refreshScene();
@@ -4267,8 +4247,49 @@
             EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction) => {
                 GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
             });
+            EventAdmin.reg(GEnum.EventType.changeProp, this, () => {
+                console.log('换理发刀');
+                let name;
+                for (let index = 0; index < GSene3D.Razor.numChildren; index++) {
+                    const element = GSene3D.Razor.getChildAt(index);
+                    if (element.name !== 'Blade') {
+                        if (element.name !== Shop._currentProp.name) {
+                            element.active = false;
+                        }
+                        else {
+                            name = element.name;
+                            element.active = true;
+                        }
+                    }
+                }
+                if (!name) {
+                    GSene3D.Razor.getChildByName('jiandao').active = true;
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.changeOther, this, () => {
+                console.log('换剃须刀');
+                for (let index = 0; index < GSene3D.knifeParent.numChildren; index++) {
+                    const element = GSene3D.knifeParent.getChildAt(index);
+                    if (element.name == Shop._currentOther.name) {
+                        element.active = true;
+                        GSene3D.knife = element;
+                        let script = GSene3D.knife.getComponent(GameMain3D_knife);
+                        if (!script) {
+                            GSene3D.knife.addComponent(GameMain3D_knife);
+                        }
+                    }
+                    else {
+                        element.active = false;
+                    }
+                }
+            });
         }
         ;
+        lwgOnEnable() {
+            GSene3D.Floor.addComponent(GameMain3D_Floor);
+            GSene3D.Razor.addComponent(GameMain3D_Razor);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+        }
         refreshScene() {
             GSene3D.Level.removeSelf();
             this.createLevel();
@@ -4339,8 +4360,6 @@
                 default:
                     break;
             }
-        }
-        lwgOnUpDate() {
         }
     }
 
@@ -4863,6 +4882,7 @@
 
     class UISet extends lwg.Admin.Scene {
         lwgOnAwake() {
+            Setting.setBtnVinish();
             this.audioOnOff();
             this.bgmOnOff();
         }
@@ -4907,6 +4927,9 @@
         }
         btnCloseUp() {
             this.self.close();
+        }
+        lwgOnDisable() {
+            Setting.setBtnAppear();
         }
     }
 
@@ -5097,6 +5120,7 @@
     class UIShop extends Shop.ShopScene {
         shopOnAwake() {
             Gold.goldAppear();
+            Setting.setBtnVinish();
             GVariate._stageClick = false;
             Shop.goodsClassArr = [Shop.allOther, Shop.allProps, Shop.allSkin];
             let SkinName;
@@ -5390,6 +5414,7 @@
             EventAdmin.notify(GEnum.EventType.changeOther);
             EventAdmin.notify(GEnum.EventType.changeProp);
             GVariate._stageClick = true;
+            Setting.setBtnAppear();
         }
     }
 
@@ -5612,6 +5637,7 @@
     class UISkinXD extends SkinXD.SkinXDScene {
         skinXDOnAwake() {
             Gold.goldVinish();
+            Setting.setBtnVinish();
         }
         skinXDOnEnable() {
             this.progressDisplay();
@@ -5654,6 +5680,9 @@
             else {
                 this.progressDisplay();
             }
+        }
+        skinXDOnDisable() {
+            Setting.setBtnAppear();
         }
     }
 
@@ -5712,9 +5741,9 @@
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
             Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.backgroundUp);
-            Click.on(Click.Type.noEffect, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
-            Click.on(Click.Type.noEffect, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
-            Click.on(Click.Type.noEffect, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+            Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
+            Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
+            Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
         }
         btnCheckUp(e) {
             e.stopPropagation();
@@ -5766,6 +5795,7 @@
     class UITask extends lwg.Task.TaskScene {
         taskOnAwake() {
             GVariate._stageClick = false;
+            Setting.setBtnVinish();
         }
         taskEventReg() {
             EventAdmin.reg(Task.EventType.getAward, this, (dataSource) => {
@@ -5818,6 +5848,7 @@
             this.self.close();
         }
         taskOnDisable() {
+            Setting.setBtnAppear();
             GVariate._stageClick = true;
         }
     }

@@ -2,6 +2,7 @@ import { lwg, Click, Setting } from "../Lwg_Template/lwg";
 
 export default class UISet extends lwg.Admin.Scene {
     lwgOnAwake(): void {
+        Setting.setBtnVinish();
         this.audioOnOff();
         this.bgmOnOff();
     }
@@ -49,5 +50,8 @@ export default class UISet extends lwg.Admin.Scene {
 
     btnCloseUp(): void {
         this.self.close();
+    }
+    lwgOnDisable():void{
+        Setting.setBtnAppear();
     }
 }
