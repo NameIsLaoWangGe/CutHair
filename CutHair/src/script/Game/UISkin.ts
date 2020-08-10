@@ -1,6 +1,7 @@
 import { Admin, Dialog, Shop, SkinScene, Skin, PalyAudio, EventAdmin, Click } from "../Lwg_Template/lwg";
 import UIShop from "./UIShop";
 import ADManager from "../TJ/Admanager";
+import { GEnum } from "../Lwg_Template/Global";
 
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
@@ -30,14 +31,18 @@ export default class UISkin extends SkinScene {
                 switch (Skin._SkinTap.selectedIndex) {
                     case 0:
                         Skin._currentEye.name = dataSource[Shop.GoodsProperty.name];
+                        EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
                         break;
                     case 1:
                         Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
+                        EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
+
                         break;
 
                     default:
                         break;
                 }
+
             } else {
 
                 if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
@@ -179,6 +184,8 @@ export default class UISkin extends SkinScene {
     skinOnEnable(): void {
         Skin._SkinList.array = Skin._eyeSkinArr;
         Skin._SkinList.refresh();
+
+        EventAdmin.notify(GEnum.EventType.cameraMove, [GEnum.TaskType.movePhotoLocation])
     }
 
     skinBtnClick(): void {

@@ -4151,8 +4151,8 @@ export module lwg {
         /**商品列表*/
         export let _ShopList: Laya.List;
 
-        /**试用皮肤名称记录，一般用于皮肤试用*/
-        export let _tryName: string;
+        /**试用商品名称记录，一般用于皮肤试用,包括试用类别名称和名字*/
+        export let _tryName: Array<string> = [];
 
         //皮肤*****************************************************************************************************
         /**皮肤的总数据，存储对象依次为[{名称，获取方式，剩余数量或者次数}]*/
@@ -4482,7 +4482,6 @@ export module lwg {
         }
 
 
-
         /**事件名称*/
         export enum EventType {
             select = 'select',
@@ -4529,8 +4528,8 @@ export module lwg {
             shopNodeDec(): void { }
 
             lwgOnEnable(): void {
-                this.myTap_Create();
                 this.myList_Create();
+                this.myTap_Create();
                 this.shopOnEnable();
             }
             /**游戏开始前执行*/
@@ -4545,7 +4544,7 @@ export module lwg {
             /**初始化list*/
             myList_Create(): void {
                 Shop._ShopList.selectEnable = true;
-                Shop._ShopList.vScrollBarSkin = "";
+                // Shop._ShopList.vScrollBarSkin = "";
                 // this._ShopList.scrollBar.elasticBackTime = 0;//设置橡皮筋回弹时间。单位为毫秒。
                 // this._ShopList.scrollBar.elasticDistance = 500;//设置橡皮筋极限距离。
                 Shop._ShopList.selectHandler = new Laya.Handler(this, this.myList_Scelet);

@@ -1,5 +1,6 @@
-import { lwg, Admin, Shop, Click, Setting } from "../Lwg_Template/lwg";
+import { lwg, Admin, Shop, Click, Setting, EventAdmin } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
+import { GEnum } from "../Lwg_Template/Global";
 
 export default class UISkinTry extends Admin.Scene {
 
@@ -7,7 +8,7 @@ export default class UISkinTry extends Admin.Scene {
         this.randomNoHave();
     }
 
-    /**随机出一个还没有获得的皮肤放在皮肤加载位置*/
+    /**随机出一个和当前皮肤不一样的皮肤放在加载位置*/
     randomNoHave(): void {
         let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
         let arrProp = Shop.getwayGoldArr(Shop.GoodsClass.Props, undefined, true);
@@ -15,12 +16,12 @@ export default class UISkinTry extends Admin.Scene {
         if (Math.floor(Math.random() * 2) === 1) {
             ele = arrOther[Math.floor(Math.random() * arrOther.length)];
             this.self['SkinPic'].skin = 'UI/Shop/Other/' + ele.name + '.png';
-            Shop._tryName = Shop._currentOther.name;
+            Shop._tryName = [Shop.GoodsClass.Other, ele.name];
 
         } else {
             ele = arrProp[Math.floor(Math.random() * arrProp.length)];
             this.self['SkinPic'].skin = 'UI/Shop/Props/' + ele.name + '.png';
-            Shop._tryName = Shop._currentOther.name;
+            Shop._tryName = [Shop.GoodsClass.Props, ele.name];
         }
     }
 
@@ -30,10 +31,10 @@ export default class UISkinTry extends Admin.Scene {
     }
 
     btnGetUp(event): void {
-        ADManager.ShowReward(() => {
-            Admin._openScene(Admin.SceneName.UIOperation, null, this.self, () => {
-            })
-        })
+        // ADManager.ShowReward(() => {
+        EventAdmin.notify(GEnum.EventType.changeTrySkin, Shop._tryName);
+        Admin._openScene(Admin.SceneName.UIOperation, null, this.self)
+        // })
     }
 
     btnNoUp(event): void {

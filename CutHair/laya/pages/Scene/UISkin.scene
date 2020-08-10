@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":107,
+    "selecteID":17,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -14,21 +14,6 @@
     "hasChild":true,
     "compId":2,
     "child":[
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image,Background,Background",
-            "props":{"var":"Background","skin":"Frame/UI/ui_orthogon_black.png","name":"Background","alpha":0.7},
-            "nodeParent":2,
-            "label":"Background",
-            "isOpen":true,
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":17,
-            "child":[
-                ]
-        },
         {
             "x":15,
             "type":"Sprite",

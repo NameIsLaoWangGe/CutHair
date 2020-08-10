@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":25,
-    "selecteID":78,
+    "selecteID":68,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":97,
+    "maxID":99,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -280,6 +280,20 @@
                                     "child":[
                                         ]
                                 }]
+                        },
+                        {
+                            "x":45,
+                            "type":"VScrollBar",
+                            "searchKey":"VScrollBar,scrollBar",
+                            "props":{"y":17,"x":545,"skin":"UI/Shop/vscroll.png","name":"scrollBar"},
+                            "nodeParent":68,
+                            "label":"scrollBar",
+                            "isDirectory":false,
+                            "isAniNode":false,
+                            "hasChild":false,
+                            "compId":98,
+                            "child":[
+                                ]
                         }]
                 },
                 {

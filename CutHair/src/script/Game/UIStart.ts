@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog } from "../Lwg_Template/lwg";
+import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -22,8 +22,12 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
         GVariate._stageClick = false;
-        Gold.createGoldNode(Laya.stage);
-        Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
+    
+        Skin._currentEye.name = null;
+        Skin._currentHead.name = null;
+        EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
+        EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
+
 
         this.levelStyleDisplay();
 

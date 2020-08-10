@@ -145,7 +145,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        GVariate._taskArr = [GEnum.TaskType.rightBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.upLeftBeard];
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
     }
@@ -291,7 +291,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.TaskBar.width = GVariate._taskArr.length * spacing;
         this.TaskBar.pivotX = this.TaskBar.width / 2;
         this.TaskBar.x = Laya.stage.width / 2;
-
     }
 
     /**

@@ -1,4 +1,4 @@
-import { lwg, EventAdmin, Admin, Animation3D, Shop } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Admin, Animation3D, Shop, Skin } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
@@ -12,7 +12,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.GameMain3D = this.self;
         GSene3D.MainCamera = this.MainCamera;
         GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark') as Laya.MeshSprite3D;
-        GSene3D.LevelTem = this.self.getChildByName('Level_001') as Laya.MeshSprite3D;
+        GSene3D.LevelTem = this.self.getChildByName('Level1') as Laya.MeshSprite3D;
         GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
         GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
         GSene3D.LevelFpos.z = GSene3D.LevelTem.transform.position.z;
@@ -37,6 +37,26 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.knifeParent = this.self.getChildByName('knifeParent') as Laya.MeshSprite3D;
         GSene3D.knife = GSene3D.knifeParent.getChildByName('tixudao') as Laya.MeshSprite3D;
 
+        GSene3D.Role = this.self.getChildByName('Role') as Laya.MeshSprite3D;
+
+        GSene3D.TouchScreen = this.self.getChildByName('TouchScreen') as Laya.MeshSprite3D;
+
+        GSene3D.Headcollision = GSene3D.Role.getChildByName('Headcollision') as Laya.MeshSprite3D;
+        let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+        TouchHeadRig.restitution = 0;
+
+        GSene3D.HeadSimulate = GSene3D.Role.getChildByName('HeadSimulate') as Laya.MeshSprite3D;
+
+        GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle') as Laya.MeshSprite3D;
+        GSene3D.HingeUp = GSene3D.Headcollision.getChildByName('HingeUp') as Laya.MeshSprite3D;
+        GSene3D.HingeDown = GSene3D.Headcollision.getChildByName('HingeDown') as Laya.MeshSprite3D;
+
+
+        GSene3D.HeadDecoration = this.self.getChildByName('HeadDecoration') as Laya.MeshSprite3D;
+        GSene3D.EyeDecoration = this.self.getChildByName('EyeDecoration') as Laya.MeshSprite3D;
+
+        GSene3D.DressUpMark = this.self.getChildByName('DressUpMark') as Laya.MeshSprite3D;
+
         this.createLevel();
     }
 
@@ -48,24 +68,12 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
     }
 
     lwgNodeDec(): void {
-        GSene3D.Head = GSene3D.Level.getChildByName('Head') as Laya.MeshSprite3D;
-        GSene3D.Headcollision = GSene3D.Head.getChildByName('Headcollision') as Laya.MeshSprite3D;
-        GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle') as Laya.MeshSprite3D;
-        GSene3D.HingeUp = GSene3D.Headcollision.getChildByName('HingeUp') as Laya.MeshSprite3D;
-        GSene3D.HingeDown = GSene3D.Headcollision.getChildByName('HingeDown') as Laya.MeshSprite3D;
-
-        let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-        TouchHeadRig.restitution = 0;
-
-        GSene3D.HairParent = GSene3D.Head.getChildByName('HairParent') as Laya.MeshSprite3D;
-        GSene3D.LeftBeard = GSene3D.Head.getChildByName('LeftBeard') as Laya.MeshSprite3D;
-        GSene3D.RightBeard = GSene3D.Head.getChildByName('RightBeard') as Laya.MeshSprite3D;
-        GSene3D.MiddleBeard = GSene3D.Head.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
-        GSene3D.UpRightBeard = GSene3D.Head.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
-        GSene3D.UpLeftBeard = GSene3D.Head.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
-
-        GSene3D.TouchScreen = this.self.getChildByName('TouchScreen') as Laya.MeshSprite3D;
-        GSene3D.HeadSimulate = GSene3D.Head.getChildByName('HeadSimulate') as Laya.MeshSprite3D
+        GSene3D.HairParent = GSene3D.Level.getChildByName('HairParent') as Laya.MeshSprite3D;
+        GSene3D.LeftBeard = GSene3D.Level.getChildByName('LeftBeard') as Laya.MeshSprite3D;
+        GSene3D.RightBeard = GSene3D.Level.getChildByName('RightBeard') as Laya.MeshSprite3D;
+        GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
+        GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
+        GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
     }
 
     lwgEventReg(): void {
@@ -81,6 +89,20 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction: string) => {
             GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
         })
+
+        // 换眼部装饰
+        EventAdmin.reg(GEnum.EventType.changeEyeDecoration, this, () => {
+            console.log('换眼部装饰');
+            for (let index = 0; index < GSene3D.EyeDecoration.numChildren; index++) {
+                const element = GSene3D.EyeDecoration.getChildAt(index) as Laya.MeshSprite3D;
+                if (element.name == Skin._currentEye.name) {
+                    element.active = true;
+                } else {
+                    element.active = false;
+                }
+            }
+        });
+
         // 更换剃刀
         EventAdmin.reg(GEnum.EventType.changeProp, this, () => {
             console.log('换理发刀');
@@ -100,6 +122,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 GSene3D.Razor.getChildByName('jiandao').active = true;
             }
         });
+
+        //换剃须刀
         EventAdmin.reg(GEnum.EventType.changeOther, this, () => {
             console.log('换剃须刀');
             for (let index = 0; index < GSene3D.knifeParent.numChildren; index++) {
@@ -115,14 +139,62 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                     element.active = false;
                 }
             }
-        })
-    };
+        });
 
+        // 换头饰
+        EventAdmin.reg(GEnum.EventType.changeHeadDecoration, this, () => {
+            console.log('换头部装饰');
+            for (let index = 0; index < GSene3D.HeadDecoration.numChildren; index++) {
+                const element = GSene3D.HeadDecoration.getChildAt(index) as Laya.MeshSprite3D;
+                if (element.name == Skin._currentHead.name) {
+                    element.active = true;
+                } else {
+                    element.active = false;
+                }
+            }
+        });
+
+        // 换眼部装饰
+        EventAdmin.reg(GEnum.EventType.changeEyeDecoration, this, () => {
+            console.log('换眼部装饰');
+            for (let index = 0; index < GSene3D.EyeDecoration.numChildren; index++) {
+                const element = GSene3D.EyeDecoration.getChildAt(index) as Laya.MeshSprite3D;
+                if (element.name == Skin._currentEye.name) {
+                    element.active = true;
+                } else {
+                    element.active = false;
+                }
+            }
+        });
+
+        // 皮肤试用
+        EventAdmin.reg(GEnum.EventType.changeTrySkin, this, (skinClass, skinName) => {
+            console.log(skinClass, skinName);
+            let arr;
+            if (skinClass == Shop.GoodsClass.Other) {
+                arr = GSene3D.knifeParent;
+            } else if (skinClass == Shop.GoodsClass.Props) {
+                arr = GSene3D.Razor;
+            }
+            for (let index = 0; index < arr.numChildren; index++) {
+                const element = arr.getChildAt(index);
+                if (element.name == skinName) {
+                    element.active = true;
+                } else {
+                    if (element.name !== 'Blade') {
+                        element.active = false;
+                    }
+                }
+            }
+        });
+    };
 
     lwgOnEnable(): void {
         GSene3D.Floor.addComponent(GameMain3D_Floor);
         GSene3D.Razor.addComponent(GameMain3D_Razor);
+        EventAdmin.notify(GEnum.EventType.changeProp);
         EventAdmin.notify(GEnum.EventType.changeOther);
+
     }
 
     refreshScene(): void {
@@ -214,6 +286,15 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 });
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
+
+                break;
+
+            case GEnum.TaskType.movePhotoLocation:
+                Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.DressUpMark.transform.position, this.moveSpeed, this, null, () => {
+                    Admin._gameStart = true;
+                });
+                Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.DressUpMark.transform.localRotationEuler, this.moveSpeed, this);
+                Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.DressUpMark.transform.localRotationEuler, this.moveSpeed, this);
 
                 break;
 

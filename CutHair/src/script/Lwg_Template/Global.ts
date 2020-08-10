@@ -4,12 +4,15 @@ export module Global {
     export module GEnum {
         /**任务类型*/
         export enum TaskType {
+            // 任务位置
             sideHair = 'sideHair',
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
             middleBeard = 'middleBeard',
             upLeftBeard = 'upLeftBeard',
             upRightBeard = 'upRightBeard',
+            /**移动到照相位置*/
+            movePhotoLocation = 'movePhotoLocation',
         }
 
         /**剃须刀的状态*/
@@ -18,18 +21,26 @@ export module Global {
         }
         /**事件*/
         export enum EventType {
+            // 剪各个部位的毛发
             leftBeard = 'leftBeard',
             rightBeard = 'rightBeard',
             middleBeard = 'middleBeard',
             upLeftBeard = 'upLeftBeard',
             upRightBeard = 'upRightBeard',
             taskProgress = 'taskProgress',
+            // 旋转摄像机到不同任务角度
             cameraMove = 'cameraMove',
             /**更换剃刀*/
             changeProp = 'changeProp',
             /**更换推刀*/
             changeOther = 'changeOther',
+            /**更换头饰*/
+            changeHeadDecoration = ' changeHeadDecoration',
+            /**更换眼部装饰*/
+            changeEyeDecoration = ' changeEyeDecoration',
 
+            /**皮肤试用换装*/
+            changeTrySkin = 'changeTrySkin',
         }
     }
 
@@ -70,10 +81,12 @@ export module Global {
         export let knifeParentFPos: Laya.Vector3 = new Laya.Vector3();
         export let knifeParentFEulerY: number;
 
-        /**头*/
+        /**角色模型*/
+        export let Role: Laya.MeshSprite3D;
         export let Head: Laya.MeshSprite3D;
         export let headFPos: Laya.Vector3 = new Laya.Vector3();
         export let headFEulerY: number;
+
         /**毛发的父节点*/
         export let HairParent: Laya.MeshSprite3D;
         export let RightBeard: Laya.MeshSprite3D;
@@ -111,6 +124,14 @@ export module Global {
         export let RightSignknife: Laya.MeshSprite3D;
         export let UpRightKnife: Laya.MeshSprite3D;
         export let UpLeftKnife: Laya.MeshSprite3D;
+
+        /**头部装饰父节点*/
+        export let HeadDecoration: Laya.MeshSprite3D;
+        /**眼部装饰父节点*/
+        export let EyeDecoration: Laya.MeshSprite3D;
+        /**装扮界面的视角*/
+        export let DressUpMark: Laya.MeshSprite3D;
+
     }
 }
 export default Global;

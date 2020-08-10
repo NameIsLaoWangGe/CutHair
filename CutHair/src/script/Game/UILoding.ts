@@ -1,4 +1,4 @@
-import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding, Task, Shop } from "../Lwg_Template/lwg";
+import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding, Task, Shop, Skin, Gold, Setting } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
 export default class UILoding extends Loding.LodeScene {
@@ -37,6 +37,11 @@ export default class UILoding extends Loding.LodeScene {
         this.self['Per'].text = 100 + '%';
 
         this.maskMoveSwitch = false;
+
+        // 其他系统的参数初始化
+        Skin._currentEye.name = null;
+        Skin._currentHead.name = null;
+
         // 获取场景
         let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls") as Laya.Scene3D;
         Laya.stage.addChildAt(Scene3D, 0);
@@ -44,6 +49,8 @@ export default class UILoding extends Loding.LodeScene {
         Scene3D.addComponent(GameMain3D);
 
         Laya.timer.once(500, this, () => {
+            Gold.createGoldNode(Laya.stage);
+            Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
             lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
         })
     }
