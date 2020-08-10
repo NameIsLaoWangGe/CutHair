@@ -333,6 +333,8 @@ export module lwg {
             operationRefresh = 'operationRefresh',
             /**复活*/
             resurgence = 'resurgence',
+            /**关闭操作界面*/
+            closeOperation = 'closeOperation',
         }
 
         /**以节点为单位，在节点内注册事件，节点移除或者关闭后，关闭事件监听；如果需要在节点外注册事件，this为EventAdmin，不要写在节点脚本中，否则每次打开一次就会注册一次*/
@@ -5172,7 +5174,7 @@ export module lwg {
         /**需要加载的图片资源列表,一般是界面的图片*/
         export let lodingList_2D: Array<any> = [];
         /**数据表的加载*/
-        export let lodingList_Data: Array<any> = [];
+        export let lodingList_Json: Array<any> = [];
 
         /**进度条总长度,长度为以上三个加载资源类型的数组总长度*/
         export let sumProgress: number;
@@ -5241,8 +5243,8 @@ export module lwg {
             }
 
             lwgOnEnable(): void {
-                loadOrder = [lodingList_2D, lodingList_3D, lodingList_Data];
-                sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Data.length;
+                loadOrder = [lodingList_2D, lodingList_3D, lodingList_Json];
+                sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Json.length;
                 loadOrderIndex = 0;
                 EventAdmin.notify(Loding.LodingType.loding);
 
@@ -5281,12 +5283,12 @@ export module lwg {
 
                         }));
                         break;
-                    case lodingList_Data:
-                        Laya.loader.load(lodingList_Data[index], Laya.Handler.create(this, (any) => {
+                    case lodingList_Json:
+                        Laya.loader.load(lodingList_Json[index], Laya.Handler.create(this, (any) => {
                             if (any == null) {
-                                console.log('XXXXXXXXXXX数据表' + lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                console.log('XXXXXXXXXXX数据表' + lodingList_Json[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                             } else {
-                                console.log('数据表' + lodingList_Data[index] + '加载完成！', '数组下标为：', index);
+                                console.log('数据表' + lodingList_Json[index] + '加载完成！', '数组下标为：', index);
                             }
                             EventAdmin.notify(LodingType.progress);
 

@@ -65,7 +65,6 @@ export default class UIShop extends Shop.ShopScene {
         } else {
             Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
         }
-
     }
 
     shopEventReg(): void {
@@ -93,7 +92,6 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     shopOnEnable(): void {
-        Shop._ShopList.vScrollBarSkin = '';
     }
 
     /**选中并且展示,并且移动到当前的cell*/
@@ -156,18 +154,15 @@ export default class UIShop extends Shop.ShopScene {
             case 2:
                 Shop._ShopList.array = Shop.allSkin;
                 this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
-                Shop._ShopList.vScrollBarSkin = 'comp/vscroll.png';
                 break;
             case 1:
                 Shop._ShopList.array = Shop.allProps;
                 this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
-                Shop._ShopList.vScrollBarSkin = '';
 
                 break;
             case 0:
                 Shop._ShopList.array = Shop.allOther;
                 this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
-                Shop._ShopList.vScrollBarSkin = '';
 
                 break;
             default:
@@ -329,8 +324,7 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     shopOnDisable(): void {
-        EventAdmin.notify(GEnum.EventType.changeOther);
-        EventAdmin.notify(GEnum.EventType.changeProp);
+      
         GVariate._stageClick = true;
         Setting.setBtnAppear();
     }

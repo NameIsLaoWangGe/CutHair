@@ -1,7 +1,7 @@
 import { Admin, Dialog, Shop, SkinScene, Skin, PalyAudio, EventAdmin, Click } from "../Lwg_Template/lwg";
 import UIShop from "./UIShop";
 import ADManager from "../TJ/Admanager";
-import { GEnum } from "../Lwg_Template/Global";
+import { GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
@@ -36,7 +36,7 @@ export default class UISkin extends SkinScene {
                     case 1:
                         Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
                         EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
-
+                        GSene3D.HairParent.active = false;
                         break;
 
                     default:

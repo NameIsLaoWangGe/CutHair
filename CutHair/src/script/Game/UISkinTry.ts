@@ -8,6 +8,8 @@ export default class UISkinTry extends Admin.Scene {
         this.randomNoHave();
     }
 
+    beforeTryOtherName: string;
+    beforeTryPropName: string;
     /**随机出一个和当前皮肤不一样的皮肤放在加载位置*/
     randomNoHave(): void {
         let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
@@ -16,12 +18,14 @@ export default class UISkinTry extends Admin.Scene {
         if (Math.floor(Math.random() * 2) === 1) {
             ele = arrOther[Math.floor(Math.random() * arrOther.length)];
             this.self['SkinPic'].skin = 'UI/Shop/Other/' + ele.name + '.png';
-            Shop._tryName = [Shop.GoodsClass.Other, ele.name];
+            this.beforeTryOtherName = Shop._currentOther.name;
+            Shop._currentOther.name = ele.name;
 
         } else {
             ele = arrProp[Math.floor(Math.random() * arrProp.length)];
             this.self['SkinPic'].skin = 'UI/Shop/Props/' + ele.name + '.png';
-            Shop._tryName = [Shop.GoodsClass.Props, ele.name];
+            this.beforeTryPropName = Shop._currentProp.name;
+            Shop._currentProp.name = ele.name;
         }
     }
 
@@ -31,16 +35,25 @@ export default class UISkinTry extends Admin.Scene {
     }
 
     btnGetUp(event): void {
-        // ADManager.ShowReward(() => {
-        EventAdmin.notify(GEnum.EventType.changeTrySkin, Shop._tryName);
-        Admin._openScene(Admin.SceneName.UIOperation, null, this.self)
-        // })
+        ADManager.ShowReward(() => {
+            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
+        })
     }
 
     btnNoUp(event): void {
         Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+        EventAdmin.notify(GEnum.EventType.changeOther);
+        EventAdmin.notify(GEnum.EventType.changeProp);
     }
 
-    onDisable(): void {
+    lwgOnDisable(): void {
+        if (this.beforeTryOtherName) {
+            Shop._currentOther.name = this.beforeTryOtherName;
+        }
+        if (this.beforeTryPropName) {
+            Shop._currentProp.name = this.beforeTryPropName;
+        }
     }
 }

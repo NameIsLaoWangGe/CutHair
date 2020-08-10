@@ -36,16 +36,14 @@ export default class UIDefeated extends lwg.Admin.Scene {
     btnAgainUp(): void {
         console.log('重新开始！');
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-        EventAdmin.notify(EventAdmin.EventType.operationRefresh);
-        this.self.close();
+        Admin._openScene(Admin.SceneName.UIOperation, null, this.self)
     }
 
     btnNextUp(): void {
         ADManager.ShowReward(() => {
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
             Game._gameLevel.value += 1;
-            Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage) })
-            this.self.close();
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self)
         })
     }
 

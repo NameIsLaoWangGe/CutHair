@@ -144,8 +144,8 @@ export default class UIOperation extends lwg.Admin.Scene {
     lwgOnAwake(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
-        // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.upLeftBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+        // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.upLeftBeard];
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
     }
@@ -155,9 +155,16 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.createTaskContent();
         this.mainCameraMove();
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
+     
     }
 
     lwgEventReg(): void {
+        // 胜利
+        EventAdmin.reg(EventAdmin.EventType.closeOperation, this, () => {
+            this.self.close();
+            console.log('关闭自己！')
+        })
+
         // 胜利
         EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
             if (Admin._gameStart) {
@@ -188,11 +195,11 @@ export default class UIOperation extends lwg.Admin.Scene {
                 Admin._gameStart = false;
             }
         })
-
-        // 重来
-        EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
-            lwg.Admin._openScene(Admin.SceneName.UIOperation)
-        })
+        
+        // // 重来
+        // EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
+        //     lwg.Admin._openScene(Admin.SceneName.UIOperation)
+        // })
 
         // 左侧胡子修剪
         EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
@@ -407,8 +414,8 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     /**触摸位置*/
-    touchPosX: number;
-    touchPosY: number;
+    touchPosX: number = null;
+    touchPosY: number = null;
     moveSwitch: boolean = false;
     onStageMouseDown(e: Laya.Event): void {
         this.moveSwitch = true;

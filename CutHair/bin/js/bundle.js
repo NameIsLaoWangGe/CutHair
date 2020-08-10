@@ -228,6 +228,7 @@
                 EventType["scene3DResurgence"] = "scene3DResurgence";
                 EventType["operationRefresh"] = "operationRefresh";
                 EventType["resurgence"] = "resurgence";
+                EventType["closeOperation"] = "closeOperation";
             })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
             EventAdmin.dispatcher = new Laya.EventDispatcher();
             function reg(type, caller, listener) {
@@ -3550,7 +3551,7 @@
         (function (Loding) {
             Loding.lodingList_3D = [];
             Loding.lodingList_2D = [];
-            Loding.lodingList_Data = [];
+            Loding.lodingList_Json = [];
             Loding.currentProgress = {
                 val: 0,
                 get value() {
@@ -3600,8 +3601,8 @@
                     });
                 }
                 lwgOnEnable() {
-                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3D, Loding.lodingList_Data];
-                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Data.length;
+                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3D, Loding.lodingList_Json];
+                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Json.length;
                     Loding.loadOrderIndex = 0;
                     EventAdmin.notify(Loding.LodingType.loding);
                 }
@@ -3634,13 +3635,13 @@
                                 EventAdmin.notify(LodingType.progress);
                             }));
                             break;
-                        case Loding.lodingList_Data:
-                            Laya.loader.load(Loding.lodingList_Data[index], Laya.Handler.create(this, (any) => {
+                        case Loding.lodingList_Json:
+                            Laya.loader.load(Loding.lodingList_Json[index], Laya.Handler.create(this, (any) => {
                                 if (any == null) {
-                                    console.log('XXXXXXXXXXX数据表' + Loding.lodingList_Data[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                    console.log('XXXXXXXXXXX数据表' + Loding.lodingList_Json[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                                 }
                                 else {
-                                    console.log('数据表' + Loding.lodingList_Data[index] + '加载完成！', '数组下标为：', index);
+                                    console.log('数据表' + Loding.lodingList_Json[index] + '加载完成！', '数组下标为：', index);
                                 }
                                 EventAdmin.notify(LodingType.progress);
                             }), null, Laya.Loader.JSON);
@@ -4000,15 +4001,13 @@
         btnAgainUp() {
             console.log('重新开始！');
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-            EventAdmin.notify(EventAdmin.EventType.operationRefresh);
-            this.self.close();
+            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
         }
         btnNextUp() {
             ADManager.ShowReward(() => {
                 EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
                 Game._gameLevel.value += 1;
-                Admin._openScene(Admin.SceneName.UIStart, null, null, () => { console.log(Laya.stage); });
-                this.self.close();
+                Admin._openScene(Admin.SceneName.UIStart, null, this.self);
             });
         }
         lwgOnDisable() {
@@ -4243,6 +4242,7 @@
             GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard');
             GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard');
             GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard');
+            GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent');
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
@@ -4328,17 +4328,24 @@
             });
             EventAdmin.reg(GEnum.EventType.changeTrySkin, this, (skinClass, skinName) => {
                 console.log(skinClass, skinName);
-                let arr;
+                let cla;
                 if (skinClass == Shop.GoodsClass.Other) {
-                    arr = GSene3D.knifeParent;
+                    cla = GSene3D.knifeParent;
                 }
                 else if (skinClass == Shop.GoodsClass.Props) {
-                    arr = GSene3D.Razor;
+                    cla = GSene3D.Razor;
                 }
-                for (let index = 0; index < arr.numChildren; index++) {
-                    const element = arr.getChildAt(index);
+                cla.active = true;
+                for (let index = 0; index < cla.numChildren; index++) {
+                    const element = cla.getChildAt(index);
                     if (element.name == skinName) {
                         element.active = true;
+                        if (skinClass == Shop.GoodsClass.Other) {
+                            GSene3D.knife = element;
+                        }
+                        else if (skinClass == Shop.GoodsClass.Props) {
+                            cla = GSene3D.Razor;
+                        }
                     }
                     else {
                         if (element.name !== 'Blade') {
@@ -4354,12 +4361,16 @@
             GSene3D.Razor.addComponent(GameMain3D_Razor);
             EventAdmin.notify(GEnum.EventType.changeProp);
             EventAdmin.notify(GEnum.EventType.changeOther);
+            GSene3D.knife.active = false;
+            GSene3D.StandardParent.active = false;
+            GSene3D.Razor.active = false;
         }
         refreshScene() {
             GSene3D.Level.removeSelf();
             this.createLevel();
             this.lwgNodeDec();
             GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
+            GSene3D.HairParent.active = true;
         }
         cameraMove(direction) {
             switch (direction) {
@@ -4369,6 +4380,9 @@
                     });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    GSene3D.Razor.active = true;
+                    GSene3D.knife.active = false;
+                    GSene3D.StandardParent.active = true;
                     break;
                 case GEnum.TaskType.rightBeard:
                     GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
@@ -4379,6 +4393,9 @@
                     });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                    GSene3D.Razor.active = false;
+                    GSene3D.knife.active = true;
+                    GSene3D.StandardParent.active = false;
                     break;
                 case GEnum.TaskType.leftBeard:
                     GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
@@ -4389,6 +4406,9 @@
                     });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                    GSene3D.Razor.active = false;
+                    GSene3D.knife.active = true;
+                    GSene3D.StandardParent.active = false;
                     break;
                 case GEnum.TaskType.middleBeard:
                     GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
@@ -4399,35 +4419,47 @@
                     });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                    GSene3D.Razor.active = false;
+                    GSene3D.knife.active = true;
+                    GSene3D.StandardParent.active = false;
                     break;
                 case GEnum.TaskType.upLeftBeard:
                     GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model2 = GSene3D.knife.getChildAt(0);
-                    Model2.transform.localRotationEulerX = -180;
-                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, null, () => {
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                     });
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpLeft.transform.localRotationEuler, this.moveSpeed, this);
+                    let euler1 = new Laya.Vector3(GSene3D.Landmark_UpLeft.transform.localRotationEuler.x, GSene3D.Landmark_UpLeft.transform.localRotationEuler.y, GSene3D.Landmark_UpLeft.transform.localRotationEuler.z);
+                    Animation3D.RotateTo(GSene3D.MainCamera, euler1, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, euler1, this.moveSpeed, this);
+                    GSene3D.Razor.active = false;
+                    GSene3D.knife.active = true;
+                    GSene3D.StandardParent.active = false;
                     break;
                 case GEnum.TaskType.upRightBeard:
                     GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model1 = GSene3D.knife.getChildAt(0);
-                    Model1.transform.localRotationEulerX = -180;
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                     });
                     Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
+                    GSene3D.Razor.active = false;
+                    GSene3D.knife.active = true;
+                    GSene3D.StandardParent.active = false;
                     break;
                 case GEnum.TaskType.movePhotoLocation:
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.DressUpMark.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                     });
-                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.DressUpMark.transform.localRotationEuler, this.moveSpeed, this);
-                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.DressUpMark.transform.localRotationEuler, this.moveSpeed, this);
+                    let euler2 = new Laya.Vector3(GSene3D.DressUpMark.transform.localRotationEuler.x, GSene3D.DressUpMark.transform.localRotationEuler.y + 360, GSene3D.DressUpMark.transform.localRotationEuler.z);
+                    Animation3D.RotateTo(GSene3D.MainCamera, euler2, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, euler2, this.moveSpeed, this);
+                    GSene3D.Razor.active = false;
+                    GSene3D.knife.active = false;
+                    GSene3D.StandardParent.active = false;
                     break;
                 default:
                     break;
@@ -4451,11 +4483,12 @@
                 "res/atlas/UI/Shop/Skin.png",
                 "res/atlas/UI/Shop/Props.png",
                 "res/atlas/UI/Shop/Other.png",
+                "res/atlas/UI/Shop.png",
             ];
             Loding.lodingList_3D = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
             ];
-            Loding.lodingList_Data = [
+            Loding.lodingList_Json = [
                 "GameData/Shop/Other.json",
                 "GameData/Shop/Props.json",
                 "GameData/Shop/Skin.json",
@@ -4654,6 +4687,8 @@
                     EventAdmin.notify(GEnum.EventType.taskProgress);
                 }
             };
+            this.touchPosX = null;
+            this.touchPosY = null;
             this.moveSwitch = false;
         }
         lwgNodeDec() {
@@ -4664,7 +4699,7 @@
         lwgOnAwake() {
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
-            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.upLeftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
         }
@@ -4675,6 +4710,10 @@
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
         }
         lwgEventReg() {
+            EventAdmin.reg(EventAdmin.EventType.closeOperation, this, () => {
+                this.self.close();
+                console.log('关闭自己！');
+            });
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (Admin._gameStart) {
                     if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
@@ -4698,9 +4737,6 @@
                     Admin._openScene(Admin.SceneName.UIResurgence);
                     Admin._gameStart = false;
                 }
-            });
-            EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
-                lwg.Admin._openScene(Admin.SceneName.UIOperation);
             });
             EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
                 this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
@@ -4941,6 +4977,9 @@
     }
 
     class UIResurgence extends Admin.Scene {
+        lwgOnEnable() {
+            console.log(Laya.stage);
+        }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnResurgence'], this, null, null, this.btnResurgenceUp);
             Click.on(Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
@@ -4951,6 +4990,7 @@
             this.self.close();
         }
         btnNoUp() {
+            EventAdmin.notify(EventAdmin.EventType.closeOperation);
             Admin._openScene(Admin.SceneName.UIDefeated);
             this.self.close();
         }
@@ -5328,17 +5368,14 @@
                 case 2:
                     Shop._ShopList.array = Shop.allSkin;
                     this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
-                    Shop._ShopList.vScrollBarSkin = 'comp/vscroll.png';
                     break;
                 case 1:
                     Shop._ShopList.array = Shop.allProps;
                     this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
-                    Shop._ShopList.vScrollBarSkin = '';
                     break;
                 case 0:
                     Shop._ShopList.array = Shop.allOther;
                     this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
-                    Shop._ShopList.vScrollBarSkin = '';
                     break;
                 default:
                     break;
@@ -5492,8 +5529,6 @@
             this.self.close();
         }
         shopOnDisable() {
-            EventAdmin.notify(GEnum.EventType.changeOther);
-            EventAdmin.notify(GEnum.EventType.changeProp);
             GVariate._stageClick = true;
             Setting.setBtnAppear();
         }
@@ -5537,6 +5572,7 @@
                         case 1:
                             Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
                             EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
+                            GSene3D.HairParent.active = false;
                             break;
                         default:
                             break;
@@ -5693,12 +5729,14 @@
             if (Math.floor(Math.random() * 2) === 1) {
                 ele = arrOther[Math.floor(Math.random() * arrOther.length)];
                 this.self['SkinPic'].skin = 'UI/Shop/Other/' + ele.name + '.png';
-                Shop._tryName = [Shop.GoodsClass.Other, ele.name];
+                this.beforeTryOtherName = Shop._currentOther.name;
+                Shop._currentOther.name = ele.name;
             }
             else {
                 ele = arrProp[Math.floor(Math.random() * arrProp.length)];
                 this.self['SkinPic'].skin = 'UI/Shop/Props/' + ele.name + '.png';
-                Shop._tryName = [Shop.GoodsClass.Props, ele.name];
+                this.beforeTryPropName = Shop._currentProp.name;
+                Shop._currentProp.name = ele.name;
             }
         }
         lwgBtnClick() {
@@ -5706,13 +5744,22 @@
             Click.on(lwg.Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
         }
         btnGetUp(event) {
-            EventAdmin.notify(GEnum.EventType.changeTrySkin, Shop._tryName);
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
         }
         btnNoUp(event) {
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
         }
-        onDisable() {
+        lwgOnDisable() {
+            if (this.beforeTryOtherName) {
+                Shop._currentOther.name = this.beforeTryOtherName;
+            }
+            if (this.beforeTryPropName) {
+                Shop._currentProp.name = this.beforeTryPropName;
+            }
         }
     }
 
@@ -5791,7 +5838,6 @@
             if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
                 this.self['BtnXDSkin'].visible = false;
             }
-            EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
             CheckIn.openCheckIn();
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
         }

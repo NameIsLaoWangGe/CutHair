@@ -1,5 +1,5 @@
 import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin } from "../Lwg_Template/lwg";
-import { GVariate, GEnum } from "../Lwg_Template/Global";
+import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UIStart extends lwg.Admin.Scene {
 
@@ -22,12 +22,11 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
         GVariate._stageClick = false;
-    
+
         Skin._currentEye.name = null;
         Skin._currentHead.name = null;
         EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
         EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
-
 
         this.levelStyleDisplay();
 
@@ -35,7 +34,7 @@ export default class UIStart extends lwg.Admin.Scene {
             this.self['BtnXDSkin'].visible = false;
         }
 
-        EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
+        // EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
         CheckIn.openCheckIn();
 
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);

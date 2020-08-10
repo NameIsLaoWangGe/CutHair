@@ -94,6 +94,8 @@ export module Global {
         export let MiddleBeard: Laya.MeshSprite3D;
         export let UpRightBeard: Laya.MeshSprite3D;
         export let UpLeftBeard: Laya.MeshSprite3D;
+        /**失败提示线*/
+        export let StandardParent: Laya.MeshSprite3D;
 
         /**地板*/
         export let Floor: Laya.MeshSprite3D;

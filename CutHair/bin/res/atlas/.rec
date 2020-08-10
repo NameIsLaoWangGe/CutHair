@@ -173,6 +173,7 @@ P 2A1556DE hutui_biaoqian2.png
 P E6AC1B4A hutui_biaoqian3.png
 P 5FE18D5D hutui_di.png
 P 3375A7E4 hutui_icon.png
+P 7A9D5B20 icon_hand.png
 P 3EAEB51C jindi_huan.png
 P F1A903B4 jindu_2.png
 P 883A07CC jindu_di.png
@@ -184,6 +185,7 @@ P 4D50E06D qiandao.png
 P EE5055A4 qipao.png
 P 28C4757F renwu.png
 P BF63B6AC shezhi.png
+P 11A44045 ui_guide.png
 P 9179159E xiandin1.png
 P AF643B15 xiandin2.png
 D UI/Inherit
@@ -255,11 +257,10 @@ P 1E66CC60 anniu.png
 P E13446FA icon_ads.png
 R 89EEC1D4 penzi.png
 P E9D8B8DD ui_board01.png
-P 2DCE1DF9 vscroll$bar.png
-P 6FE7EA34 vscroll$down.png
-P 0587871F vscroll$up.png
-P 351D8AF2 vscroll.png
-P 7E791439 xialatiao$bar.png
+P 8F855DE5 vscroll$bar.png
+P AA4E5183 vscroll$down.png
+P F0C0AA41 vscroll$up.png
+P 3B6D8868 vscroll.png
 P 8E29FF2D yinying.png
 D UI/Task
 P 79399EAB adslingqu.png
