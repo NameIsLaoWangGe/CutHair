@@ -1,4 +1,4 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools } from "../Lwg_Template/lwg";
+import { lwg, Gold, EventAdmin, Click, Admin, Shop, Tools } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 
 export default class UIShop_Goods extends Admin.Object {

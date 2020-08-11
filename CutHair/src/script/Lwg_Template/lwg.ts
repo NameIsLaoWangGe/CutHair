@@ -3,28 +3,7 @@ export module lwg {
     /**全局方法,全局变量，每个游戏不一样*/
     export module Global {
 
-        /**指代当前界面的等级节点*/
-        export let LevelNode: Laya.Sprite;
-        /**
-         * 创建通用剩余钥匙数量prefab
-         * @param parent 父节点
-         * @param x x位置
-         * @param y y位置
-         */
-        export function _createLevel(parent, x, y): void {
-            let sp: Laya.Sprite;
-            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                parent.addChild(sp);
-                sp.pos(x, y);
-                sp.zOrder = 0;
-                let level = sp.getChildByName('level') as Laya.Label;
-                // level.text = 'NO.' + lwg.Global._gameLevel;
-                LevelNode = sp;
-            }));
-        }
+        
 
         /**指代当前界面的钥匙数量节点*/
         export let KeyNumNode: Laya.Sprite;
@@ -347,7 +326,7 @@ export module lwg {
          */
         export function reg(type: any, caller: any, listener: Function) {
             if (!caller) {
-                console.error("caller must exist!");
+                console.error("事件的执行域必须存在!");
             }
             dispatcher.on(type.toString(), caller, listener);
         }
@@ -386,35 +365,6 @@ export module lwg {
         }
     }
 
-
-    /**游戏中的一些基础数据,例如等级，体力等*/
-    export module Game {
-        /**等级*/
-        export let _gameLevel = {
-            val: 1,
-            get value(): number {
-                return this.val = Laya.LocalStorage.getItem('_gameLevel') !== null ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
-            },
-            set value(val) {
-                this.val = Laya.LocalStorage.getItem('_gameLevel');
-                if (val > this.val) {
-                    Laya.LocalStorage.setItem('_gameLevel', val.toString());
-                }
-            }
-        };
-
-        /**体力*/
-        export let _execution = {
-            val: 15,
-            get value(): number {
-                return this.val = Laya.LocalStorage.getItem('_execution') !== null ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
-            },
-            set value(val) {
-                this.val = val;
-                Laya.LocalStorage.setItem('_execution', val.toString());
-            }
-        };
-    }
 
 
     /**提示模块*/
@@ -3384,7 +3334,7 @@ export module lwg {
         }
 
         /**
-         * 射线检测
+         * 射线检测，返回射线扫描结果，可以筛选结果
          * @param camera 摄像机
          * @param scene3D 当前场景
          * @param point 触摸点
@@ -3453,7 +3403,7 @@ export module lwg {
         }
 
         /**
-         * 返回两个向量之间的距离
+         * 返回两个3维向量之间的距离
         * @param v1 物体1
         * @param v2 物体2
         */
@@ -3462,7 +3412,6 @@ export module lwg {
             let lenp = Laya.Vector3.scalarLength(p);
             return lenp;
         }
-
 
         /**返回两个二维物体的距离*/
         export function twoObjectsLen_2D(obj1: Laya.Sprite, obj2: Laya.Sprite): number {
@@ -3548,7 +3497,34 @@ export module lwg {
         };
 
         /**
-         * 为一个节点创建一个扇形遮罩发
+          * 3D世界中，一个物体不会超过和另一个点的最长距离,如果超过或者等于则设置这个球面坐标，并且返回这个坐标
+          * @param originV3 原点的位置
+          * @param obj 物体
+          * @param length 长度
+         */
+        export function maximumDistanceLimi_3D(originV3: Laya.Vector3, obj: Laya.Sprite3D, length: number): Laya.Vector3 {
+            // 两个向量相减等于手臂到手的向量
+            let subP = new Laya.Vector3();
+            let objP = obj.transform.position;
+            Laya.Vector3.subtract(objP, originV3, subP);
+            // 向量的长度
+            let lenP = Laya.Vector3.scalarLength(subP);
+            if (lenP >= length) {
+                // 归一化向量
+                let normalizP = new Laya.Vector3();
+                Laya.Vector3.normalize(subP, normalizP);
+                // 坐标
+                let x = originV3.x + normalizP.x * length;
+                let y = originV3.y + normalizP.y * length;
+                let z = originV3.z + normalizP.z * length;
+                let p = new Laya.Vector3(x, y, z);
+                obj.transform.position = p;
+                return p;
+            }
+        }
+
+        /**
+         * 为一个节点创建一个扇形遮罩
          * 想要遮罩的形状发生变化，必须先将父节点的cacheAs改回“none”，接着改变其角度，再次将cacheAs改为“bitmap”，必须在同一帧内进行，因为是同一帧，所以在当前帧最后或者下一帧前表现出来，帧内时间不会表现任何状态，这是个思路，帧内做任何变化都不会显示，只要帧结尾改回来就行。
          * @param parent 被遮罩的节点，也是父节点
          * @param startAngle 扇形的初始角度
@@ -5035,6 +5011,7 @@ export module lwg {
         }
     }
 
+
     /**皮肤装扮界面*/
     export module Skin {
         /**皮肤list*/
@@ -5182,10 +5159,17 @@ export module lwg {
 
     export module Loding {
         /**3D场景的加载,其他3D物体，贴图，Mesh详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
-        export let lodingList_3D: Array<any> = [];
+        export let lodingList_3DScene: Array<any> = [];
+        /**模型网格详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
+        export let lodingList_3DMesh: Array<any> = [];
+        /**材质详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
+        export let lodingList_3DBaseMaterial: Array<any> = [];
+        /**纹理加载详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
+        export let lodingList_3DTexture2D: Array<any> = [];
+
         /**需要加载的图片资源列表,一般是界面的图片*/
         export let lodingList_2D: Array<any> = [];
-        /**数据表的加载，试用框架，必须加载*/
+        /**数据表的加载，在框架中，json为必须加载的项目*/
         export let lodingList_Json: Array<any> = [];
 
         /**进度条总长度,长度为以上三个加载资源类型的数组总长度*/
@@ -5253,14 +5237,14 @@ export module lwg {
             }
 
             lwgOnEnable(): void {
-                loadOrder = [lodingList_2D, lodingList_3D, lodingList_Json];
+                loadOrder = [lodingList_2D, lodingList_3DScene, lodingList_Json];
                 for (let index = 0; index < loadOrder.length; index++) {
                     if (loadOrder[index].length <= 0) {
                         loadOrder.splice(index, 1);
                         index--;
                     }
                 }
-                sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Json.length;
+                sumProgress = lodingList_2D.length + lodingList_3DScene.length + lodingList_Json.length;
                 loadOrderIndex = 0;
                 EventAdmin.notify(Loding.LodingType.loding);
             }
@@ -5271,7 +5255,6 @@ export module lwg {
                     console.log('没有加载项');
                     return;
                 }
-
                 // 已经加载过的分类数组的长度
                 let alreadyPro: number = 0;
                 for (let i = 0; i < loadOrderIndex; i++) {
@@ -5292,12 +5275,12 @@ export module lwg {
                             EventAdmin.notify(LodingType.progress);
                         }));
                         break;
-                    case lodingList_3D:
-                        Laya.Scene3D.load(lodingList_3D[index], Laya.Handler.create(this, (any) => {
+                    case lodingList_3DScene:
+                        Laya.Scene3D.load(lodingList_3DScene[index], Laya.Handler.create(this, (any) => {
                             if (any == null) {
-                                console.log('XXXXXXXXXXX3D场景' + lodingList_3D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                console.log('XXXXXXXXXXX3D场景' + lodingList_3DScene[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                             } else {
-                                console.log('3D场景' + lodingList_3D[index] + '加载完成！', '数组下标为：', index);
+                                console.log('3D场景' + lodingList_3DScene[index] + '加载完成！', '数组下标为：', index);
                             }
                             EventAdmin.notify(LodingType.progress);
 
@@ -5339,7 +5322,6 @@ export module lwg {
 }
 export default lwg;
 export let Admin = lwg.Admin;
-export let Game = lwg.Game;
 export let Gold = lwg.Gold;
 export let Click = lwg.Click;
 export let EventAdmin = lwg.EventAdmin;

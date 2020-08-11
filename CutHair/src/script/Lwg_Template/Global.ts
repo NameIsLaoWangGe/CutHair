@@ -5,12 +5,12 @@ export module Global {
         /**任务类型*/
         export enum TaskType {
             // 任务位置
-            sideHair = 'sideHair',
-            leftBeard = 'leftBeard',
-            rightBeard = 'rightBeard',
-            middleBeard = 'middleBeard',
-            upLeftBeard = 'upLeftBeard',
-            upRightBeard = 'upRightBeard',
+            sideHair = 'side',
+            leftBeard = 'left',
+            rightBeard = 'right',
+            middleBeard = 'middle',
+            upLeftBeard = 'leftTop',
+            upRightBeard = 'rightTop',
             /**移动到照相位置*/
             movePhotoLocation = 'movePhotoLocation',
         }
@@ -133,7 +133,6 @@ export module Global {
         export let EyeDecoration: Laya.MeshSprite3D;
         /**装扮界面的视角*/
         export let DressUpMark: Laya.MeshSprite3D;
-
     }
 }
 export default Global;

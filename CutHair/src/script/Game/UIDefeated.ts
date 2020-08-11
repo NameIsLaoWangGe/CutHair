@@ -1,6 +1,7 @@
-import { lwg, Click, EventAdmin, Dialog, Admin, Game, PalyAudio, Setting } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Dialog, Admin, PalyAudio, Setting } from "../Lwg_Template/lwg";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UIDefeated extends lwg.Admin.Scene {
 

@@ -1,6 +1,7 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, Tools, Dialog, Effects, PalyAudio, Setting } from "../Lwg_Template/lwg";
+import { lwg, Gold, EventAdmin, Click, Admin, Shop, Tools, Dialog, Effects, PalyAudio, Setting } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
 import ADManager from "../TJ/Admanager";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UIShop extends Shop.ShopScene {
     shopOnAwake(): void {

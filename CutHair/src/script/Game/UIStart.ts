@@ -1,5 +1,6 @@
-import { lwg, Gold, Game, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin } from "../Lwg_Template/lwg";
+import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UIStart extends lwg.Admin.Scene {
 
@@ -21,8 +22,6 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgOnEnable(): void {
-        GVariate._stageClick = false;
-
         Skin._currentEye.name = null;
         Skin._currentHead.name = null;
         EventAdmin.notify(GEnum.EventType.changeHeadDecoration);

@@ -1,7 +1,8 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Game, Animation2D, Effects } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Effects } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import RecordManager from "../TJ/RecordManager";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UIShare extends lwg.Admin.Scene {
 
