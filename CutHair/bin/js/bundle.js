@@ -2323,6 +2323,12 @@
                 return lenp;
             }
             Tools.twoObjectsLen_3D = twoObjectsLen_3D;
+            function twoPositionLen_3D(v1, v2) {
+                let p = twoSubV3_3D(v1, v2);
+                let lenp = Laya.Vector3.scalarLength(p);
+                return lenp;
+            }
+            Tools.twoPositionLen_3D = twoPositionLen_3D;
             function twoObjectsLen_2D(obj1, obj2) {
                 let point = new Laya.Point(obj1.x, obj1.y);
                 let len = point.distance(obj2.x, obj2.y);
@@ -3587,12 +3593,11 @@
                 lwgOnAwake() {
                     this.lodingResList();
                 }
-                lodingResList() {
-                }
+                lodingResList() { }
                 lwgEventReg() {
                     EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
                     EventAdmin.reg(LodingType.complete, this, () => { this.lodingComplete(); this.lwgInterior(); this.lodingTaskEventReg(); });
-                    EventAdmin.reg(LodingType.progress, this, () => {
+                    EventAdmin.reg(LodingType.progress, this, (skip) => {
                         Loding.currentProgress.value++;
                         if (Loding.currentProgress.value < Loding.sumProgress) {
                             console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
@@ -3602,14 +3607,24 @@
                 }
                 lwgOnEnable() {
                     Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3D, Loding.lodingList_Json];
+                    for (let index = 0; index < Loding.loadOrder.length; index++) {
+                        if (Loding.loadOrder[index].length <= 0) {
+                            Loding.loadOrder.splice(index, 1);
+                            index--;
+                        }
+                    }
                     Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3D.length + Loding.lodingList_Json.length;
                     Loding.loadOrderIndex = 0;
                     EventAdmin.notify(Loding.LodingType.loding);
                 }
                 lodingRule() {
+                    if (Loding.loadOrder.length <= 0) {
+                        console.log('没有加载项');
+                        return;
+                    }
                     let alreadyPro = 0;
-                    for (let index = 0; index < Loding.loadOrderIndex; index++) {
-                        alreadyPro += Loding.loadOrder[index].length;
+                    for (let i = 0; i < Loding.loadOrderIndex; i++) {
+                        alreadyPro += Loding.loadOrder[i].length;
                     }
                     let index = Loding.currentProgress.value - alreadyPro;
                     switch (Loding.loadOrder[Loding.loadOrderIndex]) {
@@ -4120,9 +4135,6 @@
             this.RazorState = GEnum.RazorState.move;
             let Blade = this.self.getChildByName('Blade');
             Blade.addComponent(GameMain3D_Blade);
-            EventAdmin.notify(GEnum.EventType.changeProp);
-        }
-        lwgOnUpdate() {
         }
     }
 
@@ -4145,8 +4157,6 @@
     }
 
     class GameMain3D_knife extends lwg.Admin.Object3D {
-        lwgOnEnable() {
-        }
         onTriggerEnter(other) {
             let owner = other.owner;
             let ownerParent = owner.parent;
@@ -4180,8 +4190,6 @@
                 default:
                     break;
             }
-        }
-        lwgOnUpdate() {
         }
     }
 
@@ -4484,6 +4492,7 @@
                 "res/atlas/UI/Shop/Props.png",
                 "res/atlas/UI/Shop/Other.png",
                 "res/atlas/UI/Shop.png",
+                "res/atlas/UI/Skin.png",
             ];
             Loding.lodingList_3D = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
@@ -4496,6 +4505,7 @@
                 "GameData/VictoryBox/VictoryBox.json",
                 "GameData/CheckIn/CheckIn.json",
                 "GameData/Dialog/Dialog.json",
+                "Scene/UIStart.json",
             ];
         }
         lodingPhaseComplete() {
@@ -4700,6 +4710,7 @@
             GVariate._taskNum = 0;
             lwg.Admin._gameStart = true;
             GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
+            GVariate._taskArr = [GEnum.TaskType.sideHair];
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
         }
@@ -4919,16 +4930,9 @@
                 return;
             }
             if (this.moveSwitch) {
-                let diffX = e.stageX - this.touchPosX;
-                let diffY = e.stageY - this.touchPosY;
-                this.Rocker.x += diffX;
-                this.Rocker.y += diffY;
-                this.touchPosX = e.stageX;
-                this.touchPosY = e.stageY;
                 switch (GVariate._taskArr[GVariate._taskNum]) {
                     case GEnum.TaskType.sideHair:
-                        GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
-                        GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
+                        this.razorMove(e);
                         break;
                     case GEnum.TaskType.leftBeard:
                         this.knifeMove();
@@ -4949,6 +4953,21 @@
                         break;
                 }
             }
+        }
+        razorMove(e) {
+            let diffX = e.stageX - this.touchPosX;
+            let diffY = e.stageY - this.touchPosY;
+            this.Rocker.x += diffX;
+            this.Rocker.y += diffY;
+            this.touchPosX = e.stageX;
+            this.touchPosY = e.stageY;
+            let p = Tools.twoPositionLen_3D(GSene3D.razorFPos, GSene3D.Razor.transform.position);
+            console.log(p);
+            if (p >= 1.2) {
+                return;
+            }
+            GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
+            GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
         }
         knifeMove() {
             let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
@@ -5744,11 +5763,19 @@
             Click.on(lwg.Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
         }
         btnGetUp(event) {
-            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
-            EventAdmin.notify(GEnum.EventType.changeOther);
-            EventAdmin.notify(GEnum.EventType.changeProp);
+            ADManager.ShowReward(() => {
+                Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                EventAdmin.notify(GEnum.EventType.changeOther);
+                EventAdmin.notify(GEnum.EventType.changeProp);
+            });
         }
         btnNoUp(event) {
+            if (this.beforeTryOtherName) {
+                Shop._currentOther.name = this.beforeTryOtherName;
+            }
+            if (this.beforeTryPropName) {
+                Shop._currentProp.name = this.beforeTryPropName;
+            }
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
             EventAdmin.notify(GEnum.EventType.changeOther);
             EventAdmin.notify(GEnum.EventType.changeProp);

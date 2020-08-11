@@ -43,6 +43,12 @@ export default class UISkinTry extends Admin.Scene {
     }
 
     btnNoUp(event): void {
+        if (this.beforeTryOtherName) {
+            Shop._currentOther.name = this.beforeTryOtherName;
+        }
+        if (this.beforeTryPropName) {
+            Shop._currentProp.name = this.beforeTryPropName;
+        }
         Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
         EventAdmin.notify(GEnum.EventType.changeOther);
         EventAdmin.notify(GEnum.EventType.changeProp);

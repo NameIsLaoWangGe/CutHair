@@ -3452,6 +3452,18 @@ export module lwg {
             return lenp;
         }
 
+        /**
+         * 返回两个向量之间的距离
+        * @param v1 物体1
+        * @param v2 物体2
+        */
+        export function twoPositionLen_3D(v1: Laya.Vector3, v2: Laya.Vector3): number {
+            let p = twoSubV3_3D(v1, v2);
+            let lenp = Laya.Vector3.scalarLength(p);
+            return lenp;
+        }
+
+
         /**返回两个二维物体的距离*/
         export function twoObjectsLen_2D(obj1: Laya.Sprite, obj2: Laya.Sprite): number {
             let point = new Laya.Point(obj1.x, obj1.y);
@@ -3463,9 +3475,9 @@ export module lwg {
           * 返回相同坐标系中两个三维向量的相减向量（obj1-obj2）
           * @param V3_01 向量1
           * @param V3_02 向量2
-          * @param normalizing 是否是单位向量
+          * @param normalizing 是否是单位向量,默认为不是
           */
-        export function twoSubV3_3D(V3_01: Laya.Vector3, V3_02: Laya.Vector3, normalizing: boolean): Laya.Vector3 {
+        export function twoSubV3_3D(V3_01: Laya.Vector3, V3_02: Laya.Vector3, normalizing?: boolean): Laya.Vector3 {
             let p = new Laya.Vector3();
             // 向量相减后计算长度
             Laya.Vector3.subtract(V3_01, V3_02, p);
@@ -3479,7 +3491,7 @@ export module lwg {
         }
 
         /**
-          * 输出一个向量相对于一个点的反向向量，或者反向向量的单位向量，可用于一个物体被另一个物体击退
+          * 返回一个向量相对于一个点的反向向量，或者反向向量的单位向量，可用于一个物体被另一个物体击退
           * @param type 二维还是三维
           * @param Vecoter1 固定点
           * @param Vecoter2 反弹物体向量
@@ -3819,7 +3831,7 @@ export module lwg {
         }
 
         /**
-          * 获取本地存储数据并且和文件中数据表的的对比,对比后会上传
+          * 获取本地存储数据并且和文件中数据表对比,对比后会上传
           * @param url 本地数据表地址
           * @param storageName 本地存储中的json名称
           * @param propertyName 数组中每个对象中同一个属性名，通过这个名称进行对比
@@ -5169,11 +5181,11 @@ export module lwg {
 
 
     export module Loding {
-        /**3D场景的加载*/
+        /**3D场景的加载,其他3D物体，贴图，Mesh详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
         export let lodingList_3D: Array<any> = [];
         /**需要加载的图片资源列表,一般是界面的图片*/
         export let lodingList_2D: Array<any> = [];
-        /**数据表的加载*/
+        /**数据表的加载，试用框架，必须加载*/
         export let lodingList_Json: Array<any> = [];
 
         /**进度条总长度,长度为以上三个加载资源类型的数组总长度*/
@@ -5227,13 +5239,11 @@ export module lwg {
                 this.lodingResList();
             }
             /**初始化的时候填写需要加载的内容，在三种加载数组中填写资源地址*/
-            lodingResList(): void {
-
-            }
+            lodingResList(): void { }
             lwgEventReg(): void {
                 EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule() });
                 EventAdmin.reg(LodingType.complete, this, () => { this.lodingComplete(); this.lwgInterior(); this.lodingTaskEventReg() });
-                EventAdmin.reg(LodingType.progress, this, () => {
+                EventAdmin.reg(LodingType.progress, this, (skip) => {
                     currentProgress.value++;
                     if (currentProgress.value < sumProgress) {
                         console.log('当前进度条进度为:', currentProgress.value / sumProgress);
@@ -5244,25 +5254,35 @@ export module lwg {
 
             lwgOnEnable(): void {
                 loadOrder = [lodingList_2D, lodingList_3D, lodingList_Json];
+                for (let index = 0; index < loadOrder.length; index++) {
+                    if (loadOrder[index].length <= 0) {
+                        loadOrder.splice(index, 1);
+                        index--;
+                    }
+                }
                 sumProgress = lodingList_2D.length + lodingList_3D.length + lodingList_Json.length;
                 loadOrderIndex = 0;
                 EventAdmin.notify(Loding.LodingType.loding);
-
             }
 
             /**根据加载顺序依次加载*/
             lodingRule(): void {
+                if (loadOrder.length <= 0) {
+                    console.log('没有加载项');
+                    return;
+                }
+
                 // 已经加载过的分类数组的长度
                 let alreadyPro: number = 0;
-                for (let index = 0; index < loadOrderIndex; index++) {
-                    alreadyPro += loadOrder[index].length;
+                for (let i = 0; i < loadOrderIndex; i++) {
+                    alreadyPro += loadOrder[i].length;
                 }
                 //获取到当前分类加载数组的下标 
                 let index = currentProgress.value - alreadyPro;
-                // console.log(loadOrder[index], index);
 
                 switch (loadOrder[loadOrderIndex]) {
                     case lodingList_2D:
+
                         Laya.loader.load(lodingList_2D[index], Laya.Handler.create(this, (any) => {
                             if (any == null) {
                                 console.log('XXXXXXXXXXX2D资源' + lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');

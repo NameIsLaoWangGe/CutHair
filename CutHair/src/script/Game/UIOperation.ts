@@ -145,7 +145,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
         GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.rightBeard, GEnum.TaskType.middleBeard, GEnum.TaskType.leftBeard, GEnum.TaskType.upRightBeard, GEnum.TaskType.upLeftBeard];
-        // GVariate._taskArr = [GEnum.TaskType.sideHair, GEnum.TaskType.upLeftBeard];
+        GVariate._taskArr = [GEnum.TaskType.sideHair];
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
     }
@@ -155,7 +155,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.createTaskContent();
         this.mainCameraMove();
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
-     
+
     }
 
     lwgEventReg(): void {
@@ -195,7 +195,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                 Admin._gameStart = false;
             }
         })
-        
+
         // // 重来
         // EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
         //     lwg.Admin._openScene(Admin.SceneName.UIOperation)
@@ -440,22 +440,11 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
 
         if (this.moveSwitch) {
-
-            let diffX = e.stageX - this.touchPosX;
-            let diffY = e.stageY - this.touchPosY;
-
-            this.Rocker.x += diffX;
-            this.Rocker.y += diffY;
-
-            this.touchPosX = e.stageX;
-            this.touchPosY = e.stageY;
-
             // 当前任务类型
             switch (GVariate._taskArr[GVariate._taskNum]) {
 
                 case GEnum.TaskType.sideHair:
-                    GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
-                    GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
+                    this.razorMove(e);
                     break;
 
                 case GEnum.TaskType.leftBeard:
@@ -484,37 +473,86 @@ export default class UIOperation extends lwg.Admin.Scene {
         }
     }
 
+    /**剃刀在头上运动规则*/
+    razorMove(e): void {
 
-    /**刮刀在脸上的移动规则*/
-    knifeMove(): void {
-        let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name) as Laya.HitResult;
-        // console.log(hitResult);
-        if (hitResult) {
+        let diffX = e.stageX - this.touchPosX;
+        let diffY = e.stageY - this.touchPosY;
 
-            let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
-            let y = GSene3D.Headcollision.transform.position.y - (GSene3D.HeadSimulate.transform.position.y - hitResult.point.y);
-            let z = GSene3D.Headcollision.transform.position.z - (GSene3D.HeadSimulate.transform.position.z - hitResult.point.z);
-            GSene3D.knife.transform.position = new Laya.Vector3(x, y, z);
+        this.Rocker.x += diffX;
+        this.Rocker.y += diffY;
+        this.touchPosX = e.stageX;
+        this.touchPosY = e.stageY;
 
-            // 设置旋转的角度
-            if (GSene3D.knife.transform.position.y >= GSene3D.HingeUp.transform.position.y) {
+        // 设置范围
+        let p = Tools.twoPositionLen_3D(GSene3D.razorFPos, GSene3D.Razor.transform.position);
+        if (p >= 1.1) {
+            return;
+        }
+        GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
+        GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
+    }
 
-                GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
 
-            } else if (GSene3D.knife.transform.position.y <= GSene3D.HingeDown.transform.position.y) {
+    /**
+     * 3D中两个坐标最长距离限制
+     * @param armVec 手臂的位置
+     * @param handVec 手的位置
+    */
+    handDistance(armVec: Laya.Vector3, handVec: Laya.Vector3, length: number): void {
+        // 两个向量相减等于手臂到手的向量
+        let subP = new Laya.Vector3();
+        Laya.Vector3.subtract(handVec, armVec, subP);
+        // 向量的长度
+        let lenP = Laya.Vector3.scalarLength(subP);
+        // 归一化向量
+        let normalizP = new Laya.Vector3();
+        Laya.Vector3.normalize(subP, normalizP);
 
-                GSene3D.knife.transform.lookAt(GSene3D.HingeDown.transform.position, new Laya.Vector3(0, 1, 0));
+        // this.longset和this.shortest是最长长度和最短长度，是固定值
+        if (lenP > length) {
+            // 最长范围
+            let x = armVec.x + normalizP.x * length;
+            let y = armVec.y + normalizP.y * length;
+            let z = armVec.z + normalizP.z * length;
 
-            } else {
-                // 中间脚链的跟随和最大值范围
-                GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+            this.self.transform.position.x = x;
+            this.self.transform.position.y = y;
+            // Z轴是前后，不变
+            // this.self.transform.position.z = z;
+        }
+
+
+        /**刮刀在脸上的移动规则*/
+        knifeMove(): void {
+            let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera') as Laya.Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name) as Laya.HitResult;
+            // console.log(hitResult);
+            if(hitResult) {
+
+                let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
+                let y = GSene3D.Headcollision.transform.position.y - (GSene3D.HeadSimulate.transform.position.y - hitResult.point.y);
+                let z = GSene3D.Headcollision.transform.position.z - (GSene3D.HeadSimulate.transform.position.z - hitResult.point.z);
+                GSene3D.knife.transform.position = new Laya.Vector3(x, y, z);
+
+                // 设置旋转的角度
+                if (GSene3D.knife.transform.position.y >= GSene3D.HingeUp.transform.position.y) {
+
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+
+                } else if (GSene3D.knife.transform.position.y <= GSene3D.HingeDown.transform.position.y) {
+
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeDown.transform.position, new Laya.Vector3(0, 1, 0));
+
+                } else {
+                    // 中间脚链的跟随和最大值范围
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                }
             }
         }
+        onStageMouseUp(e: Laya.Event) {
+            this.touchPosX = null;
+            this.touchPosY = null;
+            this.moveSwitch = false;
+        }
     }
-    onStageMouseUp(e: Laya.Event) {
-        this.touchPosX = null;
-        this.touchPosY = null;
-        this.moveSwitch = false;
-    }
-}

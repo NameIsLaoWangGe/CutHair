@@ -13,6 +13,7 @@ export default class UILoding extends Loding.LodeScene {
             "res/atlas/UI/Shop/Props.png",
             "res/atlas/UI/Shop/Other.png",
             "res/atlas/UI/Shop.png",
+            "res/atlas/UI/Skin.png",
         ];
         Loding.lodingList_3D = [
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
@@ -25,6 +26,7 @@ export default class UILoding extends Loding.LodeScene {
             "GameData/VictoryBox/VictoryBox.json",
             "GameData/CheckIn/CheckIn.json",
             "GameData/Dialog/Dialog.json",
+            "Scene/UIStart.json",
         ];
     }
 

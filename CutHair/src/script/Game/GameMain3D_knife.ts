@@ -3,8 +3,6 @@ import GameMain3D_Blade from "./GameMain3D_Blade";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 var notify;
 export default class GameMain3D_knife extends lwg.Admin.Object3D {
-    lwgOnEnable(): void {
-    }
     onTriggerEnter(other: Laya.Rigidbody3D): void {
         let owner = other.owner as Laya.MeshSprite3D;
         let ownerParent = owner.parent as Laya.MeshSprite3D;
@@ -40,9 +38,5 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
             default:
                 break;
         }
-    }
-
-
-    lwgOnUpdate(): void {
     }
 }

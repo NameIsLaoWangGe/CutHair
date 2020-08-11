@@ -9,9 +9,5 @@ export default class GameMain3D_Razor extends lwg.Admin.Object3D {
         this.RazorState = GEnum.RazorState.move;
         let Blade = this.self.getChildByName('Blade') as Laya.Sprite3D;
         Blade.addComponent(GameMain3D_Blade);
-        EventAdmin.notify(GEnum.EventType.changeProp);
-    }
-
-    lwgOnUpdate(): void {
     }
 }

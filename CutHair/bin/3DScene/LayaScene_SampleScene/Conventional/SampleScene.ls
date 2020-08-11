@@ -97,8 +97,76 @@
 				]
 			},
 			{
-				"type":"DirectionLight",
+				"type":"MeshSprite3D",
 				"instanceID":2,
+				"props":{
+					"name":"Beard",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.145,
+						93.33514,
+						5.091
+					],
+					"rotation":[
+						0.06406944,
+						-0.7041982,
+						0.7041982,
+						-0.06406944
+					],
+					"scale":[
+						10,
+						10,
+						6
+					],
+					"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"path":"Assets/Beard/huxvtoufa.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"Rigidbody3D",
+						"mass":1,
+						"isKinematic":true,
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"linearDamping":0,
+						"angularDamping":0,
+						"overrideGravity":false,
+						"gravity":[
+							0,
+							0,
+							0
+						],
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0.0003959202,
+									2.182261E-09,
+									0.01532135
+								],
+								"size":[
+									0.002375524,
+									0.002743021,
+									0.03064271
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"DirectionLight",
+				"instanceID":3,
 				"props":{
 					"name":"Directional Light",
 					"active":true,
@@ -133,7 +201,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":3,
+				"instanceID":4,
 				"props":{
 					"name":"DressUpMark",
 					"active":true,
@@ -161,7 +229,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":4,
+				"instanceID":5,
 				"props":{
 					"name":"PhotoCameraMark",
 					"active":true,
@@ -220,7 +288,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":5,
+				"instanceID":6,
 				"props":{
 					"name":"Landmark_UpLeft",
 					"active":true,
@@ -279,7 +347,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":6,
+				"instanceID":7,
 				"props":{
 					"name":"Landmark_UpRight",
 					"active":true,
@@ -338,7 +406,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":7,
+				"instanceID":8,
 				"props":{
 					"name":"Landmark_Side",
 					"active":true,
@@ -397,7 +465,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":8,
+				"instanceID":9,
 				"props":{
 					"name":"Landmark_Right",
 					"active":true,
@@ -456,7 +524,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":9,
+				"instanceID":10,
 				"props":{
 					"name":"Landmark_Left",
 					"active":true,
@@ -515,7 +583,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":10,
+				"instanceID":11,
 				"props":{
 					"name":"Landmark_Middle",
 					"active":true,
@@ -574,7 +642,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":11,
+				"instanceID":12,
 				"props":{
 					"name":"TouchScreen",
 					"active":true,
@@ -633,7 +701,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":12,
+				"instanceID":13,
 				"props":{
 					"name":"RightSignknife",
 					"active":true,
@@ -692,7 +760,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":13,
+				"instanceID":14,
 				"props":{
 					"name":"MiddleSignknife",
 					"active":true,
@@ -751,7 +819,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":14,
+				"instanceID":15,
 				"props":{
 					"name":"LeftSignknife",
 					"active":true,
@@ -810,7 +878,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":15,
+				"instanceID":16,
 				"props":{
 					"name":"UpRightKnife",
 					"active":true,
@@ -869,7 +937,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":16,
+				"instanceID":17,
 				"props":{
 					"name":"UpLeftKnife",
 					"active":true,
@@ -928,7 +996,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":17,
+				"instanceID":18,
 				"props":{
 					"name":"Floor",
 					"active":true,
@@ -996,7 +1064,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":18,
+				"instanceID":19,
 				"props":{
 					"name":"Room",
 					"active":true,
@@ -1033,1338 +1101,8 @@
 				"child":[]
 			},
 			{
-				"type":"MeshSprite3D",
-				"instanceID":19,
-				"props":{
-					"name":"knifeParent",
-					"active":true,
-					"isStatic":false,
-					"layer":0,
-					"position":[
-						0.6754772,
-						93.68817,
-						5.97746
-					],
-					"rotation":[
-						0,
-						-0.9617413,
-						0,
-						-0.2739593
-					],
-					"scale":[
-						1,
-						1,
-						1
-					],
-					"meshPath":"Assets/Animator/Head 2/Head 2-Tongue.lm",
-					"enableRender":true,
-					"materials":[
-						{
-							"path":"Assets/Material/Floor.lmat"
-						}
-					]
-				},
-				"components":[
-					{
-						"type":"PhysicsCollider",
-						"restitution":0,
-						"friction":0.5,
-						"rollingFriction":0,
-						"shapes":[
-							{
-								"type":"BoxColliderShape",
-								"center":[
-									0,
-									0,
-									0
-								],
-								"size":[
-									0.5000002,
-									0.15,
-									0.1
-								]
-							}
-						],
-						"isTrigger":true
-					}
-				],
-				"child":[
-					{
-						"type":"MeshSprite3D",
-						"instanceID":20,
-						"props":{
-							"name":"tixudao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								0,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0.02,
-											0.03,
-											0
-										],
-										"size":[
-											0.51,
-											0.18,
-											0.2
-										]
-									}
-								],
-								"isTrigger":true
-							}
-						],
-						"child":[
-							{
-								"type":"Sprite3D",
-								"instanceID":21,
-								"props":{
-									"name":"Model",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										1,
-										1,
-										1
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"Sprite3D",
-										"instanceID":22,
-										"props":{
-											"name":"Model",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.609,
-												1.346,
-												-0.25
-											],
-											"rotation":[
-												0.1132833,
-												0.1253734,
-												0.01442858,
-												-0.9855152
-											],
-											"scale":[
-												90,
-												90,
-												90
-											]
-										},
-										"components":[],
-										"child":[
-											{
-												"type":"MeshSprite3D",
-												"instanceID":23,
-												"props":{
-													"name":"Object010",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														-0.002226269,
-														-0.01312249,
-														0.0005027989
-													],
-													"rotation":[
-														0.5256738,
-														-0.3980167,
-														0.04780249,
-														-0.7503097
-													],
-													"scale":[
-														1,
-														1,
-														1
-													],
-													"meshPath":"Assets/Knife/tixudao/tixudao-Object010.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"path":"Assets/Knife/tixudao/tixudao.lmat"
-														}
-													]
-												},
-												"components":[],
-												"child":[]
-											},
-											{
-												"type":"MeshSprite3D",
-												"instanceID":24,
-												"props":{
-													"name":"Plane004",
-													"active":true,
-													"isStatic":false,
-													"layer":0,
-													"position":[
-														-0.00266061,
-														-0.01638627,
-														-7.720973E-05
-													],
-													"rotation":[
-														0.7071068,
-														0,
-														0,
-														-0.7071068
-													],
-													"scale":[
-														1,
-														1,
-														1
-													],
-													"meshPath":"Assets/Knife/tixudao/tixudao-Plane004.lm",
-													"enableRender":true,
-													"materials":[
-														{
-															"path":"Assets/Knife/tixudao/tixudao.lmat"
-														}
-													]
-												},
-												"components":[],
-												"child":[]
-											}
-										]
-									}
-								]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":25,
-						"props":{
-							"name":"jundao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.075,
-								-0.069,
-								-0.007
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											-0.02,
-											0.01,
-											0
-										],
-										"size":[
-											0.51,
-											0.13,
-											0.1
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[
-							{
-								"type":"Sprite3D",
-								"instanceID":26,
-								"props":{
-									"name":"Model",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.064,
-										-0.05303955,
-										-0.061
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										1,
-										1,
-										1
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":27,
-										"props":{
-											"name":"Model",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.2039316,
-												0.1220395,
-												0.04887457
-											],
-											"rotation":[
-												-0.4786828,
-												0.4973112,
-												0.5259296,
-												-0.4969331
-											],
-											"scale":[
-												100,
-												100,
-												100
-											],
-											"meshPath":"Assets/Knife/jundao/jundao-Plane007.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Knife/jundao/jundao.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":28,
-						"props":{
-							"name":"lifadao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								0,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0.06,
-											0,
-											0
-										],
-										"size":[
-											0.15,
-											0.1,
-											0.2
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[
-							{
-								"type":"Sprite3D",
-								"instanceID":29,
-								"props":{
-									"name":"Model",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.06399989,
-										-0.1220398,
-										-0.06099984
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										1,
-										1,
-										1
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":30,
-										"props":{
-											"name":"lifadao",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.1294468,
-												0.2055511,
-												0.2950102
-											],
-											"rotation":[
-												-0.008002781,
-												-0.9616975,
-												0.2739697,
-												0.003819898
-											],
-											"scale":[
-												50.00006,
-												50.00005,
-												50.00004
-											],
-											"meshPath":"Assets/Knife/lifadao/lifadao-Cylinder009.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Knife/lifadao/lifadao.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":31,
-						"props":{
-							"name":"ruwu",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								0,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											-0.08,
-											0,
-											0
-										],
-										"size":[
-											0.45,
-											0.1,
-											0.2
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[
-							{
-								"type":"Sprite3D",
-								"instanceID":32,
-								"props":{
-									"name":"Model",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.06399989,
-										-0.1220398,
-										-0.06099984
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										1,
-										1,
-										1
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":33,
-										"props":{
-											"name":"ruwu",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.59,
-												0.2592239,
-												0.111
-											],
-											"rotation":[
-												0.4717084,
-												0.5020588,
-												0.5988458,
-												0.408426
-											],
-											"scale":[
-												110,
-												110,
-												110
-											],
-											"meshPath":"Assets/Knife/ruwu/ruwu-Cylinder003.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Knife/ruwu/ruwu.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":34,
-						"props":{
-							"name":"tulongdao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								0,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											-0.08,
-											0.01,
-											0
-										],
-										"size":[
-											0.81,
-											0.16,
-											0.2
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[
-							{
-								"type":"Sprite3D",
-								"instanceID":35,
-								"props":{
-									"name":"Model",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.06399989,
-										-0.1220398,
-										-0.06099984
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										1,
-										1,
-										1
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":36,
-										"props":{
-											"name":"tulongdao",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.293,
-												0.178,
-												0.082
-											],
-											"rotation":[
-												0.5019126,
-												-0.4948832,
-												0.4163819,
-												-0.5742826
-											],
-											"scale":[
-												200,
-												200,
-												200
-											],
-											"meshPath":"Assets/Knife/tulongdao/tulongdao-tulongdao.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Knife/tulongdao/tulongdao.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":37,
-						"props":{
-							"name":"xiangsudao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								0,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[
-								{
-									"type":"Laya.BlinnPhongMaterial",
-									"path":"Resources/unity_builtin_extra.lmat"
-								}
-							]
-						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											-0.08,
-											0.01,
-											0
-										],
-										"size":[
-											0.81,
-											0.16,
-											0.2
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
-						"child":[
-							{
-								"type":"Sprite3D",
-								"instanceID":38,
-								"props":{
-									"name":"Model",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.06399989,
-										-0.1220398,
-										-0.06099984
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										1,
-										1,
-										1
-									]
-								},
-								"components":[],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":39,
-										"props":{
-											"name":"xiangsudao",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0.2500002,
-												0.1620026,
-												0.08700022
-											],
-											"rotation":[
-												0.4388402,
-												0.5401382,
-												-0.489987,
-												-0.5249598
-											],
-											"scale":[
-												150,
-												150,
-												150
-											],
-											"meshPath":"Assets/Knife/xiangsudao/xiangsudao-Plane159.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Knife/xiangsudao/xiangsudao.lmat"
-												}
-											]
-										},
-										"components":[],
-										"child":[]
-									}
-								]
-							}
-						]
-					}
-				]
-			},
-			{
-				"type":"MeshSprite3D",
-				"instanceID":40,
-				"props":{
-					"name":"Razor",
-					"active":true,
-					"isStatic":false,
-					"layer":0,
-					"position":[
-						-0.3610001,
-						95.867,
-						6.506
-					],
-					"rotation":[
-						0,
-						0,
-						0,
-						-1
-					],
-					"scale":[
-						1,
-						1,
-						1
-					],
-					"enableRender":true,
-					"materials":[]
-				},
-				"components":[],
-				"child":[
-					{
-						"type":"Sprite3D",
-						"instanceID":41,
-						"props":{
-							"name":"dianju",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.418,
-								0.163,
-								1.972
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								80.00003,
-								80,
-								80.00003
-							]
-						},
-						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":42,
-								"props":{
-									"name":"Plane010",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.02630363,
-										-0.000218274,
-										0.0004412842
-									],
-									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1,
-										1,
-										1
-									],
-									"meshPath":"Assets/Shaver/dianju/dianju-Plane010.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Shaver/dianju/dianju.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":43,
-								"props":{
-									"name":"Plane011",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.01948571,
-										-0.0002683599,
-										-0.001169973
-									],
-									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1,
-										1,
-										1
-									],
-									"meshPath":"Assets/Shaver/dianju/dianju-Plane011.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"type":"Laya.BlinnPhongMaterial",
-											"path":"Assets/Shaver/dianju/dianju.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":44,
-						"props":{
-							"name":"dianjupian",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.3097842,
-								0.0009994507,
-								0.06937742
-							],
-							"rotation":[
-								-0.7071068,
-								0,
-								0,
-								-0.7071068
-							],
-							"scale":[
-								40,
-								40.00002,
-								40.00002
-							],
-							"meshPath":"Assets/Shaver/dianjupian/dian ju pian-Cylinder001.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/Shaver/dianjupian/Room1.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"Sprite3D",
-						"instanceID":45,
-						"props":{
-							"name":"jiandao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.966,
-								-0.02799988,
-								0.282
-							],
-							"rotation":[
-								-0.7071068,
-								0,
-								0,
-								-0.7071068
-							],
-							"scale":[
-								80,
-								79.99998,
-								79.99998
-							]
-						},
-						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":46,
-								"props":{
-									"name":"Cylinder005",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.007912016,
-										-0.002123321,
-										0.0005767654
-									],
-									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1,
-										1,
-										1
-									],
-									"meshPath":"Assets/Shaver/jiandao/jiandao-Cylinder005.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Shaver/jiandao/jiandao.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":47,
-								"props":{
-									"name":"Object009",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.007912016,
-										-0.00212332,
-										0.0005767657
-									],
-									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1,
-										1,
-										1
-									],
-									"meshPath":"Assets/Shaver/jiandao/jiandao-Object009.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Shaver/jiandao/jiandao.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							}
-						]
-					},
-					{
-						"type":"Sprite3D",
-						"instanceID":48,
-						"props":{
-							"name":"yingguangbang",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.67,
-								-0.128,
-								-0.363
-							],
-							"rotation":[
-								-0.7071068,
-								0,
-								0,
-								-0.7071068
-							],
-							"scale":[
-								80,
-								80,
-								80
-							]
-						},
-						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":49,
-								"props":{
-									"name":"Cylinder006",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.01271057,
-										-0.01017822,
-										-0.001179199
-									],
-									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1,
-										1,
-										1
-									],
-									"meshPath":"Assets/Shaver/yingguangbang/yingguangbang-Cylinder006.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Shaver/yingguangbang/yingguangbang.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":50,
-								"props":{
-									"name":"Object011",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.01271057,
-										-0.01017822,
-										-0.001179199
-									],
-									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
-									],
-									"scale":[
-										1,
-										1,
-										1
-									],
-									"meshPath":"Assets/Shaver/yingguangbang/yingguangbang-Object011.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Shaver/yingguangbang/yingguangbang.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":51,
-						"props":{
-							"name":"lifadao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.105,
-								0.303,
-								0.05865622
-							],
-							"rotation":[
-								-0.3535534,
-								-0.6123725,
-								0.3535534,
-								-0.6123725
-							],
-							"scale":[
-								80,
-								80,
-								80
-							],
-							"meshPath":"Assets/Shaver/lifadao/li fa dao-Cylinder009.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/Shaver/lifadao/Room1.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":52,
-						"props":{
-							"name":"Blade",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.3664,
-								-0.0543,
-								0
-							],
-							"rotation":[
-								0,
-								0,
-								0,
-								-1
-							],
-							"scale":[
-								0.05,
-								0.05,
-								-1.32
-							],
-							"meshPath":"Library/unity default resources-Cube.lm",
-							"enableRender":false,
-							"materials":[]
-						},
-						"components":[
-							{
-								"type":"Rigidbody3D",
-								"mass":1,
-								"isKinematic":true,
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"linearDamping":0,
-								"angularDamping":0,
-								"overrideGravity":true,
-								"gravity":[
-									0,
-									0,
-									0
-								],
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											1,
-											1,
-											1
-										]
-									}
-								],
-								"isTrigger":true
-							}
-						],
-						"child":[]
-					}
-				]
-			},
-			{
 				"type":"Sprite3D",
-				"instanceID":53,
+				"instanceID":20,
 				"props":{
 					"name":"Role",
 					"active":true,
@@ -2391,7 +1129,7 @@
 				"child":[
 					{
 						"type":"MeshSprite3D",
-						"instanceID":54,
+						"instanceID":21,
 						"props":{
 							"name":"Headcollision",
 							"active":true,
@@ -2486,7 +1224,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":55,
+								"instanceID":22,
 								"props":{
 									"name":"HingeMiddle",
 									"active":true,
@@ -2541,7 +1279,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":56,
+								"instanceID":23,
 								"props":{
 									"name":"HingeUp",
 									"active":true,
@@ -2596,7 +1334,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":57,
+								"instanceID":24,
 								"props":{
 									"name":"HingeDown",
 									"active":true,
@@ -2653,7 +1391,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":58,
+						"instanceID":25,
 						"props":{
 							"name":"HeadSimulate",
 							"active":true,
@@ -2749,7 +1487,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":59,
+						"instanceID":26,
 						"props":{
 							"name":"RoleObj",
 							"active":true,
@@ -2776,7 +1514,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":60,
+								"instanceID":27,
 								"props":{
 									"name":"Body",
 									"active":true,
@@ -2811,7 +1549,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":61,
+								"instanceID":28,
 								"props":{
 									"name":"Eye_003",
 									"active":true,
@@ -2839,7 +1577,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":62,
+								"instanceID":29,
 								"props":{
 									"name":"Eye_004",
 									"active":true,
@@ -2867,7 +1605,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":63,
+								"instanceID":30,
 								"props":{
 									"name":"Eye_005",
 									"active":true,
@@ -2895,7 +1633,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":64,
+								"instanceID":31,
 								"props":{
 									"name":"Eye_006",
 									"active":true,
@@ -2923,7 +1661,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":65,
+								"instanceID":32,
 								"props":{
 									"name":"Eyelid_003",
 									"active":true,
@@ -2951,7 +1689,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":66,
+								"instanceID":33,
 								"props":{
 									"name":"Eyelid_004",
 									"active":true,
@@ -2979,7 +1717,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":67,
+								"instanceID":34,
 								"props":{
 									"name":"Eyelid_005",
 									"active":true,
@@ -3007,7 +1745,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":68,
+								"instanceID":35,
 								"props":{
 									"name":"Eyelid_006",
 									"active":true,
@@ -3035,7 +1773,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":69,
+								"instanceID":36,
 								"props":{
 									"name":"meimao",
 									"active":true,
@@ -3070,7 +1808,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":70,
+								"instanceID":37,
 								"props":{
 									"name":"Teeth_0",
 									"active":true,
@@ -3098,7 +1836,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":71,
+								"instanceID":38,
 								"props":{
 									"name":"Teeth_002",
 									"active":true,
@@ -3126,7 +1864,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":72,
+								"instanceID":39,
 								"props":{
 									"name":"tou",
 									"active":true,
@@ -3161,7 +1899,7 @@
 							},
 							{
 								"type":"MeshSprite3D",
-								"instanceID":73,
+								"instanceID":40,
 								"props":{
 									"name":"yan",
 									"active":true,
@@ -3199,8 +1937,1804 @@
 				]
 			},
 			{
+				"type":"MeshSprite3D",
+				"instanceID":41,
+				"props":{
+					"name":"knifeParent",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.6754772,
+						93.68817,
+						5.97746
+					],
+					"rotation":[
+						0,
+						-0.9617413,
+						0,
+						-0.2739593
+					],
+					"scale":[
+						1,
+						1,
+						1
+					],
+					"meshPath":"Assets/Animator/Head 2/Head 2-Tongue.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"path":"Assets/Material/Floor.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									0.5000002,
+									0.15,
+									0.1
+								]
+							}
+						],
+						"isTrigger":true
+					}
+				],
+				"child":[
+					{
+						"type":"MeshSprite3D",
+						"instanceID":42,
+						"props":{
+							"name":"tixudao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.02,
+											0.03,
+											0
+										],
+										"size":[
+											0.51,
+											0.18,
+											0.3
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"Sprite3D",
+								"instanceID":43,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0,
+										0,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										1,
+										1,
+										1
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"Sprite3D",
+										"instanceID":44,
+										"props":{
+											"name":"Model",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.609,
+												1.346,
+												-0.25
+											],
+											"rotation":[
+												0.1132833,
+												0.1253734,
+												0.01442858,
+												-0.9855152
+											],
+											"scale":[
+												90,
+												90,
+												90
+											]
+										},
+										"components":[],
+										"child":[
+											{
+												"type":"MeshSprite3D",
+												"instanceID":45,
+												"props":{
+													"name":"Object010",
+													"active":true,
+													"isStatic":false,
+													"layer":0,
+													"position":[
+														-0.002226269,
+														-0.01312249,
+														0.0005027989
+													],
+													"rotation":[
+														0.5256738,
+														-0.3980167,
+														0.04780249,
+														-0.7503097
+													],
+													"scale":[
+														1,
+														1,
+														1
+													],
+													"meshPath":"Assets/Knife/tixudao/tixudao-Object010.lm",
+													"enableRender":true,
+													"materials":[
+														{
+															"path":"Assets/Knife/tixudao/tixudao.lmat"
+														}
+													]
+												},
+												"components":[],
+												"child":[]
+											},
+											{
+												"type":"MeshSprite3D",
+												"instanceID":46,
+												"props":{
+													"name":"Plane004",
+													"active":true,
+													"isStatic":false,
+													"layer":0,
+													"position":[
+														-0.00266061,
+														-0.01638627,
+														-7.720973E-05
+													],
+													"rotation":[
+														0.7071068,
+														0,
+														0,
+														-0.7071068
+													],
+													"scale":[
+														1,
+														1,
+														1
+													],
+													"meshPath":"Assets/Knife/tixudao/tixudao-Plane004.lm",
+													"enableRender":true,
+													"materials":[
+														{
+															"path":"Assets/Knife/tixudao/tixudao.lmat"
+														}
+													]
+												},
+												"components":[],
+												"child":[]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":47,
+						"props":{
+							"name":"jundao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.075,
+								-0.069,
+								-0.007
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.02,
+											0.01,
+											0
+										],
+										"size":[
+											0.51,
+											0.13,
+											0.3
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"Sprite3D",
+								"instanceID":48,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.064,
+										-0.05303955,
+										-0.061
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										1,
+										1,
+										1
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":49,
+										"props":{
+											"name":"Model",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.2039316,
+												0.1220395,
+												0.04887457
+											],
+											"rotation":[
+												-0.4786828,
+												0.4973112,
+												0.5259296,
+												-0.4969331
+											],
+											"scale":[
+												100,
+												100,
+												100
+											],
+											"meshPath":"Assets/Knife/jundao/jundao-Plane007.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Knife/jundao/jundao.lmat"
+												}
+											]
+										},
+										"components":[],
+										"child":[]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":50,
+						"props":{
+							"name":"lifadao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.06,
+											0,
+											0
+										],
+										"size":[
+											0.15,
+											0.1,
+											0.3
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"Sprite3D",
+								"instanceID":51,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.06399989,
+										-0.1220398,
+										-0.06099984
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										1,
+										1,
+										1
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":52,
+										"props":{
+											"name":"lifadao",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.1294468,
+												0.2055511,
+												0.2950102
+											],
+											"rotation":[
+												-0.008002781,
+												-0.9616975,
+												0.2739697,
+												0.003819898
+											],
+											"scale":[
+												50.00006,
+												50.00005,
+												50.00004
+											],
+											"meshPath":"Assets/Knife/lifadao/lifadao-Cylinder009.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Knife/lifadao/lifadao.lmat"
+												}
+											]
+										},
+										"components":[],
+										"child":[]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":53,
+						"props":{
+							"name":"ruwu",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.08,
+											0,
+											0
+										],
+										"size":[
+											0.45,
+											0.1,
+											0.3
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"Sprite3D",
+								"instanceID":54,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.06399989,
+										-0.1220398,
+										-0.06099984
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										1,
+										1,
+										1
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":55,
+										"props":{
+											"name":"ruwu",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.59,
+												0.2592239,
+												0.111
+											],
+											"rotation":[
+												0.4717084,
+												0.5020588,
+												0.5988458,
+												0.408426
+											],
+											"scale":[
+												110,
+												110,
+												110
+											],
+											"meshPath":"Assets/Knife/ruwu/ruwu-Cylinder003.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Knife/ruwu/ruwu.lmat"
+												}
+											]
+										},
+										"components":[],
+										"child":[]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":56,
+						"props":{
+							"name":"tulongdao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.08,
+											0.01,
+											0
+										],
+										"size":[
+											0.81,
+											0.16,
+											0.3
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"Sprite3D",
+								"instanceID":57,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.06399989,
+										-0.1220398,
+										-0.06099984
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										1,
+										1,
+										1
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":58,
+										"props":{
+											"name":"tulongdao",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.293,
+												0.178,
+												0.082
+											],
+											"rotation":[
+												0.5019126,
+												-0.4948832,
+												0.4163819,
+												-0.5742826
+											],
+											"scale":[
+												200,
+												200,
+												200
+											],
+											"meshPath":"Assets/Knife/tulongdao/tulongdao-tulongdao.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Knife/tulongdao/tulongdao.lmat"
+												}
+											]
+										},
+										"components":[],
+										"child":[]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":59,
+						"props":{
+							"name":"xiangsudao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.08,
+											0.01,
+											0
+										],
+										"size":[
+											0.81,
+											0.16,
+											0.3
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[
+							{
+								"type":"Sprite3D",
+								"instanceID":60,
+								"props":{
+									"name":"Model",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.06399989,
+										-0.1220398,
+										-0.06099984
+									],
+									"rotation":[
+										0,
+										0,
+										0,
+										-1
+									],
+									"scale":[
+										1,
+										1,
+										1
+									]
+								},
+								"components":[],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":61,
+										"props":{
+											"name":"xiangsudao",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0.2500002,
+												0.1620026,
+												0.08700022
+											],
+											"rotation":[
+												0.4388402,
+												0.5401382,
+												-0.489987,
+												-0.5249598
+											],
+											"scale":[
+												150,
+												150,
+												150
+											],
+											"meshPath":"Assets/Knife/xiangsudao/xiangsudao-Plane159.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Knife/xiangsudao/xiangsudao.lmat"
+												}
+											]
+										},
+										"components":[],
+										"child":[]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
 				"type":"Sprite3D",
-				"instanceID":74,
+				"instanceID":62,
+				"props":{
+					"name":"HeadDecoration",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.215,
+						94.761,
+						6.603
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[],
+				"child":[
+					{
+						"type":"MeshSprite3D",
+						"instanceID":63,
+						"props":{
+							"name":"anquanmao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.132,
+								-0.05,
+								0.0003251864
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/HeadDecoration/anquanmao/anquanmao-Sphere001.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/HeadDecoration/anquanmao/anquanmao.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":64,
+						"props":{
+							"name":"yanshemao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.305,
+								-0.149,
+								0.002912065
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/HeadDecoration/yanshemao/yanshemao-head_brown_0.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/HeadDecoration/yanshemao/yanshemao.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":65,
+						"props":{
+							"name":"yanshemao_shijie",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.305,
+								-0.149,
+								0.002912065
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/HeadDecoration/yanshemao_shijie/yanshemao_shijie-head_brown_0.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/HeadDecoration/yanshemao_shijie/yanshemao_shijie.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":66,
+						"props":{
+							"name":"yanshemao_gangtie",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.305,
+								-0.149,
+								0.002912065
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/HeadDecoration/yanshemao_gangtie/yanshemao_gangtie-head_brown_0.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/HeadDecoration/yanshemao_gangtie/yanshemao_gangtie.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":67,
+						"props":{
+							"name":"xiaochoumao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								-0.503,
+								-0.0008912063
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/HeadDecoration/xiaochoumao/xiaochoumao-Object015.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/HeadDecoration/xiaochoumao/xiaochoumao.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":68,
+						"props":{
+							"name":"maomaozi",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.5,
+								-0.11,
+								0.002912065
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/HeadDecoration/maomaozi/maomaozi-Object016.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/HeadDecoration/maomaozi/maomaozi.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					}
+				]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":69,
+				"props":{
+					"name":"EyeDecoration",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						1.005,
+						94.044,
+						6.605912
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[
+					{
+						"type":"MeshSprite3D",
+						"instanceID":70,
+						"props":{
+							"name":"yuanyanjing",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.042,
+								-0.126,
+								-0.038
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/EyeDecoration/yuanyanjing/yuanyanjing-Object014.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/EyeDecoration/yuanyanjing/yuanyanjing.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":71,
+						"props":{
+							"name":"xingxingyanjing",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.042,
+								-0.145,
+								-0.038
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/EyeDecoration/xingxingyanjing/xingxingyanjing-Box001.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/EyeDecoration/xingxingyanjing/xingxingyanjing.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":72,
+						"props":{
+							"name":"jiemao_02",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.092,
+								-0.129,
+								-0.038
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/EyeDecoration/jiemao_02/jiemao_02-Plane168.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/EyeDecoration/jiemao_02/jiemao_02.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":73,
+						"props":{
+							"name":"hamajing",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.042,
+								-0.018,
+								-0.038
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/EyeDecoration/hamajing/hamajing-Line001.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/EyeDecoration/hamajing/hamajing.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":74,
+						"props":{
+							"name":"jiemao_01",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.042,
+								-0.07,
+								-0.038
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								100,
+								100,
+								100
+							],
+							"meshPath":"Assets/EyeDecoration/jiemao_01/jiemao_01-EyeLashes_Grl_R_001.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/EyeDecoration/jiemao_01/jiemao_01.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					}
+				]
+			},
+			{
+				"type":"MeshSprite3D",
+				"instanceID":75,
+				"props":{
+					"name":"Razor",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.3610001,
+						95.867,
+						6.506
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					],
+					"enableRender":true,
+					"materials":[]
+				},
+				"components":[],
+				"child":[
+					{
+						"type":"Sprite3D",
+						"instanceID":76,
+						"props":{
+							"name":"dianju",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.418,
+								0.163,
+								1.972
+							],
+							"rotation":[
+								0.5,
+								-0.5,
+								-0.5,
+								-0.5
+							],
+							"scale":[
+								80.00003,
+								80,
+								80.00003
+							]
+						},
+						"components":[],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"instanceID":77,
+								"props":{
+									"name":"Plane010",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.02630363,
+										-0.000218274,
+										0.0004412842
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/Shaver/dianju/dianju-Plane010.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Shaver/dianju/dianju.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":78,
+								"props":{
+									"name":"Plane011",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.01948571,
+										-0.0002683599,
+										-0.001169973
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/Shaver/dianju/dianju-Plane011.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"type":"Laya.BlinnPhongMaterial",
+											"path":"Assets/Shaver/dianju/dianju.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":79,
+						"props":{
+							"name":"dianjupian",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.3097842,
+								0.0009994507,
+								0.06937742
+							],
+							"rotation":[
+								-0.7071068,
+								0,
+								0,
+								-0.7071068
+							],
+							"scale":[
+								40,
+								40.00002,
+								40.00002
+							],
+							"meshPath":"Assets/Shaver/dianjupian/dian ju pian-Cylinder001.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/Shaver/dianjupian/Room1.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"Sprite3D",
+						"instanceID":80,
+						"props":{
+							"name":"jiandao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.966,
+								-0.02799988,
+								0.282
+							],
+							"rotation":[
+								-0.7071068,
+								0,
+								0,
+								-0.7071068
+							],
+							"scale":[
+								80,
+								79.99998,
+								79.99998
+							]
+						},
+						"components":[],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"instanceID":81,
+								"props":{
+									"name":"Cylinder005",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.007912016,
+										-0.002123321,
+										0.0005767654
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/Shaver/jiandao/jiandao-Cylinder005.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Shaver/jiandao/jiandao.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":82,
+								"props":{
+									"name":"Object009",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.007912016,
+										-0.00212332,
+										0.0005767657
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/Shaver/jiandao/jiandao-Object009.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Shaver/jiandao/jiandao.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							}
+						]
+					},
+					{
+						"type":"Sprite3D",
+						"instanceID":83,
+						"props":{
+							"name":"yingguangbang",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-0.67,
+								-0.128,
+								-0.363
+							],
+							"rotation":[
+								-0.7071068,
+								0,
+								0,
+								-0.7071068
+							],
+							"scale":[
+								80,
+								80,
+								80
+							]
+						},
+						"components":[],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"instanceID":84,
+								"props":{
+									"name":"Cylinder006",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.01271057,
+										-0.01017822,
+										-0.001179199
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/Shaver/yingguangbang/yingguangbang-Cylinder006.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Shaver/yingguangbang/yingguangbang.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":85,
+								"props":{
+									"name":"Object011",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.01271057,
+										-0.01017822,
+										-0.001179199
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/Shaver/yingguangbang/yingguangbang-Object011.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Shaver/yingguangbang/yingguangbang.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							}
+						]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":86,
+						"props":{
+							"name":"lifadao",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.105,
+								0.303,
+								0.05865622
+							],
+							"rotation":[
+								-0.3535534,
+								-0.6123725,
+								0.3535534,
+								-0.6123725
+							],
+							"scale":[
+								80,
+								80,
+								80
+							],
+							"meshPath":"Assets/Shaver/lifadao/li fa dao-Cylinder009.lm",
+							"enableRender":true,
+							"materials":[
+								{
+									"path":"Assets/Shaver/lifadao/Room1.lmat"
+								}
+							]
+						},
+						"components":[],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":87,
+						"props":{
+							"name":"Blade",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.3664,
+								-0.0543,
+								0
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								0.05,
+								0.05,
+								-1.32
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"materials":[]
+						},
+						"components":[
+							{
+								"type":"Rigidbody3D",
+								"mass":1,
+								"isKinematic":true,
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"linearDamping":0,
+								"angularDamping":0,
+								"overrideGravity":true,
+								"gravity":[
+									0,
+									0,
+									0
+								],
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":true
+							}
+						],
+						"child":[]
+					}
+				]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":88,
 				"props":{
 					"name":"Level1",
 					"active":true,
@@ -3227,7 +3761,7 @@
 				"child":[
 					{
 						"type":"Sprite3D",
-						"instanceID":75,
+						"instanceID":89,
 						"props":{
 							"name":"HairParent",
 							"active":true,
@@ -3254,7 +3788,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":76,
+								"instanceID":90,
 								"props":{
 									"name":"HairlineRoot",
 									"active":true,
@@ -3275,860 +3809,6 @@
 										0.007205,
 										0.17,
 										0.007205
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":77,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":78,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.002,
-										-0.0001,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.00436331,
-										-0.9999905
-									],
-									"scale":[
-										0.01186,
-										0.172212,
-										0.01186
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":79,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":80,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.002,
-										-0.0001,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.008726637,
-										0.9999619
-									],
-									"scale":[
-										0.027785,
-										0.177189,
-										0.027785
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":81,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":82,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.004,
-										-0.0002,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.0130896,
-										-0.9999143
-									],
-									"scale":[
-										0.0148,
-										0.218111,
-										0.0148
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":83,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":84,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.004,
-										-0.0002,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.01745246,
-										0.9998477
-									],
-									"scale":[
-										0.027295,
-										0.183825,
-										0.027295
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":85,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":86,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.006,
-										-0.0003,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.02181489,
-										-0.9997621
-									],
-									"scale":[
-										0.005,
-										0.220323,
-										0.005
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":87,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":88,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.006,
-										-0.0003,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.02617695,
-										0.9996573
-									],
-									"scale":[
-										0.02558,
-										0.19212,
-										0.02558
-									],
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/Glasses.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[],
-										"isTrigger":false
-									}
-								],
-								"child":[
-									{
-										"type":"MeshSprite3D",
-										"instanceID":89,
-										"props":{
-											"name":"Hairline",
-											"active":true,
-											"isStatic":false,
-											"layer":0,
-											"position":[
-												0,
-												3.003001,
-												0
-											],
-											"rotation":[
-												0,
-												0,
-												0,
-												-1
-											],
-											"scale":[
-												1,
-												3,
-												1
-											],
-											"meshPath":"Library/unity default resources-Cylinder.lm",
-											"enableRender":true,
-											"materials":[
-												{
-													"path":"Assets/Material/Glasses.lmat"
-												}
-											]
-										},
-										"components":[
-											{
-												"type":"Rigidbody3D",
-												"mass":1,
-												"isKinematic":true,
-												"restitution":0,
-												"friction":0.5,
-												"rollingFriction":0,
-												"linearDamping":0,
-												"angularDamping":0,
-												"overrideGravity":false,
-												"gravity":[
-													0,
-													0,
-													0
-												],
-												"shapes":[
-													{
-														"type":"BoxColliderShape",
-														"center":[
-															-5.960464E-08,
-															0,
-															-8.940697E-08
-														],
-														"size":[
-															1,
-															2,
-															1
-														]
-													}
-												],
-												"isTrigger":false
-											}
-										],
-										"child":[]
-									}
-								]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":90,
-								"props":{
-									"name":"HairlineRoot",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.008,
-										-0.0004,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.03053851,
-										-0.9995336
-									],
-									"scale":[
-										0.023865,
-										0.176636,
-										0.023865
 									],
 									"enableRender":true,
 									"materials":[
@@ -4237,20 +3917,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.008,
-										-0.0004,
+										0.002,
+										-0.0001,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.03489945,
-										0.9993908
+										0.00436331,
+										-0.9999905
 									],
 									"scale":[
-										0.027295,
-										0.183825,
-										0.027295
+										0.01186,
+										0.172212,
+										0.01186
 									],
 									"enableRender":true,
 									"materials":[
@@ -4359,20 +4039,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.01,
-										-0.0005,
+										-0.002,
+										-0.0001,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.03925982,
-										-0.9992291
+										0.008726637,
+										0.9999619
 									],
 									"scale":[
-										0.01872,
-										0.201521,
-										0.01872
+										0.027785,
+										0.177189,
+										0.027785
 									],
 									"enableRender":true,
 									"materials":[
@@ -4481,20 +4161,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.01,
-										-0.0005,
+										0.004,
+										-0.0002,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.04361953,
-										0.9990482
+										0.0130896,
+										-0.9999143
 									],
 									"scale":[
-										0.02607,
-										0.224194,
-										0.02607
+										0.0148,
+										0.218111,
+										0.0148
 									],
 									"enableRender":true,
 									"materials":[
@@ -4603,20 +4283,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.012,
-										-0.0006,
+										-0.004,
+										-0.0002,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.04797813,
-										-0.9988484
+										0.01745246,
+										0.9998477
 									],
 									"scale":[
-										0.023375,
-										0.176083,
-										0.023375
+										0.027295,
+										0.183825,
+										0.027295
 									],
 									"enableRender":true,
 									"materials":[
@@ -4725,20 +4405,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.012,
-										-0.0006,
+										0.006,
+										-0.0003,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.05233605,
-										0.9986295
+										0.02181489,
+										-0.9997621
 									],
 									"scale":[
-										0.029255,
-										0.201521,
-										0.029255
+										0.005,
+										0.220323,
+										0.005
 									],
 									"enableRender":true,
 									"materials":[
@@ -4847,20 +4527,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.014,
-										-0.0007,
+										-0.006,
+										-0.0003,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.05669279,
-										-0.9983917
+										0.02617695,
+										0.9996573
 									],
 									"scale":[
-										0.024355,
-										0.183825,
-										0.024355
+										0.02558,
+										0.19212,
+										0.02558
 									],
 									"enableRender":true,
 									"materials":[
@@ -4969,20 +4649,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.014,
-										-0.0007,
+										0.008,
+										-0.0004,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.06104858,
-										0.9981348
+										0.03053851,
+										-0.9995336
 									],
 									"scale":[
-										0.012105,
-										0.213687,
-										0.012105
+										0.023865,
+										0.176636,
+										0.023865
 									],
 									"enableRender":true,
 									"materials":[
@@ -5091,20 +4771,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.016,
-										-0.0008,
+										-0.008,
+										-0.0004,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.06540313,
-										-0.9978589
+										0.03489945,
+										0.9993908
 									],
 									"scale":[
-										0.021415,
-										0.172212,
-										0.021415
+										0.027295,
+										0.183825,
+										0.027295
 									],
 									"enableRender":true,
 									"materials":[
@@ -5213,20 +4893,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.016,
-										-0.0008,
+										0.01,
+										-0.0005,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.06975647,
-										0.9975641
+										0.03925982,
+										-0.9992291
 									],
 									"scale":[
-										0.02068,
-										0.174977,
-										0.02068
+										0.01872,
+										0.201521,
+										0.01872
 									],
 									"enableRender":true,
 									"materials":[
@@ -5335,20 +5015,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.018,
-										-0.0009,
+										-0.01,
+										-0.0005,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.0741085,
-										-0.9972502
+										0.04361953,
+										0.9990482
 									],
 									"scale":[
-										0.02117,
-										0.21977,
-										0.02117
+										0.02607,
+										0.224194,
+										0.02607
 									],
 									"enableRender":true,
 									"materials":[
@@ -5457,20 +5137,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.018,
-										-0.0009,
+										0.012,
+										-0.0006,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.07845904,
-										0.9969174
+										0.04797813,
+										-0.9988484
 									],
 									"scale":[
-										0.020925,
-										0.193226,
-										0.020925
+										0.023375,
+										0.176083,
+										0.023375
 									],
 									"enableRender":true,
 									"materials":[
@@ -5579,20 +5259,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.02,
-										-0.0009999999,
+										-0.012,
+										-0.0006,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.0828082,
-										-0.9965655
+										0.05233605,
+										0.9986295
 									],
 									"scale":[
-										0.022885,
-										0.187696,
-										0.022885
+										0.029255,
+										0.201521,
+										0.029255
 									],
 									"enableRender":true,
 									"materials":[
@@ -5701,20 +5381,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.02,
-										-0.0009999999,
+										0.014,
+										-0.0007,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.08715589,
-										0.9961947
+										0.05669279,
+										-0.9983917
 									],
 									"scale":[
-										0.015535,
-										0.210922,
-										0.015535
+										0.024355,
+										0.183825,
+										0.024355
 									],
 									"enableRender":true,
 									"materials":[
@@ -5823,20 +5503,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.022,
-										-0.0011,
+										-0.014,
+										-0.0007,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.09150164,
-										-0.995805
+										0.06104858,
+										0.9981348
 									],
 									"scale":[
-										0.01284,
-										0.223088,
-										0.01284
+										0.012105,
+										0.213687,
+										0.012105
 									],
 									"enableRender":true,
 									"materials":[
@@ -5945,20 +5625,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.022,
-										-0.0011,
+										0.016,
+										-0.0008,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.09584583,
-										0.9953962
+										0.06540313,
+										-0.9978589
 									],
 									"scale":[
-										0.026805,
+										0.021415,
 										0.172212,
-										0.026805
+										0.021415
 									],
 									"enableRender":true,
 									"materials":[
@@ -6067,20 +5747,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.024,
-										-0.0012,
+										-0.016,
+										-0.0008,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1001881,
-										-0.9949685
+										0.06975647,
+										0.9975641
 									],
 									"scale":[
-										0.02117,
-										0.17,
-										0.02117
+										0.02068,
+										0.174977,
+										0.02068
 									],
 									"enableRender":true,
 									"materials":[
@@ -6189,20 +5869,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.024,
-										-0.0012,
+										0.018,
+										-0.0009,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1045285,
-										0.9945219
+										0.0741085,
+										-0.9972502
 									],
 									"scale":[
-										0.00745,
-										0.20318,
-										0.00745
+										0.02117,
+										0.21977,
+										0.02117
 									],
 									"enableRender":true,
 									"materials":[
@@ -6311,20 +5991,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.026,
-										-0.0013,
+										-0.018,
+										-0.0009,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1088669,
-										-0.9940563
+										0.07845904,
+										0.9969174
 									],
 									"scale":[
-										0.02215,
-										0.176083,
-										0.02215
+										0.020925,
+										0.193226,
+										0.020925
 									],
 									"enableRender":true,
 									"materials":[
@@ -6433,20 +6113,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.026,
-										-0.0013,
+										0.02,
+										-0.0009999999,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1132032,
-										0.9935719
+										0.0828082,
+										-0.9965655
 									],
 									"scale":[
-										0.006715,
-										0.174424,
-										0.006715
+										0.022885,
+										0.187696,
+										0.022885
 									],
 									"enableRender":true,
 									"materials":[
@@ -6555,20 +6235,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.028,
-										-0.0014,
+										-0.02,
+										-0.0009999999,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1175374,
-										-0.9930685
+										0.08715589,
+										0.9961947
 									],
 									"scale":[
-										0.02607,
-										0.212581,
-										0.02607
+										0.015535,
+										0.210922,
+										0.015535
 									],
 									"enableRender":true,
 									"materials":[
@@ -6677,20 +6357,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.028,
-										-0.0014,
+										0.022,
+										-0.0011,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1218693,
-										0.9925462
+										0.09150164,
+										-0.995805
 									],
 									"scale":[
-										0.01774,
-										0.189355,
-										0.01774
+										0.01284,
+										0.223088,
+										0.01284
 									],
 									"enableRender":true,
 									"materials":[
@@ -6799,20 +6479,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.03,
-										-0.0015,
+										-0.022,
+										-0.0011,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.126199,
-										-0.992005
+										0.09584583,
+										0.9953962
 									],
 									"scale":[
-										0.01431,
+										0.026805,
 										0.172212,
-										0.01431
+										0.026805
 									],
 									"enableRender":true,
 									"materials":[
@@ -6921,20 +6601,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.03,
-										-0.0015,
+										0.024,
+										-0.0012,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1305263,
-										0.9914449
+										0.1001881,
+										-0.9949685
 									],
 									"scale":[
-										0.00598,
-										0.207604,
-										0.00598
+										0.02117,
+										0.17,
+										0.02117
 									],
 									"enableRender":true,
 									"materials":[
@@ -7043,20 +6723,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.032,
-										-0.0016,
+										-0.024,
+										-0.0012,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1348509,
-										-0.9908659
+										0.1045285,
+										0.9945219
 									],
 									"scale":[
-										0.02019,
-										0.195438,
-										0.02019
+										0.00745,
+										0.20318,
+										0.00745
 									],
 									"enableRender":true,
 									"materials":[
@@ -7165,20 +6845,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.032,
-										-0.0016,
+										0.026,
+										-0.0013,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1391732,
-										0.9902681
+										0.1088669,
+										-0.9940563
 									],
 									"scale":[
-										0.014555,
-										0.208157,
-										0.014555
+										0.02215,
+										0.176083,
+										0.02215
 									],
 									"enableRender":true,
 									"materials":[
@@ -7287,20 +6967,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.034,
-										-0.0017,
+										-0.026,
+										-0.0013,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1434926,
-										-0.9896514
+										0.1132032,
+										0.9935719
 									],
 									"scale":[
-										0.024845,
-										0.193779,
-										0.024845
+										0.006715,
+										0.174424,
+										0.006715
 									],
 									"enableRender":true,
 									"materials":[
@@ -7409,20 +7089,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.034,
-										-0.0017,
+										0.028,
+										-0.0014,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1478094,
-										0.9890159
+										0.1175374,
+										-0.9930685
 									],
 									"scale":[
-										0.025825,
-										0.178295,
-										0.025825
+										0.02607,
+										0.212581,
+										0.02607
 									],
 									"enableRender":true,
 									"materials":[
@@ -7531,20 +7211,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.036,
-										-0.0018,
+										-0.028,
+										-0.0014,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1521234,
-										-0.9883615
+										0.1218693,
+										0.9925462
 									],
 									"scale":[
-										0.013575,
-										0.210369,
-										0.013575
+										0.01774,
+										0.189355,
+										0.01774
 									],
 									"enableRender":true,
 									"materials":[
@@ -7653,20 +7333,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.036,
-										-0.0018,
+										0.03,
+										-0.0015,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1564344,
-										0.9876884
+										0.126199,
+										-0.992005
 									],
 									"scale":[
-										0.009655,
-										0.198756,
-										0.009655
+										0.01431,
+										0.172212,
+										0.01431
 									],
 									"enableRender":true,
 									"materials":[
@@ -7775,20 +7455,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.038,
-										-0.0019,
+										-0.03,
+										-0.0015,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1607426,
-										-0.9869964
+										0.1305263,
+										0.9914449
 									],
 									"scale":[
-										0.005245,
-										0.174424,
-										0.005245
+										0.00598,
+										0.207604,
+										0.00598
 									],
 									"enableRender":true,
 									"materials":[
@@ -7897,20 +7577,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.038,
-										-0.0019,
+										0.032,
+										-0.0016,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1650475,
-										0.9862856
+										0.1348509,
+										-0.9908659
 									],
 									"scale":[
-										0.02705,
-										0.207051,
-										0.02705
+										0.02019,
+										0.195438,
+										0.02019
 									],
 									"enableRender":true,
 									"materials":[
@@ -8019,20 +7699,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.04,
-										-0.002,
+										-0.032,
+										-0.0016,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1693495,
-										-0.9855561
+										0.1391732,
+										0.9902681
 									],
 									"scale":[
-										0.005735,
-										0.194332,
-										0.005735
+										0.014555,
+										0.208157,
+										0.014555
 									],
 									"enableRender":true,
 									"materials":[
@@ -8141,20 +7821,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.04,
-										-0.002,
+										0.034,
+										-0.0017,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1736483,
-										0.9848077
+										0.1434926,
+										-0.9896514
 									],
 									"scale":[
-										0.025335,
-										0.182719,
-										0.025335
+										0.024845,
+										0.193779,
+										0.024845
 									],
 									"enableRender":true,
 									"materials":[
@@ -8263,20 +7943,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.042,
-										-0.0021,
+										-0.034,
+										-0.0017,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1779436,
-										-0.9840407
+										0.1478094,
+										0.9890159
 									],
 									"scale":[
-										0.010635,
-										0.193226,
-										0.010635
+										0.025825,
+										0.178295,
+										0.025825
 									],
 									"enableRender":true,
 									"materials":[
@@ -8385,20 +8065,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.042,
-										-0.0021,
+										0.036,
+										-0.0018,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1822356,
-										0.9832549
+										0.1521234,
+										-0.9883615
 									],
 									"scale":[
-										0.017985,
-										0.198203,
-										0.017985
+										0.013575,
+										0.210369,
+										0.013575
 									],
 									"enableRender":true,
 									"materials":[
@@ -8507,20 +8187,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.044,
-										-0.0022,
+										-0.036,
+										-0.0018,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.186524,
-										-0.9824504
+										0.1564344,
+										0.9876884
 									],
 									"scale":[
-										0.013085,
-										0.17553,
-										0.013085
+										0.009655,
+										0.198756,
+										0.009655
 									],
 									"enableRender":true,
 									"materials":[
@@ -8629,20 +8309,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.044,
-										-0.0022,
+										0.038,
+										-0.0019,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.190809,
-										0.9816272
+										0.1607426,
+										-0.9869964
 									],
 									"scale":[
-										0.019455,
-										0.182166,
-										0.019455
+										0.005245,
+										0.174424,
+										0.005245
 									],
 									"enableRender":true,
 									"materials":[
@@ -8751,20 +8431,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.046,
-										-0.0023,
+										-0.038,
+										-0.0019,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1950904,
-										-0.9807853
+										0.1650475,
+										0.9862856
 									],
 									"scale":[
-										0.024845,
-										0.211475,
-										0.024845
+										0.02705,
+										0.207051,
+										0.02705
 									],
 									"enableRender":true,
 									"materials":[
@@ -8873,20 +8553,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.046,
-										-0.0023,
+										0.04,
+										-0.002,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.1993679,
-										0.9799247
+										0.1693495,
+										-0.9855561
 									],
 									"scale":[
-										0.01578,
-										0.188802,
-										0.01578
+										0.005735,
+										0.194332,
+										0.005735
 									],
 									"enableRender":true,
 									"materials":[
@@ -8995,20 +8675,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.048,
-										-0.0024,
+										-0.04,
+										-0.002,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2036418,
-										-0.9790455
+										0.1736483,
+										0.9848077
 									],
 									"scale":[
-										0.013085,
-										0.217005,
-										0.013085
+										0.025335,
+										0.182719,
+										0.025335
 									],
 									"enableRender":true,
 									"materials":[
@@ -9117,20 +8797,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.048,
-										-0.0024,
+										0.042,
+										-0.0021,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2079116,
-										0.9781476
+										0.1779436,
+										-0.9840407
 									],
 									"scale":[
-										0.012105,
-										0.191014,
-										0.012105
+										0.010635,
+										0.193226,
+										0.010635
 									],
 									"enableRender":true,
 									"materials":[
@@ -9239,20 +8919,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.05,
-										-0.0025,
+										-0.042,
+										-0.0021,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2121777,
-										-0.9772311
+										0.1822356,
+										0.9832549
 									],
 									"scale":[
-										0.006225,
+										0.017985,
 										0.198203,
-										0.006225
+										0.017985
 									],
 									"enableRender":true,
 									"materials":[
@@ -9361,20 +9041,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.05,
-										-0.0025,
+										0.044,
+										-0.0022,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2164397,
-										0.976296
+										0.186524,
+										-0.9824504
 									],
 									"scale":[
-										0.02509,
-										0.221429,
-										0.02509
+										0.013085,
+										0.17553,
+										0.013085
 									],
 									"enableRender":true,
 									"materials":[
@@ -9483,20 +9163,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.052,
-										-0.0026,
+										-0.044,
+										-0.0022,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2206974,
-										-0.9753423
+										0.190809,
+										0.9816272
 									],
 									"scale":[
-										0.01529,
+										0.019455,
 										0.182166,
-										0.01529
+										0.019455
 									],
 									"enableRender":true,
 									"materials":[
@@ -9605,20 +9285,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.052,
-										-0.0026,
+										0.046,
+										-0.0023,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2249511,
-										0.9743701
+										0.1950904,
+										-0.9807853
 									],
 									"scale":[
-										0.01284,
-										0.185484,
-										0.01284
+										0.024845,
+										0.211475,
+										0.024845
 									],
 									"enableRender":true,
 									"materials":[
@@ -9727,20 +9407,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.054,
-										-0.0027,
+										-0.046,
+										-0.0023,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2292004,
-										-0.9733793
+										0.1993679,
+										0.9799247
 									],
 									"scale":[
-										0.005245,
-										0.221429,
-										0.005245
+										0.01578,
+										0.188802,
+										0.01578
 									],
 									"enableRender":true,
 									"materials":[
@@ -9849,20 +9529,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.054,
-										-0.0027,
+										0.048,
+										-0.0024,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2334454,
-										0.9723699
+										0.2036418,
+										-0.9790455
 									],
 									"scale":[
-										0.023865,
-										0.19765,
-										0.023865
+										0.013085,
+										0.217005,
+										0.013085
 									],
 									"enableRender":true,
 									"materials":[
@@ -9971,20 +9651,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.056,
-										-0.0028,
+										-0.048,
+										-0.0024,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2376859,
-										-0.9713421
+										0.2079116,
+										0.9781476
 									],
 									"scale":[
-										0.01186,
-										0.214793,
-										0.01186
+										0.012105,
+										0.191014,
+										0.012105
 									],
 									"enableRender":true,
 									"materials":[
@@ -10093,20 +9773,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.056,
-										-0.0028,
+										0.05,
+										-0.0025,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2419219,
-										0.9702958
+										0.2121777,
+										-0.9772311
 									],
 									"scale":[
-										0.02509,
-										0.212028,
-										0.02509
+										0.006225,
+										0.198203,
+										0.006225
 									],
 									"enableRender":true,
 									"materials":[
@@ -10215,20 +9895,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.058,
-										-0.0029,
+										-0.05,
+										-0.0025,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2461533,
-										-0.9692309
+										0.2164397,
+										0.976296
 									],
 									"scale":[
-										0.013085,
-										0.196544,
-										0.013085
+										0.02509,
+										0.221429,
+										0.02509
 									],
 									"enableRender":true,
 									"materials":[
@@ -10337,20 +10017,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.058,
-										-0.0029,
+										0.052,
+										-0.0026,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2503799,
-										0.9681477
+										0.2206974,
+										-0.9753423
 									],
 									"scale":[
-										0.008185,
-										0.216452,
-										0.008185
+										0.01529,
+										0.182166,
+										0.01529
 									],
 									"enableRender":true,
 									"materials":[
@@ -10459,20 +10139,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.06,
-										-0.003,
+										-0.052,
+										-0.0026,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.254602,
-										-0.967046
+										0.2249511,
+										0.9743701
 									],
 									"scale":[
-										0.019455,
-										0.174424,
-										0.019455
+										0.01284,
+										0.185484,
+										0.01284
 									],
 									"enableRender":true,
 									"materials":[
@@ -10581,20 +10261,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.06,
-										-0.003,
+										0.054,
+										-0.0027,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2588191,
-										0.9659258
+										0.2292004,
+										-0.9733793
 									],
 									"scale":[
-										0.023865,
-										0.223641,
-										0.023865
+										0.005245,
+										0.221429,
+										0.005245
 									],
 									"enableRender":true,
 									"materials":[
@@ -10703,20 +10383,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.062,
-										-0.0031,
+										-0.054,
+										-0.0027,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2630312,
-										-0.9647873
+										0.2334454,
+										0.9723699
 									],
 									"scale":[
-										0.028765,
-										0.190461,
-										0.028765
+										0.023865,
+										0.19765,
+										0.023865
 									],
 									"enableRender":true,
 									"materials":[
@@ -10825,20 +10505,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.062,
-										-0.0031,
+										0.056,
+										-0.0028,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2672384,
-										0.9636304
+										0.2376859,
+										-0.9713421
 									],
 									"scale":[
-										0.005245,
-										0.215899,
-										0.005245
+										0.01186,
+										0.214793,
+										0.01186
 									],
 									"enableRender":true,
 									"materials":[
@@ -10947,20 +10627,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.064,
-										-0.0032,
+										-0.056,
+										-0.0028,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2714405,
-										-0.9624553
+										0.2419219,
+										0.9702958
 									],
 									"scale":[
-										0.02803,
-										0.195438,
-										0.02803
+										0.02509,
+										0.212028,
+										0.02509
 									],
 									"enableRender":true,
 									"materials":[
@@ -11069,20 +10749,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.064,
-										-0.0032,
+										0.058,
+										-0.0029,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2756374,
-										0.9612617
+										0.2461533,
+										-0.9692309
 									],
 									"scale":[
-										0.01284,
-										0.176083,
-										0.01284
+										0.013085,
+										0.196544,
+										0.013085
 									],
 									"enableRender":true,
 									"materials":[
@@ -11191,20 +10871,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.066,
-										-0.0033,
+										-0.058,
+										-0.0029,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.279829,
-										-0.9600499
+										0.2503799,
+										0.9681477
 									],
 									"scale":[
-										0.01186,
-										0.212028,
-										0.01186
+										0.008185,
+										0.216452,
+										0.008185
 									],
 									"enableRender":true,
 									"materials":[
@@ -11313,20 +10993,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.066,
-										-0.0033,
+										0.06,
+										-0.003,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2840153,
-										0.9588197
+										0.254602,
+										-0.967046
 									],
 									"scale":[
-										0.006715,
-										0.224747,
-										0.006715
+										0.019455,
+										0.174424,
+										0.019455
 									],
 									"enableRender":true,
 									"materials":[
@@ -11435,19 +11115,19 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.068,
-										-0.0034,
+										-0.06,
+										-0.003,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2881963,
-										-0.9575714
+										0.2588191,
+										0.9659258
 									],
 									"scale":[
 										0.023865,
-										0.211475,
+										0.223641,
 										0.023865
 									],
 									"enableRender":true,
@@ -11557,20 +11237,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.068,
-										-0.0034,
+										0.062,
+										-0.0031,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2923718,
-										0.9563047
+										0.2630312,
+										-0.9647873
 									],
 									"scale":[
-										0.01333,
-										0.189908,
-										0.01333
+										0.028765,
+										0.190461,
+										0.028765
 									],
 									"enableRender":true,
 									"materials":[
@@ -11679,20 +11359,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.07,
-										-0.0035,
+										-0.062,
+										-0.0031,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.2965416,
-										-0.95502
+										0.2672384,
+										0.9636304
 									],
 									"scale":[
-										0.024845,
-										0.18659,
-										0.024845
+										0.005245,
+										0.215899,
+										0.005245
 									],
 									"enableRender":true,
 									"materials":[
@@ -11801,20 +11481,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.07,
-										-0.0035,
+										0.064,
+										-0.0032,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3007059,
-										0.9537169
+										0.2714405,
+										-0.9624553
 									],
 									"scale":[
-										0.010635,
-										0.179954,
-										0.010635
+										0.02803,
+										0.195438,
+										0.02803
 									],
 									"enableRender":true,
 									"materials":[
@@ -11923,20 +11603,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.072,
-										-0.0036,
+										-0.064,
+										-0.0032,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3048643,
-										-0.9523958
+										0.2756374,
+										0.9612617
 									],
 									"scale":[
-										0.02509,
-										0.19212,
-										0.02509
+										0.01284,
+										0.176083,
+										0.01284
 									],
 									"enableRender":true,
 									"materials":[
@@ -12045,20 +11725,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.072,
-										-0.0036,
+										0.066,
+										-0.0033,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3090171,
-										0.9510565
+										0.279829,
+										-0.9600499
 									],
 									"scale":[
-										0.012595,
-										0.209816,
-										0.012595
+										0.01186,
+										0.212028,
+										0.01186
 									],
 									"enableRender":true,
 									"materials":[
@@ -12167,20 +11847,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.074,
-										-0.0037,
+										-0.066,
+										-0.0033,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3131639,
-										-0.9496992
+										0.2840153,
+										0.9588197
 									],
 									"scale":[
-										0.01627,
-										0.190461,
-										0.01627
+										0.006715,
+										0.224747,
+										0.006715
 									],
 									"enableRender":true,
 									"materials":[
@@ -12289,20 +11969,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.074,
-										-0.0037,
+										0.068,
+										-0.0034,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3173046,
-										0.9483237
+										0.2881963,
+										-0.9575714
 									],
 									"scale":[
-										0.022395,
-										0.218111,
-										0.022395
+										0.023865,
+										0.211475,
+										0.023865
 									],
 									"enableRender":true,
 									"materials":[
@@ -12411,20 +12091,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.07600001,
-										-0.0038,
+										-0.068,
+										-0.0034,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3214394,
-										-0.9469301
+										0.2923718,
+										0.9563047
 									],
 									"scale":[
-										0.005,
-										0.17553,
-										0.005
+										0.01333,
+										0.189908,
+										0.01333
 									],
 									"enableRender":true,
 									"materials":[
@@ -12533,20 +12213,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.07600001,
-										-0.0038,
+										0.07,
+										-0.0035,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3255681,
-										0.9455186
+										0.2965416,
+										-0.95502
 									],
 									"scale":[
-										0.018965,
-										0.209263,
-										0.018965
+										0.024845,
+										0.18659,
+										0.024845
 									],
 									"enableRender":true,
 									"materials":[
@@ -12655,20 +12335,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.078,
-										-0.0039,
+										-0.07,
+										-0.0035,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3296907,
-										-0.9440891
+										0.3007059,
+										0.9537169
 									],
 									"scale":[
-										0.025335,
-										0.20318,
-										0.025335
+										0.010635,
+										0.179954,
+										0.010635
 									],
 									"enableRender":true,
 									"materials":[
@@ -12777,20 +12457,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.078,
-										-0.0039,
+										0.072,
+										-0.0036,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.333807,
-										0.9426414
+										0.3048643,
+										-0.9523958
 									],
 									"scale":[
-										0.0197,
-										0.179954,
-										0.0197
+										0.02509,
+										0.19212,
+										0.02509
 									],
 									"enableRender":true,
 									"materials":[
@@ -12899,20 +12579,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.08000001,
-										-0.004,
+										-0.072,
+										-0.0036,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3379167,
-										-0.941176
+										0.3090171,
+										0.9510565
 									],
 									"scale":[
-										0.008675,
-										0.214793,
-										0.008675
+										0.012595,
+										0.209816,
+										0.012595
 									],
 									"enableRender":true,
 									"materials":[
@@ -13021,20 +12701,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.08000001,
-										-0.004,
+										0.074,
+										-0.0037,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3420202,
-										0.9396926
+										0.3131639,
+										-0.9496992
 									],
 									"scale":[
-										0.00549,
-										0.212581,
-										0.00549
+										0.01627,
+										0.190461,
+										0.01627
 									],
 									"enableRender":true,
 									"materials":[
@@ -13143,20 +12823,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.082,
-										-0.0041,
+										-0.074,
+										-0.0037,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.346117,
-										-0.9381914
+										0.3173046,
+										0.9483237
 									],
 									"scale":[
-										0.00892,
-										0.184931,
-										0.00892
+										0.022395,
+										0.218111,
+										0.022395
 									],
 									"enableRender":true,
 									"materials":[
@@ -13265,20 +12945,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.082,
-										-0.0041,
+										0.07600001,
+										-0.0038,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3502074,
-										0.9366722
+										0.3214394,
+										-0.9469301
 									],
 									"scale":[
-										0.008675,
-										0.221982,
-										0.008675
+										0.005,
+										0.17553,
+										0.005
 									],
 									"enableRender":true,
 									"materials":[
@@ -13387,20 +13067,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.08400001,
-										-0.0042,
+										-0.07600001,
+										-0.0038,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3542911,
-										-0.9351352
+										0.3255681,
+										0.9455186
 									],
 									"scale":[
-										0.01872,
-										0.194885,
-										0.01872
+										0.018965,
+										0.209263,
+										0.018965
 									],
 									"enableRender":true,
 									"materials":[
@@ -13509,20 +13189,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.08400001,
-										-0.0042,
+										0.078,
+										-0.0039,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3583679,
-										0.9335805
+										0.3296907,
+										-0.9440891
 									],
 									"scale":[
-										0.006225,
-										0.19765,
-										0.006225
+										0.025335,
+										0.20318,
+										0.025335
 									],
 									"enableRender":true,
 									"materials":[
@@ -13631,20 +13311,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.086,
-										-0.0043,
+										-0.078,
+										-0.0039,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3624381,
-										-0.9320078
+										0.333807,
+										0.9426414
 									],
 									"scale":[
-										0.02117,
-										0.18106,
-										0.02117
+										0.0197,
+										0.179954,
+										0.0197
 									],
 									"enableRender":true,
 									"materials":[
@@ -13753,20 +13433,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.086,
-										-0.0043,
+										0.08000001,
+										-0.004,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3665012,
-										0.9304176
+										0.3379167,
+										-0.941176
 									],
 									"scale":[
-										0.005735,
-										0.203733,
-										0.005735
+										0.008675,
+										0.214793,
+										0.008675
 									],
 									"enableRender":true,
 									"materials":[
@@ -13875,20 +13555,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.08800001,
-										-0.0044,
+										-0.08000001,
+										-0.004,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3705574,
-										-0.9288096
+										0.3420202,
+										0.9396926
 									],
 									"scale":[
-										0.01431,
-										0.215899,
-										0.01431
+										0.00549,
+										0.212581,
+										0.00549
 									],
 									"enableRender":true,
 									"materials":[
@@ -13997,20 +13677,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.08800001,
-										-0.0044,
+										0.082,
+										-0.0041,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3746067,
-										0.9271838
+										0.346117,
+										-0.9381914
 									],
 									"scale":[
-										0.006715,
-										0.20871,
-										0.006715
+										0.00892,
+										0.184931,
+										0.00892
 									],
 									"enableRender":true,
 									"materials":[
@@ -14119,20 +13799,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.09,
-										-0.0045,
+										-0.082,
+										-0.0041,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3786486,
-										-0.9255405
+										0.3502074,
+										0.9366722
 									],
 									"scale":[
-										0.01431,
-										0.205392,
-										0.01431
+										0.008675,
+										0.221982,
+										0.008675
 									],
 									"enableRender":true,
 									"materials":[
@@ -14241,20 +13921,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.09,
-										-0.0045,
+										0.08400001,
+										-0.0042,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3826835,
-										0.9238795
+										0.3542911,
+										-0.9351352
 									],
 									"scale":[
-										0.01823,
-										0.200415,
-										0.01823
+										0.01872,
+										0.194885,
+										0.01872
 									],
 									"enableRender":true,
 									"materials":[
@@ -14363,20 +14043,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.09200001,
-										-0.0046,
+										-0.08400001,
+										-0.0042,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3867109,
-										-0.922201
+										0.3583679,
+										0.9335805
 									],
 									"scale":[
-										0.016515,
-										0.215346,
-										0.016515
+										0.006225,
+										0.19765,
+										0.006225
 									],
 									"enableRender":true,
 									"materials":[
@@ -14485,20 +14165,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.09200001,
-										-0.0046,
+										0.086,
+										-0.0043,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3907312,
-										0.9205049
+										0.3624381,
+										-0.9320078
 									],
 									"scale":[
-										0.02705,
-										0.196544,
-										0.02705
+										0.02117,
+										0.18106,
+										0.02117
 									],
 									"enableRender":true,
 									"materials":[
@@ -14607,20 +14287,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.094,
-										-0.0047,
+										-0.086,
+										-0.0043,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3947439,
-										-0.9187912
+										0.3665012,
+										0.9304176
 									],
 									"scale":[
-										0.01333,
-										0.187696,
-										0.01333
+										0.005735,
+										0.203733,
+										0.005735
 									],
 									"enableRender":true,
 									"materials":[
@@ -14729,20 +14409,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.094,
-										-0.0047,
+										0.08800001,
+										-0.0044,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.3987491,
-										0.9170601
+										0.3705574,
+										-0.9288096
 									],
 									"scale":[
-										0.02656,
-										0.212028,
-										0.02656
+										0.01431,
+										0.215899,
+										0.01431
 									],
 									"enableRender":true,
 									"materials":[
@@ -14851,20 +14531,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.096,
-										-0.0048,
+										-0.08800001,
+										-0.0044,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4027467,
-										-0.9153115
+										0.3746067,
+										0.9271838
 									],
 									"scale":[
-										0.01284,
-										0.204286,
-										0.01284
+										0.006715,
+										0.20871,
+										0.006715
 									],
 									"enableRender":true,
 									"materials":[
@@ -14973,20 +14653,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.096,
-										-0.0048,
+										0.09,
+										-0.0045,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4067366,
-										0.9135455
+										0.3786486,
+										-0.9255405
 									],
 									"scale":[
-										0.02803,
-										0.218664,
-										0.02803
+										0.01431,
+										0.205392,
+										0.01431
 									],
 									"enableRender":true,
 									"materials":[
@@ -15095,20 +14775,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.098,
-										-0.0049,
+										-0.09,
+										-0.0045,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4107188,
-										-0.9117621
+										0.3826835,
+										0.9238795
 									],
 									"scale":[
-										0.012595,
-										0.211475,
-										0.012595
+										0.01823,
+										0.200415,
+										0.01823
 									],
 									"enableRender":true,
 									"materials":[
@@ -15217,20 +14897,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.098,
-										-0.0049,
+										0.09200001,
+										-0.0046,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4146934,
-										0.9099612
+										0.3867109,
+										-0.922201
 									],
 									"scale":[
-										0.029255,
-										0.176636,
-										0.029255
+										0.016515,
+										0.215346,
+										0.016515
 									],
 									"enableRender":true,
 									"materials":[
@@ -15339,20 +15019,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.005,
+										-0.09200001,
+										-0.0046,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4186597,
-										-0.9081432
+										0.3907312,
+										0.9205049
 									],
 									"scale":[
-										0.006715,
-										0.21424,
-										0.006715
+										0.02705,
+										0.196544,
+										0.02705
 									],
 									"enableRender":true,
 									"materials":[
@@ -15461,20 +15141,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.1,
-										-0.005,
+										0.094,
+										-0.0047,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4226183,
-										0.9063078
+										0.3947439,
+										-0.9187912
 									],
 									"scale":[
-										0.016025,
-										0.202627,
-										0.016025
+										0.01333,
+										0.187696,
+										0.01333
 									],
 									"enableRender":true,
 									"materials":[
@@ -15583,20 +15263,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.102,
-										-0.0051,
+										-0.094,
+										-0.0047,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4265688,
-										-0.9044551
+										0.3987491,
+										0.9170601
 									],
 									"scale":[
-										0.00549,
-										0.21977,
-										0.00549
+										0.02656,
+										0.212028,
+										0.02656
 									],
 									"enableRender":true,
 									"materials":[
@@ -15705,20 +15385,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.102,
-										-0.0051,
+										0.096,
+										-0.0048,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4305111,
-										0.9025853
+										0.4027467,
+										-0.9153115
 									],
 									"scale":[
-										0.01186,
-										0.173871,
-										0.01186
+										0.01284,
+										0.204286,
+										0.01284
 									],
 									"enableRender":true,
 									"materials":[
@@ -15827,20 +15507,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.104,
-										-0.0052,
+										-0.096,
+										-0.0048,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4344453,
-										-0.9006983
+										0.4067366,
+										0.9135455
 									],
 									"scale":[
-										0.027295,
-										0.208157,
-										0.027295
+										0.02803,
+										0.218664,
+										0.02803
 									],
 									"enableRender":true,
 									"materials":[
@@ -15949,20 +15629,20 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.104,
-										-0.0052,
+										0.098,
+										-0.0049,
 										0
 									],
 									"rotation":[
 										0,
 										0,
-										0.4383711,
-										0.8987941
+										0.4107188,
+										-0.9117621
 									],
 									"scale":[
-										0.02705,
-										0.198203,
-										0.02705
+										0.012595,
+										0.211475,
+										0.012595
 									],
 									"enableRender":true,
 									"materials":[
@@ -16061,12 +15741,866 @@
 										"child":[]
 									}
 								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":286,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.098,
+										-0.0049,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4146934,
+										0.9099612
+									],
+									"scale":[
+										0.029255,
+										0.176636,
+										0.029255
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":287,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":288,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1,
+										-0.005,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4186597,
+										-0.9081432
+									],
+									"scale":[
+										0.006715,
+										0.21424,
+										0.006715
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":289,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":290,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1,
+										-0.005,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4226183,
+										0.9063078
+									],
+									"scale":[
+										0.016025,
+										0.202627,
+										0.016025
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":291,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":292,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.102,
+										-0.0051,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4265688,
+										-0.9044551
+									],
+									"scale":[
+										0.00549,
+										0.21977,
+										0.00549
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":293,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":294,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.102,
+										-0.0051,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4305111,
+										0.9025853
+									],
+									"scale":[
+										0.01186,
+										0.173871,
+										0.01186
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":295,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":296,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.104,
+										-0.0052,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4344453,
+										-0.9006983
+									],
+									"scale":[
+										0.027295,
+										0.208157,
+										0.027295
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":297,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":298,
+								"props":{
+									"name":"HairlineRoot",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.104,
+										-0.0052,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										0.4383711,
+										0.8987941
+									],
+									"scale":[
+										0.02705,
+										0.198203,
+										0.02705
+									],
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Material/Glasses.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[],
+										"isTrigger":false
+									}
+								],
+								"child":[
+									{
+										"type":"MeshSprite3D",
+										"instanceID":299,
+										"props":{
+											"name":"Hairline",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												0,
+												3.003001,
+												0
+											],
+											"rotation":[
+												0,
+												0,
+												0,
+												-1
+											],
+											"scale":[
+												1,
+												3,
+												1
+											],
+											"meshPath":"Library/unity default resources-Cylinder.lm",
+											"enableRender":true,
+											"materials":[
+												{
+													"path":"Assets/Material/Glasses.lmat"
+												}
+											]
+										},
+										"components":[
+											{
+												"type":"Rigidbody3D",
+												"mass":1,
+												"isKinematic":true,
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"linearDamping":0,
+												"angularDamping":0,
+												"overrideGravity":false,
+												"gravity":[
+													0,
+													0,
+													0
+												],
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															-5.960464E-08,
+															0,
+															-8.940697E-08
+														],
+														"size":[
+															1,
+															2,
+															1
+														]
+													}
+												],
+												"isTrigger":false
+											}
+										],
+										"child":[]
+									}
+								]
 							}
 						]
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":286,
+						"instanceID":300,
 						"props":{
 							"name":"CutHairParent",
 							"active":true,
@@ -16094,7 +16628,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":287,
+						"instanceID":301,
 						"props":{
 							"name":"HairlineRoot",
 							"active":true,
@@ -16141,22 +16675,22 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":288,
+						"instanceID":302,
 						"props":{
 							"name":"RightBeard",
 							"active":true,
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								0.2925228,
-								0.06482697,
-								0.3955402
+								-0.032,
+								-0.171,
+								0.088
 							],
 							"rotation":[
-								0.1433987,
-								-0.2302228,
-								0.7516261,
-								-0.6012424
+								-0.6160356,
+								0.2623958,
+								-0.1875269,
+								-0.718667
 							],
 							"scale":[
 								1,
@@ -16168,958 +16702,6 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":289,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.21,
-										-0.35
-									],
-									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":290,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.24,
-										-0.4
-									],
-									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":291,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.27,
-										-0.45
-									],
-									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":292,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.3,
-										-0.5
-									],
-									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":293,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.33,
-										-0.55
-									],
-									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":294,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.36,
-										-0.6
-									],
-									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":295,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.22,
-										-0.35
-									],
-									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":296,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.25,
-										-0.4
-									],
-									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":297,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.28,
-										-0.45
-									],
-									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":298,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.31,
-										-0.5
-									],
-									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":299,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.34,
-										-0.55
-									],
-									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":300,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.37,
-										-0.6
-									],
-									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":301,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.25,
-										-0.4
-									],
-									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":302,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.28,
-										-0.45
-									],
-									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
 								"instanceID":303,
 								"props":{
 									"name":"Beard",
@@ -17127,26 +16709,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.05,
-										-0.31,
-										-0.5
+										-0.028,
+										0.021,
+										0.007
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.1693346,
+										-0.05519819,
+										0.4856841,
+										-0.8557978
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17170,14 +16752,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17195,26 +16777,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.05,
-										-0.34,
-										-0.55
+										-0.052,
+										0.049,
+										-0.037
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.05731389,
+										-0.04337257,
+										0.1872738,
+										-0.9796747
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17238,14 +16820,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17263,26 +16845,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.05,
-										-0.37,
-										-0.6
+										-0.0088,
+										0.0166,
+										0.0522
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										-0.2613879,
+										-0.1255397,
+										0.4924875,
+										-0.8205926
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17306,14 +16888,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17331,26 +16913,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.23,
-										-0.35
+										-0.0424,
+										0.0518,
+										-0.0894
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.1144939,
+										-0.0336898,
+										0.05060674,
+										-0.991562
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17374,14 +16956,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17399,26 +16981,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.26,
-										-0.4
+										-0.0104,
+										0.0278,
+										0.1026
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.282474,
+										-0.02555542,
+										0.127447,
+										-0.9504276
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17442,14 +17024,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17467,26 +17049,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.29,
-										-0.45
+										-0.0712,
+										0.0834,
+										-0.1322
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										0.04899401,
+										-0.0260502,
+										0.2647654,
+										-0.9627151
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17510,14 +17092,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17535,26 +17117,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.32,
-										-0.5
+										-0.0752,
+										0.0864,
+										0.1688
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										0.06090888,
+										0.0008701533,
+										0.08287914,
+										-0.9946962
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17578,14 +17160,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17603,26 +17185,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.35,
-										-0.55
+										-0.0328,
+										0.0646,
+										-0.1918
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.1387118,
+										-0.08980289,
+										0.5095692,
+										-0.8444133
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17646,14 +17228,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17671,26 +17253,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.1,
-										-0.38,
-										-0.6
+										-0.0608,
+										0.0856,
+										0.2152
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										0.006785095,
+										-0.04773945,
+										0.5022389,
+										-0.8633835
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17714,14 +17296,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17739,26 +17321,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.1,
-										-0.26,
-										-0.4
+										-0.0552,
+										0.0914,
+										-0.2362
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.03786045,
+										-0.05742259,
+										0.2537037,
+										-0.9648335
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17782,14 +17364,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17807,26 +17389,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.1,
-										-0.29,
-										-0.45
+										-0.0064,
+										0.0548,
+										0.2516
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.2779455,
+										-0.1300147,
+										0.3884672,
+										-0.8688704
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17850,14 +17432,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17875,26 +17457,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.1,
-										-0.32,
-										-0.5
+										-0.0568,
+										0.1026,
+										-0.2858
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.0174965,
+										-0.05344089,
+										0.4453855,
+										-0.8935714
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17918,14 +17500,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -17943,26 +17525,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.1,
-										-0.35,
-										-0.55
+										-0.0264,
+										0.07979999,
+										0.3066
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.1711476,
+										-0.09968714,
+										0.5152439,
+										-0.8338434
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -17986,14 +17568,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18011,26 +17593,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.1,
-										-0.38,
-										-0.6
+										-0.0456,
+										0.1042,
+										-0.3386
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										-0.09328085,
+										-0.03895441,
+										0.15846,
+										-0.982177
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18054,14 +17636,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18079,26 +17661,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.21,
-										-0.3
+										-0.0352,
+										0.0964,
+										0.3588
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										-0.1324074,
+										-0.07727201,
+										0.4419597,
+										-0.8838376
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18122,14 +17704,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18147,26 +17729,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.24,
-										-0.35
+										-0.0016,
+										0.0812,
+										-0.3996
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.3144898,
+										-0.113916,
+										0.211249,
+										-0.9184188
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18190,14 +17772,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18215,26 +17797,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.27,
-										-0.4
+										-0.0016,
+										0.09119999,
+										-0.4496
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.3103051,
+										-0.1233135,
+										0.2637618,
+										-0.9049498
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18258,14 +17840,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18283,26 +17865,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.3,
-										-0.45
+										-0.004,
+										0.103,
+										-0.499
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.3093368,
+										-0.0326808,
+										0.2683146,
+										-0.9117292
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18326,14 +17908,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18351,26 +17933,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.33,
-										-0.5
+										0.0196,
+										0.0398,
+										0.0076
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.1585236,
+										-0.07338817,
+										0.4537163,
+										-0.873857
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18394,14 +17976,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18419,26 +18001,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.36,
-										-0.55
+										0.003600001,
+										0.0618,
+										-0.0384
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.08916435,
+										-0.04132058,
+										0.1494959,
+										-0.9838665
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18462,14 +18044,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18487,26 +18069,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.15,
-										-0.39,
-										-0.6
+										0.0476,
+										0.0288,
+										0.0506
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										-0.3069754,
+										-0.1256911,
+										0.1686459,
+										-0.9281845
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18530,14 +18112,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18555,26 +18137,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.15,
-										-0.27,
-										-0.4
+										-0.006000001,
+										0.079,
+										-0.086
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.04244784,
+										-0.01952006,
+										0.03235703,
+										-0.9983838
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18598,14 +18180,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18623,26 +18205,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.15,
-										-0.3,
-										-0.45
+										0.005199999,
+										0.0706,
+										0.1112
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.06411216,
+										-0.07799548,
+										0.6553499,
+										-0.7485472
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18666,14 +18248,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18691,26 +18273,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.15,
-										-0.33,
-										-0.5
+										0.0132,
+										0.0746,
+										-0.1408
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.1414391,
+										-0.04819005,
+										0.1197169,
+										-0.9814991
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18734,14 +18316,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18759,26 +18341,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.15,
-										-0.36,
-										-0.55
+										-0.0292,
+										0.1064,
+										0.1698
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										0.08559687,
+										-0.01202455,
+										0.08940647,
+										-0.9922374
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18802,14 +18384,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18827,26 +18409,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										-0.15,
-										-0.39,
-										-0.6
+										-0.0156,
+										0.1062,
+										-0.1836
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										0.01782906,
+										-0.06905858,
+										0.254418,
+										-0.9644608
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18870,14 +18452,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18895,26 +18477,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.22,
-										-0.3
+										0.034,
+										0.069,
+										0.204
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										-0.2394481,
+										-0.03703027,
+										0.3837533,
+										-0.8910818
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -18938,14 +18520,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -18963,26 +18545,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.25,
-										-0.35
+										0.0404,
+										0.0742,
+										-0.2476
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.2803483,
+										-0.04152931,
+										0.272733,
+										-0.9194003
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19006,14 +18588,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19031,26 +18613,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.28,
-										-0.4
+										0.0396,
+										0.0748,
+										0.2526
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.2745737,
+										-0.07581694,
+										0.2657455,
+										-0.9209998
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19074,14 +18656,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19099,26 +18681,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.31,
-										-0.45
+										0.022,
+										0.098,
+										-0.293
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.1800638,
+										-0.03760003,
+										0.3122036,
+										-0.9320366
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19142,14 +18724,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19167,26 +18749,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.34,
-										-0.5
+										-0.01,
+										0.122,
+										0.315
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.003025591,
+										-0.05169626,
+										0.3931998,
+										-0.9179937
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19210,14 +18792,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19235,26 +18817,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.37,
-										-0.55
+										0.0404,
+										0.0942,
+										-0.3476
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.2713802,
+										-0.07166326,
+										0.4182479,
+										-0.8638784
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19278,14 +18860,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19303,26 +18885,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.2,
-										-0.4,
-										-0.6
+										0.0116,
+										0.1258,
+										-0.3904
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										-0.1339835,
+										-0.03516313,
+										0.1163505,
+										-0.9835012
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19346,14 +18928,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19371,26 +18953,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.23,
-										-0.3
+										0.0188,
+										0.1304,
+										-0.4422
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										-0.1672804,
+										-0.05310227,
+										0.2397954,
+										-0.9548276
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19414,14 +18996,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19439,26 +19021,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.26,
-										-0.35
+										0.046,
+										0.12,
+										-0.499
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.3066521,
+										-0.08620959,
+										0.2636369,
+										-0.9105098
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19482,14 +19064,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19507,26 +19089,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.29,
-										-0.4
+										-0.1004,
+										0.0548,
+										0.0126
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.04728014,
+										-0.06544015,
+										0.5033745,
+										-0.8602886
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19550,14 +19132,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19575,26 +19157,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.32,
-										-0.45
+										-0.0844,
+										0.0528,
+										-0.0414
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.143452,
+										-0.03291036,
+										0.320905,
+										-0.9356059
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19618,14 +19200,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19643,26 +19225,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.35,
-										-0.5
+										-0.05,
+										0.027,
+										0.05
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.3146526,
+										-0.1396978,
+										0.1712293,
+										-0.9231245
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19686,14 +19268,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19711,26 +19293,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.38,
-										-0.55
+										-0.0548,
+										0.0406,
+										-0.0988
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.3131543,
+										-0.06219156,
+										-0.007451415,
+										-0.9476345
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19754,14 +19336,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19779,26 +19361,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.25,
-										-0.41,
-										-0.6
+										-0.122,
+										0.09100001,
+										0.118
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										0.05623564,
+										-0.0235554,
+										0.3512267,
+										-0.9343032
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19822,14 +19404,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19847,26 +19429,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.3,
-										-0.27,
-										-0.35
+										-0.0596,
+										0.0542,
+										-0.1476
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.2808219,
+										-0.08372131,
+										0.1562227,
+										-0.943252
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19890,14 +19472,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19915,26 +19497,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.3,
-										-0.3,
-										-0.4
+										-0.0564,
+										0.0518,
+										0.1516
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.2803457,
+										-0.05956719,
+										0.5263778,
+										-0.8004902
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -19958,14 +19540,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -19983,26 +19565,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.3,
-										-0.33,
-										-0.45
+										-0.1252,
+										0.1134,
+										-0.1812
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										0.07179014,
+										-0.02364716,
+										0.2926258,
+										-0.9532351
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20026,14 +19608,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20051,26 +19633,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.3,
-										-0.36,
-										-0.5
+										-0.1052,
+										0.0984,
+										0.2138
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.03274947,
+										-0.05546705,
+										0.3290169,
+										-0.9421246
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20094,14 +19676,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20119,26 +19701,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.3,
-										-0.39,
-										-0.55
+										-0.07,
+										0.082,
+										-0.245
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										-0.2081631,
+										-0.1178667,
+										0.320693,
+										-0.9164779
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20162,14 +19744,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20187,26 +19769,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.3,
-										-0.42,
-										-0.6
+										-0.0964,
+										0.1018,
+										0.2616
 									],
 									"rotation":[
-										0.5892487,
-										0.4125964,
-										0.3984397,
-										-0.5690309
+										-0.09202993,
+										-0.03414667,
+										0.07621207,
+										-0.9922481
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20230,14 +19812,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20255,26 +19837,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.35,
-										-0.28,
-										-0.35
+										-0.1092,
+										0.1214,
+										-0.2852
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.005743683,
+										-0.05445773,
+										0.4170899,
+										-0.9072141
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20298,14 +19880,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20323,26 +19905,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.35,
-										-0.31,
-										-0.4
+										-0.094,
+										0.11,
+										0.311
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.09362233,
+										-0.0489572,
+										0.3231276,
+										-0.9404396
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20366,14 +19948,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20391,26 +19973,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.35,
-										-0.34,
-										-0.45
+										-0.0924,
+										0.1188,
+										-0.3394
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.1095014,
+										-0.04488813,
+										0.184212,
+										-0.9757358
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20434,14 +20016,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20459,26 +20041,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.35,
-										-0.37,
-										-0.5
+										-0.1292,
+										0.1564,
+										-0.3802
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										0.09422005,
+										-0.07518014,
+										0.2865472,
+										-0.9504532
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20502,14 +20084,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20527,26 +20109,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.35,
-										-0.4,
-										-0.55
+										-0.1148,
+										0.1556,
+										-0.4338
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										0.03212053,
+										-0.04609754,
+										0.5525161,
+										-0.8316064
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20570,14 +20152,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20595,26 +20177,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.416,
-										-0.266,
-										-0.147
+										-0.1108,
+										0.1626,
+										-0.4848
 									],
 									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
+										0.01474848,
+										-0.07141891,
+										0.5662206,
+										-0.8210213
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20638,14 +20220,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20663,26 +20245,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.4,
-										-0.26,
-										-0.3
+										0.0584,
+										0.0652,
+										0.0104
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										-0.1108385,
+										-0.05649804,
+										0.1918225,
+										-0.9735127
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20706,14 +20288,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20731,26 +20313,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.4,
-										-0.29,
-										-0.35
+										0.0768,
+										0.0614,
+										-0.0442
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.2105902,
+										-0.07023259,
+										0.1489284,
+										-0.9636075
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20774,14 +20356,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20799,26 +20381,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.4,
-										-0.32,
-										-0.4
+										0.0344,
+										0.0932,
+										0.0664
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										0.01721904,
+										-0.03441563,
+										0.2065636,
+										-0.9776761
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20842,14 +20424,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20867,26 +20449,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.4,
-										-0.35,
-										-0.45
+										0.0368,
+										0.1014,
+										-0.0842
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										0.02452296,
+										-0.07473326,
+										0.5287471,
+										-0.8451273
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20910,14 +20492,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -20935,26 +20517,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.4,
-										-0.38,
-										-0.5
+										0.028,
+										0.108,
+										0.118
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										0.04591486,
+										-0.003433824,
+										0.1991166,
+										-0.9788936
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -20978,14 +20560,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21003,26 +20585,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.4,
-										-0.41,
-										-0.55
+										0.032,
+										0.115,
+										-0.133
 									],
 									"rotation":[
-										0.5481197,
-										0.3837976,
-										0.4262504,
-										-0.6087486
+										0.03804097,
+										-0.02898608,
+										0.4203189,
+										-0.9061152
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21046,14 +20628,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21071,26 +20653,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.466,
-										-0.186,
-										0.003
+										0.0768,
+										0.08140001,
+										0.1558
 									],
 									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
+										-0.2002767,
+										-0.07720441,
+										0.3935636,
+										-0.8938884
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21114,14 +20696,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21139,26 +20721,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.466,
-										-0.216,
-										-0.047
+										0.0992,
+										0.0746,
+										-0.1998
 									],
 									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
+										-0.3203481,
+										0.01561558,
+										0.2429281,
+										-0.9154885
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21182,14 +20764,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21207,26 +20789,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.466,
-										-0.216,
-										0.053
+										0.0448,
+										0.1154,
+										0.2138
 									],
 									"rotation":[
-										-0.05714116,
-										-0.04001067,
-										0.5721793,
-										-0.8171567
+										-0.01651624,
+										-0.06320152,
+										0.5687306,
+										-0.8199257
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21250,14 +20832,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21275,26 +20857,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.466,
-										-0.246,
-										-0.097
+										0.0992,
+										0.0846,
+										-0.2498
 									],
 									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
+										-0.3138159,
+										-0.1030925,
+										0.4081208,
+										-0.8510752
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21318,14 +20900,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21343,26 +20925,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.18,
-										-0.15
+										0.0704,
+										0.1062,
+										0.2574
 									],
 									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
+										-0.185598,
+										-0.03453757,
+										-0.05233764,
+										-0.9806229
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21386,14 +20968,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21411,26 +20993,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.21,
-										-0.2
+										0.0312,
+										0.1456,
+										-0.2828
 									],
 									"rotation":[
-										0.1981708,
-										0.1387607,
-										0.5565388,
-										-0.7948198
+										0.04520896,
+										-0.07501422,
+										0.4040997,
+										-0.9105122
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21454,14 +21036,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21479,26 +21061,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.24,
-										-0.25
+										0.044,
+										0.136,
+										0.314
 									],
 									"rotation":[
-										0.2531319,
-										0.1772449,
-										0.5455036,
-										-0.7790599
+										-0.01123145,
+										-0.06502859,
+										0.5754858,
+										-0.815145
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21522,14 +21104,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21547,26 +21129,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.27,
-										-0.3
+										0.0408,
+										0.1484,
+										-0.3352
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										0.0006895066,
+										-0.05894401,
+										0.5092556,
+										-0.8585942
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21590,14 +21172,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21615,26 +21197,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.3,
-										-0.35
+										0.0264,
+										0.1692,
+										-0.3816
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										0.05608911,
+										-0.02218509,
+										0.08977532,
+										-0.9941339
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21658,14 +21240,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21683,26 +21265,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.33,
-										-0.4
+										0.0248,
+										0.1804,
+										-0.4312
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										0.08001962,
+										-0.02605475,
+										0.4599335,
+										-0.8839565
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21726,14 +21308,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21751,26 +21333,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.36,
-										-0.45
+										0.0912,
+										0.1406,
+										-0.4978
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.2771464,
+										-0.05292247,
+										0.4001476,
+										-0.8719352
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21794,14 +21376,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21819,26 +21401,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.45,
-										-0.39,
-										-0.5
+										-0.1112,
+										0.0424,
+										0.0028
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.2545886,
+										-0.05040655,
+										0.5294546,
+										-0.8076643
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21862,14 +21444,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21887,26 +21469,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.516,
-										-0.196,
-										0.003
+										-0.1088,
+										0.0506,
+										-0.0478
 									],
 									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
+										-0.2737278,
+										-0.05564275,
+										0.4500475,
+										-0.8481947
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21930,14 +21512,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -21955,26 +21537,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.516,
-										-0.226,
-										-0.047
+										-0.1184,
+										0.0578,
+										0.0546
 									],
 									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
+										-0.2368355,
+										-0.074775,
+										0.07564656,
+										-0.9657097
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -21998,14 +21580,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22023,26 +21605,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.516,
-										-0.226,
-										0.053
+										-0.1328,
+										0.0786,
+										-0.0918
 									],
 									"rotation":[
-										-0.05714116,
-										-0.04001067,
-										0.5721793,
-										-0.8171567
+										-0.1475577,
+										-0.06091847,
+										0.4354919,
+										-0.8859246
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22066,14 +21648,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22091,26 +21673,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.516,
-										-0.256,
-										-0.097
+										-0.1512,
+										0.0924,
+										0.1128
 									],
 									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
+										-0.06706522,
+										-0.02895251,
+										0.04536967,
+										-0.9962959
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22134,14 +21716,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22159,26 +21741,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.19,
-										-0.15
+										-0.1384,
+										0.09280001,
+										-0.1404
 									],
 									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
+										-0.1276695,
+										-0.04312858,
+										0.257212,
+										-0.9569129
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22202,14 +21784,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22227,26 +21809,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.22,
-										-0.2
+										-0.1552,
+										0.1054,
+										0.1638
 									],
 									"rotation":[
-										0.1981708,
-										0.1387607,
-										0.5565388,
-										-0.7948198
+										-0.04058832,
+										-0.05001712,
+										0.1861481,
+										-0.980408
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22270,14 +21852,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22295,26 +21877,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.25,
-										-0.25
+										-0.1704,
+										0.1268,
+										-0.1824
 									],
 									"rotation":[
-										0.2531319,
-										0.1772449,
-										0.5455036,
-										-0.7790599
+										0.0526017,
+										-0.06934717,
+										0.3760498,
+										-0.9225023
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22338,14 +21920,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22363,26 +21945,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.28,
-										-0.3
+										-0.148,
+										0.11,
+										0.212
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										-0.04578024,
+										-0.07728824,
+										0.6648576,
+										-0.7415491
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22406,14 +21988,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22431,26 +22013,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.31,
-										-0.35
+										-0.1568,
+										0.1266,
+										-0.2358
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.03147376,
+										-0.0330154,
+										0.2130079,
+										-0.9759852
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22474,14 +22056,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22499,26 +22081,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.34,
-										-0.4
+										-0.1312,
+										0.1074,
+										0.2578
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.1625189,
+										-0.06941704,
+										0.3012335,
+										-0.9370311
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22542,14 +22124,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22567,26 +22149,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.37,
-										-0.45
+										-0.116,
+										0.106,
+										-0.296
 									],
 									"rotation":[
-										0.458064,
-										0.3207399,
-										0.4755164,
-										-0.6791078
+										-0.2444146,
+										-0.08544268,
+										0.2196653,
+										-0.9405894
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22610,14 +22192,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22635,26 +22217,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.5,
-										-0.4,
-										-0.5
+										-0.1096,
+										0.1012,
+										0.3024
 									],
 									"rotation":[
-										0.5043204,
-										0.3531289,
-										0.4519844,
-										-0.6455007
+										-0.2628261,
+										-0.1189995,
+										0.4178197,
+										-0.8615035
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22678,14 +22260,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22703,26 +22285,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.566,
-										-0.206,
-										0.003
+										-0.1368,
+										0.1316,
+										-0.3408
 									],
 									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
+										-0.1330052,
+										-0.05275521,
+										0.3233392,
+										-0.9354028
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22746,14 +22328,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22771,26 +22353,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.566,
-										-0.236,
-										-0.047
+										-0.108,
+										0.11,
+										0.352
 									],
 									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
+										-0.2920697,
+										-0.07115156,
+										0.1403991,
+										-0.9433562
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22814,14 +22396,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22839,26 +22421,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.566,
-										-0.266,
-										-0.097
+										-0.1008,
+										0.1146,
+										-0.3998
 									],
 									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
+										-0.3011672,
+										-0.1173018,
+										0.5636895,
+										-0.7601269
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22882,14 +22464,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22907,26 +22489,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.55,
-										-0.2,
-										-0.15
+										-0.1368,
+										0.1516,
+										-0.4408
 									],
 									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
+										-0.1158422,
+										-0.06903245,
+										0.566699,
+										-0.8128145
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -22950,14 +22532,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -22975,26 +22557,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.55,
-										-0.23,
-										-0.2
+										-0.1168,
+										0.1466,
+										-0.4958
 									],
 									"rotation":[
-										0.1981708,
-										0.1387607,
-										0.5565388,
-										-0.7948198
+										-0.2168975,
+										-0.0902272,
+										0.619234,
+										-0.7492422
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23018,14 +22600,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23043,26 +22625,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.55,
-										-0.26,
-										-0.25
+										0.07560001,
+										0.1068,
+										0.0186
 									],
 									"rotation":[
-										0.2531319,
-										0.1772449,
-										0.5455036,
-										-0.7790599
+										0.06854893,
+										-0.03956114,
+										0.2707772,
+										-0.959383
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23086,14 +22668,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23111,26 +22693,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.55,
-										-0.29,
-										-0.3
+										0.138,
+										0.07000001,
+										-0.047
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										-0.2661125,
+										-0.07693055,
+										0.2617505,
+										-0.9245282
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23154,14 +22736,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23179,26 +22761,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.55,
-										-0.32,
-										-0.35
+										0.114,
+										0.08800001,
+										0.059
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.1424258,
+										-0.06017995,
+										0.1316888,
+										-0.9791585
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23222,14 +22804,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23247,26 +22829,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.55,
-										-0.35,
-										-0.4
+										0.1404,
+										0.0782,
+										0.1024
 									],
 									"rotation":[
-										0.409576,
-										0.2867882,
-										0.4967318,
-										-0.7094065
+										-0.2694457,
+										-0.07027441,
+										0.4490924,
+										-0.8489856
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23290,14 +22872,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23315,26 +22897,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.6,
-										-0.12,
-										0
+										0.1068,
+										0.1134,
+										0.1608
 									],
 									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
+										-0.1121313,
+										-0.02885789,
+										-0.03221962,
+										-0.9927517
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23358,14 +22940,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23383,26 +22965,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.616,
-										-0.246,
-										-0.047
+										0.1364,
+										0.1012,
+										-0.1966
 									],
 									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
+										-0.2536089,
+										-0.005718321,
+										0.2886678,
+										-0.9232122
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23426,14 +23008,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23451,26 +23033,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.616,
-										-0.276,
-										-0.097
+										0.09560001,
+										0.1318,
+										0.2136
 									],
 									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
+										-0.04892322,
+										-0.02706824,
+										0.08869919,
+										-0.994488
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23494,14 +23076,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23519,26 +23101,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.6,
-										-0.21,
-										-0.15
+										0.106,
+										0.134,
+										-0.239
 									],
 									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
+										-0.0911314,
+										-0.0581389,
+										0.3715348,
+										-0.9221046
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23562,14 +23144,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23587,26 +23169,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.6,
-										-0.24,
-										-0.2
+										0.1236,
+										0.1208,
+										0.2566
 									],
 									"rotation":[
-										0.1981708,
-										0.1387607,
-										0.5565388,
-										-0.7948198
+										-0.1901342,
+										-0.02914928,
+										0.2712655,
+										-0.9430876
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23630,14 +23212,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23655,26 +23237,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.6,
-										-0.27,
-										-0.25
+										0.1188,
+										0.1344,
+										-0.2922
 									],
 									"rotation":[
-										0.2531319,
-										0.1772449,
-										0.5455036,
-										-0.7790599
+										-0.1634749,
+										-0.06227576,
+										0.3060286,
+										-0.9358121
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23698,14 +23280,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23723,26 +23305,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.6,
-										-0.3,
-										-0.3
+										0.07400001,
+										0.178,
+										-0.331
 									],
 									"rotation":[
-										0.3068598,
-										0.2148655,
-										0.5318108,
-										-0.7595046
+										0.0888842,
+										-0.04076692,
+										0.4809237,
+										-0.8712922
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23766,14 +23348,14 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23791,26 +23373,26 @@
 									"isStatic":false,
 									"layer":0,
 									"position":[
-										0.6,
-										-0.33,
-										-0.35
+										0.1172,
+										0.1556,
+										-0.3918
 									],
 									"rotation":[
-										0.3590926,
-										0.2514394,
-										0.5155271,
-										-0.736249
+										-0.154541,
+										-0.05108913,
+										0.3235562,
+										-0.9321043
 									],
 									"scale":[
-										0.02,
-										0.3,
-										0.02
+										10.00001,
+										10,
+										6.000003
 									],
-									"meshPath":"Library/unity default resources-Cube.lm",
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/Material/beard.lmat"
+											"path":"Assets/Beard/huxvtoufa.lmat"
 										}
 									]
 								},
@@ -23834,14 +23416,9602 @@
 											{
 												"type":"BoxColliderShape",
 												"center":[
-													0,
-													0,
-													0
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
 												],
 												"size":[
-													1,
-													1,
-													1
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":402,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1244,
+										0.1602,
+										-0.4436
+									],
+									"rotation":[
+										-0.1775296,
+										-0.09572591,
+										0.5005568,
+										-0.8418805
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":403,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.09,
+										0.196,
+										-0.485
+									],
+									"rotation":[
+										-0.01952606,
+										-0.02616882,
+										0.03112499,
+										-0.9989821
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":404,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1876,
+										0.0792,
+										0.0094
+									],
+									"rotation":[
+										-0.1040284,
+										-0.07999893,
+										0.6453574,
+										-0.7525238
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":405,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.17,
+										0.07600001,
+										-0.045
+									],
+									"rotation":[
+										-0.2240433,
+										-0.08355997,
+										0.1776623,
+										-0.9545986
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":406,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2204,
+										0.1138,
+										0.0676
+									],
+									"rotation":[
+										0.06644297,
+										-0.05976817,
+										0.5629411,
+										-0.821651
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":407,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2036,
+										0.1112,
+										-0.0866
+									],
+									"rotation":[
+										-0.05236202,
+										-0.02847235,
+										0.140875,
+										-0.9882317
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":408,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2268,
+										0.1286,
+										0.1192
+									],
+									"rotation":[
+										0.09661192,
+										-0.08277613,
+										0.5066313,
+										-0.8527245
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":409,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1868,
+										0.1086,
+										-0.1408
+									],
+									"rotation":[
+										-0.130084,
+										-0.0591137,
+										0.3718974,
+										-0.9172111
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":410,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2028,
+										0.1206,
+										0.1632
+									],
+									"rotation":[
+										-0.05733243,
+										-0.02839939,
+										0.1062699,
+										-0.9922768
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":411,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2148,
+										0.1396,
+										-0.1838
+									],
+									"rotation":[
+										0.03314986,
+										-0.05429419,
+										0.5408697,
+										-0.8386973
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":412,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1868,
+										0.1186,
+										0.2092
+									],
+									"rotation":[
+										-0.1208691,
+										-0.06979591,
+										0.5040899,
+										-0.8522984
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":413,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1788,
+										0.1226,
+										-0.2428
+									],
+									"rotation":[
+										-0.183346,
+										-0.03060545,
+										0.1650598,
+										-0.9686087
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":414,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1988,
+										0.1376,
+										0.2622
+									],
+									"rotation":[
+										-0.07135072,
+										-0.04891236,
+										0.2597712,
+										-0.9617878
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":415,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2068,
+										0.1536,
+										-0.2858
+									],
+									"rotation":[
+										-0.03173971,
+										-0.03076684,
+										0.230272,
+										-0.9721218
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":416,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1532,
+										0.1134,
+										0.3008
+									],
+									"rotation":[
+										-0.3189097,
+										-0.07266702,
+										0.05131774,
+										-0.943601
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":417,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1644,
+										0.1318,
+										-0.3464
+									],
+									"rotation":[
+										-0.2556375,
+										-0.06031928,
+										0.2552365,
+										-0.9305189
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":418,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.154,
+										0.134,
+										-0.399
+									],
+									"rotation":[
+										-0.2954953,
+										-0.0468851,
+										0.4861324,
+										-0.8210723
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":419,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.1884,
+										0.1698,
+										-0.4404
+									],
+									"rotation":[
+										-0.1378138,
+										-0.03097567,
+										-0.01417722,
+										-0.9898722
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":420,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.186,
+										0.178,
+										-0.491
+									],
+									"rotation":[
+										-0.1362721,
+										-0.05055511,
+										0.3400231,
+										-0.929117
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":421,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1968,
+										0.07040001,
+										0.0008
+									],
+									"rotation":[
+										-0.2963836,
+										-0.07603866,
+										0.5303647,
+										-0.7906252
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":422,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.172,
+										0.09900001,
+										0.057
+									],
+									"rotation":[
+										-0.1699839,
+										-0.08885257,
+										0.4286744,
+										-0.8828641
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":423,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1984,
+										0.0892,
+										0.1004
+									],
+									"rotation":[
+										-0.3053707,
+										-0.1346849,
+										0.3031804,
+										-0.8925751
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":424,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.172,
+										0.119,
+										0.157
+									],
+									"rotation":[
+										-0.180343,
+										-0.0751648,
+										0.2547043,
+										-0.9470757
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":425,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1784,
+										0.1242,
+										0.2054
+									],
+									"rotation":[
+										-0.2240602,
+										-0.04676427,
+										0.1038229,
+										-0.9679003
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":426,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1864,
+										0.1382,
+										-0.2966
+									],
+									"rotation":[
+										-0.2700092,
+										-0.04460154,
+										-0.06312038,
+										-0.9597508
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":427,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.128,
+										0.192,
+										-0.332
+									],
+									"rotation":[
+										0.04301196,
+										-0.01123725,
+										-0.07367384,
+										-0.996291
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":428,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1384,
+										0.1942,
+										-0.3846
+									],
+									"rotation":[
+										-0.009279788,
+										-0.02505356,
+										0.09630566,
+										-0.9949932
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":429,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2,
+										0.158,
+										-0.45
+									],
+									"rotation":[
+										-0.3141335,
+										-0.03346679,
+										0.496097,
+										-0.8087571
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":430,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2,
+										0.168,
+										-0.5
+									],
+									"rotation":[
+										-0.3334744,
+										-0.08357085,
+										0.05477986,
+										-0.9374486
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":431,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2272,
+										0.08840001,
+										0.0068
+									],
+									"rotation":[
+										-0.1931692,
+										-0.05570132,
+										0.08528548,
+										-0.9758634
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":432,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2224,
+										0.0948,
+										-0.0444
+									],
+									"rotation":[
+										-0.2025088,
+										-0.05346817,
+										0.442652,
+										-0.8718892
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":433,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2048,
+										0.0816,
+										0.0512
+									],
+									"rotation":[
+										-0.2870595,
+										-0.1374786,
+										0.2875637,
+										-0.9033292
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":434,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.248,
+										0.124,
+										-0.088
+									],
+									"rotation":[
+										-0.0713994,
+										-0.05451079,
+										0.3386561,
+										-0.9366124
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":435,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.248,
+										0.124,
+										0.112
+									],
+									"rotation":[
+										-0.0723399,
+										-0.05325653,
+										0.3222584,
+										-0.9423801
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":436,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2648,
+										0.1466,
+										-0.1338
+									],
+									"rotation":[
+										0.02152961,
+										-0.07874046,
+										0.3933903,
+										-0.9157404
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":437,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2152,
+										0.1094,
+										0.1538
+									],
+									"rotation":[
+										-0.2498529,
+										-0.01886971,
+										0.2546794,
+										-0.934
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":438,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2472,
+										0.1434,
+										-0.1882
+									],
+									"rotation":[
+										-0.07340833,
+										-0.05617381,
+										0.3753709,
+										-0.9222539
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":439,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.248,
+										0.144,
+										0.212
+									],
+									"rotation":[
+										-0.08448654,
+										-0.03051776,
+										0.04133734,
+										-0.9950989
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":440,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2752,
+										0.1744,
+										-0.2312
+									],
+									"rotation":[
+										0.05936882,
+										0.003663674,
+										0.005270928,
+										-0.9982156
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":441,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.236,
+										0.145,
+										0.259
+									],
+									"rotation":[
+										-0.1214097,
+										-0.08446133,
+										0.5251553,
+										-0.838056
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":442,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2376,
+										0.1562,
+										-0.2906
+									],
+									"rotation":[
+										-0.1378454,
+										-0.04474247,
+										0.1112577,
+										-0.9831676
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":443,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2168,
+										0.1406,
+										0.3042
+									],
+									"rotation":[
+										-0.2409176,
+										-0.07251104,
+										0.2710346,
+										-0.9291078
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":444,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2736,
+										0.1932,
+										-0.3316
+									],
+									"rotation":[
+										0.08583301,
+										-0.07071085,
+										0.5778251,
+										-0.8085486
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":445,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2504,
+										0.1858,
+										-0.3874
+									],
+									"rotation":[
+										-0.04336467,
+										-0.06731009,
+										0.5550364,
+										-0.8279634
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":446,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2096,
+										0.1752,
+										-0.4976
+									],
+									"rotation":[
+										-0.2658803,
+										-0.09105104,
+										0.4736924,
+										-0.8346454
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":447,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.226,
+										0.103,
+										0.006
+									],
+									"rotation":[
+										-0.2140494,
+										-0.04531866,
+										-0.03494578,
+										-0.9751451
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":448,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.206,
+										0.128,
+										0.061
+									],
+									"rotation":[
+										-0.08612177,
+										-0.06056794,
+										0.4470428,
+										-0.8882946
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":449,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2468,
+										0.1074,
+										0.1008
+									],
+									"rotation":[
+										-0.3031305,
+										-0.0530411,
+										0.4441053,
+										-0.8414685
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":450,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2292,
+										0.1306,
+										0.1552
+									],
+									"rotation":[
+										-0.1990559,
+										-0.1260555,
+										0.3240477,
+										-0.9162314
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":451,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2132,
+										0.1526,
+										0.2092
+									],
+									"rotation":[
+										-0.129215,
+										-0.07281531,
+										0.338011,
+										-0.9293815
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":452,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2276,
+										0.1518,
+										0.2556
+									],
+									"rotation":[
+										-0.2188203,
+										-0.02560911,
+										0.1314199,
+										-0.9665354
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":453,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1796,
+										0.1978,
+										-0.2824
+									],
+									"rotation":[
+										0.06449641,
+										-0.0684026,
+										0.5333717,
+										-0.8406402
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":454,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2468,
+										0.1474,
+										0.3008
+									],
+									"rotation":[
+										-0.3094208,
+										-0.001106456,
+										0.27075,
+										-0.9115657
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":455,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1868,
+										0.2024,
+										-0.3342
+									],
+									"rotation":[
+										0.01286194,
+										-0.04869536,
+										0.3683336,
+										-0.9283285
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":456,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.1924,
+										0.2082,
+										-0.3856
+									],
+									"rotation":[
+										-0.009930551,
+										-0.058502,
+										0.4833162,
+										-0.8734326
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":457,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.222,
+										0.196,
+										-0.443
+									],
+									"rotation":[
+										-0.1815222,
+										-0.06195993,
+										0.289381,
+										-0.9378003
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":458,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.203,
+										0.2561,
+										-0.4897
+									],
+									"rotation":[
+										-0.1211025,
+										-0.06955283,
+										0.4348327,
+										-0.8896163
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":459,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3028,
+										0.1246,
+										0.0132
+									],
+									"rotation":[
+										-0.03098995,
+										-0.06741358,
+										0.5435929,
+										-0.8360633
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":460,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2644,
+										0.1058,
+										-0.0464
+									],
+									"rotation":[
+										-0.2419101,
+										-0.116917,
+										0.2666092,
+										-0.9255969
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":461,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2604,
+										0.1028,
+										0.0526
+									],
+									"rotation":[
+										-0.2801607,
+										-0.01475859,
+										0.1580442,
+										-0.9467388
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":462,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2756,
+										0.1242,
+										-0.0936
+									],
+									"rotation":[
+										-0.1929386,
+										-0.05184035,
+										0.3273374,
+										-0.9235461
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":463,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3092,
+										0.1494,
+										0.1148
+									],
+									"rotation":[
+										-0.0179666,
+										-0.03785038,
+										0.1949557,
+										-0.9799168
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":464,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2612,
+										0.1234,
+										-0.1472
+									],
+									"rotation":[
+										-0.2746071,
+										-0.05463869,
+										0.213662,
+										-0.9359242
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":465,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2668,
+										0.1276,
+										0.1542
+									],
+									"rotation":[
+										-0.2284808,
+										-0.05272076,
+										0.4908702,
+										-0.839085
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":466,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2812,
+										0.1484,
+										-0.1922
+									],
+									"rotation":[
+										-0.1613857,
+										-0.0731607,
+										0.3091846,
+										-0.9343485
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":467,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.326,
+										0.182,
+										0.219
+									],
+									"rotation":[
+										0.0650577,
+										-0.0114158,
+										-0.06110177,
+										-0.9959437
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":468,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2996,
+										0.1722,
+										-0.2376
+									],
+									"rotation":[
+										-0.0617528,
+										-0.0539697,
+										0.3589445,
+										-0.9297487
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":469,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.306,
+										0.177,
+										0.264
+									],
+									"rotation":[
+										-0.0197722,
+										-0.07027363,
+										0.4674079,
+										-0.8810225
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":470,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3012,
+										0.1834,
+										-0.2872
+									],
+									"rotation":[
+										-0.06293181,
+										-0.04087606,
+										0.1574619,
+										-0.9846698
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":471,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.2772,
+										0.1654,
+										0.3068
+									],
+									"rotation":[
+										-0.185359,
+										-0.03491864,
+										0.29167,
+										-0.9377374
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":472,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3068,
+										0.1976,
+										-0.3358
+									],
+									"rotation":[
+										-0.004856318,
+										-0.07071418,
+										0.5924078,
+										-0.8025142
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":473,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3196,
+										0.2172,
+										-0.3826
+									],
+									"rotation":[
+										0.04609481,
+										-0.05797082,
+										0.3328085,
+										-0.9400815
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":474,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2584,
+										0.1432,
+										0.0604
+									],
+									"rotation":[
+										-0.0995918,
+										-0.05851293,
+										0.4395726,
+										-0.890749
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":475,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.272,
+										0.143,
+										0.107
+									],
+									"rotation":[
+										-0.1634336,
+										-0.1019223,
+										0.4776959,
+										-0.8571512
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":476,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2584,
+										0.1632,
+										0.1604
+									],
+									"rotation":[
+										-0.09366769,
+										-0.0643518,
+										0.5194899,
+										-0.8468857
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":477,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.276,
+										0.16,
+										0.206
+									],
+									"rotation":[
+										-0.2109688,
+										-0.03679693,
+										0.1260875,
+										-0.968628
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":478,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2752,
+										0.1806,
+										-0.2938
+									],
+									"rotation":[
+										-0.2063706,
+										-0.03643633,
+										0.1346837,
+										-0.968475
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":479,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2896,
+										0.1798,
+										-0.3474
+									],
+									"rotation":[
+										-0.2663261,
+										-0.02274022,
+										0.3953291,
+										-0.8787879
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":480,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.26,
+										0.212,
+										-0.39
+									],
+									"rotation":[
+										-0.09791517,
+										-0.07272223,
+										0.5735984,
+										-0.8100055
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":481,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.264,
+										0.219,
+										-0.441
+									],
+									"rotation":[
+										-0.1464656,
+										-0.03839052,
+										0.1293387,
+										-0.9799722
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":482,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2496,
+										0.2398,
+										-0.4874
+									],
+									"rotation":[
+										-0.06240708,
+										-0.04610246,
+										0.2724144,
+										-0.9590466
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":483,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.304,
+										0.105,
+										0.001
+									],
+									"rotation":[
+										-0.2872572,
+										-0.1125625,
+										0.5382215,
+										-0.7843027
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":484,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.356,
+										0.154,
+										-0.036
+									],
+									"rotation":[
+										-0.03304231,
+										-0.05962743,
+										0.2660047,
+										-0.9615583
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":485,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3568,
+										0.1546,
+										0.0642
+									],
+									"rotation":[
+										-0.03634071,
+										-0.02344583,
+										0.08862123,
+										-0.9951261
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":486,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.352,
+										0.161,
+										-0.087
+									],
+									"rotation":[
+										-0.05912006,
+										-0.03798948,
+										0.1446064,
+										-0.9869907
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":487,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.348,
+										0.158,
+										0.112
+									],
+									"rotation":[
+										-0.04712218,
+										-0.07647747,
+										0.6518146,
+										-0.7530395
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":488,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3512,
+										0.1704,
+										-0.1372
+									],
+									"rotation":[
+										-0.05318625,
+										-0.05000856,
+										0.3834005,
+										-0.9206924
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":489,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3336,
+										0.1572,
+										0.1584
+									],
+									"rotation":[
+										-0.1458957,
+										-0.06839664,
+										0.3831983,
+										-0.9095029
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":490,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3112,
+										0.1504,
+										-0.1972
+									],
+									"rotation":[
+										-0.2654124,
+										0.003737926,
+										0.2725791,
+										-0.9247935
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":491,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3176,
+										0.1552,
+										0.2044
+									],
+									"rotation":[
+										-0.239199,
+										-0.04490016,
+										0.2568991,
+										-0.9352918
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":492,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3224,
+										0.1688,
+										-0.2444
+									],
+									"rotation":[
+										-0.1900876,
+										-0.07583611,
+										0.5987864,
+										-0.7743194
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":493,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3304,
+										0.1748,
+										0.2576
+									],
+									"rotation":[
+										-0.1637779,
+										-0.07764243,
+										0.3334931,
+										-0.9251653
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":494,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3296,
+										0.1842,
+										-0.2926
+									],
+									"rotation":[
+										-0.1843192,
+										-0.03903866,
+										-0.0004786029,
+										-0.9820908
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":495,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3184,
+										0.1758,
+										0.3046
+									],
+									"rotation":[
+										-0.2188542,
+										-0.1051483,
+										0.4177171,
+										-0.8755336
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":496,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2996,
+										0.1668,
+										0.0626
+									],
+									"rotation":[
+										-0.06363216,
+										-0.04495644,
+										0.242928,
+										-0.9669104
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":497,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3356,
+										0.1498,
+										0.1036
+									],
+									"rotation":[
+										-0.2486047,
+										-0.009118811,
+										0.3090395,
+										-0.9179364
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":498,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3028,
+										0.1844,
+										0.1618
+									],
+									"rotation":[
+										-0.06397656,
+										-0.0678212,
+										0.5112002,
+										-0.8543897
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":499,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2932,
+										0.2016,
+										0.2142
+									],
+									"rotation":[
+										-0.01459268,
+										-0.06060567,
+										0.4757047,
+										-0.8773932
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":500,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.33,
+										0.184,
+										0.255
+									],
+									"rotation":[
+										-0.235137,
+										-0.03797653,
+										0.03131028,
+										-0.9707153
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":501,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2788,
+										0.2324,
+										-0.2822
+									],
+									"rotation":[
+										0.05320591,
+										-0.04887902,
+										0.3042721,
+										-0.9498413
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":502,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2876,
+										0.2358,
+										-0.3344
+									],
+									"rotation":[
+										-0.001847327,
+										-0.04438593,
+										0.1593487,
+										-0.9862223
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":503,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.298,
+										0.238,
+										-0.387
+									],
+									"rotation":[
+										-0.0264765,
+										-0.07380224,
+										0.6413378,
+										-0.7632418
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":504,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2788,
+										0.2624,
+										-0.4322
+									],
+									"rotation":[
+										0.04838923,
+										-0.05770303,
+										0.2199636,
+										-0.972597
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":505,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.2844,
+										0.2682,
+										-0.4836
+									],
+									"rotation":[
+										0.02036515,
+										-0.03079987,
+										0.3077766,
+										-0.950742
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":506,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3772,
+										0.1394,
+										0.0068
+									],
+									"rotation":[
+										-0.1701145,
+										-0.08985582,
+										0.5013817,
+										-0.8435659
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":507,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3692,
+										0.1434,
+										-0.0452
+									],
+									"rotation":[
+										-0.2154737,
+										-0.09184706,
+										0.4616563,
+										-0.855575
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":508,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.4084,
+										0.1728,
+										0.0646
+									],
+									"rotation":[
+										-0.02304957,
+										-0.03288177,
+										0.1955717,
+										-0.979867
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":509,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3852,
+										0.1654,
+										-0.0912
+									],
+									"rotation":[
+										-0.1557845,
+										-0.02865501,
+										-0.03968542,
+										-0.9865776
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":510,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3916,
+										0.1702,
+										0.1104
+									],
+									"rotation":[
+										-0.1089599,
+										-0.05857348,
+										0.2555728,
+										-0.9588428
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":511,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3564,
+										0.1538,
+										0.1516
+									],
+									"rotation":[
+										-0.2841583,
+										0.0175072,
+										0.3176683,
+										-0.9044526
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":512,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3684,
+										0.1728,
+										-0.1954
+									],
+									"rotation":[
+										-0.228076,
+										-0.04639472,
+										0.3754883,
+										-0.8971273
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":513,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3796,
+										0.1812,
+										0.2074
+									],
+									"rotation":[
+										-0.1545317,
+										-0.09925588,
+										0.4933199,
+										-0.8502375
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":514,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.4108,
+										0.2146,
+										-0.2348
+									],
+									"rotation":[
+										-0.005220532,
+										-0.06675261,
+										0.3018979,
+										-0.9509861
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":515,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.3548,
+										0.1726,
+										0.2512
+									],
+									"rotation":[
+										-0.2851921,
+										-0.1076329,
+										0.5212986,
+										-0.7970749
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":516,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3848,
+										0.1574,
+										0.0538
+									],
+									"rotation":[
+										-0.247972,
+										-0.09451415,
+										0.1169232,
+										-0.9570298
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":517,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.356,
+										0.189,
+										0.111
+									],
+									"rotation":[
+										-0.07388881,
+										-0.07568021,
+										0.5979076,
+										-0.7945562
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":518,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3464,
+										0.2062,
+										0.1634
+									],
+									"rotation":[
+										-0.04547531,
+										-0.0407659,
+										0.2849219,
+										-0.9566032
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":519,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3512,
+										0.2126,
+										0.2122
+									],
+									"rotation":[
+										-0.0719589,
+										-0.04771006,
+										0.2471816,
+										-0.965115
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":520,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3784,
+										0.2022,
+										0.2554
+									],
+									"rotation":[
+										-0.2171916,
+										-0.07993195,
+										0.1180187,
+										-0.9656657
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":521,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3432,
+										0.2486,
+										-0.3358
+									],
+									"rotation":[
+										0.002459675,
+										-0.07249993,
+										0.6696815,
+										-0.7390971
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":522,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3392,
+										0.2616,
+										-0.3848
+									],
+									"rotation":[
+										-0.007803291,
+										-0.02647337,
+										0.3302805,
+										-0.9434793
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":523,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3424,
+										0.2692,
+										-0.4356
+									],
+									"rotation":[
+										-0.02590572,
+										-0.05629846,
+										0.2278665,
+										-0.9717183
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":524,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3712,
+										0.2576,
+										-0.4928
+									],
+									"rotation":[
+										-0.1580514,
+										-0.07891543,
+										0.5720798,
+										-0.8009475
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":525,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.4032,
+										0.1484,
+										-0.0492
+									],
+									"rotation":[
+										-0.3021992,
+										-0.03835443,
+										0.4453434,
+										-0.8419465
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":526,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.4128,
+										0.1856,
+										-0.1968
+									],
+									"rotation":[
+										-0.271917,
+										-0.0386812,
+										0.07500171,
+										-0.9586134
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":527,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.3716,
+										0.2318,
+										0.1196
+									],
+									"rotation":[
+										0.07673349,
+										-0.001015782,
+										-0.1034665,
+										-0.9916681
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":528,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4028,
+										0.2184,
+										0.1618
+									],
+									"rotation":[
+										-0.07871985,
+										-0.05036511,
+										0.2851281,
+										-0.9539227
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":529,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.446,
+										0.216,
+										-0.299
+									],
+									"rotation":[
+										-0.2968466,
+										-0.06984352,
+										0.4730557,
+										-0.8265727
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":530,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4436,
+										0.2178,
+										0.3016
+									],
+									"rotation":[
+										-0.3034574,
+										-0.03727132,
+										0.1306598,
+										-0.9431079
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":531,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4212,
+										0.2446,
+										-0.3428
+									],
+									"rotation":[
+										-0.1828849,
+										-0.05417122,
+										0.1630202,
+										-0.9680099
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":532,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.406,
+										0.266,
+										-0.389
+									],
+									"rotation":[
+										-0.0779053,
+										-0.07287808,
+										0.5517664,
+										-0.8271478
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":533,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4268,
+										0.2604,
+										-0.4442
+									],
+									"rotation":[
+										-0.1980471,
+										-0.07249537,
+										0.4411609,
+										-0.8722951
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":534,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4444,
+										0.2572,
+										-0.4986
+									],
+									"rotation":[
+										-0.2943643,
+										-0.1100737,
+										0.1996811,
+										-0.9280953
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":535,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.472,
+										0.211,
+										0.107
+									],
+									"rotation":[
+										-0.167004,
+										-0.1042333,
+										0.3431175,
+										-0.918431
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":536,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4744,
+										0.2192,
+										0.1564
+									],
+									"rotation":[
+										-0.1941815,
+										-0.07941775,
+										0.1779664,
+										-0.9614127
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":537,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4768,
+										0.2274,
+										0.2058
+									],
+									"rotation":[
+										-0.1815947,
+										-0.08539787,
+										0.6387862,
+										-0.7427535
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":538,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4576,
+										0.2518,
+										0.2606
+									],
+									"rotation":[
+										-0.09470353,
+										-0.05699588,
+										0.443561,
+										-0.8894023
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":539,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4512,
+										0.2766,
+										-0.3378
+									],
+									"rotation":[
+										-0.08027414,
+										-0.03027205,
+										0.03686636,
+										-0.9956307
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":540,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4872,
+										0.2596,
+										-0.3968
+									],
+									"rotation":[
+										-0.2686358,
+										-0.06110325,
+										0.1243358,
+										-0.953227
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":541,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.4368,
+										0.3074,
+										-0.4342
+									],
+									"rotation":[
+										0.004538537,
+										-0.05158555,
+										0.2099432,
+										-0.9763412
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
+												]
+											}
+										],
+										"isTrigger":true
+									}
+								],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":542,
+								"props":{
+									"name":"Beard",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.452,
+										0.306,
+										-0.488
+									],
+									"rotation":[
+										-0.05670127,
+										-0.06967257,
+										0.5479469,
+										-0.8316759
+									],
+									"scale":[
+										10.00001,
+										10,
+										6.000003
+									],
+									"meshPath":"Assets/Beard/huxvtoufa-Cylinder008.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/Beard/huxvtoufa.lmat"
+										}
+									]
+								},
+								"components":[
+									{
+										"type":"Rigidbody3D",
+										"mass":1,
+										"isKinematic":true,
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"linearDamping":0,
+										"angularDamping":0,
+										"overrideGravity":false,
+										"gravity":[
+											0,
+											0,
+											0
+										],
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													0.0003959202,
+													2.182261E-09,
+													0.01532135
+												],
+												"size":[
+													0.002375524,
+													0.002743021,
+													0.03064271
 												]
 											}
 										],
@@ -23854,7 +33024,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":402,
+						"instanceID":543,
 						"props":{
 							"name":"MiddleBeard",
 							"active":true,
@@ -23878,1712 +33048,11 @@
 							]
 						},
 						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":403,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":404,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										-0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":405,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":406,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										-0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":407,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":408,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":409,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										-0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":410,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":411,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										-0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":412,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":413,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":414,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										-0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":415,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":416,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										-0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":417,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":418,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":419,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										-0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":420,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":421,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										-0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":422,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":423,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":424,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										-0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":425,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0.1
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":426,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										-0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":427,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0.2
-									],
-									"rotation":[
-										0,
-										0,
-										0,
-										-1
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							}
-						]
+						"child":[]
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":428,
+						"instanceID":544,
 						"props":{
 							"name":"UpRightBeard",
 							"active":true,
@@ -25607,1712 +33076,11 @@
 							]
 						},
 						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":429,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":430,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":431,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":432,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":433,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":434,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":435,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":436,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":437,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":438,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":439,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":440,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":441,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":442,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":443,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":444,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":445,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":446,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":447,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":448,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":449,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":450,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":451,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0.1
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":452,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":453,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0.2
-									],
-									"rotation":[
-										-4.040082E-09,
-										0.3549075,
-										1.064243E-08,
-										-0.9349014
-									],
-									"scale":[
-										0.02000001,
-										0.3000001,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							}
-						]
+						"child":[]
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":454,
+						"instanceID":545,
 						"props":{
 							"name":"UpLeftBeard",
 							"active":true,
@@ -27336,1712 +33104,11 @@
 							]
 						},
 						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":455,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":456,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":457,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":458,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":459,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										0,
-										0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":460,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":461,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":462,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":463,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":464,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										0,
-										0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":465,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":466,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":467,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":468,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":469,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										0,
-										0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":470,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":471,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":472,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":473,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":474,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										0,
-										0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":475,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":476,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										-0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":477,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0.1
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":478,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										-0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":479,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.2,
-										0,
-										0.2
-									],
-									"rotation":[
-										-1.894251E-10,
-										0.3549075,
-										4.989857E-10,
-										-0.9349014
-									],
-									"scale":[
-										0.02,
-										0.3000001,
-										0.02000001
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							}
-						]
+						"child":[]
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":480,
+						"instanceID":546,
 						"props":{
 							"name":"LeftBeard",
 							"active":true,
@@ -29065,8920 +33132,11 @@
 							]
 						},
 						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":481,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.15,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":482,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.18,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":483,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.21,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":484,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.24,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":485,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.27,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":486,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.3,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":487,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.33,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":488,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0,
-										-0.36,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":489,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.16,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":490,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.19,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":491,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.22,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":492,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.25,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":493,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.28,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":494,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.31,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":495,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.34,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":496,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.05,
-										-0.37,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":497,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.16,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":498,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.19,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":499,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.22,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":500,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.25,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":501,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.28,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":502,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.31,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":503,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.34,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":504,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.05,
-										-0.37,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":505,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.17,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":506,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.2,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":507,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.23,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":508,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.26,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":509,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.29,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":510,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.32,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":511,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.35,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":512,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.1,
-										-0.38,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":513,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										-0.2,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":514,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										-0.23,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":515,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										-0.26,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":516,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										-0.29,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":517,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										-0.32,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":518,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										-0.1,
-										-0.38,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":519,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.18,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":520,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.21,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":521,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.24,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":522,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.27,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":523,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.3,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":524,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.33,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":525,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.36,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":526,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.15,
-										-0.39,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":527,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.22,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":528,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.25,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":529,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.28,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":530,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.31,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":531,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.34,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":532,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.37,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":533,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.2,
-										-0.4,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":534,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.23,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":535,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.26,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":536,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.29,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":537,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.32,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":538,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.35,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":539,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.38,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":540,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.25,
-										-0.41,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":541,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.24,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":542,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.27,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":543,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.3,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":544,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.33,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":545,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.36,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":546,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.39,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":547,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.3,
-										-0.42,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":548,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.436,
-										-0.145,
-										0.159
-									],
-									"rotation":[
-										-0.1140039,
-										-0.07982641,
-										0.5679945,
-										-0.8111801
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":549,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.37,
-										-0.182,
-										0.239
-									],
-									"rotation":[
-										-0.1703113,
-										-0.1192533,
-										0.5610424,
-										-0.8012516
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":550,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.25,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":551,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.28,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":552,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.31,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":553,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.34,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":554,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.37,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":555,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.4,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":556,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.35,
-										-0.43,
-										0.6
-									],
-									"rotation":[
-										-0.6087487,
-										-0.4262504,
-										0.3837975,
-										-0.5481197
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":557,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.433,
-										-0.222,
-										0.282
-									],
-									"rotation":[
-										-0.1703113,
-										-0.1192533,
-										0.5610424,
-										-0.8012516
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":558,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.2,
-										0.2
-									],
-									"rotation":[
-										-0.2257889,
-										-0.1580991,
-										0.5513571,
-										-0.7874195
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":559,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.23,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":560,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.26,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":561,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.29,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":562,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.32,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":563,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.35,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":564,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.38,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":565,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.4,
-										-0.41,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":566,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.09,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":567,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.12,
-										-0.05
-									],
-									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":568,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.12,
-										0.05
-									],
-									"rotation":[
-										-0.05714116,
-										-0.04001067,
-										0.5721793,
-										-0.8171567
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":569,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.15,
-										0.1
-									],
-									"rotation":[
-										-0.1140039,
-										-0.07982641,
-										0.5679945,
-										-0.8111801
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":570,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.18,
-										0.15
-									],
-									"rotation":[
-										-0.1703113,
-										-0.1192533,
-										0.5610424,
-										-0.8012516
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":571,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.21,
-										0.2
-									],
-									"rotation":[
-										-0.2257889,
-										-0.1580991,
-										0.5513571,
-										-0.7874195
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":572,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.24,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":573,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.27,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":574,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.3,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":575,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.33,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":576,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.36,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":577,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.39,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":578,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.45,
-										-0.42,
-										0.55
-									],
-									"rotation":[
-										-0.5690309,
-										-0.3984397,
-										0.4125964,
-										-0.5892487
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":579,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.09999999,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":580,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.13,
-										-0.05
-									],
-									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":581,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.13,
-										0.05
-									],
-									"rotation":[
-										-0.05714116,
-										-0.04001067,
-										0.5721793,
-										-0.8171567
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":582,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.16,
-										-0.1
-									],
-									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":583,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.16,
-										0.1
-									],
-									"rotation":[
-										-0.1140039,
-										-0.07982641,
-										0.5679945,
-										-0.8111801
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":584,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.19,
-										-0.15
-									],
-									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":585,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.19,
-										0.15
-									],
-									"rotation":[
-										-0.1703113,
-										-0.1192533,
-										0.5610424,
-										-0.8012516
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":586,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.22,
-										0.2
-									],
-									"rotation":[
-										-0.2257889,
-										-0.1580991,
-										0.5513571,
-										-0.7874195
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":587,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.25,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":588,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.28,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":589,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.31,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":590,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.34,
-										0.4
-									],
-									"rotation":[
-										-0.4340844,
-										-0.3039492,
-										0.4864204,
-										-0.6946803
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":591,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.37,
-										0.45
-									],
-									"rotation":[
-										-0.4814855,
-										-0.3371398,
-										0.4640331,
-										-0.6627079
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":592,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.5,
-										-0.4,
-										0.5
-									],
-									"rotation":[
-										-0.5265408,
-										-0.3686878,
-										0.4393851,
-										-0.6275069
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":593,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.11,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":594,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.14,
-										-0.05
-									],
-									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":595,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.14,
-										0.05
-									],
-									"rotation":[
-										-0.05714116,
-										-0.04001067,
-										0.5721793,
-										-0.8171567
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":596,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.17,
-										-0.1
-									],
-									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":597,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.17,
-										0.1
-									],
-									"rotation":[
-										-0.1140039,
-										-0.07982641,
-										0.5679945,
-										-0.8111801
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":598,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.2,
-										-0.15
-									],
-									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":599,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.2,
-										0.15
-									],
-									"rotation":[
-										-0.1703113,
-										-0.1192533,
-										0.5610424,
-										-0.8012516
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":600,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.23,
-										0.2
-									],
-									"rotation":[
-										-0.2257889,
-										-0.1580991,
-										0.5513571,
-										-0.7874195
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":601,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.26,
-										0.25
-									],
-									"rotation":[
-										-0.2801665,
-										-0.1961747,
-										0.5389856,
-										-0.7697512
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":602,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.29,
-										0.3
-									],
-									"rotation":[
-										-0.3331791,
-										-0.2332946,
-										0.5239881,
-										-0.7483326
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":603,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.55,
-										-0.32,
-										0.35
-									],
-									"rotation":[
-										-0.3845686,
-										-0.2692778,
-										0.506438,
-										-0.7232683
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":604,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.12,
-										0
-									],
-									"rotation":[
-										0,
-										0,
-										0.5735765,
-										-0.8191521
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":605,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.15,
-										-0.05
-									],
-									"rotation":[
-										0.02858799,
-										0.02001753,
-										0.573227,
-										-0.818653
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":606,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.15,
-										0.05
-									],
-									"rotation":[
-										-0.05714116,
-										-0.04001067,
-										0.5721793,
-										-0.8171567
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":607,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.18,
-										-0.1
-									],
-									"rotation":[
-										0.08562471,
-										0.05995506,
-										0.5704343,
-										-0.8146647
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":608,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.18,
-										0.1
-									],
-									"rotation":[
-										-0.1140039,
-										-0.07982641,
-										0.5679945,
-										-0.8111801
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":609,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.21,
-										-0.15
-									],
-									"rotation":[
-										0.1422443,
-										0.09960051,
-										0.5648625,
-										-0.8067073
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":610,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.21,
-										0.15
-									],
-									"rotation":[
-										-0.1703113,
-										-0.1192533,
-										0.5610424,
-										-0.8012516
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							},
-							{
-								"type":"MeshSprite3D",
-								"instanceID":611,
-								"props":{
-									"name":"Beard",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.6,
-										-0.24,
-										0.2
-									],
-									"rotation":[
-										-0.2257889,
-										-0.1580991,
-										0.5513571,
-										-0.7874195
-									],
-									"scale":[
-										0.02,
-										0.3,
-										0.02
-									],
-									"meshPath":"Library/unity default resources-Cube.lm",
-									"enableRender":true,
-									"materials":[
-										{
-											"path":"Assets/Material/beard.lmat"
-										}
-									]
-								},
-								"components":[
-									{
-										"type":"Rigidbody3D",
-										"mass":1,
-										"isKinematic":true,
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"linearDamping":0,
-										"angularDamping":0,
-										"overrideGravity":false,
-										"gravity":[
-											0,
-											0,
-											0
-										],
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													0,
-													0,
-													0
-												],
-												"size":[
-													1,
-													1,
-													1
-												]
-											}
-										],
-										"isTrigger":true
-									}
-								],
-								"child":[]
-							}
-						]
+						"child":[]
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":612,
+						"instanceID":547,
 						"props":{
 							"name":"StandardParent",
 							"active":true,
@@ -38005,7 +33163,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":613,
+								"instanceID":548,
 								"props":{
 									"name":"standard",
 									"active":true,
@@ -38064,7 +33222,7 @@
 							},
 							{
 								"type":"Sprite3D",
-								"instanceID":614,
+								"instanceID":549,
 								"props":{
 									"name":"GameObject",
 									"active":true,
@@ -38091,7 +33249,7 @@
 								"child":[
 									{
 										"type":"MeshSprite3D",
-										"instanceID":615,
+										"instanceID":550,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38126,7 +33284,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":616,
+										"instanceID":551,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38161,7 +33319,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":617,
+										"instanceID":552,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38196,7 +33354,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":618,
+										"instanceID":553,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38231,7 +33389,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":619,
+										"instanceID":554,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38266,7 +33424,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":620,
+										"instanceID":555,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38301,7 +33459,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":621,
+										"instanceID":556,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38336,7 +33494,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":622,
+										"instanceID":557,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38371,7 +33529,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":623,
+										"instanceID":558,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38406,7 +33564,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":624,
+										"instanceID":559,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38441,7 +33599,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":625,
+										"instanceID":560,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38476,7 +33634,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":626,
+										"instanceID":561,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38511,7 +33669,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":627,
+										"instanceID":562,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38546,7 +33704,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":628,
+										"instanceID":563,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38581,7 +33739,7 @@
 									},
 									{
 										"type":"MeshSprite3D",
-										"instanceID":629,
+										"instanceID":564,
 										"props":{
 											"name":"standard",
 											"active":true,
@@ -38617,472 +33775,6 @@
 								]
 							}
 						]
-					}
-				]
-			},
-			{
-				"type":"Sprite3D",
-				"instanceID":630,
-				"props":{
-					"name":"HeadDecoration",
-					"active":true,
-					"isStatic":false,
-					"layer":0,
-					"position":[
-						0.215,
-						94.761,
-						6.603
-					],
-					"rotation":[
-						0,
-						0,
-						0,
-						-1
-					],
-					"scale":[
-						1,
-						1,
-						1
-					]
-				},
-				"components":[],
-				"child":[
-					{
-						"type":"MeshSprite3D",
-						"instanceID":631,
-						"props":{
-							"name":"anquanmao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.132,
-								-0.05,
-								0.0003251864
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/HeadDecoration/anquanmao/anquanmao-Sphere001.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/HeadDecoration/anquanmao/anquanmao.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":632,
-						"props":{
-							"name":"yanshemao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.305,
-								-0.149,
-								0.002912065
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/HeadDecoration/yanshemao/yanshemao-head_brown_0.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/HeadDecoration/yanshemao/yanshemao.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":633,
-						"props":{
-							"name":"yanshemao_shijie",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.305,
-								-0.149,
-								0.002912065
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/HeadDecoration/yanshemao_shijie/yanshemao_shijie-head_brown_0.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/HeadDecoration/yanshemao_shijie/yanshemao_shijie.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":634,
-						"props":{
-							"name":"yanshemao_gangtie",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0.305,
-								-0.149,
-								0.002912065
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/HeadDecoration/yanshemao_gangtie/yanshemao_gangtie-head_brown_0.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/HeadDecoration/yanshemao_gangtie/yanshemao_gangtie.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":635,
-						"props":{
-							"name":"xiaochoumao",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								-0.503,
-								-0.0008912063
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/HeadDecoration/xiaochoumao/xiaochoumao-Object015.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/HeadDecoration/xiaochoumao/xiaochoumao.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":636,
-						"props":{
-							"name":"maomaozi",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.5,
-								-0.11,
-								0.002912065
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/HeadDecoration/maomaozi/maomaozi-Object016.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/HeadDecoration/maomaozi/maomaozi.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					}
-				]
-			},
-			{
-				"type":"Sprite3D",
-				"instanceID":637,
-				"props":{
-					"name":"EyeDecoration",
-					"active":true,
-					"isStatic":false,
-					"layer":0,
-					"position":[
-						1.005,
-						94.044,
-						6.605912
-					],
-					"rotation":[
-						0,
-						0,
-						0,
-						-1
-					],
-					"scale":[
-						1,
-						1,
-						1
-					]
-				},
-				"components":[
-					{
-						"type":"PhysicsCollider",
-						"restitution":0,
-						"friction":0.5,
-						"rollingFriction":0,
-						"shapes":[
-							{
-								"type":"BoxColliderShape",
-								"center":[
-									0,
-									0,
-									0
-								],
-								"size":[
-									1,
-									1,
-									1
-								]
-							}
-						],
-						"isTrigger":false
-					}
-				],
-				"child":[
-					{
-						"type":"MeshSprite3D",
-						"instanceID":638,
-						"props":{
-							"name":"yuanyanjing",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.042,
-								-0.126,
-								-0.038
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/EyeDecoration/yuanyanjing/yuanyanjing-Object014.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/EyeDecoration/yuanyanjing/yuanyanjing.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":639,
-						"props":{
-							"name":"xingxingyanjing",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.042,
-								-0.145,
-								-0.038
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/EyeDecoration/xingxingyanjing/xingxingyanjing-Box001.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/EyeDecoration/xingxingyanjing/xingxingyanjing.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":640,
-						"props":{
-							"name":"jiemao_02",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.092,
-								-0.129,
-								-0.038
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/EyeDecoration/jiemao_02/jiemao_02-Plane168.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/EyeDecoration/jiemao_02/jiemao_02.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":641,
-						"props":{
-							"name":"hamajing",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.042,
-								-0.018,
-								-0.038
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/EyeDecoration/hamajing/hamajing-Line001.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/EyeDecoration/hamajing/hamajing.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":642,
-						"props":{
-							"name":"jiemao_01",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.042,
-								-0.07,
-								-0.038
-							],
-							"rotation":[
-								0.5,
-								-0.5,
-								-0.5,
-								-0.5
-							],
-							"scale":[
-								100,
-								100,
-								100
-							],
-							"meshPath":"Assets/EyeDecoration/jiemao_01/jiemao_01-EyeLashes_Grl_R_001.lm",
-							"enableRender":true,
-							"materials":[
-								{
-									"path":"Assets/EyeDecoration/jiemao_01/jiemao_01.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
 					}
 				]
 			}
