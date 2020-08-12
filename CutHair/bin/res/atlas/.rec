@@ -161,6 +161,7 @@ P B7535474 qiandui.png
 P FA08FDE4 sanbei.png
 P 516ED890 txt_zhijie.png
 P 63B58DAD 标题.png
+D UI/EasterEgg_Aotoman
 D UI/GameMain
 P C942384B bai.png
 P F5FCFD0A hui.png
@@ -311,6 +312,48 @@ R BE7B7D82 shop.png
 R 827F5BCD Task.png
 R B59D3434 victory.png
 R 2D221A41 XDSkin.png
+D UI/EasterEgg_Aotoman/Congratulation
+P 907EDAED 3.png
+R B2EF2CDE biaoti.png
+R 7162CBA2 bj.png
+P 95110F81 queding.png
+R 66957F45 tiantong.png
+P ECBF8410 tiantong1.png
+P E51D2ED9 txt_xiandan.png
+P 2488D3DD txt_yuansu.png
+R 02A94AC2 txt_zhenbang.png
+D UI/EasterEgg_Aotoman/GameStart
+P B54C7443 renwu_xiao.png
+P 5AFD7362 zhazi_2.png
+P 4C9DA2A8 zhuazi_1.png
+P 36A9AB19 zhujiem.png
+D UI/EasterEgg_Aotoman/Hint
+P 1A028CA9 zi.png
+D UI/EasterEgg_Aotoman/Task
+P B64B6B76 1.png
+P ED487F41 2.png
+P 907EDAED 3.png
+P 8A33F7E1 4.png
+P 59EA8677 5.png
+P 81E34674 aniu2.png
+P 76D773B6 anniu1.png
+R 537C55F2 bj.png
+P A8C0C85F kuang.png
+P DE5DD2C2 qianwang.png
+P B54C7443 renwu_xiao.png
+P B340650D tishi.png
+P 929160EB wancheng.png
+P 819EF66D wancheng2.png
+D UI/EasterEgg_Aotoman/Unworthy
+P A0E91C23 bupei.png
+P C459E226 jieshou.png
+R 8CD136BE zi.png
+D UI/EasterEgg_Aotoman/xiaoguotu
+R 0260F7BF 38703923-E6FE-4b3a-9FBC-020C45B5C53E.png
+R 82042E76 xiaog1uo.png
+R 00C32360 xiaoguo.png
+R 0F576A66 xioaguoa.png
+R B18DB42B 奥特曼—彩蛋.png
 D UI/Share/Photo
 P 9B156950 photo_1.png
 P 9B156950 photo_10.png

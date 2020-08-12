@@ -7,7 +7,12 @@ export module GameControl {
     /**等级*/
     export let _gameLevel = {
         get value(): number {
-            return Laya.LocalStorage.getItem('_gameLevel') !== null ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+            if (Laya.LocalStorage.getItem('_gameLevel') !== null) {
+                return Number(Laya.LocalStorage.getItem('_gameLevel'));
+            } else {
+                Laya.LocalStorage.setItem('_gameLevel', (1).toString());
+                return 1;
+            }
         },
         set value(val) {
             Laya.LocalStorage.setItem('_gameLevel', val.toString());

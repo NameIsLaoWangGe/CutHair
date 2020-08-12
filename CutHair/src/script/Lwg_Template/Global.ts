@@ -5,12 +5,12 @@ export module Global {
         /**任务类型*/
         export enum TaskType {
             // 任务位置
-            sideHair = 'side',
-            leftBeard = 'left',
-            rightBeard = 'right',
-            middleBeard = 'middle',
-            upLeftBeard = 'leftTop',
-            upRightBeard = 'rightTop',
+            HairParent = 'HairParent',
+            LeftBeard = 'LeftBeard',
+            RightBeard = 'RightBeard',
+            MiddleBeard = 'MiddleBeard',
+            UpLeftBeard = 'UpLeftBeard',
+            UpRightBeard = 'UpRightBeard',
             /**移动到照相位置*/
             movePhotoLocation = 'movePhotoLocation',
         }
@@ -22,11 +22,12 @@ export module Global {
         /**事件*/
         export enum EventType {
             // 剪各个部位的毛发
-            leftBeard = 'leftBeard',
-            rightBeard = 'rightBeard',
-            middleBeard = 'middleBeard',
-            upLeftBeard = 'upLeftBeard',
-            upRightBeard = 'upRightBeard',
+            HairParent = 'HairParent',
+            LeftBeard = 'LeftBeard',
+            RightBeard = 'RightBeard',
+            MiddleBeard = 'MiddleBeard',
+            UpLeftBeard = 'UpLeftBeard',
+            UpRightBeard = 'UpRightBeard',
             taskProgress = 'taskProgress',
             // 旋转摄像机到不同任务角度
             cameraMove = 'cameraMove',
@@ -62,6 +63,8 @@ export module Global {
         export let GameMain3D: Laya.Scene3D;
         /**场景摄像机的父节点*/
         export let MainCamera: Laya.MeshSprite3D;
+        /**关卡父节点*/
+        export let LevelParent: Laya.MeshSprite3D;
         /**当前关卡节点*/
         export let LevelTem: Laya.MeshSprite3D;
         export let Level: Laya.MeshSprite3D;

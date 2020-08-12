@@ -15,20 +15,20 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
                     owner['already'] = true;
                 }
                 if (ownerParent.name === 'RightBeard') {
-                    EventAdmin.notify(GEnum.EventType.rightBeard)
+                    EventAdmin.notify(GEnum.EventType.RightBeard)
 
                 } else if (ownerParent.name === 'LeftBeard') {
-                    EventAdmin.notify(GEnum.EventType.leftBeard)
+                    EventAdmin.notify(GEnum.EventType.LeftBeard)
 
                 } else if (ownerParent.name === 'MiddleBeard') {
-                    EventAdmin.notify(GEnum.EventType.middleBeard)
+                    EventAdmin.notify(GEnum.EventType.MiddleBeard)
 
                 }
                 else if (ownerParent.name === 'UpRightBeard') {
-                    EventAdmin.notify(GEnum.EventType.upRightBeard)
+                    EventAdmin.notify(GEnum.EventType.UpRightBeard)
                 }
                 else if (ownerParent.name === 'UpLeftBeard') {
-                    EventAdmin.notify(GEnum.EventType.upLeftBeard)
+                    EventAdmin.notify(GEnum.EventType.UpLeftBeard)
                 }
 
                 other.isKinematic = false;

@@ -4,6 +4,7 @@ import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
 import { Global, GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import GameMain3D_knife from "./GameMain3D_knife";
+import { Game } from "../Lwg_Template/Game";
 export default class GameMain3D extends lwg.Admin.Scene3D {
 
     constructor() { super(); }
@@ -12,10 +13,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.GameMain3D = this.self;
         GSene3D.MainCamera = this.MainCamera;
         GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark') as Laya.MeshSprite3D;
-        GSene3D.LevelTem = this.self.getChildByName('Level1') as Laya.MeshSprite3D;
-        GSene3D.LevelFpos.x = GSene3D.LevelTem.transform.position.x;
-        GSene3D.LevelFpos.y = GSene3D.LevelTem.transform.position.y;
-        GSene3D.LevelFpos.z = GSene3D.LevelTem.transform.position.z;
+        GSene3D.LevelParent = this.self.getChildByName('LevelParent') as Laya.MeshSprite3D;
+
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
         GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle') as Laya.MeshSprite3D;
@@ -56,30 +55,44 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         GSene3D.DressUpMark = this.self.getChildByName('DressUpMark') as Laya.MeshSprite3D;
 
-        this.createLevel();
+        this.getLevelContent();
     }
 
-    /**产生关卡*/
-    createLevel(): void {
-        GSene3D.Level = GSene3D.LevelTem.clone() as Laya.MeshSprite3D;
-        this.self.addChild(GSene3D.Level);
-        GSene3D.LevelTem.removeSelf();
-    }
-
-    lwgNodeDec(): void {
-        GSene3D.HairParent = GSene3D.Level.getChildByName('HairParent') as Laya.MeshSprite3D;
-        GSene3D.LeftBeard = GSene3D.Level.getChildByName('LeftBeard') as Laya.MeshSprite3D;
-        GSene3D.RightBeard = GSene3D.Level.getChildByName('RightBeard') as Laya.MeshSprite3D;
-        GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
-        GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
-        GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
-        GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent') as Laya.MeshSprite3D;
+    /**获取当前关卡并且设置当前关卡的内容*/
+    getLevelContent(): void {
+        GSene3D.Level = null;
+        for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
+            const element = GSene3D.LevelParent.getChildAt(index) as Laya.MeshSprite3D;
+            if (Number(element.name.substring(5, element.name.length)) == Game._gameLevel.value) {
+                element.active = true;
+                GSene3D.Level = element;
+            } else {
+                element.active = false;
+            }
+        }
+        if (!GSene3D.Level) {
+            console.log('本关卡不存在');
+        } else {
+            for (let index = 0; index < GSene3D.Level.numChildren; index++) {
+                const element = GSene3D.Level.getChildAt(index);
+                if (element.name !== 'CutHairParent' && element.name !== 'StandardParent') {
+                    GVariate._taskArr.push(element.name);
+                }
+            }
+            GSene3D.HairParent = GSene3D.Level.getChildByName('HairParent') as Laya.MeshSprite3D;
+            GSene3D.LeftBeard = GSene3D.Level.getChildByName('LeftBeard') as Laya.MeshSprite3D;
+            GSene3D.RightBeard = GSene3D.Level.getChildByName('RightBeard') as Laya.MeshSprite3D;
+            GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard') as Laya.MeshSprite3D;
+            GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
+            GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
+            GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent') as Laya.MeshSprite3D;
+        }
     }
 
     lwgEventReg(): void {
         // 重来
         EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
-            this.refreshScene();
+            this.getLevelContent();
         })
         //摄像机的移动,参数为方向
         EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction: string) => {
@@ -125,7 +138,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         //换剃须刀
         EventAdmin.reg(GEnum.EventType.changeOther, this, () => {
-            console.log('换剃须刀');
+          
             for (let index = 0; index < GSene3D.knifeParent.numChildren; index++) {
                 const element = GSene3D.knifeParent.getChildAt(index) as Laya.MeshSprite3D;
                 if (element.name == Shop._currentOther.name) {
@@ -200,26 +213,45 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.Razor.addComponent(GameMain3D_Razor);
         EventAdmin.notify(GEnum.EventType.changeProp);
         EventAdmin.notify(GEnum.EventType.changeOther);
-
-        GSene3D.knife.active = false;
-        GSene3D.StandardParent.active = false;
-        GSene3D.Razor.active = false;
+        this.knifeTimeDisplay();
     }
 
-    refreshScene(): void {
-        GSene3D.Level.removeSelf();
-        this.createLevel();
-        this.lwgNodeDec();
-        GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
-        GSene3D.HairParent.active = true;
+    /**
+     * 不同剃毛状态下剃刀和刮刀的显示设置
+     * @param name 不传则是全部隐藏
+    */
+    knifeTimeDisplay(name?: string): void {
+        if (name === 'k') {
+            GSene3D.knife.active = true;
+            if (GSene3D.StandardParent) {
+                GSene3D.StandardParent.active = false;
+            }
+            GSene3D.Razor.active = false;
+
+        } else if (name === 'r') {
+            GSene3D.knife.active = false;
+            if (GSene3D.StandardParent) {
+                GSene3D.StandardParent.active = true;
+            }
+            GSene3D.Razor.active = true;
+
+        } else {
+            GSene3D.knife.active = false;
+            if (GSene3D.StandardParent) {
+                GSene3D.StandardParent.active = false;
+            }
+            GSene3D.Razor.active = false;
+        }
+
     }
 
     /**摄像机移动速度*/
     moveSpeed: number = 1000;
     /**摄像机的移动规则*/
     cameraMove(direction): void {
+        console.log('移动方向！', direction);
         switch (direction) {
-            case GEnum.TaskType.sideHair:
+            case GEnum.TaskType.HairParent:
 
                 Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this, null, () => {
                     Admin._gameStart = true;
@@ -227,12 +259,11 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
 
-                GSene3D.Razor.active = true;
-                GSene3D.knife.active = false;
-                GSene3D.StandardParent.active = true;
+                this.knifeTimeDisplay('r');
+
                 break;
 
-            case GEnum.TaskType.rightBeard:
+            case GEnum.TaskType.RightBeard:
 
                 GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
@@ -244,13 +275,11 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
 
-                GSene3D.Razor.active = false;
-                GSene3D.knife.active = true;
-                GSene3D.StandardParent.active = false;
+                this.knifeTimeDisplay('k');
 
                 break;
 
-            case GEnum.TaskType.leftBeard:
+            case GEnum.TaskType.LeftBeard:
 
                 GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
@@ -262,13 +291,12 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
 
-                GSene3D.Razor.active = false;
-                GSene3D.knife.active = true;
-                GSene3D.StandardParent.active = false;
+                this.knifeTimeDisplay('k');
+
 
                 break;
 
-            case GEnum.TaskType.middleBeard:
+            case GEnum.TaskType.MiddleBeard:
 
                 GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position
                 GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z)
@@ -280,12 +308,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
 
-                GSene3D.Razor.active = false;
-                GSene3D.knife.active = true;
-                GSene3D.StandardParent.active = false;
+                this.knifeTimeDisplay('k');
 
                 break;
-            case GEnum.TaskType.upLeftBeard:
+            case GEnum.TaskType.UpLeftBeard:
 
                 GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
                 GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
@@ -299,14 +325,11 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, euler1, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, euler1, this.moveSpeed, this);
 
-                GSene3D.Razor.active = false;
-                GSene3D.knife.active = true;
-                GSene3D.StandardParent.active = false;
-
+                this.knifeTimeDisplay('k');
 
                 break;
 
-            case GEnum.TaskType.upRightBeard:
+            case GEnum.TaskType.UpRightBeard:
                 GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
                 GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                 let Model1 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D;
@@ -319,9 +342,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
 
-                GSene3D.Razor.active = false;
-                GSene3D.knife.active = true;
-                GSene3D.StandardParent.active = false;
+                this.knifeTimeDisplay('k');
+
 
                 break;
 
@@ -335,9 +357,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 Animation3D.RotateTo(GSene3D.MainCamera, euler2, this.moveSpeed, this);
                 Animation3D.RotateTo(GSene3D.TouchScreen, euler2, this.moveSpeed, this);
 
-                GSene3D.Razor.active = false;
-                GSene3D.knife.active = false;
-                GSene3D.StandardParent.active = false;
+                this.knifeTimeDisplay();
 
                 break;
 

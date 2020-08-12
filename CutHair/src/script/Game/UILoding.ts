@@ -27,6 +27,7 @@ export default class UILoding extends Loding.LodeScene {
             "GameData/CheckIn/CheckIn.json",
             "GameData/Dialog/Dialog.json",
             "GameData/Game/GameLevel.json",
+            "GameData/EasterEgg/EasterEgg.json",
         ];
     }
 
@@ -38,13 +39,7 @@ export default class UILoding extends Loding.LodeScene {
         this.self['Mask'].x = 0;
         this.self['Shear'].x = this.self['Mask'].width;
         this.self['Per'].text = 100 + '%';
-
         this.maskMoveSwitch = false;
-
-        // 其他系统的参数初始化
-        Skin._currentEye.name = null;
-        Skin._currentHead.name = null;
-
         // 获取场景
         let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls") as Laya.Scene3D;
         Laya.stage.addChildAt(Scene3D, 0);

@@ -1,9 +1,8 @@
+import { lwgInit } from "./lwgInit";
 /**综合模板*/
 export module lwg {
     /**全局方法,全局变量，每个游戏不一样*/
     export module Global {
-
-        
 
         /**指代当前界面的钥匙数量节点*/
         export let KeyNumNode: Laya.Sprite;
@@ -955,6 +954,12 @@ export module lwg {
         /**游戏是否结束*/
         export let _gameStart: boolean = false;
 
+        /**管理数据表中的一些属性命名，数据表必须参考此命名方式*/
+        export enum JsonProperty {
+            /**当数据表艺术组形式呈现出来时， 表中属性RECORDS就代表了整个数据表数组*/
+            RECORDS = 'RECORDS',
+        }
+
         /**常用场景的名称，和脚本名称保持一致*/
         export enum SceneName {
             UILoding = 'UILoding',
@@ -998,6 +1003,10 @@ export module lwg {
             /**失败*/
             Defeated = 'defeated',
         }
+
+        /**获取一张数据表，次张数据表必须已经进行过预加载，而且命名方式必须以GameData/EasterEgg的形式命名*/
+        
+        
         /**
           * 打开界面
           * @param name 界面名称
@@ -4047,7 +4056,7 @@ export module lwg {
         export function initTask(): void {
             //如果上个日期等于今天的日期，那么从存储中获取，如果不相等则直接从数据表中获取
             if (todayData.date !== (new Date).getDate()) {
-                Task.everydayTask = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS']
+                Task.everydayTask = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS'];
                 console.log('不是同一天，每日任务重制！');
                 todayData.date = (new Date).getDate();
             } else {
@@ -4151,13 +4160,11 @@ export module lwg {
         export let defaultSkin: string;
         /**当前穿戴的皮肤*/
         export let _currentSkin = {
-            currentSkin: null,
             get name(): string {
-                return this.currentSkin = Laya.LocalStorage.getItem('Shop_currentSkin') !== null ? Laya.LocalStorage.getItem('Shop_currentSkin') : null;
+                return Laya.LocalStorage.getItem('Shop_currentSkin') ? Laya.LocalStorage.getItem('Shop_currentSkin') : null;
             },
             set name(name: string) {
-                this.currentSkin = name;
-                Laya.LocalStorage.setItem('Shop_currentSkin', this.currentSkin);
+                Laya.LocalStorage.setItem('Shop_currentSkin', name);
             }
         };
 
@@ -4169,7 +4176,7 @@ export module lwg {
         /**当前道具*/
         export let _currentProp = {
             get name(): string {
-                return Laya.LocalStorage.getItem('Shop_currentProp') !== null ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
+                return Laya.LocalStorage.getItem('Shop_currentProp') ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
             },
             set name(name: string) {
                 Laya.LocalStorage.setItem('Shop_currentProp', name);
@@ -4184,7 +4191,7 @@ export module lwg {
         /**当前使用的其他物品*/
         export let _currentOther = {
             get name(): string {
-                return Laya.LocalStorage.getItem('Shop_crrentOther') !== null ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
+                return Laya.LocalStorage.getItem('Shop_crrentOther') ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
             },
             set name(name: string) {
                 Laya.LocalStorage.setItem('Shop_crrentOther', name);
@@ -5309,6 +5316,7 @@ export module lwg {
             lwgInterior(): void {
                 Task.initTask();
                 Shop.initShop();
+                lwgInit.init();
             }
             /**任务系统中的事件注册，caller指向Task模块*/
             lodingTaskEventReg(): void {

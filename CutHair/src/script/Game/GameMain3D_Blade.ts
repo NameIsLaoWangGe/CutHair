@@ -47,7 +47,8 @@ export default class GameMain3D_Blade extends lwg.Admin.Object3D {
                         cutHairline.name = 'cutHairline';
                         let rig3D = cutHairline.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
                         rig3D.isKinematic = false;
-                        rig3D.gravity = (new Laya.Vector3(0, -3, 3));
+                        rig3D.isTrigger = true;
+                        rig3D.gravity = (new Laya.Vector3(0, -20, 0));
                         rig3D.rollingFriction = 0;
                         rig3D.restitution = 0;
 

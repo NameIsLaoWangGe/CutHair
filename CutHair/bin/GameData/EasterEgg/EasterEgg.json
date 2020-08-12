@@ -1,0 +1,197 @@
+{ 
+"RECORDS": 
+[
+  {
+    "name": "easterEgg_1",
+    "describe": "凹凸曼彩蛋",
+    "condition": [
+      "assembly1",
+      "assembly2",
+      "assembly3",
+      "assembly4",
+      "assembly5"
+    ],
+    "resCondition": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "rewardType": [
+      "assembly1",
+      "assembly2",
+      "assembly3",
+      "assembly4",
+      "assembly5"
+    ],
+    "rewardNum": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "name": "easterEgg_2",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "easterEgg_3",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  },
+  {
+    "name": "NaN",
+    "describe": "NaN",
+    "condition": [
+      null
+    ],
+    "resCondition": [
+      null
+    ],
+    "rewardType": [
+      null
+    ],
+    "rewardNum": [
+      null
+    ]
+  }
+]
+}

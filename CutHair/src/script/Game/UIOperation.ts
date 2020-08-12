@@ -17,7 +17,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     /**可以剩余毛发数量*/
     residueNum: number = 10;
     /**侧面所需理发的数量*/
-    _sideHairNum = {
+    _HairParentNum = {
         index: 0,
         sum: 0,
         switch: true,
@@ -145,7 +145,6 @@ export default class UIOperation extends lwg.Admin.Scene {
     lwgOnAwake(): void {
         GVariate._taskNum = 0;
         lwg.Admin._gameStart = true;
-        GVariate._taskArr = Game.getLevelData_Condition();
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
     }
@@ -155,7 +154,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.createTaskContent();
         this.mainCameraMove();
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
-
     }
 
     lwgEventReg(): void {
@@ -202,27 +200,27 @@ export default class UIOperation extends lwg.Admin.Scene {
         // })
 
         // 左侧胡子修剪
-        EventAdmin.reg(GEnum.EventType.leftBeard, this, () => {
+        EventAdmin.reg(GEnum.EventType.LeftBeard, this, () => {
             this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
         })
 
         // 右侧胡子修剪
-        EventAdmin.reg(GEnum.EventType.rightBeard, this, () => {
+        EventAdmin.reg(GEnum.EventType.RightBeard, this, () => {
             this._rightBeardNum.setValue = this._rightBeardNum.value - 1;
         })
 
         // 中间的胡子修剪
-        EventAdmin.reg(GEnum.EventType.middleBeard, this, () => {
+        EventAdmin.reg(GEnum.EventType.MiddleBeard, this, () => {
             this._middleBeardNum.setValue = this._middleBeardNum.value - 1;
         })
 
         // 右上角胡子修剪
-        EventAdmin.reg(GEnum.EventType.upRightBeard, this, () => {
+        EventAdmin.reg(GEnum.EventType.UpRightBeard, this, () => {
             this._upRightBeardNum.setValue = this._upRightBeardNum.value - 1;
         })
 
         // 左上角胡子修剪
-        EventAdmin.reg(GEnum.EventType.upLeftBeard, this, () => {
+        EventAdmin.reg(GEnum.EventType.UpLeftBeard, this, () => {
             this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 1;
         })
 
@@ -234,31 +232,31 @@ export default class UIOperation extends lwg.Admin.Scene {
             let sum;
             let value;
             switch (GVariate._taskArr[GVariate._taskNum]) {
-                case GEnum.TaskType.sideHair:
-                    value = this._sideHairNum.value;
-                    sum = this._sideHairNum.sum;
+                case GEnum.TaskType.HairParent:
+                    value = this._HairParentNum.value;
+                    sum = this._HairParentNum.sum;
                     break;
-                case GEnum.TaskType.leftBeard:
+                case GEnum.TaskType.LeftBeard:
                     value = this._leftBeardNum.value;
                     sum = this._leftBeardNum.sum;
 
                     break;
-                case GEnum.TaskType.rightBeard:
+                case GEnum.TaskType.RightBeard:
                     value = this._rightBeardNum.value;
                     sum = this._rightBeardNum.sum;
 
                     break;
-                case GEnum.TaskType.middleBeard:
+                case GEnum.TaskType.MiddleBeard:
                     value = this._middleBeardNum.value;
                     sum = this._middleBeardNum.sum;
 
                     break;
-                case GEnum.TaskType.upRightBeard:
+                case GEnum.TaskType.UpRightBeard:
                     value = this._upRightBeardNum.value;
                     sum = this._upRightBeardNum.sum;
 
                     break;
-                case GEnum.TaskType.upLeftBeard:
+                case GEnum.TaskType.UpLeftBeard:
                     value = this._upLeftBeardNum.value;
                     sum = this._upLeftBeardNum.sum;
 
@@ -306,29 +304,33 @@ export default class UIOperation extends lwg.Admin.Scene {
     createTaskContent(): void {
         for (let index = 0; index < GVariate._taskArr.length; index++) {
             switch (GVariate._taskArr[index]) {
-                case GEnum.TaskType.sideHair:
-                    this._sideHairNum.setValue = GSene3D.HairParent.numChildren;
-                    this._sideHairNum.sum = GSene3D.HairParent.numChildren;
-                    this._sideHairNum.index = index;
+                case GEnum.TaskType.HairParent:
+                   
+                    this._HairParentNum.setValue = GSene3D.HairParent.numChildren;
+                    this._HairParentNum.sum = GSene3D.HairParent.numChildren;
+                    this._HairParentNum.index = index;
                     this.monitorHiarLen();
-                    this._numZoder.push(this._sideHairNum);
+                    this._numZoder.push(this._HairParentNum);
 
                     break;
-                case GEnum.TaskType.leftBeard:
+                case GEnum.TaskType.LeftBeard:
+                
                     this._leftBeardNum.setValue = GSene3D.LeftBeard.numChildren;
                     this._leftBeardNum.sum = GSene3D.LeftBeard.numChildren;
                     this._leftBeardNum.index = index;
                     this._numZoder.push(this._leftBeardNum);
 
                     break;
-                case GEnum.TaskType.rightBeard:
+                case GEnum.TaskType.RightBeard:
+                  
                     this._rightBeardNum.setValue = GSene3D.RightBeard.numChildren;
                     this._rightBeardNum.sum = GSene3D.RightBeard.numChildren;
                     this._rightBeardNum.index = index;
                     this._numZoder.push(this._rightBeardNum);
 
                     break;
-                case GEnum.TaskType.middleBeard:
+                case GEnum.TaskType.MiddleBeard:
+                  
                     this._middleBeardNum.setValue = GSene3D.MiddleBeard.numChildren;
                     this._middleBeardNum.sum = GSene3D.MiddleBeard.numChildren;
                     this._middleBeardNum.index = index;
@@ -336,7 +338,8 @@ export default class UIOperation extends lwg.Admin.Scene {
 
                     break;
 
-                case GEnum.TaskType.upRightBeard:
+                case GEnum.TaskType.UpRightBeard:
+                  
                     this._upRightBeardNum.setValue = GSene3D.UpRightBeard.numChildren;
                     this._upRightBeardNum.sum = GSene3D.UpRightBeard.numChildren;
                     this._upRightBeardNum.index = index;
@@ -344,7 +347,8 @@ export default class UIOperation extends lwg.Admin.Scene {
 
                     break;
 
-                case GEnum.TaskType.upLeftBeard:
+                case GEnum.TaskType.UpLeftBeard:
+                
                     this._upLeftBeardNum.setValue = GSene3D.UpLeftBeard.numChildren;
                     this._upLeftBeardNum.sum = GSene3D.UpLeftBeard.numChildren;
                     this._upLeftBeardNum.index = index;
@@ -360,7 +364,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     /**监听每根头发的长度*/
     monitorHiarLen(): void {
-        let _sideHairNum = this._sideHairNum;
+        let _HairParentNum = this._HairParentNum;
         for (let index = 0; index < GSene3D.HairParent.numChildren; index++) {
             const element = GSene3D.HairParent.getChildAt(index) as Laya.MeshSprite3D;
             let len = element.transform.localPositionY;
@@ -375,7 +379,7 @@ export default class UIOperation extends lwg.Admin.Scene {
                         if (v < 0.19) {
                             // console.log('这根头发理完了！');
                             this.detection = false;
-                            _sideHairNum.setValue = _sideHairNum.value - 1;
+                            _HairParentNum.setValue = _HairParentNum.value - 1;
                         }
                         this.value = v;
                         // console.log('当前头发长度', this.value);
@@ -443,28 +447,28 @@ export default class UIOperation extends lwg.Admin.Scene {
             // 当前任务类型
             switch (GVariate._taskArr[GVariate._taskNum]) {
 
-                case GEnum.TaskType.sideHair:
+                case GEnum.TaskType.HairParent:
                     this.razorMove(e);
                     break;
 
-                case GEnum.TaskType.leftBeard:
+                case GEnum.TaskType.LeftBeard:
                     this.knifeMove(e);
                     break;
 
-                case GEnum.TaskType.rightBeard:
+                case GEnum.TaskType.RightBeard:
                     this.knifeMove(e);
                     break;
 
-                case GEnum.TaskType.middleBeard:
+                case GEnum.TaskType.MiddleBeard:
                     this.knifeMove(e);
 
                     break;
-                case GEnum.TaskType.upRightBeard:
+                case GEnum.TaskType.UpRightBeard:
                     this.knifeMove(e);
 
                     break;
 
-                case GEnum.TaskType.upLeftBeard:
+                case GEnum.TaskType.UpLeftBeard:
                     this.knifeMove(e);
                     break;
                 default:
@@ -477,7 +481,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     razorMove(e): void {
         let diffX = e.stageX - this.touchPosX;
         let diffY = e.stageY - this.touchPosY;
-        
+
         this.Rocker.x += diffX;
         this.Rocker.y += diffY;
         this.touchPosX = e.stageX;
