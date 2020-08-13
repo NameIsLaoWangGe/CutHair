@@ -1,6 +1,7 @@
 import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin, Animation2D } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
+import { EasterEgg } from "../Lwg_Template/EasterEgg";
 
 export default class UIStart extends lwg.Admin.Scene {
 
@@ -19,6 +20,10 @@ export default class UIStart extends lwg.Admin.Scene {
         EventAdmin.reg(CheckIn.EventType.removeCheckBtn, this, () => {
             this.self['BtnCheck'].visible = false;
         })
+        EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
+            this.self['BtnAotuman'].visible = true;
+            this.self['EasterEgg_Aotuman'].visible = false;
+        })
     }
 
     lwgOnEnable(): void {
@@ -29,8 +34,14 @@ export default class UIStart extends lwg.Admin.Scene {
 
         this.levelStyleDisplay();
 
-        if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
+        if (Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.have)) {
             this.self['BtnXDSkin'].visible = false;
+        }
+
+        if (!EasterEgg._easterEgg_1.value) {
+            this.self['BtnAotuman'].visible = false;
+        } else {
+            this.self['EasterEgg_Aotuman'].visible = false;
         }
 
         // EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
@@ -76,7 +87,7 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgBtnClick(): void {
         Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
-            lwg.Admin._openScene(Admin.SceneName.UISkin);
+            lwg.Admin._openScene(Admin.SceneName.UIShop);
         });
 
         Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
@@ -89,6 +100,11 @@ export default class UIStart extends lwg.Admin.Scene {
 
         Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
             lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+
+        });
+
+        Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+            lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
 
         });
 
@@ -105,7 +121,7 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     onStageMouseMove(event: Laya.Event): void {
-        if (this.easterEgg_AotumanSwitch) {
+        if (this.easterEgg_AotumanSwitch && !EasterEgg._easterEgg_1.value) {
             this.self.addChild(this.self['Aotuman']);
             this.self['Aotuman'].x = event.stageX;
             this.self['Aotuman'].y = event.stageY;
@@ -127,9 +143,9 @@ export default class UIStart extends lwg.Admin.Scene {
 
                 Animation2D.simple_Rotate(this.self['LeftClamp'], 0, 19, time * 0.5, 0, () => {
 
-                    Animation2D.move_Simple(this.self['Clamp'], this.self['Clamp'].x, this.self['Clamp'].y - 200, time * 2, delayed * 4);
+                    Animation2D.move_Simple(this.self['Clamp'], fxClamp, fyClamp, fxClamp, fyClamp - 200, time * 2, delayed * 4);
 
-                    Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 6, 0, () => {
+                    Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 8, 0, () => {
                         this.self['Clamp'].x = fxClamp;
                         this.self['Clamp'].y = fyClamp;
                         this.self['RightClamp'].rotation = frRightClamp;
@@ -138,7 +154,7 @@ export default class UIStart extends lwg.Admin.Scene {
                         this.self['PicAotuman'].y = fyPicAotuman;
                         this.self['PicAotuman'].rotation = frPicAotuman;
                     });
-                    Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 5, 0, () => {
+                    Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 6, 0, () => {
                         Admin._openScene(Admin.SceneName.UIEasterEgg);
                     });
                 });

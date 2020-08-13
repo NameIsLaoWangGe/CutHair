@@ -1,36 +1,6 @@
 (function () {
     'use strict';
 
-    var lwgInit;
-    (function (lwgInit) {
-        function init() {
-            Skin._currentEye.name = null;
-            Skin._currentHead.name = null;
-            if (!Shop._currentOther.name) {
-                Shop._currentOther.name = 'tixudao';
-            }
-            if (!Shop._currentProp.name) {
-                Shop._currentProp.name = 'jiandao';
-            }
-            if (!Shop._currentSkin.name) {
-                Shop._currentSkin.name = 'anquanmao';
-            }
-        }
-        lwgInit.init = init;
-        function gameInit() {
-        }
-        lwgInit.gameInit = gameInit;
-        function shopInit() {
-        }
-        lwgInit.shopInit = shopInit;
-        function taskInit() {
-        }
-        lwgInit.taskInit = taskInit;
-        function easterEggInit() {
-        }
-        lwgInit.easterEggInit = easterEggInit;
-    })(lwgInit || (lwgInit = {}));
-
     var lwg;
     (function (lwg) {
         let Global;
@@ -1936,7 +1906,9 @@
                 }), delayed);
             }
             Animation2D.swell_shrink = swell_shrink;
-            function move_Simple(node, targetX, targetY, time, delayed, ease, func) {
+            function move_Simple(node, fX, fY, targetX, targetY, time, delayed, ease, func) {
+                node.x = fX;
+                node.y = fY;
                 if (!delayed) {
                     delayed = 0;
                 }
@@ -2782,7 +2754,7 @@
                 }
                 else {
                     Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
-                    console.log('是同一天！，每日继续任务');
+                    console.log('是同一天！，继续每日任务');
                 }
             }
             Task.initTask = initTask;
@@ -3688,9 +3660,6 @@
                 }
                 lodingPhaseComplete() { }
                 lwgInterior() {
-                    Task.initTask();
-                    Shop.initShop();
-                    lwgInit.init();
                 }
                 lodingTaskEventReg() {
                 }
@@ -4192,7 +4161,7 @@
 
     var EasterEgg;
     (function (EasterEgg) {
-        EasterEgg.easterEggArr = [];
+        EasterEgg._easterEgg_1Arr = [];
         EasterEgg._easterEgg_1 = {
             get value() {
                 if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
@@ -4206,114 +4175,148 @@
                 Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
             }
         };
-        function easterEggInit() {
-            EasterEgg.easterEggArr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", EasterEggClass.EasterEgg, EasterEggProperty.name);
+        function initEasterEgg() {
+            EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
         }
-        EasterEgg.easterEggInit = easterEggInit;
-        function getSingleData(describe) {
-            let obj;
-            for (let index = 0; index < EasterEgg.easterEggArr.length; index++) {
-                if (EasterEgg.easterEggArr[index]['describe'] === describe) {
-                    obj = EasterEgg.easterEggArr[index];
+        EasterEgg.initEasterEgg = initEasterEgg;
+        function getProperty(classify, name, property) {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
                 }
             }
-            if (obj) {
-                return obj;
+            if (pro !== null) {
+                return pro;
             }
             else {
-                console.log('获取彩蛋信息失败！');
-            }
-        }
-        EasterEgg.getSingleData = getSingleData;
-        function getProperty(className, describe, property) {
-            let obj = getSingleData(describe);
-            let arr;
-            for (const key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    if (key === property) {
-                        arr = obj[key];
-                    }
-                }
-            }
-            if (arr) {
-                return arr;
-            }
-            else {
-                console.log('获取属性失败！');
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
             }
         }
         EasterEgg.getProperty = getProperty;
-        function setProperty(className, describe, property, value) {
-            let obj = getSingleData(describe);
-            if (!obj) {
-                console.log('设置属性值失败！');
-                return;
-            }
-            let arr;
-            for (const key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    if (key === property) {
-                        obj[key] = value;
-                    }
+        function setProperty(classify, name, property, value) {
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
                 }
             }
             let data = {};
-            data[className] = arr;
-            Laya.LocalStorage.setJSON(className, JSON.stringify(data));
+            data[classify] = arr;
+            Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
         }
         EasterEgg.setProperty = setProperty;
-        function doDetection(className, describe, conditionNum) {
-            let resCondition = getProperty(className, describe, EasterEggProperty.resCondition);
-            resCondition[conditionNum] = 1;
-            setProperty(className, describe, EasterEggProperty.resCondition, resCondition);
-            let num;
-            for (let index = 0; index < resCondition.length; index++) {
-                const element = resCondition[index];
-                if (element === 1) {
-                    num++;
+        function getTaskProperty(classify, name, property) {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
                 }
             }
-            if (!num) {
-                console.log('任务完成错误！');
-            }
-            if (num >= resCondition.length) {
-                return 1;
+            if (pro !== null) {
+                return pro;
             }
             else {
-                return 0;
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+        EasterEgg.getTaskProperty = getTaskProperty;
+        function getClassify(classify) {
+            let arr = [];
+            switch (classify) {
+                case Classify.EasterEgg_01:
+                    arr = EasterEgg._easterEgg_1Arr;
+                    break;
+                default:
+                    break;
+            }
+            return arr;
+        }
+        EasterEgg.getClassify = getClassify;
+        function doDetection(classify, name, number) {
+            if (!number) {
+                number = 0;
+            }
+            let resCondition = getProperty(classify, name, Property.resCondition);
+            let condition = getProperty(classify, name, Property.condition);
+            if (!getProperty(classify, name, Property.complete)) {
+                if (condition <= resCondition + number) {
+                    setProperty(classify, name, Property.resCondition, condition);
+                    setProperty(classify, name, Property.complete, true);
+                    return 1;
+                }
+                else {
+                    setProperty(classify, name, Property.resCondition, resCondition + number);
+                    return 0;
+                }
+            }
+            else {
+                return 1;
             }
         }
         EasterEgg.doDetection = doDetection;
+        function detectAllTasks(classify) {
+            let num = 1;
+            let arr = getClassify(classify);
+            for (const key in arr) {
+                if (arr.hasOwnProperty(key)) {
+                    const element = arr[key];
+                    let resCondition = getProperty(classify, name, Property.resCondition);
+                    let condition = getProperty(classify, name, Property.condition);
+                    if (condition > resCondition) {
+                        num = 0;
+                    }
+                }
+            }
+            return num;
+        }
+        EasterEgg.detectAllTasks = detectAllTasks;
         let rewardType;
         (function (rewardType) {
             rewardType["gold"] = "gold";
             rewardType["diamond"] = "diamond";
             rewardType["assembly"] = "assembly";
         })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
-        let EasterEggProperty;
-        (function (EasterEggProperty) {
-            EasterEggProperty["name"] = "name";
-            EasterEggProperty["describe"] = "describe";
-            EasterEggProperty["condition"] = "condition";
-            EasterEggProperty["resCondition"] = "resCondition";
-            EasterEggProperty["rewardType"] = "rewardType";
-            EasterEggProperty["rewardNum"] = "rewardNum";
-            EasterEggProperty["getReward"] = "getReward";
-        })(EasterEggProperty = EasterEgg.EasterEggProperty || (EasterEgg.EasterEggProperty = {}));
-        let EasterEggClass;
-        (function (EasterEggClass) {
-            EasterEggClass["EasterEgg"] = "EasterEgg";
-        })(EasterEggClass = EasterEgg.EasterEggClass || (EasterEgg.EasterEggClass = {}));
-        let EasterEggEventType;
-        (function (EasterEggEventType) {
-            EasterEggEventType["trigger"] = "trigger";
-        })(EasterEggEventType = EasterEgg.EasterEggEventType || (EasterEgg.EasterEggEventType = {}));
+        let Property;
+        (function (Property) {
+            Property["name"] = "name";
+            Property["explain"] = "explain";
+            Property["condition"] = "condition";
+            Property["resCondition"] = "resCondition";
+            Property["complete"] = "complete";
+        })(Property = EasterEgg.Property || (EasterEgg.Property = {}));
+        let Classify;
+        (function (Classify) {
+            Classify["EasterEgg_01"] = "EasterEgg_01";
+        })(Classify = EasterEgg.Classify || (EasterEgg.Classify = {}));
+        let Name;
+        (function (Name) {
+            Name["easterEgg_1"] = "easterEgg_1";
+            Name["easterEgg_2"] = "easterEgg_2";
+            Name["easterEgg_3"] = "easterEgg_3";
+            Name["easterEgg_4"] = "easterEgg_4";
+            Name["easterEgg_5"] = "easterEgg_5";
+        })(Name = EasterEgg.Name || (EasterEgg.Name = {}));
+        let EventType;
+        (function (EventType) {
+            EventType["trigger"] = "trigger";
+        })(EventType = EasterEgg.EventType || (EasterEgg.EventType = {}));
         class EasterEggScene extends Admin.Scene {
             lwgOnAwake() {
-                this.initData();
+                this.easterEggInitData();
                 this.easterEggOnAwake();
             }
-            initData() {
+            easterEggInitData() {
             }
             lwgEventReg() {
                 this.easterEggEventReg();
@@ -4345,9 +4348,52 @@
         easterEggOnAwake() {
             Setting.setBtnVinish();
             Gold.goldVinish();
+            this.initDisplay();
+            EasterEgg._easterEgg_1.value = true;
+        }
+        initDisplay() {
+            for (let index = 0; index < EasterEgg._easterEgg_1Arr.length; index++) {
+                const element = EasterEgg._easterEgg_1Arr[index];
+                let name = 'Complete' + (index + 1);
+                let complete = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.complete);
+                if (complete === 1) {
+                    this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng.png';
+                }
+                else {
+                    this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng2.png';
+                }
+                let assemblyName = 'Assembly' + (index + 1);
+                let Num = this.self[assemblyName].getChildByName('Num');
+                if (Num) {
+                    let condetion = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.condition);
+                    let resCondetion = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.resCondition);
+                    Num.text = resCondetion + '/' + condetion;
+                }
+                switch (index) {
+                    case 0:
+                        if (complete !== 1) {
+                            Click.on(Click.Type.largen, this.self['BtnGoUp'], this, null, null, () => {
+                                Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
+                            });
+                        }
+                        break;
+                    case 4:
+                        if (complete !== 1) {
+                            Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
+                                this.self['DialogHint'].x = 0;
+                            });
+                            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+                                this.self['DialogHint'].x = -800;
+                            });
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         easterEggBtnClick() {
-            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, () => {
+            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
                 this.self.close();
             });
         }
@@ -4355,6 +4401,7 @@
         easterEggOnDisable() {
             Setting.setBtnAppear();
             Gold.goldAppear();
+            EventAdmin.notify(EasterEgg.EventType.trigger);
         }
     }
 
@@ -4566,9 +4613,16 @@
             this.getLevelContent();
         }
         getLevelContent() {
-            GSene3D.Level = null;
-            for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
-                const element = GSene3D.LevelParent.getChildAt(index);
+            if (GSene3D.Level) {
+                GSene3D.Level.removeSelf();
+            }
+            GSene3D.LevelParent.active = true;
+            let LevelParent0 = GSene3D.LevelParent.clone();
+            this.self.addChild(LevelParent0);
+            GSene3D.LevelParent.active = false;
+            GVariate._taskArr = [];
+            for (let index = 0; index < LevelParent0.numChildren; index++) {
+                const element = LevelParent0.getChildAt(index);
                 if (Number(element.name.substring(5, element.name.length)) == Game._gameLevel.value) {
                     element.active = true;
                     GSene3D.Level = element;
@@ -4594,6 +4648,7 @@
                 GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard');
                 GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard');
                 GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent');
+                GSene3D.Razor.transform.position = GSene3D.razorFPos;
             }
         }
         lwgEventReg() {
@@ -4819,6 +4874,43 @@
         }
     }
 
+    class Init extends Admin.Scene {
+        onEnable() {
+            console.log('开始初始化');
+            this.gameInit();
+            this.skinInit();
+            this.shopInit();
+            this.taskInit();
+            this.easterEggInit();
+        }
+        gameInit() { }
+        ;
+        skinInit() {
+            Skin._currentEye.name = null;
+            Skin._currentHead.name = null;
+        }
+        shopInit() {
+            Shop.initShop();
+            if (!Shop._currentOther.name) {
+                Shop._currentOther.name = 'tixudao';
+            }
+            if (!Shop._currentProp.name) {
+                Shop._currentProp.name = 'jiandao';
+            }
+            if (!Shop._currentSkin.name) {
+                Shop._currentSkin.name = 'anquanmao';
+            }
+        }
+        taskInit() {
+            Task.initTask();
+        }
+        easterEggInit() {
+            EasterEgg.initEasterEgg();
+        }
+        onDisable() {
+        }
+    }
+
     class UILoding extends Loding.LodeScene {
         constructor() {
             super(...arguments);
@@ -4869,6 +4961,9 @@
                 Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
                 lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
             });
+        }
+        lwgInterior() {
+            this.self.addComponent(Init);
         }
         lodingTaskEventReg() {
             EventAdmin.reg(Task.EventType.useSkins, Task, () => {
@@ -6142,7 +6237,7 @@
             this.self['SceneContent'].y = Laya.stage.height / 2;
         }
         progressDisplay() {
-            let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.resCondition);
+            let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.resCondition);
             if (resCondition > 0) {
                 for (let index = 0; index < resCondition; index++) {
                     let name = 'Bar' + (index + 1);
@@ -6198,6 +6293,10 @@
             EventAdmin.reg(CheckIn.EventType.removeCheckBtn, this, () => {
                 this.self['BtnCheck'].visible = false;
             });
+            EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
+                this.self['BtnAotuman'].visible = true;
+                this.self['EasterEgg_Aotuman'].visible = false;
+            });
         }
         lwgOnEnable() {
             Skin._currentEye.name = null;
@@ -6205,8 +6304,14 @@
             EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
             EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
             this.levelStyleDisplay();
-            if (Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.have)) {
+            if (Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.have)) {
                 this.self['BtnXDSkin'].visible = false;
+            }
+            if (!EasterEgg._easterEgg_1.value) {
+                this.self['BtnAotuman'].visible = false;
+            }
+            else {
+                this.self['EasterEgg_Aotuman'].visible = false;
             }
             CheckIn.openCheckIn();
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
@@ -6240,7 +6345,7 @@
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
-                lwg.Admin._openScene(Admin.SceneName.UISkin);
+                lwg.Admin._openScene(Admin.SceneName.UIShop);
             });
             Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
                 Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
@@ -6251,6 +6356,9 @@
             Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
                 lwg.Admin._openScene(Admin.SceneName.UICheckIn);
             });
+            Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+                lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
+            });
             Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
         }
         btnXDSkinDown() {
@@ -6260,7 +6368,7 @@
             lwg.Admin._openScene(Admin.SceneName.UISkinXD);
         }
         onStageMouseMove(event) {
-            if (this.easterEgg_AotumanSwitch) {
+            if (this.easterEgg_AotumanSwitch && !EasterEgg._easterEgg_1.value) {
                 this.self.addChild(this.self['Aotuman']);
                 this.self['Aotuman'].x = event.stageX;
                 this.self['Aotuman'].y = event.stageY;
@@ -6278,8 +6386,8 @@
                     let frPicAotuman = this.self['PicAotuman'].rotation;
                     Animation2D.simple_Rotate(this.self['RightClamp'], 0, -19, time * 0.5);
                     Animation2D.simple_Rotate(this.self['LeftClamp'], 0, 19, time * 0.5, 0, () => {
-                        Animation2D.move_Simple(this.self['Clamp'], this.self['Clamp'].x, this.self['Clamp'].y - 200, time * 1, delayed * 4);
-                        Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 6, 0, () => {
+                        Animation2D.move_Simple(this.self['Clamp'], fxClamp, fyClamp, fxClamp, fyClamp - 200, time * 2, delayed * 4);
+                        Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 8, 0, () => {
                             this.self['Clamp'].x = fxClamp;
                             this.self['Clamp'].y = fyClamp;
                             this.self['RightClamp'].rotation = frRightClamp;
@@ -6288,7 +6396,7 @@
                             this.self['PicAotuman'].y = fyPicAotuman;
                             this.self['PicAotuman'].rotation = frPicAotuman;
                         });
-                        Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 5, 0, () => {
+                        Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 6, 0, () => {
                             Admin._openScene(Admin.SceneName.UIEasterEgg);
                         });
                     });

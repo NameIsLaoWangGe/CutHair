@@ -60,9 +60,17 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
     /**获取当前关卡并且设置当前关卡的内容*/
     getLevelContent(): void {
-        GSene3D.Level = null;
-        for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
-            const element = GSene3D.LevelParent.getChildAt(index) as Laya.MeshSprite3D;
+        if (GSene3D.Level) {
+            GSene3D.Level.removeSelf();
+        }
+        GSene3D.LevelParent.active = true;
+        let LevelParent0 = GSene3D.LevelParent.clone();
+        this.self.addChild(LevelParent0);
+        GSene3D.LevelParent.active = false;
+        GVariate._taskArr = [];
+
+        for (let index = 0; index < LevelParent0.numChildren; index++) {
+            const element = LevelParent0.getChildAt(index) as Laya.MeshSprite3D;
             if (Number(element.name.substring(5, element.name.length)) == Game._gameLevel.value) {
                 element.active = true;
                 GSene3D.Level = element;
@@ -70,6 +78,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 element.active = false;
             }
         }
+
         if (!GSene3D.Level) {
             console.log('本关卡不存在');
         } else {
@@ -86,6 +95,8 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
             GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard') as Laya.MeshSprite3D;
             GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard') as Laya.MeshSprite3D;
             GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent') as Laya.MeshSprite3D;
+
+            GSene3D.Razor.transform.position = GSene3D.razorFPos;
         }
     }
 
@@ -138,7 +149,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         //换剃须刀
         EventAdmin.reg(GEnum.EventType.changeOther, this, () => {
-          
+
             for (let index = 0; index < GSene3D.knifeParent.numChildren; index++) {
                 const element = GSene3D.knifeParent.getChildAt(index) as Laya.MeshSprite3D;
                 if (element.name == Shop._currentOther.name) {

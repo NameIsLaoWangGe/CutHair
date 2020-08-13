@@ -1,6 +1,8 @@
 import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding, Task, Shop, Skin, Gold, Setting } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
+import { EasterEgg } from "../Lwg_Template/EasterEgg";
+import Init from "../Lwg_Template/Init";
 export default class UILoding extends Loding.LodeScene {
 
     lodingResList(): void {
@@ -51,6 +53,10 @@ export default class UILoding extends Loding.LodeScene {
             Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
             lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
         })
+    }
+
+    lwgInterior(): void {
+        this.self.addComponent(Init);
     }
 
     lodingTaskEventReg(): void {

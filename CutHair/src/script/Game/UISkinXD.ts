@@ -18,7 +18,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
     /**进度条显示*/
     progressDisplay(): void {
-        let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Other, 'xiandanren', Shop.GoodsProperty.resCondition);
+        let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.resCondition);
         if (resCondition > 0) {
             for (let index = 0; index < resCondition; index++) {
                 let name = 'Bar' + (index + 1);

@@ -54,15 +54,6 @@
     "arrange": 5,
     "getOder": 5,
     "have": false
-  },
-  {
-    "name": "xiandanren",
-    "getway": "adsXD",
-    "condition": 3,
-    "resCondition": 0,
-    "arrange": 7,
-    "getOder": -1,
-    "have": false
   }
 ]
 }

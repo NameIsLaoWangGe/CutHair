@@ -63,6 +63,8 @@ export module Global {
         export let GameMain3D: Laya.Scene3D;
         /**场景摄像机的父节点*/
         export let MainCamera: Laya.MeshSprite3D;
+        /**关卡父节点创建模板*/
+        export let LevelParentItem: Laya.MeshSprite3D;
         /**关卡父节点*/
         export let LevelParent: Laya.MeshSprite3D;
         /**当前关卡节点*/

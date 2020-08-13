@@ -1,4 +1,3 @@
-import { lwgInit } from "./lwgInit";
 /**综合模板*/
 export module lwg {
     /**全局方法,全局变量，每个游戏不一样*/
@@ -2823,6 +2822,8 @@ export module lwg {
         /**
          * 简单移动,初始位置可以为null
          * @param node 节点
+         * @param fX 初始x位置
+         * @param fY 初始x位置
          * @param targetX 目标x位置
          * @param targetY 目标y位置
          * @param time 花费时间
@@ -2830,7 +2831,9 @@ export module lwg {
          * @param ease 动画类型
          * @param func 完成后的回调
          */
-        export function move_Simple(node, targetX, targetY, time, delayed?: number, ease?: Function, func?: Function): void {
+        export function move_Simple(node, fX, fY, targetX, targetY, time, delayed?: number, ease?: Function, func?: Function): void {
+            node.x = fX;
+            node.y = fY;
             if (!delayed) {
                 delayed = 0;
             }
@@ -4064,7 +4067,7 @@ export module lwg {
                 todayData.date = (new Date).getDate();
             } else {
                 Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
-                console.log('是同一天！，每日继续任务');
+                console.log('是同一天！，继续每日任务');
             }
         }
 
@@ -5315,11 +5318,8 @@ export module lwg {
             /**每个资源加载成功后，进度条每次增加后的回调*/
             lodingPhaseComplete(): void { }
 
-            /**完成后，内部结构初始化*/
+            /**完成后，内部结构初始化，重写覆盖*/
             lwgInterior(): void {
-                Task.initTask();
-                Shop.initShop();
-                lwgInit.init();
             }
             /**任务系统中的事件注册，caller指向Task模块*/
             lodingTaskEventReg(): void {
