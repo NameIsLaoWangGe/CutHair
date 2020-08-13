@@ -1,4 +1,4 @@
-import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin } from "../Lwg_Template/lwg";
+import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin, Animation2D } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
 
@@ -75,35 +75,87 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
-        Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.backgroundUp);
-        Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
-        Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
-        Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+        Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+            lwg.Admin._openScene(Admin.SceneName.UISkin);
+        });
+
+        Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
+            Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+        });
+
+        Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
+            Admin._openScene(lwg.Admin.SceneName.UITask, null, this.self);
+        });
+
+        Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
+            lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+
+        });
+
+        Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
     }
 
-    btnCheckUp(e: Laya.Event): void {
-        e.stopPropagation();
-        lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+    easterEgg_AotumanSwitch: boolean = false;
+    btnXDSkinDown(): void {
+        this.easterEgg_AotumanSwitch = true;
     }
 
-    btnXDSkinUp(e: Laya.Event): void {
-        e.stopPropagation();
+    btnXDSkinUp(): void {
         lwg.Admin._openScene(Admin.SceneName.UISkinXD);
     }
 
-    btnSkinUp(e: Laya.Event): void {
-        e.stopPropagation();
-        lwg.Admin._openScene(Admin.SceneName.UIShop);
+    onStageMouseMove(event: Laya.Event): void {
+        if (this.easterEgg_AotumanSwitch) {
+            this.self.addChild(this.self['Aotuman']);
+            this.self['Aotuman'].x = event.stageX;
+            this.self['Aotuman'].y = event.stageY;
+            let point: Laya.Point = new Laya.Point(this.self['EasterEgg_Aotuman'].x, this.self['EasterEgg_Aotuman'].y);
+            if (point.distance(event.stageX, event.stageY) < 50) {
+                this.aotumanBack();
+                let time = 100;
+                let delayed = 100;
+
+                let fxClamp = this.self['Clamp'].x;
+                let fyClamp = this.self['Clamp'].y;
+                let frRightClamp = this.self['RightClamp'].rotation;
+                let frLeftClamp = this.self['LeftClamp'].rotation;
+                let fxPicAotuman = this.self['PicAotuman'].x;
+                let fyPicAotuman = this.self['PicAotuman'].y;
+                let frPicAotuman = this.self['PicAotuman'].rotation;
+
+                Animation2D.simple_Rotate(this.self['RightClamp'], 0, -19, time * 0.5);
+
+                Animation2D.simple_Rotate(this.self['LeftClamp'], 0, 19, time * 0.5, 0, () => {
+
+                    Animation2D.move_Simple(this.self['Clamp'], this.self['Clamp'].x, this.self['Clamp'].y - 200, time * 2, delayed * 4);
+
+                    Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 6, 0, () => {
+                        this.self['Clamp'].x = fxClamp;
+                        this.self['Clamp'].y = fyClamp;
+                        this.self['RightClamp'].rotation = frRightClamp;
+                        this.self['LeftClamp'].rotation = frLeftClamp;
+                        this.self['PicAotuman'].x = fxPicAotuman;
+                        this.self['PicAotuman'].y = fyPicAotuman;
+                        this.self['PicAotuman'].rotation = frPicAotuman;
+                    });
+                    Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 5, 0, () => {
+                        Admin._openScene(Admin.SceneName.UIEasterEgg);
+                    });
+                });
+            }
+        }
     }
 
-    backgroundUp(): void {
-        Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+    onStageMouseUp(): void {
+        this.aotumanBack();
     }
 
-    btnTaskeUp(e): void {
-        e.stopPropagation();
-        lwg.Admin._openScene(Admin.SceneName.UITask);
+    /**凹凸曼回到原位*/
+    aotumanBack(): void {
+        this.easterEgg_AotumanSwitch = false;
+        this.self['BtnXDSkin'].addChild(this.self['Aotuman']);
+        this.self['Aotuman'].x = 77;
+        this.self['Aotuman'].y = 63;
     }
 
     lwgOnDisable(): void {

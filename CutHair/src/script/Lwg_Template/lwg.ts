@@ -989,6 +989,7 @@ export module lwg {
             UICheckIn = 'UICheckIn',
             UIResurgence = 'UIResurgence',
             UISkin = 'UISkin',
+            UIEasterEgg = 'UIEasterEgg',
         }
         /**游戏当前的状态*/
         export enum GameState {
@@ -1004,9 +1005,6 @@ export module lwg {
             Defeated = 'defeated',
         }
 
-        /**获取一张数据表，次张数据表必须已经进行过预加载，而且命名方式必须以GameData/EasterEgg的形式命名*/
-        
-        
         /**
           * 打开界面
           * @param name 界面名称
@@ -1871,7 +1869,7 @@ export module lwg {
         * */
         export let beetleScale;
         /**b
-         * 点击事件注册,传函数名的时候不要用func=>因为这是传函数不是函数名
+         * 点击事件注册,可以用(e)=>{}简写传递的函数参数
          * @param effect 效果类型 1.'largen'
          * @param soundUrl 音效的地址
          * @param target 节点
@@ -2229,8 +2227,11 @@ export module lwg {
           * @param delayed 延时时间
           * @param func 回调函数
         */
-        export function simple_Rotate(node, Frotate, Erotate, time, delayed, func?: Function): void {
+        export function simple_Rotate(node, Frotate, Erotate, time, delayed?: number, func?: Function): void {
             node.rotation = Frotate;
+            if (!delayed) {
+                delayed = 0;
+            }
             Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
                 if (func) {
                     func();
@@ -2504,17 +2505,20 @@ export module lwg {
           * @param delayed 延时时间
           * @param func 结束回调函数
           * */
-        export function drop_KickBack(target, fAlpha, firstY, targetY, extendY, time1, delayed, func): void {
+        export function drop_KickBack(target, fAlpha, firstY, targetY, extendY, time1, delayed?: number, func?: Function): void {
 
             target.alpha = fAlpha;
             target.y = firstY;
 
+            if (!delayed) {
+                delayed = 0;
+            }
             Laya.Tween.to(target, { alpha: 1, y: targetY + extendY }, time1, null, Laya.Handler.create(this, function () {
 
                 Laya.Tween.to(target, { y: targetY - extendY / 2 }, time1 / 2, null, Laya.Handler.create(this, function () {
 
                     Laya.Tween.to(target, { y: targetY }, time1 / 4, null, Laya.Handler.create(this, function () {
-                        if (func !== null) {
+                        if (func) {
                             func();
                         }
                     }), 0);
@@ -2819,18 +2823,17 @@ export module lwg {
         /**
          * 简单移动,初始位置可以为null
          * @param node 节点
-         * @param firstX 初始x位置
-         * @param firstY 初始y位置
          * @param targetX 目标x位置
          * @param targetY 目标y位置
          * @param time 花费时间
          * @param delayed 延时时间
+         * @param ease 动画类型
          * @param func 完成后的回调
          */
-        export function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, ease?: Function, func?: Function): void {
-            node.x = firstX;
-            node.y = firstY;
-
+        export function move_Simple(node, targetX, targetY, time, delayed?: number, ease?: Function, func?: Function): void {
+            if (!delayed) {
+                delayed = 0;
+            }
             Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease ? ease : null, Laya.Handler.create(this, function () {
                 if (func) {
                     func()

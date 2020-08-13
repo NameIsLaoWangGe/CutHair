@@ -736,6 +736,7 @@
                 SceneName["UICheckIn"] = "UICheckIn";
                 SceneName["UIResurgence"] = "UIResurgence";
                 SceneName["UISkin"] = "UISkin";
+                SceneName["UIEasterEgg"] = "UIEasterEgg";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -1605,6 +1606,9 @@
         (function (Animation2D) {
             function simple_Rotate(node, Frotate, Erotate, time, delayed, func) {
                 node.rotation = Frotate;
+                if (!delayed) {
+                    delayed = 0;
+                }
                 Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
                     if (func) {
                         func();
@@ -1753,10 +1757,13 @@
             function drop_KickBack(target, fAlpha, firstY, targetY, extendY, time1, delayed, func) {
                 target.alpha = fAlpha;
                 target.y = firstY;
+                if (!delayed) {
+                    delayed = 0;
+                }
                 Laya.Tween.to(target, { alpha: 1, y: targetY + extendY }, time1, null, Laya.Handler.create(this, function () {
                     Laya.Tween.to(target, { y: targetY - extendY / 2 }, time1 / 2, null, Laya.Handler.create(this, function () {
                         Laya.Tween.to(target, { y: targetY }, time1 / 4, null, Laya.Handler.create(this, function () {
-                            if (func !== null) {
+                            if (func) {
                                 func();
                             }
                         }), 0);
@@ -1929,9 +1936,10 @@
                 }), delayed);
             }
             Animation2D.swell_shrink = swell_shrink;
-            function move_Simple(node, firstX, firstY, targetX, targetY, time, delayed, ease, func) {
-                node.x = firstX;
-                node.y = firstY;
+            function move_Simple(node, targetX, targetY, time, delayed, ease, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
                 Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease ? ease : null, Laya.Handler.create(this, function () {
                     if (func) {
                         func();
@@ -4182,6 +4190,174 @@
         }
     }
 
+    var EasterEgg;
+    (function (EasterEgg) {
+        EasterEgg.easterEggArr = [];
+        EasterEgg._easterEgg_1 = {
+            get value() {
+                if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
+            }
+        };
+        function easterEggInit() {
+            EasterEgg.easterEggArr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", EasterEggClass.EasterEgg, EasterEggProperty.name);
+        }
+        EasterEgg.easterEggInit = easterEggInit;
+        function getSingleData(describe) {
+            let obj;
+            for (let index = 0; index < EasterEgg.easterEggArr.length; index++) {
+                if (EasterEgg.easterEggArr[index]['describe'] === describe) {
+                    obj = EasterEgg.easterEggArr[index];
+                }
+            }
+            if (obj) {
+                return obj;
+            }
+            else {
+                console.log('获取彩蛋信息失败！');
+            }
+        }
+        EasterEgg.getSingleData = getSingleData;
+        function getProperty(className, describe, property) {
+            let obj = getSingleData(describe);
+            let arr;
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if (key === property) {
+                        arr = obj[key];
+                    }
+                }
+            }
+            if (arr) {
+                return arr;
+            }
+            else {
+                console.log('获取属性失败！');
+            }
+        }
+        EasterEgg.getProperty = getProperty;
+        function setProperty(className, describe, property, value) {
+            let obj = getSingleData(describe);
+            if (!obj) {
+                console.log('设置属性值失败！');
+                return;
+            }
+            let arr;
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if (key === property) {
+                        obj[key] = value;
+                    }
+                }
+            }
+            let data = {};
+            data[className] = arr;
+            Laya.LocalStorage.setJSON(className, JSON.stringify(data));
+        }
+        EasterEgg.setProperty = setProperty;
+        function doDetection(className, describe, conditionNum) {
+            let resCondition = getProperty(className, describe, EasterEggProperty.resCondition);
+            resCondition[conditionNum] = 1;
+            setProperty(className, describe, EasterEggProperty.resCondition, resCondition);
+            let num;
+            for (let index = 0; index < resCondition.length; index++) {
+                const element = resCondition[index];
+                if (element === 1) {
+                    num++;
+                }
+            }
+            if (!num) {
+                console.log('任务完成错误！');
+            }
+            if (num >= resCondition.length) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+        EasterEgg.doDetection = doDetection;
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+            rewardType["assembly"] = "assembly";
+        })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
+        let EasterEggProperty;
+        (function (EasterEggProperty) {
+            EasterEggProperty["name"] = "name";
+            EasterEggProperty["describe"] = "describe";
+            EasterEggProperty["condition"] = "condition";
+            EasterEggProperty["resCondition"] = "resCondition";
+            EasterEggProperty["rewardType"] = "rewardType";
+            EasterEggProperty["rewardNum"] = "rewardNum";
+            EasterEggProperty["getReward"] = "getReward";
+        })(EasterEggProperty = EasterEgg.EasterEggProperty || (EasterEgg.EasterEggProperty = {}));
+        let EasterEggClass;
+        (function (EasterEggClass) {
+            EasterEggClass["EasterEgg"] = "EasterEgg";
+        })(EasterEggClass = EasterEgg.EasterEggClass || (EasterEgg.EasterEggClass = {}));
+        let EasterEggEventType;
+        (function (EasterEggEventType) {
+            EasterEggEventType["trigger"] = "trigger";
+        })(EasterEggEventType = EasterEgg.EasterEggEventType || (EasterEgg.EasterEggEventType = {}));
+        class EasterEggScene extends Admin.Scene {
+            lwgOnAwake() {
+                this.initData();
+                this.easterEggOnAwake();
+            }
+            initData() {
+            }
+            lwgEventReg() {
+                this.easterEggEventReg();
+            }
+            easterEggEventReg() { }
+            easterEggOnAwake() { }
+            lwgNodeDec() {
+                this.easterEggNodeDec();
+            }
+            easterEggNodeDec() { }
+            lwgOnEnable() {
+                this.easterEggOnEnable();
+            }
+            easterEggOnEnable() { }
+            lwgOpenAni() { return this.easterEggOpenAin(); }
+            easterEggOpenAin() { return 0; }
+            lwgBtnClick() { this.easterEggBtnClick(); }
+            easterEggBtnClick() { }
+            ;
+            lwgOnDisable() {
+                this.easterEggOnDisable();
+            }
+            easterEggOnDisable() { }
+        }
+        EasterEgg.EasterEggScene = EasterEggScene;
+    })(EasterEgg || (EasterEgg = {}));
+
+    class UIEasterEgg extends EasterEgg.EasterEggScene {
+        easterEggOnAwake() {
+            Setting.setBtnVinish();
+            Gold.goldVinish();
+        }
+        easterEggBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, () => {
+                this.self.close();
+            });
+        }
+        ;
+        easterEggOnDisable() {
+            Setting.setBtnAppear();
+            Gold.goldAppear();
+        }
+    }
+
     var Global;
     (function (Global) {
         let GEnum;
@@ -6007,6 +6183,10 @@
     }
 
     class UIStart extends lwg.Admin.Scene {
+        constructor() {
+            super(...arguments);
+            this.easterEgg_AotumanSwitch = false;
+        }
         lwgNodeDec() {
             this.LevelDisplay = this.self['LevelDisplay'];
             this.LevelStyle = this.self['LevelStyle'];
@@ -6059,30 +6239,70 @@
             }
         }
         lwgBtnClick() {
-            Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, this.btnSkinUp);
-            Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.backgroundUp);
-            Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, this.btnTaskeUp);
-            Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, null, null, this.btnXDSkinUp);
-            Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, this.btnCheckUp);
+            Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+                lwg.Admin._openScene(Admin.SceneName.UISkin);
+            });
+            Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
+                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+            });
+            Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
+                Admin._openScene(lwg.Admin.SceneName.UITask, null, this.self);
+            });
+            Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
+                lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+            });
+            Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
         }
-        btnCheckUp(e) {
-            e.stopPropagation();
-            lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+        btnXDSkinDown() {
+            this.easterEgg_AotumanSwitch = true;
         }
-        btnXDSkinUp(e) {
-            e.stopPropagation();
+        btnXDSkinUp() {
             lwg.Admin._openScene(Admin.SceneName.UISkinXD);
         }
-        btnSkinUp(e) {
-            e.stopPropagation();
-            lwg.Admin._openScene(Admin.SceneName.UIShop);
+        onStageMouseMove(event) {
+            if (this.easterEgg_AotumanSwitch) {
+                this.self.addChild(this.self['Aotuman']);
+                this.self['Aotuman'].x = event.stageX;
+                this.self['Aotuman'].y = event.stageY;
+                let point = new Laya.Point(this.self['EasterEgg_Aotuman'].x, this.self['EasterEgg_Aotuman'].y);
+                if (point.distance(event.stageX, event.stageY) < 50) {
+                    this.aotumanBack();
+                    let time = 100;
+                    let delayed = 100;
+                    let fxClamp = this.self['Clamp'].x;
+                    let fyClamp = this.self['Clamp'].y;
+                    let frRightClamp = this.self['RightClamp'].rotation;
+                    let frLeftClamp = this.self['LeftClamp'].rotation;
+                    let fxPicAotuman = this.self['PicAotuman'].x;
+                    let fyPicAotuman = this.self['PicAotuman'].y;
+                    let frPicAotuman = this.self['PicAotuman'].rotation;
+                    Animation2D.simple_Rotate(this.self['RightClamp'], 0, -19, time * 0.5);
+                    Animation2D.simple_Rotate(this.self['LeftClamp'], 0, 19, time * 0.5, 0, () => {
+                        Animation2D.move_Simple(this.self['Clamp'], this.self['Clamp'].x, this.self['Clamp'].y - 200, time * 1, delayed * 4);
+                        Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 6, 0, () => {
+                            this.self['Clamp'].x = fxClamp;
+                            this.self['Clamp'].y = fyClamp;
+                            this.self['RightClamp'].rotation = frRightClamp;
+                            this.self['LeftClamp'].rotation = frLeftClamp;
+                            this.self['PicAotuman'].x = fxPicAotuman;
+                            this.self['PicAotuman'].y = fyPicAotuman;
+                            this.self['PicAotuman'].rotation = frPicAotuman;
+                        });
+                        Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 5, 0, () => {
+                            Admin._openScene(Admin.SceneName.UIEasterEgg);
+                        });
+                    });
+                }
+            }
         }
-        backgroundUp() {
-            Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+        onStageMouseUp() {
+            this.aotumanBack();
         }
-        btnTaskeUp(e) {
-            e.stopPropagation();
-            lwg.Admin._openScene(Admin.SceneName.UITask);
+        aotumanBack() {
+            this.easterEgg_AotumanSwitch = false;
+            this.self['BtnXDSkin'].addChild(this.self['Aotuman']);
+            this.self['Aotuman'].x = 77;
+            this.self['Aotuman'].y = 63;
         }
         lwgOnDisable() {
             Gold.GoldNode.visible = false;
@@ -6518,6 +6738,7 @@
             var reg = Laya.ClassUtils.regClass;
             reg("script/Game/UICheckIn.ts", UICheckIn);
             reg("script/Game/UIDefeated.ts", UIDefeated);
+            reg("script/Game/UIEasterEgg.ts", UIEasterEgg);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
             reg("script/Game/UIResurgence.ts", UIResurgence);

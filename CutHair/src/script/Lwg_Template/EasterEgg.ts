@@ -4,6 +4,20 @@ export module EasterEgg {
     /**所有彩蛋集合*/
     export let easterEggArr: Array<any> = [];
 
+    /**彩蛋1是否已经被触发*/
+    export let _easterEgg_1 = {
+        get value(): boolean {
+            if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        set value(val: boolean) {
+            Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
+        }
+    };
+
     /**初始化彩蛋模块*/
     export function easterEggInit(): void {
         easterEggArr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", EasterEggClass.EasterEgg, EasterEggProperty.name);
@@ -135,6 +149,11 @@ export module EasterEgg {
         EasterEgg = 'EasterEgg',
     }
 
+    /**彩蛋模块事件类型*/
+    export enum EasterEggEventType {
+        /**触发彩蛋*/
+        trigger = 'trigger',
+    }
 
     /**彩蛋场景继承类*/
     export class EasterEggScene extends Admin.Scene {
