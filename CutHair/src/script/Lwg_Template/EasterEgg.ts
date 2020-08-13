@@ -123,6 +123,7 @@ export module EasterEgg {
             if (condition <= resCondition + number) {
                 setProperty(classify, name, Property.resCondition, condition);
                 setProperty(classify, name, Property.complete, true);
+                console.log(getProperty(classify, name, Property.complete));
                 return 1;
             } else {
                 setProperty(classify, name, Property.resCondition, resCondition + number);
@@ -183,19 +184,21 @@ export module EasterEgg {
         EasterEgg_01 = 'EasterEgg_01',
     }
 
-    /**彩蛋名称*/
+    /**彩蛋中的任务名称*/
     export enum Name {
-        easterEgg_1 = 'easterEgg_1',
-        easterEgg_2 = 'easterEgg_2',
-        easterEgg_3 = 'easterEgg_3',
-        easterEgg_4 = 'easterEgg_4',
-        easterEgg_5 = 'easterEgg_5',
+        assembly_1 = 'assembly_1',
+        assembly_2 = 'assembly_2',
+        assembly_3 = 'assembly_3',
+        assembly_4 = 'assembly_4',
+        assembly_5 = 'assembly_5',
     }
 
     /**彩蛋模块事件类型*/
     export enum EventType {
         /**触发彩蛋*/
         trigger = 'trigger',
+        /**看广告完成任务*/
+        easterEggAds = 'easterEggAds',
     }
 
     /**彩蛋场景继承类*/

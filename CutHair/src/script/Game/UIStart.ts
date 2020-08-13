@@ -44,7 +44,6 @@ export default class UIStart extends lwg.Admin.Scene {
             this.self['EasterEgg_Aotuman'].visible = false;
         }
 
-        // EventAdmin.notify(GEnum.EventType.cameraMove, GEnum.TaskType.sideHair);
         CheckIn.openCheckIn();
 
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
@@ -95,7 +94,7 @@ export default class UIStart extends lwg.Admin.Scene {
         });
 
         Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
-            Admin._openScene(lwg.Admin.SceneName.UITask, null, this.self);
+            Admin._openScene(lwg.Admin.SceneName.UITask);
         });
 
         Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {

@@ -1,5 +1,6 @@
 import { lwg, Admin, Dialog, VictoryBox, EventAdmin, Animation2D, Effects, Gold, Click, Task, Tools } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
+import { EasterEgg } from "../Lwg_Template/EasterEgg";
 
 export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     constructor() { super(); }
@@ -19,8 +20,8 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
 
     victoryBoxEventReg(): void {
         EventAdmin.reg(VictoryBox.EventType.openBox, this, (dataSource) => {
-            console.log(dataSource, VictoryBox._openNum);
-            if (VictoryBox._openNum > 0) {
+            console.log(dataSource, VictoryBox._defaultOpenNum);
+            if (VictoryBox._defaultOpenNum > 0) {
                 if (dataSource[VictoryBox.BoxProperty.ads]) {
                     ADManager.ShowReward(() => {
                         this.getRewardFunc(dataSource);
@@ -36,7 +37,17 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
 
     /**领取奖励动画*/
     getRewardFunc(dataSource): void {
-        VictoryBox._openNum--;
+        VictoryBox.alreadyNum++;
+        let automan = false;
+        if (VictoryBox.alreadyNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
+            EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, 1);
+            let cell = VictoryBox._BoxList.getCell(dataSource.arrange - 1);
+            let Automan = cell.getChildByName('Automan') as Laya.Sprite;
+            Automan.visible = true;
+            automan = true;
+        }
+
+        VictoryBox._defaultOpenNum--;
         VictoryBox._selectBox = dataSource[VictoryBox.BoxProperty.name];
         // 特效
         let diffX = dataSource.arrange % 3;
@@ -50,11 +61,13 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
 
         VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
 
-        Laya.timer.frameOnce(20, this, f => {
-            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
-            });
-        })
+        if (!automan) {
+            Laya.timer.frameOnce(20, this, f => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
+                });
+            })
+        }
 
         EventAdmin.notify(Task.EventType.victoryBox);
     }
@@ -81,6 +94,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
             } else {
                 Pic_Box.skin = 'UI/VictoryBox/baoxian2.png';
             }
+
             Pic_Box.visible = true;
             Pic_Gold.visible = false;
             Num.visible = false;
@@ -114,17 +128,17 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
         if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
             ADManager.ShowReward(() => {
-                Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"])
-                VictoryBox._openNum += 3;
+                Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
+                VictoryBox._defaultOpenNum += 3;
                 VictoryBox._adsMaxOpenNum -= 3;
             })
         } else {
-            Dialog.createHint_Middle(Dialog.HintContent["没有宝箱领可以领了！"])
+            Dialog.createHint_Middle(Dialog.HintContent["没有宝箱领可以领了！"]);
         }
     }
 
     victoryOnUpdate(): void {
-        if (VictoryBox._openNum > 0) {
+        if (VictoryBox._defaultOpenNum > 0) {
             this.self['BtnAgain'].visible = false;
             this.self['BtnNo'].visible = false;
         } else {

@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":44,
+    "selecteID":53,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":52,
+    "maxID":54,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -257,7 +257,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,Assembly4,Assembly4",
-                    "props":{"y":627,"x":536,"width":174,"var":"Assembly4","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","name":"Assembly4","height":235},
+                    "props":{"y":745,"x":623,"width":174,"var":"Assembly4","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","pivotY":118,"pivotX":87,"name":"Assembly4","height":235},
                     "nodeParent":13,
                     "label":"Assembly4",
                     "isOpen":true,
@@ -430,22 +430,21 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,DialogHint,DialogHint",
-            "props":{"var":"DialogHint","name":"DialogHint"},
+            "props":{"y":0,"x":-800,"var":"DialogHint","name":"DialogHint"},
             "nodeParent":2,
             "label":"DialogHint",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":44,
             "child":[
                 {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":0,"x":-797,"width":720,"texture":"Frame/UI/ui_orthogon_black.png","height":1650,"alpha":0.7},
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"y":0,"x":4,"width":720,"skin":"Frame/UI/ui_orthogon_black.png","sizeGrid":"22,22,32,22","height":1650,"alpha":0.7},
                     "nodeParent":44,
-                    "label":"Sprite",
+                    "label":"Image",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -454,38 +453,9 @@
                         ]
                 },
                 {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"y":485,"x":-709,"width":538,"skin":"UI/Common/dikuang.png","sizeGrid":"43,37,50,50","height":340},
-                    "nodeParent":44,
-                    "label":"Image",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":48,
-                    "child":[
-                        {
-                            "x":45,
-                            "type":"Sprite",
-                            "searchKey":"Sprite",
-                            "props":{"y":139,"x":269,"width":438,"texture":"UI/EasterEgg_Aotoman/Hint/zi.png","pivotY":55,"pivotX":219,"height":110},
-                            "nodeParent":48,
-                            "label":"Sprite",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":46,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnConfirm,BtnConfirm",
-                    "props":{"y":938,"x":-440,"width":288,"var":"BtnConfirm","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnConfirm","height":128},
+                    "props":{"y":938,"x":361,"width":288,"var":"BtnConfirm","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnConfirm","height":128},
                     "nodeParent":44,
                     "label":"BtnConfirm",
                     "isOpen":true,
@@ -495,7 +465,6 @@
                     "compId":50,
                     "child":[
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":26.5,"x":68,"width":154,"valign":"middle","text":"确认","height":75,"fontSize":60,"color":"#e46415","align":"center"},
@@ -508,7 +477,47 @@
                             "child":[
                                 ]
                         }]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"y":485,"x":92,"width":538,"skin":"UI/Common/dikuang.png","sizeGrid":"43,37,50,50","height":340},
+                    "nodeParent":44,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":48,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":139,"x":269,"width":438,"texture":"UI/EasterEgg_Aotoman/Hint/zi.png","pivotY":55,"pivotX":219,"height":110},
+                            "nodeParent":48,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":46,
+                            "child":[
+                                ]
+                        }]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,BtnAotuman,BtnAotuman",
+            "props":{"y":747,"x":376,"width":288,"var":"BtnAotuman","pivotY":245,"pivotX":144,"name":"BtnAotuman","height":490},
+            "nodeParent":2,
+            "label":"BtnAotuman",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":53,
+            "child":[
+                ]
         }],
     "animations":[
         {

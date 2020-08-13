@@ -15,7 +15,7 @@ export default class UIVictoryBox_Cell extends Admin.Object {
         if (this.self['_dataSource'][VictoryBox.BoxProperty.openState]) {
             return;
         } else {
-            if (VictoryBox._openNum > 0) {
+            if (VictoryBox._defaultOpenNum > 0) {
                 let Pic_Box = this.self.getChildByName('Pic_Box') as Laya.Image;
                 if (!this.self['_dataSource'][VictoryBox.BoxProperty.ads]) {
                     Pic_Box.skin = 'UI/VictoryBox/baoxian3.png';

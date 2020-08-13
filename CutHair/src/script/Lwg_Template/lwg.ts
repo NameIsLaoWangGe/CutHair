@@ -4582,14 +4582,15 @@ export module lwg {
         /**宝箱数据集合*/
         export let _BoxArray = [];
         /**领取次数,默认为三次，重写覆盖*/
-        export let _openNum: number = 3;
+        export let _defaultOpenNum: number = 3;
         /**已经领取了几次奖励*/
         export let _alreadyOpenNum: number = 0;
         /**看宝箱可以领取的最大次数*/
         export let _adsMaxOpenNum: number = 6;
         /**第几次打开宝箱界面*/
         export let _openVictoryBoxNum: number = 0;
-
+        /**当前是第几次打开宝箱*/
+        export let alreadyNum: number = 0;
         /**当前被选中的那个宝箱是什么宝箱*/
         export let _selectBox: string;
         /**
@@ -4668,9 +4669,11 @@ export module lwg {
                 //注意这里要复制数组，不可以直接赋值
                 _BoxArray = Tools.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json")['RECORDS']);
                 _selectBox = null;
-                _openNum = 3;
+                _defaultOpenNum = 3;
                 _openVictoryBoxNum++;
                 _adsMaxOpenNum = 6;
+                _alreadyOpenNum = 0;
+                
             }
             /**VictoryBoxScene开始前执行一次，重写覆盖*/
             victoryBoxOnAwake(): void { }

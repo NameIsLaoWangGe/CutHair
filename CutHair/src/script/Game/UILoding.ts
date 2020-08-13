@@ -56,30 +56,7 @@ export default class UILoding extends Loding.LodeScene {
     }
 
     lwgInterior(): void {
-        this.self.addComponent(Init);
-    }
-
-    lodingTaskEventReg(): void {
-        EventAdmin.reg(Task.EventType.useSkins, Task, () => {
-            let num = Shop.setUseSkinType();
-            let name = Task.TaskName.每日使用5种皮肤;
-            let num1 = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
-            if (num > num1) {
-                Task.doDetectionTask(Task.TaskClass.everyday, name, num - num1);
-            }
-        });
-        EventAdmin.reg(Task.EventType.victory, Task, () => {
-            let name = Task.TaskName.每日服务10位客人;
-            Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-        })
-        EventAdmin.reg(Task.EventType.adsTime, Task, () => {
-            let name = Task.TaskName.每日观看两个广告;
-            Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-        })
-        EventAdmin.reg(Task.EventType.victoryBox, Task, () => {
-            let name = Task.TaskName.每日开启10个宝箱;
-            Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-        })
+        this.self.addComponent(Init);//误删
     }
 
     lwgAdaptive(): void {

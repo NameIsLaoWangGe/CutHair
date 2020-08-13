@@ -3127,10 +3127,11 @@
         let VictoryBox;
         (function (VictoryBox) {
             VictoryBox._BoxArray = [];
-            VictoryBox._openNum = 3;
+            VictoryBox._defaultOpenNum = 3;
             VictoryBox._alreadyOpenNum = 0;
             VictoryBox._adsMaxOpenNum = 6;
             VictoryBox._openVictoryBoxNum = 0;
+            VictoryBox.alreadyNum = 0;
             function getBoxProperty(name, property) {
                 let pro = null;
                 for (let index = 0; index < VictoryBox._BoxArray.length; index++) {
@@ -3184,9 +3185,10 @@
                     VictoryBox._BoxList = this.self['BoxList'];
                     VictoryBox._BoxArray = Tools.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json")['RECORDS']);
                     VictoryBox._selectBox = null;
-                    VictoryBox._openNum = 3;
+                    VictoryBox._defaultOpenNum = 3;
                     VictoryBox._openVictoryBoxNum++;
                     VictoryBox._adsMaxOpenNum = 6;
+                    VictoryBox._alreadyOpenNum = 0;
                 }
                 victoryBoxOnAwake() { }
                 lwgOnEnable() {
@@ -3694,6 +3696,193 @@
     let Skin = lwg.Skin;
     let SkinScene = lwg.Skin.SkinScene;
 
+    var EasterEgg;
+    (function (EasterEgg) {
+        EasterEgg._easterEgg_1Arr = [];
+        EasterEgg._easterEgg_1 = {
+            get value() {
+                if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
+            }
+        };
+        function initEasterEgg() {
+            EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
+        }
+        EasterEgg.initEasterEgg = initEasterEgg;
+        function getProperty(classify, name, property) {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            }
+            else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+        EasterEgg.getProperty = getProperty;
+        function setProperty(classify, name, property, value) {
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
+                }
+            }
+            let data = {};
+            data[classify] = arr;
+            Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
+        }
+        EasterEgg.setProperty = setProperty;
+        function getTaskProperty(classify, name, property) {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            }
+            else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+        EasterEgg.getTaskProperty = getTaskProperty;
+        function getClassify(classify) {
+            let arr = [];
+            switch (classify) {
+                case Classify.EasterEgg_01:
+                    arr = EasterEgg._easterEgg_1Arr;
+                    break;
+                default:
+                    break;
+            }
+            return arr;
+        }
+        EasterEgg.getClassify = getClassify;
+        function doDetection(classify, name, number) {
+            if (!number) {
+                number = 0;
+            }
+            let resCondition = getProperty(classify, name, Property.resCondition);
+            let condition = getProperty(classify, name, Property.condition);
+            if (!getProperty(classify, name, Property.complete)) {
+                if (condition <= resCondition + number) {
+                    setProperty(classify, name, Property.resCondition, condition);
+                    setProperty(classify, name, Property.complete, true);
+                    console.log(getProperty(classify, name, Property.complete));
+                    return 1;
+                }
+                else {
+                    setProperty(classify, name, Property.resCondition, resCondition + number);
+                    return 0;
+                }
+            }
+            else {
+                return 1;
+            }
+        }
+        EasterEgg.doDetection = doDetection;
+        function detectAllTasks(classify) {
+            let num = 1;
+            let arr = getClassify(classify);
+            for (const key in arr) {
+                if (arr.hasOwnProperty(key)) {
+                    const element = arr[key];
+                    let resCondition = getProperty(classify, name, Property.resCondition);
+                    let condition = getProperty(classify, name, Property.condition);
+                    if (condition > resCondition) {
+                        num = 0;
+                    }
+                }
+            }
+            return num;
+        }
+        EasterEgg.detectAllTasks = detectAllTasks;
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+            rewardType["assembly"] = "assembly";
+        })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
+        let Property;
+        (function (Property) {
+            Property["name"] = "name";
+            Property["explain"] = "explain";
+            Property["condition"] = "condition";
+            Property["resCondition"] = "resCondition";
+            Property["complete"] = "complete";
+        })(Property = EasterEgg.Property || (EasterEgg.Property = {}));
+        let Classify;
+        (function (Classify) {
+            Classify["EasterEgg_01"] = "EasterEgg_01";
+        })(Classify = EasterEgg.Classify || (EasterEgg.Classify = {}));
+        let Name;
+        (function (Name) {
+            Name["assembly_1"] = "assembly_1";
+            Name["assembly_2"] = "assembly_2";
+            Name["assembly_3"] = "assembly_3";
+            Name["assembly_4"] = "assembly_4";
+            Name["assembly_5"] = "assembly_5";
+        })(Name = EasterEgg.Name || (EasterEgg.Name = {}));
+        let EventType;
+        (function (EventType) {
+            EventType["trigger"] = "trigger";
+            EventType["easterEggAds"] = "easterEggAds";
+        })(EventType = EasterEgg.EventType || (EasterEgg.EventType = {}));
+        class EasterEggScene extends Admin.Scene {
+            lwgOnAwake() {
+                this.easterEggInitData();
+                this.easterEggOnAwake();
+            }
+            easterEggInitData() {
+            }
+            lwgEventReg() {
+                this.easterEggEventReg();
+            }
+            easterEggEventReg() { }
+            easterEggOnAwake() { }
+            lwgNodeDec() {
+                this.easterEggNodeDec();
+            }
+            easterEggNodeDec() { }
+            lwgOnEnable() {
+                this.easterEggOnEnable();
+            }
+            easterEggOnEnable() { }
+            lwgOpenAni() { return this.easterEggOpenAin(); }
+            easterEggOpenAin() { return 0; }
+            lwgBtnClick() { this.easterEggBtnClick(); }
+            easterEggBtnClick() { }
+            ;
+            lwgOnDisable() {
+                this.easterEggOnDisable();
+            }
+            easterEggOnDisable() { }
+        }
+        EasterEgg.EasterEggScene = EasterEggScene;
+    })(EasterEgg || (EasterEgg = {}));
+
     class ADManager {
         constructor() {
         }
@@ -3726,6 +3915,7 @@
                     if (rewardAction != null) {
                         rewardAction();
                         EventAdmin.notify(Task.EventType.adsTime);
+                        EventAdmin.notify(EasterEgg.EventType.easterEggAds);
                     }
                 });
                 p.cbi.Add(TJ.Define.Event.Close, () => {
@@ -4159,192 +4349,11 @@
         }
     }
 
-    var EasterEgg;
-    (function (EasterEgg) {
-        EasterEgg._easterEgg_1Arr = [];
-        EasterEgg._easterEgg_1 = {
-            get value() {
-                if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
-            }
-        };
-        function initEasterEgg() {
-            EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
-        }
-        EasterEgg.initEasterEgg = initEasterEgg;
-        function getProperty(classify, name, property) {
-            let pro = null;
-            let arr = getClassify(classify);
-            for (let index = 0; index < arr.length; index++) {
-                const element = arr[index];
-                if (element['name'] === name) {
-                    pro = element[property];
-                    break;
-                }
-            }
-            if (pro !== null) {
-                return pro;
-            }
-            else {
-                console.log(name + '找不到属性:' + property, pro);
-                return null;
-            }
-        }
-        EasterEgg.getProperty = getProperty;
-        function setProperty(classify, name, property, value) {
-            let arr = getClassify(classify);
-            for (let index = 0; index < arr.length; index++) {
-                const element = arr[index];
-                if (element['name'] === name) {
-                    element[property] = value;
-                    break;
-                }
-            }
-            let data = {};
-            data[classify] = arr;
-            Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
-        }
-        EasterEgg.setProperty = setProperty;
-        function getTaskProperty(classify, name, property) {
-            let pro = null;
-            let arr = getClassify(classify);
-            for (let index = 0; index < arr.length; index++) {
-                const element = arr[index];
-                if (element['name'] === name) {
-                    pro = element[property];
-                    break;
-                }
-            }
-            if (pro !== null) {
-                return pro;
-            }
-            else {
-                console.log(name + '找不到属性:' + property, pro);
-                return null;
-            }
-        }
-        EasterEgg.getTaskProperty = getTaskProperty;
-        function getClassify(classify) {
-            let arr = [];
-            switch (classify) {
-                case Classify.EasterEgg_01:
-                    arr = EasterEgg._easterEgg_1Arr;
-                    break;
-                default:
-                    break;
-            }
-            return arr;
-        }
-        EasterEgg.getClassify = getClassify;
-        function doDetection(classify, name, number) {
-            if (!number) {
-                number = 0;
-            }
-            let resCondition = getProperty(classify, name, Property.resCondition);
-            let condition = getProperty(classify, name, Property.condition);
-            if (!getProperty(classify, name, Property.complete)) {
-                if (condition <= resCondition + number) {
-                    setProperty(classify, name, Property.resCondition, condition);
-                    setProperty(classify, name, Property.complete, true);
-                    return 1;
-                }
-                else {
-                    setProperty(classify, name, Property.resCondition, resCondition + number);
-                    return 0;
-                }
-            }
-            else {
-                return 1;
-            }
-        }
-        EasterEgg.doDetection = doDetection;
-        function detectAllTasks(classify) {
-            let num = 1;
-            let arr = getClassify(classify);
-            for (const key in arr) {
-                if (arr.hasOwnProperty(key)) {
-                    const element = arr[key];
-                    let resCondition = getProperty(classify, name, Property.resCondition);
-                    let condition = getProperty(classify, name, Property.condition);
-                    if (condition > resCondition) {
-                        num = 0;
-                    }
-                }
-            }
-            return num;
-        }
-        EasterEgg.detectAllTasks = detectAllTasks;
-        let rewardType;
-        (function (rewardType) {
-            rewardType["gold"] = "gold";
-            rewardType["diamond"] = "diamond";
-            rewardType["assembly"] = "assembly";
-        })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
-        let Property;
-        (function (Property) {
-            Property["name"] = "name";
-            Property["explain"] = "explain";
-            Property["condition"] = "condition";
-            Property["resCondition"] = "resCondition";
-            Property["complete"] = "complete";
-        })(Property = EasterEgg.Property || (EasterEgg.Property = {}));
-        let Classify;
-        (function (Classify) {
-            Classify["EasterEgg_01"] = "EasterEgg_01";
-        })(Classify = EasterEgg.Classify || (EasterEgg.Classify = {}));
-        let Name;
-        (function (Name) {
-            Name["easterEgg_1"] = "easterEgg_1";
-            Name["easterEgg_2"] = "easterEgg_2";
-            Name["easterEgg_3"] = "easterEgg_3";
-            Name["easterEgg_4"] = "easterEgg_4";
-            Name["easterEgg_5"] = "easterEgg_5";
-        })(Name = EasterEgg.Name || (EasterEgg.Name = {}));
-        let EventType;
-        (function (EventType) {
-            EventType["trigger"] = "trigger";
-        })(EventType = EasterEgg.EventType || (EasterEgg.EventType = {}));
-        class EasterEggScene extends Admin.Scene {
-            lwgOnAwake() {
-                this.easterEggInitData();
-                this.easterEggOnAwake();
-            }
-            easterEggInitData() {
-            }
-            lwgEventReg() {
-                this.easterEggEventReg();
-            }
-            easterEggEventReg() { }
-            easterEggOnAwake() { }
-            lwgNodeDec() {
-                this.easterEggNodeDec();
-            }
-            easterEggNodeDec() { }
-            lwgOnEnable() {
-                this.easterEggOnEnable();
-            }
-            easterEggOnEnable() { }
-            lwgOpenAni() { return this.easterEggOpenAin(); }
-            easterEggOpenAin() { return 0; }
-            lwgBtnClick() { this.easterEggBtnClick(); }
-            easterEggBtnClick() { }
-            ;
-            lwgOnDisable() {
-                this.easterEggOnDisable();
-            }
-            easterEggOnDisable() { }
-        }
-        EasterEgg.EasterEggScene = EasterEggScene;
-    })(EasterEgg || (EasterEgg = {}));
-
     class UIEasterEgg extends EasterEgg.EasterEggScene {
+        constructor() {
+            super(...arguments);
+            this.clickNum = 0;
+        }
         easterEggOnAwake() {
             Setting.setBtnVinish();
             Gold.goldVinish();
@@ -4356,7 +4365,7 @@
                 const element = EasterEgg._easterEgg_1Arr[index];
                 let name = 'Complete' + (index + 1);
                 let complete = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.complete);
-                if (complete === 1) {
+                if (complete) {
                     this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng.png';
                 }
                 else {
@@ -4377,10 +4386,14 @@
                             });
                         }
                         break;
+                    case 3:
+                        break;
                     case 4:
                         if (complete !== 1) {
                             Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
-                                this.self['DialogHint'].x = 0;
+                                ADManager.ShowReward(() => {
+                                    this.self['DialogHint'].x = 0;
+                                });
                             });
                             Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
                                 this.self['DialogHint'].x = -800;
@@ -4393,7 +4406,14 @@
             }
         }
         easterEggBtnClick() {
-            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, () => {
+                this.self.close();
+            });
+            Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+                this.clickNum++;
+                console.log(this.clickNum);
+            });
+            Click.on(Click.Type.largen, this.self['BtnInject'], this, null, null, () => {
                 this.self.close();
             });
         }
@@ -4903,9 +4923,32 @@
         }
         taskInit() {
             Task.initTask();
+            EventAdmin.reg(Task.EventType.useSkins, Task, () => {
+                let num = Shop.setUseSkinType();
+                let name = Task.TaskName.每日使用5种皮肤;
+                let num1 = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
+                if (num > num1) {
+                    Task.doDetectionTask(Task.TaskClass.everyday, name, num - num1);
+                }
+            });
+            EventAdmin.reg(Task.EventType.victory, Task, () => {
+                let name = Task.TaskName.每日服务10位客人;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
+            EventAdmin.reg(Task.EventType.adsTime, Task, () => {
+                let name = Task.TaskName.每日观看两个广告;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
+            EventAdmin.reg(Task.EventType.victoryBox, Task, () => {
+                let name = Task.TaskName.每日开启10个宝箱;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
         }
         easterEggInit() {
             EasterEgg.initEasterEgg();
+            EventAdmin.reg(EasterEgg.EventType.easterEggAds, Task, () => {
+                EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_3, 1);
+            });
         }
         onDisable() {
         }
@@ -4964,28 +5007,6 @@
         }
         lwgInterior() {
             this.self.addComponent(Init);
-        }
-        lodingTaskEventReg() {
-            EventAdmin.reg(Task.EventType.useSkins, Task, () => {
-                let num = Shop.setUseSkinType();
-                let name = Task.TaskName.每日使用5种皮肤;
-                let num1 = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
-                if (num > num1) {
-                    Task.doDetectionTask(Task.TaskClass.everyday, name, num - num1);
-                }
-            });
-            EventAdmin.reg(Task.EventType.victory, Task, () => {
-                let name = Task.TaskName.每日服务10位客人;
-                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-            });
-            EventAdmin.reg(Task.EventType.adsTime, Task, () => {
-                let name = Task.TaskName.每日观看两个广告;
-                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-            });
-            EventAdmin.reg(Task.EventType.victoryBox, Task, () => {
-                let name = Task.TaskName.每日开启10个宝箱;
-                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
-            });
         }
         lwgAdaptive() {
             this.self['Bg'].y = Laya.stage.height / 2;
@@ -6351,7 +6372,7 @@
                 Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
             });
             Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
-                Admin._openScene(lwg.Admin.SceneName.UITask, null, this.self);
+                Admin._openScene(lwg.Admin.SceneName.UITask);
             });
             Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
                 lwg.Admin._openScene(Admin.SceneName.UICheckIn);
@@ -6634,7 +6655,7 @@
                 return;
             }
             else {
-                if (VictoryBox._openNum > 0) {
+                if (VictoryBox._defaultOpenNum > 0) {
                     let Pic_Box = this.self.getChildByName('Pic_Box');
                     if (!this.self['_dataSource'][VictoryBox.BoxProperty.ads]) {
                         Pic_Box.skin = 'UI/VictoryBox/baoxian3.png';
@@ -6669,8 +6690,8 @@
         }
         victoryBoxEventReg() {
             EventAdmin.reg(VictoryBox.EventType.openBox, this, (dataSource) => {
-                console.log(dataSource, VictoryBox._openNum);
-                if (VictoryBox._openNum > 0) {
+                console.log(dataSource, VictoryBox._defaultOpenNum);
+                if (VictoryBox._defaultOpenNum > 0) {
                     if (dataSource[VictoryBox.BoxProperty.ads]) {
                         ADManager.ShowReward(() => {
                             this.getRewardFunc(dataSource);
@@ -6686,7 +6707,16 @@
             });
         }
         getRewardFunc(dataSource) {
-            VictoryBox._openNum--;
+            VictoryBox.alreadyNum++;
+            let automan = false;
+            if (VictoryBox.alreadyNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
+                EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, 1);
+                let cell = VictoryBox._BoxList.getCell(dataSource.arrange - 1);
+                let Automan = cell.getChildByName('Automan');
+                Automan.visible = true;
+                automan = true;
+            }
+            VictoryBox._defaultOpenNum--;
             VictoryBox._selectBox = dataSource[VictoryBox.BoxProperty.name];
             let diffX = dataSource.arrange % 3;
             if (diffX == 0) {
@@ -6697,11 +6727,13 @@
             let y = VictoryBox._BoxList.y + VictoryBox._BoxList.height / 3 * diffY + 92;
             Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
             VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
-            Laya.timer.frameOnce(20, this, f => {
-                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                    Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
+            if (!automan) {
+                Laya.timer.frameOnce(20, this, f => {
+                    Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                        Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
+                    });
                 });
-            });
+            }
             EventAdmin.notify(Task.EventType.victoryBox);
         }
         boxList_Update(cell, index) {
@@ -6754,7 +6786,7 @@
             if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
                 ADManager.ShowReward(() => {
                     Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
-                    VictoryBox._openNum += 3;
+                    VictoryBox._defaultOpenNum += 3;
                     VictoryBox._adsMaxOpenNum -= 3;
                 });
             }
@@ -6763,7 +6795,7 @@
             }
         }
         victoryOnUpdate() {
-            if (VictoryBox._openNum > 0) {
+            if (VictoryBox._defaultOpenNum > 0) {
                 this.self['BtnAgain'].visible = false;
                 this.self['BtnNo'].visible = false;
             }

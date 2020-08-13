@@ -25,7 +25,7 @@
   {
     "name": "assembly_4",
     "explain": "宝箱获取",
-    "condition": 5,
+    "condition": 1,
     "resCondition": 0,
     "complete": false
   },

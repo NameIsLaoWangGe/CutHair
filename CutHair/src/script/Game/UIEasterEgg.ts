@@ -1,5 +1,6 @@
 import { EasterEgg } from "../Lwg_Template/EasterEgg";
 import { Click, Admin, Setting, Gold, Shop, EventAdmin, Task } from "../Lwg_Template/lwg";
+import ADManager from "../TJ/Admanager";
 
 export default class UIEasterEgg extends EasterEgg.EasterEggScene {
 
@@ -18,7 +19,7 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
             //显示是否完成 
             let name = 'Complete' + (index + 1);
             let complete = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.complete);
-            if (complete === 1) {
+            if (complete) {
                 this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng.png';
             } else {
                 this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng2.png';
@@ -41,10 +42,15 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
                         });
                     }
                     break;
+
+                case 3:
+                    break;
                 case 4:
                     if (complete !== 1) {
                         Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
-                            this.self['DialogHint'].x = 0;
+                            ADManager.ShowReward(() => {
+                                this.self['DialogHint'].x = 0;
+                            })
                         });
 
                         Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
@@ -55,14 +61,20 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
                 default:
                     break;
             }
-
         }
     }
 
+    clickNum: number = 0;
     /**显示任务完成状况*/
-
     easterEggBtnClick(): void {
-        Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+        Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, () => {
+            this.self.close();
+        });
+        Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+            this.clickNum++;
+            console.log(this.clickNum);
+        });
+        Click.on(Click.Type.largen, this.self['BtnInject'], this, null, null, () => {
             this.self.close();
         });
     };
@@ -71,5 +83,9 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
         Setting.setBtnAppear();
         Gold.goldAppear();
         EventAdmin.notify(EasterEgg.EventType.trigger);
+    }
+
+    easu():void{
+
     }
 }
