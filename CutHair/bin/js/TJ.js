@@ -2,11 +2,11 @@ var DP =
 {
     Basic:
     {
-        appGuid:"11197d7d-eeab-0b2b-071c-87b27b7675b8",
-        productName:"解救小王子",
-        packageName:"com.tomatojoy.jjxwz.wx",
-        versionName:"1.0.4",
-        versionCode:7,
+        appGuid:"45174a50-fd36-04bb-effb-cb3eea7596b3",
+        productName:"剃头大师",
+        packageName:"com.tomato.joy.ttds.wx",
+        versionName:"0.0.1",
+        versionCode:1,
         channel:"WX_AppRt",
     },
     XIAOMI:
@@ -19,10 +19,10 @@ var DP =
     },
     WX:   //微信小游戏
     {
-        appId:"wxd306db691cc24fd5",
-        bannerId:"adunit-41a509e53e2e82d0",
-        insertId:"adunit-60c30b6fabc21c37",
-        videoId:"adunit-7d1746fb774ebf5a",
+        appId:"wx1bae7e805d15dffb",
+        bannerId:null,
+        insertId:null,
+        videoId:null,
     },
     VIVO:
     {
@@ -49,7 +49,7 @@ var DP =
     },
     ReYun:   //热云统计
     {
-        appId:"f1b18f4431d86d947f4c24a5312f8fd6",
+        appId:"262edc71c5c934ba4435fbf8142b26d6",
     },
     QTTGame:   //趣头条游戏
     {
@@ -147,7 +147,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/7/30 18:17:16
+中国标准时间 2020/8/14 17:03:28
 */
 var TJ;
 (function (TJ) {

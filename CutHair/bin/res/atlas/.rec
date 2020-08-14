@@ -193,6 +193,7 @@ D UI/Inherit
 P ECE7E04E bupei.png
 P E4FD158F jieshou.png
 P BCBCAD68 txt_biaoti.png
+R ACDD8DDF yangshi.png
 R 0B987673 zi.png
 D UI/Loding
 P E81ED0DF bg1.jpg
@@ -295,23 +296,6 @@ P BA861BD4 tiao2.png
 P FBF9F77D txt_huoqu.png
 P 61893087 txt_leiji.png
 P 04AF5391 txt_xiexie.png
-D UI/xiaoguotu
-R B879CA48 Congratulate.png
-R E0A9A5F2 Defeated.png
-R ED9BA181 DressUp.png
-R D6123357 fenxiang.png
-R D115C94D GameMain.png
-R 3439DAE5 GameStart.png
-R ADC5437F GameStart2.png
-R A6E5AB68 Gift.png
-R 3C19B409 Inherit.png
-R E763A2E2 register.png
-R 10BFE6FE Resurgence.png
-R 346A2476 Set.png
-R BE7B7D82 shop.png
-R 827F5BCD Task.png
-R B59D3434 victory.png
-R 2D221A41 XDSkin.png
 D UI/EasterEgg_Aotoman/Congratulation
 P 907EDAED 3.png
 R B2EF2CDE biaoti.png

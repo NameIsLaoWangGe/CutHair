@@ -160,21 +160,12 @@ export default class UIOperation extends lwg.Admin.Scene {
         // 胜利
         EventAdmin.reg(EventAdmin.EventType.closeOperation, this, () => {
             this.self.close();
-            console.log('关闭自己！')
         })
 
         // 胜利
         EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
             if (Admin._gameStart) {
-                if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-                    Laya.timer.frameOnce(60, this, () => {
-                        Admin._openScene(Admin.SceneName.UISkin, null, this.self);
-                    });
-                } else {
-                    //刷新一下属性 
-                    this.BtnLast.visible = true;
-                }
-                // Admin._gameStart = false;
+                this.BtnLast.visible = true;
             }
         })
 
@@ -193,11 +184,6 @@ export default class UIOperation extends lwg.Admin.Scene {
                 Admin._gameStart = false;
             }
         })
-
-        // // 重来
-        // EventAdmin.reg(EventAdmin.EventType.operationRefresh, this, () => {
-        //     lwg.Admin._openScene(Admin.SceneName.UIOperation)
-        // })
 
         // 左侧胡子修剪
         EventAdmin.reg(GEnum.EventType.LeftBeard, this, () => {
@@ -291,7 +277,6 @@ export default class UIOperation extends lwg.Admin.Scene {
             Mask.width = Bar.width + 20;
             Mask.x = -(Bar.width + 20);
             Mask.height = 25;
-
         }
         this.TaskBar.width = GVariate._taskArr.length * spacing;
         this.TaskBar.pivotX = this.TaskBar.width / 2;
@@ -409,11 +394,15 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.BtnLast.visible = false;
         this.moveSwitch = false;
         e.stopPropagation();
-        GVariate._taskNum++;
-        this.mainCameraMove();
-        EventAdmin.notify(GEnum.EventType.taskProgress);
-        if (this._numZoder[GVariate._taskNum].value <= 10) {
-            EventAdmin.notify(EventAdmin.EventType.taskReach);
+        if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+            Admin._openScene(Admin.SceneName.UISkin, null, this.self);
+        } else {
+            GVariate._taskNum++;
+            this.mainCameraMove();
+            EventAdmin.notify(GEnum.EventType.taskProgress);
+            if (this._numZoder[GVariate._taskNum].value <= 10) {
+                EventAdmin.notify(EventAdmin.EventType.taskReach);
+            }
         }
     }
 
