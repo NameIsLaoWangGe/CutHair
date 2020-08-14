@@ -327,6 +327,19 @@ export module lwg {
                 console.error("事件的执行域必须存在!");
             }
             dispatcher.on(type.toString(), caller, listener);
+
+        }
+        /**
+        * 注册一次事件，相应一次就消失
+        * @param type 事件类型或者名称
+        * @param caller 事件的执行域
+        * @param listener 响应事件的回调函数,以下写法可以传递参数进来:()=>{}
+        */
+        export function regOnce(type: any, caller: any, listener: Function) {
+            if (!caller) {
+                console.error("事件的执行域必须存在!");
+            }
+            dispatcher.once(type.toString(), caller, listener);
         }
         /**
          * 通知事件
@@ -4673,7 +4686,7 @@ export module lwg {
                 _openVictoryBoxNum++;
                 _adsMaxOpenNum = 6;
                 _alreadyOpenNum = 0;
-                
+
             }
             /**VictoryBoxScene开始前执行一次，重写覆盖*/
             victoryBoxOnAwake(): void { }

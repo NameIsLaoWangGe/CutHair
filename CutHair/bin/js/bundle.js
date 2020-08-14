@@ -224,6 +224,13 @@
                 EventAdmin.dispatcher.on(type.toString(), caller, listener);
             }
             EventAdmin.reg = reg;
+            function regOnce(type, caller, listener) {
+                if (!caller) {
+                    console.error("事件的执行域必须存在!");
+                }
+                EventAdmin.dispatcher.once(type.toString(), caller, listener);
+            }
+            EventAdmin.regOnce = regOnce;
             function notify(type, args) {
                 EventAdmin.dispatcher.event(type.toString(), args);
             }
@@ -3809,12 +3816,18 @@
             for (const key in arr) {
                 if (arr.hasOwnProperty(key)) {
                     const element = arr[key];
-                    let resCondition = getProperty(classify, name, Property.resCondition);
-                    let condition = getProperty(classify, name, Property.condition);
+                    let resCondition = getProperty(classify, element.name, Property.resCondition);
+                    let condition = getProperty(classify, element.name, Property.condition);
                     if (condition > resCondition) {
                         num = 0;
                     }
                 }
+            }
+            if (num == 1) {
+                console.log(classify, '完成了！');
+            }
+            else {
+                console.log(classify, '没有完成！');
             }
             return num;
         }
@@ -3855,29 +3868,22 @@
                 this.easterEggInitData();
                 this.easterEggOnAwake();
             }
-            easterEggInitData() {
-            }
-            lwgEventReg() {
-                this.easterEggEventReg();
-            }
+            easterEggInitData() { }
+            lwgEventReg() { this.easterEggEventReg(); }
             easterEggEventReg() { }
             easterEggOnAwake() { }
-            lwgNodeDec() {
-                this.easterEggNodeDec();
-            }
+            lwgNodeDec() { this.easterEggNodeDec(); }
             easterEggNodeDec() { }
-            lwgOnEnable() {
-                this.easterEggOnEnable();
-            }
+            lwgOnEnable() { this.easterEggOnEnable(); }
             easterEggOnEnable() { }
             lwgOpenAni() { return this.easterEggOpenAin(); }
             easterEggOpenAin() { return 0; }
             lwgBtnClick() { this.easterEggBtnClick(); }
             easterEggBtnClick() { }
             ;
-            lwgOnDisable() {
-                this.easterEggOnDisable();
-            }
+            lwgOnUpdate() { this.easterEggOnUpdate(); }
+            easterEggOnUpdate() { }
+            lwgOnDisable() { this.easterEggOnDisable(); }
             easterEggOnDisable() { }
         }
         EasterEgg.EasterEggScene = EasterEggScene;
@@ -4353,6 +4359,8 @@
         constructor() {
             super(...arguments);
             this.clickNum = 0;
+            this.clickSwitch = false;
+            this.clickTime = 0;
         }
         easterEggOnAwake() {
             Setting.setBtnVinish();
@@ -4411,13 +4419,43 @@
             });
             Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
                 this.clickNum++;
-                console.log(this.clickNum);
+                this.clickSwitch = true;
             });
             Click.on(Click.Type.largen, this.self['BtnInject'], this, null, null, () => {
                 this.self.close();
             });
+            Click.on(Click.Type.largen, this.self['BtnAssembly4No'], this, null, null, () => {
+                this.self['DialogAssembly4'].x = 800;
+            });
+            Click.on(Click.Type.largen, this.self['BtnAssembly4Yes'], this, null, null, () => {
+                ADManager.ShowReward(() => {
+                    this.self['DialogAssembly4'].x = 0;
+                });
+            });
         }
         ;
+        clickStraight() {
+            if (this.clickSwitch) {
+                this.clickTime++;
+                if (this.clickTime >= 60) {
+                    this.clickSwitch = false;
+                    this.clickNum = 0;
+                }
+                else {
+                    if (this.clickNum >= 5) {
+                        this.self['DialogAssembly4'].x = 0;
+                        this.clickSwitch = false;
+                        this.clickNum = 0;
+                    }
+                }
+            }
+            else {
+                this.clickTime = 0;
+            }
+        }
+        easterEggOnUpdate() {
+            this.clickStraight();
+        }
         easterEggOnDisable() {
             Setting.setBtnAppear();
             Gold.goldAppear();
@@ -4582,7 +4620,7 @@
                     }
                     other.isKinematic = false;
                     other.isTrigger = false;
-                    other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
+                    other.linearVelocity = new Laya.Vector3(0, -3, 0);
                     break;
                 default:
                     break;
@@ -4600,6 +4638,10 @@
             GSene3D.MainCamera = this.MainCamera;
             GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark');
             GSene3D.LevelParent = this.self.getChildByName('LevelParent');
+            for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
+                const element = GSene3D.LevelParent.getChildAt(index);
+                element.active = false;
+            }
             GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
             GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
             GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
@@ -4641,23 +4683,15 @@
             this.self.addChild(LevelParent0);
             GSene3D.LevelParent.active = false;
             GVariate._taskArr = [];
-            for (let index = 0; index < LevelParent0.numChildren; index++) {
-                const element = LevelParent0.getChildAt(index);
-                if (Number(element.name.substring(5, element.name.length)) == Game._gameLevel.value) {
-                    element.active = true;
-                    GSene3D.Level = element;
-                }
-                else {
-                    element.active = false;
-                }
-            }
+            GSene3D.Level = LevelParent0.getChildByName('Level' + Game._gameLevel.value);
+            GSene3D.Level.active = true;
             if (!GSene3D.Level) {
                 console.log('本关卡不存在');
             }
             else {
                 for (let index = 0; index < GSene3D.Level.numChildren; index++) {
                     const element = GSene3D.Level.getChildAt(index);
-                    if (element.name !== 'CutHairParent' && element.name !== 'StandardParent') {
+                    if (element.name !== 'CutHairParent' && element.name !== 'StandardParent' && element.name !== 'RoleObj') {
                         GVariate._taskArr.push(element.name);
                     }
                 }
@@ -4678,8 +4712,8 @@
             EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction) => {
                 this.cameraMove(direction);
             });
-            EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction) => {
-                GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
+            EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, () => {
+                GSene3D.Razor.transform.position = GSene3D.razorFPos;
             });
             EventAdmin.reg(GEnum.EventType.changeEyeDecoration, this, () => {
                 console.log('换眼部装饰');
@@ -4729,7 +4763,6 @@
                 }
             });
             EventAdmin.reg(GEnum.EventType.changeHeadDecoration, this, () => {
-                console.log('换头部装饰');
                 for (let index = 0; index < GSene3D.HeadDecoration.numChildren; index++) {
                     const element = GSene3D.HeadDecoration.getChildAt(index);
                     if (element.name == Skin._currentHead.name) {
@@ -4860,6 +4893,9 @@
                     GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model2 = GSene3D.knife.getChildAt(0);
+                    Model2.transform.localRotationEulerX = -17;
+                    Model2.transform.localRotationEulerY = 168;
+                    Model2.transform.localRotationEulerZ = -178;
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                     });
@@ -4872,6 +4908,9 @@
                     GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
                     GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                     let Model1 = GSene3D.knife.getChildAt(0);
+                    Model1.transform.localRotationEulerX = 28;
+                    Model1.transform.localRotationEulerY = 167;
+                    Model1.transform.localRotationEulerZ = 176;
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                     });
@@ -5057,7 +5096,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余需要修理的头发', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 10) {
                             this.switch = false;
                             console.log('任务完成了！');
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -5075,7 +5114,7 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余左侧胡须', this.value);
-                        if (this.value <= 3) {
+                        if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -5383,9 +5422,7 @@
             }
         }
         onStageMouseMove(e) {
-            if (!Admin._gameStart) {
-                return;
-            }
+            Admin._gameStart = true;
             if (this.moveSwitch) {
                 switch (GVariate._taskArr[GVariate._taskNum]) {
                     case GEnum.TaskType.HairParent:
@@ -6047,7 +6084,9 @@
                         case 1:
                             Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
                             EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
-                            GSene3D.HairParent.active = false;
+                            if (GSene3D.HairParent) {
+                                GSene3D.HairParent.active = false;
+                            }
                             break;
                         default:
                             break;
@@ -6311,7 +6350,7 @@
             EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
                 this.self['BtnXDSkin'].visible = false;
             });
-            EventAdmin.reg(CheckIn.EventType.removeCheckBtn, this, () => {
+            EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
                 this.self['BtnCheck'].visible = false;
             });
             EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {

@@ -145,12 +145,17 @@ export module EasterEgg {
         for (const key in arr) {
             if (arr.hasOwnProperty(key)) {
                 const element = arr[key];
-                let resCondition = getProperty(classify, name, Property.resCondition);
-                let condition = getProperty(classify, name, Property.condition);
+                let resCondition = getProperty(classify, element.name, Property.resCondition);
+                let condition = getProperty(classify, element.name, Property.condition);
                 if (condition > resCondition) {
                     num = 0;
                 }
             }
+        }
+        if (num == 1) {
+            console.log(classify, '完成了！');
+        } else {
+            console.log(classify, '没有完成！');
         }
         return num;
     }
@@ -208,38 +213,35 @@ export module EasterEgg {
             this.easterEggOnAwake();
         }
         /**初始化json数据*/
-        easterEggInitData(): void {
-        }
-        lwgEventReg(): void {
-            this.easterEggEventReg();
-        }
+        easterEggInitData(): void { }
+        lwgEventReg(): void { this.easterEggEventReg(); }
         /**任务中注册的一些事件*/
         easterEggEventReg(): void { }
 
         /**初始化前执行一次*/
         easterEggOnAwake(): void { }
-        lwgNodeDec(): void {
-            this.easterEggNodeDec();
-        }
+        lwgNodeDec(): void { this.easterEggNodeDec(); }
         /**节点声明*/
         easterEggNodeDec(): void { }
 
-        lwgOnEnable(): void {
-            this.easterEggOnEnable();
-        }
+        lwgOnEnable(): void { this.easterEggOnEnable(); }
         /**开始后执行*/
         easterEggOnEnable(): void { }
         lwgOpenAni(): number { return this.easterEggOpenAin(); }
         /**开场动画*/
         easterEggOpenAin(): number { return 0; }
-        /**按钮点击事件*/
+
         lwgBtnClick(): void { this.easterEggBtnClick() }
+        /**按钮点击事件*/
         easterEggBtnClick(): void { };
 
-        lwgOnDisable(): void {
-            this.easterEggOnDisable();
-        }
+        lwgOnUpdate(): void { this.easterEggOnUpdate(); }
+        /**每帧执行*/
+        easterEggOnUpdate(): void { }
+
+        lwgOnDisable(): void { this.easterEggOnDisable(); }
         /**页面关闭后执行*/
         easterEggOnDisable(): void { }
+
     }
 }

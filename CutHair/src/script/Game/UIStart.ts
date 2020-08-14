@@ -17,7 +17,7 @@ export default class UIStart extends lwg.Admin.Scene {
         EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
             this.self['BtnXDSkin'].visible = false;
         })
-        EventAdmin.reg(CheckIn.EventType.removeCheckBtn, this, () => {
+        EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
             this.self['BtnCheck'].visible = false;
         })
         EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {

@@ -14,6 +14,10 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.MainCamera = this.MainCamera;
         GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark') as Laya.MeshSprite3D;
         GSene3D.LevelParent = this.self.getChildByName('LevelParent') as Laya.MeshSprite3D;
+        for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
+            const element = GSene3D.LevelParent.getChildAt(index);
+            element.active = false;
+        }
 
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
@@ -69,22 +73,15 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.LevelParent.active = false;
         GVariate._taskArr = [];
 
-        for (let index = 0; index < LevelParent0.numChildren; index++) {
-            const element = LevelParent0.getChildAt(index) as Laya.MeshSprite3D;
-            if (Number(element.name.substring(5, element.name.length)) == Game._gameLevel.value) {
-                element.active = true;
-                GSene3D.Level = element;
-            } else {
-                element.active = false;
-            }
-        }
+        GSene3D.Level = LevelParent0.getChildByName('Level' + Game._gameLevel.value) as Laya.MeshSprite3D;
+        GSene3D.Level.active = true;
 
         if (!GSene3D.Level) {
             console.log('本关卡不存在');
         } else {
             for (let index = 0; index < GSene3D.Level.numChildren; index++) {
                 const element = GSene3D.Level.getChildAt(index);
-                if (element.name !== 'CutHairParent' && element.name !== 'StandardParent') {
+                if (element.name !== 'CutHairParent' && element.name !== 'StandardParent' && element.name !== 'RoleObj') {
                     GVariate._taskArr.push(element.name);
                 }
             }
@@ -109,9 +106,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction: string) => {
             this.cameraMove(direction);
         })
-        //重来
-        EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, (direction: string) => {
-            GSene3D.Razor.transform.position = new Laya.Vector3(GSene3D.razorFPos.x, GSene3D.razorFPos.y, GSene3D.razorFPos.z);
+        //复活
+        EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, () => {
+            GSene3D.Razor.transform.position = GSene3D.razorFPos;
         })
 
         // 换眼部装饰
@@ -167,7 +164,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
 
         // 换头饰
         EventAdmin.reg(GEnum.EventType.changeHeadDecoration, this, () => {
-            console.log('换头部装饰');
+
             for (let index = 0; index < GSene3D.HeadDecoration.numChildren; index++) {
                 const element = GSene3D.HeadDecoration.getChildAt(index) as Laya.MeshSprite3D;
                 if (element.name == Skin._currentHead.name) {
@@ -327,7 +324,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
                 GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                 let Model2 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D;
-                // Model2.transform.localRotationEulerX = -180;
+                Model2.transform.localRotationEulerX = -17;
+                Model2.transform.localRotationEulerY = 168;
+                Model2.transform.localRotationEulerZ = -178;
 
                 Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this, null, () => {
                     Admin._gameStart = true;
@@ -344,7 +343,9 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
                 GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
                 let Model1 = GSene3D.knife.getChildAt(0) as Laya.MeshSprite3D;
-                // Model1.transform.localRotationEulerX = -180;
+                Model1.transform.localRotationEulerX = 28;
+                Model1.transform.localRotationEulerY = 167;
+                Model1.transform.localRotationEulerZ = 176;
 
                 Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
                     Admin._gameStart = true;

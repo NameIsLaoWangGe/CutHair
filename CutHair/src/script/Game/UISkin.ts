@@ -36,7 +36,9 @@ export default class UISkin extends SkinScene {
                     case 1:
                         Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
                         EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
-                        GSene3D.HairParent.active = false;
+                        if (GSene3D.HairParent) {
+                            GSene3D.HairParent.active = false;
+                        }
                         break;
 
                     default:

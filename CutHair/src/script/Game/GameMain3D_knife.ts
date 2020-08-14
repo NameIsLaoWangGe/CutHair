@@ -33,7 +33,7 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
 
                 other.isKinematic = false;
                 other.isTrigger = false;
-                other.linearVelocity = new Laya.Vector3(0, -0.5, 0);
+                other.linearVelocity = new Laya.Vector3(0, -3, 0);
                 break;
             default:
                 break;

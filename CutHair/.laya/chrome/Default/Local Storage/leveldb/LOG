@@ -1,21 +1,6 @@
-2020/08/13-19:13:30.466 45d8 Reusing MANIFEST D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/MANIFEST-000001
-2020/08/13-19:13:30.466 45d8 Recovering log #122
-2020/08/13-19:13:30.467 45d8 Reusing old log D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/000122.log 
-2020/08/13-20:20:32.547 2cb8 Level-0 table #126: started
-2020/08/13-20:20:32.587 2cb8 Level-0 table #126: 11034 bytes OK
-2020/08/13-20:20:32.612 2cb8 Delete type=0 #122
-2020/08/13-20:38:36.154 2cb8 Level-0 table #128: started
-2020/08/13-20:38:36.199 2cb8 Level-0 table #128: 10199 bytes OK
-2020/08/13-20:38:36.230 2cb8 Delete type=0 #125
-2020/08/13-20:38:36.231 2cb8 Compacting 4@0 + 1@1 files
-2020/08/13-20:38:36.258 2cb8 Generated table #129@0: 40 keys, 3783 bytes
-2020/08/13-20:38:36.258 2cb8 Compacted 4@0 + 1@1 files => 3783 bytes
-2020/08/13-20:38:36.296 2cb8 compacted to: files[ 0 1 1 0 0 0 0 ]
-2020/08/13-20:38:36.297 2cb8 Delete type=2 #119
-2020/08/13-20:38:36.297 2cb8 Delete type=2 #121
-2020/08/13-20:38:36.297 2cb8 Delete type=2 #123
-2020/08/13-20:38:36.297 2cb8 Delete type=2 #126
-2020/08/13-20:38:36.297 2cb8 Delete type=2 #128
-2020/08/13-21:03:09.258 2cb8 Level-0 table #131: started
-2020/08/13-21:03:09.287 2cb8 Level-0 table #131: 10970 bytes OK
-2020/08/13-21:03:09.318 2cb8 Delete type=0 #127
+2020/08/14-10:11:32.165 12a0 Reusing MANIFEST D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/MANIFEST-000001
+2020/08/14-10:11:32.166 12a0 Recovering log #130
+2020/08/14-10:11:32.166 12a0 Reusing old log D:\Game\project\CutHair\Project\CutHair\.laya\chrome\Default\Local Storage\leveldb/000130.log 
+2020/08/14-11:23:17.177 120c Level-0 table #134: started
+2020/08/14-11:23:17.214 120c Level-0 table #134: 11311 bytes OK
+2020/08/14-11:23:17.244 120c Delete type=0 #130
