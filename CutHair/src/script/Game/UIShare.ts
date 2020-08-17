@@ -16,7 +16,7 @@ export default class UIShare extends lwg.Admin.Scene {
             index = Game._gameLevel.value;
         }
 
-        let url = 'UI/Share/Photo/photo_' + index + '.png'
+        let url = 'UI/Share/Photo/' + index + '.png'
         this.self['SmallPhoto'].skin = url;
     }
 

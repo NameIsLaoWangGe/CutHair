@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":494,
+    "selecteID":429,
     "searchKey":"View",
     "props":{"y":0,"x":0,"width":720,"visible":true,"sceneColor":"#494949","height":1280},
     "nodeParent":-1,
@@ -121,7 +121,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,BtnMore,BtnMore",
-            "props":{"y":591,"x":0,"var":"BtnMore","texture":"UI/GameStart/genduo.png","name":"BtnMore"},
+            "props":{"y":591,"x":0,"visible":false,"var":"BtnMore","texture":"UI/GameStart/genduo.png","name":"BtnMore"},
             "nodeParent":2,
             "label":"BtnMore",
             "isDirectory":false,
@@ -503,32 +503,17 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "searchKey":"Image,PicAotuman,PicAotuman",
-                    "props":{"y":116,"x":52,"width":33,"var":"PicAotuman","skin":"UI/EasterEgg_Aotoman/GameStart/renwu_xiao.png","pivotY":31,"pivotX":17,"name":"PicAotuman","height":61},
-                    "nodeParent":498,
-                    "label":"PicAotuman",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":502,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
                     "searchKey":"Image,Clamp,Clamp",
                     "props":{"y":-21,"x":26,"var":"Clamp","name":"Clamp"},
                     "nodeParent":498,
                     "label":"Clamp",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":500,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,LeftClamp,LeftClamp",
                             "props":{"y":80,"x":18,"var":"LeftClamp","skin":"UI/EasterEgg_Aotoman/GameStart/zhazi_2.png","scaleX":-1,"rotation":0,"name":"LeftClamp"},
@@ -542,7 +527,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,RightClamp,RightClamp",
                             "props":{"y":82,"x":34,"width":30,"var":"RightClamp","skin":"UI/EasterEgg_Aotoman/GameStart/zhazi_2.png","rotation":0,"name":"RightClamp","height":55},
@@ -556,7 +540,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"texture":"UI/EasterEgg_Aotoman/GameStart/zhuazi_1.png"},
@@ -569,6 +552,20 @@
                             "child":[
                                 ]
                         }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,PicAotuman,PicAotuman",
+                    "props":{"y":118,"x":52,"width":33,"var":"PicAotuman","skin":"UI/EasterEgg_Aotoman/GameStart/renwu_xiao.png","pivotY":31,"pivotX":17,"name":"PicAotuman","height":61},
+                    "nodeParent":498,
+                    "label":"PicAotuman",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":502,
+                    "child":[
+                        ]
                 }]
         },
         {

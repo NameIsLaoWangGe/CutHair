@@ -7,7 +7,7 @@ export module EasterEgg {
     /**彩蛋1是否已经被触发*/
     export let _easterEgg_1 = {
         get value(): boolean {
-            if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
+            if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
                 return false;
             } else {
                 return true;
@@ -23,6 +23,9 @@ export module EasterEgg {
     /**初始化彩蛋模块*/
     export function initEasterEgg(): void {
         _easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
+        Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
+        // console.log(  Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS']);
+        
     }
 
     /**

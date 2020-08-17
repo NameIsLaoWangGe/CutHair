@@ -13,7 +13,13 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         GSene3D.GameMain3D = this.self;
         GSene3D.MainCamera = this.MainCamera;
         GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark') as Laya.MeshSprite3D;
-        GSene3D.LevelParent = this.self.getChildByName('LevelParent') as Laya.MeshSprite3D;
+        GSene3D.LevelParent_Mark = this.self.getChildByName('LevelParent_Mark') as Laya.MeshSprite3D;
+        // 获取关卡prefab
+        GSene3D.LevelParent = Laya.loader.getRes("3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh") as Laya.MeshSprite3D;
+
+        this.self.addChild(GSene3D.LevelParent);
+        GSene3D.LevelParent.transform.position = GSene3D.LevelParent_Mark.transform.position;
+
         for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
             const element = GSene3D.LevelParent.getChildAt(index);
             element.active = false;
@@ -201,6 +207,7 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
         this.self.addChild(LevelParent0);
         GSene3D.LevelParent.active = false;
 
+        console.log(Game._gameLevel.value);
         let index;
         if (Game._gameLevel.value > 10) {
             index = Game._gameLevel.value % 10 + 1;

@@ -5,6 +5,10 @@ import { EasterEgg } from "../Lwg_Template/EasterEgg";
 import Init from "../Lwg_Template/Init";
 export default class UILoding extends Loding.LodeScene {
 
+    subpackages(): void {
+
+    }
+
     lodingResList(): void {
         Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
@@ -20,6 +24,9 @@ export default class UILoding extends Loding.LodeScene {
         Loding.lodingList_3DScene = [
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
         ];
+        Loding.lodingList_3DPrefab = [
+            "3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh"
+        ]
         Loding.lodingList_Json = [
             "GameData/Shop/Other.json",
             "GameData/Shop/Props.json",
@@ -47,6 +54,7 @@ export default class UILoding extends Loding.LodeScene {
         Laya.stage.addChildAt(Scene3D, 0);
         Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
         Scene3D.addComponent(GameMain3D);
+
 
         Laya.timer.once(500, this, () => {
             Gold.createGoldNode(Laya.stage);

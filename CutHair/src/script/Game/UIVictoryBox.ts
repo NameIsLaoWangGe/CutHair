@@ -37,9 +37,9 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
 
     /**领取奖励动画*/
     getRewardFunc(dataSource): void {
-        VictoryBox.alreadyNum++;
+        VictoryBox._alreadyOpenNum++;
         let automan = false;
-        if (VictoryBox.alreadyNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
+        if (VictoryBox._alreadyOpenNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
             EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, 1);
             let cell = VictoryBox._BoxList.getCell(dataSource.arrange - 1);
             let Automan = cell.getChildByName('Automan') as Laya.Sprite;
@@ -123,7 +123,6 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     }
 
     // /**看广告获取的最大次数为6次*/
-    // maxAdvGet: number = 6;
     btnAgainUp(event): void {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
         if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {

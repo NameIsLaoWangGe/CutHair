@@ -14,6 +14,7 @@ import UISkin from "./script/Game/UISkin"
 import UISkinTry from "./script/Game/UISkinTry"
 import UISkinXD from "./script/Game/UISkinXD"
 import UIStart from "./script/Game/UIStart"
+import UISubpackages from "./script/Game/UISubpackages"
 import UITask_GetAward from "./script/Game/UITask_GetAward"
 import UITask from "./script/Game/UITask"
 import UIVictory from "./script/Game/UIVictory"
@@ -30,10 +31,10 @@ export default class GameConfig{
     static screenMode:string="vertical";
     static alignV:string="top";
     static alignH:string="left";
-    static startScene:any="Scene/UILoding.scene";
+    static startScene:any="Scene/UISubpackages.scene";
     static sceneRoot:string="";
     static debug:boolean=false;
-    static stat:boolean=true;
+    static stat:boolean=false;
     static physicsDebug:boolean=false;
     static exportSceneToJson:boolean=true;
     constructor(){}
@@ -54,6 +55,7 @@ export default class GameConfig{
         reg("script/Game/UISkinTry.ts",UISkinTry);
         reg("script/Game/UISkinXD.ts",UISkinXD);
         reg("script/Game/UIStart.ts",UIStart);
+        reg("script/Game/UISubpackages.ts",UISubpackages);
         reg("script/Game/UITask_GetAward.ts",UITask_GetAward);
         reg("script/Game/UITask.ts",UITask);
         reg("script/Game/UIVictory.ts",UIVictory);

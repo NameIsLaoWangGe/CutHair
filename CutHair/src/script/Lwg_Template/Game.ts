@@ -7,12 +7,7 @@ export module GameControl {
     /**等级*/
     export let _gameLevel = {
         get value(): number {
-            if (Laya.LocalStorage.getItem('_gameLevel') !== null) {
-                return Number(Laya.LocalStorage.getItem('_gameLevel'));
-            } else {
-                Laya.LocalStorage.setItem('_gameLevel', (1).toString());
-                return 1;
-            }
+            return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
         },
         set value(val) {
             Laya.LocalStorage.setItem('_gameLevel', val.toString());
@@ -22,7 +17,7 @@ export module GameControl {
     /**当前实际打开后者停留的关卡数，而非真实的关卡等级*/
     export let _practicalLevel = {
         get value(): number {
-            return Laya.LocalStorage.getItem('_practicalLevel') !== null ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : _gameLevel.value;
+            return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : _gameLevel.value;
         },
         set value(val) {
             Laya.LocalStorage.setItem('_practicalLevel', val.toString());
@@ -123,7 +118,7 @@ export module GameControl {
     /**体力*/
     export let _execution = {
         get value(): number {
-            return this.val = Laya.LocalStorage.getItem('_execution') !== null ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            return this.val = Laya.LocalStorage.getItem('_execution')? Number(Laya.LocalStorage.getItem('_execution')) : 15;
         },
         set value(val) {
             this.val = val;

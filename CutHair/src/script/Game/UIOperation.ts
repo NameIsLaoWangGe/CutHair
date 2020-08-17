@@ -26,7 +26,18 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.value = vals;
             if (this.switch) {
                 console.log('剩余需要修理的头发', this.value);
-                if (this.value <= 10) {
+
+                let residue = [10, 10, 10, 10, 20, 10, 20, 10, 26, 28];
+                let index;
+                if (Game._gameLevel.value > 10) {
+                    index = Game._gameLevel.value % 10 + 1 - 1;
+                } else {
+                    index = Game._gameLevel.value - 1;
+                }
+                if (!residue[index]) {
+                    index = 0;
+                }
+                if (this.value <= residue[index]) {
                     this.switch = false;
                     console.log('任务完成了！');
                     EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -475,7 +486,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
         GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
-        Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.3);
+        Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.5);
     }
 
 

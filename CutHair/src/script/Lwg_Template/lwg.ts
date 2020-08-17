@@ -2063,6 +2063,7 @@ export module lwg {
         }
     }
 
+    /**3D缓动动画*/
     export module Animation3D {
         /**缓动集合，用于清除当前this上的所有缓动*/
         export let tweenMap: any = {};
@@ -3272,7 +3273,7 @@ export module lwg {
             }
         }
 
-        /**通用音效播放
+        /**通用失败音效播放
          * @param url 音效地址，不传则是默认音效
          * @param number 播放次数，默认1次
          * @param func 播放完毕回调
@@ -3293,7 +3294,7 @@ export module lwg {
             }
         }
 
-        /**胜利音效播放
+        /**通用胜利音效播放
           * @param url 音效地址，不传则是默认音效
           * @param number 播放次数，默认1次
           * @param func 播放完毕回调
@@ -3845,8 +3846,7 @@ export module lwg {
             // 第二步，如果本地缓存有，那么需要和数据表中的数据进行对比，把缓存没有的新增对象复制进去
             // 第三步，如果本地缓存没有，那么直接从数据表获取
             let dataArr;
-            console.log(Laya.LocalStorage.getJSON(storageName));
-            if (JSON.parse(Laya.LocalStorage.getJSON(storageName))) {
+            if (Laya.LocalStorage.getJSON(storageName)) {
                 dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
                 console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
                 try {
@@ -3894,18 +3894,16 @@ export module lwg {
 
         /**今日日期*/
         export let todayData = {
-            d: null,
             /**获取存储的日期*/
             get date(): number {
-                return this.d = Laya.LocalStorage.getItem('Task_todayData') !== null ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
+                return Laya.LocalStorage.getItem('Task_todayData') ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
             },
             /**设置存储的日期*/
             set date(date: number) {
-                this.d = date;
-                Laya.LocalStorage.setItem('Task_todayData', this.d);
+                Laya.LocalStorage.setItem('Task_todayData', date.toString());
             }
         };
-
+        0
         /**
         * 通过名称获取任务的一个属性值
         * @param ClassName 任务类型名称
@@ -4225,8 +4223,14 @@ export module lwg {
          * @param skin 皮肤名称
          */
         export function setUseSkinType(): number {
+
+            let arr;
             // 拉取
-            let arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+            if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
+                arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+            } else {
+                return;
+            }
             useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
             // 去重
             useSkinType.push(_currentOther.name, _currentProp.name, _currentSkin.name);
@@ -4474,9 +4478,9 @@ export module lwg {
             free = 'free',
             /**看广告*/
             ads = 'ads',
-            /**看广告*/
+            /**特殊页面看广告*/
             adsXD = 'adsXD',
-            /**关卡中获得*/
+            /**关卡中获得，或者是过了多少关获得*/
             ineedwin = 'ineedwin',
             /**金币购买*/
             gold = 'gold',
@@ -4603,8 +4607,8 @@ export module lwg {
         export let _adsMaxOpenNum: number = 6;
         /**第几次打开宝箱界面*/
         export let _openVictoryBoxNum: number = 0;
-        /**当前是第几次打开宝箱*/
-        export let alreadyNum: number = 0;
+        // /**当前是第几次打开宝箱*/
+        // export let alreadyNum: number = 0;
         /**当前被选中的那个宝箱是什么宝箱*/
         export let _selectBox: string;
         /**
@@ -4687,7 +4691,6 @@ export module lwg {
                 _openVictoryBoxNum++;
                 _adsMaxOpenNum = 6;
                 _alreadyOpenNum = 0;
-
             }
             /**VictoryBoxScene开始前执行一次，重写覆盖*/
             victoryBoxOnAwake(): void { }
@@ -4760,7 +4763,7 @@ export module lwg {
         /**上次的签到日期，主要判断今日会不会弹出签到，不一样则弹出签到，一样则不弹出签到*/
         export let _lastCheckDate = {
             get date(): number {
-                return Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+                return Laya.LocalStorage.getItem('Check_lastCheckDate') ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
             },
             // 日期写数字
             set date(date: number) {
@@ -4770,7 +4773,7 @@ export module lwg {
         /**当前签到第几天了，7日签到为7天一个循环*/
         export let _checkInNum = {
             get number(): number {
-                return Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+                return Laya.LocalStorage.getItem('Check_checkInNum') ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
             },
             /**次数写数字*/
             set number(num: number) {
@@ -4963,7 +4966,7 @@ export module lwg {
         /**已经几次看广告*/
         export let _adsNum = {
             get value(): number {
-                return Laya.LocalStorage.getItem('XDSKin_adsNum') !== null ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
+                return Laya.LocalStorage.getItem('XDSKin_adsNum') ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
             },
             /**次数写数字*/
             set value(value: number) {
@@ -5056,7 +5059,7 @@ export module lwg {
         /**当前眼部的装扮*/
         export let _currentHead = {
             get name(): string {
-                return Laya.LocalStorage.getItem('Skin_currentHead') !== null ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
+                return Laya.LocalStorage.getItem('Skin_currentHead') ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
             },
             set name(name: string) {
                 Laya.LocalStorage.setItem('Skin_currentHead', name);
@@ -5068,7 +5071,7 @@ export module lwg {
         /**当前眼部的装扮*/
         export let _currentEye = {
             get name(): string {
-                return Laya.LocalStorage.getItem('Skin_currentEye') !== null ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
+                return Laya.LocalStorage.getItem('Skin_currentEye') ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
             },
             set name(name: string) {
                 Laya.LocalStorage.setItem('Skin_currentEye', name);
@@ -5185,11 +5188,11 @@ export module lwg {
             }
         }
     }
-
-
     export module Loding {
-        /**3D场景的加载,其他3D物体，贴图，Mesh详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
+        /**3D场景的加载，其他3D物体，贴图，Mesh详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
         export let lodingList_3DScene: Array<any> = [];
+        /**3D预设的加载，其他3D物体，贴图，Mesh详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
+        export let lodingList_3DPrefab: Array<any> = [];
         /**模型网格详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
         export let lodingList_3DMesh: Array<any> = [];
         /**材质详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
@@ -5203,7 +5206,7 @@ export module lwg {
         export let lodingList_Json: Array<any> = [];
 
         /**进度条总长度,长度为以上三个加载资源类型的数组总长度*/
-        export let sumProgress: number;
+        export let sumProgress: number = 0;
         /**加载顺序依次为3d,2d,数据表，可修改*/
         export let loadOrder: Array<any>[];
         /**当前加载到哪个分类数组*/
@@ -5248,10 +5251,16 @@ export module lwg {
         }
 
         export class LodeScene extends Admin.Scene {
-
             lwgOnAwake(): void {
+                this.subpackages();
                 this.lodingResList();
             }
+
+            /**是否需要分包*/
+            subpackages(): void {
+
+            }
+
             /**初始化的时候填写需要加载的内容，在三种加载数组中填写资源地址*/
             lodingResList(): void { }
             lwgEventReg(): void {
@@ -5267,14 +5276,15 @@ export module lwg {
             }
 
             lwgOnEnable(): void {
-                loadOrder = [lodingList_2D, lodingList_3DScene, lodingList_Json];
+                loadOrder = [lodingList_2D, lodingList_3DScene, lodingList_3DPrefab, lodingList_Json];
                 for (let index = 0; index < loadOrder.length; index++) {
+                    sumProgress += loadOrder[index].length;
                     if (loadOrder[index].length <= 0) {
                         loadOrder.splice(index, 1);
+
                         index--;
                     }
                 }
-                sumProgress = lodingList_2D.length + lodingList_3DScene.length + lodingList_Json.length;
                 loadOrderIndex = 0;
                 EventAdmin.notify(Loding.LodingType.loding);
             }
@@ -5311,6 +5321,17 @@ export module lwg {
                                 console.log('XXXXXXXXXXX3D场景' + lodingList_3DScene[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
                             } else {
                                 console.log('3D场景' + lodingList_3DScene[index] + '加载完成！', '数组下标为：', index);
+                            }
+                            EventAdmin.notify(LodingType.progress);
+
+                        }));
+                        break;
+                    case lodingList_3DPrefab:
+                        Laya.Sprite3D.load(lodingList_3DPrefab[index], Laya.Handler.create(this, (any) => {
+                            if (any == null) {
+                                console.log('XXXXXXXXXXX3D预设体' + lodingList_3DPrefab[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                            } else {
+                                console.log('3D场景' + lodingList_3DPrefab[index] + '加载完成！', '数组下标为：', index);
                             }
                             EventAdmin.notify(LodingType.progress);
 

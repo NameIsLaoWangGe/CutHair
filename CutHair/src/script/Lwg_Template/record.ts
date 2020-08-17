@@ -127,7 +127,16 @@ export module record {
 
 
     export enum Laya3D {
-        '_defaultPhysicsMemory'= '如果出现内存不够的情况‘abort Cannot enlarge memory arrays’，在Laya.d3.js中的构造函数中改变this._defaultPhysicsMemory = 512;'
+        '_defaultPhysicsMemory' = '如果出现内存不够的情况‘abort Cannot enlarge memory arrays’，在Laya.d3.js中的构造函数中改变this._defaultPhysicsMemory = 512;'
+
+    }
+
+    export enum LocalStorage {
+        "Laya.LocalStorage.getItem()" = '在pc浏览器中，会自动把“null”转换为null，但是微信小游戏等不会，所以getItem()如果没有上传，返回的是一个字符串“null”，并不是是真正的null，所以不可以用Laya.LocalStorage.getItem()！==null，来判断有无存储，必须得用Laya.LocalStorage.getItem()！==“null”，如果用Laya.LocalStorage.getItem()！==null会被自动判定成Laya.LocalStorage.getItem()==false，用Laya.LocalStorage.getItem()！==“null”才为true，为了避免歧义，直接用Laya.LocalStorage.getItem()是正确或者是错误即可有无存储',
+
+        'JSON.parse()' = 'json转换成对象问题，同上在pc浏览器中，会自动把“null”转换为null，当Laya.LocalStorage.getJson()时，如果是没有上传json，那么在小游戏中返回的是“null”，pc会自动把“null”转换为null，此时浏览器不会报错，而小游戏中JSON.parse(“null”)是报错的，因为非json结构，所以此时不可以直接用JSON.parse(Laya.LocalStorage.getJson())，需先做判断!Laya.LocalStorage.getItem(),有上传过才可以转换',
+
+        '上传格式' = '为了统一，不要用number进行存储，所有的数据在本地存取的时候都用string和null，需要转换时则转换成number等',
 
     }
 }

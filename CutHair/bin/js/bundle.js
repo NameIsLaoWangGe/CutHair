@@ -2586,8 +2586,7 @@
             Tools.arrayUnique_03 = arrayUnique_03;
             function dataCompare(url, storageName, propertyName) {
                 let dataArr;
-                console.log(Laya.LocalStorage.getJSON(storageName));
-                if (JSON.parse(Laya.LocalStorage.getJSON(storageName))) {
+                if (Laya.LocalStorage.getJSON(storageName)) {
                     dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
                     console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
                     try {
@@ -2624,13 +2623,11 @@
         (function (Task) {
             Task.TaskClassArr = [];
             Task.todayData = {
-                d: null,
                 get date() {
-                    return this.d = Laya.LocalStorage.getItem('Task_todayData') !== null ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
+                    return Laya.LocalStorage.getItem('Task_todayData') ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
                 },
                 set date(date) {
-                    this.d = date;
-                    Laya.LocalStorage.setItem('Task_todayData', this.d);
+                    Laya.LocalStorage.setItem('Task_todayData', date.toString());
                 }
             };
             function getTaskProperty(ClassName, name, property) {
@@ -2853,7 +2850,13 @@
             };
             Shop.useSkinType = [];
             function setUseSkinType() {
-                let arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                let arr;
+                if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
+                    arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                }
+                else {
+                    return;
+                }
                 Shop.useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
                 Shop.useSkinType.push(Shop._currentOther.name, Shop._currentProp.name, Shop._currentSkin.name);
                 Shop.useSkinType = Tools.arrayUnique_03(Shop.useSkinType);
@@ -3139,7 +3142,6 @@
             VictoryBox._alreadyOpenNum = 0;
             VictoryBox._adsMaxOpenNum = 6;
             VictoryBox._openVictoryBoxNum = 0;
-            VictoryBox.alreadyNum = 0;
             function getBoxProperty(name, property) {
                 let pro = null;
                 for (let index = 0; index < VictoryBox._BoxArray.length; index++) {
@@ -3245,7 +3247,7 @@
         (function (CheckIn) {
             CheckIn._lastCheckDate = {
                 get date() {
-                    return Laya.LocalStorage.getItem('Check_lastCheckDate') !== null ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+                    return Laya.LocalStorage.getItem('Check_lastCheckDate') ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
                 },
                 set date(date) {
                     Laya.LocalStorage.setItem('Check_lastCheckDate', date.toString());
@@ -3253,7 +3255,7 @@
             };
             CheckIn._checkInNum = {
                 get number() {
-                    return Laya.LocalStorage.getItem('Check_checkInNum') !== null ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+                    return Laya.LocalStorage.getItem('Check_checkInNum') ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
                 },
                 set number(num) {
                     Laya.LocalStorage.setItem('Check_checkInNum', num.toString());
@@ -3391,7 +3393,7 @@
         (function (SkinXD) {
             SkinXD._adsNum = {
                 get value() {
-                    return Laya.LocalStorage.getItem('XDSKin_adsNum') !== null ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
+                    return Laya.LocalStorage.getItem('XDSKin_adsNum') ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
                 },
                 set value(value) {
                     Laya.LocalStorage.setItem('XDSKin_adsNum', value.toString());
@@ -3458,7 +3460,7 @@
             Skin._headSkinArr = [];
             Skin._currentHead = {
                 get name() {
-                    return Laya.LocalStorage.getItem('Skin_currentHead') !== null ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
+                    return Laya.LocalStorage.getItem('Skin_currentHead') ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
                 },
                 set name(name) {
                     Laya.LocalStorage.setItem('Skin_currentHead', name);
@@ -3467,7 +3469,7 @@
             Skin._eyeSkinArr = [];
             Skin._currentEye = {
                 get name() {
-                    return Laya.LocalStorage.getItem('Skin_currentEye') !== null ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
+                    return Laya.LocalStorage.getItem('Skin_currentEye') ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
                 },
                 set name(name) {
                     Laya.LocalStorage.setItem('Skin_currentEye', name);
@@ -3556,11 +3558,13 @@
         let Loding;
         (function (Loding) {
             Loding.lodingList_3DScene = [];
+            Loding.lodingList_3DPrefab = [];
             Loding.lodingList_3DMesh = [];
             Loding.lodingList_3DBaseMaterial = [];
             Loding.lodingList_3DTexture2D = [];
             Loding.lodingList_2D = [];
             Loding.lodingList_Json = [];
+            Loding.sumProgress = 0;
             Loding.currentProgress = {
                 val: 0,
                 get value() {
@@ -3594,7 +3598,10 @@
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
             class LodeScene extends Admin.Scene {
                 lwgOnAwake() {
+                    this.subpackages();
                     this.lodingResList();
+                }
+                subpackages() {
                 }
                 lodingResList() { }
                 lwgEventReg() {
@@ -3609,14 +3616,14 @@
                     });
                 }
                 lwgOnEnable() {
-                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3DScene, Loding.lodingList_Json];
+                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3DScene, Loding.lodingList_3DPrefab, Loding.lodingList_Json];
                     for (let index = 0; index < Loding.loadOrder.length; index++) {
+                        Loding.sumProgress += Loding.loadOrder[index].length;
                         if (Loding.loadOrder[index].length <= 0) {
                             Loding.loadOrder.splice(index, 1);
                             index--;
                         }
                     }
-                    Loding.sumProgress = Loding.lodingList_2D.length + Loding.lodingList_3DScene.length + Loding.lodingList_Json.length;
                     Loding.loadOrderIndex = 0;
                     EventAdmin.notify(Loding.LodingType.loding);
                 }
@@ -3649,6 +3656,17 @@
                                 }
                                 else {
                                     console.log('3D场景' + Loding.lodingList_3DScene[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_3DPrefab:
+                            Laya.Sprite3D.load(Loding.lodingList_3DPrefab[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX3D预设体' + Loding.lodingList_3DPrefab[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                }
+                                else {
+                                    console.log('3D场景' + Loding.lodingList_3DPrefab[index] + '加载完成！', '数组下标为：', index);
                                 }
                                 EventAdmin.notify(LodingType.progress);
                             }));
@@ -3709,7 +3727,7 @@
         EasterEgg._easterEgg_1Arr = [];
         EasterEgg._easterEgg_1 = {
             get value() {
-                if (Laya.LocalStorage.getItem('_easterEgg_01') == null) {
+                if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
                     return false;
                 }
                 else {
@@ -3722,6 +3740,7 @@
         };
         function initEasterEgg() {
             EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
+            Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
         }
         EasterEgg.initEasterEgg = initEasterEgg;
         function getProperty(classify, name, property) {
@@ -4178,13 +4197,7 @@
         GameControl._gameSwitch = false;
         GameControl._gameLevel = {
             get value() {
-                if (Laya.LocalStorage.getItem('_gameLevel') !== null) {
-                    return Number(Laya.LocalStorage.getItem('_gameLevel'));
-                }
-                else {
-                    Laya.LocalStorage.setItem('_gameLevel', (1).toString());
-                    return 1;
-                }
+                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
             },
             set value(val) {
                 Laya.LocalStorage.setItem('_gameLevel', val.toString());
@@ -4192,7 +4205,7 @@
         };
         GameControl._practicalLevel = {
             get value() {
-                return Laya.LocalStorage.getItem('_practicalLevel') !== null ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
+                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
             },
             set value(val) {
                 Laya.LocalStorage.setItem('_practicalLevel', val.toString());
@@ -4270,7 +4283,7 @@
         GameControl._createLevel = _createLevel;
         GameControl._execution = {
             get value() {
-                return this.val = Laya.LocalStorage.getItem('_execution') !== null ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
             },
             set value(val) {
                 this.val = val;
@@ -4638,7 +4651,10 @@
             GSene3D.GameMain3D = this.self;
             GSene3D.MainCamera = this.MainCamera;
             GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark');
-            GSene3D.LevelParent = this.self.getChildByName('LevelParent');
+            GSene3D.LevelParent_Mark = this.self.getChildByName('LevelParent_Mark');
+            GSene3D.LevelParent = Laya.loader.getRes("3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh");
+            this.self.addChild(GSene3D.LevelParent);
+            GSene3D.LevelParent.transform.position = GSene3D.LevelParent_Mark.transform.position;
             for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
                 const element = GSene3D.LevelParent.getChildAt(index);
                 element.active = false;
@@ -4800,6 +4816,7 @@
             let LevelParent0 = GSene3D.LevelParent.clone();
             this.self.addChild(LevelParent0);
             GSene3D.LevelParent.active = false;
+            console.log(Game._gameLevel.value);
             let index;
             if (Game._gameLevel.value > 10) {
                 index = Game._gameLevel.value % 10 + 1;
@@ -5004,6 +5021,8 @@
             this.shearSpeed = 5;
             this.shearSwitch = true;
         }
+        subpackages() {
+        }
         lodingResList() {
             Loding.lodingList_2D = [
                 "res/atlas/Frame/Effects.png",
@@ -5018,6 +5037,9 @@
             ];
             Loding.lodingList_3DScene = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
+            ];
+            Loding.lodingList_3DPrefab = [
+                "3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh"
             ];
             Loding.lodingList_Json = [
                 "GameData/Shop/Other.json",
@@ -5100,7 +5122,18 @@
                     this.value = vals;
                     if (this.switch) {
                         console.log('剩余需要修理的头发', this.value);
-                        if (this.value <= 10) {
+                        let residue = [10, 10, 10, 10, 20, 10, 20, 10, 26, 28];
+                        let index;
+                        if (Game._gameLevel.value > 10) {
+                            index = Game._gameLevel.value % 10 + 1 - 1;
+                        }
+                        else {
+                            index = Game._gameLevel.value - 1;
+                        }
+                        if (!residue[index]) {
+                            index = 0;
+                        }
+                        if (this.value <= residue[index]) {
                             this.switch = false;
                             console.log('任务完成了！');
                             EventAdmin.notify(EventAdmin.EventType.taskReach);
@@ -5458,7 +5491,7 @@
             this.touchPosY = e.stageY;
             GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
             GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
-            Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.3);
+            Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.5);
         }
         knifeMove(e) {
             this.touchPosX = e.stageX;
@@ -5677,7 +5710,7 @@
             else {
                 index = Game._gameLevel.value;
             }
-            let url = 'UI/Share/Photo/photo_' + index + '.png';
+            let url = 'UI/Share/Photo/' + index + '.png';
             this.self['SmallPhoto'].skin = url;
         }
         lwgOpenAni() {
@@ -5878,7 +5911,7 @@
             Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
             if (condition <= resCondition + 1) {
                 Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
-                this.sceletDisplay(dataSource.name, false);
+                this.sceletDisplay(dataSource, false);
             }
             Shop._ShopList.refresh();
         }
@@ -6031,6 +6064,7 @@
                             break;
                     }
                     this.sceletDisplay(noHaveGold[0], true);
+                    Gold.addGold(-price);
                 }
                 Shop._ShopList.refresh();
             }
@@ -6520,6 +6554,68 @@
         }
     }
 
+    class SubpackController {
+        constructor() {
+            this.subPkgInfo = [
+                { name: "sp1", root: "res" },
+                { name: "sp2", root: "3DScene" },
+                { name: "sp3", root: "3DPrefab" },
+                { name: "sp4", root: "UI" },
+                { name: "sp5", root: "Frame" },
+            ];
+        }
+        init(cb) {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.onCpl = cb;
+                this.pkgFlag = 0;
+                this.loadPkg_wx();
+            }
+        }
+        loadPkg_wx() {
+            if (this.pkgFlag == this.subPkgInfo.length) {
+                this.onCpl();
+            }
+            else {
+                let info = this.subPkgInfo[this.pkgFlag];
+                let name = info.name;
+                let root = info.root;
+                Laya.Browser.window.wx.loadSubpackage({
+                    name: name,
+                    success: (res) => {
+                        console.log(`load ${name} suc`);
+                        Laya.MiniAdpter.subNativeFiles[name] = root;
+                        Laya.MiniAdpter.nativefiles.push(root);
+                        this.pkgFlag++;
+                        console.log("加载次数", this.pkgFlag);
+                        this.loadPkg_wx();
+                    },
+                    fail: (res) => {
+                        console.error(`load ${name} err: `, res);
+                    },
+                });
+            }
+        }
+    }
+
+    class UISubpackages extends Laya.Script {
+        onAwake() {
+            console.log('开始分包！');
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                let gameContrl = new SubpackController();
+                gameContrl.init(() => {
+                    Admin._openScene('UILoding');
+                });
+            }
+            else {
+                Admin._openScene('UILoding');
+            }
+        }
+        onEnable() {
+        }
+        onDisable() {
+        }
+    }
+
     class UITask_GetAward extends Admin.Object {
         lwgBtnClick() {
             let BtnGet = this.self.getChildByName('BtnGet');
@@ -6788,9 +6884,9 @@
             });
         }
         getRewardFunc(dataSource) {
-            VictoryBox.alreadyNum++;
+            VictoryBox._alreadyOpenNum++;
             let automan = false;
-            if (VictoryBox.alreadyNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
+            if (VictoryBox._alreadyOpenNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
                 EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, 1);
                 let cell = VictoryBox._BoxList.getCell(dataSource.arrange - 1);
                 let Automan = cell.getChildByName('Automan');
@@ -6972,6 +7068,7 @@
             reg("script/Game/UISkinTry.ts", UISkinTry);
             reg("script/Game/UISkinXD.ts", UISkinXD);
             reg("script/Game/UIStart.ts", UIStart);
+            reg("script/Game/UISubpackages.ts", UISubpackages);
             reg("script/Game/UITask_GetAward.ts", UITask_GetAward);
             reg("script/Game/UITask.ts", UITask);
             reg("script/Game/UIVictory.ts", UIVictory);
@@ -6986,10 +7083,10 @@
     GameConfig.screenMode = "vertical";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "Scene/UILoding.scene";
+    GameConfig.startScene = "Scene/UISubpackages.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
-    GameConfig.stat = true;
+    GameConfig.stat = false;
     GameConfig.physicsDebug = false;
     GameConfig.exportSceneToJson = true;
     GameConfig.init();

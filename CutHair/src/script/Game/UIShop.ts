@@ -97,6 +97,7 @@ export default class UIShop extends Shop.ShopScene {
 
     /**选中并且展示,并且移动到当前的cell*/
     sceletDisplay(dataSource: any, scrollTo: boolean): void {
+        // console.log(dataSource);
         switch (Shop._ShopTap.selectedIndex) {
             case 2:
                 Shop._currentSkin.name = dataSource.name;
@@ -144,7 +145,7 @@ export default class UIShop extends Shop.ShopScene {
         Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
         if (condition <= resCondition + 1) {
             Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
-            this.sceletDisplay(dataSource.name, false);
+            this.sceletDisplay(dataSource, false);
         }
         Shop._ShopList.refresh();
     }
@@ -304,6 +305,7 @@ export default class UIShop extends Shop.ShopScene {
                         break;
                 }
                 this.sceletDisplay(noHaveGold[0], true);
+                Gold.addGold(-price);
             }
             Shop._ShopList.refresh();
         }
@@ -325,7 +327,7 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     shopOnDisable(): void {
-      
+
         GVariate._stageClick = true;
         Setting.setBtnAppear();
     }
