@@ -2,6 +2,7 @@ import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Di
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
 import { EasterEgg } from "../Lwg_Template/EasterEgg";
+import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIStart extends lwg.Admin.Scene {
 
@@ -11,7 +12,12 @@ export default class UIStart extends lwg.Admin.Scene {
     lwgNodeDec(): void {
         this.LevelDisplay = this.self['LevelDisplay'];
         this.LevelStyle = this.self['LevelStyle'];
+
+        ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
+        ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
+
     }
+    
 
     lwgEventReg(): void {
         EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {

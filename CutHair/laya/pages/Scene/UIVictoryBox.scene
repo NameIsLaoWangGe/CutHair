@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":10,
+    "selectedBox":91,
+    "selecteID":90,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
@@ -206,13 +206,14 @@
                                     "props":{"y":31,"x":36,"visible":false,"var":"Automan","texture":"UI/Common/kuang1.png","name":"Automan"},
                                     "nodeParent":72,
                                     "label":"Automan",
-                                    "isOpen":null,
+                                    "isOpen":true,
                                     "isDirectory":true,
                                     "isAniNode":false,
                                     "hasChild":true,
                                     "compId":91,
                                     "child":[
                                         {
+                                            "x":75,
                                             "type":"Sprite",
                                             "searchKey":"Sprite",
                                             "props":{"y":66,"x":33,"texture":"UI/EasterEgg_Aotoman/Task/4.png"},

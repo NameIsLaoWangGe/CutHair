@@ -1,3 +1,5 @@
+import ADManager, { TaT } from "../TJ/Admanager";
+
 /**综合模板*/
 export module lwg {
     /**全局方法,全局变量，每个游戏不一样*/
@@ -1048,6 +1050,7 @@ export module lwg {
                     func();
                 }
             }));
+
         }
 
         /**打开下一关场景，并且上传信息
@@ -1108,6 +1111,8 @@ export module lwg {
                 this.lwgOnAwake();
                 this.lwgVariateInit();
                 this.lwgAdaptive();
+
+                Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
             }
             /**游戏开始前执行一次，重写覆盖*/
             lwgOnAwake(): void { }
@@ -1195,6 +1200,7 @@ export module lwg {
                 Laya.timer.clearAll(this);
                 Laya.Tween.clearAll(this);
                 EventAdmin.offCaller(this);
+                Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.close);
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgOnDisable(): void { }
@@ -1292,7 +1298,6 @@ export module lwg {
             }
 
             onDisable(): void {
-                // printPoint('dis', this.calssName);
                 this.lwgOnDisable();
             }
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
@@ -4311,7 +4316,7 @@ export module lwg {
          * 返回当前只能用金币购买的商品数组
          * @param goodsClass 商品品类
          * @param have 是否显示获取到的，true为已获得，flase为没有获得，不传则是全部
-         * @param excludeCurrent 假设当前的装扮的皮肤恰好是金币购买的，是否排除这个皮肤
+         * @param excludeCurrent 假设当前的装扮的皮肤恰好是金币购买的，是否排除这个皮肤，默认为不排除
          * */
         export function getwayGoldArr(goodsClass: string, have?: boolean, excludeCurrent?: boolean) {
             let arr = getGoodsClassArr(goodsClass);
@@ -5368,6 +5373,87 @@ export module lwg {
         }
     }
 
+    export module Tomato {
+        /**场景打点类型*/
+        export enum scenePointType {
+            open = 'open',
+            close = 'close',
+        }
+        /**
+        * 场景打点,记录玩家进场景和出场景的次数
+        * @param type 两种类型，一种是离开打点，一种是进入打点
+        * @param sceneName 场景名称
+        */
+        export function scenePrintPoint(sceneName: string, type: string): void {
+            switch (sceneName) {
+                case Admin.SceneName.UILoding:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'UIPreload');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'UIPreload');
+                    }
+                    break;
+                case Admin.SceneName.UIStart:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'mianpage');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'mianpage');
+                    }
+                    break;
+                case Admin.SceneName.UIVictory:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'successpage');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'successpage');
+                    }
+                    break;
+
+                case Admin.SceneName.UIDefeated:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'failpage');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'failpage');
+                    }
+                    break;
+
+                case Admin.SceneName.UIResurgence:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'revivepage');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'revivepage');
+                    }
+                    break;
+                case Admin.SceneName.UISkinXD:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'limmitpage');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'limmitpage');
+                    }
+                    break;
+                case Admin.SceneName.UIShare:
+                    if (type === scenePointType.open) {
+                        ADManager.TAPoint(TaT.PageEnter, 'sharepage');
+                    } else if (type === scenePointType.close) {
+                        ADManager.TAPoint(TaT.PageLeave, 'sharepage');
+                    }
+                    break;
+                default:
+
+                    break;
+            }
+        }
+
+
+        /**按钮打点类型*/
+        export enum btnPointType {
+            show = 'show',
+            click = 'click',
+        }
+        /**按钮打点*/
+        export function btnPrintPoint(): void {
+            
+        }
+    }
 }
 export default lwg;
 export let Admin = lwg.Admin;
@@ -5396,5 +5482,7 @@ export let SkinXD = lwg.SkinXD;
 export let SkinXDScene = lwg.SkinXD.SkinXDScene;
 export let Skin = lwg.Skin;
 export let SkinScene = lwg.Skin.SkinScene;
+// 其他
+export let Tomato = lwg.Tomato;
 
 

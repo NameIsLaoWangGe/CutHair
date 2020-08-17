@@ -5,6 +5,8 @@ import ADManager, { TaT } from "../TJ/Admanager";
 export default class UISkinXD extends SkinXD.SkinXDScene {
 
     skinXDOnAwake(): void {
+        console.log(Laya.stage);
+        
         Gold.goldVinish();
         Setting.setBtnVinish();
     }

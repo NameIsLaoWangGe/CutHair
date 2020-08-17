@@ -5,13 +5,17 @@ export default class UICheckIn extends CheckIn.CheckInScene {
 
     checkInNodeDec(): void {
         if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-            this.self['BtnTenGet'].visible = false;
+            this.self['BtnThreeGet'].visible = false;
             this.self['BtnGet'].visible = false;
             this.self['Select'].visible = false;
         }
     }
 
     checkInOnEnable(): void {
+        console.log(Laya.stage);
+
+        ADManager.TAPoint(TaT.BtnShow, 'AD3award');
+
         Setting.setBtnVinish();
         let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip') as Laya.Image;
         ChinkTip.visible = false;
@@ -74,19 +78,20 @@ export default class UICheckIn extends CheckIn.CheckInScene {
 
     checkInBtnClick(): void {
         lwg.Click.on('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-        lwg.Click.on('largen', this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+        lwg.Click.on('largen', this.self['BtnThreeGet'], this, null, null, this.btnTenGetUp, null);
         lwg.Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
         lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
     }
 
     btnOffClick(): void {
         lwg.Click.off('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-        lwg.Click.off('largen', this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+        lwg.Click.off('largen', this.self['BtnThreeGet'], this, null, null, this.btnTenGetUp, null);
         lwg.Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
         lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
     }
     btnTenGetUp(): void {
         ADManager.ShowReward(() => {
+            ADManager.TAPoint(TaT.BtnClick, 'AD3award');
             this.btnGetUpFunc(3);
         })
     }
@@ -142,10 +147,10 @@ export default class UICheckIn extends CheckIn.CheckInScene {
         if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
             if (this.self['Dot'].visible) {
                 this.self['BtnGet'].visible = false;
-                this.self['BtnTenGet'].visible = true;
+                this.self['BtnThreeGet'].visible = true;
             } else {
                 this.self['BtnGet'].visible = true;
-                this.self['BtnTenGet'].visible = false;
+                this.self['BtnThreeGet'].visible = false;
             }
         }
     }

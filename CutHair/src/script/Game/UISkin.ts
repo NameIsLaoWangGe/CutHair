@@ -5,6 +5,7 @@ import { GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
+        console.log(Laya.stage);
 
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
 

@@ -5,6 +5,7 @@ import { GVariate } from "../Lwg_Template/Global";
 export default class UITask extends lwg.Task.TaskScene {
 
     taskOnAwake(): void {
+        console.log(Laya.stage);
         GVariate._stageClick = false;
         Setting.setBtnVinish();
     }

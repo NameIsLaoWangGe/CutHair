@@ -773,6 +773,7 @@
                     this.lwgOnAwake();
                     this.lwgVariateInit();
                     this.lwgAdaptive();
+                    Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
                 }
                 lwgOnAwake() { }
                 onEnable() {
@@ -837,6 +838,7 @@
                     Laya.timer.clearAll(this);
                     Laya.Tween.clearAll(this);
                     EventAdmin.offCaller(this);
+                    Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.close);
                 }
                 lwgOnDisable() { }
             }
@@ -3695,6 +3697,85 @@
             }
             Loding.LodeScene = LodeScene;
         })(Loding = lwg.Loding || (lwg.Loding = {}));
+        let Tomato;
+        (function (Tomato) {
+            let scenePointType;
+            (function (scenePointType) {
+                scenePointType["open"] = "open";
+                scenePointType["close"] = "close";
+            })(scenePointType = Tomato.scenePointType || (Tomato.scenePointType = {}));
+            function scenePrintPoint(sceneName, type) {
+                switch (sceneName) {
+                    case Admin.SceneName.UILoding:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'UIPreload');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'UIPreload');
+                        }
+                        break;
+                    case Admin.SceneName.UIStart:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'mianpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'mianpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIVictory:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'successpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'successpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIDefeated:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'failpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'failpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIResurgence:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'revivepage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'revivepage');
+                        }
+                        break;
+                    case Admin.SceneName.UISkinXD:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'limmitpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'limmitpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIShare:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'sharepage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'sharepage');
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Tomato.scenePrintPoint = scenePrintPoint;
+            let btnPointType;
+            (function (btnPointType) {
+                btnPointType["show"] = "show";
+                btnPointType["click"] = "click";
+            })(btnPointType = Tomato.btnPointType || (Tomato.btnPointType = {}));
+            function btnPrintPoint() {
+            }
+            Tomato.btnPrintPoint = btnPrintPoint;
+        })(Tomato = lwg.Tomato || (lwg.Tomato = {}));
     })(lwg || (lwg = {}));
     let Admin = lwg.Admin;
     let Gold = lwg.Gold;
@@ -3721,6 +3802,7 @@
     let SkinXDScene = lwg.SkinXD.SkinXDScene;
     let Skin = lwg.Skin;
     let SkinScene = lwg.Skin.SkinScene;
+    let Tomato = lwg.Tomato;
 
     var EasterEgg;
     (function (EasterEgg) {
@@ -4058,12 +4140,14 @@
     class UICheckIn extends CheckIn.CheckInScene {
         checkInNodeDec() {
             if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-                this.self['BtnTenGet'].visible = false;
+                this.self['BtnThreeGet'].visible = false;
                 this.self['BtnGet'].visible = false;
                 this.self['Select'].visible = false;
             }
         }
         checkInOnEnable() {
+            console.log(Laya.stage);
+            ADManager.TAPoint(TaT.BtnShow, 'AD3award');
             Setting.setBtnVinish();
             let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
             ChinkTip.visible = false;
@@ -4116,18 +4200,19 @@
         }
         checkInBtnClick() {
             lwg.Click.on('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-            lwg.Click.on('largen', this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+            lwg.Click.on('largen', this.self['BtnThreeGet'], this, null, null, this.btnTenGetUp, null);
             lwg.Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
             lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
         }
         btnOffClick() {
             lwg.Click.off('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-            lwg.Click.off('largen', this.self['BtnTenGet'], this, null, null, this.btnTenGetUp, null);
+            lwg.Click.off('largen', this.self['BtnThreeGet'], this, null, null, this.btnTenGetUp, null);
             lwg.Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
             lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
         }
         btnTenGetUp() {
             ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'AD3award');
                 this.btnGetUpFunc(3);
             });
         }
@@ -4179,11 +4264,11 @@
             if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
                 if (this.self['Dot'].visible) {
                     this.self['BtnGet'].visible = false;
-                    this.self['BtnTenGet'].visible = true;
+                    this.self['BtnThreeGet'].visible = true;
                 }
                 else {
                     this.self['BtnGet'].visible = true;
-                    this.self['BtnTenGet'].visible = false;
+                    this.self['BtnThreeGet'].visible = false;
                 }
             }
         }
@@ -5547,6 +5632,7 @@
             Setting.setBtnVinish();
             this.audioOnOff();
             this.bgmOnOff();
+            ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
         }
         audioOnOff() {
             if (Setting._sound.switch) {
@@ -5842,6 +5928,28 @@
             else {
                 Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
             }
+            this.buyPriceDisplay();
+        }
+        buyPriceDisplay() {
+            let noHaveGold = [];
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Skin, false);
+                    break;
+                case 1:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Props, false);
+                    break;
+                case 0:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Other, false);
+                    break;
+                default:
+                    break;
+            }
+            Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
+            if (noHaveGold[0]) {
+                let price = noHaveGold[0][Shop.GoodsProperty.condition];
+                this.self['BuyPrice'].value = price.toString();
+            }
         }
         shopEventReg() {
             EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
@@ -5866,8 +5974,6 @@
                 }
             });
             Shop._ShopList.refresh();
-        }
-        shopOnEnable() {
         }
         sceletDisplay(dataSource, scrollTo) {
             switch (Shop._ShopTap.selectedIndex) {
@@ -5934,6 +6040,7 @@
                     break;
             }
             Shop._ShopList.refresh();
+            this.buyPriceDisplay();
         }
         myList_Update(cell, index) {
             let dataSource = cell.dataSource;
@@ -6045,6 +6152,10 @@
             else {
                 Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
                 let price = noHaveGold[0][Shop.GoodsProperty.condition];
+                if (noHaveGold[1]) {
+                    let price1 = noHaveGold[1][Shop.GoodsProperty.condition];
+                    this.self['BuyPrice'].value = price1.toString();
+                }
                 if (Gold._goldNum < price) {
                     Dialog.createHint_Middle(Dialog.HintContent["金币不够了！"]);
                 }
@@ -6099,6 +6210,7 @@
 
     class UISkin extends SkinScene {
         skinOnAwake() {
+            console.log(Laya.stage);
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
             let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
             Skin._headSkinArr = [];
@@ -6363,6 +6475,7 @@
 
     class UISkinXD extends SkinXD.SkinXDScene {
         skinXDOnAwake() {
+            console.log(Laya.stage);
             Gold.goldVinish();
             Setting.setBtnVinish();
         }
@@ -6421,6 +6534,8 @@
         lwgNodeDec() {
             this.LevelDisplay = this.self['LevelDisplay'];
             this.LevelStyle = this.self['LevelStyle'];
+            ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
         }
         lwgEventReg() {
             EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
@@ -6597,22 +6712,29 @@
         }
     }
 
+    let isInit = false;
+    TJ.Common.PriorityInit.Add(100, () => {
+        isInit = true;
+    });
     class UISubpackages extends Laya.Script {
         onAwake() {
-            console.log('开始分包！');
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                let gameContrl = new SubpackController();
-                gameContrl.init(() => {
+            let act = () => {
+                if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                    let gameContrl = new SubpackController();
+                    gameContrl.init(() => {
+                        Admin._openScene('UILoding');
+                    });
+                }
+                else {
                     Admin._openScene('UILoding');
-                });
+                }
+            };
+            if (isInit) {
+                act();
             }
             else {
-                Admin._openScene('UILoding');
+                TJ.Common.PriorityInit.Add(100, act);
             }
-        }
-        onEnable() {
-        }
-        onDisable() {
         }
     }
 
@@ -6640,6 +6762,7 @@
 
     class UITask extends lwg.Task.TaskScene {
         taskOnAwake() {
+            console.log(Laya.stage);
             GVariate._stageClick = false;
             Setting.setBtnVinish();
         }

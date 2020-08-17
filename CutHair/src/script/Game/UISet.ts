@@ -1,10 +1,13 @@
 import { lwg, Click, Setting } from "../Lwg_Template/lwg";
+import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UISet extends lwg.Admin.Scene {
     lwgOnAwake(): void {
         Setting.setBtnVinish();
         this.audioOnOff();
         this.bgmOnOff();
+
+        ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
     }
 
     /**音效*/
@@ -51,7 +54,7 @@ export default class UISet extends lwg.Admin.Scene {
     btnCloseUp(): void {
         this.self.close();
     }
-    lwgOnDisable():void{
+    lwgOnDisable(): void {
         Setting.setBtnAppear();
     }
 }
