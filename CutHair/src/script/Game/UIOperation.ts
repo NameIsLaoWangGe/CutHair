@@ -1,6 +1,7 @@
 import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, Dialog } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
+import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIOperation extends lwg.Admin.Scene {
     /** @prop {name:TaskProgress, tips:"每个任务的进度条", type:Prefab}*/
@@ -158,6 +159,8 @@ export default class UIOperation extends lwg.Admin.Scene {
         lwg.Admin._gameStart = true;
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
+
+        ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
     }
 
     lwgOnEnable(): void {
@@ -525,5 +528,8 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.touchPosX = null;
         this.touchPosY = null;
         this.moveSwitch = false;
+    }
+
+    lwgOnDisable():void{
     }
 }

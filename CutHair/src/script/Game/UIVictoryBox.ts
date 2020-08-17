@@ -6,6 +6,9 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     constructor() { super(); }
 
     victoryBoxOnAwake(): void {
+        ADManager.TAPoint(TaT.BtnShow, 'Adboxvideo');
+        ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
+        
         // ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_box');
         this.self['BtnAgain'].visible = false;
         this.self['BtnNo'].visible = false;
@@ -24,6 +27,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
             if (VictoryBox._defaultOpenNum > 0) {
                 if (dataSource[VictoryBox.BoxProperty.ads]) {
                     ADManager.ShowReward(() => {
+                        ADManager.TAPoint(TaT.BtnClick, 'Adboxvideo');
                         this.getRewardFunc(dataSource);
                     })
                 } else {
@@ -125,6 +129,8 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     // /**看广告获取的最大次数为6次*/
     btnAgainUp(event): void {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
+        ADManager.TAPoint(TaT.BtnClick, 'Adboxagain');
+        
         if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
             ADManager.ShowReward(() => {
                 Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);

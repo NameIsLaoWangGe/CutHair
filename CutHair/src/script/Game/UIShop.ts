@@ -1,10 +1,29 @@
 import { lwg, Gold, EventAdmin, Click, Admin, Shop, Tools, Dialog, Effects, PalyAudio, Setting } from "../Lwg_Template/lwg";
 import { GVariate, GEnum } from "../Lwg_Template/Global";
-import ADManager from "../TJ/Admanager";
+import ADManager, { TaT } from "../TJ/Admanager";
 import { Game } from "../Lwg_Template/Game";
 
 export default class UIShop extends Shop.ShopScene {
     shopOnAwake(): void {
+        ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_skin');
+        ADManager.TAPoint(TaT.BtnShow, 'closeword_skin');
+        ADManager.TAPoint(TaT.BtnShow, 'Adcoinget');
+
+        ADManager.TAPoint(TaT.BtnShow, 'Adxiangsu_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Adjiguangjjian_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Admyworld_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Adcat_get');
+
+        ADManager.TAPoint(TaT.BtnShow, 'Adstar_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Adanquan_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Adtomato_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Adiron_get');
+        ADManager.TAPoint(TaT.BtnShow, 'Adhama_get');
+
+        ADManager.TAPoint(TaT.BtnShow, 'ADyuan_ge');
+        ADManager.TAPoint(TaT.BtnShow, 'ADjiemao1_get');
+        ADManager.TAPoint(TaT.BtnShow, 'ADjiemao2_get');
+
         Gold.goldAppear();
         Setting.setBtnVinish();
         GVariate._stageClick = false;
@@ -58,6 +77,7 @@ export default class UIShop extends Shop.ShopScene {
         if (!Shop._currentOther.name) {
             Shop._currentOther.name = OtherName.tixudao;
         }
+        this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
 
         // 设置通过关卡获取的显示,目前就一个
         let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
@@ -72,6 +92,7 @@ export default class UIShop extends Shop.ShopScene {
 
     /**初始化金币价格*/
     buyPriceDisplay(): void {
+
         //初始化金币狗买按钮上的价格
         let noHaveGold = [];
         switch (Shop._ShopTap.selectedIndex) {
@@ -104,6 +125,54 @@ export default class UIShop extends Shop.ShopScene {
                 if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
                     ADManager.ShowReward(() => {
                         this.adsAcquisition(dataSource);
+
+                        switch (dataSource.name) {
+                            case 'yingguangbang':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adjiguangjjian_get');
+
+                                break;
+                            case 'yuanyanjing':
+                                ADManager.TAPoint(TaT.BtnClick, 'ADyuan_ge');
+
+                                break;
+                            case 'xingxingyanjing':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adstar_get');
+
+                                break;
+                            case 'jiemao_01':
+                                ADManager.TAPoint(TaT.BtnClick, 'ADjiemao1_get');
+
+                                break;
+                            case 'jiemao_02':
+                                ADManager.TAPoint(TaT.BtnClick, 'ADjiemao2_get');
+
+                                break;
+                            case 'hamajing':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adhama_get');
+
+                                break;
+
+                            case 'yanshemao_gangtie':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adiron_get');
+
+                                break;
+                            case 'yanshemao':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adtomato_get');
+
+                                break;
+                            case 'maomaozi':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adcat_get');
+
+                                break;
+                            case 'xiangsudao':
+                                ADManager.TAPoint(TaT.BtnClick, 'Adxiangsu_get');
+
+                                break;
+                            default:
+                                break;
+                        }
+
+
                     })
                 } else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
                     Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤限定界面获取!"]);
@@ -295,6 +364,8 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     btnBuyUp(): void {
+        ADManager.TAPoint(TaT.BtnShow, 'Adcoinget');
+
         let noHaveGold = [];
         switch (Shop._ShopTap.selectedIndex) {
             case 2:
@@ -348,6 +419,8 @@ export default class UIShop extends Shop.ShopScene {
 
     btnGetGold(): void {
         ADManager.ShowReward(() => {
+            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_skin');
+
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 this.advFunc();
             });
@@ -359,6 +432,7 @@ export default class UIShop extends Shop.ShopScene {
 
 
     btnBackUp(): void {
+        ADManager.TAPoint(TaT.BtnClick, 'closeword_skin');
         this.self.close();
     }
 

@@ -22,7 +22,6 @@ export default class GameMain3D_knife extends lwg.Admin.Object3D {
 
                 } else if (ownerParent.name === 'MiddleBeard') {
                     EventAdmin.notify(GEnum.EventType.MiddleBeard)
-
                 }
                 else if (ownerParent.name === 'UpRightBeard') {
                     EventAdmin.notify(GEnum.EventType.UpRightBeard)

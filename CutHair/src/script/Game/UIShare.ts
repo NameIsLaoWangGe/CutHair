@@ -3,10 +3,14 @@ import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import RecordManager from "../TJ/RecordManager";
 import { Game } from "../Lwg_Template/Game";
+import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIShare extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
+        ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
+        ADManager.TAPoint(TaT.BtnShow, 'sharebt_share');
+
         this.endPhoto();
 
         let index;
@@ -16,7 +20,7 @@ export default class UIShare extends lwg.Admin.Scene {
             index = Game._gameLevel.value;
         }
 
-        let url = 'UI/Share/Photo/' + index + '.png'
+        let url = 'UI/Share/Photo/' + index + '.png';
         this.self['SmallPhoto'].skin = url;
     }
 
@@ -121,12 +125,14 @@ export default class UIShare extends lwg.Admin.Scene {
 
     btnShareUp(): void {
         RecordManager._share('award', () => {
-            this.shareFunc()
+            this.shareFunc();
+            ADManager.TAPoint(TaT.BtnClick, 'sharebt_share');
         })
     }
 
     btnNoShareUp(): void {
-        this.shareFunc()
+        ADManager.TAPoint(TaT.BtnClick, 'closeword_share');
+        this.shareFunc();
     }
 
     shareFunc(): void {

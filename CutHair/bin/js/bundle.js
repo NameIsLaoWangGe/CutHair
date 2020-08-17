@@ -4417,6 +4417,9 @@
             this.self['Dot'].visible = true;
         }
         lwgOnEnable() {
+            ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
+            ADManager.TAPoint(TaT.BtnShow, 'ADnextbt_fail');
+            ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
             Setting.setBtnAppear();
             PalyAudio.playDefeatedSound();
         }
@@ -4438,12 +4441,14 @@
             }
         }
         btnAgainUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'returnword_fail');
             console.log('重新开始！');
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
         }
         btnNextUp() {
             ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'ADnextbt_fail');
                 EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
                 Game._gameLevel.value += 1;
                 Admin._openScene(Admin.SceneName.UIStart, null, this.self);
@@ -4462,6 +4467,8 @@
             this.clickTime = 0;
         }
         easterEggOnAwake() {
+            ADManager.TAPoint(TaT.BtnShow, 'power');
+            ADManager.TAPoint(TaT.BtnShow, 'Adtips');
             Setting.setBtnVinish();
             Gold.goldVinish();
             this.initDisplay();
@@ -4521,7 +4528,7 @@
                 this.clickSwitch = true;
             });
             Click.on(Click.Type.largen, this.self['BtnInject'], this, null, null, () => {
-                this.self.close();
+                ADManager.TAPoint(TaT.BtnClick, 'power');
             });
             Click.on(Click.Type.largen, this.self['BtnAssembly4No'], this, null, null, () => {
                 this.self['DialogAssembly4'].x = 800;
@@ -4530,6 +4537,15 @@
                 ADManager.ShowReward(() => {
                     this.self['DialogAssembly4'].x = 0;
                 });
+            });
+            Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
+                ADManager.ShowReward(() => {
+                    ADManager.TAPoint(TaT.BtnClick, 'Adtips');
+                    this.self['DialogHint'].x = 0;
+                });
+            });
+            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+                this.self['DialogHint'].x = -800;
             });
         }
         ;
@@ -4595,6 +4611,7 @@
                 EventType["changeHeadDecoration"] = " changeHeadDecoration";
                 EventType["changeEyeDecoration"] = " changeEyeDecoration";
                 EventType["changeTrySkin"] = "changeTrySkin";
+                EventType["goBack"] = "goBack";
             })(EventType = GEnum.EventType || (GEnum.EventType = {}));
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
@@ -4883,6 +4900,11 @@
                         }
                     }
                 }
+            });
+            EventAdmin.reg(GEnum.EventType.goBack, this, () => {
+                GSene3D.MainCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
+                GSene3D.MainCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+                GSene3D.TouchScreen.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
             });
         }
         ;
@@ -5331,6 +5353,7 @@
             lwg.Admin._gameStart = true;
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
+            ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
         }
         lwgOnEnable() {
             this.BtnLast.visible = false;
@@ -5604,10 +5627,14 @@
             this.touchPosY = null;
             this.moveSwitch = false;
         }
+        lwgOnDisable() {
+        }
     }
 
     class UIResurgence extends Admin.Scene {
         lwgOnEnable() {
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_revive');
+            ADManager.TAPoint(TaT.BtnShow, 'ADrevivebt_revive');
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnResurgence'], this, null, null, this.btnResurgenceUp);
@@ -5615,12 +5642,14 @@
         }
         btnResurgenceUp() {
             ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'ADrevivebt_revive');
                 Admin._gameStart = true;
                 EventAdmin.notify(EventAdmin.EventType.scene3DResurgence);
                 this.self.close();
             });
         }
         btnNoUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_revive');
             EventAdmin.notify(EventAdmin.EventType.closeOperation);
             Admin._openScene(Admin.SceneName.UIDefeated);
             this.self.close();
@@ -5788,6 +5817,8 @@
 
     class UIShare extends lwg.Admin.Scene {
         lwgOnEnable() {
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
+            ADManager.TAPoint(TaT.BtnShow, 'sharebt_share');
             this.endPhoto();
             let index;
             if (Game._gameLevel.value > 10) {
@@ -5846,9 +5877,11 @@
         btnShareUp() {
             RecordManager._share('award', () => {
                 this.shareFunc();
+                ADManager.TAPoint(TaT.BtnClick, 'sharebt_share');
             });
         }
         btnNoShareUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_share');
             this.shareFunc();
         }
         shareFunc() {
@@ -5874,6 +5907,21 @@
 
     class UIShop extends Shop.ShopScene {
         shopOnAwake() {
+            ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_skin');
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_skin');
+            ADManager.TAPoint(TaT.BtnShow, 'Adcoinget');
+            ADManager.TAPoint(TaT.BtnShow, 'Adxiangsu_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adjiguangjjian_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Admyworld_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adcat_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adstar_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adanquan_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adtomato_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adiron_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adhama_get');
+            ADManager.TAPoint(TaT.BtnShow, 'ADyuan_ge');
+            ADManager.TAPoint(TaT.BtnShow, 'ADjiemao1_get');
+            ADManager.TAPoint(TaT.BtnShow, 'ADjiemao2_get');
             Gold.goldAppear();
             Setting.setBtnVinish();
             GVariate._stageClick = false;
@@ -5921,6 +5969,7 @@
             if (!Shop._currentOther.name) {
                 Shop._currentOther.name = OtherName.tixudao;
             }
+            this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
             let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
             if (Game._gameLevel.value >= condition) {
                 Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.have, true);
@@ -5960,6 +6009,40 @@
                     if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
                         ADManager.ShowReward(() => {
                             this.adsAcquisition(dataSource);
+                            switch (dataSource.name) {
+                                case 'yingguangbang':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adjiguangjjian_get');
+                                    break;
+                                case 'yuanyanjing':
+                                    ADManager.TAPoint(TaT.BtnClick, 'ADyuan_ge');
+                                    break;
+                                case 'xingxingyanjing':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adstar_get');
+                                    break;
+                                case 'jiemao_01':
+                                    ADManager.TAPoint(TaT.BtnClick, 'ADjiemao1_get');
+                                    break;
+                                case 'jiemao_02':
+                                    ADManager.TAPoint(TaT.BtnClick, 'ADjiemao2_get');
+                                    break;
+                                case 'hamajing':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adhama_get');
+                                    break;
+                                case 'yanshemao_gangtie':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adiron_get');
+                                    break;
+                                case 'yanshemao':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adtomato_get');
+                                    break;
+                                case 'maomaozi':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adcat_get');
+                                    break;
+                                case 'xiangsudao':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adxiangsu_get');
+                                    break;
+                                default:
+                                    break;
+                            }
                         });
                     }
                     else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
@@ -6132,6 +6215,7 @@
             Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
         btnBuyUp() {
+            ADManager.TAPoint(TaT.BtnShow, 'Adcoinget');
             let noHaveGold = [];
             switch (Shop._ShopTap.selectedIndex) {
                 case 2:
@@ -6182,6 +6266,7 @@
         }
         btnGetGold() {
             ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_skin');
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     this.advFunc();
                 });
@@ -6191,6 +6276,7 @@
             Gold.addGold(500);
         }
         btnBackUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_skin');
             this.self.close();
         }
         shopOnDisable() {
@@ -6476,6 +6562,7 @@
     class UISkinXD extends SkinXD.SkinXDScene {
         skinXDOnAwake() {
             console.log(Laya.stage);
+            ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
             Gold.goldVinish();
             Setting.setBtnVinish();
         }
@@ -6507,6 +6594,7 @@
             this.self.close();
         }
         btnGetFunc() {
+            ADManager.TAPoint(TaT.BtnClick, 'Adlimmitget');
             let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
             if (have === 1) {
                 this.progressDisplay();
@@ -6536,6 +6624,8 @@
             this.LevelStyle = this.self['LevelStyle'];
             ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'startword_main');
         }
         lwgEventReg() {
             EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
@@ -6596,16 +6686,19 @@
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+                ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
                 lwg.Admin._openScene(Admin.SceneName.UIShop);
             });
             Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
                 Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
             });
             Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
                 Admin._openScene(lwg.Admin.SceneName.UITask);
             });
             Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
                 lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+                ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
             });
             Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
                 lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
@@ -6617,6 +6710,7 @@
         }
         btnXDSkinUp() {
             lwg.Admin._openScene(Admin.SceneName.UISkinXD);
+            ADManager.TAPoint(TaT.BtnClick, 'limitskinbt_main');
         }
         onStageMouseMove(event) {
             if (this.easterEgg_AotumanSwitch && !EasterEgg._easterEgg_1.value) {
@@ -6763,6 +6857,7 @@
     class UITask extends lwg.Task.TaskScene {
         taskOnAwake() {
             console.log(Laya.stage);
+            ADManager.TAPoint(TaT.BtnShow, 'Adtask');
             GVariate._stageClick = false;
             Setting.setBtnVinish();
         }
@@ -6776,6 +6871,7 @@
             });
             EventAdmin.reg(Task.EventType.adsGetAward_Every, this, (dataSource) => {
                 ADManager.ShowReward(() => {
+                    ADManager.TAPoint(TaT.BtnClick, 'Adtask');
                     Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                         Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
                         Task._TaskList.refresh();
@@ -6829,8 +6925,11 @@
         }
         lwgNodeDec() {
             this.GlodNum = this.self['GlodNum'];
+            ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
         }
         lwgOnEnable() {
+            ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
             this.getGoldNum = 50;
             this.getGoldDisPlay();
             Gold.goldAppear(500);
@@ -6915,6 +7014,7 @@
             }
         }
         btnNormalUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_success');
             this.offClick();
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 this.advFunc();
@@ -6922,6 +7022,7 @@
         }
         btnAdvUp() {
             ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'closeword_success');
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     this.advFunc();
                 });
@@ -6939,6 +7040,7 @@
         }
         lwgOnDisable() {
             Setting.setBtnVinish();
+            EventAdmin.notify(GEnum.EventType.goBack);
         }
     }
 
@@ -6978,6 +7080,8 @@
     class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         constructor() { super(); }
         victoryBoxOnAwake() {
+            ADManager.TAPoint(TaT.BtnShow, 'Adboxvideo');
+            ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
             this.self['BtnAgain'].visible = false;
             this.self['BtnNo'].visible = false;
             if (VictoryBox._openVictoryBoxNum > 1) {
@@ -6994,6 +7098,7 @@
                 if (VictoryBox._defaultOpenNum > 0) {
                     if (dataSource[VictoryBox.BoxProperty.ads]) {
                         ADManager.ShowReward(() => {
+                            ADManager.TAPoint(TaT.BtnClick, 'Adboxvideo');
                             this.getRewardFunc(dataSource);
                         });
                     }
@@ -7083,6 +7188,7 @@
         }
         btnAgainUp(event) {
             ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
+            ADManager.TAPoint(TaT.BtnClick, 'Adboxagain');
             if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
                 ADManager.ShowReward(() => {
                     Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);

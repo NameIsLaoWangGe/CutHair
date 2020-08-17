@@ -15,9 +15,11 @@ export default class UIStart extends lwg.Admin.Scene {
 
         ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
+        ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
+        ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
     }
-    
+
 
     lwgEventReg(): void {
         EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
@@ -92,11 +94,15 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgBtnClick(): void {
         Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+            ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
+
             lwg.Admin._openScene(Admin.SceneName.UIShop);
         });
 
         Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
             Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+            ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+            
         });
 
         Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
@@ -105,6 +111,8 @@ export default class UIStart extends lwg.Admin.Scene {
 
         Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
             lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+            ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
+            
 
         });
 
@@ -123,6 +131,7 @@ export default class UIStart extends lwg.Admin.Scene {
 
     btnXDSkinUp(): void {
         lwg.Admin._openScene(Admin.SceneName.UISkinXD);
+        ADManager.TAPoint(TaT.BtnClick, 'limitskinbt_main');
     }
 
     onStageMouseMove(event: Laya.Event): void {

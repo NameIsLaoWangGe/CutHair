@@ -1,12 +1,14 @@
 import { Admin, Dialog, Shop, SkinScene, Skin, PalyAudio, EventAdmin, Click } from "../Lwg_Template/lwg";
 import UIShop from "./UIShop";
-import ADManager from "../TJ/Admanager";
+import ADManager, { TaT } from "../TJ/Admanager";
 import { GEnum, GSene3D } from "../Lwg_Template/Global";
 
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
         console.log(Laya.stage);
 
+      
+        
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
 
         let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
@@ -192,6 +194,7 @@ export default class UISkin extends SkinScene {
     }
 
     skinBtnClick(): void {
+        
         Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, this.btnCompleteUp, null);
     }
 

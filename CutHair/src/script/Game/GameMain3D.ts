@@ -187,6 +187,13 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 }
             }
         });
+
+        //回到原位
+        EventAdmin.reg(GEnum.EventType.goBack, this, () => {
+            GSene3D.MainCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
+            GSene3D.MainCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+            GSene3D.TouchScreen.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+        });
     };
 
     lwgOnEnable(): void {
@@ -383,5 +390,6 @@ export default class GameMain3D extends lwg.Admin.Scene3D {
                 break;
         }
     }
+
 
 }

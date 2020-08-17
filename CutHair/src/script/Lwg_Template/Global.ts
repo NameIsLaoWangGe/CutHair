@@ -42,6 +42,8 @@ export module Global {
 
             /**皮肤试用换装*/
             changeTrySkin = 'changeTrySkin',
+            /**皮肤试用换装*/
+            goBack = 'goBack',
         }
     }
 
@@ -67,9 +69,9 @@ export module Global {
         export let LevelParentItem: Laya.MeshSprite3D;
         /**关卡父节点*/
         export let LevelParent: Laya.MeshSprite3D;
-         /**关卡父节点标记*/
+        /**关卡父节点标记*/
         export let LevelParent_Mark: Laya.MeshSprite3D;
-        
+
         /**当前关卡节点*/
         export let LevelTem: Laya.MeshSprite3D;
         export let Level: Laya.MeshSprite3D;

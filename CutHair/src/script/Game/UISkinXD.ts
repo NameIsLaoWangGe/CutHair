@@ -6,6 +6,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
 
     skinXDOnAwake(): void {
         console.log(Laya.stage);
+        ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
         
         Gold.goldVinish();
         Setting.setBtnVinish();
@@ -45,6 +46,8 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
     /**看完广告的返回函数*/
     btnGetFunc(): void {
+        ADManager.TAPoint(TaT.BtnClick, 'Adlimmitget');
+        
         let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
         if (have === 1) {
             this.progressDisplay();

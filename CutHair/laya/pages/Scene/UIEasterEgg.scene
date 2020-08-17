@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":54,
-    "selecteID":56,
+    "selectedBox":2,
+    "selecteID":13,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
@@ -53,13 +53,14 @@
             "props":{"y":194,"x":1,"width":720,"var":"Assembly","name":"Assembly","height":1073,"alpha":1},
             "nodeParent":2,
             "label":"Assembly",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":13,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Assembly1,Assembly1",
                     "props":{"y":333,"x":127,"width":174,"var":"Assembly1","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","pivotY":118,"pivotX":87,"name":"Assembly1","height":236},
@@ -72,6 +73,7 @@
                     "compId":8,
                     "child":[
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Complete1,Complete1",
                             "props":{"y":0,"x":4,"var":"Complete1","skin":"UI/EasterEgg_Aotoman/Task/wancheng.png","name":"Complete1"},
@@ -85,6 +87,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":27,"x":68.5,"texture":"UI/EasterEgg_Aotoman/Task/renwu_xiao.png"},
@@ -98,6 +101,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":108,"x":33,"width":107,"valign":"middle","text":"获得皮肤","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -111,6 +115,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":143,"x":33.5,"width":107,"valign":"middle","text":"咸蛋娃娃","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -124,6 +129,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,BtnGoUp,BtnGoUp",
                             "props":{"y":201,"x":125,"width":75,"var":"BtnGoUp","skin":"UI/EasterEgg_Aotoman/Task/qianwang.png","pivotY":15,"pivotX":38,"name":"BtnGoUp","height":30},
@@ -138,6 +144,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Assembly2,Assembly2",
                     "props":{"y":208,"x":371,"width":174,"var":"Assembly2","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","pivotY":92,"pivotX":87,"name":"Assembly2","height":183},
@@ -150,6 +157,7 @@
                     "compId":10,
                     "child":[
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Complete2,Complete2",
                             "props":{"y":0,"x":4,"var":"Complete2","skin":"UI/EasterEgg_Aotoman/Task/wancheng2.png","name":"Complete2"},
@@ -163,6 +171,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":112,"x":34,"width":107,"valign":"middle","text":"登录游戏","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -176,6 +185,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":32,"x":61,"texture":"UI/EasterEgg_Aotoman/Task/1.png"},
@@ -190,6 +200,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Assembly3,Assembly3",
                     "props":{"y":361,"x":623,"width":174,"var":"Assembly3","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","pivotY":118,"pivotX":87,"name":"Assembly3","height":235},
@@ -202,6 +213,7 @@
                     "compId":12,
                     "child":[
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Complete3,Complete3",
                             "props":{"y":0,"x":4,"var":"Complete3","skin":"UI/EasterEgg_Aotoman/Task/wancheng2.png","name":"Complete3"},
@@ -215,6 +227,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":102,"x":31.5,"width":107,"valign":"middle","text":"累计观看","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -228,6 +241,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":139,"x":34.5,"width":107,"valign":"middle","text":"5次广告","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -241,6 +255,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,Num",
                             "props":{"y":176,"x":36.5,"width":107,"valign":"middle","text":"（5/5）","name":"Num","height":41,"fontSize":25,"color":"#ff6bf4","bold":true,"align":"center"},
@@ -255,6 +270,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Assembly4,Assembly4",
                     "props":{"y":745,"x":623,"width":174,"var":"Assembly4","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","pivotY":118,"pivotX":87,"name":"Assembly4","height":235},
@@ -267,6 +283,7 @@
                     "compId":11,
                     "child":[
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":110,"x":34,"width":107,"valign":"middle","text":"宝箱获取","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -280,6 +297,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,Num",
                             "props":{"y":147,"x":35,"width":107,"valign":"middle","text":"（0/3）","name":"Num","height":41,"fontSize":25,"color":"#ff6bf4","bold":true,"align":"center"},
@@ -293,6 +311,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Complete4,Complete4",
                             "props":{"y":0,"x":4,"var":"Complete4","skin":"UI/EasterEgg_Aotoman/Task/wancheng2.png","name":"Complete4"},
@@ -307,6 +326,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Assembly5,Assembly5",
                     "props":{"y":757,"x":118,"width":174,"var":"Assembly5","skin":"UI/EasterEgg_Aotoman/Task/kuang.png","sizeGrid":"121,0,33,0","pivotY":120,"pivotX":87,"name":"Assembly5","height":240},
@@ -319,6 +339,7 @@
                     "compId":9,
                     "child":[
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Complete5,Complete5",
                             "props":{"y":0,"x":4,"var":"Complete5","skin":"UI/EasterEgg_Aotoman/Task/wancheng2.png","name":"Complete5"},
@@ -332,6 +353,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":110,"x":34,"width":107,"valign":"middle","text":"隐藏彩蛋","height":41,"fontSize":25,"color":"#6985f3","bold":true,"align":"center"},
@@ -346,6 +368,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnHint,BtnHint",
                     "props":{"y":822,"x":120,"width":74,"var":"BtnHint","texture":"UI/EasterEgg_Aotoman/Task/tishi.png","pivotY":29,"pivotX":37,"name":"BtnHint","height":57},
@@ -359,6 +382,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"y":277,"x":595.5,"texture":"UI/EasterEgg_Aotoman/Task/2.png"},
@@ -372,6 +396,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"y":667,"x":580,"texture":"UI/EasterEgg_Aotoman/Task/4.png"},
@@ -385,6 +410,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"y":677,"x":78.5,"texture":"UI/EasterEgg_Aotoman/Task/5.png"},
@@ -433,13 +459,14 @@
             "props":{"y":0,"x":-800,"var":"DialogHint","name":"DialogHint"},
             "nodeParent":2,
             "label":"DialogHint",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":44,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"y":0,"x":4,"width":720,"skin":"Frame/UI/ui_orthogon_black.png","sizeGrid":"22,22,32,22","height":1650,"alpha":0.7},
@@ -453,6 +480,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnConfirm,BtnConfirm",
                     "props":{"y":938,"x":361,"width":288,"var":"BtnConfirm","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnConfirm","height":128},
@@ -465,6 +493,7 @@
                     "compId":50,
                     "child":[
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":26.5,"x":68,"width":154,"valign":"middle","text":"确认","height":75,"fontSize":60,"color":"#e46415","align":"center"},
@@ -479,6 +508,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"y":485,"x":92,"width":538,"skin":"UI/Common/dikuang.png","sizeGrid":"43,37,50,50","height":340},
@@ -491,6 +521,7 @@
                     "compId":48,
                     "child":[
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":139,"x":269,"width":438,"texture":"UI/EasterEgg_Aotoman/Hint/zi.png","pivotY":55,"pivotX":219,"height":110},
@@ -523,7 +554,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,DialogAssembly4,DialogAssembly4",
-            "props":{"y":0,"x":800,"var":"DialogAssembly4","texture":"UI/EasterEgg_Aotoman/xiaoguotu/xiaog1uo.png","name":"DialogAssembly4"},
+            "props":{"y":0,"x":800,"var":"DialogAssembly4","name":"DialogAssembly4"},
             "nodeParent":2,
             "label":"DialogAssembly4",
             "isOpen":true,

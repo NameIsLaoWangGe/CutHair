@@ -1,10 +1,13 @@
 import { EasterEgg } from "../Lwg_Template/EasterEgg";
 import { Click, Admin, Setting, Gold, Shop, EventAdmin, Task } from "../Lwg_Template/lwg";
-import ADManager from "../TJ/Admanager";
+import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIEasterEgg extends EasterEgg.EasterEggScene {
 
     easterEggOnAwake(): void {
+        ADManager.TAPoint(TaT.BtnShow, 'power');
+        ADManager.TAPoint(TaT.BtnShow, 'Adtips');
+
         Setting.setBtnVinish();
         Gold.goldVinish();
         this.initDisplay();
@@ -74,7 +77,8 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
             this.clickSwitch = true;
         });
         Click.on(Click.Type.largen, this.self['BtnInject'], this, null, null, () => {
-            this.self.close();
+
+            ADManager.TAPoint(TaT.BtnClick, 'power');
         });
         Click.on(Click.Type.largen, this.self['BtnAssembly4No'], this, null, null, () => {
             this.self['DialogAssembly4'].x = 800;
@@ -85,9 +89,23 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
                 this.self['DialogAssembly4'].x = 0;
             })
         });
+
+        Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
+            ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'Adtips');
+
+                this.self['DialogHint'].x = 0;
+            })
+        });
+
+        Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+            this.self['DialogHint'].x = -800;
+        });
+
+
     };
 
-   
+
     /**连续点击5次的彩蛋记录*/
     clickNum: number = 0;
     clickSwitch: boolean = false;

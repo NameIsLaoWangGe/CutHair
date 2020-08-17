@@ -1,7 +1,7 @@
 import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Shop, Task, Setting } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
-import ADManager from "../TJ/Admanager";
+import ADManager, { TaT } from "../TJ/Admanager";
 import { Game } from "../Lwg_Template/Game";
 
 export default class UIVictory extends lwg.Admin.Scene {
@@ -12,9 +12,15 @@ export default class UIVictory extends lwg.Admin.Scene {
     getGoldNum: number;
     lwgNodeDec(): void {
         this.GlodNum = this.self['GlodNum'];
+
+        ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
+        ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
+
     }
 
     lwgOnEnable(): void {
+        ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
+
         this.getGoldNum = 50;
         this.getGoldDisPlay();
         Gold.goldAppear(500);
@@ -120,6 +126,7 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     btnNormalUp(): void {
+        ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_success');
         this.offClick();
         Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
             this.advFunc();
@@ -128,6 +135,7 @@ export default class UIVictory extends lwg.Admin.Scene {
 
     btnAdvUp(): void {
         ADManager.ShowReward(() => {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_success');
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                 this.advFunc();
             });
@@ -146,5 +154,6 @@ export default class UIVictory extends lwg.Admin.Scene {
 
     lwgOnDisable(): void {
         Setting.setBtnVinish();
+        EventAdmin.notify(GEnum.EventType.goBack);
     }
 }

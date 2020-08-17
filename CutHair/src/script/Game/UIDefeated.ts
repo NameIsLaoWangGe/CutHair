@@ -1,6 +1,6 @@
 import { lwg, Click, EventAdmin, Dialog, Admin, PalyAudio, Setting } from "../Lwg_Template/lwg";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
-import ADManager from "../TJ/Admanager";
+import ADManager, { TaT } from "../TJ/Admanager";
 import { Game } from "../Lwg_Template/Game";
 
 export default class UIDefeated extends lwg.Admin.Scene {
@@ -12,6 +12,11 @@ export default class UIDefeated extends lwg.Admin.Scene {
     }
 
     lwgOnEnable(): void {
+        ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
+        
+        ADManager.TAPoint(TaT.BtnShow, 'ADnextbt_fail');
+        ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
+
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
     }
@@ -35,6 +40,8 @@ export default class UIDefeated extends lwg.Admin.Scene {
     }
 
     btnAgainUp(): void {
+        ADManager.TAPoint(TaT.BtnClick, 'returnword_fail');
+
         console.log('重新开始！');
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
         Admin._openScene(Admin.SceneName.UIOperation, null, this.self)
@@ -42,6 +49,8 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
     btnNextUp(): void {
         ADManager.ShowReward(() => {
+            ADManager.TAPoint(TaT.BtnClick, 'ADnextbt_fail');
+
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
             Game._gameLevel.value += 1;
             Admin._openScene(Admin.SceneName.UIStart, null, this.self)

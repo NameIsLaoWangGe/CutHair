@@ -1,11 +1,13 @@
 import { lwg, Click, EventAdmin, Dialog, Admin, Task, Gold, Shop, Setting } from "../Lwg_Template/lwg";
-import ADManager from "../TJ/Admanager";
+import ADManager, { TaT } from "../TJ/Admanager";
 import { GVariate } from "../Lwg_Template/Global";
 
 export default class UITask extends lwg.Task.TaskScene {
 
     taskOnAwake(): void {
         console.log(Laya.stage);
+        ADManager.TAPoint(TaT.BtnShow, 'Adtask');
+
         GVariate._stageClick = false;
         Setting.setBtnVinish();
     }
@@ -22,6 +24,8 @@ export default class UITask extends lwg.Task.TaskScene {
         // 看广告领取金币
         EventAdmin.reg(Task.EventType.adsGetAward_Every, this, (dataSource) => {
             ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'Adtask');
+
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
                     Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
                     Task._TaskList.refresh();
