@@ -10,8 +10,8 @@ export default class UIDefeated extends lwg.Admin.Scene {
     }
 
     lwgNodeDec(): void {
-        this.self['BtnAdv'].visible = true;
-        this.self['BtnAgain'].visible = false;
+        this.self['BtnSelect_WeChat'].visible = true;
+        this.self['BtnAgain_WeChat'].visible = false;
         this.self['Dot'].visible = true;
     }
 
@@ -23,23 +23,38 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
+
+
+        if (Game._platform == Game._platformTpye.OPPO) {
+
+            this.self['OPPO'].visible = true;
+            this.self['WeChat'].visible = false;
+
+        } else {
+            this.self['OPPO'].visible = false;
+            this.self['WeChat'].visible = true;
+        }
+
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
-        Click.on(Click.Type.largen, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
-        Click.on(Click.Type.largen, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+        Click.on(Click.Type.largen, this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+        Click.on(Click.Type.largen, this.self['BtnNext_WeChat'], this, null, null, this.btnNextUp);
+        Click.on(Click.Type.largen, this.self['BtnSelect_WeChat'], this, null, null, this.btnSelectUp);
+
+        Click.on(Click.Type.largen, this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
+        Click.on(Click.Type.largen, this.self['BtnNext_OPPO'], this, null, null, this.btnNextUp);
     }
 
     btnSelectUp(): void {
         if (this.self['Dot'].visible) {
             this.self['Dot'].visible = false;
-            this.self['BtnAdv'].visible = false;
-            this.self['BtnAgain'].visible = true;
+            this.self['BtnSelect_WeChat'].visible = false;
+            this.self['BtnAgain_WeChat'].visible = true;
         } else {
             this.self['Dot'].visible = true;
-            this.self['BtnAdv'].visible = true;
-            this.self['BtnAgain'].visible = false;
+            this.self['BtnSelect_WeChat'].visible = true;
+            this.self['BtnAgain_WeChat'].visible = false;
         }
     }
 
@@ -48,20 +63,21 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
         console.log('重新开始！');
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-        Admin._openScene(Admin.SceneName.UIOperation, null, this.self)
+        Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }
 
     btnNextUp(): void {
+
         ADManager.ShowReward(() => {
             ADManager.TAPoint(TaT.BtnClick, 'ADnextbt_fail');
 
-            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
             Game._gameLevel.value += 1;
-            Admin._openScene(Admin.SceneName.UIStart, null, this.self)
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         })
     }
 
     lwgOnDisable(): void {
-        Setting.setBtnVinish();
+        EventAdmin.notify(GEnum.EventType.goBack);
     }
 }

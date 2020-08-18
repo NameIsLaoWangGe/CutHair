@@ -4,11 +4,6 @@ import { GSene3D } from "../Lwg_Template/Global";
 import { EasterEgg } from "../Lwg_Template/EasterEgg";
 import Init from "../Lwg_Template/Init";
 export default class UILoding extends Loding.LodeScene {
-
-    subpackages(): void {
-
-    }
-
     lodingResList(): void {
         Loding.lodingList_2D = [
             "res/atlas/Frame/Effects.png",
@@ -32,7 +27,10 @@ export default class UILoding extends Loding.LodeScene {
             "res/atlas/UI/Set.png",
 
             "res/atlas/UI/Task.png",
-            
+
+            "res/atlas/UI/Register.png",
+
+            "res/atlas/UI/Common.png",
 
         ];
         Loding.lodingList_3DScene = [
@@ -59,6 +57,8 @@ export default class UILoding extends Loding.LodeScene {
             "Scene/UISkinXD.json",
             "Scene/UITask.json",
         ];
+
+        this.shearAni(); 
     }
 
     lodingPhaseComplete(): void {
@@ -75,7 +75,6 @@ export default class UILoding extends Loding.LodeScene {
         Laya.stage.addChildAt(Scene3D, 0);
         Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
         Scene3D.addComponent(GameMain3D);
-
 
         Laya.timer.once(500, this, () => {
             Gold.createGoldNode(Laya.stage);
@@ -95,6 +94,24 @@ export default class UILoding extends Loding.LodeScene {
         this.self['FCM'].y = Laya.stage.height * 0.910;
     }
 
+    /**剪刀动画*/
+    shearAni(): void {
+        Laya.timer.loop(20, this, () => {
+            if (this.self['Shear_02'].rotation > 15) {
+                this.self['Shear_02']['dir'] = 'up';
+            } else if (this.self['Shear_02'].rotation <= 0) {
+                this.self['Shear_02']['dir'] = 'down';
+            }
+            if (this.self['Shear_02']['dir'] === 'up') {
+                this.self['Shear_02'].rotation -= this.shearSpeed;
+                this.self['Shear_01'].rotation += this.shearSpeed;
+            } else if (this.self['Shear_02']['dir'] === 'down') {
+                this.self['Shear_02'].rotation += this.shearSpeed;
+                this.self['Shear_01'].rotation -= this.shearSpeed;
+            }
+        });
+    }
+
     /**进度条动画开关*/
     maskMoveSwitch: boolean = true;
     /**剪刀修剪速度*/
@@ -112,20 +129,6 @@ export default class UILoding extends Loding.LodeScene {
                 let str: string = ((- this.self['Mask'].width - this.self['Mask'].x) / - this.self['Mask'].width * 100).toString().substring(0, 2);
                 this.self['Per'].text = str + '%';
             }
-        }
-
-        // 剪刀动画
-        if (this.self['Shear_02'].rotation > 15) {
-            this.self['Shear_02']['dir'] = 'up';
-        } else if (this.self['Shear_02'].rotation <= 0) {
-            this.self['Shear_02']['dir'] = 'down';
-        }
-        if (this.self['Shear_02']['dir'] === 'up') {
-            this.self['Shear_02'].rotation -= this.shearSpeed;
-            this.self['Shear_01'].rotation += this.shearSpeed;
-        } else if (this.self['Shear_02']['dir'] === 'down') {
-            this.self['Shear_02'].rotation += this.shearSpeed;
-            this.self['Shear_01'].rotation -= this.shearSpeed;
         }
     }
 

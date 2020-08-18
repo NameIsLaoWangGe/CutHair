@@ -29,8 +29,8 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						3.64,
-						93.34,
+						5.71,
+						94.135,
 						6.6
 					],
 					"rotation":[
@@ -1146,8 +1146,8 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						3.64,
-						93.34,
+						5.71,
+						94.135,
 						6.6
 					],
 					"rotation":[
@@ -3940,30 +3940,7 @@
 						}
 					]
 				},
-				"components":[
-					{
-						"type":"PhysicsCollider",
-						"restitution":0,
-						"friction":0.5,
-						"rollingFriction":0,
-						"shapes":[
-							{
-								"type":"BoxColliderShape",
-								"center":[
-									0,
-									0,
-									0
-								],
-								"size":[
-									1,
-									1,
-									1
-								]
-							}
-						],
-						"isTrigger":false
-					}
-				],
+				"components":[],
 				"child":[]
 			}
 		]

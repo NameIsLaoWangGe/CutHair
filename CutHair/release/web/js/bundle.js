@@ -1,1 +1,7432 @@
-!function(){"use strict";var e;!function(e){let t,a,n,i,s,o,l,r,c,h,d,g,u,y,p,m,f,S,k,L;!function(t){function btnPauseUp(t){t.stopPropagation(),t.currentTarget.scale(1,1),e.Admin._openScene("UIPause",null,null,null)}function btnHintUp(e){e.currentTarget.scale(1,1),e.stopPropagation(),s._openScene(s.SceneName.UISmallHint,null,null,e=>{})}function btnAgainUp(e){e.stopPropagation(),e.currentTarget.scale(1,1),t.refreshNum++,s._refreshScene()}t._createKeyNum=function(e,a,n){let i;Laya.loader.load("prefab/KeyNum.json",Laya.Handler.create(this,function(s){let o=new Laya.Prefab;o.json=s,i=Laya.Pool.getItemByCreateFun("prefab",o.create,o),e.addChild(i),i.pos(a,n),i.zOrder=0,i.getChildByName("Num"),t.KeyNumNode=i}))},t._createExecutionNum=function(e){let a;Laya.loader.load("prefab/ExecutionNum.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n,a=Laya.Pool.getItemByCreateFun("prefab",i.create,i),e.addChild(a),a.getChildByName("Num"),a.pos(297,90),a.zOrder=50,t.ExecutionNumNode=a,t.ExecutionNumNode.name="ExecutionNumNode"}))},t._addExecution=function(e){},t._createBtnPause=function(e){let a;Laya.loader.load("prefab/BtnPause.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n,a=Laya.Pool.getItemByCreateFun("prefab",i.create,i),e.addChild(a),a.pos(645,167),a.zOrder=0,t.BtnPauseNode=a,t.BtnPauseNode.name="BtnPauseNode",r.on(r.Type.largen,a,null,null,null,btnPauseUp,null)}))},t.btnPauseUp=btnPauseUp,t._createBtnHint=function(e){let a;Laya.loader.load("prefab/BtnHint.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n,a=Laya.Pool.getItemByCreateFun("prefab",i.create,i),e.addChild(a),a.pos(645,293),a.zOrder=0,t.BtnHintNode=a,t.BtnHintNode.name="BtnHintNode",r.on(r.Type.largen,a,null,null,null,btnHintUp,null)}))},t.btnHintUp=btnHintUp,t._createBtnAgain=function(e){let a;Laya.loader.load("prefab/BtnAgain.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n,a=Laya.Pool.getItemByCreateFun("prefab",i.create,i),e.addChild(a),a.pos(645,409),a.zOrder=0,r.on(r.Type.largen,a,null,btnAgainUp,null,null,null),t.BtnAgainNode=a}))},t.btnAgainUp=btnAgainUp,t._createP201_01=function(e){let a;Laya.loader.load("prefab/P201.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n,a=Laya.Pool.getItemByCreateFun("P201",i.create,i),e.addChild(a),a.pos(80,290),a.zOrder=65,t.P201_01Node=a}))},t._createStimulateDec=function(e){let a;Laya.loader.load("prefab/StimulateDec.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n,(a=Laya.Pool.getItemByCreateFun("StimulateDec",i.create,i)).getChildByName("Dec"),e.addChild(a),a.pos(35,150),a.zOrder=65,t.StimulateDecNode=a}))},t._createHint_InPut=function(e){let t;Laya.loader.load("prefab/HintPre_01.json",Laya.Handler.create(this,function(a){let n=new Laya.Prefab;n.json=a,t=Laya.Pool.getItemByCreateFun("prefab",n.create,n),Laya.stage.addChild(t),t.pos(Laya.stage.width/2,Laya.stage.height/2);let i=t.getChildByName("dec");i.text=e,t.zOrder=100,i.alpha=0,h.scale_Alpha(t,0,1,0,1,1,1,200,null,0,e=>{h.fadeOut(i,0,1,150,0,e=>{h.fadeOut(i,1,0,200,1500,e=>{h.scale_Alpha(t,1,1,1,1,0,0,200,null,0,e=>{t.removeSelf()})})})})}))},t.createConsumeEx=function(a){let n=Laya.Pool.getItemByClass("label",Laya.Label);n.name="label",Laya.stage.addChild(n),n.text="-2",n.fontSize=40,n.bold=!0,n.color="#59245c",n.x=t.ExecutionNumNode.x+100,n.y=t.ExecutionNumNode.y-n.height/2+4,n.zOrder=100,e.Animation2D.fadeOut(n,0,1,200,150,a=>{e.Animation2D.leftRight_Shake(t.ExecutionNumNode,15,60,0,null),e.Animation2D.fadeOut(n,1,0,600,400,e=>{})})},t._createGold=function(e,t,a,n){let i;Laya.loader.load("prefab/GolPre.json",Laya.Handler.create(this,function(e){let s=new Laya.Prefab;s.json=e,i=Laya.Pool.getItemByCreateFun("prefab",s.create,s),t.addChild(i),i.pos(a,n)}))},t._createAddExecution=function(a,n,i){let s;Laya.loader.load("prefab/execution.json",Laya.Handler.create(this,function(a){let n=new Laya.Prefab;n.json=a,s=Laya.Pool.getItemByCreateFun("prefab",n.create,n),Laya.stage.addChild(s),s.x=Laya.stage.width/2,s.y=Laya.stage.height/2,s.zOrder=50,t.ExecutionNumNode&&h.move_Simple_01(s,s.x,s.y,t.ExecutionNumNode.x,t.ExecutionNumNode.y,800,null,100,a=>{h.fadeOut(s,1,0,200,0,a=>{e.Animation2D.upDwon_Shake(t.ExecutionNumNode,10,80,0,null),i&&i()})})}))}}(t=e.Global||(e.Global={})),function(e){let t;!function(e){e.taskReach="taskReach",e.defeated="defeated",e.scene3DRefresh="Scene3DRefresh",e.scene3DResurgence="scene3DResurgence",e.operationRefresh="operationRefresh",e.resurgence="resurgence",e.closeOperation="closeOperation"}(t=e.EventType||(e.EventType={})),e.dispatcher=new Laya.EventDispatcher,e.reg=function(t,a,n){a||console.error("事件的执行域必须存在!"),e.dispatcher.on(t.toString(),a,n)},e.regOnce=function(t,a,n){a||console.error("事件的执行域必须存在!"),e.dispatcher.once(t.toString(),a,n)},e.notify=function(t,a){e.dispatcher.event(t.toString(),a)},e.off=function(e,t,a){this.dispatcher.off(e.toString(),t,a)},e.offAll=function(t){e.dispatcher.offAll(t.toString())},e.offCaller=function(t){e.dispatcher.offAllCaller(t)}}(a=e.EventAdmin||(e.EventAdmin={})),function(e){let t,a,n,i,s;function getDialogContent_Random(e){let t=[],a=getUseWhere(e),n=Math.floor(Math.random()*a.length);for(const e in a[n])if(a[n].hasOwnProperty(e)){const i=a[n][e];"content"==e.substring(0,7)&&"-1"!==i&&t.push(i)}return t}function getUseWhere(t){let a=[];for(let n=0;n<e._dialogContent.Array.length;n++){const i=e._dialogContent.Array[n];i.useWhere==t&&a.push(i)}return a}!function(e){e[e["金币不够了！"]=0]="金币不够了！",e[e["没有可以购买的皮肤了！"]=1]="没有可以购买的皮肤了！",e[e["暂时没有广告，过会儿再试试吧！"]=2]="暂时没有广告，过会儿再试试吧！",e[e["暂无皮肤!"]=3]="暂无皮肤!",e[e["暂无分享!"]=4]="暂无分享!",e[e["暂无提示机会!"]=5]="暂无提示机会!",e[e["观看完整广告才能获取奖励哦！"]=6]="观看完整广告才能获取奖励哦！",e[e["通关上一关才能解锁本关！"]=7]="通关上一关才能解锁本关！",e[e["分享成功后才能获取奖励！"]=8]="分享成功后才能获取奖励！",e[e["分享成功!"]=9]="分享成功!",e[e["暂无视频，玩一局游戏之后分享！"]=10]="暂无视频，玩一局游戏之后分享！",e[e["消耗2点体力！"]=11]="消耗2点体力！",e[e["今日体力福利已领取！"]=12]="今日体力福利已领取！",e[e["分享成功，获得125金币！"]=13]="分享成功，获得125金币！",e[e["限定皮肤已经获得，请前往皮肤界面查看。"]=14]="限定皮肤已经获得，请前往皮肤界面查看。",e[e["分享失败！"]=15]="分享失败！",e[e["兑换码错误！"]=16]="兑换码错误！",e[e["尚未获得该商品!"]=17]="尚未获得该商品!",e[e["恭喜获得新皮肤!"]=18]="恭喜获得新皮肤!",e[e["请前往皮肤限定界面获取!"]=19]="请前往皮肤限定界面获取!",e[e["通过相应的关卡数达到就可以得到了!"]=20]="通过相应的关卡数达到就可以得到了!",e[e["点击金币抽奖按钮购买!"]=21]="点击金币抽奖按钮购买!",e[e["没有领取次数了！"]=22]="没有领取次数了！",e[e["增加三次开启宝箱次数！"]=23]="增加三次开启宝箱次数！",e[e["观看广告可以获得三次开宝箱次数！"]=24]="观看广告可以获得三次开宝箱次数！",e[e["没有宝箱领可以领了！"]=25]="没有宝箱领可以领了！",e[e["请前往皮肤界面购买！"]=26]="请前往皮肤界面购买！"}(t=e.HintContent||(e.HintContent={})),function(e){e.blackBord="Frame/UI/ui_orthogon_black.png"}(a||(a={})),e.createHint_Middle=function(e){let n=Laya.Pool.getItemByClass("Hint_M",Laya.Sprite);n.name="Hint_M",Laya.stage.addChild(n),n.width=Laya.stage.width,n.height=100,n.pivotY=n.height/2,n.pivotX=Laya.stage.width/2,n.x=Laya.stage.width/2,n.y=Laya.stage.height/2,n.zOrder=100;let i=new Laya.Image;n.addChild(i),i.skin=a.blackBord,i.width=Laya.stage.width,i.pivotX=Laya.stage.width/2,i.height=100,i.pivotY=i.height/2,i.y=n.height/2,i.x=Laya.stage.width/2,i.alpha=.6;let s=new Laya.Label;n.addChild(s),s.width=Laya.stage.width,s.text=t[e],s.pivotX=Laya.stage.width/2,s.x=Laya.stage.width/2,s.height=100,s.pivotY=50,s.y=n.height/2,s.bold=!0,s.fontSize=35,s.color="#ffffff",s.align="center",s.valign="middle",s.alpha=0,h.scale_Alpha(n,0,1,0,1,1,1,200,null,0,e=>{h.fadeOut(s,0,1,150,0,e=>{h.fadeOut(s,1,0,200,800,e=>{h.scale_Alpha(n,1,1,1,1,0,0,200,null,0,e=>{n.removeSelf()})})})})},e._dialogContent={get Array(){return null!==Laya.loader.getRes("GameData/Dialog/Dialog.json").RECORDS?Laya.loader.getRes("GameData/Dialog/Dialog.json").RECORDS:[]}},e.getDialogContent=function(t,a){let n;for(let i=0;i<e._dialogContent.Array.length;i++){const s=e._dialogContent.Array[i];if(s.useWhere==t&&s.name==a){n=s;break}}let i=[];for(const e in n)if(n.hasOwnProperty(e)){const t=n[e];"content"!=e.substring(0,7)&&-1===t||i.push(t)}return i},e.getDialogContent_Random=getDialogContent_Random,e.getUseWhere=getUseWhere,function(e){e.scene1="scene1",e.scene2="scene2",e.scene3="scene3"}(n=e.UseWhere||(e.UseWhere={})),function(e){e.name="name",e.useWhere="useWhere",e.content="content",e.max="max"}(i=e.DialogProperty||(e.DialogProperty={})),function(e){e.voluntarily="voluntarily",e.manual="manual",e.clickContent="clickContent"}(s=e.PlayMode||(e.PlayMode={})),e.createVoluntarilyDialogue=function(t,a,n,i,s,o,l){null==i&&(i=0),Laya.timer.once(i,this,()=>{let i;Laya.loader.load("prefab/Pre_Dialogue.json",Laya.Handler.create(this,function(r){let c=new Laya.Prefab;c.json=r,i=Laya.Pool.getItemByCreateFun("Pre_Dialogue",c.create,c),o?o.addChild(i):Laya.stage.addChild(i),i.x=t,i.y=a;let d,g=i.getChildByName("Content");void 0!==l?g.text=l[0]:(d=getDialogContent_Random(n),g.text=d[0]),i.zOrder=100,null==s&&(s=1e3),h.scale_Alpha(i,0,0,0,1,1,1,150,null,1e3,()=>{for(let e=0;e<d.length;e++)Laya.timer.once(e*s,this,()=>{g.text=d[e],e==d.length-1&&Laya.timer.once(s,this,()=>{h.scale_Alpha(i,1,1,1,0,0,0,150,null,1e3,()=>{i.removeSelf()})})})}),e.DialogueNode=i}))})}}(n=e.Dialog||(e.Dialog={})),function(t){let a;function createOneGold(e,t,n){let i=Laya.Pool.getItemByClass("addGold",Laya.Image);return i.name="addGold",i.alpha=1,i.zOrder=60,i.width=e,i.height=t,i.pivotX=e/2,i.pivotY=t/2,i.skin=n||a[0],i}t._goldNum=0,t.createGoldNode=function(e){if(t.GoldNode)return;let a;Laya.loader.load("Prefab/GoldNode.json",Laya.Handler.create(this,function(n){let i=new Laya.Prefab;i.json=n;let s=(a=Laya.Pool.getItemByCreateFun("gold",i.create,i)).getChildByName("Num"),o=Laya.LocalStorage.getItem("_goldNum");o?t._goldNum=Number(o):Laya.LocalStorage.setItem("_goldNum","0"),s.text=t._goldNum.toString(),e.addChild(a),a.getChildByName("Pic"),a.pos(234,100),a.zOrder=50,t.GoldNode=a}))},t.goldAppear=function(e,a,n){e?h.scale_Alpha(t.GoldNode,0,1,1,1,1,1,e,null,0,e=>{t.GoldNode.visible=!0}):t.GoldNode.visible=!0,a&&(t.GoldNode.x=a),n&&(t.GoldNode.y=n)},t.goldVinish=function(e){e?h.scale_Alpha(t.GoldNode,1,1,1,1,1,0,e,null,0,e=>{t.GoldNode.visible=!1}):t.GoldNode.visible=!1},t.addGold=function(e){t._goldNum+=e,t.GoldNode.getChildByName("Num").text=t._goldNum.toString(),Laya.LocalStorage.setItem("_goldNum",t._goldNum.toString())},t.addGoldDisPlay=function(e){let a=t.GoldNode.getChildByName("Num");a.value=(Number(a.value)+e).toString()},t.addGoldNoDisPlay=function(e){t._goldNum+=e,Laya.LocalStorage.setItem("_goldNum",t._goldNum.toString())},function(e){e[e["Frame/Effects/icon_gold.png"]=0]="Frame/Effects/icon_gold.png"}(a||(a={})),t.createOneGold=createOneGold,t.getGoldAni_Single=function(e,t,a,n,i,s,o,l,r){for(let c=0;c<t;c++)Laya.timer.once(30*c,this,()=>{let d=createOneGold(a,n,i);e.addChild(d),h.move_Scale(d,1,s.x,s.y,o.x,o.y,1,350,0,null,()=>{c===t-1?Laya.timer.once(200,this,()=>{r&&r()}):l&&l(),d.removeSelf()})})},t.getGoldAni_Heap=function(e,t,n,i,s,o,l,r,c){for(let d=0;d<t;d++){let g=createOneGold(n,i,s);e.addChild(g),g.skin=s||a[0];let u=1==Math.floor(2*Math.random())?o.x+100*Math.random():o.x-100*Math.random(),y=1==Math.floor(2*Math.random())?o.y+100*Math.random():o.y-100*Math.random();h.move_Scale(g,.5,o.x,o.y,u,y,1,300,100*Math.random()+100,Laya.Ease.expoIn,()=>{h.move_Scale(g,1,g.x,g.y,l.x,l.y,1,400,200*Math.random()+100,Laya.Ease.cubicOut,()=>{d===t-1?Laya.timer.once(200,this,()=>{c&&c()}):r&&r(),g.removeSelf()})})}};class n extends Laya.Script{onAwake(){this.initProperty()}onEnable(){this.self=this.owner,this.selfScene=this.self.scene;let e=this.__proto__.constructor.name;this.self[e]=this,this.timer=0,this.lwgInit(),this.propertyAssign()}lwgInit(){}initProperty(){}propertyAssign(){this.startAlpha&&(this.self.alpha=this.startAlpha),this.startScale&&this.self.scale(this.startScale,this.startScale),this.startRotat&&(this.self.rotation=this.startRotat)}commonSpeedXYByAngle(e,t){this.self.x+=u.speedXYByAngle(e,t+this.accelerated).x,this.self.y+=u.speedXYByAngle(e,t+this.accelerated).y}moveRules(){}onUpdate(){this.moveRules()}onDisable(){Laya.Pool.recover(this.self.name,this.self),this.destroy(),Laya.Tween.clearAll(this),Laya.timer.clearAll(this)}}t.GoldAniBase=n;t.AddGold=class extends n{lwgInit(){this.self.width=115,this.self.height=111,this.self.pivotX=this.self.width/2,this.self.pivotY=this.self.height/2}initProperty(){}moveRules(){this.moveSwitch&&(this.timer++,this.timer>0&&(e.Animation2D.move_Scale(this.self,1,this.self.x,this.self.y,this.targetX,this.targetY,.35,250,0,e=>{this.self.removeSelf(),null!==this.func&&this.func()}),this.moveSwitch=!1))}}}(i=e.Gold||(e.Gold={})),function(e){let t,n,i;e._sceneControl={},e._gameStart=!1,function(e){e.RECORDS="RECORDS"}(t=e.JsonProperty||(e.JsonProperty={})),function(e){e.UILoding="UILoding",e.UIStart="UIStart",e.UIMain="UIMain",e.GameMain3D="GameMain3D",e.UIVictory="UIVictory",e.UIDefeated="UIDefeated",e.UIExecutionHint="UIExecutionHint",e.UIPassHint="UIPassHint",e.UISet="UISet",e.UIPifu="UIPifu",e.UIPuase="UIPuase",e.UIShare="UIShare",e.UISmallHint="UISmallHint",e.UISkinXD="UISkinXD",e.UISkinTry="UISkinTry",e.UIRedeem="UIRedeem",e.UIAnchorXD="UIAnchorXD",e.UITurntable="UITurntable",e.UICaiDanQiang="UICaiDanQiang",e.UICaidanPifu="UICaidanPifu",e.UIOperation="UIOperation",e.UIShop="UIShop",e.UITask="UITask",e.UIVictoryBox="UIVictoryBox",e.UICheckIn="UICheckIn",e.UIResurgence="UIResurgence",e.UISkin="UISkin",e.UIEasterEgg="UIEasterEgg"}(n=e.SceneName||(e.SceneName={})),function(e){e.GameStart="GameStart",e.Play="Play",e.Pause="pause",e.Victory="victory",e.Defeated="defeated"}(i=e.GameState||(e.GameState={})),e._openScene=function(t,a,n,i){Laya.Scene.load("Scene/"+t+".json",Laya.Handler.create(this,function(s){s.width=Laya.stage.width,s.height=Laya.stage.height,a?Laya.stage.addChildAt(s,a):Laya.stage.addChild(s),s.name=t,e._sceneControl[t]=s;let o=s.getChildByName("Background");o&&(o.width=Laya.stage.width,o.height=Laya.stage.height),n&&n.close(),i&&i()}))},e._nextCustomScene=function(e){},e._refreshScene=function(){},e._closeCustomScene=function(){};e.Scene=class extends Laya.Script{constructor(){super(),this.aniTime=100,this.aniDelayde=100}onAwake(){this.self=this.owner,this.calssName=this.__proto__.constructor.name,this.self[this.calssName]=this,this.gameState(this.calssName),this.lwgNodeDec(),this.lwgOnAwake(),this.lwgVariateInit(),this.lwgAdaptive()}lwgOnAwake(){}onEnable(){this.lwgEventReg(),this.lwgOnEnable(),this.btnAndlwgOpenAni()}lwgNodeDec(){}lwgEventReg(){}lwgVariateInit(){}gameState(t){switch(t){case n.UIStart:e._gameState=i.GameStart;break;case n.UIMain:e._gameState=i.Play;break;case n.UIDefeated:e._gameState=i.Defeated;break;case n.UIVictory:e._gameState=i.Victory}}lwgOnEnable(){}btnAndlwgOpenAni(){let e=this.lwgOpenAni();e?Laya.timer.once(e,this,e=>{this.lwgBtnClick()}):this.lwgBtnClick()}lwgBtnClick(){}lwgOpenAni(){return this.aniTime}lwgAdaptive(){}lwgVanishAni(){return 0}onUpdate(){this.lwgOnUpdate()}lwgOnUpdate(){}onDisable(){this.lwgOnDisable(),Laya.timer.clearAll(this),Laya.Tween.clearAll(this),a.offCaller(this)}lwgOnDisable(){}};e.Scene3D=class extends Laya.Script3D{constructor(){super(),this.mainCameraFpos=new Laya.Vector3}onAwake(){this.self=this.owner,this.calssName=this.__proto__.constructor.name,this.gameState(this.calssName),this.MainCamera=this.self.getChildByName("Main Camera"),this.MainCamera&&(this.mainCameraFpos.x=this.MainCamera.transform.localPositionX,this.mainCameraFpos.y=this.MainCamera.transform.localPositionY,this.mainCameraFpos.z=this.MainCamera.transform.localPositionZ),this.lwgOnAwake(),this.lwgNodeDec(),this.lwgAdaptive()}lwgOnAwake(){}onEnable(){this.self[this.calssName]=this,this.lwgEventReg(),this.lwgOnEnable(),this.lwgBtnClick(),this.lwgAdaptive(),this.lwgOpenAni()}lwgNodeDec(){}lwgEventReg(){}gameState(t){switch(t){case n.UIStart:e._gameState=i.GameStart;break;case n.UIMain:e._gameState=i.Play;break;case n.UIDefeated:e._gameState=i.Defeated;break;case n.UIVictory:e._gameState=i.Victory}}lwgOnEnable(){}lwgBtnClick(){}lwgAdaptive(){}lwgOpenAni(){}lwgVanishAni(){}onUpdate(){this.lwgOnUpDate()}lwgOnUpDate(){}onDisable(){this.lwgOnDisable()}lwgOnDisable(){}};e.Person=class extends Laya.Script{constructor(){super()}onAwake(){}lwgOnAwake(){}onEnable(){this.self=this.owner,this.selfScene=this.self.scene,this.rig=this.self.getComponent(Laya.RigidBody);let e=this.__proto__.constructor.name;this.self[e]=this,this.lwgOnEnable()}lwgOnEnable(){console.log("父类的初始化！")}};e.Object=class extends Laya.Script{constructor(){super()}onAwake(){this.self=this.owner,this.selfScene=this.self.scene;let e=this.__proto__.constructor.name;this.self[e]=this,this.lwgNodeDec()}lwgNodeDec(){}onEnable(){this.lwgOnEnable(),this.lwgBtnClick(),this.lwgEventReg()}lwgOnEnable(){}lwgBtnClick(){}lwgEventReg(){}onUpdate(){this.lwgOnUpdate()}lwgOnUpdate(){}onDisable(){this.lwgOnDisable(),Laya.timer.clearAll(this),a.offCaller(this)}lwgOnDisable(){}};e.Object3D=class extends Laya.Script3D{constructor(){super()}onAwake(){this.self=this.owner,this.selfTransform=this.self.transform,this.selfScene=this.self.scene;let e=this.__proto__.constructor.name;this.self[e]=this,this.rig3D=this.self.getComponent(Laya.Rigidbody3D),this.BoxCol3D=this.self.getComponent(Laya.PhysicsCollider),this.lwgNodeDec()}lwgNodeDec(){}onEnable(){this.lwgEventReg(),this.lwgOnEnable()}lwgOnEnable(){}lwgBtnClick(){}lwgEventReg(){}onUpdate(){this.lwgOnUpdate()}lwgOnUpdate(){}onDisable(){this.lwgOnDisable(),Laya.timer.clearAll(this),a.offCaller(this)}lwgOnDisable(){}}}(s=e.Admin||(e.Admin={})),function(t){let a,n;!function(e){e[e["Frame/Effects/cir_white.png"]=0]="Frame/Effects/cir_white.png",e[e["Frame/Effects/cir_black.png"]=1]="Frame/Effects/cir_black.png",e[e["Frame/Effects/cir_blue.png"]=2]="Frame/Effects/cir_blue.png",e[e["Frame/Effects/cir_bluish.png"]=3]="Frame/Effects/cir_bluish.png",e[e["Frame/Effects/cir_cyan.png"]=4]="Frame/Effects/cir_cyan.png",e[e["Frame/Effects/cir_grass.png"]=5]="Frame/Effects/cir_grass.png",e[e["Frame/Effects/cir_green.png"]=6]="Frame/Effects/cir_green.png",e[e["Frame/Effects/cir_orange.png"]=7]="Frame/Effects/cir_orange.png",e[e["Frame/Effects/cir_pink.png"]=8]="Frame/Effects/cir_pink.png",e[e["Frame/Effects/cir_purple.png"]=9]="Frame/Effects/cir_purple.png",e[e["Frame/Effects/cir_red.png"]=10]="Frame/Effects/cir_red.png",e[e["Frame/Effects/cir_yellow.png"]=11]="Frame/Effects/cir_yellow.png",e[e["Frame/Effects/star_black.png"]=12]="Frame/Effects/star_black.png",e[e["Frame/Effects/star_blue.png"]=13]="Frame/Effects/star_blue.png",e[e["Frame/Effects/star_bluish.png"]=14]="Frame/Effects/star_bluish.png",e[e["Frame/Effects/star_cyan.png"]=15]="Frame/Effects/star_cyan.png",e[e["Frame/Effects/star_grass.png"]=16]="Frame/Effects/star_grass.png",e[e["Frame/Effects/star_green.png"]=17]="Frame/Effects/star_green.png",e[e["Frame/Effects/star_orange.png"]=18]="Frame/Effects/star_orange.png",e[e["Frame/Effects/star_pink.png"]=19]="Frame/Effects/star_pink.png",e[e["Frame/Effects/star_purple.png"]=20]="Frame/Effects/star_purple.png",e[e["Frame/Effects/star_red.png"]=21]="Frame/Effects/star_red.png",e[e["Frame/Effects/star_white.png"]=22]="Frame/Effects/star_white.png",e[e["Frame/Effects/star_yellow.png"]=23]="Frame/Effects/star_yellow.png"}(a=t.SkinUrl||(t.SkinUrl={})),function(e){e.star="star",e.dot="dot"}(n=t.SkinStyle||(t.SkinStyle={}));t.EffectsBase=class extends Laya.Script{onAwake(){this.initProperty()}onEnable(){this.self=this.owner,this.selfScene=this.self.scene;let e=this.__proto__.constructor.name;this.self[e]=this,this.timer=0,this.lwgInit(),this.propertyAssign()}lwgInit(){}initProperty(){}propertyAssign(){this.startAlpha&&(this.self.alpha=this.startAlpha),this.startScale&&this.self.scale(this.startScale,this.startScale),this.startRotat&&(this.self.rotation=this.startRotat)}commonSpeedXYByAngle(e,t){this.self.x+=u.speedXYByAngle(e,t+this.accelerated).x,this.self.y+=u.speedXYByAngle(e,t+this.accelerated).y}moveRules(){}onUpdate(){this.moveRules()}onDisable(){Laya.Pool.recover(this.self.name,this.self),this.destroy(),Laya.Tween.clearAll(this),Laya.timer.clearAll(this)}},t.createCommonExplosion=function(e,t,n,s,o,l,r){for(let c=0;c<t;c++){let t,c=Laya.Pool.getItemByClass("ele",Laya.Image);c.name="ele","star"===o?t=12+Math.floor(12*Math.random()):"dot"===o&&(t=Math.floor(12*Math.random())),c.skin=a[t],c.alpha=1,e.addChild(c),c.pos(n,s);let h=c.addComponent(i);h.startSpeed=Math.random()*l,h.continueTime=2*Math.random()+r}};class i extends e.Effects.EffectsBase{lwgInit(){this.self.width=25,this.self.height=25,this.self.pivotX=this.self.width/2,this.self.pivotY=this.self.height/2}initProperty(){this.startAngle=360*Math.random(),this.startSpeed=5*Math.random()+8,this.startScale=.4+.6*Math.random(),this.accelerated=2,this.continueTime=8+10*Math.random(),this.rotateDir=1===Math.floor(2*Math.random())?"left":"right",this.rotateRan=10*Math.random()}moveRules(){this.timer++,"left"===this.rotateDir?this.self.rotation+=this.rotateRan:this.self.rotation-=this.rotateRan,this.timer>=this.continueTime/2&&(this.self.alpha-=.04,this.self.alpha<=.65&&this.self.removeSelf()),this.commonSpeedXYByAngle(this.startAngle,this.startSpeed+this.accelerated),this.accelerated+=.2}}t.commonExplosion=i,t.createExplosion_Rotate=function(e,t,i,o,l,r,c){for(let h=0;h<t;h++){let t,h=Laya.Pool.getItemByClass("ele",Laya.Image);h.name="ele",l===n.star?t=12+Math.floor(12*Math.random()):l===n.dot&&(t=Math.floor(12*Math.random())),h.skin=a[t],h.alpha=1,e.addChild(h),h.pos(i,o);let d=h.addComponent(s);d.startSpeed=2+Math.random()*r,d.rotateRan=Math.random()*c}};class s extends e.Effects.EffectsBase{lwgInit(){this.self.width=41,this.self.height=41,this.self.pivotX=this.self.width/2,this.self.pivotY=this.self.height/2}initProperty(){this.startAngle=360*Math.random(),this.startSpeed=5*Math.random()+8,this.startScale=.4+.6*Math.random(),this.accelerated=0,this.continueTime=5+20*Math.random(),this.rotateDir=1===Math.floor(2*Math.random())?"left":"right",this.rotateRan=15*Math.random()}moveRules(){"left"===this.rotateDir?this.self.rotation+=this.rotateRan:this.self.rotation-=this.rotateRan,this.startSpeed-this.accelerated<=.1?(this.self.alpha-=.03,this.self.alpha<=0&&this.self.removeSelf()):this.accelerated+=.2,this.commonSpeedXYByAngle(this.startAngle,this.startSpeed-this.accelerated)}}t.Explosion_Rotate=s,t.createFireworks=function(e,t,n,i){for(let s=0;s<t;s++){let t=Laya.Pool.getItemByClass("fireworks",Laya.Image);t.name="fireworks";let s=12+Math.floor(11*Math.random());t.alpha=1,t.skin=a[s],e.addChild(t),t.pos(n,i),t.getComponent(o)||t.addComponent(o)}};class o extends e.Effects.EffectsBase{lwgInit(){this.self.width=41,this.self.height=41,this.self.pivotX=this.self.width/2,this.self.pivotY=this.self.height/2}initProperty(){this.startAngle=360*Math.random(),this.startSpeed=5*Math.random()+5,this.startScale=.4+.6*Math.random(),this.accelerated=.1,this.continueTime=200+10*Math.random()}moveRules(){this.timer++,this.timer>=3*this.continueTime/5&&(this.self.alpha-=.1),this.timer>=this.continueTime?this.self.removeSelf():this.commonSpeedXYByAngle(this.startAngle,this.startSpeed),this.self.scaleX<0?this.self.scaleX+=.01:this.self.scaleX>=this.startScale&&(this.self.scaleX-=.01)}}t.Fireworks=o,t.createLeftOrRightJet=function(e,t,n,i,s){for(let o=0;o<n;o++){let n=Laya.Pool.getItemByClass("Jet",Laya.Image);n.name="Jet";let o=12+Math.floor(11*Math.random());n.skin=a[o],n.alpha=1,e.addChild(n),n.pos(i,s);let r=n.getComponent(l);if(r)r.direction=t,r.initProperty();else{n.addComponent(l);let e=n.getComponent(l);e.direction=t,e.initProperty()}}};class l extends e.Effects.EffectsBase{lwgInit(){this.self.width=41,this.self.height=41,this.self.pivotX=this.self.width/2,this.self.pivotY=this.self.height/2}initProperty(){"left"===this.direction?this.startAngle=100*Math.random()-90+45-10-20:"right"===this.direction&&(this.startAngle=100*Math.random()+90+45+20),this.startSpeed=10*Math.random()+3,this.startScale=.4+.6*Math.random(),this.accelerated=.1,this.continueTime=300+50*Math.random(),this.randomRotate=1+20*Math.random()}moveRules(){this.timer++,this.timer>=3*this.continueTime/5&&(this.self.alpha-=.1),this.timer>=this.continueTime?this.self.removeSelf():this.commonSpeedXYByAngle(this.startAngle,this.startSpeed),this.self.rotation+=this.randomRotate,this.self.scaleX<0?this.self.scaleX+=.01:this.self.scaleX>=this.startScale&&(this.self.scaleX-=.01)}}t.leftOrRightJet=l}(o=e.Effects||(e.Effects={})),function(e){e.skLoding=function(){},e.onCompelet=function(e){console.log(e._skBufferUrl,"加载成功")},e.onError=function(e){console.log(e,"加载失败！")}}(l=e.Sk||(e.Sk={})),function(e){let t;!function(e){e.noEffect="noEffect",e.largen="largen",e.balloon="balloon",e.beetle="beetle"}(t=e.Type||(e.Type={})),e.on=function(e,a,n,i,s,o,l){let r;switch(e){case t.noEffect:r=new _;break;case t.largen:r=new w;break;case t.balloon:r=new v;break;case t.balloon:r=new T;break;default:r=new w}a.on(Laya.Event.MOUSE_DOWN,n,i),a.on(Laya.Event.MOUSE_MOVE,n,s),a.on(Laya.Event.MOUSE_UP,n,o),a.on(Laya.Event.MOUSE_OUT,n,l),a.on(Laya.Event.MOUSE_DOWN,n,r.down),a.on(Laya.Event.MOUSE_MOVE,n,r.move),a.on(Laya.Event.MOUSE_UP,n,r.up),a.on(Laya.Event.MOUSE_OUT,n,r.out)},e.off=function(e,a,n,i,s,o,l){let r;switch(e){case t.noEffect:r=new _;break;case t.largen:r=new w;break;case t.balloon:r=new v;break;case t.balloon:r=new T;break;default:r=new w}a.off(Laya.Event.MOUSE_DOWN,n,i),a.off(Laya.Event.MOUSE_MOVE,n,s),a.off(Laya.Event.MOUSE_UP,n,o),a.off(Laya.Event.MOUSE_OUT,n,l),a.off(Laya.Event.MOUSE_DOWN,n,r.down),a.off(Laya.Event.MOUSE_MOVE,n,r.move),a.off(Laya.Event.MOUSE_UP,n,r.up),a.off(Laya.Event.MOUSE_OUT,n,r.out)}}(r=e.Click||(e.Click={}));class _{constructor(){}down(e){console.log("无点击效果的点击")}move(e){}up(e){}out(e){}}e.Btn_NoEffect=_;class w{constructor(){}down(e){e.currentTarget.scale(1.1,1.1),g.playSound(r.audioUrl)}move(e){}up(e){e.currentTarget.scale(1,1)}out(e){e.currentTarget.scale(1,1)}}e.Btn_LargenEffect=w;class v{constructor(){}down(e){e.currentTarget.scale(r.balloonScale+.06,r.balloonScale+.06),g.playSound(r.audioUrl)}up(e){e.currentTarget.scale(r.balloonScale,r.balloonScale)}move(e){e.currentTarget.scale(r.balloonScale,r.balloonScale)}out(e){e.currentTarget.scale(r.balloonScale,r.balloonScale)}}e.Btn_Balloon=v;class T{constructor(){}down(e){e.currentTarget.scale(r.beetleScale+.06,r.beetleScale+.06),g.playSound(r.audioUrl)}up(e){e.currentTarget.scale(r.beetleScale,r.beetleScale)}move(e){e.currentTarget.scale(r.beetleScale,r.beetleScale)}out(e){e.currentTarget.scale(r.beetleScale,r.beetleScale)}}e.Btn_Beetle=T,function(e){e.tweenMap={},e.frame=1,e.MoveTo=function(t,a,n,i,s,o,l=0,r=!0,c,h){let d=t.transform.position.clone();if(0==n||null==n)return t.transform.position=a.clone(),void(o&&o.apply(i));(h<=0||null==h)&&(h=this.frame);let g=function(){t.transform&&(t.transform.position=d),c&&c()};Laya.timer.once(l,t,function(){Laya.timer.frameLoop(h,t,g)});let u=Laya.Tween.to(d,{x:a.x,y:a.y,z:a.z},n,s,Laya.Handler.create(t,function(){t.transform&&(t.transform.position=a.clone(),Laya.timer.clear(t,g)),o&&o.apply(i)}),l,r);e.tweenMap[t.id]||(e.tweenMap[t.id]=[]),e.tweenMap[t.id].push(u)},e.RotateTo=function(t,a,n,i,s,o,l,r,c,h){let d=t.transform.localRotationEuler.clone();if(0==n||null==n)return t.transform.localRotationEuler=a.clone(),void(o&&o.apply(i));(h<=0||null==h)&&(h=this.frame);let g=function(){t.transform&&(t.transform.localRotationEuler=d),c&&c()};Laya.timer.once(l,t,function(){Laya.timer.frameLoop(h,t,g)});let u=Laya.Tween.to(d,{x:a.x,y:a.y,z:a.z},n,s,Laya.Handler.create(t,function(){t.transform&&(t.transform.localRotationEuler=a.clone(),Laya.timer.clear(t,g)),o&&o.apply(i)}),l,r);e.tweenMap[t.id]||(e.tweenMap[t.id]=[]),e.tweenMap[t.id].push(u)},e.ScaleTo=function(t,a,n,i,s,o,l,r,c,h){let d=t.transform.localScale.clone();if(0==n||null==n)return t.transform.localScale=a.clone(),void(o&&o.apply(i));(h<=0||null==h)&&(h=this.frame);let g=function(){t.transform.localScale=d.clone(),c&&c()};Laya.timer.once(l,this,function(){Laya.timer.frameLoop(h,t,g)});let u=Laya.Tween.to(d,{x:a.x,y:a.y,z:a.z},n,s,Laya.Handler.create(t,function(){t.transform.localScale=a.clone(),Laya.timer.clear(t,g),o&&o.apply(i)}),l,r);e.tweenMap[t.id]||(e.tweenMap[t.id]=[]),e.tweenMap[t.id].push(u)},e.ClearTween=function(t){let a=e.tweenMap[t.id];if(a&&a.length)for(;a.length>0;)a.pop().clear();Laya.timer.clearAll(t)}}(c=e.Animation3D||(e.Animation3D={})),function(e){e.simple_Rotate=function(e,t,a,n,i,s){e.rotation=t,i||(i=0),Laya.Tween.to(e,{rotation:a},n,null,Laya.Handler.create(this,function(){s&&s()}),i)},e.upDown_Overturn=function(e,t,a){Laya.Tween.to(e,{scaleY:0},t,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleY:1},t,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleY:0},t,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleY:1},t,null,Laya.Handler.create(this,function(){null===a&&void 0===a||a()}),0)}),0)}),0)}),0)},e.leftRight_Overturn=function(e,t,a){Laya.Tween.to(e,{scaleX:0},t,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:1},t,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:0},t,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:1},t,null,Laya.Handler.create(this,function(){}),0),null!==a&&a()}),0)}),0)}),0)},e.leftRight_Shake=function(e,t,a,n,i){Laya.Tween.to(e,{x:e.x-t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{x:e.x+2*t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{x:e.x-t},a,null,Laya.Handler.create(this,function(){null!==i&&i()}))}))}),n)},e.upDwon_Shake=function(e,t,a,n,i){Laya.Tween.to(e,{y:e.y+t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{y:e.y-2*t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{y:e.y+t},a,null,Laya.Handler.create(this,function(){null!==i&&i()}))}))}),n)},e.fadeOut=function(e,t,a,n,i,s){e.alpha=t,Laya.Tween.to(e,{alpha:a},n,null,Laya.Handler.create(this,function(){s&&s()}),i)},e.fadeOut_KickBack=function(e,t,a,n,i,s){e.alpha=t,Laya.Tween.to(e,{alpha:a},n,null,Laya.Handler.create(this,function(){null!==s&&s()}),i)},e.move_FadeOut=function(e,t,a,n,i,s,o,l){e.alpha=0,e.x=t,e.y=a,Laya.Tween.to(e,{alpha:1,x:n,y:i},s,null,Laya.Handler.create(this,function(){null!==l&&l()}),o)},e.move_Fade_Out=function(e,t,a,n,i,s,o,l){e.alpha=1,e.x=t,e.y=a,Laya.Tween.to(e,{alpha:0,x:n,y:i},s,null,Laya.Handler.create(this,function(){null!==l&&l()}),o)},e.move_FadeOut_Scale_01=function(e,t,a,n,i,s,o,l){e.alpha=0,e.targetX=0,e.targetY=0,e.x=t,e.y=a,Laya.Tween.to(e,{alpha:1,x:n,y:i,scaleX:1,scaleY:1},s,null,Laya.Handler.create(this,function(){null!==l&&l()}),o)},e.move_Scale=function(e,t,a,n,i,s,o,l,r,c,h){e.scaleX=t,e.scaleY=t,e.x=a,e.y=n,Laya.Tween.to(e,{x:i,y:s,scaleX:o,scaleY:o},l,c?null:c,Laya.Handler.create(this,function(){h&&h()}),r)},e.rotate_Scale=function(e,t,a,n,i,s,o,l,r,c){e.scaleX=a,e.scaleY=n,e.rotation=t,Laya.Tween.to(e,{rotation:i,scaleX:s,scaleY:o},l,null,Laya.Handler.create(this,()=>{c&&c(),e.rotation=0}),r||0)},e.drop_Simple=function(e,t,a,n,i,s,o){e.y=t,Laya.Tween.to(e,{y:a,rotation:n},i,Laya.Ease.circOut,Laya.Handler.create(this,function(){null!==o&&o()}),s)},e.drop_KickBack=function(e,t,a,n,i,s,o,l){e.alpha=t,e.y=a,o||(o=0),Laya.Tween.to(e,{alpha:1,y:n+i},s,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{y:n-i/2},s/2,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{y:n},s/4,null,Laya.Handler.create(this,function(){l&&l()}),0)}),0)}),o)},e.drop_Excursion=function(e,t,a,n,i,s,o){Laya.Tween.to(e,{x:e.x+a,y:e.y+1*t/6},i,Laya.Ease.expoIn,Laya.Handler.create(this,function(){Laya.Tween.to(e,{x:e.x+a+50,y:t,rotation:n},i,null,Laya.Handler.create(this,function(){null!==o&&o()}),0)}),s)},e.goUp_Simple=function(e,t,a,n,i,s,o){e.y=t,e.rotation=a,Laya.Tween.to(e,{y:n,rotation:0},i,Laya.Ease.cubicOut,Laya.Handler.create(this,function(){null!==o&&o()}),s)},e.cardRotateX_TowFace=function(e,t,a,n,i,s){Laya.Tween.to(e,{scaleX:0},n,null,Laya.Handler.create(this,function(){if(t)for(let a=0;a<t.length;a++){let n=e.getChildByName(t[a]);null!==n&&(n.alpha=0)}null!==a&&a(),Laya.Tween.to(e,{scaleX:1},.9*n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:0},.8*n,null,Laya.Handler.create(this,function(){if(t)for(let a=0;a<t.length;a++){let n=e.getChildByName(t[a]);null!==n&&(n.alpha=1)}Laya.Tween.to(e,{scaleX:1},.7*n,null,Laya.Handler.create(this,function(){null!==s&&s()}),0)}),0)}),0)}),i)},e.cardRotateX_OneFace=function(e,t,a,n,i){Laya.Tween.to(e,{scaleX:0},a,null,Laya.Handler.create(this,function(){null!==t&&t(),Laya.Tween.to(e,{scaleX:1},a,null,Laya.Handler.create(this,function(){null!==i&&i()}),0)}),n)},e.cardRotateY_TowFace=function(e,t,a,n,i,s){Laya.Tween.to(e,{scaleY:0},n,null,Laya.Handler.create(this,function(){if(t)for(let a=0;a<t.length;a++){let n=e.getChildByName(t[a]);null!==n&&(n.alpha=0)}null!==a&&a(),Laya.Tween.to(e,{scaleY:1},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleY:0},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleY:1},1*n/2,null,Laya.Handler.create(this,function(){if(t)for(let a=0;a<t.length;a++){let n=e.getChildByName(t[a]);null!==n&&(n.alpha=1)}null!==s&&s()}),0)}),0)}),0)}),i)},e.cardRotateY_OneFace=function(e,t,a,n,i){Laya.Tween.to(e,{scaleY:0},a,null,Laya.Handler.create(this,function(){null!==t&&t(),Laya.Tween.to(e,{scaleY:1},a,null,Laya.Handler.create(this,function(){null!==i&&i()}),0)}),n)},e.move_changeRotate=function(e,t,a,n,i,s,o){let l=t*n+e.x*(1-n),r=a*n+e.y*(1-n);Laya.Tween.to(e,{x:l,y:r,rotation:45},s,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{x:t,y:a,rotation:0},s,null,Laya.Handler.create(this,function(){null!==o&&o()}),0)}),0)},e.bombs_Appear=function(e,t,a,n,i,s,o,l,r,c){e.scale(0,0),e.alpha=t,Laya.Tween.to(e,{scaleX:n,scaleY:n,alpha:1,rotation:i},s,Laya.Ease.cubicInOut,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:a,scaleY:a,rotation:0},o,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:a+.2*(n-a),scaleY:a+.2*(n-a),rotation:0},o,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:a,scaleY:a,rotation:0},o,null,Laya.Handler.create(this,function(){c&&c()}),0)}),0)}),0)}),l)},e.bombs_Vanish=function(e,t,a,n,i,s,o){Laya.Tween.to(e,{scaleX:t,scaleY:t,alpha:a,rotation:n},i,Laya.Ease.cubicOut,Laya.Handler.create(this,function(){null!==o&&o()}),s)},e.swell_shrink=function(e,t,a,n,i,s){i||(i=0),Laya.Tween.to(e,{scaleX:a,scaleY:a,alpha:1},n,Laya.Ease.cubicInOut,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:t,scaleY:t,rotation:0},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:t+.5*(a-t),scaleY:t+.5*(a-t),rotation:0},.5*n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:t,scaleY:t,rotation:0},n,null,Laya.Handler.create(this,function(){null!==s&&s()}),0)}),0)}),0)}),i)},e.move_Simple=function(e,t,a,n,i,s,o,l,r){e.x=t,e.y=a,o||(o=0),Laya.Tween.to(e,{x:n,y:i},s,l||null,Laya.Handler.create(this,function(){r&&r()}),o)},e.move_Simple_01=function(e,t,a,n,i,s,o,l,r){l||(l=0),o||(o=null),e.x=t,e.y=a,Laya.Tween.to(e,{x:n,y:i},s,o,Laya.Handler.create(this,function(){r&&r()}),l)},e.move_Deform_X=function(e,t,a,n,i,s,o,l,r){e.alpha=0,e.x=t,e.rotation=a,Laya.Tween.to(e,{x:n,scaleX:1+i,scaleY:1+s,rotation:a/3,alpha:1},o,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:1,scaleY:1,rotation:0},o,null,Laya.Handler.create(this,function(){null!==r&&r()}),0)}),l)},e.move_Deform_Y=function(e,t,a,n,i,s,o,l,r){e.alpha=0,t&&(e.y=t),e.rotation=a,Laya.Tween.to(e,{y:n,scaleX:1+i,scaleY:1+s,rotation:a/3,alpha:1},o,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{scaleX:1,scaleY:1,rotation:0},o,null,Laya.Handler.create(this,function(){null!==r&&r()}),0)}),l)},e.blink_FadeOut_v=function(e,t,a,n,i,s){e.alpha=t,Laya.Tween.to(e,{alpha:a},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{alpha:t},n,null,Laya.Handler.create(this,function(){null!==s&&s()}),0)}),i)},e.blink_FadeOut=function(e,t,a,n,i,s){Laya.Tween.to(e,{alpha:t},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{alpha:a},n,null,Laya.Handler.create(this,function(){null!==s&&s()}),0)}),i)},e.shookHead_Simple=function(e,t,a,n,i){let s=e.rotation;Laya.Tween.to(e,{rotation:s+t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{rotation:s-2*t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{rotation:s+t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{rotation:s},a,null,Laya.Handler.create(this,function(){null!==i&&i()}),0)}),0)}),0)}),n)},e.HintAni_01=function(e,t,a,n,i,s,o){e.alpha=0,Laya.Tween.to(e,{alpha:1,y:e.y-t},a,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{y:e.y-15},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{alpha:0,y:e.y+t+i},s,null,Laya.Handler.create(this,function(){null!==o&&o()}),0)}),0)}),0)},e.scale_Alpha=function(e,t,a,n,i,s,o,l,r,c,h){c||(c=0),c||(r=null),e.alpha=t,e.scaleX=a,e.scaleY=n,Laya.Tween.to(e,{scaleX:i,scaleY:s,alpha:o},l,r,Laya.Handler.create(this,function(){h&&h()}),c)},e.rotate_Magnify_KickBack=function(e,t,a,n,i,s,o,l){e.alpha=0,e.scaleX=0,e.scaleY=0,Laya.Tween.to(e,{alpha:1,rotation:360+t,scaleX:1+a,scaleY:1+a},n,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{rotation:360-t/2,scaleX:1+a/2,scaleY:1+a/2},i,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{rotation:360+t/3,scaleX:1+a/5,scaleY:1+a/5},i,null,Laya.Handler.create(this,function(){Laya.Tween.to(e,{rotation:360,scaleX:1,scaleY:1},i,null,Laya.Handler.create(this,function(){e.rotation=0,null!==l&&l()}),0)}),o)}),0)}),s)}}(h=e.Animation2D||(e.Animation2D={})),function(e){e._sound={get switch(){return"0"!=Laya.LocalStorage.getItem("Setting_sound")},set switch(e){let t;t=e?1:0,Laya.LocalStorage.setItem("Setting_sound",t.toString())}},e._bgMusic={get switch(){return"0"!=Laya.LocalStorage.getItem("Setting_bgMusic")},set switch(e){let t;e?(t=1,g.playMusic()):(t=0,g.stopMusic()),Laya.LocalStorage.setItem("Setting_bgMusic",t.toString())}},e._shake={get switch(){return"0"!=Laya.LocalStorage.getItem("Setting_shake")},set switch(e){let t;t=e?1:0,Laya.LocalStorage.setItem("Setting_shake",t.toString())}},e.createSetBtn=function(t,a,n,i,o,l){let c=new Laya.Image;c.width=n||100,c.height=i||100,c.skin=o||"Frame/UI/icon_set.png",l?l.addChild(c):Laya.stage.addChild(c),c.pivotX=c.width/2,c.pivotY=c.height/2,c.x=t,c.y=a,c.zOrder=100,r.on(r.Type.largen,c,null,null,null,function(){s._openScene(s.SceneName.UISet)},null),e.BtnSetNode=c,e.BtnSetNode.name="BtnSetNode"},e.setBtnAppear=function(t,a,n){t?h.scale_Alpha(e.BtnSetNode,0,1,1,1,1,1,t,null,0,t=>{e.BtnSetNode.visible=!0}):e.BtnSetNode.visible=!0,a&&(e.BtnSetNode.x=a),n&&(e.BtnSetNode.y=n)},e.setBtnVinish=function(t){t?h.scale_Alpha(e.BtnSetNode,1,1,1,1,1,0,t,null,0,t=>{e.BtnSetNode.visible=!1}):e.BtnSetNode.visible=!1}}(d=e.Setting||(e.Setting={})),function(e){let t;!function(e){e.btn="Frame/voice/btn.wav",e.bgm="Frame/voice/bgm.mp3",e.victory="Frame/voice/guoguan.wav",e.defeated="Frame/voice/wancheng.wav"}(t=e.voiceUrl||(e.voiceUrl={})),e.playSound=function(e,a,n){e||(e=t.btn),a||(a=1),d._sound.switch&&Laya.SoundManager.playSound(e,a,Laya.Handler.create(this,function(){n&&n()}))},e.playDefeatedSound=function(e,a,n){e||(e=t.defeated),a||(a=1),d._sound.switch&&Laya.SoundManager.playSound(e,a,Laya.Handler.create(this,function(){n&&n()}))},e.playVictorySound=function(e,a,n){e||(e=t.victory),a||(a=1),d._sound.switch&&Laya.SoundManager.playSound(e,a,Laya.Handler.create(this,function(){n&&n()}))},e.playMusic=function(e,a,n){e||(e=t.bgm),a||(a=0),n||(n=0),Laya.SoundManager.playMusic(e,a,Laya.Handler.create(this,function(){}),n)},e.stopMusic=function(){Laya.SoundManager.stopMusic()}}(g=e.PalyAudio||(e.PalyAudio={})),function(e){function twoSubV3_3D(e,t,a){let n=new Laya.Vector3;if(Laya.Vector3.subtract(e,t,n),a){let e=new Laya.Vector3;return Laya.Vector3.normalize(n,e),e}return n}function obj_DeepCopy(e){var t={};for(var a in e)t[a]="object"==typeof e[a]?obj_DeepCopy(e[a]):e[a];return t}e.randomNumOfArray=function(e,t){let a=[];if(t>e.length)return"数组长度小于取出的数！";for(let n=0;n<t;n++){let t=Math.floor(Math.random()*(e.length-1)),n=e[t];e.splice(t,1),a.push(n)}return a},e.rayScanning=function(e,t,a,n){let i=new Laya.Ray(new Laya.Vector3(0,0,0),new Laya.Vector3(0,0,0)),s=new Array;if(e.viewportPointToRay(a,i),t.physicsSimulation.rayCastAll(i,s),0!=s.length&&n){let e=null;for(var o=0;o<s.length;o++)s[o].collider.owner.name===n&&(e=s[o]);return e}return s},e.dotRotateXY=function(e,t,a,n,i){let s=e+(a-e)*Math.cos(i*Math.PI/180)-(n-t)*Math.sin(i*Math.PI/180),o=t+(a-e)*Math.sin(i*Math.PI/180)+(n-t)*Math.cos(i*Math.PI/180);return new Laya.Point(s,o)},e.toHexString=function(e,t,a){return"#"+("00000"+(e<<16|t<<8|a).toString(16)).slice(-6)},e.twoObjectsLen_3D=function(e,t){let a=e.transform.position,n=t.transform.position,i=new Laya.Vector3;return Laya.Vector3.subtract(a,n,i),Laya.Vector3.scalarLength(i)},e.twoPositionLen_3D=function(e,t){let a=twoSubV3_3D(e,t);return Laya.Vector3.scalarLength(a)},e.twoObjectsLen_2D=function(e,t){return new Laya.Point(e.x,e.y).distance(t.x,t.y)},e.twoSubV3_3D=twoSubV3_3D,e.reverseVector=function(e,t,a,n){let i;if("2d"===e)return i=new Laya.Point(t.x-a.x,t.y-a.y),n&&i.normalize(),i;if("3d"===e){if(i=new Laya.Vector3(t.x-a.x,t.y-a.y,t.z-a.z),n){let e=new Laya.Vector3;return Laya.Vector3.normalize(i,e),e}return i}},e.vector_Angle=function(e,t){let a=90-Math.atan2(e,t)*(180/Math.PI);return a<=0&&(a=270+(90+a)),a-90},e.angle_Vector=function(e){let t=(90-(e-=90))/(180/Math.PI),a=new Laya.Point(Math.sin(t),Math.cos(t));return a.normalize(),a},e.maximumDistanceLimi_3D=function(e,t,a){let n=new Laya.Vector3,i=t.transform.position;if(Laya.Vector3.subtract(i,e,n),Laya.Vector3.scalarLength(n)>=a){let i=new Laya.Vector3;Laya.Vector3.normalize(n,i);let s=e.x+i.x*a,o=e.y+i.y*a,l=e.z+i.z*a,r=new Laya.Vector3(s,o,l);return t.transform.position=r,r}},e.drawPieMask=function(e,t,a){e.cacheAs="bitmap";let n=new Laya.Sprite;return n.blendMode="destination-out",e.addChild(n),n.graphics.drawPie(e.width/2,e.height/2,e.width/2+10,t,a,"#000000")},e.transitionScreenPointfor3D=function(e,t){let a=new Laya.Vector3;t.viewport.project(e,t.projectionViewMatrix,a);let n=new Laya.Vector2;return n.x=a.x,n.y=a.y,n},e.objPropertySort=function(e,t){return e.sort(function(e,a){var n=e[t],i=a[t];return isNaN(Number(n))||isNaN(Number(i))||(n=Number(n),i=Number(i)),n<i?-1:n>i?1:0}),e},e.dataCompareDifferent=function(e,t,a){for(var n=[],i=0;i<e.length;i++){for(var s=e[i],o=s[a],l=!1,r=0;r<t.length;r++)if(t[r][a]==o){l=!0;break}l||n.push(s)}return n},e.dataComparEidentical=function(e,t,a){for(var n=[],i=0;i<e.length;i++){for(var s=e[i],o=(s[a],!1),l=0;l<t.length;l++)if(t[l][a]==name){o=!0;break}o&&n.push(s)}return n},e.data1AddToData2=function(e,t){for(let a=0;a<t.length;a++){const n=t[a];e.push(n)}},e.random=function(e,t){const a=(e=e||10)-t+1;return Math.floor(Math.random()*a+e)},e.array_Copy=function(e){for(var t=[],a=0;a<e.length;a++)t.push(e[a]);return t},e.objArray_Copy=function(e){var t=e instanceof Array?[]:{};for(var a in e)t[a]="object"==typeof e[a]?obj_DeepCopy(e[a]):e[a];return t},e.obj_DeepCopy=obj_DeepCopy,e.speedByAngle=function(e,t){if(e%90==0||!e)return void console.error("计算的角度异常,需要查看：",e);let a={x:0,y:0};return a.y=t.y,a.x=a.y/Math.tan(e*Math.PI/180),a},e.speedXYByAngle=function(e,t){const a={x:0,y:0};return a.x=t*Math.cos(e*Math.PI/180),a.y=t*Math.sin(e*Math.PI/180),a},e.getRad=function(e){return e/180*Math.PI},e.getRoundPos=function(e,t,a){var n=a,i=(t=t,2*Math.PI/360*e);return{x:n.x+Math.sin(i)*t,y:n.y-Math.cos(i)*t}},e.converteNum=function(e){if("number"!=typeof e)return console.warn("要转化的数字并不为number"),e;let t;return t=e<1e3?""+e:e<1e6?(e/1e3).toFixed(1)+"k":e<1e9?(e/1e6).toFixed(1)+"m":""+e},e.arrayUnique_01=function(e){for(var t=0,a=e.length;t<a;t++){var n=t+1;for(a=e.length;n<a;n++)e[t]===e[n]&&(e.splice(n,1),n--,a--)}return e},e.arrayUnique_02=function(e){for(var t=[(e=e.sort())[0]],a=1,n=e.length;a<n;a++)e[a]!==e[a-1]&&t.push(e[a]);return t},e.arrayUnique_03=function(e){return Array.from(new Set(e))},e.dataCompare=function(t,a,n){let i;if(console.log(Laya.LocalStorage.getJSON(a)),JSON.parse(Laya.LocalStorage.getJSON(a))){i=JSON.parse(Laya.LocalStorage.getJSON(a))[a],console.log(a+"从本地缓存中获取到数据,将和文件夹的json文件进行对比");try{let s=Laya.loader.getRes(t).RECORDS;if(s.length>=i.length){let t=e.dataCompareDifferent(s,i,n);console.log("两个数据的差值为：",t),e.data1AddToData2(i,t)}else console.log(a+"数据表填写有误，长度不能小于之前的长度")}catch(e){console.log(a,"数据赋值失败！请检查数据表或者手动赋值！")}}else try{i=Laya.loader.getRes(t).RECORDS}catch(e){console.log(a+"数据赋值失败！请检查数据表或者手动赋值！")}let s={};return s[a]=i,Laya.LocalStorage.setJSON(a,JSON.stringify(s)),i}}(u=e.Tools||(e.Tools={})),function(e){function getTaskClassArr(t){let n=[];switch(t){case a.everyday:n=e.everydayTask;break;case a.perpetual:n=e.perpetualTask}return n}let t,a,n,i,o;e.TaskClassArr=[],e.todayData={d:null,get date(){return this.d=null!==Laya.LocalStorage.getItem("Task_todayData")?Number(Laya.LocalStorage.getItem("Task_todayData")):null},set date(e){this.d=e,Laya.LocalStorage.setItem("Task_todayData",this.d)}},e.getTaskProperty=function(e,t,a){let n=null,i=getTaskClassArr(e);for(let e=0;e<i.length;e++){const s=i[e];if(s.name===t){n=s[a];break}}return null!==n?n:(console.log(t+"找不到属性:"+a,n),null)},e.setTaskProperty=function(t,a,n,i){let s=getTaskClassArr(t);for(let e=0;e<s.length;e++){const t=s[e];if(t.name===a){t[n]=i;break}}let o={};o[t]=s,Laya.LocalStorage.setJSON(t,JSON.stringify(o)),e._TaskList&&e._TaskList.refresh()},e.getTaskClassArr=getTaskClassArr,e.doDetectionTask=function(t,a,n){n||(n=1);let i=e.getTaskProperty(t,a,e.TaskProperty.resCondition),s=e.getTaskProperty(t,a,e.TaskProperty.condition);return-1!==e.getTaskProperty(t,a,e.TaskProperty.get)?s<=i+n?(e.setTaskProperty(t,a,e.TaskProperty.resCondition,s),e.setTaskProperty(t,a,e.TaskProperty.get,1),e._TaskList&&e._TaskList.refresh(),1):(e.setTaskProperty(t,a,e.TaskProperty.resCondition,i+n),e._TaskList&&e._TaskList.refresh(),0):-1},function(e){e.name="name",e.explain="explain",e.taskType="taskType",e.condition="condition",e.resCondition="resCondition",e.rewardType="rewardType",e.rewardNum="rewardNum",e.arrange="arrange",e.time="time",e.get="get"}(t=e.TaskProperty||(e.TaskProperty={})),function(e){e.everyday="Task_Everyday",e.perpetual="Task_Perpetual"}(a=e.TaskClass||(e.TaskClass={})),function(e){e.getAward="getAward",e.adsGetAward_Every="adsGetAward_Every",e.useSkins="useSkins",e.victory="victory",e.adsTime="adsTime",e.victoryBox="victoryBox"}(n=e.EventType||(e.EventType={})),function(e){e.ads="ads",e.victory="victory",e.useSkins="useSkins",e.treasureBox="treasureBox"}(i=e.TaskType||(e.TaskType={})),function(e){e["观看广告获得金币"]="观看广告获得金币",e["每日服务10位客人"]="每日服务10位客人",e["每日观看两个广告"]="每日观看两个广告",e["每日使用5种皮肤"]="每日使用5种皮肤",e["每日开启10个宝箱"]="每日开启10个宝箱"}(o=e.TaskName||(e.TaskName={})),e.initTask=function(){e.todayData.date!==(new Date).getDate()?(e.everydayTask=Laya.loader.getRes("GameData/Task/everydayTask.json").RECORDS,console.log("不是同一天，每日任务重制！"),e.todayData.date=(new Date).getDate()):(e.everydayTask=u.dataCompare("GameData/Task/everydayTask.json",a.everyday,t.name),console.log("是同一天！，继续每日任务"))};e.TaskScene=class extends s.Scene{lwgOnAwake(){this.initData(),this.taskOnAwake()}initData(){e._TaskTap=this.self.TaskTap,e._TaskList=this.self.TaskList,e.TaskClassArr=[e.everydayTask]}lwgEventReg(){this.taskEventReg()}taskEventReg(){}taskOnAwake(){}lwgNodeDec(){this.taskNodeDec()}taskNodeDec(){}lwgOnEnable(){this.taskTap_Create(),this.taskList_Create(),this.taskOnEnable()}taskOnEnable(){}taskTap_Create(){e._TaskList.selectHandler=new Laya.Handler(this,this.taskTap_Select)}taskTap_Select(e){}taskList_Create(){e._TaskList.selectEnable=!0,e._TaskList.vScrollBarSkin="",e._TaskList.selectHandler=new Laya.Handler(this,this.taskList_Scelet),e._TaskList.renderHandler=new Laya.Handler(this,this.taskList_Update),this.taskList_refresh()}taskList_Scelet(e){}taskList_Update(e,t){}taskList_refresh(){e._TaskList&&e.TaskClassArr.length>0&&(e._TaskList.array=e.TaskClassArr[0],e._TaskList.refresh())}lwgOnDisable(){this.taskOnDisable()}taskOnDisable(){}}}(y=e.Task||(e.Task={})),function(e){function getGoodsProperty(e,t,a){let n=null,i=getGoodsClassArr(e);for(let e=0;e<i.length;e++){const s=i[e];if(s.name===t){n=s[a];break}}return null!==n?n:(console.log(t+"找不到属性:"+a,n),null)}function setGoodsProperty(t,a,n,i){let s=getGoodsClassArr(t);for(let e=0;e<s.length;e++){const t=s[e];if(t.name===a){t[n]=i;break}}let o={};o[t]=s,Laya.LocalStorage.setJSON(t,JSON.stringify(o)),e._ShopList&&e._ShopList.refresh()}function get_Current(t){let a=null;switch(t){case n.Skin:a=e._currentSkin.name;break;case n.Props:a=e._currentProp.name;break;case n.Other:a=e._currentOther.name}return a}function getGoodsClassArr(t){let a=[];switch(t){case n.Skin:a=e.allSkin;break;case n.Props:a=e.allProps;break;case n.Other:a=e.allOther}return a}let t,a,n,i;e.goodsClassArr=[],e.classWarehouse=[],e._tryName=[],e.allSkin=[],e._currentSkin={get name(){return Laya.LocalStorage.getItem("Shop_currentSkin")?Laya.LocalStorage.getItem("Shop_currentSkin"):null},set name(e){Laya.LocalStorage.setItem("Shop_currentSkin",e)}},e.allProps=[],e._currentProp={get name(){return Laya.LocalStorage.getItem("Shop_currentProp")?Laya.LocalStorage.getItem("Shop_currentProp"):null},set name(e){Laya.LocalStorage.setItem("Shop_currentProp",e)}},e.allOther=[],e._currentOther={get name(){return Laya.LocalStorage.getItem("Shop_crrentOther")?Laya.LocalStorage.getItem("Shop_crrentOther"):null},set name(e){Laya.LocalStorage.setItem("Shop_crrentOther",e)}},e.useSkinType=[],e.setUseSkinType=function(){let t=JSON.parse(Laya.LocalStorage.getJSON("Shop_useSkinType"));e.useSkinType=null!==t?t.Shop_useSkinType:[],e.useSkinType.push(e._currentOther.name,e._currentProp.name,e._currentSkin.name),e.useSkinType=u.arrayUnique_03(e.useSkinType);let a={Shop_useSkinType:e.useSkinType};return Laya.LocalStorage.setJSON("Shop_useSkinType",JSON.stringify(a)),e.useSkinType.length},e.getGoodsProperty=getGoodsProperty,e.setGoodsProperty=setGoodsProperty,e.getHaveArr=function(e){let a=getGoodsClassArr(e),n=[];for(let e=0;e<a.length;e++){const i=a[e];i[t.have]&&n.push(i)}return n},e.getwayGoldArr=function(e,n,i){let s=getGoodsClassArr(e),o=[];for(let e=0;e<s.length;e++){const i=s[e];n&&void 0!==n?i[t.have]&&i[t.getway]===a.gold&&o.push(i):n||void 0===n?null==n&&i[t.getway]===a.gold&&o.push(i):i[t.have]||i[t.getway]!==a.gold||o.push(i)}if(i&&void 0!==i)for(let a=0;a<o.length;a++)if(o[a][t.name]===get_Current(e)){o.splice(a,1);break}return o},e.getwayIneedwinArr=function(e,n){let i=getGoodsClassArr(e),s=[];for(let e=0;e<i.length;e++){const o=i[e];n&&void 0!==n?o[t.have]&&o[t.getway]===a.ineedwin&&s.push(o):n||void 0===n?null==n&&o[t.getway]===a.ineedwin&&s.push(o):o[t.have]||o[t.getway]!==a.ineedwin||s.push(o)}return s},e.get_Current=get_Current,e.getGoodsClassArr=getGoodsClassArr,e.buyGoods=function(a,n,i){i||(i=1);let s=getGoodsProperty(a,n,t.resCondition),o=getGoodsProperty(a,n,t.condition),l=getGoodsProperty(a,n,t.have);return!0!==l&&null!==l?o<=s+i?(setGoodsProperty(a,n,t.resCondition,o),setGoodsProperty(a,n,t.have,!0),e._ShopList&&e._ShopList.refresh(),1):(setGoodsProperty(a,n,t.resCondition,s+i),e._ShopList&&e._ShopList.refresh(),0):-1},e.initShop=function(){e.allSkin=u.dataCompare("GameData/Shop/Skin.json",n.Skin,t.name),e.allProps=u.dataCompare("GameData/Shop/Props.json",n.Props,t.name),e.allOther=u.dataCompare("GameData/Shop/Other.json",n.Other,t.name)},function(e){e.name="name",e.getway="getway",e.condition="condition",e.resCondition="resCondition",e.arrange="arrange",e.getOder="getOder",e.have="have"}(t=e.GoodsProperty||(e.GoodsProperty={})),function(e){e.free="free",e.ads="ads",e.adsXD="adsXD",e.ineedwin="ineedwin",e.gold="gold",e.diamond="diamond",e.easterEgg="easterEgg",e.other="other"}(a=e.Getway||(e.Getway={})),function(e){e.Skin="Shop_Skin",e.Props="Shop_Props",e.Other="Shop_Other"}(n=e.GoodsClass||(e.GoodsClass={})),function(e){e.select="select"}(i=e.EventType||(e.EventType={}));e.ShopScene=class extends s.Scene{lwgOnAwake(){this.initData(),this.shopOnAwake()}initData(){e._ShopTap=this.self.MyTap,e._ShopList=this.self.MyList,e.allSkin||(e.allSkin=u.dataCompare("GameData/Shop/Skin.json",n.Skin,t.name)),e.allProps||(e.allProps=u.dataCompare("GameData/Shop/Props.json",n.Props,t.name)),e.allOther||(e.allOther=u.dataCompare("GameData/Shop/Other.json",n.Other,t.name)),e.goodsClassArr=[e.allSkin,e.allProps,e.allOther],e.classWarehouse=[n.Skin,n.Props,n.Skin]}lwgEventReg(){this.shopEventReg()}shopEventReg(){}shopOnAwake(){}lwgNodeDec(){this.shopNodeDec()}shopNodeDec(){}lwgOnEnable(){this.myList_Create(),this.myTap_Create(),this.shopOnEnable()}shopOnEnable(){}myTap_Create(){e._ShopTap.selectHandler=new Laya.Handler(this,this.myTap_Select)}myTap_Select(e){}myList_Create(){e._ShopList.selectEnable=!0,e._ShopList.selectHandler=new Laya.Handler(this,this.myList_Scelet),e._ShopList.renderHandler=new Laya.Handler(this,this.myList_Update),this.myList_refresh()}myList_Scelet(e){}myList_Update(e,t){}myList_refresh(){e._ShopList&&e.goodsClassArr.length>0&&(e._ShopList.array=e.goodsClassArr[0],e._ShopList.refresh())}lwgOnDisable(){this.shopOnDisable()}shopOnDisable(){}}}(p=e.Shop||(e.Shop={})),function(e){let t,a;e._BoxArray=[],e._defaultOpenNum=3,e._alreadyOpenNum=0,e._adsMaxOpenNum=6,e._openVictoryBoxNum=0,e.alreadyNum=0,e.getBoxProperty=function(t,a){let n=null;for(let i=0;i<e._BoxArray.length;i++){const s=e._BoxArray[i];if(s.name===t){n=s[a];break}}return null!==n?n:(console.log(t+"找不到属性:"+a,n),null)},e.setBoxProperty=function(t,a,n){for(let i=0;i<e._BoxArray.length;i++){const s=e._BoxArray[i];if(s.name===t){s[a]=n;break}}e._BoxList&&e._BoxList.refresh()},function(e){e.name="name",e.rewardType="rewardType",e.rewardNum="rewardNum",e.openState="openState",e.ads="ads",e.select="select"}(t=e.BoxProperty||(e.BoxProperty={})),function(e){e.openBox="openBox"}(a=e.EventType||(e.EventType={}));e.VictoryBoxScene=class extends s.Scene{lwgOnAwake(){this.initData(),this.victoryBoxOnAwake()}initData(){e._BoxList=this.self.BoxList,e._BoxArray=u.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json").RECORDS),e._selectBox=null,e._defaultOpenNum=3,e._openVictoryBoxNum++,e._adsMaxOpenNum=6,e._alreadyOpenNum=0}victoryBoxOnAwake(){}lwgOnEnable(){this.boxList_Create(),this.victoryBoxOnEnable()}victoryBoxOnEnable(){}boxList_Create(){e._BoxList.selectEnable=!0,e._BoxList.selectHandler=new Laya.Handler(this,this.boxList_Scelet),e._BoxList.renderHandler=new Laya.Handler(this,this.boxList_Update),this.boxList_refresh()}boxList_Scelet(e){}boxList_Update(e,t){}boxList_refresh(){e._BoxList&&(e._BoxList.array=e._BoxArray,e._BoxList.refresh())}lwgNodeDec(){this.victoryBoxNodeDec()}victoryBoxNodeDec(){}lwgBtnClick(){this.victoryBoxBtnClick()}victoryBoxBtnClick(){}lwgEventReg(){this.victoryBoxEventReg()}victoryBoxEventReg(){}lwgOnDisable(){this.victoryBoxOnDisable()}victoryBoxOnDisable(){}lwgOnUpdate(){this.victoryOnUpdate()}victoryOnUpdate(){}}}(m=e.VictoryBox||(e.VictoryBox={})),function(e){function getCheckProperty(t,a){let n=null;for(let i=0;i<e._checkArray.length;i++){const s=e._checkArray[i];if(s.name===t){n=s[a];break}}return null!==n?n:(console.log(t+"找不到属性:"+a,n),null)}function setCheckProperty(t,a,n,i){for(let t=0;t<e._checkArray.length;t++){const s=e._checkArray[t];if(s.name===a){s[n]=i;break}}let s={};s[t]=e._checkArray,Laya.LocalStorage.setJSON(t,JSON.stringify(s)),e._checkList&&e._checkList.refresh()}let t,a,n;e._lastCheckDate={get date(){return null!==Laya.LocalStorage.getItem("Check_lastCheckDate")?Number(Laya.LocalStorage.getItem("Check_lastCheckDate")):-1},set date(e){Laya.LocalStorage.setItem("Check_lastCheckDate",e.toString())}},e._checkInNum={get number(){return null!==Laya.LocalStorage.getItem("Check_checkInNum")?Number(Laya.LocalStorage.getItem("Check_checkInNum")):0},set number(e){Laya.LocalStorage.setItem("Check_checkInNum",e.toString())}},e.getCheckProperty=getCheckProperty,e.setCheckProperty=setCheckProperty,e.openCheckIn=function(){(new Date).getDate()!==e._lastCheckDate.date?(console.log("没有签到过，弹出签到页面！"),s._openScene(s.SceneName.UICheckIn)):console.log("签到过了，今日不可以再签到")},e.todayCheckIn_7Days=function(){let n=(new Date).getDate();e._lastCheckDate.date=n,e._checkInNum.number++,setCheckProperty(t.chek_7Days,"day"+e._checkInNum.number,a.checkInState,!0);let i=getCheckProperty("day"+e._checkInNum.number,a.rewardNum);return 7===e._checkInNum.number&&(e._checkInNum.number=0,Laya.LocalStorage.removeItem(t.chek_7Days)),i},function(e){e.chek_7Days="Chek_7Days",e.chek_15Days="Chek_15Days",e.chek_30Days="Chek_30Days"}(t=e.CheckClass||(e.CheckClass={})),function(e){e.name="name",e.rewardType="rewardType",e.rewardNum="rewardNum",e.checkInState="checkInState",e.arrange="arrange"}(a=e.CheckProPerty||(e.CheckProPerty={})),function(e){e.removeCheckBtn="removeCheckBtn"}(n=e.EventType||(e.EventType={}));e.CheckInScene=class extends s.Scene{lwgOnAwake(){this.initData(),this.checkInOnAwake()}initData(){e._checkList=this.self.CheckList,e._checkArray=u.dataCompare("GameData/CheckIn/CheckIn.json",t.chek_7Days,a.name)}checkInOnAwake(){}lwgOnEnable(){this.checkList_Create(),this.checkInOnEnable()}checkInOnEnable(){}checkList_Create(){e._checkList.selectEnable=!0,e._checkList.selectHandler=new Laya.Handler(this,this.checkList_Scelet),e._checkList.renderHandler=new Laya.Handler(this,this.checkList_Update),this.checkList_refresh()}checkList_Scelet(e){}checkList_Update(e,t){}checkList_refresh(){e._checkList&&(e._checkList.array=e._checkArray,e._checkList.refresh())}lwgNodeDec(){this.checkInNodeDec()}checkInNodeDec(){}lwgBtnClick(){this.checkInBtnClick()}checkInBtnClick(){}lwgEventReg(){this.checkInEventReg()}checkInEventReg(){}lwgOnDisable(){this.checkInOnDisable()}checkInOnDisable(){}lwgOnUpdate(){this.checkInOnUpdate()}checkInOnUpdate(){}}}(f=e.CheckIn||(e.CheckIn={})),function(e){let t;e._adsNum={get value(){return null!==Laya.LocalStorage.getItem("XDSKin_adsNum")?Number(Laya.LocalStorage.getItem("XDSKin_adsNum")):0},set value(e){Laya.LocalStorage.setItem("XDSKin_adsNum",e.toString())}},e.openXDSkin=function(t){e._adsNum.value>=e._needAdsNum||(s._openScene(s.SceneName.UISkinXD),e._fromScene=t)},function(e){e.acquisition="acquisition"}(t=e.EventType||(e.EventType={}));e.SkinXDScene=class extends s.Scene{lwgOnAwake(){this.initData(),this.skinXDOnAwake()}initData(){e._needAdsNum=3}skinXDOnAwake(){}lwgAdaptive(){this.skinXDAdaptive()}skinXDAdaptive(){}lwgOnEnable(){this.skinXDOnEnable()}skinXDOnEnable(){}lwgNodeDec(){this.skinXDNodeDec()}skinXDNodeDec(){}lwgBtnClick(){this.skinXDBtnClick()}skinXDBtnClick(){}lwgEventReg(){this.skinXDEventReg()}skinXDEventReg(){}lwgOnDisable(){this.skinXDOnDisable()}skinXDOnDisable(){}lwgOnUpdate(){this.skinXDOnUpdate()}skinXDOnUpdate(){}}}(S=e.SkinXD||(e.SkinXD={})),function(e){let t,a,n;e._skinClassArr=[],e._headSkinArr=[],e._currentHead={get name(){return null!==Laya.LocalStorage.getItem("Skin_currentHead")?Laya.LocalStorage.getItem("Skin_currentHead"):null},set name(e){Laya.LocalStorage.setItem("Skin_currentHead",e)}},e._eyeSkinArr=[],e._currentEye={get name(){return null!==Laya.LocalStorage.getItem("Skin_currentEye")?Laya.LocalStorage.getItem("Skin_currentEye"):null},set name(e){Laya.LocalStorage.setItem("Skin_currentEye",e)}},function(e){e.head="head",e.eye="eye",e.body="body",e.upperBody="upperBody",e.lowerBody="lowerBody"}(t=e.SkinClass||(e.SkinClass={})),function(e){e.name="name",e.getway="getway",e.condition="condition",e.resCondition="resCondition",e.arrange="arrange",e.getOder="getOder",e.classify="classify",e.have="have"}(a=e.SkinProperty||(e.SkinProperty={})),function(e){e.purchase="purchase",e.select="select"}(n=e.EventType||(e.EventType={}));e.SkinScene=class extends s.Scene{lwgOnAwake(){this.initData(),this.skinOnAwake()}initData(){e._SkinTap=this.self.SkinTap,e._SkinList=this.self.SkinList,e._skinClassArr=[e._eyeSkinArr,e._headSkinArr]}lwgEventReg(){this.skinEventReg()}skinEventReg(){}skinOnAwake(){}lwgNodeDec(){this.skinNodeDec()}skinNodeDec(){}lwgOnEnable(){this.skinList_Create(),this.skinTap_Create(),this.skinOnEnable()}skinOnEnable(){}lwgOpenAni(){return this.skinOpenAin()}skinOpenAin(){return 0}lwgBtnClick(){this.skinBtnClick()}skinBtnClick(){}skinTap_Create(){e._SkinTap.selectHandler=new Laya.Handler(this,this.skinTap_Select)}skinTap_Select(e){}skinList_Create(){e._SkinList.selectEnable=!0,e._SkinList.selectHandler=new Laya.Handler(this,this.skinList_Scelet),e._SkinList.renderHandler=new Laya.Handler(this,this.skinList_Update),this.skinList_refresh()}skinList_Scelet(e){}skinList_Update(e,t){}skinList_refresh(){e._SkinList&&e._skinClassArr.length>0&&(e._SkinList.array=e._skinClassArr[0],e._SkinList.refresh())}lwgOnDisable(){this.skinOnDisable()}skinOnDisable(){}}}(k=e.Skin||(e.Skin={})),function(e){let t;e.lodingList_3DScene=[],e.lodingList_3DMesh=[],e.lodingList_3DBaseMaterial=[],e.lodingList_3DTexture2D=[],e.lodingList_2D=[],e.lodingList_Json=[],e.currentProgress={val:0,get value(){return this.val},set value(t){if(this.val=t,this.val>=e.sumProgress)console.log("当前进度条进度为:",e.currentProgress.value/e.sumProgress),console.log("进度条停止！"),console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取'),a.notify(e.LodingType.complete);else{let t=0;for(let a=0;a<=e.loadOrderIndex;a++)t+=e.loadOrder[a].length;this.val===t&&e.loadOrderIndex++,a.notify(e.LodingType.loding)}}},function(e){e.complete="complete",e.loding="loding",e.progress="progress"}(t=e.LodingType||(e.LodingType={}));e.LodeScene=class extends s.Scene{lwgOnAwake(){this.lodingResList()}lodingResList(){}lwgEventReg(){a.reg(t.loding,this,()=>{this.lodingRule()}),a.reg(t.complete,this,()=>{this.lodingComplete(),this.lwgInterior(),this.lodingTaskEventReg()}),a.reg(t.progress,this,t=>{e.currentProgress.value++,e.currentProgress.value<e.sumProgress&&(console.log("当前进度条进度为:",e.currentProgress.value/e.sumProgress),this.lodingPhaseComplete())})}lwgOnEnable(){e.loadOrder=[e.lodingList_2D,e.lodingList_3DScene,e.lodingList_Json];for(let t=0;t<e.loadOrder.length;t++)e.loadOrder[t].length<=0&&(e.loadOrder.splice(t,1),t--);e.sumProgress=e.lodingList_2D.length+e.lodingList_3DScene.length+e.lodingList_Json.length,e.loadOrderIndex=0,a.notify(e.LodingType.loding)}lodingRule(){if(e.loadOrder.length<=0)return void console.log("没有加载项");let n=0;for(let t=0;t<e.loadOrderIndex;t++)n+=e.loadOrder[t].length;let i=e.currentProgress.value-n;switch(e.loadOrder[e.loadOrderIndex]){case e.lodingList_2D:Laya.loader.load(e.lodingList_2D[i],Laya.Handler.create(this,n=>{null==n?console.log("XXXXXXXXXXX2D资源"+e.lodingList_2D[i]+"加载失败！不会停止加载进程！","数组下标为：",i,"XXXXXXXXXXX"):console.log("2D资源"+e.lodingList_2D[i]+"加载完成！","数组下标为：",i),a.notify(t.progress)}));break;case e.lodingList_3DScene:Laya.Scene3D.load(e.lodingList_3DScene[i],Laya.Handler.create(this,n=>{null==n?console.log("XXXXXXXXXXX3D场景"+e.lodingList_3DScene[i]+"加载失败！不会停止加载进程！","数组下标为：",i,"XXXXXXXXXXX"):console.log("3D场景"+e.lodingList_3DScene[i]+"加载完成！","数组下标为：",i),a.notify(t.progress)}));break;case e.lodingList_Json:Laya.loader.load(e.lodingList_Json[i],Laya.Handler.create(this,n=>{null==n?console.log("XXXXXXXXXXX数据表"+e.lodingList_Json[i]+"加载失败！不会停止加载进程！","数组下标为：",i,"XXXXXXXXXXX"):console.log("数据表"+e.lodingList_Json[i]+"加载完成！","数组下标为：",i),a.notify(t.progress)}),null,Laya.Loader.JSON)}}lodingPhaseComplete(){}lwgInterior(){}lodingTaskEventReg(){}lodingComplete(){}}}(L=e.Loding||(e.Loding={}))}(e||(e={}));let t=e.Admin,a=e.Gold,n=e.Click,i=e.EventAdmin,s=e.Tools,o=e.Effects,l=e.PalyAudio,r=e.Setting,c=e.Dialog,h=e.Animation2D,d=e.Animation3D,g=e.Loding,u=(e.Loding.LodeScene,e.Shop),y=(e.Shop.ShopScene,e.Task),p=(e.Task.TaskScene,e.VictoryBox),m=(e.VictoryBox.VictoryBoxScene,e.CheckIn),f=(e.CheckIn.CheckInScene,e.SkinXD),S=(e.SkinXD.SkinXDScene,e.Skin),k=e.Skin.SkinScene;var L,_,w;!function(e){function getProperty(e,t,a){let n=null,i=getClassify(e);for(let e=0;e<i.length;e++){const s=i[e];if(s.name===t){n=s[a];break}}return null!==n?n:(console.log(t+"找不到属性:"+a,n),null)}function setProperty(e,t,a,n){let i=getClassify(e);for(let e=0;e<i.length;e++){const s=i[e];if(s.name===t){s[a]=n;break}}let s={};s[e]=i,Laya.LocalStorage.setJSON(e,JSON.stringify(s))}function getClassify(t){let a=[];switch(t){case i.EasterEgg_01:a=e._easterEgg_1Arr}return a}let a,n,i,o,l;e._easterEgg_1Arr=[],e._easterEgg_1={get value(){return null!=Laya.LocalStorage.getItem("_easterEgg_01")},set value(e){Laya.LocalStorage.setItem("_easterEgg_01",e.toString())}},e.initEasterEgg=function(){e._easterEgg_1Arr=s.dataCompare("GameData/EasterEgg/EasterEgg.json",i.EasterEgg_01,n.name)},e.getProperty=getProperty,e.setProperty=setProperty,e.getTaskProperty=function(e,t,a){let n=null,i=getClassify(e);for(let e=0;e<i.length;e++){const s=i[e];if(s.name===t){n=s[a];break}}return null!==n?n:(console.log(t+"找不到属性:"+a,n),null)},e.getClassify=getClassify,e.doDetection=function(e,t,a){a||(a=0);let i=getProperty(e,t,n.resCondition),s=getProperty(e,t,n.condition);return getProperty(e,t,n.complete)?1:s<=i+a?(setProperty(e,t,n.resCondition,s),setProperty(e,t,n.complete,!0),console.log(getProperty(e,t,n.complete)),1):(setProperty(e,t,n.resCondition,i+a),0)},e.detectAllTasks=function(e){let t=1,a=getClassify(e);for(const i in a)if(a.hasOwnProperty(i)){const s=a[i];let o=getProperty(e,s.name,n.resCondition);getProperty(e,s.name,n.condition)>o&&(t=0)}return 1==t?console.log(e,"完成了！"):console.log(e,"没有完成！"),t},function(e){e.gold="gold",e.diamond="diamond",e.assembly="assembly"}(a=e.rewardType||(e.rewardType={})),function(e){e.name="name",e.explain="explain",e.condition="condition",e.resCondition="resCondition",e.complete="complete"}(n=e.Property||(e.Property={})),function(e){e.EasterEgg_01="EasterEgg_01"}(i=e.Classify||(e.Classify={})),function(e){e.assembly_1="assembly_1",e.assembly_2="assembly_2",e.assembly_3="assembly_3",e.assembly_4="assembly_4",e.assembly_5="assembly_5"}(o=e.Name||(e.Name={})),function(e){e.trigger="trigger",e.easterEggAds="easterEggAds"}(l=e.EventType||(e.EventType={}));e.EasterEggScene=class extends t.Scene{lwgOnAwake(){this.easterEggInitData(),this.easterEggOnAwake()}easterEggInitData(){}lwgEventReg(){this.easterEggEventReg()}easterEggEventReg(){}easterEggOnAwake(){}lwgNodeDec(){this.easterEggNodeDec()}easterEggNodeDec(){}lwgOnEnable(){this.easterEggOnEnable()}easterEggOnEnable(){}lwgOpenAni(){return this.easterEggOpenAin()}easterEggOpenAin(){return 0}lwgBtnClick(){this.easterEggBtnClick()}easterEggBtnClick(){}lwgOnUpdate(){this.easterEggOnUpdate()}easterEggOnUpdate(){}lwgOnDisable(){this.easterEggOnDisable()}easterEggOnDisable(){}}}(L||(L={}));class v{constructor(){}static ShowBanner(){let e=new TJ.ADS.Param;e.place=TJ.ADS.Place.BOTTOM|TJ.ADS.Place.CENTER,TJ.ADS.Api.ShowBanner(e)}static CloseBanner(){let e=new TJ.ADS.Param;e.place=TJ.ADS.Place.BOTTOM|TJ.ADS.Place.CENTER,TJ.ADS.Api.RemoveBanner(e)}static ShowNormal(){TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param)}static showNormal2(){TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param)}static ShowReward(e,t=500){if(v.CanShowCD){l.stopMusic(),console.log("?????");let a=new TJ.ADS.Param;a.extraAd=!0;let n=!1;a.cbi.Add(TJ.Define.Event.Reward,()=>{n=!0,l.playMusic(l.voiceUrl.bgm,0,1e3),null!=e&&(e(),i.notify(y.EventType.adsTime),i.notify(L.EventType.easterEggAds))}),a.cbi.Add(TJ.Define.Event.Close,()=>{n||(l.playMusic(l.voiceUrl.bgm,0,1e3),c.createHint_Middle(c.HintContent["观看完整广告才能获取奖励哦！"]))}),a.cbi.Add(TJ.Define.Event.NoAds,()=>{l.playMusic(l.voiceUrl.bgm,0,1e3),c.createHint_Middle(c.HintContent["暂时没有广告，过会儿再试试吧！"])}),TJ.ADS.Api.ShowReward(a),v.CanShowCD=!1,setTimeout(()=>{v.CanShowCD=!0},t)}}static Event(e,t){console.log("Param:>"+e+"Value:>"+t);let a=new TJ.GSA.Param;a.id=null==t?e:e+t,console.log(a.id),TJ.GSA.Api.Event(a)}static initShare(){TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.WX_AppRt&&(this.wx.onShareAppMessage(()=>({title:this.shareContent,imageUrl:this.shareImgUrl,query:""})),this.wx.showShareMenu({withShareTicket:!0,success:null,fail:null,complete:null}))}static lureShare(){TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.WX_AppRt&&this.wx.shareAppMessage({title:this.shareContent,imageUrl:this.shareImgUrl,query:""})}static VibrateShort(){TJ.API.Vibrate.Short()}static Vibratelong(){TJ.API.Vibrate.Long()}static TAPoint(e,t){let a=new TJ.API.TA.Param;switch(a.id=t,e){case _.BtnShow:TJ.API.TA.Event_Button_Show(a);break;case _.BtnClick:TJ.API.TA.Event_Button_Click(a);break;case _.PageShow:TJ.API.TA.Event_Page_Show(a);break;case _.PageEnter:TJ.API.TA.Event_Page_Enter(a);break;case _.PageLeave:TJ.API.TA.Event_Page_Leave(a);break;case _.LevelStart:TJ.API.TA.Event_Level_Start(a),console.log("本关开始打点");break;case _.LevelFail:TJ.API.TA.Event_Level_Fail(a),console.log("本关失败打点");break;case _.LevelFinish:TJ.API.TA.Event_Level_Finish(a),console.log("本关胜利打点")}}}v.CanShowCD=!0,v.wx=Laya.Browser.window.wx,v.shareImgUrl="http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408",v.shareContent="快把锅甩给队友！",function(e){e[e.BtnShow=0]="BtnShow",e[e.BtnClick=1]="BtnClick",e[e.PageShow=2]="PageShow",e[e.PageEnter=3]="PageEnter",e[e.PageLeave=4]="PageLeave",e[e.LevelStart=5]="LevelStart",e[e.LevelFinish=6]="LevelFinish",e[e.LevelFail=7]="LevelFail"}(_||(_={}));class T extends m.CheckInScene{checkInNodeDec(){m._lastCheckDate.date==(new Date).getDate()&&(this.self.BtnTenGet.visible=!1,this.self.BtnGet.visible=!1,this.self.Select.visible=!1)}checkInOnEnable(){r.setBtnVinish(),this.self.BtnSeven.getChildByName("ChinkTip").visible=!1}checkList_Update(e,t){let a=e.dataSource,n=e.getChildByName("Pic_Board"),i=e.getChildByName("Pic_Gold"),s=e.getChildByName("Num"),o=e.getChildByName("ChinkTip"),l=e.getChildByName("DayNum");switch(a[m.CheckProPerty.checkInState]?(i.visible=!1,s.visible=!1,o.visible=!0,n.skin="UI/Common/kuang1.png"):(i.visible=!0,s.visible=!0,s.text=a[m.CheckProPerty.rewardNum],o.visible=!1,n.skin="UI/Common/kuang2.png"),a[m.CheckProPerty.name]){case"day1":l.text="第一天";break;case"day2":l.text="第二天";break;case"day3":l.text="第三天";break;case"day4":l.text="第四天";break;case"day5":l.text="第五天";break;case"day6":l.text="第六天";break;case"day7":l.text="第七天"}}checkInBtnClick(){e.Click.on("largen",this.self.BtnGet,this,null,null,this.btnGetUp,null),e.Click.on("largen",this.self.BtnTenGet,this,null,null,this.btnTenGetUp,null),e.Click.on(n.Type.noEffect,this.self.BtnSelect,this,null,null,this.btnSelectUp,null),e.Click.on("largen",this.self.BtnBack,this,null,null,this.btnBackUp,null)}btnOffClick(){e.Click.off("largen",this.self.BtnGet,this,null,null,this.btnGetUp,null),e.Click.off("largen",this.self.BtnTenGet,this,null,null,this.btnTenGetUp,null),e.Click.off(n.Type.noEffect,this.self.BtnSelect,this,null,null,this.btnSelectUp,null),e.Click.off("largen",this.self.BtnBack,this,null,null,this.btnBackUp,null)}btnTenGetUp(){v.ShowReward(()=>{this.btnGetUpFunc(3)})}btnBackUp(e){this.self.close()}btnGetUp(e){this.btnGetUpFunc(1)}btnGetUpFunc(e){this.btnOffClick();let t,n=m._checkInNum.number;t=n<6?m._checkList.getCell(n):this.self.BtnSeven,h.swell_shrink(t,1,1.1,100,0,()=>{let t=[[111,191],[296,191],[486,191],[111,394],[296,394],[486,394],[306,597]];o.createExplosion_Rotate(this.self.SceneContent,25,t[n][0],t[n][1],"star",10,15);let i=m.todayCheckIn_7Days();if(7===m._checkInNum.number){this.self.BtnSeven.getChildByName("ChinkTip").visible=!0,this.self.BtnSeven.getChildByName("Num").visible=!1,this.self.BtnSeven.getChildByName("Pic_Gold").visible=!1,this.self.BtnSeven.skin="UI/Common/kuang1.png"}a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{a.addGold(i*e),this.self.close()})})}btnSelectUp(){this.self.Dot.visible?this.self.Dot.visible=!1:this.self.Dot.visible=!0}checkInOnUpdate(){m._lastCheckDate.date!==(new Date).getDate()&&(this.self.Dot.visible?(this.self.BtnGet.visible=!1,this.self.BtnTenGet.visible=!0):(this.self.BtnGet.visible=!0,this.self.BtnTenGet.visible=!1))}checkInOnDisable(){r.setBtnAppear()}}!function(e){function getLevelData(t){let a,n,i=Laya.loader.getRes("GameData/Game/GameLevel.json").RECORDS;n=t||e._gameLevel.value;for(let e=0;e<i.length;e++){const t=i[e];if(t.name==="level"+n){a=t;break}}return a||i[n-1]}let a,n;e._gameSwitch=!1,e._gameLevel={get value(){return null!==Laya.LocalStorage.getItem("_gameLevel")?Number(Laya.LocalStorage.getItem("_gameLevel")):(Laya.LocalStorage.setItem("_gameLevel",1..toString()),1)},set value(e){Laya.LocalStorage.setItem("_gameLevel",e.toString())}},e._practicalLevel={get value(){return null!==Laya.LocalStorage.getItem("_practicalLevel")?Number(Laya.LocalStorage.getItem("_practicalLevel")):e._gameLevel.value},set value(e){Laya.LocalStorage.setItem("_practicalLevel",e.toString())}},e.getLevelData=getLevelData,e.getLevelData_Condition=function(t){let a,n=getLevelData(t||e._gameLevel.value);for(const e in n)n.hasOwnProperty(e)&&"condition"===e&&(a=n[e]);if(a)return a;console.log("获取关卡描述失败")},function(e){e.name="name",e.condition="condition",e.resCondition="resCondition",e.rewardType="rewardType",e.rewardNum="rewardNum"}(a=e.gameProperty||(e.gameProperty={})),function(e){e.gold="gold",e.diamond="diamond"}(n=e.rewardType||(e.rewardType={})),e._createLevel=function(t,a,n){let i;Laya.loader.load("prefab/LevelNode.json",Laya.Handler.create(this,function(s){let o=new Laya.Prefab;o.json=s,i=Laya.Pool.getItemByCreateFun("prefab",o.create,o),t.addChild(i),i.pos(a,n),i.zOrder=0,i.getChildByName("level"),e.LevelNode=i}))},e._execution={get value(){return this.val=null!==Laya.LocalStorage.getItem("_execution")?Number(Laya.LocalStorage.getItem("_execution")):15},set value(e){this.val=e,Laya.LocalStorage.setItem("_execution",e.toString())}};e.GameScene=class extends t.Scene{lwgOnAwake(){this.initData(),this.gameOnAwake()}initData(){}lwgEventReg(){this.gameEventReg()}gameEventReg(){}gameOnAwake(){}lwgNodeDec(){this.gameNodeDec()}gameNodeDec(){}lwgOnEnable(){this.gameOnEnable()}gameOnEnable(){}lwgOpenAni(){return this.gameOpenAin()}gameOpenAin(){return 0}lwgBtnClick(){this.gameBtnClick()}gameBtnClick(){}lwgOnDisable(){this.gameOnDisable()}gameOnDisable(){}}}(w||(w={}));let C=w;w.GameScene;class b extends e.Admin.Scene{lwgNodeDec(){this.self.BtnAdv.visible=!0,this.self.BtnAgain.visible=!1,this.self.Dot.visible=!0}lwgOnEnable(){r.setBtnAppear(),l.playDefeatedSound()}lwgBtnClick(){n.on(n.Type.largen,this.self.BtnAgain,this,null,null,this.btnAgainUp,null),n.on(n.Type.largen,this.self.BtnNext,this,null,null,this.btnNextUp,null),n.on(n.Type.largen,this.self.BtnSelect,this,null,null,this.btnSelectUp,null)}btnSelectUp(){this.self.Dot.visible?(this.self.Dot.visible=!1,this.self.BtnAdv.visible=!1,this.self.BtnAgain.visible=!0):(this.self.Dot.visible=!0,this.self.BtnAdv.visible=!0,this.self.BtnAgain.visible=!1)}btnAgainUp(){console.log("重新开始！"),i.notify(i.EventType.scene3DRefresh),t._openScene(t.SceneName.UIOperation,null,this.self)}btnNextUp(){v.ShowReward(()=>{i.notify(i.EventType.scene3DRefresh),C._gameLevel.value+=1,t._openScene(t.SceneName.UIStart,null,this.self)})}lwgOnDisable(){r.setBtnVinish()}}class B extends L.EasterEggScene{constructor(){super(...arguments),this.clickNum=0,this.clickSwitch=!1,this.clickTime=0}easterEggOnAwake(){r.setBtnVinish(),a.goldVinish(),this.initDisplay(),L._easterEgg_1.value=!0}initDisplay(){for(let e=0;e<L._easterEgg_1Arr.length;e++){const a=L._easterEgg_1Arr[e];let i="Complete"+(e+1),s=L.getProperty(L.Classify.EasterEgg_01,a.name,L.Property.complete);this.self[i].skin=s?"UI/EasterEgg_Aotoman/Task/wancheng.png":"UI/EasterEgg_Aotoman/Task/wancheng2.png";let o="Assembly"+(e+1),l=this.self[o].getChildByName("Num");if(l){let e=L.getProperty(L.Classify.EasterEgg_01,a.name,L.Property.condition),t=L.getProperty(L.Classify.EasterEgg_01,a.name,L.Property.resCondition);l.text=t+"/"+e}switch(e){case 0:1!==s&&n.on(n.Type.largen,this.self.BtnGoUp,this,null,null,()=>{t._openScene(t.SceneName.UISkinXD,null,this.self)});break;case 3:break;case 4:1!==s&&(n.on(n.Type.largen,this.self.BtnHint,this,null,null,()=>{v.ShowReward(()=>{this.self.DialogHint.x=0})}),n.on(n.Type.largen,this.self.BtnConfirm,this,null,null,()=>{this.self.DialogHint.x=-800}))}}}easterEggBtnClick(){n.on(n.Type.largen,this.self.BtnBack,this,null,null,()=>{this.self.close()}),n.on(n.Type.largen,this.self.BtnAotuman,this,null,null,()=>{this.clickNum++,this.clickSwitch=!0}),n.on(n.Type.largen,this.self.BtnInject,this,null,null,()=>{this.self.close()}),n.on(n.Type.largen,this.self.BtnAssembly4No,this,null,null,()=>{this.self.DialogAssembly4.x=800}),n.on(n.Type.largen,this.self.BtnAssembly4Yes,this,null,null,()=>{v.ShowReward(()=>{this.self.DialogAssembly4.x=0})})}clickStraight(){this.clickSwitch?(this.clickTime++,this.clickTime>=60?(this.clickSwitch=!1,this.clickNum=0):this.clickNum>=5&&(this.self.DialogAssembly4.x=0,this.clickSwitch=!1,this.clickNum=0)):this.clickTime=0}easterEggOnUpdate(){this.clickStraight()}easterEggOnDisable(){r.setBtnAppear(),a.goldAppear(),i.notify(L.EventType.trigger)}}var P;!function(e){let t,a,n;!function(e){let t,a,n;!function(e){e.HairParent="HairParent",e.LeftBeard="LeftBeard",e.RightBeard="RightBeard",e.MiddleBeard="MiddleBeard",e.UpLeftBeard="UpLeftBeard",e.UpRightBeard="UpRightBeard",e.movePhotoLocation="movePhotoLocation"}(t=e.TaskType||(e.TaskType={})),function(e){e.move="move"}(a=e.RazorState||(e.RazorState={})),function(e){e.HairParent="HairParent",e.LeftBeard="LeftBeard",e.RightBeard="RightBeard",e.MiddleBeard="MiddleBeard",e.UpLeftBeard="UpLeftBeard",e.UpRightBeard="UpRightBeard",e.taskProgress="taskProgress",e.cameraMove="cameraMove",e.changeProp="changeProp",e.changeOther="changeOther",e.changeHeadDecoration=" changeHeadDecoration",e.changeEyeDecoration=" changeEyeDecoration",e.changeTrySkin="changeTrySkin"}(n=e.EventType||(e.EventType={}))}(t=e.GEnum||(e.GEnum={})),function(e){e._firstTask=null,e._stageClick=!1,e._taskArr=[],e._taskNum=0}(a=e.GVariate||(e.GVariate={})),function(e){e.LevelFpos=new Laya.Vector3,e.razorFPos=new Laya.Vector3,e.knifeParentFPos=new Laya.Vector3,e.headFPos=new Laya.Vector3}(n=e.GSene3D||(e.GSene3D={}))}(P||(P={}));let E=P.GVariate,D=P.GEnum,N=P.GSene3D;class A extends e.Admin.Object3D{onTriggerEnter(t){if(!e.Admin._gameStart)return;let a=t.owner,n=a.parent;switch(a.name){case"Hairline":let t=2*n.transform.localScaleY*a.transform.localScaleY,s=e.Tools.dotRotateXY(n.transform.position.x,n.transform.position.y,n.transform.position.x,n.transform.position.y+t,n.transform.localRotationEulerZ).y-n.transform.position.y,o=s-Math.abs(this.selfTransform.position.y-this.self.transform.localScaleY/2-n.transform.position.y),l=o/s;if(n.transform.localScaleY-=n.transform.localScaleY*l,n.HairLen&&(n.HairLen.setValue=n.transform.localScaleY),1===Math.floor(4*Math.random())&&o>=.01){let e=n.clone();e.transform.localScaleY=e.transform.localScaleY*l;let t=N.Level.getChildByName("CutHairParent");e.name="cutHair",t.addChild(e),e.transform.position=this.self.transform.position;let a=e.getChildAt(0);a.name="cutHairline";let i=a.getComponent(Laya.Rigidbody3D);i.isKinematic=!1,i.isTrigger=!0,i.gravity=new Laya.Vector3(0,-20,0),i.rollingFriction=0,i.restitution=0,Laya.timer.once(3e3,this,t=>{e.removeSelf()})}break;case"standard":console.log("碰到线了，游戏失败！"),i.notify(i.EventType.resurgence)}}}class x extends e.Admin.Object3D{lwgOnEnable(){this.RazorState=D.RazorState.move,this.self.getChildByName("Blade").addComponent(A)}}class O extends e.Admin.Object3D{lwgOnEnable(){this.rig3D.restitution=0}onTriggerEnter(e){let t=e.owner;switch(t.name){case"Beard":break;case"cutHairline":t.parent.removeSelf()}}}class U extends e.Admin.Object3D{onTriggerEnter(e){let t=e.owner,a=t.parent;switch(t.name.substring(0,5)){case"Beard":if(t.already)return;t.already=!0,"RightBeard"===a.name?i.notify(D.EventType.RightBeard):"LeftBeard"===a.name?i.notify(D.EventType.LeftBeard):"MiddleBeard"===a.name?i.notify(D.EventType.MiddleBeard):"UpRightBeard"===a.name?i.notify(D.EventType.UpRightBeard):"UpLeftBeard"===a.name&&i.notify(D.EventType.UpLeftBeard),e.isKinematic=!1,e.isTrigger=!1,e.linearVelocity=new Laya.Vector3(0,-3,0)}}}class I extends e.Admin.Scene3D{constructor(){super(),this.moveSpeed=1e3}lwgOnAwake(){N.GameMain3D=this.self,N.MainCamera=this.MainCamera,N.PhotoCameraMark=this.self.getChildByName("PhotoCameraMark"),N.LevelParent=this.self.getChildByName("LevelParent");for(let e=0;e<N.LevelParent.numChildren;e++){N.LevelParent.getChildAt(e).active=!1}N.Landmark_Side=this.self.getChildByName("Landmark_Side"),N.Landmark_Right=this.self.getChildByName("Landmark_Right"),N.Landmark_Middle=this.self.getChildByName("Landmark_Middle"),N.Landmark_Left=this.self.getChildByName("Landmark_Left"),N.Landmark_UpRight=this.self.getChildByName("Landmark_UpRight"),N.Landmark_UpLeft=this.self.getChildByName("Landmark_UpLeft"),N.LeftSignknife=this.self.getChildByName("LeftSignknife"),N.MiddleSignknife=this.self.getChildByName("MiddleSignknife"),N.RightSignknife=this.self.getChildByName("RightSignknife"),N.UpRightKnife=this.self.getChildByName("UpRightKnife"),N.UpLeftKnife=this.self.getChildByName("UpLeftKnife"),N.Floor=this.self.getChildByName("Floor"),N.Razor=this.self.getChildByName("Razor"),N.razorFPos.x=N.Razor.transform.position.x,N.razorFPos.y=N.Razor.transform.position.y,N.razorFPos.z=N.Razor.transform.position.z,N.knifeParent=this.self.getChildByName("knifeParent"),N.knife=N.knifeParent.getChildByName("tixudao"),N.Role=this.self.getChildByName("Role"),N.TouchScreen=this.self.getChildByName("TouchScreen"),N.Headcollision=N.Role.getChildByName("Headcollision"),N.Headcollision.getComponent(Laya.Rigidbody3D).restitution=0,N.HeadSimulate=N.Role.getChildByName("HeadSimulate"),N.HingeMiddle=N.Headcollision.getChildByName("HingeMiddle"),N.HingeUp=N.Headcollision.getChildByName("HingeUp"),N.HingeDown=N.Headcollision.getChildByName("HingeDown"),N.HeadDecoration=this.self.getChildByName("HeadDecoration"),N.EyeDecoration=this.self.getChildByName("EyeDecoration"),N.DressUpMark=this.self.getChildByName("DressUpMark")}lwgEventReg(){i.reg(i.EventType.scene3DRefresh,this,()=>{this.getLevelContent()}),i.reg(D.EventType.cameraMove,this,e=>{this.cameraMove(e)}),i.reg(i.EventType.scene3DResurgence,this,()=>{N.Razor.transform.position=N.razorFPos}),i.reg(D.EventType.changeEyeDecoration,this,()=>{console.log("换眼部装饰");for(let e=0;e<N.EyeDecoration.numChildren;e++){const t=N.EyeDecoration.getChildAt(e);t.name==S._currentEye.name?t.active=!0:t.active=!1}}),i.reg(D.EventType.changeProp,this,()=>{let e;console.log("换理发刀");for(let t=0;t<N.Razor.numChildren;t++){const a=N.Razor.getChildAt(t);"Blade"!==a.name&&(a.name!==u._currentProp.name?a.active=!1:(e=a.name,a.active=!0))}e||(N.Razor.getChildByName("jiandao").active=!0)}),i.reg(D.EventType.changeOther,this,()=>{for(let e=0;e<N.knifeParent.numChildren;e++){const t=N.knifeParent.getChildAt(e);if(t.name==u._currentOther.name){t.active=!0,N.knife=t,N.knife.getComponent(U)||N.knife.addComponent(U)}else t.active=!1}N.knife.active=!1}),i.reg(D.EventType.changeHeadDecoration,this,()=>{for(let e=0;e<N.HeadDecoration.numChildren;e++){const t=N.HeadDecoration.getChildAt(e);t.name==S._currentHead.name?t.active=!0:t.active=!1}}),i.reg(D.EventType.changeEyeDecoration,this,()=>{console.log("换眼部装饰");for(let e=0;e<N.EyeDecoration.numChildren;e++){const t=N.EyeDecoration.getChildAt(e);t.name==S._currentEye.name?t.active=!0:t.active=!1}}),i.reg(D.EventType.changeTrySkin,this,(e,t)=>{let a;console.log(e,t),e==u.GoodsClass.Other?a=N.knifeParent:e==u.GoodsClass.Props&&(a=N.Razor),a.active=!0;for(let n=0;n<a.numChildren;n++){const i=a.getChildAt(n);i.name==t?(i.active=!0,e==u.GoodsClass.Other?N.knife=i:e==u.GoodsClass.Props&&(a=N.Razor)):"Blade"!==i.name&&(i.active=!1)}})}lwgOnEnable(){N.Floor.addComponent(O),N.Razor.addComponent(x),i.notify(D.EventType.changeProp),i.notify(D.EventType.changeOther),this.getLevelContent()}getLevelContent(){N.Level&&N.Level.removeSelf(),N.LevelParent.active=!0;let e,t=N.LevelParent.clone();if(this.self.addChild(t),N.LevelParent.active=!1,e=C._gameLevel.value>10?C._gameLevel.value%10+1:C._gameLevel.value,N.Level=t.getChildByName("Level"+e),N.Level){N.Level.active=!0,E._taskArr=[];for(let e=0;e<N.Level.numChildren;e++){const t=N.Level.getChildAt(e);"CutHairParent"!==t.name&&"StandardParent"!==t.name&&"RoleObj"!==t.name&&E._taskArr.push(t.name)}N.HairParent=N.Level.getChildByName("HairParent"),N.LeftBeard=N.Level.getChildByName("LeftBeard"),N.RightBeard=N.Level.getChildByName("RightBeard"),N.MiddleBeard=N.Level.getChildByName("MiddleBeard"),N.UpRightBeard=N.Level.getChildByName("UpRightBeard"),N.UpLeftBeard=N.Level.getChildByName("UpLeftBeard"),N.StandardParent=N.Level.getChildByName("StandardParent"),N.Razor.transform.position=N.razorFPos,this.knifeTimeDisplay()}else console.log("本关卡不存在")}knifeTimeDisplay(e){"k"===e?(N.knife.active=!0,N.StandardParent&&(N.StandardParent.active=!1),N.Razor.active=!1):"r"===e?(N.knife.active=!1,N.StandardParent&&(N.StandardParent.active=!0),N.Razor.active=!0,console.log("剃刀出现")):e||(N.knife.active=!1,N.StandardParent&&(N.StandardParent.active=!1),N.Razor.active=!1)}cameraMove(e){switch(console.log("移动方向！",e),e){case D.TaskType.HairParent:d.MoveTo(N.MainCamera,N.Landmark_Side.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay("r")}),d.RotateTo(N.MainCamera,N.Landmark_Side.transform.localRotationEuler,this.moveSpeed,this),d.RotateTo(N.TouchScreen,N.Landmark_Side.transform.localRotationEuler,this.moveSpeed,this);break;case D.TaskType.RightBeard:N.knife.transform.position=N.RightSignknife.transform.position,N.HingeMiddle.transform.position=new Laya.Vector3(N.HingeMiddle.transform.position.x,N.knife.transform.position.y,N.HingeMiddle.transform.position.z),N.knife.transform.lookAt(N.HingeMiddle.transform.position,new Laya.Vector3(0,1,0)),d.MoveTo(N.MainCamera,N.Landmark_Right.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay("k")}),d.RotateTo(N.MainCamera,N.Landmark_Right.transform.localRotationEuler,this.moveSpeed,this),d.RotateTo(N.TouchScreen,N.Landmark_Right.transform.localRotationEuler,this.moveSpeed,this);break;case D.TaskType.LeftBeard:N.knife.transform.position=N.LeftSignknife.transform.position,N.HingeMiddle.transform.position=new Laya.Vector3(N.HingeMiddle.transform.position.x,N.knife.transform.position.y,N.HingeMiddle.transform.position.z),N.knife.transform.lookAt(N.HingeMiddle.transform.position,new Laya.Vector3(0,1,0)),d.MoveTo(N.MainCamera,N.Landmark_Left.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay("k")}),d.RotateTo(N.MainCamera,N.Landmark_Left.transform.localRotationEuler,this.moveSpeed,this),d.RotateTo(N.TouchScreen,N.Landmark_Left.transform.localRotationEuler,this.moveSpeed,this);break;case D.TaskType.MiddleBeard:N.knife.transform.position=N.MiddleSignknife.transform.position,N.HingeMiddle.transform.position=new Laya.Vector3(N.HingeMiddle.transform.position.x,N.knife.transform.position.y,N.HingeMiddle.transform.position.z),N.knife.transform.lookAt(N.HingeMiddle.transform.position,new Laya.Vector3(0,1,0)),d.MoveTo(N.MainCamera,N.Landmark_Middle.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay("k")}),d.RotateTo(N.MainCamera,N.Landmark_Middle.transform.localRotationEuler,this.moveSpeed,this),d.RotateTo(N.TouchScreen,N.Landmark_Middle.transform.localRotationEuler,this.moveSpeed,this);break;case D.TaskType.UpLeftBeard:N.knife.transform.position=N.UpLeftKnife.transform.position,N.knife.transform.lookAt(N.HingeUp.transform.position,new Laya.Vector3(0,1,0));N.knife.getChildAt(0);d.MoveTo(N.MainCamera,N.Landmark_UpLeft.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay("k")});let a=new Laya.Vector3(N.Landmark_UpLeft.transform.localRotationEuler.x,N.Landmark_UpLeft.transform.localRotationEuler.y,N.Landmark_UpLeft.transform.localRotationEuler.z);d.RotateTo(N.MainCamera,a,this.moveSpeed,this),d.RotateTo(N.TouchScreen,a,this.moveSpeed,this);break;case D.TaskType.UpRightBeard:N.knife.transform.position=N.UpRightKnife.transform.position,N.knife.transform.lookAt(N.HingeUp.transform.position,new Laya.Vector3(0,1,0));N.knife.getChildAt(0);d.MoveTo(N.MainCamera,N.Landmark_UpRight.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay("k")}),d.RotateTo(N.MainCamera,N.Landmark_UpRight.transform.localRotationEuler,this.moveSpeed,this),d.RotateTo(N.TouchScreen,N.Landmark_UpRight.transform.localRotationEuler,this.moveSpeed,this);break;case D.TaskType.movePhotoLocation:d.MoveTo(N.MainCamera,N.DressUpMark.transform.position,this.moveSpeed,this,null,()=>{t._gameStart=!0,this.knifeTimeDisplay()});let n=new Laya.Vector3(N.DressUpMark.transform.localRotationEuler.x,N.DressUpMark.transform.localRotationEuler.y,N.DressUpMark.transform.localRotationEuler.z);d.RotateTo(N.MainCamera,n,this.moveSpeed,this),d.RotateTo(N.TouchScreen,n,this.moveSpeed,this)}}}class R extends t.Scene{onEnable(){console.log("开始初始化"),this.gameInit(),this.skinInit(),this.shopInit(),this.taskInit(),this.easterEggInit()}gameInit(){}skinInit(){S._currentEye.name=null,S._currentHead.name=null}shopInit(){u.initShop(),u._currentOther.name||(u._currentOther.name="tixudao"),u._currentProp.name||(u._currentProp.name="jiandao"),u._currentSkin.name||(u._currentSkin.name="anquanmao")}taskInit(){y.initTask(),i.reg(y.EventType.useSkins,y,()=>{let e=u.setUseSkinType(),t=y.TaskName.每日使用5种皮肤,a=y.getTaskProperty(y.TaskClass.everyday,t,y.TaskProperty.resCondition);e>a&&y.doDetectionTask(y.TaskClass.everyday,t,e-a)}),i.reg(y.EventType.victory,y,()=>{let e=y.TaskName.每日服务10位客人;y.doDetectionTask(y.TaskClass.everyday,e,1)}),i.reg(y.EventType.adsTime,y,()=>{let e=y.TaskName.每日观看两个广告;y.doDetectionTask(y.TaskClass.everyday,e,1)}),i.reg(y.EventType.victoryBox,y,()=>{let e=y.TaskName.每日开启10个宝箱;y.doDetectionTask(y.TaskClass.everyday,e,1)})}easterEggInit(){L.initEasterEgg(),i.reg(L.EventType.easterEggAds,y,()=>{L.doDetection(L.Classify.EasterEgg_01,L.Name.assembly_3,1)})}onDisable(){}}class G extends g.LodeScene{constructor(){super(...arguments),this.maskMoveSwitch=!0,this.shearSpeed=5,this.shearSwitch=!0}lodingResList(){g.lodingList_2D=["res/atlas/Frame/Effects.png","res/atlas/Frame/UI.png","res/atlas/UI/GameStart.png","res/atlas/UI/Common.png","res/atlas/UI/Shop/Skin.png","res/atlas/UI/Shop/Props.png","res/atlas/UI/Shop/Other.png","res/atlas/UI/Shop.png","res/atlas/UI/Skin.png"],g.lodingList_3DScene=["3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"],g.lodingList_Json=["GameData/Shop/Other.json","GameData/Shop/Props.json","GameData/Shop/Skin.json","GameData/Task/everydayTask.json","GameData/VictoryBox/VictoryBox.json","GameData/CheckIn/CheckIn.json","GameData/Dialog/Dialog.json","GameData/Game/GameLevel.json","GameData/EasterEgg/EasterEgg.json"]}lodingPhaseComplete(){}lodingComplete(){this.self.Mask.x=0,this.self.Shear.x=this.self.Mask.width,this.self.Per.text="100%",this.maskMoveSwitch=!1;let n=Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls");Laya.stage.addChildAt(n,0),t._sceneControl[t.SceneName.GameMain3D]=n,n.addComponent(I),Laya.timer.once(500,this,()=>{a.createGoldNode(Laya.stage),r.createSetBtn(65,104,47,54,"UI/GameStart/shezhi.png",Laya.stage),e.Admin._openScene(e.Admin.SceneName.UIStart,null,this.self)})}lwgInterior(){this.self.addComponent(R)}lwgAdaptive(){this.self.Bg.y=Laya.stage.height/2,this.self.Logo.y=.174*Laya.stage.height,this.self.Progress.y=.827*Laya.stage.height,this.self.FCM.y=.91*Laya.stage.height}lwgOnUpdate(){if(this.maskMoveSwitch&&this.self.Mask.x<-20){this.self.Mask.x+=10,this.self.Shear.x+=10;let e=((-this.self.Mask.width-this.self.Mask.x)/-this.self.Mask.width*100).toString().substring(0,2);this.self.Per.text=e+"%"}this.self.Shear_02.rotation>15?this.self.Shear_02.dir="up":this.self.Shear_02.rotation<=0&&(this.self.Shear_02.dir="down"),"up"===this.self.Shear_02.dir?(this.self.Shear_02.rotation-=this.shearSpeed,this.self.Shear_01.rotation+=this.shearSpeed):"down"===this.self.Shear_02.dir&&(this.self.Shear_02.rotation+=this.shearSpeed,this.self.Shear_01.rotation-=this.shearSpeed)}lwgOnDisable(){e.PalyAudio.playMusic()}}class M extends e.Admin.Scene{constructor(){super(...arguments),this._numZoder=[],this.residueNum=10,this._HairParentNum={index:0,sum:0,switch:!0,value:0,set setValue(e){this.value=e,this.switch&&(console.log("剩余需要修理的头发",this.value),this.value<=10&&(this.switch=!1,console.log("任务完成了！"),i.notify(i.EventType.taskReach))),i.notify(D.EventType.taskProgress)}},this._leftBeardNum={index:0,sum:0,switch:!0,value:0,set setValue(e){this.value=e,this.switch&&(console.log("剩余左侧胡须",this.value),this.value<=10&&(console.log("任务完成了！"),this.switch=!1,i.notify(i.EventType.taskReach))),i.notify(D.EventType.taskProgress)}},this._rightBeardNum={index:0,sum:0,switch:!0,value:0,set setValue(e){this.value=e,this.switch&&(console.log("剩余剩余右侧胡须",this.value),this.value<=10&&(console.log("任务完成了！"),this.switch=!1,i.notify(i.EventType.taskReach))),i.notify(D.EventType.taskProgress)}},this._middleBeardNum={index:0,sum:0,switch:!0,value:0,set setValue(e){this.value=e,this.switch&&(console.log("剩余中间胡子",this.value),this.value<=10&&(console.log("任务完成了！"),this.switch=!1,i.notify(i.EventType.taskReach))),i.notify(D.EventType.taskProgress)}},this._upRightBeardNum={index:0,sum:0,switch:!0,value:0,set setValue(e){this.value=e,this.switch&&(console.log("剩余右上角",this.value),this.value<=10&&(console.log("任务完成了！"),this.switch=!1,i.notify(i.EventType.taskReach))),i.notify(D.EventType.taskProgress)}},this._upLeftBeardNum={index:0,sum:0,switch:!0,value:0,set setValue(e){this.value=e,this.switch&&(console.log("剩余左上角",this.value),this.value<=10&&(console.log("任务完成了！"),this.switch=!1,i.notify(i.EventType.taskReach))),i.notify(D.EventType.taskProgress)}},this.touchPosX=null,this.touchPosY=null,this.moveSwitch=!1}lwgNodeDec(){this.Rocker=this.self.Rocker,this.TaskBar=this.self.TaskBar,this.BtnLast=this.self.BtnLast}lwgOnAwake(){E._taskNum=0,e.Admin._gameStart=!0,this.createProgress(),i.notify(y.TaskType.useSkins)}lwgOnEnable(){this.BtnLast.visible=!1,this.createTaskContent(),this.mainCameraMove(),c.createVoluntarilyDialogue(150,334,c.UseWhere.scene2,0,2e3,this.self)}lwgEventReg(){i.reg(i.EventType.closeOperation,this,()=>{this.self.close()}),i.reg(i.EventType.taskReach,this,()=>{t._gameStart&&(this.BtnLast.visible=!0)}),i.reg(i.EventType.defeated,this,()=>{t._gameStart&&(t._openScene(t.SceneName.UIDefeated),t._gameStart=!1)}),i.reg(i.EventType.resurgence,this,()=>{t._gameStart&&(t._openScene(t.SceneName.UIResurgence),t._gameStart=!1)}),i.reg(D.EventType.LeftBeard,this,()=>{this._leftBeardNum.setValue=this._leftBeardNum.value-1}),i.reg(D.EventType.RightBeard,this,()=>{this._rightBeardNum.setValue=this._rightBeardNum.value-1}),i.reg(D.EventType.MiddleBeard,this,()=>{this._middleBeardNum.setValue=this._middleBeardNum.value-1}),i.reg(D.EventType.UpRightBeard,this,()=>{this._upRightBeardNum.setValue=this._upRightBeardNum.value-1}),i.reg(D.EventType.UpLeftBeard,this,()=>{this._upLeftBeardNum.setValue=this._upLeftBeardNum.value-1}),i.reg(D.EventType.taskProgress,this,()=>{let e,t,a=this.TaskBar.getChildAt(E._taskNum).getChildByName("Bar");switch(E._taskArr[E._taskNum]){case D.TaskType.HairParent:t=this._HairParentNum.value,e=this._HairParentNum.sum;break;case D.TaskType.LeftBeard:t=this._leftBeardNum.value,e=this._leftBeardNum.sum;break;case D.TaskType.RightBeard:t=this._rightBeardNum.value,e=this._rightBeardNum.sum;break;case D.TaskType.MiddleBeard:t=this._middleBeardNum.value,e=this._middleBeardNum.sum;break;case D.TaskType.UpRightBeard:t=this._upRightBeardNum.value,e=this._upRightBeardNum.sum;break;case D.TaskType.UpLeftBeard:t=this._upLeftBeardNum.value,e=this._upLeftBeardNum.sum}a.mask.x=(e-t)*a.width/e-a.mask.width,a.mask.x>0&&(a.mask.x=0)})}createProgress(){this.TaskBar.removeChildren(0,this.TaskBar.numChildren);for(let e=0;e<E._taskArr.length;e++){const t=Laya.Pool.getItemByCreateFun("TaskPro",this.TaskProgress.create,this.TaskProgress);this.TaskBar.addChild(t),t.pos(100*e,0);let a=t.getChildByName("Bar");a.width=80;let n=new Laya.Sprite;n.loadImage("Frame/UI/ui_orthogon_black.png"),n.renderType="mask",a.mask=n,n.width=a.width+20,n.x=-(a.width+20),n.height=25}this.TaskBar.width=100*E._taskArr.length,this.TaskBar.pivotX=this.TaskBar.width/2,this.TaskBar.x=Laya.stage.width/2}createTaskContent(){for(let e=0;e<E._taskArr.length;e++)switch(E._taskArr[e]){case D.TaskType.HairParent:this._HairParentNum.setValue=N.HairParent.numChildren,this._HairParentNum.sum=N.HairParent.numChildren,this._HairParentNum.index=e,this.monitorHiarLen(),this._numZoder.push(this._HairParentNum);break;case D.TaskType.LeftBeard:this._leftBeardNum.setValue=N.LeftBeard.numChildren,this._leftBeardNum.sum=N.LeftBeard.numChildren,this._leftBeardNum.index=e,this._numZoder.push(this._leftBeardNum);break;case D.TaskType.RightBeard:this._rightBeardNum.setValue=N.RightBeard.numChildren,this._rightBeardNum.sum=N.RightBeard.numChildren,this._rightBeardNum.index=e,this._numZoder.push(this._rightBeardNum);break;case D.TaskType.MiddleBeard:this._middleBeardNum.setValue=N.MiddleBeard.numChildren,this._middleBeardNum.sum=N.MiddleBeard.numChildren,this._middleBeardNum.index=e,this._numZoder.push(this._middleBeardNum);break;case D.TaskType.UpRightBeard:this._upRightBeardNum.setValue=N.UpRightBeard.numChildren,this._upRightBeardNum.sum=N.UpRightBeard.numChildren,this._upRightBeardNum.index=e,this._numZoder.push(this._upRightBeardNum);break;case D.TaskType.UpLeftBeard:this._upLeftBeardNum.setValue=N.UpLeftBeard.numChildren,this._upLeftBeardNum.sum=N.UpLeftBeard.numChildren,this._upLeftBeardNum.index=e,this._numZoder.push(this._upLeftBeardNum)}}monitorHiarLen(){let e=this._HairParentNum;for(let t=0;t<N.HairParent.numChildren;t++){const a=N.HairParent.getChildAt(t);let n=a.transform.localPositionY;a.HairLen={detection:!0,value:n,get getValue(){return this.value},set setValue(t){this.detection&&(t<.19&&(this.detection=!1,e.setValue=e.value-1),this.value=t)}}}}mainCameraMove(){E._taskNum>E._taskArr.length||i.notify(D.EventType.cameraMove,E._taskArr[E._taskNum])}lwgBtnClick(){e.Click.on(n.Type.largen,this.BtnLast,this,null,null,this.btnLastUp,null)}btnLastUp(e){this.BtnLast.visible=!1,this.moveSwitch=!1,e.stopPropagation(),E._taskNum>=E._taskArr.length-1?t._openScene(t.SceneName.UISkin,null,this.self):(E._taskNum++,this.mainCameraMove(),i.notify(D.EventType.taskProgress),this._numZoder[E._taskNum].value<=10&&i.notify(i.EventType.taskReach))}onStageMouseDown(e){this.moveSwitch=!0,this.touchPosX=e.stageX,this.touchPosY=e.stageY;let t=N.MainCamera.getChildByName("MainCamera"),a=s.rayScanning(t,N.GameMain3D,new Laya.Vector2(this.touchPosX,this.touchPosY),N.TouchScreen.name);if(a){let e=N.Headcollision.transform.position.x-N.knife.transform.position.x+a.point.x,t=N.Headcollision.transform.position.y-N.knife.transform.position.y+a.point.y,n=N.Headcollision.transform.position.z-N.knife.transform.position.z+a.point.z;N.HeadSimulate.transform.position=new Laya.Vector3(e,t,n)}}onStageMouseMove(e){if(t._gameStart=!0,this.moveSwitch)switch(E._taskArr[E._taskNum]){case D.TaskType.HairParent:this.razorMove(e);break;case D.TaskType.LeftBeard:case D.TaskType.RightBeard:case D.TaskType.MiddleBeard:case D.TaskType.UpRightBeard:case D.TaskType.UpLeftBeard:this.knifeMove(e)}}razorMove(e){let t=e.stageX-this.touchPosX,a=e.stageY-this.touchPosY;this.Rocker.x+=t,this.Rocker.y+=a,this.touchPosX=e.stageX,this.touchPosY=e.stageY,N.Razor.transform.localPositionX-=.01*t,N.Razor.transform.localPositionY-=.01*a,s.maximumDistanceLimi_3D(N.razorFPos,N.Razor,1.3)}knifeMove(e){this.touchPosX=e.stageX,this.touchPosY=e.stageY;let t=s.rayScanning(N.MainCamera.getChildByName("MainCamera"),N.GameMain3D,new Laya.Vector2(this.touchPosX,this.touchPosY),N.HeadSimulate.name);if(t){let e=N.Headcollision.transform.position.x-(N.HeadSimulate.transform.position.x-t.point.x),a=N.Headcollision.transform.position.y-(N.HeadSimulate.transform.position.y-t.point.y),n=N.Headcollision.transform.position.z-(N.HeadSimulate.transform.position.z-t.point.z);N.knife.transform.position=new Laya.Vector3(e,a,n),N.knife.transform.position.y>=N.HingeUp.transform.position.y?N.knife.transform.lookAt(N.HingeUp.transform.position,new Laya.Vector3(0,1,0)):N.knife.transform.position.y<=N.HingeDown.transform.position.y?N.knife.transform.lookAt(N.HingeDown.transform.position,new Laya.Vector3(0,1,0)):(N.HingeMiddle.transform.position=new Laya.Vector3(N.HingeMiddle.transform.position.x,N.knife.transform.position.y,N.HingeMiddle.transform.position.z),N.knife.transform.lookAt(N.HingeMiddle.transform.position,new Laya.Vector3(0,1,0)))}}onStageMouseUp(e){this.touchPosX=null,this.touchPosY=null,this.moveSwitch=!1}}class H extends t.Scene{lwgOnEnable(){}lwgBtnClick(){n.on(n.Type.largen,this.self.BtnResurgence,this,null,null,this.btnResurgenceUp),n.on(n.Type.largen,this.self.BtnNo,this,null,null,this.btnNoUp)}btnResurgenceUp(){v.ShowReward(()=>{t._gameStart=!0,i.notify(i.EventType.scene3DResurgence),this.self.close()})}btnNoUp(){i.notify(i.EventType.closeOperation),t._openScene(t.SceneName.UIDefeated),this.self.close()}}class X extends e.Admin.Scene{lwgOnAwake(){r.setBtnVinish(),this.audioOnOff(),this.bgmOnOff()}audioOnOff(){r._sound.switch?this.self.AudioOff.visible=!1:this.self.AudioOff.visible=!0}bgmOnOff(){r._bgMusic.switch?this.self.BgmOff.visible=!1:this.self.BgmOff.visible=!0}lwgBtnClick(){n.on(n.Type.largen,this.self.BtnAudio,this,null,null,this.btnAudioUp,null),n.on(n.Type.largen,this.self.BtnBgm,this,null,null,this.btnBgmUp,null),n.on(n.Type.largen,this.self.BtnClose,this,null,null,this.btnCloseUp,null)}btnAudioUp(){r._sound.switch?r._sound.switch=!1:r._sound.switch=!0,this.audioOnOff()}btnBgmUp(){r._bgMusic.switch?r._bgMusic.switch=!1:r._bgMusic.switch=!0,this.bgmOnOff()}btnCloseUp(){this.self.close()}lwgOnDisable(){r.setBtnAppear()}}class V{constructor(){this.GRV=null,this.isRecordVideoing=!1,this.isVideoRecord=!1,this.videoRecordTimer=0,this.isHasVideoRecord=!1}static Init(){V.grv=new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo}static startAutoRecord(){TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt&&(null==V.grv&&V.Init(),V.recording||(V.autoRecording=!0,console.log("******************开始录屏"),V._start(),V.lastRecordTime=Date.now()))}static stopAutoRecord(){if(TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt)return V.autoRecording?(V.autoRecording=!1,V._end(!1),Date.now()-V.lastRecordTime>6e3||(!(Date.now()-V.lastRecordTime<3e3)||(console.log("小于3秒"),!1))):(console.log("RecordManager.autoRecording",V.autoRecording),!1)}static startRecord(){TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt&&(V.autoRecording&&this.stopAutoRecord(),V.recording=!0,V._start(),V.lastRecordTime=Date.now())}static stopRecord(){if(TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt)return console.log("time:"+(Date.now()-V.lastRecordTime)),!(Date.now()-V.lastRecordTime<=3e3)&&(V.recording=!1,V._end(!0),!0)}static _start(){TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt&&(console.log("******************180s  ？？？？？"),V.grv.Start(180))}static _end(e){TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt&&(console.log("******************180结束 ？？？？？"),V.grv.Stop(e))}static _share(e,t,a=null,n=null){if(TJ.API.AppInfo.Channel()==TJ.Define.Channel.AppRt.ZJTD_AppRt)if(console.log("******************吊起分享 ？？？？？",V.grv,V.grv.videoPath),V.grv.videoPath){let a=new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam;a.extra.videoTopics=["解救小王子","番茄小游戏","抖音小游戏"],a.channel="video",a.success=(()=>{c.createHint_Middle(c.HintContent["分享成功!"]),t()}),a.fail=(()=>{"noAward"===e?c.createHint_Middle(c.HintContent["分享成功后才能获取奖励！"]):c.createHint_Middle(c.HintContent["分享失败！"]),n()}),V.grv.Share(a)}else c.createHint_Middle(c.HintContent["暂无视频，玩一局游戏之后分享！"])}}V.recording=!1,V.autoRecording=!1;class F extends e.Admin.Scene{lwgOnEnable(){let e;this.endPhoto();let t="UI/Share/Photo/photo_"+(e=C._gameLevel.value>10?C._gameLevel.value%10+1:C._gameLevel.value)+".png";this.self.SmallPhoto.skin=t}lwgOpenAni(){return this.aniTime=100,this.aniDelayde=100,this.self.SmallFram.x-=500,this.self.Logo.y-=500,this.self.BtnShare.alpha=0,h.rotate_Scale(this.self.BigFrame,45,0,0,600,1,1,4.5*this.aniTime,1*this.aniDelayde,()=>{h.move_Simple_01(this.self.SmallFram,this.self.SmallFram.x,this.self.SmallFram.y,this.self.SmallFram.x+=500,this.self.SmallFram.y,2*this.aniTime,Laya.Ease.cubicOut,this.aniDelayde),h.move_Simple_01(this.self.Logo,this.self.Logo.x,this.self.Logo.y,this.self.Logo.x,this.self.Logo.y+=500,2*this.aniTime,Laya.Ease.cubicOut,2*this.aniDelayde),h.bombs_Appear(this.self.BtnShare,0,1,1.2,0,2*this.aniTime,1*this.aniTime,4*this.aniDelayde);let e=Math.floor(100*Math.random()+900);Laya.timer.frameLoop(1,this,()=>{Number(this.self.HotNum.text)<e&&(this.self.HotNum.text=Number(this.self.HotNum.text)+6)}),Laya.timer.once(7*this.aniDelayde,this,()=>{this.self.Icon_hand.skin="UI/Share/tubiao_1-2.png"}),h.rotate_Scale(this.self.Icon_hand,-10,2,2,0,1,1,4*this.aniTime,7*this.aniDelayde)}),this.self.BtnNoShare.alpha=0,h.fadeOut(this.self.BtnNoShare,0,1,this.aniTime,20*this.aniDelayde),o.createExplosion_Rotate(this.self.SceneContent,40,this.self.SceneContent.width/2,this.self.SceneContent.height/2-100,o.SkinStyle.star,20,15),5*this.aniTime}endPhoto(){this.EndCamera=N.MainCamera.clone(),N.GameMain3D.addChild(this.EndCamera),this.EndCamera.transform.position=N.PhotoCameraMark.transform.position,this.EndCamera.transform.localRotationEuler=N.PhotoCameraMark.transform.localRotationEuler;let e=this.EndCamera.getChildAt(0);e.renderTarget=new Laya.RenderTexture(this.self.BigPhoto.width,this.self.BigPhoto.height),e.renderingOrder=-1,e.clearFlag=Laya.BaseCamera.CLEARFLAG_SKY;var t=new Laya.Texture(e.renderTarget,Laya.Texture.DEF_UV),a=new Laya.Sprite;this.self.BigPhoto.addChild(a),a.graphics.drawTexture(t)}lwgBtnClick(){n.on(n.Type.noEffect,this.self.SmallFram,this,null,null,this.btnShareUp,null),n.on(n.Type.noEffect,this.self.BigFrame,this,null,null,this.btnShareUp,null),n.on(n.Type.largen,this.self.BtnShare,this,null,null,this.btnShareUp,null),n.on(n.Type.largen,this.self.BtnNoShare,this,null,null,this.btnNoShareUp,null)}btnShareUp(){V._share("award",()=>{this.shareFunc()})}btnNoShareUp(){this.shareFunc()}shareFunc(){this.self.close(),t._openScene(t.SceneName.UIVictoryBox)}lwgOnDisable(){this.EndCamera.removeSelf()}}class j extends t.Object{lwgOnEnable(){this.Select=this.self.getChildByName("Select")}lwgBtnClick(){n.on(n.Type.largen,this.self,this,null,null,this.up,null)}up(){i.notify(u.EventType.select,[this.self._dataSource])}}class J extends u.ShopScene{shopOnAwake(){let e,t,n;a.goldAppear(),r.setBtnVinish(),E._stageClick=!1,u.goodsClassArr=[u.allOther,u.allProps,u.allSkin],function(e){e.anquanmao="anquanmao",e.yuanyanjing="yuanyanjing",e.jiemao_01="jiemao_01",e.hamajing="hamajing",e.yanshemao_gangtie="yanshemao_gangtie",e.yanshemao="yanshemao",e.jiemao_02="jiemao_02",e.xiaochoumao="xiaochoumao",e.xingxingyanjing="xingxingyanjing",e.yanshemao_shijie="yanshemao_shijie",e.maomaozi="maomaozi"}(e||(e={})),function(e){e.yingguangbang="yingguangbang",e.lifadao="lifadao",e.jiandao="jiandao",e.dianjupian="dianjupian",e.dianju="dianju"}(t||(t={})),function(e){e.xiangsudao="xiangsudao",e.tixudao="tixudao",e.ruwu="ruwu",e.lifadao="lifadao",e.jundao="jundao",e.tulongdao="tulongdao"}(n||(n={})),s.objPropertySort(u.allSkin,"arrange"),s.objPropertySort(u.allProps,"arrange"),s.objPropertySort(u.allOther,"arrange"),u._currentSkin.name||(u._currentSkin.name=e.anquanmao),u._currentProp.name||(u._currentProp.name=t.jiandao),u._currentOther.name||(u._currentOther.name=n.tixudao);let i=u.getGoodsProperty(u.GoodsClass.Skin,e.xiaochoumao,u.GoodsProperty.condition);C._gameLevel.value>=i?u.setGoodsProperty(u.GoodsClass.Skin,e.xiaochoumao,u.GoodsProperty.have,!0):u.setGoodsProperty(u.GoodsClass.Skin,e.xiaochoumao,u.GoodsProperty.resCondition,C._gameLevel.value)}shopEventReg(){i.reg(u.EventType.select,this,e=>{e.have?this.sceletDisplay(e,!1):e[u.GoodsProperty.getway]===u.Getway.ads?v.ShowReward(()=>{this.adsAcquisition(e)}):e[u.GoodsProperty.getway]===u.Getway.adsXD?c.createHint_Middle(c.HintContent["请前往皮肤限定界面获取!"]):e[u.GoodsProperty.getway]===u.Getway.ineedwin?c.createHint_Middle(c.HintContent["通过相应的关卡数达到就可以得到了!"]):e[u.GoodsProperty.getway]===u.Getway.gold&&c.createHint_Middle(c.HintContent["点击金币抽奖按钮购买!"])}),u._ShopList.refresh()}shopOnEnable(){}sceletDisplay(e,t){switch(u._ShopTap.selectedIndex){case 2:u._currentSkin.name=e.name,this.self.Dispaly.skin="UI/Shop/Skin/"+e.name+".png";break;case 1:u._currentProp.name=e.name,this.self.Dispaly.skin="UI/Shop/Props/"+e.name+".png";break;case 0:u._currentOther.name=e.name,this.self.Dispaly.skin="UI/Shop/Other/"+e.name+".png"}if(t){let t=e.arrange-1;u._ShopList.scrollTo(t)}}adsAcquisition(e){let t;switch(u._ShopTap.selectedIndex){case 2:t=u.GoodsClass.Skin;break;case 1:t=u.GoodsClass.Props;break;case 0:t=u.GoodsClass.Other}let a=u.getGoodsProperty(t,e.name,u.GoodsProperty.condition),n=u.getGoodsProperty(t,e.name,u.GoodsProperty.resCondition);u.setGoodsProperty(t,e.name,u.GoodsProperty.resCondition,n+1),a<=n+1&&(u.setGoodsProperty(t,e.name,u.GoodsProperty.have,!0),this.sceletDisplay(e.name,!1)),u._ShopList.refresh()}myTap_Select(e){switch(l.playSound(),e){case 2:u._ShopList.array=u.allSkin,this.self.Dispaly.skin="UI/Shop/Skin/"+u._currentSkin.name+".png";break;case 1:u._ShopList.array=u.allProps,this.self.Dispaly.skin="UI/Shop/Props/"+u._currentProp.name+".png";break;case 0:u._ShopList.array=u.allOther,this.self.Dispaly.skin="UI/Shop/Other/"+u._currentOther.name+".png"}u._ShopList.refresh()}myList_Update(e,t){let a=e.dataSource,n=e.getChildByName("Select");n.visible=!1;let i=e.getChildByName("Pic");switch(u._ShopTap.selectedIndex){case 2:i.skin="UI/Shop/Skin/"+a.name+".png",e.dataSource[u.GoodsProperty.name]==u._currentSkin.name?n.visible=!0:n.visible=!1;break;case 1:i.skin="UI/Shop/Props/"+a.name+".png",e.dataSource[u.GoodsProperty.name]==u._currentProp.name?n.visible=!0:n.visible=!1;break;case 0:i.skin="UI/Shop/Other/"+a.name+".png",e.dataSource[u.GoodsProperty.name]==u._currentOther.name?n.visible=!0:n.visible=!1}let s=e.getChildByName("NoHave");s.visible=!0;let o=e.getChildByName("Board"),l=s.getChildByName("Dec"),r=s.getChildByName("Icon");if(e.dataSource[u.GoodsProperty.have])s.visible=!1,o.skin="UI/Common/kuang1.png";else{switch(e.dataSource[u.GoodsProperty.getway]){case u.Getway.ads:l.text=e.dataSource[u.GoodsProperty.resCondition]+"/"+e.dataSource[u.GoodsProperty.condition],l.x=88,l.fontSize=30,r.visible=!0;break;case u.Getway.adsXD:l.text="限定获取",l.x=s.width/2,l.fontSize=23,r.visible=!1;break;case u.Getway.easterEgg:l.text="彩蛋获取",l.x=s.width/2,l.fontSize=23,r.visible=!1;break;case u.Getway.ineedwin:l.text="过"+e.dataSource[u.GoodsProperty.resCondition]+"/"+e.dataSource[u.GoodsProperty.condition]+"关",l.x=s.width/2,l.fontSize=23,r.visible=!1;break;case u.Getway.gold:l.text="金币抽取",l.x=s.width/2,l.fontSize=23,r.visible=!1;break;default:r.visible=!1}o.skin="UI/Common/kuang2.png"}}lwgBtnClick(){n.on(n.Type.largen,this.self.BtnBuy,this,null,null,this.btnBuyUp),n.on(n.Type.largen,this.self.BtnGetGold,this,null,null,this.btnGetGold),n.on(n.Type.largen,this.self.BtnBack,this,null,null,this.btnBackUp)}btnBuyUp(){let e=[];switch(u._ShopTap.selectedIndex){case 2:e=u.getwayGoldArr(u.GoodsClass.Skin,!1);break;case 1:e=u.getwayGoldArr(u.GoodsClass.Props,!1);break;case 0:e=u.getwayGoldArr(u.GoodsClass.Other,!1)}if(e.length<=0)c.createHint_Middle(c.HintContent["没有可以购买的皮肤了！"]);else{s.objPropertySort(e,u.GoodsProperty.getOder);let t=e[0][u.GoodsProperty.condition];if(a._goldNum<t)c.createHint_Middle(c.HintContent["金币不够了！"]);else{switch(c.createHint_Middle(c.HintContent["恭喜获得新皮肤!"]),u._ShopTap.selectedIndex){case 2:u.setGoodsProperty(u.GoodsClass.Skin,e[0].name,u.GoodsProperty.have,!0);break;case 1:u.setGoodsProperty(u.GoodsClass.Props,e[0].name,u.GoodsProperty.have,!0);break;case 0:u.setGoodsProperty(u.GoodsClass.Other,e[0].name,u.GoodsProperty.have,!0)}this.sceletDisplay(e[0],!0)}u._ShopList.refresh()}}btnGetGold(){v.ShowReward(()=>{a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{this.advFunc()})})}advFunc(){a.addGold(500)}btnBackUp(){this.self.close()}shopOnDisable(){E._stageClick=!0,r.setBtnAppear()}}class z extends t.Object{lwgBtnClick(){n.on(n.Type.largen,this.self,this,null,null,this.up,null)}up(){i.notify(S.EventType.select,[this.self._dataSource])}}class Y extends k{skinOnAwake(){c.createVoluntarilyDialogue(150,334,c.UseWhere.scene3,0,2e3,this.self);let e=u.getGoodsClassArr(u.GoodsClass.Skin);S._headSkinArr=[],S._eyeSkinArr=[],S._currentEye.name=null,S._currentHead.name=null;for(let t=0;t<e.length;t++){const a=e[t];a[S.SkinProperty.classify]===S.SkinClass.head?S._headSkinArr.push(a):a[S.SkinProperty.classify]===S.SkinClass.eye&&S._eyeSkinArr.push(a)}}skinEventReg(){i.reg(S.EventType.select,this,e=>{if(e[u.GoodsProperty.have])switch(S._SkinTap.selectedIndex){case 0:S._currentEye.name=e[u.GoodsProperty.name],i.notify(D.EventType.changeEyeDecoration);break;case 1:S._currentHead.name=e[u.GoodsProperty.name],i.notify(D.EventType.changeHeadDecoration),N.HairParent&&(N.HairParent.active=!1)}else e[u.GoodsProperty.getway]===u.Getway.ads?v.ShowReward(()=>{this.adsAcquisition(e)}):e[u.GoodsProperty.getway]===u.Getway.adsXD?c.createHint_Middle(c.HintContent["请前往皮肤限定界面获取!"]):e[u.GoodsProperty.getway]===u.Getway.ineedwin?c.createHint_Middle(c.HintContent["通过相应的关卡数达到就可以得到了!"]):e[u.GoodsProperty.getway]===u.Getway.gold&&c.createHint_Middle(c.HintContent["请前往皮肤界面购买！"])}),S._SkinList.refresh()}adsAcquisition(e){let t=u.GoodsClass.Skin,a=u.getGoodsProperty(t,e.name,u.GoodsProperty.condition),n=u.getGoodsProperty(t,e.name,u.GoodsProperty.resCondition);if(u.setGoodsProperty(t,e.name,u.GoodsProperty.resCondition,n+1),a<=n+1)switch(u.setGoodsProperty(t,e.name,u.GoodsProperty.have,!0),S._SkinTap.selectedIndex){case 0:S._currentEye.name=e[u.GoodsProperty.name];break;case 1:S._currentHead.name=e[u.GoodsProperty.name]}S._SkinList.refresh()}skinTap_Select(e){switch(l.playSound(),e){case 0:S._SkinList.array=S._eyeSkinArr;break;case 1:S._SkinList.array=S._headSkinArr}S._SkinList.refresh()}skinList_Update(e,t){let a=e.dataSource,n=e.getChildByName("Select");switch(n.visible=!1,e.getChildByName("Pic").skin="UI/Shop/Skin/"+a.name+".png",S._SkinTap.selectedIndex){case 0:e.dataSource.name==S._currentEye.name?n.visible=!0:n.visible=!1;break;case 1:e.dataSource.name==S._currentHead.name?n.visible=!0:n.visible=!1}let i=e.getChildByName("NoHave");i.visible=!0;let s=e.getChildByName("Board"),o=i.getChildByName("Dec"),l=i.getChildByName("Icon");if(e.dataSource[u.GoodsProperty.have])i.visible=!1,s.skin="UI/Common/kuang1.png";else{switch(e.dataSource[u.GoodsProperty.getway]){case u.Getway.ads:o.text=e.dataSource[u.GoodsProperty.resCondition]+"/"+e.dataSource[u.GoodsProperty.condition],o.x=88,o.fontSize=30,l.visible=!0;break;case u.Getway.adsXD:o.text="限定获取",o.x=i.width/2,o.fontSize=23,l.visible=!1;break;case u.Getway.easterEgg:o.text="彩蛋获取",o.x=i.width/2,o.fontSize=23,l.visible=!1;break;case u.Getway.ineedwin:o.text="过"+e.dataSource[u.GoodsProperty.resCondition]+"/"+e.dataSource[u.GoodsProperty.condition]+"关",o.x=i.width/2,o.fontSize=23,l.visible=!1;break;case u.Getway.gold:o.text="金币抽取",o.x=i.width/2,o.fontSize=23,l.visible=!1;break;default:l.visible=!1}s.skin="UI/Common/kuang2.png"}}skinOnEnable(){S._SkinList.array=S._eyeSkinArr,S._SkinList.refresh(),i.notify(D.EventType.cameraMove,[D.TaskType.movePhotoLocation])}skinBtnClick(){n.on(n.Type.largen,this.self.BtnComplete,this,null,null,this.btnCompleteUp,null)}btnCompleteUp(){t._openScene(t.SceneName.UIShare,null,this.self)}}class q extends t.Scene{lwgOnAwake(){this.randomNoHave()}randomNoHave(){let e,t;u.getwayGoldArr(u.GoodsClass.Other,void 0,!0),u.getwayGoldArr(u.GoodsClass.Props,void 0,!0);for(let a=0;a<E._taskArr.length;a++){const n=E._taskArr[a];n===D.TaskType.HairParent?e=!0:n!==D.TaskType.LeftBeard&&n!==D.TaskType.RightBeard&&n!==D.TaskType.UpLeftBeard&&n!==D.TaskType.UpRightBeard&&n!==D.TaskType.MiddleBeard||(t=!0)}e&&console.log("本关有剃头任务！"),t&&console.log("本关剃胡须任务！"),e&&t?1===Math.floor(2*Math.random())?this.randomProp():this.randomOther():e&&!t?this.randomProp():!e&&t&&this.randomOther()}randomOther(){let e,t=u.getwayGoldArr(u.GoodsClass.Other,void 0,!0);e=t[Math.floor(Math.random()*t.length)],this.self.SkinPic.skin="UI/Shop/Other/"+e.name+".png",this.beforeTryOtherName=u._currentOther.name,u._currentOther.name=e.name}randomProp(){let e,t=u.getwayGoldArr(u.GoodsClass.Props,void 0,!0);e=t[Math.floor(Math.random()*t.length)],this.self.SkinPic.skin="UI/Shop/Props/"+e.name+".png",this.beforeTryPropName=u._currentProp.name,u._currentProp.name=e.name}lwgBtnClick(){n.on(e.Click.Type.largen,this.self.BtnNo,this,null,null,this.btnNoUp,null),n.on(e.Click.Type.largen,this.self.BtnGet,this,null,null,this.btnGetUp,null)}btnGetUp(e){v.ShowReward(()=>{t._openScene(t.SceneName.UIOperation,null,this.self),i.notify(D.EventType.changeOther),i.notify(D.EventType.changeProp)})}btnNoUp(e){this.beforeTryOtherName&&(u._currentOther.name=this.beforeTryOtherName),this.beforeTryPropName&&(u._currentProp.name=this.beforeTryPropName),t._openScene(t.SceneName.UIOperation,null,this.self),i.notify(D.EventType.changeOther),i.notify(D.EventType.changeProp)}lwgOnDisable(){this.beforeTryOtherName&&(u._currentOther.name=this.beforeTryOtherName),this.beforeTryPropName&&(u._currentProp.name=this.beforeTryPropName)}}class W extends f.SkinXDScene{skinXDOnAwake(){a.goldVinish(),r.setBtnVinish()}skinXDOnEnable(){this.progressDisplay()}skinXDAdaptive(){this.self.SceneContent.y=Laya.stage.height/2}progressDisplay(){let e=u.getGoodsProperty(u.GoodsClass.Props,"xiandanren",u.GoodsProperty.resCondition);if(e>0)for(let t=0;t<e;t++){let e="Bar"+(t+1);this.self[e].skin="UI/XDSkin/tiao1.png"}}skinXDBtnClick(){n.on(n.Type.largen,this.self.BtnGet,this,null,null,this.btnGetUp),n.on(n.Type.largen,this.self.BtnBack,this,null,null,this.btnBackUp)}btnGetUp(){v.ShowReward(()=>{this.btnGetFunc()})}btnBackUp(){this.self.close()}btnGetFunc(){1===u.buyGoods(u.GoodsClass.Other,"xiandanren",1)?(this.progressDisplay(),c.createHint_Middle(c.HintContent["限定皮肤已经获得，请前往皮肤界面查看。"]),u._currentOther.name="xiandanren",i.notify(f.EventType.acquisition),h.fadeOut(this.self,1,0,500,500,()=>{this.self.close()})):this.progressDisplay()}skinXDOnDisable(){r.setBtnAppear()}}class K extends e.Admin.Scene{constructor(){super(...arguments),this.easterEgg_AotumanSwitch=!1}lwgNodeDec(){this.LevelDisplay=this.self.LevelDisplay,this.LevelStyle=this.self.LevelStyle}lwgEventReg(){i.reg(f.EventType.acquisition,this,()=>{this.self.BtnXDSkin.visible=!1}),i.regOnce(m.EventType.removeCheckBtn,this,()=>{this.self.BtnCheck.visible=!1}),i.reg(L.EventType.trigger,this,()=>{this.self.BtnAotuman.visible=!0,this.self.EasterEgg_Aotuman.visible=!1})}lwgOnEnable(){S._currentEye.name=null,S._currentHead.name=null,i.notify(D.EventType.changeHeadDecoration),i.notify(D.EventType.changeEyeDecoration),this.levelStyleDisplay(),u.getGoodsProperty(u.GoodsClass.Props,"xiandanren",u.GoodsProperty.have)&&(this.self.BtnXDSkin.visible=!1),L._easterEgg_1.value?this.self.EasterEgg_Aotuman.visible=!1:this.self.BtnAotuman.visible=!1,m.openCheckIn(),c.createVoluntarilyDialogue(150,334,c.UseWhere.scene1,1e3,2e3,this.self)}levelStyleDisplay(){let e=C._gameLevel.value%this.LevelStyle.numChildren;for(let t=0;t<this.LevelStyle.numChildren;t++){const a=this.LevelStyle.getChildAt(t);let n=Number(a.name.substring(a.name.length-1,a.name.length));C._gameLevel.value<5&&(n+=1);let i=a.getChildByName("Num");if(n===e)i.value=C._gameLevel.value.toString();else if(n<e)i.value=(C._gameLevel.value-(e-n)).toString();else if(n>e){i.value=(C._gameLevel.value+(n-e)).toString(),a.getChildByName("Pic").skin="UI/GameStart/jindu_hui.png";let t=a.getChildByName("Color");null!==t&&(t.visible=!1),i.skin="UI/Common/shuzi3.png"}}}lwgBtnClick(){n.on(n.Type.largen,this.self.BtnSkin,this,null,null,()=>{e.Admin._openScene(t.SceneName.UIShop)}),n.on(n.Type.noEffect,this.self.Guide,this,null,null,()=>{t._openScene(e.Admin.SceneName.UISkinTry,null,this.self)}),n.on(n.Type.largen,this.self.BtnTask,this,null,null,()=>{t._openScene(e.Admin.SceneName.UITask)}),n.on(n.Type.largen,this.self.BtnCheck,this,null,null,()=>{e.Admin._openScene(t.SceneName.UICheckIn)}),n.on(n.Type.largen,this.self.BtnAotuman,this,null,null,()=>{e.Admin._openScene(t.SceneName.UIEasterEgg)}),n.on(n.Type.largen,this.self.BtnXDSkin,this,this.btnXDSkinDown,null,this.btnXDSkinUp)}btnXDSkinDown(){this.easterEgg_AotumanSwitch=!0}btnXDSkinUp(){e.Admin._openScene(t.SceneName.UISkinXD)}onStageMouseMove(e){if(this.easterEgg_AotumanSwitch&&!L._easterEgg_1.value){if(this.self.addChild(this.self.Aotuman),this.self.Aotuman.x=e.stageX,this.self.Aotuman.y=e.stageY,new Laya.Point(this.self.EasterEgg_Aotuman.x,this.self.EasterEgg_Aotuman.y).distance(e.stageX,e.stageY)<50){this.aotumanBack();let e=100,a=100,n=this.self.Clamp.x,i=this.self.Clamp.y,s=this.self.RightClamp.rotation,o=this.self.LeftClamp.rotation,l=this.self.PicAotuman.x,r=this.self.PicAotuman.y,c=this.self.PicAotuman.rotation;h.simple_Rotate(this.self.RightClamp,0,-19,.5*e),h.simple_Rotate(this.self.LeftClamp,0,19,.5*e,0,()=>{h.move_Simple(this.self.Clamp,n,i,n,i-200,2*e,4*a),h.drop_KickBack(this.self.PicAotuman,1,this.self.PicAotuman.y,this.self.PicAotuman.y+600,50,8*e,0,()=>{this.self.Clamp.x=n,this.self.Clamp.y=i,this.self.RightClamp.rotation=s,this.self.LeftClamp.rotation=o,this.self.PicAotuman.x=l,this.self.PicAotuman.y=r,this.self.PicAotuman.rotation=c}),h.simple_Rotate(this.self.PicAotuman,0,360,6*e,0,()=>{t._openScene(t.SceneName.UIEasterEgg)})})}}}onStageMouseUp(){this.aotumanBack()}aotumanBack(){this.easterEgg_AotumanSwitch=!1,this.self.BtnXDSkin.addChild(this.self.Aotuman),this.self.Aotuman.x=77,this.self.Aotuman.y=63}lwgOnDisable(){a.GoldNode.visible=!1,r.setBtnVinish()}}class Z extends t.Object{lwgBtnClick(){let e=this.self.getChildByName("BtnGet");n.on(n.Type.largen,e,this,null,null,this.btnGetUp)}btnGetUp(){"观看广告获得金币"!==this.self.dataSource[y.TaskProperty.name]?1===this.self.dataSource[y.TaskProperty.get]?i.notify(y.EventType.getAward,[this.self.dataSource]):0===this.self.dataSource[y.TaskProperty.get]?console.log("任务没有完成"):-1===this.self.dataSource[y.TaskProperty.get]&&console.log("或者已经领取过！"):i.notify(y.EventType.adsGetAward_Every,[this.self.dataSource])}}class Q extends e.Task.TaskScene{taskOnAwake(){E._stageClick=!1,r.setBtnVinish()}taskEventReg(){i.reg(y.EventType.getAward,this,e=>{a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{y.setTaskProperty(y.TaskClass.everyday,e.name,y.TaskProperty.get,-1),a.addGold(e[y.TaskProperty.rewardNum]),y._TaskList.refresh()})}),i.reg(y.EventType.adsGetAward_Every,this,e=>{v.ShowReward(()=>{a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{a.addGold(y.getTaskProperty(y.TaskClass.everyday,e.name,y.TaskProperty.rewardNum)),y._TaskList.refresh()})})})}taskList_Update(e,t){let a=e.dataSource;e.getChildByName("Name").text=a.name;let n=e.getChildByName("BtnGet");0===a.get?n.skin="UI/Task/jinxing.png":1===a.get?n.skin="UI/Task/linqu.png":-1===a.get&&(n.skin="UI/Task/yilingqu.png");let i=e.getChildByName("ProgressBar");i.width=a.resCondition/a.condition*169;let s=e.getChildByName("ProNum");s.text=a.resCondition+"/"+a.condition,e.getChildByName("AwardNum").text=a.rewardNum,0===t&&(i.width=169,s.text="1/1",n.skin="UI/Task/adslingqu.png")}lwgBtnClick(){n.on(n.Type.largen,this.self.BtnBack,this,null,null,this.btnBackUp)}btnBackUp(){this.self.close()}taskOnDisable(){r.setBtnAppear(),E._stageClick=!0}}class $ extends e.Admin.Scene{constructor(){super(),this.addOrSub="add"}lwgNodeDec(){this.GlodNum=this.self.GlodNum}lwgOnEnable(){this.getGoldNum=50,this.getGoldDisPlay(),a.goldAppear(500),r.setBtnAppear(),C._gameLevel.value++,this.self.BtnAdv.visible=!0,this.self.BtnNormal.visible=!1,this.self.Dot.visible=!0,e.Effects.createFireworks(Laya.stage,40,430,200),e.Effects.createFireworks(Laya.stage,40,109,200),e.Effects.createLeftOrRightJet(Laya.stage,"right",40,720,300),e.Effects.createLeftOrRightJet(Laya.stage,"left",40,0,300),i.notify(y.TaskType.victory)}lwgOpenAni(){return this.self.Multiply10.alpha=0,this.self.GlodNum.alpha=0,this.self.BtnAdv.alpha=0,this.self.Select.alpha=0,h.move_Simple(this.self.Logo,this.self.Logo.x,this.self.Logo.y-500,this.self.Logo.x,this.self.Logo.y,5*this.aniTime,0*this.aniDelayde,Laya.Ease.cubicOut,()=>{h.scale_Alpha(this.self.Multiply10,0,0,0,1,1,1,3*this.aniTime),h.bombs_Appear(this.self.GlodNum,0,1,1.2,0,2*this.aniTime,1*this.aniTime,3*this.aniDelayde),h.bombs_Appear(this.self.BtnAdv,0,1,1.2,0,2*this.aniTime,1*this.aniTime,5*this.aniDelayde),h.fadeOut(this.self.Select,0,1,2*this.aniTime,7*this.aniDelayde)}),0}getGoldDisPlay(){this.GlodNum.getChildByName("Num").text=(10*this.getGoldNum).toString()}lwgBtnClick(){n.on(n.Type.noEffect,this.self.BtnSelect,this,null,null,this.btnSelectUp,null),n.on(n.Type.largen,this.self.BtnAdv,this,null,null,this.btnAdvUp,null),n.on(n.Type.largen,this.self.BtnNormal,this,null,null,this.btnNormalUp,null)}offClick(){n.off(n.Type.noEffect,this.self.BtnSelect,this,null,null,this.btnSelectUp,null),n.off(n.Type.largen,this.self.BtnAdv,this,null,null,this.btnAdvUp,null),n.off(n.Type.largen,this.self.BtnNormal,this,null,null,this.btnNormalUp,null)}btnSelectUp(){if(this.self.Dot.visible){this.self.Dot.visible=!1,this.self.BtnAdv.visible=!1,this.self.BtnNormal.visible=!0,this.addOrSub="sub";let e=this.self.Multiply10;h.scale_Alpha(e,e.alpha,e.scaleX,e.scaleY,0,0,0,100);let t=this.GlodNum.getChildByName("Num");Laya.timer.loop(30,this,()=>{"sub"==this.addOrSub&&(Number(t.text)<this.getGoldNum?(t.text=this.getGoldNum.toString(),this.addOrSub=null):t.text=(Number(t.text)-30).toString())})}else{this.self.Dot.visible=!0,this.self.BtnAdv.visible=!0,this.self.BtnNormal.visible=!1,this.addOrSub="add";let e=this.self.Multiply10;h.scale_Alpha(e,e.alpha,e.scaleX,e.scaleY,1,1,1,100);let t=this.GlodNum.getChildByName("Num");Laya.timer.loop(30,this,()=>{"add"==this.addOrSub&&(Number(t.text)>10*this.getGoldNum?(t.text=(10*this.getGoldNum).toString(),this.addOrSub=null):t.text=(Number(t.text)+30).toString())})}}btnNormalUp(){this.offClick(),a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{this.advFunc()})}btnAdvUp(){v.ShowReward(()=>{a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{this.advFunc()})})}advFunc(){this.self.Dot.visible?a.addGold(10*this.getGoldNum):a.addGold(this.getGoldNum),i.notify(i.EventType.scene3DRefresh),t._openScene(t.SceneName.UIStart,null,this.self)}lwgOnDisable(){r.setBtnVinish()}}class ee extends t.Object{constructor(){super()}lwgBtnClick(){n.on(n.Type.noEffect,this.self,this,null,null,this.up,null)}btnoff(){n.off(n.Type.noEffect,this.self,this,null,null,this.up,null)}up(e){if(!this.self._dataSource[p.BoxProperty.openState])if(p._defaultOpenNum>0){let e=this.self.getChildByName("Pic_Box");this.self._dataSource[p.BoxProperty.ads]||(e.skin="UI/VictoryBox/baoxian3.png"),this.btnoff(),h.shookHead_Simple(e,10,100,0,e=>{i.notify(p.EventType.openBox,[this.self._dataSource]),this.lwgBtnClick()})}else c.createHint_Middle(c.HintContent["观看广告可以获得三次开宝箱次数！"])}lwgDisable(){}}class te extends p.VictoryBoxScene{constructor(){super()}victoryBoxOnAwake(){if(this.self.BtnAgain.visible=!1,this.self.BtnNo.visible=!1,p._openVictoryBoxNum>1){let e=s.randomNumOfArray([0,1,2,3,4,5,6,7,8],3);for(let t=0;t<e.length;t++){e[t];p.setBoxProperty("box"+e[t],p.BoxProperty.ads,!0)}}}victoryBoxEventReg(){i.reg(p.EventType.openBox,this,e=>{console.log(e,p._defaultOpenNum),p._defaultOpenNum>0?e[p.BoxProperty.ads]?v.ShowReward(()=>{this.getRewardFunc(e)}):this.getRewardFunc(e):c.createHint_Middle(c.HintContent["观看广告可以获得三次开宝箱次数！"])})}getRewardFunc(e){p.alreadyNum++;let t=!1;if(9===p.alreadyNum&&!L.getProperty(L.Classify.EasterEgg_01,L.Name.assembly_4,L.Property.complete)){L.doDetection(L.Classify.EasterEgg_01,L.Name.assembly_4,1),p._BoxList.getCell(e.arrange-1).getChildByName("Automan").visible=!0,t=!0}p._defaultOpenNum--,p._selectBox=e[p.BoxProperty.name];let n=e.arrange%3;0==n&&(n=3);let s=Math.floor(e.arrange/3+.5),l=p._BoxList.x+p._BoxList.width/3*n-45,r=p._BoxList.y+p._BoxList.height/3*s+92;o.createExplosion_Rotate(this.self,25,l,r,"star",10,15),p.setBoxProperty(e[p.BoxProperty.name],p.BoxProperty.openState,!0),t||Laya.timer.frameOnce(20,this,t=>{a.getGoldAni_Heap(Laya.stage,15,88,69,"UI/GameStart/qian.png",new Laya.Point(Laya.stage.width/2,Laya.stage.height/2),new Laya.Point(a.GoldNode.x-80,a.GoldNode.y),null,()=>{a.addGold(p.getBoxProperty(e.name,p.BoxProperty.rewardNum))})}),i.notify(y.EventType.victoryBox)}boxList_Update(e,t){let a=e.dataSource,n=e.getChildByName("Select");p._selectBox===a[p.BoxProperty.name]?n.visible=!0:n.visible=!1;let i=e.getChildByName("Num"),s=e.getChildByName("Pic_Gold"),o=e.getChildByName("Pic_Box"),l=e.getChildByName("BordPic");a[p.BoxProperty.openState]?(o.visible=!1,s.visible=!0,i.visible=!0,i.text=a[p.BoxProperty.rewardNum],l.skin="UI/Common/kuang1.png"):(a[p.BoxProperty.ads]?o.skin="UI/VictoryBox/baoxian_adv.png":o.skin="UI/VictoryBox/baoxian2.png",o.visible=!0,s.visible=!1,i.visible=!1,l.skin="UI/Common/kuang2.png")}victoryBoxBtnClick(){n.on("largen",this.self.BtnNo,this,null,null,this.btnNoUp,null),n.on("largen",this.self.BtnAgain,this,null,null,this.btnAgainUp,null)}btnOffClick(){n.off("largen",this.self.BtnNo,this,null,null,this.btnNoUp,null),n.off("largen",this.self.BtnAgain,this,null,null,this.btnAgainUp,null)}btnNoUp(t){e.Admin._openScene(e.Admin.SceneName.UIVictory,null,null,null),this.self.close()}btnAgainUp(e){v.TAPoint(_.BtnClick,"ADrewardbt_box"),p._alreadyOpenNum<9&&p._adsMaxOpenNum>0?v.ShowReward(()=>{c.createHint_Middle(c.HintContent["增加三次开启宝箱次数！"]),p._defaultOpenNum+=3,p._adsMaxOpenNum-=3}):c.createHint_Middle(c.HintContent["没有宝箱领可以领了！"])}victoryOnUpdate(){p._defaultOpenNum>0?(this.self.BtnAgain.visible=!1,this.self.BtnNo.visible=!1):(this.self.BtnAgain.visible=!0,this.self.BtnNo.visible=!0)}}var ae,ne=Laya.ClassUtils.regClass;!function(e){!function(e){class t extends Laya.Scene{constructor(){super()}createChildren(){super.createChildren(),this.loadScene("test/TestScene")}}e.TestSceneUI=t,ne("ui.test.TestSceneUI",t)}(e.test||(e.test={}))}(ae||(ae={}));class ie extends ae.test.TestSceneUI{constructor(){super(),this.newScene=Laya.stage.addChild(new Laya.Scene3D);var e=this.newScene.addChild(new Laya.Camera(0,.1,100));e.transform.translate(new Laya.Vector3(0,6,9.5)),e.transform.rotate(new Laya.Vector3(-15,0,0),!0,!1);var t=new Laya.DirectionLight;this.newScene.addChild(t),t.color=new Laya.Vector3(.6,.6,.6);var a=t.transform.worldMatrix;a.setForward(new Laya.Vector3(-1,-1,-1)),t.transform.worldMatrix=a;var n=this.newScene.addChild(new Laya.MeshSprite3D(Laya.PrimitiveMesh.createPlane(10,10,10,10))),i=new Laya.BlinnPhongMaterial;Laya.Texture2D.load("res/grass.png",Laya.Handler.create(this,function(e){i.albedoTexture=e}));var s=i.tilingOffset;s.setValue(5,5,0,0),i.tilingOffset=s,n.meshRenderer.material=i;var o=n.addComponent(Laya.PhysicsCollider),l=new Laya.BoxColliderShape(10,0,10);o.colliderShape=l,o.friction=2,o.restitution=.3,this.mat1=new Laya.BlinnPhongMaterial,Laya.Texture2D.load("res/wood.jpg",Laya.Handler.create(this,function(e){this.mat1.albedoTexture=e,Laya.timer.once(100,this,function(){this.addBox()})}))}addBox(){var e=this.newScene.addChild(new Laya.MeshSprite3D(Laya.PrimitiveMesh.createBox(.75,.5,.5)));e.meshRenderer.material=this.mat1;var t=e.transform,a=t.position;a.setValue(0,10,0),t.position=a;var n=e.addComponent(Laya.Rigidbody3D),i=new Laya.BoxColliderShape(.75,.5,.5);n.colliderShape=i,n.mass=10}}class se{constructor(){}static init(){var e=Laya.ClassUtils.regClass;e("script/Game/UICheckIn.ts",T),e("script/Game/UIDefeated.ts",b),e("script/Game/UIEasterEgg.ts",B),e("script/Game/UILoding.ts",G),e("script/Game/UIOperation.ts",M),e("script/Game/UIResurgence.ts",H),e("script/Game/UISet.ts",X),e("script/Game/UIShare.ts",F),e("script/Game/UIShop_Goods.ts",j),e("script/Game/UIShop.ts",J),e("script/Game/UISKin_Goods.ts",z),e("script/Game/UISkin.ts",Y),e("script/Game/UISkinTry.ts",q),e("script/Game/UISkinXD.ts",W),e("script/Game/UIStart.ts",K),e("script/Game/UITask_GetAward.ts",Z),e("script/Game/UITask.ts",Q),e("script/Game/UIVictory.ts",$),e("script/Game/UIVictoryBox_Cell.ts",ee),e("script/Game/UIVictoryBox.ts",te),e("script/GameUI.ts",ie)}}se.width=720,se.height=1280,se.scaleMode="fixedwidth",se.screenMode="vertical",se.alignV="top",se.alignH="left",se.startScene="Scene/UILoding.scene",se.sceneRoot="",se.debug=!1,se.stat=!0,se.physicsDebug=!1,se.exportSceneToJson=!0,se.init();new class{constructor(){window.Laya3D?Laya3D.init(se.width,se.height):Laya.init(se.width,se.height,Laya.WebGL),Laya.Physics&&Laya.Physics.enable(),Laya.DebugPanel&&Laya.DebugPanel.enable(),Laya.stage.scaleMode=se.scaleMode,Laya.stage.screenMode=se.screenMode,Laya.stage.alignV=se.alignV,Laya.stage.alignH=se.alignH,Laya.URL.exportSceneToJson=se.exportSceneToJson,(se.debug||"true"==Laya.Utils.getQueryString("debug"))&&Laya.enableDebugPanel(),se.physicsDebug&&Laya.PhysicsDebugDraw&&Laya.PhysicsDebugDraw.enable(),se.stat&&Laya.Stat.show(),Laya.alertGlobalError=!0,Laya.ResourceVersion.enable("version.json",Laya.Handler.create(this,this.onVersionLoaded),Laya.ResourceVersion.FILENAME_VERSION)}onVersionLoaded(){Laya.AtlasInfoManager.enable("fileconfig.json",Laya.Handler.create(this,this.onConfigLoaded))}onConfigLoaded(){se.startScene&&Laya.Scene.open(se.startScene)}}}();
+(function () {
+    'use strict';
+
+    var lwg;
+    (function (lwg) {
+        let Global;
+        (function (Global) {
+            function _createKeyNum(parent, x, y) {
+                let sp;
+                Laya.loader.load('prefab/KeyNum.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    sp.pos(x, y);
+                    sp.zOrder = 0;
+                    let num = sp.getChildByName('Num');
+                    Global.KeyNumNode = sp;
+                }));
+            }
+            Global._createKeyNum = _createKeyNum;
+            function _createExecutionNum(parent) {
+                let sp;
+                Laya.loader.load('prefab/ExecutionNum.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    let num = sp.getChildByName('Num');
+                    sp.pos(297, 90);
+                    sp.zOrder = 50;
+                    Global.ExecutionNumNode = sp;
+                    Global.ExecutionNumNode.name = 'ExecutionNumNode';
+                }));
+            }
+            Global._createExecutionNum = _createExecutionNum;
+            function _addExecution(number) {
+            }
+            Global._addExecution = _addExecution;
+            function _createBtnPause(parent) {
+                let sp;
+                Laya.loader.load('prefab/BtnPause.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    sp.pos(645, 167);
+                    sp.zOrder = 0;
+                    Global.BtnPauseNode = sp;
+                    Global.BtnPauseNode.name = 'BtnPauseNode';
+                    Click.on(Click.Type.largen, sp, null, null, null, btnPauseUp, null);
+                }));
+            }
+            Global._createBtnPause = _createBtnPause;
+            function btnPauseUp(event) {
+                event.stopPropagation();
+                event.currentTarget.scale(1, 1);
+                lwg.Admin._openScene('UIPause', null, null, null);
+            }
+            Global.btnPauseUp = btnPauseUp;
+            function _createBtnHint(parent) {
+                let sp;
+                Laya.loader.load('prefab/BtnHint.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    sp.pos(645, 293);
+                    sp.zOrder = 0;
+                    Global.BtnHintNode = sp;
+                    Global.BtnHintNode.name = 'BtnHintNode';
+                    Click.on(Click.Type.largen, sp, null, null, null, btnHintUp, null);
+                }));
+            }
+            Global._createBtnHint = _createBtnHint;
+            function btnHintUp(event) {
+                event.currentTarget.scale(1, 1);
+                event.stopPropagation();
+                Admin._openScene(Admin.SceneName.UISmallHint, null, null, f => { });
+            }
+            Global.btnHintUp = btnHintUp;
+            function _createBtnAgain(parent) {
+                let sp;
+                Laya.loader.load('prefab/BtnAgain.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    sp.pos(645, 409);
+                    sp.zOrder = 0;
+                    Click.on(Click.Type.largen, sp, null, btnAgainUp, null, null, null);
+                    Global.BtnAgainNode = sp;
+                }));
+            }
+            Global._createBtnAgain = _createBtnAgain;
+            function btnAgainUp(event) {
+                event.stopPropagation();
+                event.currentTarget.scale(1, 1);
+                Global.refreshNum++;
+                Admin._refreshScene();
+            }
+            Global.btnAgainUp = btnAgainUp;
+            function _createP201_01(parent) {
+                let sp;
+                Laya.loader.load('prefab/P201.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('P201', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    sp.pos(80, 290);
+                    sp.zOrder = 65;
+                    Global.P201_01Node = sp;
+                }));
+            }
+            Global._createP201_01 = _createP201_01;
+            function _createStimulateDec(parent) {
+                let sp;
+                Laya.loader.load('prefab/StimulateDec.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('StimulateDec', _prefab.create, _prefab);
+                    let dec = sp.getChildByName('Dec');
+                    parent.addChild(sp);
+                    sp.pos(35, 150);
+                    sp.zOrder = 65;
+                    Global.StimulateDecNode = sp;
+                }));
+            }
+            Global._createStimulateDec = _createStimulateDec;
+            function _createHint_InPut(input) {
+                let sp;
+                Laya.loader.load('prefab/HintPre_01.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    Laya.stage.addChild(sp);
+                    sp.pos(Laya.stage.width / 2, Laya.stage.height / 2);
+                    let dec = sp.getChildByName('dec');
+                    dec.text = input;
+                    sp.zOrder = 100;
+                    dec.alpha = 0;
+                    Animation2D.scale_Alpha(sp, 0, 1, 0, 1, 1, 1, 200, null, 0, f => {
+                        Animation2D.fadeOut(dec, 0, 1, 150, 0, f => {
+                            Animation2D.fadeOut(dec, 1, 0, 200, 1500, f => {
+                                Animation2D.scale_Alpha(sp, 1, 1, 1, 1, 0, 0, 200, null, 0, f => {
+                                    sp.removeSelf();
+                                });
+                            });
+                        });
+                    });
+                }));
+            }
+            Global._createHint_InPut = _createHint_InPut;
+            function createConsumeEx(subEx) {
+                let label = Laya.Pool.getItemByClass('label', Laya.Label);
+                label.name = 'label';
+                Laya.stage.addChild(label);
+                label.text = '-2';
+                label.fontSize = 40;
+                label.bold = true;
+                label.color = '#59245c';
+                label.x = Global.ExecutionNumNode.x + 100;
+                label.y = Global.ExecutionNumNode.y - label.height / 2 + 4;
+                label.zOrder = 100;
+                lwg.Animation2D.fadeOut(label, 0, 1, 200, 150, f => {
+                    lwg.Animation2D.leftRight_Shake(Global.ExecutionNumNode, 15, 60, 0, null);
+                    lwg.Animation2D.fadeOut(label, 1, 0, 600, 400, f => {
+                    });
+                });
+            }
+            Global.createConsumeEx = createConsumeEx;
+            function _createGold(type, parent, x, y) {
+                let sp;
+                Laya.loader.load('prefab/GolPre.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    parent.addChild(sp);
+                    sp.pos(x, y);
+                }));
+            }
+            Global._createGold = _createGold;
+            function _createAddExecution(x, y, func) {
+                let sp;
+                Laya.loader.load('prefab/execution.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                    Laya.stage.addChild(sp);
+                    sp.x = Laya.stage.width / 2;
+                    sp.y = Laya.stage.height / 2;
+                    sp.zOrder = 50;
+                    if (Global.ExecutionNumNode) {
+                        Animation2D.move_Simple_01(sp, sp.x, sp.y, Global.ExecutionNumNode.x, Global.ExecutionNumNode.y, 800, null, 100, f => {
+                            Animation2D.fadeOut(sp, 1, 0, 200, 0, f => {
+                                lwg.Animation2D.upDwon_Shake(Global.ExecutionNumNode, 10, 80, 0, null);
+                                if (func) {
+                                    func();
+                                }
+                            });
+                        });
+                    }
+                }));
+            }
+            Global._createAddExecution = _createAddExecution;
+        })(Global = lwg.Global || (lwg.Global = {}));
+        let EventAdmin;
+        (function (EventAdmin) {
+            let EventType;
+            (function (EventType) {
+                EventType["taskReach"] = "taskReach";
+                EventType["defeated"] = "defeated";
+                EventType["scene3DRefresh"] = "Scene3DRefresh";
+                EventType["scene3DResurgence"] = "scene3DResurgence";
+                EventType["operationRefresh"] = "operationRefresh";
+                EventType["resurgence"] = "resurgence";
+                EventType["closeOperation"] = "closeOperation";
+            })(EventType = EventAdmin.EventType || (EventAdmin.EventType = {}));
+            EventAdmin.dispatcher = new Laya.EventDispatcher();
+            function reg(type, caller, listener) {
+                if (!caller) {
+                    console.error("事件的执行域必须存在!");
+                }
+                EventAdmin.dispatcher.on(type.toString(), caller, listener);
+            }
+            EventAdmin.reg = reg;
+            function regOnce(type, caller, listener) {
+                if (!caller) {
+                    console.error("事件的执行域必须存在!");
+                }
+                EventAdmin.dispatcher.once(type.toString(), caller, listener);
+            }
+            EventAdmin.regOnce = regOnce;
+            function notify(type, args) {
+                EventAdmin.dispatcher.event(type.toString(), args);
+            }
+            EventAdmin.notify = notify;
+            function off(type, caller, listener) {
+                this.dispatcher.off(type.toString(), caller, listener);
+            }
+            EventAdmin.off = off;
+            function offAll(type) {
+                EventAdmin.dispatcher.offAll(type.toString());
+            }
+            EventAdmin.offAll = offAll;
+            function offCaller(caller) {
+                EventAdmin.dispatcher.offAllCaller(caller);
+            }
+            EventAdmin.offCaller = offCaller;
+        })(EventAdmin = lwg.EventAdmin || (lwg.EventAdmin = {}));
+        let Dialog;
+        (function (Dialog) {
+            let HintContent;
+            (function (HintContent) {
+                HintContent[HintContent["\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01"] = 0] = "\u91D1\u5E01\u4E0D\u591F\u4E86\uFF01";
+                HintContent[HintContent["\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01"] = 1] = "\u6CA1\u6709\u53EF\u4EE5\u8D2D\u4E70\u7684\u76AE\u80A4\u4E86\uFF01";
+                HintContent[HintContent["\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01"] = 2] = "\u6682\u65F6\u6CA1\u6709\u5E7F\u544A\uFF0C\u8FC7\u4F1A\u513F\u518D\u8BD5\u8BD5\u5427\uFF01";
+                HintContent[HintContent["\u6682\u65E0\u76AE\u80A4!"] = 3] = "\u6682\u65E0\u76AE\u80A4!";
+                HintContent[HintContent["\u6682\u65E0\u5206\u4EAB!"] = 4] = "\u6682\u65E0\u5206\u4EAB!";
+                HintContent[HintContent["\u6682\u65E0\u63D0\u793A\u673A\u4F1A!"] = 5] = "\u6682\u65E0\u63D0\u793A\u673A\u4F1A!";
+                HintContent[HintContent["\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01"] = 6] = "\u89C2\u770B\u5B8C\u6574\u5E7F\u544A\u624D\u80FD\u83B7\u53D6\u5956\u52B1\u54E6\uFF01";
+                HintContent[HintContent["\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01"] = 7] = "\u901A\u5173\u4E0A\u4E00\u5173\u624D\u80FD\u89E3\u9501\u672C\u5173\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01"] = 8] = "\u5206\u4EAB\u6210\u529F\u540E\u624D\u80FD\u83B7\u53D6\u5956\u52B1\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F!"] = 9] = "\u5206\u4EAB\u6210\u529F!";
+                HintContent[HintContent["\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01"] = 10] = "\u6682\u65E0\u89C6\u9891\uFF0C\u73A9\u4E00\u5C40\u6E38\u620F\u4E4B\u540E\u5206\u4EAB\uFF01";
+                HintContent[HintContent["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
+                HintContent[HintContent["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01"] = 13] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01";
+                HintContent[HintContent["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002";
+                HintContent[HintContent["\u5206\u4EAB\u5931\u8D25\uFF01"] = 15] = "\u5206\u4EAB\u5931\u8D25\uFF01";
+                HintContent[HintContent["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 16] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
+                HintContent[HintContent["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 17] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
+                HintContent[HintContent["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 18] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
+                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 19] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
+                HintContent[HintContent["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 20] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
+                HintContent[HintContent["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 21] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
+                HintContent[HintContent["\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01"] = 22] = "\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01";
+                HintContent[HintContent["\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 23] = "\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintContent[HintContent["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 24] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintContent[HintContent["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 25] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
+                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01"] = 26] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01";
+            })(HintContent = Dialog.HintContent || (Dialog.HintContent = {}));
+            let Skin;
+            (function (Skin) {
+                Skin["blackBord"] = "Frame/UI/ui_orthogon_black.png";
+            })(Skin || (Skin = {}));
+            function createHint_Middle(describe) {
+                let Hint_M = Laya.Pool.getItemByClass('Hint_M', Laya.Sprite);
+                Hint_M.name = 'Hint_M';
+                Laya.stage.addChild(Hint_M);
+                Hint_M.width = Laya.stage.width;
+                Hint_M.height = 100;
+                Hint_M.pivotY = Hint_M.height / 2;
+                Hint_M.pivotX = Laya.stage.width / 2;
+                Hint_M.x = Laya.stage.width / 2;
+                Hint_M.y = Laya.stage.height / 2;
+                Hint_M.zOrder = 100;
+                let Pic = new Laya.Image();
+                Hint_M.addChild(Pic);
+                Pic.skin = Skin.blackBord;
+                Pic.width = Laya.stage.width;
+                Pic.pivotX = Laya.stage.width / 2;
+                Pic.height = 100;
+                Pic.pivotY = Pic.height / 2;
+                Pic.y = Hint_M.height / 2;
+                Pic.x = Laya.stage.width / 2;
+                Pic.alpha = 0.6;
+                let Dec = new Laya.Label();
+                Hint_M.addChild(Dec);
+                Dec.width = Laya.stage.width;
+                Dec.text = HintContent[describe];
+                Dec.pivotX = Laya.stage.width / 2;
+                Dec.x = Laya.stage.width / 2;
+                Dec.height = 100;
+                Dec.pivotY = 50;
+                Dec.y = Hint_M.height / 2;
+                Dec.bold = true;
+                Dec.fontSize = 35;
+                Dec.color = '#ffffff';
+                Dec.align = 'center';
+                Dec.valign = 'middle';
+                Dec.alpha = 0;
+                Animation2D.scale_Alpha(Hint_M, 0, 1, 0, 1, 1, 1, 200, null, 0, f => {
+                    Animation2D.fadeOut(Dec, 0, 1, 150, 0, f => {
+                        Animation2D.fadeOut(Dec, 1, 0, 200, 800, f => {
+                            Animation2D.scale_Alpha(Hint_M, 1, 1, 1, 1, 0, 0, 200, null, 0, f => {
+                                Hint_M.removeSelf();
+                            });
+                        });
+                    });
+                });
+            }
+            Dialog.createHint_Middle = createHint_Middle;
+            Dialog._dialogContent = {
+                get Array() {
+                    return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] !== null ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
+                },
+            };
+            function getDialogContent(useWhere, name) {
+                let dia;
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element['useWhere'] == useWhere && element['name'] == name) {
+                        dia = element;
+                        break;
+                    }
+                }
+                let arr = [];
+                for (const key in dia) {
+                    if (dia.hasOwnProperty(key)) {
+                        const value = dia[key];
+                        if (key.substring(0, 7) == 'content' || value !== -1) {
+                            arr.push(value);
+                        }
+                    }
+                }
+                return arr;
+            }
+            Dialog.getDialogContent = getDialogContent;
+            function getDialogContent_Random(useWhere) {
+                let contentArr = [];
+                let whereArr = getUseWhere(useWhere);
+                let index = Math.floor(Math.random() * whereArr.length);
+                for (const key in whereArr[index]) {
+                    if (whereArr[index].hasOwnProperty(key)) {
+                        const value = whereArr[index][key];
+                        if (key.substring(0, 7) == 'content' && value !== "-1") {
+                            contentArr.push(value);
+                        }
+                    }
+                }
+                return contentArr;
+            }
+            Dialog.getDialogContent_Random = getDialogContent_Random;
+            function getUseWhere(useWhere) {
+                let arr = [];
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element['useWhere'] == useWhere) {
+                        arr.push(element);
+                    }
+                }
+                return arr;
+            }
+            Dialog.getUseWhere = getUseWhere;
+            let UseWhere;
+            (function (UseWhere) {
+                UseWhere["scene1"] = "scene1";
+                UseWhere["scene2"] = "scene2";
+                UseWhere["scene3"] = "scene3";
+            })(UseWhere = Dialog.UseWhere || (Dialog.UseWhere = {}));
+            let DialogProperty;
+            (function (DialogProperty) {
+                DialogProperty["name"] = "name";
+                DialogProperty["useWhere"] = "useWhere";
+                DialogProperty["content"] = "content";
+                DialogProperty["max"] = "max";
+            })(DialogProperty = Dialog.DialogProperty || (Dialog.DialogProperty = {}));
+            let PlayMode;
+            (function (PlayMode) {
+                PlayMode["voluntarily"] = "voluntarily";
+                PlayMode["manual"] = "manual";
+                PlayMode["clickContent"] = "clickContent";
+            })(PlayMode = Dialog.PlayMode || (Dialog.PlayMode = {}));
+            function createVoluntarilyDialogue(x, y, useWhere, startDelayed, delayed, parent, content) {
+                if (startDelayed == undefined) {
+                    startDelayed = 0;
+                }
+                Laya.timer.once(startDelayed, this, () => {
+                    let Pre_Dialogue;
+                    Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                        let _prefab = new Laya.Prefab();
+                        _prefab.json = prefab;
+                        Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
+                        if (parent) {
+                            parent.addChild(Pre_Dialogue);
+                        }
+                        else {
+                            Laya.stage.addChild(Pre_Dialogue);
+                        }
+                        Pre_Dialogue.x = x;
+                        Pre_Dialogue.y = y;
+                        let ContentLabel = Pre_Dialogue.getChildByName('Content');
+                        let contentArr;
+                        if (content !== undefined) {
+                            ContentLabel.text = content[0];
+                        }
+                        else {
+                            contentArr = getDialogContent_Random(useWhere);
+                            ContentLabel.text = contentArr[0];
+                        }
+                        Pre_Dialogue.zOrder = 100;
+                        if (delayed == undefined) {
+                            delayed = 1000;
+                        }
+                        Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 1000, () => {
+                            for (let index = 0; index < contentArr.length; index++) {
+                                Laya.timer.once(index * delayed, this, () => {
+                                    ContentLabel.text = contentArr[index];
+                                    if (index == contentArr.length - 1) {
+                                        Laya.timer.once(delayed, this, () => {
+                                            Animation2D.scale_Alpha(Pre_Dialogue, 1, 1, 1, 0, 0, 0, 150, null, 1000, () => {
+                                                Pre_Dialogue.removeSelf();
+                                            });
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                        Dialog.DialogueNode = Pre_Dialogue;
+                    }));
+                });
+            }
+            Dialog.createVoluntarilyDialogue = createVoluntarilyDialogue;
+        })(Dialog = lwg.Dialog || (lwg.Dialog = {}));
+        let Gold;
+        (function (Gold_1) {
+            Gold_1._goldNum = 0;
+            function createGoldNode(parent) {
+                if (Gold_1.GoldNode) {
+                    return;
+                }
+                let sp;
+                Laya.loader.load('Prefab/GoldNode.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    sp = Laya.Pool.getItemByCreateFun('gold', _prefab.create, _prefab);
+                    let num = sp.getChildByName('Num');
+                    let goldNum = Laya.LocalStorage.getItem('_goldNum');
+                    if (goldNum) {
+                        Gold_1._goldNum = Number(goldNum);
+                    }
+                    else {
+                        Laya.LocalStorage.setItem('_goldNum', '0');
+                    }
+                    num.text = Gold_1._goldNum.toString();
+                    parent.addChild(sp);
+                    let Pic = sp.getChildByName('Pic');
+                    sp.pos(234, 100);
+                    sp.zOrder = 50;
+                    Gold_1.GoldNode = sp;
+                }));
+            }
+            Gold_1.createGoldNode = createGoldNode;
+            function goldAppear(delayed, x, y) {
+                if (delayed) {
+                    Animation2D.scale_Alpha(Gold_1.GoldNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
+                        Gold_1.GoldNode.visible = true;
+                    });
+                }
+                else {
+                    Gold_1.GoldNode.visible = true;
+                }
+                if (x) {
+                    Gold_1.GoldNode.x = x;
+                }
+                if (y) {
+                    Gold_1.GoldNode.y = y;
+                }
+            }
+            Gold_1.goldAppear = goldAppear;
+            function goldVinish(delayed) {
+                if (delayed) {
+                    Animation2D.scale_Alpha(Gold_1.GoldNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
+                        Gold_1.GoldNode.visible = false;
+                    });
+                }
+                else {
+                    Gold_1.GoldNode.visible = false;
+                }
+            }
+            Gold_1.goldVinish = goldVinish;
+            function addGold(number) {
+                Gold_1._goldNum += number;
+                let Num = Gold_1.GoldNode.getChildByName('Num');
+                Num.text = Gold_1._goldNum.toString();
+                Laya.LocalStorage.setItem('_goldNum', Gold_1._goldNum.toString());
+            }
+            Gold_1.addGold = addGold;
+            function addGoldDisPlay(number) {
+                let Num = Gold_1.GoldNode.getChildByName('Num');
+                Num.value = (Number(Num.value) + number).toString();
+            }
+            Gold_1.addGoldDisPlay = addGoldDisPlay;
+            function addGoldNoDisPlay(number) {
+                Gold_1._goldNum += number;
+                Laya.LocalStorage.setItem('_goldNum', Gold_1._goldNum.toString());
+            }
+            Gold_1.addGoldNoDisPlay = addGoldNoDisPlay;
+            let SkinUrl;
+            (function (SkinUrl) {
+                SkinUrl[SkinUrl["Frame/Effects/icon_gold.png"] = 0] = "Frame/Effects/icon_gold.png";
+            })(SkinUrl || (SkinUrl = {}));
+            function createOneGold(width, height, url) {
+                let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image);
+                Gold.name = 'addGold';
+                Gold.alpha = 1;
+                Gold.zOrder = 60;
+                Gold.width = width;
+                Gold.height = height;
+                Gold.pivotX = width / 2;
+                Gold.pivotY = height / 2;
+                if (!url) {
+                    Gold.skin = SkinUrl[0];
+                }
+                else {
+                    Gold.skin = url;
+                }
+                return Gold;
+            }
+            Gold_1.createOneGold = createOneGold;
+            function getGoldAni_Single(parent, number, width, height, url, firstPoint, targetPoint, func1, func2) {
+                for (let index = 0; index < number; index++) {
+                    Laya.timer.once(index * 30, this, () => {
+                        let Gold = createOneGold(width, height, url);
+                        parent.addChild(Gold);
+                        Animation2D.move_Scale(Gold, 1, firstPoint.x, firstPoint.y, targetPoint.x, targetPoint.y, 1, 350, 0, null, () => {
+                            if (index === number - 1) {
+                                Laya.timer.once(200, this, () => {
+                                    if (func2) {
+                                        func2();
+                                    }
+                                });
+                            }
+                            else {
+                                if (func1) {
+                                    func1();
+                                }
+                            }
+                            Gold.removeSelf();
+                        });
+                    });
+                }
+            }
+            Gold_1.getGoldAni_Single = getGoldAni_Single;
+            function getGoldAni_Heap(parent, number, width, height, url, firstPoint, targetPoint, func1, func2) {
+                for (let index = 0; index < number; index++) {
+                    let Gold = createOneGold(width, height, url);
+                    parent.addChild(Gold);
+                    if (!url) {
+                        Gold.skin = SkinUrl[0];
+                    }
+                    else {
+                        Gold.skin = url;
+                    }
+                    let x = Math.floor(Math.random() * 2) == 1 ? firstPoint.x + Math.random() * 100 : firstPoint.x - Math.random() * 100;
+                    let y = Math.floor(Math.random() * 2) == 1 ? firstPoint.y + Math.random() * 100 : firstPoint.y - Math.random() * 100;
+                    Animation2D.move_Scale(Gold, 0.5, firstPoint.x, firstPoint.y, x, y, 1, 300, Math.random() * 100 + 100, Laya.Ease.expoIn, () => {
+                        Animation2D.move_Scale(Gold, 1, Gold.x, Gold.y, targetPoint.x, targetPoint.y, 1, 400, Math.random() * 200 + 100, Laya.Ease.cubicOut, () => {
+                            if (index === number - 1) {
+                                Laya.timer.once(200, this, () => {
+                                    if (func2) {
+                                        func2();
+                                    }
+                                });
+                            }
+                            else {
+                                if (func1) {
+                                    func1();
+                                }
+                            }
+                            Gold.removeSelf();
+                        });
+                    });
+                }
+            }
+            Gold_1.getGoldAni_Heap = getGoldAni_Heap;
+            class GoldAniBase extends Laya.Script {
+                onAwake() {
+                    this.initProperty();
+                }
+                onEnable() {
+                    this.self = this.owner;
+                    this.selfScene = this.self.scene;
+                    let calssName = this['__proto__']['constructor'].name;
+                    this.self[calssName] = this;
+                    this.timer = 0;
+                    this.lwgInit();
+                    this.propertyAssign();
+                }
+                lwgInit() {
+                }
+                initProperty() {
+                }
+                propertyAssign() {
+                    if (this.startAlpha) {
+                        this.self.alpha = this.startAlpha;
+                    }
+                    if (this.startScale) {
+                        this.self.scale(this.startScale, this.startScale);
+                    }
+                    if (this.startRotat) {
+                        this.self.rotation = this.startRotat;
+                    }
+                }
+                commonSpeedXYByAngle(angle, speed) {
+                    this.self.x += Tools.speedXYByAngle(angle, speed + this.accelerated).x;
+                    this.self.y += Tools.speedXYByAngle(angle, speed + this.accelerated).y;
+                }
+                moveRules() {
+                }
+                onUpdate() {
+                    this.moveRules();
+                }
+                onDisable() {
+                    Laya.Pool.recover(this.self.name, this.self);
+                    this.destroy();
+                    Laya.Tween.clearAll(this);
+                    Laya.timer.clearAll(this);
+                }
+            }
+            Gold_1.GoldAniBase = GoldAniBase;
+            class AddGold extends GoldAniBase {
+                lwgInit() {
+                    this.self.width = 115;
+                    this.self.height = 111;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
+                initProperty() {
+                }
+                moveRules() {
+                    if (this.moveSwitch) {
+                        this.timer++;
+                        if (this.timer > 0) {
+                            lwg.Animation2D.move_Scale(this.self, 1, this.self.x, this.self.y, this.targetX, this.targetY, 0.35, 250, 0, f => {
+                                this.self.removeSelf();
+                                if (this.func !== null) {
+                                    this.func();
+                                }
+                            });
+                            this.moveSwitch = false;
+                        }
+                    }
+                }
+            }
+            Gold_1.AddGold = AddGold;
+        })(Gold = lwg.Gold || (lwg.Gold = {}));
+        let Admin;
+        (function (Admin) {
+            Admin._sceneControl = {};
+            Admin._gameStart = false;
+            let JsonProperty;
+            (function (JsonProperty) {
+                JsonProperty["RECORDS"] = "RECORDS";
+            })(JsonProperty = Admin.JsonProperty || (Admin.JsonProperty = {}));
+            let SceneName;
+            (function (SceneName) {
+                SceneName["UILoding"] = "UILoding";
+                SceneName["UIStart"] = "UIStart";
+                SceneName["UIMain"] = "UIMain";
+                SceneName["GameMain3D"] = "GameMain3D";
+                SceneName["UIVictory"] = "UIVictory";
+                SceneName["UIDefeated"] = "UIDefeated";
+                SceneName["UIExecutionHint"] = "UIExecutionHint";
+                SceneName["UIPassHint"] = "UIPassHint";
+                SceneName["UISet"] = "UISet";
+                SceneName["UIPifu"] = "UIPifu";
+                SceneName["UIPuase"] = "UIPuase";
+                SceneName["UIShare"] = "UIShare";
+                SceneName["UISmallHint"] = "UISmallHint";
+                SceneName["UISkinXD"] = "UISkinXD";
+                SceneName["UISkinTry"] = "UISkinTry";
+                SceneName["UIRedeem"] = "UIRedeem";
+                SceneName["UIAnchorXD"] = "UIAnchorXD";
+                SceneName["UITurntable"] = "UITurntable";
+                SceneName["UICaiDanQiang"] = "UICaiDanQiang";
+                SceneName["UICaidanPifu"] = "UICaidanPifu";
+                SceneName["UIOperation"] = "UIOperation";
+                SceneName["UIShop"] = "UIShop";
+                SceneName["UITask"] = "UITask";
+                SceneName["UIVictoryBox"] = "UIVictoryBox";
+                SceneName["UICheckIn"] = "UICheckIn";
+                SceneName["UIResurgence"] = "UIResurgence";
+                SceneName["UISkin"] = "UISkin";
+                SceneName["UIEasterEgg"] = "UIEasterEgg";
+            })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
+            let GameState;
+            (function (GameState) {
+                GameState["GameStart"] = "GameStart";
+                GameState["Play"] = "Play";
+                GameState["Pause"] = "pause";
+                GameState["Victory"] = "victory";
+                GameState["Defeated"] = "defeated";
+            })(GameState = Admin.GameState || (Admin.GameState = {}));
+            function _openScene(openName, zOder, cloesScene, func) {
+                Laya.Scene.load('Scene/' + openName + '.json', Laya.Handler.create(this, function (scene) {
+                    scene.width = Laya.stage.width;
+                    scene.height = Laya.stage.height;
+                    if (zOder) {
+                        Laya.stage.addChildAt(scene, zOder);
+                    }
+                    else {
+                        Laya.stage.addChild(scene);
+                    }
+                    scene.name = openName;
+                    Admin._sceneControl[openName] = scene;
+                    let background = scene.getChildByName('Background');
+                    if (background) {
+                        background.width = Laya.stage.width;
+                        background.height = Laya.stage.height;
+                    }
+                    if (cloesScene) {
+                        cloesScene.close();
+                    }
+                    if (func) {
+                        func();
+                    }
+                }));
+            }
+            Admin._openScene = _openScene;
+            function _nextCustomScene(subEx) {
+            }
+            Admin._nextCustomScene = _nextCustomScene;
+            function _refreshScene() {
+            }
+            Admin._refreshScene = _refreshScene;
+            function _closeCustomScene() {
+            }
+            Admin._closeCustomScene = _closeCustomScene;
+            class Scene extends Laya.Script {
+                constructor() {
+                    super();
+                    this.aniTime = 100;
+                    this.aniDelayde = 100;
+                }
+                onAwake() {
+                    this.self = this.owner;
+                    this.calssName = this['__proto__']['constructor'].name;
+                    this.self[this.calssName] = this;
+                    this.gameState(this.calssName);
+                    this.lwgNodeDec();
+                    this.lwgOnAwake();
+                    this.lwgVariateInit();
+                    this.lwgAdaptive();
+                    Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
+                }
+                lwgOnAwake() { }
+                ;
+                lwgModuleOnAwake() {
+                }
+                onEnable() {
+                    this.lwgEventReg();
+                    this.lwgOnEnable();
+                    this.btnAndlwgOpenAni();
+                }
+                lwgNodeDec() {
+                }
+                lwgEventReg() {
+                }
+                lwgVariateInit() {
+                }
+                gameState(calssName) {
+                    switch (calssName) {
+                        case SceneName.UIStart:
+                            Admin._gameState = GameState.GameStart;
+                            break;
+                        case SceneName.UIMain:
+                            Admin._gameState = GameState.Play;
+                            break;
+                        case SceneName.UIDefeated:
+                            Admin._gameState = GameState.Defeated;
+                            break;
+                        case SceneName.UIVictory:
+                            Admin._gameState = GameState.Victory;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                lwgOnEnable() {
+                }
+                btnAndlwgOpenAni() {
+                    let time = this.lwgOpenAni();
+                    if (time) {
+                        Laya.timer.once(time, this, f => {
+                            this.lwgBtnClick();
+                        });
+                    }
+                    else {
+                        this.lwgBtnClick();
+                    }
+                }
+                lwgBtnClick() {
+                }
+                lwgOpenAni() {
+                    return this.aniTime;
+                }
+                lwgAdaptive() {
+                }
+                lwgVanishAni() {
+                    return 0;
+                }
+                onUpdate() {
+                    this.lwgOnUpdate();
+                }
+                lwgOnUpdate() {
+                }
+                onDisable() {
+                    this.lwgOnDisable();
+                    Laya.timer.clearAll(this);
+                    Laya.Tween.clearAll(this);
+                    EventAdmin.offCaller(this);
+                    Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.close);
+                }
+                lwgOnDisable() { }
+            }
+            Admin.Scene = Scene;
+            class Scene3D extends Laya.Script3D {
+                constructor() {
+                    super();
+                    this.mainCameraFpos = new Laya.Vector3();
+                }
+                onAwake() {
+                    this.self = this.owner;
+                    this.calssName = this['__proto__']['constructor'].name;
+                    this.gameState(this.calssName);
+                    this.MainCamera = this.self.getChildByName("Main Camera");
+                    if (this.MainCamera) {
+                        this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
+                        this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
+                        this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
+                    }
+                    this.lwgOnAwake();
+                    this.lwgNodeDec();
+                    this.lwgAdaptive();
+                }
+                lwgOnAwake() {
+                }
+                onEnable() {
+                    this.self[this.calssName] = this;
+                    this.lwgEventReg();
+                    this.lwgOnEnable();
+                    this.lwgBtnClick();
+                    this.lwgAdaptive();
+                    this.lwgOpenAni();
+                }
+                lwgNodeDec() {
+                }
+                lwgEventReg() {
+                }
+                gameState(calssName) {
+                    switch (calssName) {
+                        case SceneName.UIStart:
+                            Admin._gameState = GameState.GameStart;
+                            break;
+                        case SceneName.UIMain:
+                            Admin._gameState = GameState.Play;
+                            break;
+                        case SceneName.UIDefeated:
+                            Admin._gameState = GameState.Defeated;
+                            break;
+                        case SceneName.UIVictory:
+                            Admin._gameState = GameState.Victory;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                lwgOnEnable() {
+                }
+                lwgBtnClick() {
+                }
+                lwgAdaptive() {
+                }
+                lwgOpenAni() {
+                }
+                lwgVanishAni() {
+                }
+                onUpdate() {
+                    this.lwgOnUpDate();
+                }
+                lwgOnUpDate() {
+                }
+                onDisable() {
+                    this.lwgOnDisable();
+                }
+                lwgOnDisable() {
+                }
+            }
+            Admin.Scene3D = Scene3D;
+            class Person extends Laya.Script {
+                constructor() {
+                    super();
+                }
+                onAwake() {
+                }
+                lwgOnAwake() {
+                }
+                onEnable() {
+                    this.self = this.owner;
+                    this.selfScene = this.self.scene;
+                    this.rig = this.self.getComponent(Laya.RigidBody);
+                    let calssName = this['__proto__']['constructor'].name;
+                    this.self[calssName] = this;
+                    this.lwgOnEnable();
+                }
+                lwgOnEnable() {
+                    console.log('父类的初始化！');
+                }
+            }
+            Admin.Person = Person;
+            class Object extends Laya.Script {
+                constructor() {
+                    super();
+                }
+                onAwake() {
+                    this.self = this.owner;
+                    this.selfScene = this.self.scene;
+                    let calssName = this['__proto__']['constructor'].name;
+                    this.self[calssName] = this;
+                    this.lwgNodeDec();
+                }
+                lwgNodeDec() {
+                }
+                onEnable() {
+                    this.lwgOnEnable();
+                    this.lwgBtnClick();
+                    this.lwgEventReg();
+                }
+                lwgOnEnable() {
+                }
+                lwgBtnClick() {
+                }
+                lwgEventReg() {
+                }
+                onUpdate() {
+                    this.lwgOnUpdate();
+                }
+                lwgOnUpdate() {
+                }
+                onDisable() {
+                    this.lwgOnDisable();
+                    Laya.timer.clearAll(this);
+                    EventAdmin.offCaller(this);
+                }
+                lwgOnDisable() {
+                }
+            }
+            Admin.Object = Object;
+            class Object3D extends Laya.Script3D {
+                constructor() {
+                    super();
+                }
+                onAwake() {
+                    this.self = this.owner;
+                    this.selfTransform = this.self.transform;
+                    this.selfScene = this.self.scene;
+                    let calssName = this['__proto__']['constructor'].name;
+                    this.self[calssName] = this;
+                    this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
+                    this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider);
+                    this.lwgNodeDec();
+                }
+                lwgNodeDec() { }
+                onEnable() {
+                    this.lwgEventReg();
+                    this.lwgOnEnable();
+                }
+                lwgOnEnable() { }
+                lwgBtnClick() {
+                }
+                lwgEventReg() {
+                }
+                onUpdate() {
+                    this.lwgOnUpdate();
+                }
+                lwgOnUpdate() {
+                }
+                onDisable() {
+                    this.lwgOnDisable();
+                    Laya.timer.clearAll(this);
+                    EventAdmin.offCaller(this);
+                }
+                lwgOnDisable() {
+                }
+            }
+            Admin.Object3D = Object3D;
+        })(Admin = lwg.Admin || (lwg.Admin = {}));
+        let Effects;
+        (function (Effects) {
+            let SkinUrl;
+            (function (SkinUrl) {
+                SkinUrl[SkinUrl["Frame/Effects/cir_white.png"] = 0] = "Frame/Effects/cir_white.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_black.png"] = 1] = "Frame/Effects/cir_black.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_blue.png"] = 2] = "Frame/Effects/cir_blue.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_bluish.png"] = 3] = "Frame/Effects/cir_bluish.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_cyan.png"] = 4] = "Frame/Effects/cir_cyan.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_grass.png"] = 5] = "Frame/Effects/cir_grass.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_green.png"] = 6] = "Frame/Effects/cir_green.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_orange.png"] = 7] = "Frame/Effects/cir_orange.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_pink.png"] = 8] = "Frame/Effects/cir_pink.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_purple.png"] = 9] = "Frame/Effects/cir_purple.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_red.png"] = 10] = "Frame/Effects/cir_red.png";
+                SkinUrl[SkinUrl["Frame/Effects/cir_yellow.png"] = 11] = "Frame/Effects/cir_yellow.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_black.png"] = 12] = "Frame/Effects/star_black.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_blue.png"] = 13] = "Frame/Effects/star_blue.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_bluish.png"] = 14] = "Frame/Effects/star_bluish.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_cyan.png"] = 15] = "Frame/Effects/star_cyan.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_grass.png"] = 16] = "Frame/Effects/star_grass.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_green.png"] = 17] = "Frame/Effects/star_green.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_orange.png"] = 18] = "Frame/Effects/star_orange.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_pink.png"] = 19] = "Frame/Effects/star_pink.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_purple.png"] = 20] = "Frame/Effects/star_purple.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_red.png"] = 21] = "Frame/Effects/star_red.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_white.png"] = 22] = "Frame/Effects/star_white.png";
+                SkinUrl[SkinUrl["Frame/Effects/star_yellow.png"] = 23] = "Frame/Effects/star_yellow.png";
+            })(SkinUrl = Effects.SkinUrl || (Effects.SkinUrl = {}));
+            let SkinStyle;
+            (function (SkinStyle) {
+                SkinStyle["star"] = "star";
+                SkinStyle["dot"] = "dot";
+            })(SkinStyle = Effects.SkinStyle || (Effects.SkinStyle = {}));
+            class EffectsBase extends Laya.Script {
+                onAwake() {
+                    this.initProperty();
+                }
+                onEnable() {
+                    this.self = this.owner;
+                    this.selfScene = this.self.scene;
+                    let calssName = this['__proto__']['constructor'].name;
+                    this.self[calssName] = this;
+                    this.timer = 0;
+                    this.lwgInit();
+                    this.propertyAssign();
+                }
+                lwgInit() {
+                }
+                initProperty() {
+                }
+                propertyAssign() {
+                    if (this.startAlpha) {
+                        this.self.alpha = this.startAlpha;
+                    }
+                    if (this.startScale) {
+                        this.self.scale(this.startScale, this.startScale);
+                    }
+                    if (this.startRotat) {
+                        this.self.rotation = this.startRotat;
+                    }
+                }
+                commonSpeedXYByAngle(angle, speed) {
+                    this.self.x += Tools.speedXYByAngle(angle, speed + this.accelerated).x;
+                    this.self.y += Tools.speedXYByAngle(angle, speed + this.accelerated).y;
+                }
+                moveRules() {
+                }
+                onUpdate() {
+                    this.moveRules();
+                }
+                onDisable() {
+                    Laya.Pool.recover(this.self.name, this.self);
+                    this.destroy();
+                    Laya.Tween.clearAll(this);
+                    Laya.timer.clearAll(this);
+                }
+            }
+            Effects.EffectsBase = EffectsBase;
+            function createCommonExplosion(parent, quantity, x, y, style, speed, continueTime) {
+                for (let index = 0; index < quantity; index++) {
+                    let ele = Laya.Pool.getItemByClass('ele', Laya.Image);
+                    ele.name = 'ele';
+                    let num;
+                    if (style === 'star') {
+                        num = 12 + Math.floor(Math.random() * 12);
+                    }
+                    else if (style === 'dot') {
+                        num = Math.floor(Math.random() * 12);
+                    }
+                    ele.skin = SkinUrl[num];
+                    ele.alpha = 1;
+                    parent.addChild(ele);
+                    ele.pos(x, y);
+                    let scirpt = ele.addComponent(commonExplosion);
+                    scirpt.startSpeed = Math.random() * speed;
+                    scirpt.continueTime = 2 * Math.random() + continueTime;
+                }
+            }
+            Effects.createCommonExplosion = createCommonExplosion;
+            class commonExplosion extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 25;
+                    this.self.height = 25;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
+                initProperty() {
+                    this.startAngle = 360 * Math.random();
+                    this.startSpeed = 5 * Math.random() + 8;
+                    this.startScale = 0.4 + Math.random() * 0.6;
+                    this.accelerated = 2;
+                    this.continueTime = 8 + Math.random() * 10;
+                    this.rotateDir = Math.floor(Math.random() * 2) === 1 ? 'left' : 'right';
+                    this.rotateRan = Math.random() * 10;
+                }
+                moveRules() {
+                    this.timer++;
+                    if (this.rotateDir === 'left') {
+                        this.self.rotation += this.rotateRan;
+                    }
+                    else {
+                        this.self.rotation -= this.rotateRan;
+                    }
+                    if (this.timer >= this.continueTime / 2) {
+                        this.self.alpha -= 0.04;
+                        if (this.self.alpha <= 0.65) {
+                            this.self.removeSelf();
+                        }
+                    }
+                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed + this.accelerated);
+                    this.accelerated += 0.2;
+                }
+            }
+            Effects.commonExplosion = commonExplosion;
+            function createExplosion_Rotate(parent, quantity, x, y, style, speed, rotate) {
+                for (let index = 0; index < quantity; index++) {
+                    let ele = Laya.Pool.getItemByClass('ele', Laya.Image);
+                    ele.name = 'ele';
+                    let num;
+                    if (style === SkinStyle.star) {
+                        num = 12 + Math.floor(Math.random() * 12);
+                    }
+                    else if (style === SkinStyle.dot) {
+                        num = Math.floor(Math.random() * 12);
+                    }
+                    ele.skin = SkinUrl[num];
+                    ele.alpha = 1;
+                    parent.addChild(ele);
+                    ele.pos(x, y);
+                    let scirpt = ele.addComponent(Explosion_Rotate);
+                    scirpt.startSpeed = 2 + Math.random() * speed;
+                    scirpt.rotateRan = Math.random() * rotate;
+                }
+            }
+            Effects.createExplosion_Rotate = createExplosion_Rotate;
+            class Explosion_Rotate extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 41;
+                    this.self.height = 41;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
+                initProperty() {
+                    this.startAngle = 360 * Math.random();
+                    this.startSpeed = 5 * Math.random() + 8;
+                    this.startScale = 0.4 + Math.random() * 0.6;
+                    this.accelerated = 0;
+                    this.continueTime = 5 + Math.random() * 20;
+                    this.rotateDir = Math.floor(Math.random() * 2) === 1 ? 'left' : 'right';
+                    this.rotateRan = Math.random() * 15;
+                }
+                moveRules() {
+                    if (this.rotateDir === 'left') {
+                        this.self.rotation += this.rotateRan;
+                    }
+                    else {
+                        this.self.rotation -= this.rotateRan;
+                    }
+                    if (this.startSpeed - this.accelerated <= 0.1) {
+                        this.self.alpha -= 0.03;
+                        if (this.self.alpha <= 0) {
+                            this.self.removeSelf();
+                        }
+                    }
+                    else {
+                        this.accelerated += 0.2;
+                    }
+                    this.commonSpeedXYByAngle(this.startAngle, this.startSpeed - this.accelerated);
+                }
+            }
+            Effects.Explosion_Rotate = Explosion_Rotate;
+            function createFireworks(parent, quantity, x, y) {
+                for (let index = 0; index < quantity; index++) {
+                    let ele = Laya.Pool.getItemByClass('fireworks', Laya.Image);
+                    ele.name = 'fireworks';
+                    let num = 12 + Math.floor(Math.random() * 11);
+                    ele.alpha = 1;
+                    ele.skin = SkinUrl[num];
+                    parent.addChild(ele);
+                    ele.pos(x, y);
+                    let scirpt = ele.getComponent(Fireworks);
+                    if (!scirpt) {
+                        ele.addComponent(Fireworks);
+                    }
+                }
+            }
+            Effects.createFireworks = createFireworks;
+            class Fireworks extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 41;
+                    this.self.height = 41;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
+                initProperty() {
+                    this.startAngle = 360 * Math.random();
+                    this.startSpeed = 5 * Math.random() + 5;
+                    this.startScale = 0.4 + Math.random() * 0.6;
+                    this.accelerated = 0.1;
+                    this.continueTime = 200 + Math.random() * 10;
+                }
+                moveRules() {
+                    this.timer++;
+                    if (this.timer >= this.continueTime * 3 / 5) {
+                        this.self.alpha -= 0.1;
+                    }
+                    if (this.timer >= this.continueTime) {
+                        this.self.removeSelf();
+                    }
+                    else {
+                        this.commonSpeedXYByAngle(this.startAngle, this.startSpeed);
+                    }
+                    if (this.self.scaleX < 0) {
+                        this.self.scaleX += 0.01;
+                    }
+                    else if (this.self.scaleX >= this.startScale) {
+                        this.self.scaleX -= 0.01;
+                    }
+                }
+            }
+            Effects.Fireworks = Fireworks;
+            function createLeftOrRightJet(parent, direction, quantity, x, y) {
+                for (let index = 0; index < quantity; index++) {
+                    let ele = Laya.Pool.getItemByClass('Jet', Laya.Image);
+                    ele.name = 'Jet';
+                    let num = 12 + Math.floor(Math.random() * 11);
+                    ele.skin = SkinUrl[num];
+                    ele.alpha = 1;
+                    parent.addChild(ele);
+                    ele.pos(x, y);
+                    let scirpt = ele.getComponent(leftOrRightJet);
+                    if (!scirpt) {
+                        ele.addComponent(leftOrRightJet);
+                        let scirpt1 = ele.getComponent(leftOrRightJet);
+                        scirpt1.direction = direction;
+                        scirpt1.initProperty();
+                    }
+                    else {
+                        scirpt.direction = direction;
+                        scirpt.initProperty();
+                    }
+                }
+            }
+            Effects.createLeftOrRightJet = createLeftOrRightJet;
+            class leftOrRightJet extends lwg.Effects.EffectsBase {
+                lwgInit() {
+                    this.self.width = 41;
+                    this.self.height = 41;
+                    this.self.pivotX = this.self.width / 2;
+                    this.self.pivotY = this.self.height / 2;
+                }
+                initProperty() {
+                    if (this.direction === 'left') {
+                        this.startAngle = 100 * Math.random() - 90 + 45 - 10 - 20;
+                    }
+                    else if (this.direction === 'right') {
+                        this.startAngle = 100 * Math.random() + 90 + 45 + 20;
+                    }
+                    this.startSpeed = 10 * Math.random() + 3;
+                    this.startScale = 0.4 + Math.random() * 0.6;
+                    this.accelerated = 0.1;
+                    this.continueTime = 300 + Math.random() * 50;
+                    this.randomRotate = 1 + Math.random() * 20;
+                }
+                moveRules() {
+                    this.timer++;
+                    if (this.timer >= this.continueTime * 3 / 5) {
+                        this.self.alpha -= 0.1;
+                    }
+                    if (this.timer >= this.continueTime) {
+                        this.self.removeSelf();
+                    }
+                    else {
+                        this.commonSpeedXYByAngle(this.startAngle, this.startSpeed);
+                    }
+                    this.self.rotation += this.randomRotate;
+                    if (this.self.scaleX < 0) {
+                        this.self.scaleX += 0.01;
+                    }
+                    else if (this.self.scaleX >= this.startScale) {
+                        this.self.scaleX -= 0.01;
+                    }
+                }
+            }
+            Effects.leftOrRightJet = leftOrRightJet;
+        })(Effects = lwg.Effects || (lwg.Effects = {}));
+        let Sk;
+        (function (Sk) {
+            function skLoding() {
+            }
+            Sk.skLoding = skLoding;
+            function onCompelet(tem) {
+                console.log(tem['_skBufferUrl'], '加载成功');
+            }
+            Sk.onCompelet = onCompelet;
+            function onError(url) {
+                console.log(url, '加载失败！');
+            }
+            Sk.onError = onError;
+        })(Sk = lwg.Sk || (lwg.Sk = {}));
+        let Click;
+        (function (Click) {
+            let Type;
+            (function (Type) {
+                Type["noEffect"] = "noEffect";
+                Type["largen"] = "largen";
+                Type["balloon"] = "balloon";
+                Type["beetle"] = "beetle";
+            })(Type = Click.Type || (Click.Type = {}));
+            function on(effect, target, caller, down, move, up, out) {
+                let btnEffect;
+                switch (effect) {
+                    case Type.noEffect:
+                        btnEffect = new Btn_NoEffect();
+                        break;
+                    case Type.largen:
+                        btnEffect = new Btn_LargenEffect();
+                        break;
+                    case Type.balloon:
+                        btnEffect = new Btn_Balloon();
+                        break;
+                    case Type.balloon:
+                        btnEffect = new Btn_Beetle();
+                        break;
+                    default:
+                        btnEffect = new Btn_LargenEffect();
+                        break;
+                }
+                target.on(Laya.Event.MOUSE_DOWN, caller, down);
+                target.on(Laya.Event.MOUSE_MOVE, caller, move);
+                target.on(Laya.Event.MOUSE_UP, caller, up);
+                target.on(Laya.Event.MOUSE_OUT, caller, out);
+                target.on(Laya.Event.MOUSE_DOWN, caller, btnEffect.down);
+                target.on(Laya.Event.MOUSE_MOVE, caller, btnEffect.move);
+                target.on(Laya.Event.MOUSE_UP, caller, btnEffect.up);
+                target.on(Laya.Event.MOUSE_OUT, caller, btnEffect.out);
+            }
+            Click.on = on;
+            function off(effect, target, caller, down, move, up, out) {
+                let btnEffect;
+                switch (effect) {
+                    case Type.noEffect:
+                        btnEffect = new Btn_NoEffect();
+                        break;
+                    case Type.largen:
+                        btnEffect = new Btn_LargenEffect();
+                        break;
+                    case Type.balloon:
+                        btnEffect = new Btn_Balloon();
+                        break;
+                    case Type.balloon:
+                        btnEffect = new Btn_Beetle();
+                        break;
+                    default:
+                        btnEffect = new Btn_LargenEffect();
+                        break;
+                }
+                target.off(Laya.Event.MOUSE_DOWN, caller, down);
+                target.off(Laya.Event.MOUSE_MOVE, caller, move);
+                target.off(Laya.Event.MOUSE_UP, caller, up);
+                target.off(Laya.Event.MOUSE_OUT, caller, out);
+                target.off(Laya.Event.MOUSE_DOWN, caller, btnEffect.down);
+                target.off(Laya.Event.MOUSE_MOVE, caller, btnEffect.move);
+                target.off(Laya.Event.MOUSE_UP, caller, btnEffect.up);
+                target.off(Laya.Event.MOUSE_OUT, caller, btnEffect.out);
+            }
+            Click.off = off;
+        })(Click = lwg.Click || (lwg.Click = {}));
+        class Btn_NoEffect {
+            constructor() {
+            }
+            down(event) {
+                console.log('无点击效果的点击');
+            }
+            move(event) {
+            }
+            up(event) {
+            }
+            out(event) {
+            }
+        }
+        lwg.Btn_NoEffect = Btn_NoEffect;
+        class Btn_LargenEffect {
+            constructor() {
+            }
+            down(event) {
+                event.currentTarget.scale(1.1, 1.1);
+                PalyAudio.playSound(Click.audioUrl);
+            }
+            move(event) {
+            }
+            up(event) {
+                event.currentTarget.scale(1, 1);
+            }
+            out(event) {
+                event.currentTarget.scale(1, 1);
+            }
+        }
+        lwg.Btn_LargenEffect = Btn_LargenEffect;
+        class Btn_Balloon {
+            constructor() {
+            }
+            down(event) {
+                event.currentTarget.scale(Click.balloonScale + 0.06, Click.balloonScale + 0.06);
+                PalyAudio.playSound(Click.audioUrl);
+            }
+            up(event) {
+                event.currentTarget.scale(Click.balloonScale, Click.balloonScale);
+            }
+            move(event) {
+                event.currentTarget.scale(Click.balloonScale, Click.balloonScale);
+            }
+            out(event) {
+                event.currentTarget.scale(Click.balloonScale, Click.balloonScale);
+            }
+        }
+        lwg.Btn_Balloon = Btn_Balloon;
+        class Btn_Beetle {
+            constructor() {
+            }
+            down(event) {
+                event.currentTarget.scale(Click.beetleScale + 0.06, Click.beetleScale + 0.06);
+                PalyAudio.playSound(Click.audioUrl);
+            }
+            up(event) {
+                event.currentTarget.scale(Click.beetleScale, Click.beetleScale);
+            }
+            move(event) {
+                event.currentTarget.scale(Click.beetleScale, Click.beetleScale);
+            }
+            out(event) {
+                event.currentTarget.scale(Click.beetleScale, Click.beetleScale);
+            }
+        }
+        lwg.Btn_Beetle = Btn_Beetle;
+        let Animation3D;
+        (function (Animation3D) {
+            Animation3D.tweenMap = {};
+            Animation3D.frame = 1;
+            function MoveTo(target, toPos, duration, caller, ease, complete, delay = 0, coverBefore = true, update, frame) {
+                let position = target.transform.position.clone();
+                if (duration == 0 || duration === undefined || duration === null) {
+                    target.transform.position = toPos.clone();
+                    complete && complete.apply(caller);
+                    return;
+                }
+                if (frame <= 0 || frame === undefined || frame === null) {
+                    frame = this.frame;
+                }
+                let updateRenderPos = function () {
+                    if (target.transform) {
+                        target.transform.position = position;
+                    }
+                    update && update();
+                };
+                Laya.timer.once(delay, target, function () {
+                    Laya.timer.frameLoop(frame, target, updateRenderPos);
+                });
+                let endTween = function () {
+                    if (target.transform) {
+                        target.transform.position = toPos.clone();
+                        Laya.timer.clear(target, updateRenderPos);
+                    }
+                    complete && complete.apply(caller);
+                };
+                let tween = Laya.Tween.to(position, { x: toPos.x, y: toPos.y, z: toPos.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+                if (!Animation3D.tweenMap[target.id]) {
+                    Animation3D.tweenMap[target.id] = [];
+                }
+                Animation3D.tweenMap[target.id].push(tween);
+            }
+            Animation3D.MoveTo = MoveTo;
+            function RotateTo(target, toRotation, duration, caller, ease, complete, delay, coverBefore, update, frame) {
+                let rotation = target.transform.localRotationEuler.clone();
+                if (duration == 0 || duration === undefined || duration === null) {
+                    target.transform.localRotationEuler = toRotation.clone();
+                    complete && complete.apply(caller);
+                    return;
+                }
+                if (frame <= 0 || frame === undefined || frame === null) {
+                    frame = this.frame;
+                }
+                let updateRenderRotation = function () {
+                    if (target.transform) {
+                        target.transform.localRotationEuler = rotation;
+                    }
+                    update && update();
+                };
+                Laya.timer.once(delay, target, function () {
+                    Laya.timer.frameLoop(frame, target, updateRenderRotation);
+                });
+                let endTween = function () {
+                    if (target.transform) {
+                        target.transform.localRotationEuler = toRotation.clone();
+                        Laya.timer.clear(target, updateRenderRotation);
+                    }
+                    complete && complete.apply(caller);
+                };
+                let tween = Laya.Tween.to(rotation, { x: toRotation.x, y: toRotation.y, z: toRotation.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+                if (!Animation3D.tweenMap[target.id]) {
+                    Animation3D.tweenMap[target.id] = [];
+                }
+                Animation3D.tweenMap[target.id].push(tween);
+            }
+            Animation3D.RotateTo = RotateTo;
+            function ScaleTo(target, toScale, duration, caller, ease, complete, delay, coverBefore, update, frame) {
+                let localScale = target.transform.localScale.clone();
+                if (duration == 0 || duration === undefined || duration === null) {
+                    target.transform.localScale = toScale.clone();
+                    complete && complete.apply(caller);
+                    return;
+                }
+                if (frame <= 0 || frame === undefined || frame === null) {
+                    frame = this.frame;
+                }
+                let updateRenderPos = function () {
+                    target.transform.localScale = localScale.clone();
+                    update && update();
+                };
+                Laya.timer.once(delay, this, function () {
+                    Laya.timer.frameLoop(frame, target, updateRenderPos);
+                });
+                let endTween = function () {
+                    target.transform.localScale = toScale.clone();
+                    Laya.timer.clear(target, updateRenderPos);
+                    complete && complete.apply(caller);
+                };
+                let tween = Laya.Tween.to(localScale, { x: toScale.x, y: toScale.y, z: toScale.z }, duration, ease, Laya.Handler.create(target, endTween), delay, coverBefore);
+                if (!Animation3D.tweenMap[target.id]) {
+                    Animation3D.tweenMap[target.id] = [];
+                }
+                Animation3D.tweenMap[target.id].push(tween);
+            }
+            Animation3D.ScaleTo = ScaleTo;
+            function ClearTween(target) {
+                let tweens = Animation3D.tweenMap[target.id];
+                if (tweens && tweens.length) {
+                    while (tweens.length > 0) {
+                        let tween = tweens.pop();
+                        tween.clear();
+                    }
+                }
+                Laya.timer.clearAll(target);
+            }
+            Animation3D.ClearTween = ClearTween;
+        })(Animation3D = lwg.Animation3D || (lwg.Animation3D = {}));
+        let Animation2D;
+        (function (Animation2D) {
+            function simple_Rotate(node, Frotate, Erotate, time, delayed, func) {
+                node.rotation = Frotate;
+                if (!delayed) {
+                    delayed = 0;
+                }
+                Laya.Tween.to(node, { rotation: Erotate }, time, null, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.simple_Rotate = simple_Rotate;
+            function upDown_Overturn(node, time, func) {
+                Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
+                                if (func !== null || func !== undefined) {
+                                    func();
+                                }
+                            }), 0);
+                        }), 0);
+                    }), 0);
+                }), 0);
+            }
+            Animation2D.upDown_Overturn = upDown_Overturn;
+            function leftRight_Overturn(node, time, func) {
+                Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { scaleX: 1 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(node, { scaleX: 1 }, time, null, Laya.Handler.create(this, function () {
+                            }), 0);
+                            if (func !== null) {
+                                func();
+                            }
+                        }), 0);
+                    }), 0);
+                }), 0);
+            }
+            Animation2D.leftRight_Overturn = leftRight_Overturn;
+            function leftRight_Shake(node, range, time, delayed, func) {
+                Laya.Tween.to(node, { x: node.x - range }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { x: node.x + range * 2 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { x: node.x - range }, time, null, Laya.Handler.create(this, function () {
+                            if (func !== null) {
+                                func();
+                            }
+                        }));
+                    }));
+                }), delayed);
+            }
+            Animation2D.leftRight_Shake = leftRight_Shake;
+            function upDwon_Shake(node, range, time, delayed, func) {
+                Laya.Tween.to(node, { y: node.y + range }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { y: node.y - range * 2 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { y: node.y + range }, time, null, Laya.Handler.create(this, function () {
+                            if (func !== null) {
+                                func();
+                            }
+                        }));
+                    }));
+                }), delayed);
+            }
+            Animation2D.upDwon_Shake = upDwon_Shake;
+            function fadeOut(node, alpha1, alpha2, time, delayed, func) {
+                node.alpha = alpha1;
+                Laya.Tween.to(node, { alpha: alpha2 }, time, null, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.fadeOut = fadeOut;
+            function fadeOut_KickBack(node, alpha1, alpha2, time, delayed, func) {
+                node.alpha = alpha1;
+                Laya.Tween.to(node, { alpha: alpha2 }, time, null, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.fadeOut_KickBack = fadeOut_KickBack;
+            function move_FadeOut(node, firstX, firstY, targetX, targetY, time, delayed, func) {
+                node.alpha = 0;
+                node.x = firstX;
+                node.y = firstY;
+                Laya.Tween.to(node, { alpha: 1, x: targetX, y: targetY }, time, null, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.move_FadeOut = move_FadeOut;
+            function move_Fade_Out(node, firstX, firstY, targetX, targetY, time, delayed, func) {
+                node.alpha = 1;
+                node.x = firstX;
+                node.y = firstY;
+                Laya.Tween.to(node, { alpha: 0, x: targetX, y: targetY }, time, null, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.move_Fade_Out = move_Fade_Out;
+            function move_FadeOut_Scale_01(node, firstX, firstY, targetX, targetY, time, delayed, func) {
+                node.alpha = 0;
+                node.targetX = 0;
+                node.targetY = 0;
+                node.x = firstX;
+                node.y = firstY;
+                Laya.Tween.to(node, { alpha: 1, x: targetX, y: targetY, scaleX: 1, scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.move_FadeOut_Scale_01 = move_FadeOut_Scale_01;
+            function move_Scale(node, fScale, fX, fY, tX, tY, eScale, time, delayed, ease, func) {
+                node.scaleX = fScale;
+                node.scaleY = fScale;
+                node.x = fX;
+                node.y = fY;
+                Laya.Tween.to(node, { x: tX, y: tY, scaleX: eScale, scaleY: eScale }, time, ease ? null : ease, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.move_Scale = move_Scale;
+            function rotate_Scale(target, fRotate, fScaleX, fScaleY, eRotate, eScaleX, eScaleY, time, delayed, func) {
+                target.scaleX = fScaleX;
+                target.scaleY = fScaleY;
+                target.rotation = fRotate;
+                Laya.Tween.to(target, { rotation: eRotate, scaleX: eScaleX, scaleY: eScaleY }, time, null, Laya.Handler.create(this, () => {
+                    if (func) {
+                        func();
+                    }
+                    target.rotation = 0;
+                }), delayed ? delayed : 0);
+            }
+            Animation2D.rotate_Scale = rotate_Scale;
+            function drop_Simple(node, fY, tY, rotation, time, delayed, func) {
+                node.y = fY;
+                Laya.Tween.to(node, { y: tY, rotation: rotation }, time, Laya.Ease.circOut, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.drop_Simple = drop_Simple;
+            function drop_KickBack(target, fAlpha, firstY, targetY, extendY, time1, delayed, func) {
+                target.alpha = fAlpha;
+                target.y = firstY;
+                if (!delayed) {
+                    delayed = 0;
+                }
+                Laya.Tween.to(target, { alpha: 1, y: targetY + extendY }, time1, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { y: targetY - extendY / 2 }, time1 / 2, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(target, { y: targetY }, time1 / 4, null, Laya.Handler.create(this, function () {
+                            if (func) {
+                                func();
+                            }
+                        }), 0);
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.drop_KickBack = drop_KickBack;
+            function drop_Excursion(node, targetY, targetX, rotation, time, delayed, func) {
+                Laya.Tween.to(node, { x: node.x + targetX, y: node.y + targetY * 1 / 6 }, time, Laya.Ease.expoIn, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { x: node.x + targetX + 50, y: targetY, rotation: rotation }, time, null, Laya.Handler.create(this, function () {
+                        if (func !== null) {
+                            func();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.drop_Excursion = drop_Excursion;
+            function goUp_Simple(node, initialY, initialR, targetY, time, delayed, func) {
+                node.y = initialY;
+                node.rotation = initialR;
+                Laya.Tween.to(node, { y: targetY, rotation: 0 }, time, Laya.Ease.cubicOut, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.goUp_Simple = goUp_Simple;
+            function cardRotateX_TowFace(node, arr, func1, time, delayed, func2) {
+                Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
+                    if (arr) {
+                        for (let i = 0; i < arr.length; i++) {
+                            let child = node.getChildByName(arr[i]);
+                            if (child !== null) {
+                                child['alpha'] = 0;
+                            }
+                        }
+                    }
+                    if (func1 !== null) {
+                        func1();
+                    }
+                    Laya.Tween.to(node, { scaleX: 1 }, time * 0.9, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { scaleX: 0 }, time * 0.8, null, Laya.Handler.create(this, function () {
+                            if (arr) {
+                                for (let i = 0; i < arr.length; i++) {
+                                    let child = node.getChildByName(arr[i]);
+                                    if (child !== null) {
+                                        child['alpha'] = 1;
+                                    }
+                                }
+                            }
+                            Laya.Tween.to(node, { scaleX: 1 }, time * 0.7, null, Laya.Handler.create(this, function () {
+                                if (func2 !== null) {
+                                    func2();
+                                }
+                            }), 0);
+                        }), 0);
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.cardRotateX_TowFace = cardRotateX_TowFace;
+            function cardRotateX_OneFace(node, func1, time, delayed, func2) {
+                Laya.Tween.to(node, { scaleX: 0 }, time, null, Laya.Handler.create(this, function () {
+                    if (func1 !== null) {
+                        func1();
+                    }
+                    Laya.Tween.to(node, { scaleX: 1 }, time, null, Laya.Handler.create(this, function () {
+                        if (func2 !== null) {
+                            func2();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.cardRotateX_OneFace = cardRotateX_OneFace;
+            function cardRotateY_TowFace(node, arr, func1, time, delayed, func2) {
+                Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
+                    if (arr) {
+                        for (let i = 0; i < arr.length; i++) {
+                            let child = node.getChildByName(arr[i]);
+                            if (child !== null) {
+                                child['alpha'] = 0;
+                            }
+                        }
+                    }
+                    if (func1 !== null) {
+                        func1();
+                    }
+                    Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(node, { scaleY: 1 }, time * 1 / 2, null, Laya.Handler.create(this, function () {
+                                if (arr) {
+                                    for (let i = 0; i < arr.length; i++) {
+                                        let child = node.getChildByName(arr[i]);
+                                        if (child !== null) {
+                                            child['alpha'] = 1;
+                                        }
+                                    }
+                                }
+                                if (func2 !== null) {
+                                    func2();
+                                }
+                            }), 0);
+                        }), 0);
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.cardRotateY_TowFace = cardRotateY_TowFace;
+            function cardRotateY_OneFace(node, func1, time, delayed, func2) {
+                Laya.Tween.to(node, { scaleY: 0 }, time, null, Laya.Handler.create(this, function () {
+                    if (func1 !== null) {
+                        func1();
+                    }
+                    Laya.Tween.to(node, { scaleY: 1 }, time, null, Laya.Handler.create(this, function () {
+                        if (func2 !== null) {
+                            func2();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.cardRotateY_OneFace = cardRotateY_OneFace;
+            function move_changeRotate(node, targetX, targetY, per, rotation_pe, time, func) {
+                let targetPerX = targetX * per + node.x * (1 - per);
+                let targetPerY = targetY * per + node.y * (1 - per);
+                Laya.Tween.to(node, { x: targetPerX, y: targetPerY, rotation: 45 }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { x: targetX, y: targetY, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
+                        if (func !== null) {
+                            func();
+                        }
+                    }), 0);
+                }), 0);
+            }
+            Animation2D.move_changeRotate = move_changeRotate;
+            function bombs_Appear(node, firstAlpha, firstScale, scale1, rotation, time1, time2, delayed, audioType, func) {
+                node.scale(0, 0);
+                node.alpha = firstAlpha;
+                Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, rotation: rotation }, time1, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { scaleX: firstScale + (scale1 - firstScale) * 0.2, scaleY: firstScale + (scale1 - firstScale) * 0.2, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
+                                if (func) {
+                                    func();
+                                }
+                            }), 0);
+                        }), 0);
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.bombs_Appear = bombs_Appear;
+            function bombs_Vanish(node, scale, alpha, rotation, time, delayed, func) {
+                Laya.Tween.to(node, { scaleX: scale, scaleY: scale, alpha: alpha, rotation: rotation }, time, Laya.Ease.cubicOut, Laya.Handler.create(this, function () {
+                    if (func !== null) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.bombs_Vanish = bombs_Vanish;
+            function swell_shrink(node, firstScale, scale1, time, delayed, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
+                Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, }, time, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { scaleX: firstScale + (scale1 - firstScale) * 0.5, scaleY: firstScale + (scale1 - firstScale) * 0.5, rotation: 0 }, time * 0.5, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
+                                if (func !== null) {
+                                    func();
+                                }
+                            }), 0);
+                        }), 0);
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.swell_shrink = swell_shrink;
+            function move_Simple(node, fX, fY, targetX, targetY, time, delayed, ease, func) {
+                node.x = fX;
+                node.y = fY;
+                if (!delayed) {
+                    delayed = 0;
+                }
+                Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease ? ease : null, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.move_Simple = move_Simple;
+            function move_Simple_01(node, firstX, firstY, targetX, targetY, time, ease, delayed, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
+                if (!ease) {
+                    ease = null;
+                }
+                node.x = firstX;
+                node.y = firstY;
+                Laya.Tween.to(node, { x: targetX, y: targetY }, time, ease, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.move_Simple_01 = move_Simple_01;
+            function move_Deform_X(node, firstX, firstR, targetX, scaleX, scaleY, time, delayed, func) {
+                node.alpha = 0;
+                node.x = firstX;
+                node.rotation = firstR;
+                Laya.Tween.to(node, { x: targetX, scaleX: 1 + scaleX, scaleY: 1 + scaleY, rotation: firstR / 3, alpha: 1 }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { scaleX: 1, scaleY: 1, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
+                        if (func !== null) {
+                            func();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.move_Deform_X = move_Deform_X;
+            function move_Deform_Y(target, firstY, firstR, targeY, scaleX, scaleY, time, delayed, func) {
+                target.alpha = 0;
+                if (firstY) {
+                    target.y = firstY;
+                }
+                target.rotation = firstR;
+                Laya.Tween.to(target, { y: targeY, scaleX: 1 + scaleX, scaleY: 1 + scaleY, rotation: firstR / 3, alpha: 1 }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { scaleX: 1, scaleY: 1, rotation: 0 }, time, null, Laya.Handler.create(this, function () {
+                        if (func !== null) {
+                            func();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.move_Deform_Y = move_Deform_Y;
+            function blink_FadeOut_v(target, minAlpha, maXalpha, time, delayed, func) {
+                target.alpha = minAlpha;
+                Laya.Tween.to(target, { alpha: maXalpha }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { alpha: minAlpha }, time, null, Laya.Handler.create(this, function () {
+                        if (func !== null) {
+                            func();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.blink_FadeOut_v = blink_FadeOut_v;
+            function blink_FadeOut(target, minAlpha, maXalpha, time, delayed, func) {
+                Laya.Tween.to(target, { alpha: minAlpha }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { alpha: maXalpha }, time, null, Laya.Handler.create(this, function () {
+                        if (func !== null) {
+                            func();
+                        }
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.blink_FadeOut = blink_FadeOut;
+            function shookHead_Simple(target, rotate, time, delayed, func) {
+                let firstR = target.rotation;
+                Laya.Tween.to(target, { rotation: firstR + rotate }, time, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { rotation: firstR - rotate * 2 }, time, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(target, { rotation: firstR + rotate }, time, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(target, { rotation: firstR }, time, null, Laya.Handler.create(this, function () {
+                                if (func !== null) {
+                                    func();
+                                }
+                            }), 0);
+                        }), 0);
+                    }), 0);
+                }), delayed);
+            }
+            Animation2D.shookHead_Simple = shookHead_Simple;
+            function HintAni_01(target, upNum, time1, stopTime, downNum, time2, func) {
+                target.alpha = 0;
+                Laya.Tween.to(target, { alpha: 1, y: target.y - upNum }, time1, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(target, { y: target.y - 15 }, stopTime, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(target, { alpha: 0, y: target.y + upNum + downNum }, time2, null, Laya.Handler.create(this, function () {
+                            if (func !== null) {
+                                func();
+                            }
+                        }), 0);
+                    }), 0);
+                }), 0);
+            }
+            Animation2D.HintAni_01 = HintAni_01;
+            function scale_Alpha(target, fAlpha, fScaleX, fScaleY, eScaleX, eScaleY, eAlpha, time, ease, delayed, func) {
+                if (!delayed) {
+                    delayed = 0;
+                }
+                if (!delayed) {
+                    ease = null;
+                }
+                target.alpha = fAlpha;
+                target.scaleX = fScaleX;
+                target.scaleY = fScaleY;
+                Laya.Tween.to(target, { scaleX: eScaleX, scaleY: eScaleY, alpha: eAlpha }, time, ease, Laya.Handler.create(this, function () {
+                    if (func) {
+                        func();
+                    }
+                }), delayed);
+            }
+            Animation2D.scale_Alpha = scale_Alpha;
+            function rotate_Magnify_KickBack(node, eAngle, eScale, time1, time2, delayed1, delayed2, func) {
+                node.alpha = 0;
+                node.scaleX = 0;
+                node.scaleY = 0;
+                Laya.Tween.to(node, { alpha: 1, rotation: 360 + eAngle, scaleX: 1 + eScale, scaleY: 1 + eScale }, time1, null, Laya.Handler.create(this, function () {
+                    Laya.Tween.to(node, { rotation: 360 - eAngle / 2, scaleX: 1 + eScale / 2, scaleY: 1 + eScale / 2 }, time2, null, Laya.Handler.create(this, function () {
+                        Laya.Tween.to(node, { rotation: 360 + eAngle / 3, scaleX: 1 + eScale / 5, scaleY: 1 + eScale / 5 }, time2, null, Laya.Handler.create(this, function () {
+                            Laya.Tween.to(node, { rotation: 360, scaleX: 1, scaleY: 1 }, time2, null, Laya.Handler.create(this, function () {
+                                node.rotation = 0;
+                                if (func !== null) {
+                                    func();
+                                }
+                            }), 0);
+                        }), delayed2);
+                    }), 0);
+                }), delayed1);
+            }
+            Animation2D.rotate_Magnify_KickBack = rotate_Magnify_KickBack;
+        })(Animation2D = lwg.Animation2D || (lwg.Animation2D = {}));
+        let Setting;
+        (function (Setting) {
+            Setting._sound = {
+                get switch() {
+                    return Laya.LocalStorage.getItem('Setting_sound') == '0' ? false : true;
+                },
+                set switch(value) {
+                    let val;
+                    if (value) {
+                        val = 1;
+                    }
+                    else {
+                        val = 0;
+                    }
+                    Laya.LocalStorage.setItem('Setting_sound', val.toString());
+                }
+            };
+            Setting._bgMusic = {
+                get switch() {
+                    return Laya.LocalStorage.getItem('Setting_bgMusic') == '0' ? false : true;
+                },
+                set switch(value) {
+                    let val;
+                    if (value) {
+                        val = 1;
+                        Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
+                        PalyAudio.playMusic();
+                    }
+                    else {
+                        val = 0;
+                        Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
+                        PalyAudio.stopMusic();
+                    }
+                }
+            };
+            Setting._shake = {
+                get switch() {
+                    return Laya.LocalStorage.getItem('Setting_shake') == '0' ? false : true;
+                },
+                set switch(value) {
+                    let val;
+                    if (value) {
+                        val = 1;
+                    }
+                    else {
+                        val = 0;
+                    }
+                    Laya.LocalStorage.setItem('Setting_shake', val.toString());
+                }
+            };
+            function createSetBtn(x, y, width, height, url, parent) {
+                let _url = 'Frame/UI/icon_set.png';
+                let btn = new Laya.Image;
+                if (width) {
+                    btn.width = width;
+                }
+                else {
+                    btn.width = 100;
+                }
+                if (height) {
+                    btn.height = height;
+                }
+                else {
+                    btn.height = 100;
+                }
+                if (url) {
+                    btn.skin = url;
+                }
+                else {
+                    btn.skin = _url;
+                }
+                if (parent) {
+                    parent.addChild(btn);
+                }
+                else {
+                    Laya.stage.addChild(btn);
+                }
+                btn.pivotX = btn.width / 2;
+                btn.pivotY = btn.height / 2;
+                btn.x = x;
+                btn.y = y;
+                btn.zOrder = 100;
+                var btnSetUp = function () {
+                    Admin._openScene(Admin.SceneName.UISet);
+                };
+                Click.on(Click.Type.largen, btn, null, null, null, btnSetUp, null);
+                Setting.BtnSetNode = btn;
+                Setting.BtnSetNode.name = 'BtnSetNode';
+            }
+            Setting.createSetBtn = createSetBtn;
+            function setBtnAppear(delayed, x, y) {
+                if (delayed) {
+                    Animation2D.scale_Alpha(Setting.BtnSetNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
+                        Setting.BtnSetNode.visible = true;
+                    });
+                }
+                else {
+                    Setting.BtnSetNode.visible = true;
+                }
+                if (x) {
+                    Setting.BtnSetNode.x = x;
+                }
+                if (y) {
+                    Setting.BtnSetNode.y = y;
+                }
+            }
+            Setting.setBtnAppear = setBtnAppear;
+            function setBtnVinish(delayed) {
+                if (delayed) {
+                    Animation2D.scale_Alpha(Setting.BtnSetNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
+                        Setting.BtnSetNode.visible = false;
+                    });
+                }
+                else {
+                    Setting.BtnSetNode.visible = false;
+                }
+            }
+            Setting.setBtnVinish = setBtnVinish;
+        })(Setting = lwg.Setting || (lwg.Setting = {}));
+        let PalyAudio;
+        (function (PalyAudio) {
+            let voiceUrl;
+            (function (voiceUrl) {
+                voiceUrl["btn"] = "res/Voice/btn.wav";
+                voiceUrl["bgm"] = "res/Voice/bgm.mp3";
+                voiceUrl["victory"] = "res/Voice/guoguan.wav";
+                voiceUrl["defeated"] = "res/Voice/wancheng.wav";
+            })(voiceUrl = PalyAudio.voiceUrl || (PalyAudio.voiceUrl = {}));
+            function playSound(url, number, func) {
+                if (!url) {
+                    url = voiceUrl.btn;
+                }
+                if (!number) {
+                    number = 1;
+                }
+                if (Setting._sound.switch) {
+                    Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () {
+                        if (func) {
+                            func();
+                        }
+                    }));
+                }
+            }
+            PalyAudio.playSound = playSound;
+            function playDefeatedSound(url, number, func) {
+                if (!url) {
+                    url = voiceUrl.defeated;
+                }
+                if (!number) {
+                    number = 1;
+                }
+                if (Setting._sound.switch) {
+                    Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () {
+                        if (func) {
+                            func();
+                        }
+                    }));
+                }
+            }
+            PalyAudio.playDefeatedSound = playDefeatedSound;
+            function playVictorySound(url, number, func) {
+                if (!url) {
+                    url = voiceUrl.victory;
+                }
+                if (!number) {
+                    number = 1;
+                }
+                if (Setting._sound.switch) {
+                    Laya.SoundManager.playSound(url, number, Laya.Handler.create(this, function () {
+                        if (func) {
+                            func();
+                        }
+                    }));
+                }
+            }
+            PalyAudio.playVictorySound = playVictorySound;
+            function playMusic(url, number, delayed) {
+                if (!url) {
+                    url = voiceUrl.bgm;
+                }
+                if (!number) {
+                    number = 0;
+                }
+                if (!delayed) {
+                    delayed = 0;
+                }
+                if (Setting._bgMusic.switch) {
+                    Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), delayed);
+                }
+            }
+            PalyAudio.playMusic = playMusic;
+            function stopMusic() {
+                Laya.SoundManager.stopMusic();
+            }
+            PalyAudio.stopMusic = stopMusic;
+        })(PalyAudio = lwg.PalyAudio || (lwg.PalyAudio = {}));
+        let Tools;
+        (function (Tools) {
+            function randomNumOfArray(arr, num) {
+                let arr0 = [];
+                if (num > arr.length) {
+                    return '数组长度小于取出的数！';
+                }
+                else {
+                    for (let index = 0; index < num; index++) {
+                        let ran = Math.floor(Math.random() * (arr.length - 1));
+                        let a1 = arr[ran];
+                        arr.splice(ran, 1);
+                        arr0.push(a1);
+                    }
+                    return arr0;
+                }
+            }
+            Tools.randomNumOfArray = randomNumOfArray;
+            function rayScanning(camera, scene3D, point, filtrate) {
+                let _ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
+                let outs = new Array();
+                camera.viewportPointToRay(point, _ray);
+                scene3D.physicsSimulation.rayCastAll(_ray, outs);
+                if (outs.length != 0 && filtrate) {
+                    let outsChaild = null;
+                    for (var i = 0; i < outs.length; i++) {
+                        let hitResult = outs[i].collider.owner;
+                        if (hitResult.name === filtrate) {
+                            outsChaild = outs[i];
+                        }
+                    }
+                    return outsChaild;
+                }
+                else {
+                    return outs;
+                }
+            }
+            Tools.rayScanning = rayScanning;
+            function dotRotateXY(x0, y0, x1, y1, angle) {
+                let x2 = x0 + (x1 - x0) * Math.cos(angle * Math.PI / 180) - (y1 - y0) * Math.sin(angle * Math.PI / 180);
+                let y2 = y0 + (x1 - x0) * Math.sin(angle * Math.PI / 180) + (y1 - y0) * Math.cos(angle * Math.PI / 180);
+                return new Laya.Point(x2, y2);
+            }
+            Tools.dotRotateXY = dotRotateXY;
+            function toHexString(r, g, b) {
+                return '#' + ("00000" + (r << 16 | g << 8 | b).toString(16)).slice(-6);
+            }
+            Tools.toHexString = toHexString;
+            function twoObjectsLen_3D(obj1, obj2) {
+                let obj1V3 = obj1.transform.position;
+                let obj2V3 = obj2.transform.position;
+                let p = new Laya.Vector3();
+                Laya.Vector3.subtract(obj1V3, obj2V3, p);
+                let lenp = Laya.Vector3.scalarLength(p);
+                return lenp;
+            }
+            Tools.twoObjectsLen_3D = twoObjectsLen_3D;
+            function twoPositionLen_3D(v1, v2) {
+                let p = twoSubV3_3D(v1, v2);
+                let lenp = Laya.Vector3.scalarLength(p);
+                return lenp;
+            }
+            Tools.twoPositionLen_3D = twoPositionLen_3D;
+            function twoObjectsLen_2D(obj1, obj2) {
+                let point = new Laya.Point(obj1.x, obj1.y);
+                let len = point.distance(obj2.x, obj2.y);
+                return len;
+            }
+            Tools.twoObjectsLen_2D = twoObjectsLen_2D;
+            function twoSubV3_3D(V3_01, V3_02, normalizing) {
+                let p = new Laya.Vector3();
+                Laya.Vector3.subtract(V3_01, V3_02, p);
+                if (normalizing) {
+                    let p1 = new Laya.Vector3();
+                    Laya.Vector3.normalize(p, p1);
+                    return p1;
+                }
+                else {
+                    return p;
+                }
+            }
+            Tools.twoSubV3_3D = twoSubV3_3D;
+            function reverseVector(type, Vecoter1, Vecoter2, normalizing) {
+                let p;
+                if (type === '2d') {
+                    p = new Laya.Point(Vecoter1.x - Vecoter2.x, Vecoter1.y - Vecoter2.y);
+                    if (normalizing) {
+                        p.normalize();
+                    }
+                    return p;
+                }
+                else if (type === '3d') {
+                    p = new Laya.Vector3(Vecoter1.x - Vecoter2.x, Vecoter1.y - Vecoter2.y, Vecoter1.z - Vecoter2.z);
+                    if (normalizing) {
+                        let returnP = new Laya.Vector3();
+                        Laya.Vector3.normalize(p, returnP);
+                        return returnP;
+                    }
+                    else {
+                        return p;
+                    }
+                }
+            }
+            Tools.reverseVector = reverseVector;
+            function vector_Angle(x, y) {
+                let radian = Math.atan2(x, y);
+                let angle = 90 - radian * (180 / Math.PI);
+                if (angle <= 0) {
+                    angle = 270 + (90 + angle);
+                }
+                return angle - 90;
+            }
+            Tools.vector_Angle = vector_Angle;
+            function angle_Vector(angle) {
+                angle -= 90;
+                let radian = (90 - angle) / (180 / Math.PI);
+                let p = new Laya.Point(Math.sin(radian), Math.cos(radian));
+                p.normalize();
+                return p;
+            }
+            Tools.angle_Vector = angle_Vector;
+            function maximumDistanceLimi_3D(originV3, obj, length) {
+                let subP = new Laya.Vector3();
+                let objP = obj.transform.position;
+                Laya.Vector3.subtract(objP, originV3, subP);
+                let lenP = Laya.Vector3.scalarLength(subP);
+                if (lenP >= length) {
+                    let normalizP = new Laya.Vector3();
+                    Laya.Vector3.normalize(subP, normalizP);
+                    let x = originV3.x + normalizP.x * length;
+                    let y = originV3.y + normalizP.y * length;
+                    let z = originV3.z + normalizP.z * length;
+                    let p = new Laya.Vector3(x, y, z);
+                    obj.transform.position = p;
+                    return p;
+                }
+            }
+            Tools.maximumDistanceLimi_3D = maximumDistanceLimi_3D;
+            function drawPieMask(parent, startAngle, endAngle) {
+                parent.cacheAs = "bitmap";
+                let drawPieSpt = new Laya.Sprite();
+                drawPieSpt.blendMode = "destination-out";
+                parent.addChild(drawPieSpt);
+                let drawPie = drawPieSpt.graphics.drawPie(parent.width / 2, parent.height / 2, parent.width / 2 + 10, startAngle, endAngle, "#000000");
+                return drawPie;
+            }
+            Tools.drawPieMask = drawPieMask;
+            function transitionScreenPointfor3D(v3, camera) {
+                let ScreenV3 = new Laya.Vector3();
+                camera.viewport.project(v3, camera.projectionViewMatrix, ScreenV3);
+                let point = new Laya.Vector2();
+                point.x = ScreenV3.x;
+                point.y = ScreenV3.y;
+                return point;
+            }
+            Tools.transitionScreenPointfor3D = transitionScreenPointfor3D;
+            function objPropertySort(array, property) {
+                var compare = function (obj1, obj2) {
+                    var val1 = obj1[property];
+                    var val2 = obj2[property];
+                    if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+                        val1 = Number(val1);
+                        val2 = Number(val2);
+                    }
+                    if (val1 < val2) {
+                        return -1;
+                    }
+                    else if (val1 > val2) {
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+                };
+                array.sort(compare);
+                return array;
+            }
+            Tools.objPropertySort = objPropertySort;
+            function dataCompareDifferent(data1, data2, property) {
+                var result = [];
+                for (var i = 0; i < data1.length; i++) {
+                    var obj1 = data1[i];
+                    var obj1Name = obj1[property];
+                    var isExist = false;
+                    for (var j = 0; j < data2.length; j++) {
+                        var obj2 = data2[j];
+                        var obj2Name = obj2[property];
+                        if (obj2Name == obj1Name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (!isExist) {
+                        result.push(obj1);
+                    }
+                }
+                return result;
+            }
+            Tools.dataCompareDifferent = dataCompareDifferent;
+            function dataComparEidentical(data1, data2, property) {
+                var result = [];
+                for (var i = 0; i < data1.length; i++) {
+                    var obj1 = data1[i];
+                    var obj1Name = obj1[property];
+                    var isExist = false;
+                    for (var j = 0; j < data2.length; j++) {
+                        var obj2 = data2[j];
+                        var obj2Name = obj2[property];
+                        if (obj2Name == name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (isExist) {
+                        result.push(obj1);
+                    }
+                }
+                return result;
+            }
+            Tools.dataComparEidentical = dataComparEidentical;
+            function data1AddToData2(data1, data2) {
+                for (let index = 0; index < data2.length; index++) {
+                    const element = data2[index];
+                    data1.push(element);
+                }
+            }
+            Tools.data1AddToData2 = data1AddToData2;
+            function random(range1, range2) {
+                range1 = range1 || 10;
+                const c = range1 - range2 + 1;
+                return Math.floor(Math.random() * c + range1);
+            }
+            Tools.random = random;
+            function array_Copy(arr1) {
+                var arr = [];
+                for (var i = 0; i < arr1.length; i++) {
+                    arr.push(arr1[i]);
+                }
+                return arr;
+            }
+            Tools.array_Copy = array_Copy;
+            function objArray_Copy(source) {
+                var sourceCopy = source instanceof Array ? [] : {};
+                for (var item in source) {
+                    sourceCopy[item] = typeof source[item] === 'object' ? obj_DeepCopy(source[item]) : source[item];
+                }
+                return sourceCopy;
+            }
+            Tools.objArray_Copy = objArray_Copy;
+            function obj_DeepCopy(source) {
+                var sourceCopy = {};
+                for (var item in source)
+                    sourceCopy[item] = typeof source[item] === 'object' ? obj_DeepCopy(source[item]) : source[item];
+                return sourceCopy;
+            }
+            Tools.obj_DeepCopy = obj_DeepCopy;
+            function speedByAngle(angle, XY) {
+                if (angle % 90 === 0 || !angle) {
+                    console.error("计算的角度异常,需要查看：", angle);
+                    return;
+                }
+                let speedXY = { x: 0, y: 0 };
+                speedXY.y = XY.y;
+                speedXY.x = speedXY.y / Math.tan(angle * Math.PI / 180);
+                return speedXY;
+            }
+            Tools.speedByAngle = speedByAngle;
+            function speedXYByAngle(angle, speed) {
+                const speedXY = { x: 0, y: 0 };
+                speedXY.x = speed * Math.cos(angle * Math.PI / 180);
+                speedXY.y = speed * Math.sin(angle * Math.PI / 180);
+                return speedXY;
+            }
+            Tools.speedXYByAngle = speedXYByAngle;
+            function getRad(degree) {
+                return degree / 180 * Math.PI;
+            }
+            Tools.getRad = getRad;
+            function getRoundPos(angle, radius, centerPos) {
+                var center = centerPos;
+                var radius = radius;
+                var hudu = (2 * Math.PI / 360) * angle;
+                var X = center.x + Math.sin(hudu) * radius;
+                var Y = center.y - Math.cos(hudu) * radius;
+                return { x: X, y: Y };
+            }
+            Tools.getRoundPos = getRoundPos;
+            function converteNum(number) {
+                if (typeof (number) !== "number") {
+                    console.warn("要转化的数字并不为number");
+                    return number;
+                }
+                let backNum;
+                if (number < 1000) {
+                    backNum = "" + number;
+                }
+                else if (number < 1000000) {
+                    backNum = "" + (number / 1000).toFixed(1) + "k";
+                }
+                else if (number < 10e8) {
+                    backNum = "" + (number / 1000000).toFixed(1) + "m";
+                }
+                else {
+                    backNum = "" + number;
+                }
+                return backNum;
+            }
+            Tools.converteNum = converteNum;
+            function arrayUnique_01(arr) {
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    for (var j = i + 1, len = arr.length; j < len; j++) {
+                        if (arr[i] === arr[j]) {
+                            arr.splice(j, 1);
+                            j--;
+                            len--;
+                        }
+                    }
+                }
+                return arr;
+            }
+            Tools.arrayUnique_01 = arrayUnique_01;
+            function arrayUnique_02(arr) {
+                arr = arr.sort();
+                var arr1 = [arr[0]];
+                for (var i = 1, len = arr.length; i < len; i++) {
+                    if (arr[i] !== arr[i - 1]) {
+                        arr1.push(arr[i]);
+                    }
+                }
+                return arr1;
+            }
+            Tools.arrayUnique_02 = arrayUnique_02;
+            function arrayUnique_03(arr) {
+                return Array.from(new Set(arr));
+            }
+            Tools.arrayUnique_03 = arrayUnique_03;
+            function dataCompare(url, storageName, propertyName) {
+                let dataArr;
+                if (Laya.LocalStorage.getJSON(storageName)) {
+                    dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
+                    console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
+                    try {
+                        let dataArr_0 = Laya.loader.getRes(url)['RECORDS'];
+                        if (dataArr_0.length >= dataArr.length) {
+                            let diffArray = Tools.dataCompareDifferent(dataArr_0, dataArr, propertyName);
+                            console.log('两个数据的差值为：', diffArray);
+                            Tools.data1AddToData2(dataArr, diffArray);
+                        }
+                        else {
+                            console.log(storageName + '数据表填写有误，长度不能小于之前的长度');
+                        }
+                    }
+                    catch (error) {
+                        console.log(storageName, '数据赋值失败！请检查数据表或者手动赋值！');
+                    }
+                }
+                else {
+                    try {
+                        dataArr = Laya.loader.getRes(url)['RECORDS'];
+                    }
+                    catch (error) {
+                        console.log(storageName + '数据赋值失败！请检查数据表或者手动赋值！');
+                    }
+                }
+                let data = {};
+                data[storageName] = dataArr;
+                Laya.LocalStorage.setJSON(storageName, JSON.stringify(data));
+                return dataArr;
+            }
+            Tools.dataCompare = dataCompare;
+        })(Tools = lwg.Tools || (lwg.Tools = {}));
+        let Task;
+        (function (Task) {
+            Task.TaskClassArr = [];
+            Task.todayData = {
+                get date() {
+                    return Laya.LocalStorage.getItem('Task_todayData') ? Number(Laya.LocalStorage.getItem('Task_todayData')) : null;
+                },
+                set date(date) {
+                    Laya.LocalStorage.setItem('Task_todayData', date.toString());
+                }
+            };
+            function getTaskProperty(ClassName, name, property) {
+                let pro = null;
+                let arr = getTaskClassArr(ClassName);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            Task.getTaskProperty = getTaskProperty;
+            function setTaskProperty(ClassName, name, property, value) {
+                let arr = getTaskClassArr(ClassName);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[ClassName] = arr;
+                Laya.LocalStorage.setJSON(ClassName, JSON.stringify(data));
+                if (Task._TaskList) {
+                    Task._TaskList.refresh();
+                }
+            }
+            Task.setTaskProperty = setTaskProperty;
+            function getTaskClassArr(ClassName) {
+                let arr = [];
+                switch (ClassName) {
+                    case TaskClass.everyday:
+                        arr = Task.everydayTask;
+                        break;
+                    case TaskClass.perpetual:
+                        arr = Task.perpetualTask;
+                        break;
+                    default:
+                        break;
+                }
+                return arr;
+            }
+            Task.getTaskClassArr = getTaskClassArr;
+            function doDetectionTask(calssName, name, number) {
+                if (!number) {
+                    number = 1;
+                }
+                let resCondition = Task.getTaskProperty(calssName, name, Task.TaskProperty.resCondition);
+                let condition = Task.getTaskProperty(calssName, name, Task.TaskProperty.condition);
+                if (Task.getTaskProperty(calssName, name, Task.TaskProperty.get) !== -1) {
+                    if (condition <= resCondition + number) {
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, condition);
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.get, 1);
+                        if (Task._TaskList) {
+                            Task._TaskList.refresh();
+                        }
+                        return 1;
+                    }
+                    else {
+                        Task.setTaskProperty(calssName, name, Task.TaskProperty.resCondition, resCondition + number);
+                        if (Task._TaskList) {
+                            Task._TaskList.refresh();
+                        }
+                        return 0;
+                    }
+                }
+                else {
+                    return -1;
+                }
+            }
+            Task.doDetectionTask = doDetectionTask;
+            let TaskProperty;
+            (function (TaskProperty) {
+                TaskProperty["name"] = "name";
+                TaskProperty["explain"] = "explain";
+                TaskProperty["taskType"] = "taskType";
+                TaskProperty["condition"] = "condition";
+                TaskProperty["resCondition"] = "resCondition";
+                TaskProperty["rewardType"] = "rewardType";
+                TaskProperty["rewardNum"] = "rewardNum";
+                TaskProperty["arrange"] = "arrange";
+                TaskProperty["time"] = "time";
+                TaskProperty["get"] = "get";
+            })(TaskProperty = Task.TaskProperty || (Task.TaskProperty = {}));
+            let TaskClass;
+            (function (TaskClass) {
+                TaskClass["everyday"] = "Task_Everyday";
+                TaskClass["perpetual"] = "Task_Perpetual";
+            })(TaskClass = Task.TaskClass || (Task.TaskClass = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["getAward"] = "getAward";
+                EventType["adsGetAward_Every"] = "adsGetAward_Every";
+                EventType["useSkins"] = "useSkins";
+                EventType["victory"] = "victory";
+                EventType["adsTime"] = "adsTime";
+                EventType["victoryBox"] = "victoryBox";
+            })(EventType = Task.EventType || (Task.EventType = {}));
+            let TaskType;
+            (function (TaskType) {
+                TaskType["ads"] = "ads";
+                TaskType["victory"] = "victory";
+                TaskType["useSkins"] = "useSkins";
+                TaskType["treasureBox"] = "treasureBox";
+            })(TaskType = Task.TaskType || (Task.TaskType = {}));
+            let TaskName;
+            (function (TaskName) {
+                TaskName["\u89C2\u770B\u5E7F\u544A\u83B7\u5F97\u91D1\u5E01"] = "\u89C2\u770B\u5E7F\u544A\u83B7\u5F97\u91D1\u5E01";
+                TaskName["\u6BCF\u65E5\u670D\u52A110\u4F4D\u5BA2\u4EBA"] = "\u6BCF\u65E5\u670D\u52A110\u4F4D\u5BA2\u4EBA";
+                TaskName["\u6BCF\u65E5\u89C2\u770B\u4E24\u4E2A\u5E7F\u544A"] = "\u6BCF\u65E5\u89C2\u770B\u4E24\u4E2A\u5E7F\u544A";
+                TaskName["\u6BCF\u65E5\u4F7F\u75285\u79CD\u76AE\u80A4"] = "\u6BCF\u65E5\u4F7F\u75285\u79CD\u76AE\u80A4";
+                TaskName["\u6BCF\u65E5\u5F00\u542F10\u4E2A\u5B9D\u7BB1"] = "\u6BCF\u65E5\u5F00\u542F10\u4E2A\u5B9D\u7BB1";
+            })(TaskName = Task.TaskName || (Task.TaskName = {}));
+            function initTask() {
+                if (Task.todayData.date !== (new Date).getDate()) {
+                    Task.everydayTask = Laya.loader.getRes('GameData/Task/everydayTask.json')['RECORDS'];
+                    console.log('不是同一天，每日任务重制！');
+                    Task.todayData.date = (new Date).getDate();
+                }
+                else {
+                    Task.everydayTask = Tools.dataCompare('GameData/Task/everydayTask.json', TaskClass.everyday, TaskProperty.name);
+                    console.log('是同一天！，继续每日任务');
+                }
+            }
+            Task.initTask = initTask;
+            class TaskScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.taskOnAwake();
+                }
+                initData() {
+                    Task._TaskTap = this.self['TaskTap'];
+                    Task._TaskList = this.self['TaskList'];
+                    Task.TaskClassArr = [Task.everydayTask];
+                }
+                lwgEventReg() {
+                    this.taskEventReg();
+                }
+                taskEventReg() { }
+                taskOnAwake() { }
+                lwgNodeDec() {
+                    this.taskNodeDec();
+                }
+                taskNodeDec() { }
+                lwgOnEnable() {
+                    this.taskTap_Create();
+                    this.taskList_Create();
+                    this.taskOnEnable();
+                }
+                taskOnEnable() {
+                }
+                taskTap_Create() {
+                    Task._TaskList.selectHandler = new Laya.Handler(this, this.taskTap_Select);
+                }
+                taskTap_Select(index) { }
+                taskList_Create() {
+                    Task._TaskList.selectEnable = true;
+                    Task._TaskList.vScrollBarSkin = "";
+                    Task._TaskList.selectHandler = new Laya.Handler(this, this.taskList_Scelet);
+                    Task._TaskList.renderHandler = new Laya.Handler(this, this.taskList_Update);
+                    this.taskList_refresh();
+                }
+                taskList_Scelet(index) { }
+                taskList_Update(cell, index) { }
+                taskList_refresh() {
+                    if (Task._TaskList && Task.TaskClassArr.length > 0) {
+                        Task._TaskList.array = Task.TaskClassArr[0];
+                        Task._TaskList.refresh();
+                    }
+                }
+                lwgOnDisable() {
+                    this.taskOnDisable();
+                }
+                taskOnDisable() {
+                }
+            }
+            Task.TaskScene = TaskScene;
+        })(Task = lwg.Task || (lwg.Task = {}));
+        let Shop;
+        (function (Shop) {
+            Shop.goodsClassArr = [];
+            Shop.classWarehouse = [];
+            Shop._tryName = [];
+            Shop.allSkin = [];
+            Shop._currentSkin = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Shop_currentSkin') ? Laya.LocalStorage.getItem('Shop_currentSkin') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Shop_currentSkin', name);
+                }
+            };
+            Shop.allProps = [];
+            Shop._currentProp = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Shop_currentProp') ? Laya.LocalStorage.getItem('Shop_currentProp') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Shop_currentProp', name);
+                }
+            };
+            Shop.allOther = [];
+            Shop._currentOther = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Shop_crrentOther') ? Laya.LocalStorage.getItem('Shop_crrentOther') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Shop_crrentOther', name);
+                }
+            };
+            Shop.useSkinType = [];
+            function setUseSkinType() {
+                let arr;
+                if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
+                    arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                }
+                else {
+                    return;
+                }
+                Shop.useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
+                Shop.useSkinType.push(Shop._currentOther.name, Shop._currentProp.name, Shop._currentSkin.name);
+                Shop.useSkinType = Tools.arrayUnique_03(Shop.useSkinType);
+                let data = {
+                    Shop_useSkinType: Shop.useSkinType,
+                };
+                Laya.LocalStorage.setJSON('Shop_useSkinType', JSON.stringify(data));
+                return Shop.useSkinType.length;
+            }
+            Shop.setUseSkinType = setUseSkinType;
+            function getGoodsProperty(goodsClass, name, property) {
+                let pro = null;
+                let arr = getGoodsClassArr(goodsClass);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            Shop.getGoodsProperty = getGoodsProperty;
+            function setGoodsProperty(goodsClass, name, property, value) {
+                let arr = getGoodsClassArr(goodsClass);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[goodsClass] = arr;
+                Laya.LocalStorage.setJSON(goodsClass, JSON.stringify(data));
+                if (Shop._ShopList) {
+                    Shop._ShopList.refresh();
+                }
+            }
+            Shop.setGoodsProperty = setGoodsProperty;
+            function getHaveArr(goodsClass) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrHave = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element[GoodsProperty.have]) {
+                        arrHave.push(element);
+                    }
+                }
+                return arrHave;
+            }
+            Shop.getHaveArr = getHaveArr;
+            function getwayGoldArr(goodsClass, have, excludeCurrent) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrNoHave = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (have && have !== undefined) {
+                        if (element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.gold) {
+                            arrNoHave.push(element);
+                        }
+                    }
+                    else if (!have && have !== undefined) {
+                        if (!element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.gold) {
+                            arrNoHave.push(element);
+                        }
+                    }
+                    else if (have == undefined) {
+                        if (element[GoodsProperty.getway] === Getway.gold) {
+                            arrNoHave.push(element);
+                        }
+                    }
+                }
+                if (excludeCurrent && excludeCurrent !== undefined) {
+                    for (let index = 0; index < arrNoHave.length; index++) {
+                        const element = arrNoHave[index];
+                        if (element[GoodsProperty.name] === get_Current(goodsClass)) {
+                            arrNoHave.splice(index, 1);
+                            break;
+                        }
+                    }
+                }
+                return arrNoHave;
+            }
+            Shop.getwayGoldArr = getwayGoldArr;
+            function getwayIneedwinArr(goodsClass, have) {
+                let arr = getGoodsClassArr(goodsClass);
+                let arrIneedwin = [];
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (have && have !== undefined) {
+                        if (element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.ineedwin) {
+                            arrIneedwin.push(element);
+                        }
+                    }
+                    else if (!have && have !== undefined) {
+                        if (!element[GoodsProperty.have] && element[GoodsProperty.getway] === Getway.ineedwin) {
+                            arrIneedwin.push(element);
+                        }
+                    }
+                    else if (have == undefined) {
+                        if (element[GoodsProperty.getway] === Getway.ineedwin) {
+                            arrIneedwin.push(element);
+                        }
+                    }
+                }
+                return arrIneedwin;
+            }
+            Shop.getwayIneedwinArr = getwayIneedwinArr;
+            function get_Current(goodsClass) {
+                let _current = null;
+                switch (goodsClass) {
+                    case GoodsClass.Skin:
+                        _current = Shop._currentSkin.name;
+                        break;
+                    case GoodsClass.Props:
+                        _current = Shop._currentProp.name;
+                        break;
+                    case GoodsClass.Other:
+                        _current = Shop._currentOther.name;
+                        break;
+                    default:
+                        break;
+                }
+                return _current;
+            }
+            Shop.get_Current = get_Current;
+            function getGoodsClassArr(goodsClass) {
+                let arr = [];
+                switch (goodsClass) {
+                    case GoodsClass.Skin:
+                        arr = Shop.allSkin;
+                        break;
+                    case GoodsClass.Props:
+                        arr = Shop.allProps;
+                        break;
+                    case GoodsClass.Other:
+                        arr = Shop.allOther;
+                        break;
+                    default:
+                        break;
+                }
+                return arr;
+            }
+            Shop.getGoodsClassArr = getGoodsClassArr;
+            function buyGoods(calssName, name, number) {
+                if (!number) {
+                    number = 1;
+                }
+                let resCondition = getGoodsProperty(calssName, name, GoodsProperty.resCondition);
+                let condition = getGoodsProperty(calssName, name, GoodsProperty.condition);
+                let have = getGoodsProperty(calssName, name, GoodsProperty.have);
+                if (have !== true && have !== null) {
+                    if (condition <= resCondition + number) {
+                        setGoodsProperty(calssName, name, GoodsProperty.resCondition, condition);
+                        setGoodsProperty(calssName, name, GoodsProperty.have, true);
+                        if (Shop._ShopList) {
+                            Shop._ShopList.refresh();
+                        }
+                        return 1;
+                    }
+                    else {
+                        setGoodsProperty(calssName, name, GoodsProperty.resCondition, resCondition + number);
+                        if (Shop._ShopList) {
+                            Shop._ShopList.refresh();
+                        }
+                        return 0;
+                    }
+                }
+                else {
+                    return -1;
+                }
+            }
+            Shop.buyGoods = buyGoods;
+            function initShop() {
+                Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+            }
+            Shop.initShop = initShop;
+            let GoodsProperty;
+            (function (GoodsProperty) {
+                GoodsProperty["name"] = "name";
+                GoodsProperty["getway"] = "getway";
+                GoodsProperty["condition"] = "condition";
+                GoodsProperty["resCondition"] = "resCondition";
+                GoodsProperty["arrange"] = "arrange";
+                GoodsProperty["getOder"] = "getOder";
+                GoodsProperty["have"] = "have";
+            })(GoodsProperty = Shop.GoodsProperty || (Shop.GoodsProperty = {}));
+            let Getway;
+            (function (Getway) {
+                Getway["free"] = "free";
+                Getway["ads"] = "ads";
+                Getway["adsXD"] = "adsXD";
+                Getway["ineedwin"] = "ineedwin";
+                Getway["gold"] = "gold";
+                Getway["diamond"] = "diamond";
+                Getway["easterEgg"] = "easterEgg";
+                Getway["other"] = "other";
+            })(Getway = Shop.Getway || (Shop.Getway = {}));
+            let GoodsClass;
+            (function (GoodsClass) {
+                GoodsClass["Skin"] = "Shop_Skin";
+                GoodsClass["Props"] = "Shop_Props";
+                GoodsClass["Other"] = "Shop_Other";
+            })(GoodsClass = Shop.GoodsClass || (Shop.GoodsClass = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["select"] = "select";
+            })(EventType = Shop.EventType || (Shop.EventType = {}));
+            class ShopScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.shopOnAwake();
+                }
+                initData() {
+                    Shop._ShopTap = this.self['MyTap'];
+                    Shop._ShopList = this.self['MyList'];
+                    if (!Shop.allSkin) {
+                        Shop.allSkin = Tools.dataCompare('GameData/Shop/Skin.json', GoodsClass.Skin, GoodsProperty.name);
+                    }
+                    if (!Shop.allProps) {
+                        Shop.allProps = Tools.dataCompare('GameData/Shop/Props.json', GoodsClass.Props, GoodsProperty.name);
+                    }
+                    if (!Shop.allOther) {
+                        Shop.allOther = Tools.dataCompare('GameData/Shop/Other.json', GoodsClass.Other, GoodsProperty.name);
+                    }
+                    Shop.goodsClassArr = [Shop.allSkin, Shop.allProps, Shop.allOther];
+                    Shop.classWarehouse = [GoodsClass.Skin, GoodsClass.Props, GoodsClass.Skin];
+                }
+                lwgEventReg() {
+                    this.shopEventReg();
+                }
+                shopEventReg() { }
+                shopOnAwake() { }
+                lwgNodeDec() {
+                    this.shopNodeDec();
+                }
+                shopNodeDec() { }
+                lwgOnEnable() {
+                    this.myList_Create();
+                    this.myTap_Create();
+                    this.shopOnEnable();
+                }
+                shopOnEnable() { }
+                myTap_Create() {
+                    Shop._ShopTap.selectHandler = new Laya.Handler(this, this.myTap_Select);
+                }
+                myTap_Select(index) { }
+                myList_Create() {
+                    Shop._ShopList.selectEnable = true;
+                    Shop._ShopList.selectHandler = new Laya.Handler(this, this.myList_Scelet);
+                    Shop._ShopList.renderHandler = new Laya.Handler(this, this.myList_Update);
+                    this.myList_refresh();
+                }
+                myList_Scelet(index) { }
+                myList_Update(cell, index) { }
+                myList_refresh() {
+                    if (Shop._ShopList && Shop.goodsClassArr.length > 0) {
+                        Shop._ShopList.array = Shop.goodsClassArr[0];
+                        Shop._ShopList.refresh();
+                    }
+                }
+                lwgOnDisable() {
+                    this.shopOnDisable();
+                }
+                shopOnDisable() {
+                }
+            }
+            Shop.ShopScene = ShopScene;
+        })(Shop = lwg.Shop || (lwg.Shop = {}));
+        let VictoryBox;
+        (function (VictoryBox) {
+            VictoryBox._BoxArray = [];
+            VictoryBox._defaultOpenNum = 3;
+            VictoryBox._alreadyOpenNum = 0;
+            VictoryBox._adsMaxOpenNum = 6;
+            VictoryBox._openVictoryBoxNum = 0;
+            function getBoxProperty(name, property) {
+                let pro = null;
+                for (let index = 0; index < VictoryBox._BoxArray.length; index++) {
+                    const element = VictoryBox._BoxArray[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            VictoryBox.getBoxProperty = getBoxProperty;
+            function setBoxProperty(name, property, value) {
+                for (let index = 0; index < VictoryBox._BoxArray.length; index++) {
+                    const element = VictoryBox._BoxArray[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                if (VictoryBox._BoxList) {
+                    VictoryBox._BoxList.refresh();
+                }
+            }
+            VictoryBox.setBoxProperty = setBoxProperty;
+            let BoxProperty;
+            (function (BoxProperty) {
+                BoxProperty["name"] = "name";
+                BoxProperty["rewardType"] = "rewardType";
+                BoxProperty["rewardNum"] = "rewardNum";
+                BoxProperty["openState"] = "openState";
+                BoxProperty["ads"] = "ads";
+                BoxProperty["select"] = "select";
+            })(BoxProperty = VictoryBox.BoxProperty || (VictoryBox.BoxProperty = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["openBox"] = "openBox";
+            })(EventType = VictoryBox.EventType || (VictoryBox.EventType = {}));
+            class VictoryBoxScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.victoryBoxOnAwake();
+                }
+                initData() {
+                    VictoryBox._BoxList = this.self['BoxList'];
+                    VictoryBox._BoxArray = Tools.objArray_Copy(Laya.loader.getRes("GameData/VictoryBox/VictoryBox.json")['RECORDS']);
+                    VictoryBox._selectBox = null;
+                    VictoryBox._defaultOpenNum = 3;
+                    VictoryBox._openVictoryBoxNum++;
+                    VictoryBox._adsMaxOpenNum = 6;
+                    VictoryBox._alreadyOpenNum = 0;
+                }
+                victoryBoxOnAwake() { }
+                lwgOnEnable() {
+                    this.boxList_Create();
+                    this.victoryBoxOnEnable();
+                }
+                victoryBoxOnEnable() { }
+                boxList_Create() {
+                    VictoryBox._BoxList.selectEnable = true;
+                    VictoryBox._BoxList.selectHandler = new Laya.Handler(this, this.boxList_Scelet);
+                    VictoryBox._BoxList.renderHandler = new Laya.Handler(this, this.boxList_Update);
+                    this.boxList_refresh();
+                }
+                boxList_Scelet(index) { }
+                boxList_Update(cell, index) { }
+                boxList_refresh() {
+                    if (VictoryBox._BoxList) {
+                        VictoryBox._BoxList.array = VictoryBox._BoxArray;
+                        VictoryBox._BoxList.refresh();
+                    }
+                }
+                lwgNodeDec() {
+                    this.victoryBoxNodeDec();
+                }
+                victoryBoxNodeDec() { }
+                lwgBtnClick() {
+                    this.victoryBoxBtnClick();
+                }
+                victoryBoxBtnClick() { }
+                lwgEventReg() {
+                    this.victoryBoxEventReg();
+                }
+                victoryBoxEventReg() { }
+                lwgOnDisable() {
+                    this.victoryBoxOnDisable();
+                }
+                victoryBoxOnDisable() { }
+                lwgOnUpdate() {
+                    this.victoryOnUpdate();
+                }
+                victoryOnUpdate() { }
+            }
+            VictoryBox.VictoryBoxScene = VictoryBoxScene;
+        })(VictoryBox = lwg.VictoryBox || (lwg.VictoryBox = {}));
+        let CheckIn;
+        (function (CheckIn) {
+            CheckIn._lastCheckDate = {
+                get date() {
+                    return Laya.LocalStorage.getItem('Check_lastCheckDate') ? Number(Laya.LocalStorage.getItem('Check_lastCheckDate')) : -1;
+                },
+                set date(date) {
+                    Laya.LocalStorage.setItem('Check_lastCheckDate', date.toString());
+                }
+            };
+            CheckIn._checkInNum = {
+                get number() {
+                    return Laya.LocalStorage.getItem('Check_checkInNum') ? Number(Laya.LocalStorage.getItem('Check_checkInNum')) : 0;
+                },
+                set number(num) {
+                    Laya.LocalStorage.setItem('Check_checkInNum', num.toString());
+                }
+            };
+            function getCheckProperty(name, property) {
+                let pro = null;
+                for (let index = 0; index < CheckIn._checkArray.length; index++) {
+                    const element = CheckIn._checkArray[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            CheckIn.getCheckProperty = getCheckProperty;
+            function setCheckProperty(className, name, property, value) {
+                for (let index = 0; index < CheckIn._checkArray.length; index++) {
+                    const element = CheckIn._checkArray[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[className] = CheckIn._checkArray;
+                Laya.LocalStorage.setJSON(className, JSON.stringify(data));
+                if (CheckIn._checkList) {
+                    CheckIn._checkList.refresh();
+                }
+            }
+            CheckIn.setCheckProperty = setCheckProperty;
+            function openCheckIn() {
+                let todayDate = (new Date).getDate();
+                if (todayDate !== CheckIn._lastCheckDate.date) {
+                    console.log('没有签到过，弹出签到页面！');
+                    Admin._openScene(Admin.SceneName.UICheckIn);
+                }
+                else {
+                    console.log('签到过了，今日不可以再签到');
+                }
+            }
+            CheckIn.openCheckIn = openCheckIn;
+            function todayCheckIn_7Days() {
+                let todayDate = (new Date).getDate();
+                CheckIn._lastCheckDate.date = todayDate;
+                CheckIn._checkInNum.number++;
+                setCheckProperty(CheckClass.chek_7Days, 'day' + CheckIn._checkInNum.number, CheckProPerty.checkInState, true);
+                let rewardNum = getCheckProperty('day' + CheckIn._checkInNum.number, CheckProPerty.rewardNum);
+                if (CheckIn._checkInNum.number === 7) {
+                    CheckIn._checkInNum.number = 0;
+                    Laya.LocalStorage.removeItem(CheckClass.chek_7Days);
+                }
+                return rewardNum;
+            }
+            CheckIn.todayCheckIn_7Days = todayCheckIn_7Days;
+            let CheckClass;
+            (function (CheckClass) {
+                CheckClass["chek_7Days"] = "Chek_7Days";
+                CheckClass["chek_15Days"] = "Chek_15Days";
+                CheckClass["chek_30Days"] = "Chek_30Days";
+            })(CheckClass = CheckIn.CheckClass || (CheckIn.CheckClass = {}));
+            let CheckProPerty;
+            (function (CheckProPerty) {
+                CheckProPerty["name"] = "name";
+                CheckProPerty["rewardType"] = "rewardType";
+                CheckProPerty["rewardNum"] = "rewardNum";
+                CheckProPerty["checkInState"] = "checkInState";
+                CheckProPerty["arrange"] = "arrange";
+            })(CheckProPerty = CheckIn.CheckProPerty || (CheckIn.CheckProPerty = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["removeCheckBtn"] = "removeCheckBtn";
+            })(EventType = CheckIn.EventType || (CheckIn.EventType = {}));
+            class CheckInScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.checkInOnAwake();
+                }
+                initData() {
+                    CheckIn._checkList = this.self['CheckList'];
+                    CheckIn._checkArray = Tools.dataCompare('GameData/CheckIn/CheckIn.json', CheckClass.chek_7Days, CheckProPerty.name);
+                }
+                checkInOnAwake() { }
+                lwgOnEnable() {
+                    this.checkList_Create();
+                    this.checkInOnEnable();
+                }
+                checkInOnEnable() { }
+                checkList_Create() {
+                    CheckIn._checkList.selectEnable = true;
+                    CheckIn._checkList.selectHandler = new Laya.Handler(this, this.checkList_Scelet);
+                    CheckIn._checkList.renderHandler = new Laya.Handler(this, this.checkList_Update);
+                    this.checkList_refresh();
+                }
+                checkList_Scelet(index) { }
+                checkList_Update(cell, index) { }
+                checkList_refresh() {
+                    if (CheckIn._checkList) {
+                        CheckIn._checkList.array = CheckIn._checkArray;
+                        CheckIn._checkList.refresh();
+                    }
+                }
+                lwgNodeDec() {
+                    this.checkInNodeDec();
+                }
+                checkInNodeDec() { }
+                lwgBtnClick() {
+                    this.checkInBtnClick();
+                }
+                checkInBtnClick() { }
+                lwgEventReg() {
+                    this.checkInEventReg();
+                }
+                checkInEventReg() { }
+                lwgOnDisable() {
+                    this.checkInOnDisable();
+                }
+                checkInOnDisable() { }
+                lwgOnUpdate() {
+                    this.checkInOnUpdate();
+                }
+                checkInOnUpdate() { }
+            }
+            CheckIn.CheckInScene = CheckInScene;
+        })(CheckIn = lwg.CheckIn || (lwg.CheckIn = {}));
+        let SkinXD;
+        (function (SkinXD) {
+            SkinXD._adsNum = {
+                get value() {
+                    return Laya.LocalStorage.getItem('XDSKin_adsNum') ? Number(Laya.LocalStorage.getItem('XDSKin_adsNum')) : 0;
+                },
+                set value(value) {
+                    Laya.LocalStorage.setItem('XDSKin_adsNum', value.toString());
+                }
+            };
+            function openXDSkin(fromScene) {
+                if (SkinXD._adsNum.value >= SkinXD._needAdsNum) {
+                    return;
+                }
+                else {
+                    Admin._openScene(Admin.SceneName.UISkinXD);
+                    SkinXD._fromScene = fromScene;
+                }
+            }
+            SkinXD.openXDSkin = openXDSkin;
+            let EventType;
+            (function (EventType) {
+                EventType["acquisition"] = "acquisition";
+            })(EventType = SkinXD.EventType || (SkinXD.EventType = {}));
+            class SkinXDScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.skinXDOnAwake();
+                }
+                initData() {
+                    SkinXD._needAdsNum = 3;
+                }
+                skinXDOnAwake() { }
+                lwgAdaptive() {
+                    this.skinXDAdaptive();
+                }
+                skinXDAdaptive() { }
+                ;
+                lwgOnEnable() {
+                    this.skinXDOnEnable();
+                }
+                skinXDOnEnable() { }
+                lwgNodeDec() {
+                    this.skinXDNodeDec();
+                }
+                skinXDNodeDec() { }
+                lwgBtnClick() {
+                    this.skinXDBtnClick();
+                }
+                skinXDBtnClick() { }
+                lwgEventReg() {
+                    this.skinXDEventReg();
+                }
+                skinXDEventReg() { }
+                lwgOnDisable() {
+                    this.skinXDOnDisable();
+                }
+                skinXDOnDisable() { }
+                lwgOnUpdate() {
+                    this.skinXDOnUpdate();
+                }
+                skinXDOnUpdate() { }
+            }
+            SkinXD.SkinXDScene = SkinXDScene;
+        })(SkinXD = lwg.SkinXD || (lwg.SkinXD = {}));
+        let Skin;
+        (function (Skin) {
+            Skin._skinClassArr = [];
+            Skin._headSkinArr = [];
+            Skin._currentHead = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Skin_currentHead') ? Laya.LocalStorage.getItem('Skin_currentHead') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Skin_currentHead', name);
+                }
+            };
+            Skin._eyeSkinArr = [];
+            Skin._currentEye = {
+                get name() {
+                    return Laya.LocalStorage.getItem('Skin_currentEye') ? Laya.LocalStorage.getItem('Skin_currentEye') : null;
+                },
+                set name(name) {
+                    Laya.LocalStorage.setItem('Skin_currentEye', name);
+                }
+            };
+            let SkinClass;
+            (function (SkinClass) {
+                SkinClass["head"] = "head";
+                SkinClass["eye"] = "eye";
+                SkinClass["body"] = "body";
+                SkinClass["upperBody"] = "upperBody";
+                SkinClass["lowerBody"] = "lowerBody";
+            })(SkinClass = Skin.SkinClass || (Skin.SkinClass = {}));
+            let SkinProperty;
+            (function (SkinProperty) {
+                SkinProperty["name"] = "name";
+                SkinProperty["getway"] = "getway";
+                SkinProperty["condition"] = "condition";
+                SkinProperty["resCondition"] = "resCondition";
+                SkinProperty["arrange"] = "arrange";
+                SkinProperty["getOder"] = "getOder";
+                SkinProperty["classify"] = "classify";
+                SkinProperty["have"] = "have";
+            })(SkinProperty = Skin.SkinProperty || (Skin.SkinProperty = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["purchase"] = "purchase";
+                EventType["select"] = "select";
+            })(EventType = Skin.EventType || (Skin.EventType = {}));
+            class SkinScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.initData();
+                    this.skinOnAwake();
+                }
+                initData() {
+                    Skin._SkinTap = this.self['SkinTap'];
+                    Skin._SkinList = this.self['SkinList'];
+                    Skin._skinClassArr = [Skin._eyeSkinArr, Skin._headSkinArr];
+                }
+                lwgEventReg() {
+                    this.skinEventReg();
+                }
+                skinEventReg() { }
+                skinOnAwake() { }
+                lwgNodeDec() {
+                    this.skinNodeDec();
+                }
+                skinNodeDec() { }
+                lwgOnEnable() {
+                    this.skinList_Create();
+                    this.skinTap_Create();
+                    this.skinOnEnable();
+                }
+                skinOnEnable() { }
+                lwgOpenAni() { return this.skinOpenAin(); }
+                skinOpenAin() { return 0; }
+                lwgBtnClick() { this.skinBtnClick(); }
+                skinBtnClick() { }
+                ;
+                skinTap_Create() {
+                    Skin._SkinTap.selectHandler = new Laya.Handler(this, this.skinTap_Select);
+                }
+                skinTap_Select(index) { }
+                skinList_Create() {
+                    Skin._SkinList.selectEnable = true;
+                    Skin._SkinList.selectHandler = new Laya.Handler(this, this.skinList_Scelet);
+                    Skin._SkinList.renderHandler = new Laya.Handler(this, this.skinList_Update);
+                    this.skinList_refresh();
+                }
+                skinList_Scelet(index) { }
+                skinList_Update(cell, index) { }
+                skinList_refresh() {
+                    if (Skin._SkinList && Skin._skinClassArr.length > 0) {
+                        Skin._SkinList.array = Skin._skinClassArr[0];
+                        Skin._SkinList.refresh();
+                    }
+                }
+                lwgOnDisable() {
+                    this.skinOnDisable();
+                }
+                skinOnDisable() {
+                }
+            }
+            Skin.SkinScene = SkinScene;
+        })(Skin = lwg.Skin || (lwg.Skin = {}));
+        let Loding;
+        (function (Loding) {
+            Loding.lodingList_3DScene = [];
+            Loding.lodingList_3DPrefab = [];
+            Loding.lodingList_3DMesh = [];
+            Loding.lodingList_3DBaseMaterial = [];
+            Loding.lodingList_3DTexture2D = [];
+            Loding.lodingList_2D = [];
+            Loding.lodingList_Json = [];
+            Loding.sumProgress = 0;
+            Loding.currentProgress = {
+                val: 0,
+                get value() {
+                    return this.val;
+                },
+                set value(v) {
+                    this.val = v;
+                    if (this.val >= Loding.sumProgress) {
+                        console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
+                        console.log('进度条停止！');
+                        console.log('所有资源加载完成！此时所有资源可通过例如 Laya.loader.getRes("Data/levelsData.json")获取');
+                        EventAdmin.notify(Loding.LodingType.complete);
+                    }
+                    else {
+                        let number = 0;
+                        for (let index = 0; index <= Loding.loadOrderIndex; index++) {
+                            number += Loding.loadOrder[index].length;
+                        }
+                        if (this.val === number) {
+                            Loding.loadOrderIndex++;
+                        }
+                        EventAdmin.notify(Loding.LodingType.loding);
+                    }
+                },
+            };
+            let LodingType;
+            (function (LodingType) {
+                LodingType["complete"] = "complete";
+                LodingType["loding"] = "loding";
+                LodingType["progress"] = "progress";
+            })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
+            class LodeScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.lodingResList();
+                }
+                lodingResList() { }
+                lwgEventReg() {
+                    EventAdmin.reg(LodingType.loding, this, () => { this.lodingRule(); });
+                    EventAdmin.reg(LodingType.complete, this, () => { this.lodingComplete(); this.lwgInterior(); this.lodingTaskEventReg(); });
+                    EventAdmin.reg(LodingType.progress, this, (skip) => {
+                        Loding.currentProgress.value++;
+                        if (Loding.currentProgress.value < Loding.sumProgress) {
+                            console.log('当前进度条进度为:', Loding.currentProgress.value / Loding.sumProgress);
+                            this.lodingPhaseComplete();
+                        }
+                    });
+                }
+                lwgOnEnable() {
+                    Loding.loadOrder = [Loding.lodingList_2D, Loding.lodingList_3DScene, Loding.lodingList_3DPrefab, Loding.lodingList_Json];
+                    for (let index = 0; index < Loding.loadOrder.length; index++) {
+                        Loding.sumProgress += Loding.loadOrder[index].length;
+                        if (Loding.loadOrder[index].length <= 0) {
+                            Loding.loadOrder.splice(index, 1);
+                            index--;
+                        }
+                    }
+                    Loding.loadOrderIndex = 0;
+                    EventAdmin.notify(Loding.LodingType.loding);
+                }
+                lodingRule() {
+                    if (Loding.loadOrder.length <= 0) {
+                        console.log('没有加载项');
+                        return;
+                    }
+                    let alreadyPro = 0;
+                    for (let i = 0; i < Loding.loadOrderIndex; i++) {
+                        alreadyPro += Loding.loadOrder[i].length;
+                    }
+                    let index = Loding.currentProgress.value - alreadyPro;
+                    switch (Loding.loadOrder[Loding.loadOrderIndex]) {
+                        case Loding.lodingList_2D:
+                            Laya.loader.load(Loding.lodingList_2D[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX2D资源' + Loding.lodingList_2D[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                }
+                                else {
+                                    console.log('2D资源' + Loding.lodingList_2D[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_3DScene:
+                            Laya.Scene3D.load(Loding.lodingList_3DScene[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX3D场景' + Loding.lodingList_3DScene[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                }
+                                else {
+                                    console.log('3D场景' + Loding.lodingList_3DScene[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_3DPrefab:
+                            Laya.Sprite3D.load(Loding.lodingList_3DPrefab[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX3D预设体' + Loding.lodingList_3DPrefab[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                }
+                                else {
+                                    console.log('3D场景' + Loding.lodingList_3DPrefab[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }));
+                            break;
+                        case Loding.lodingList_Json:
+                            Laya.loader.load(Loding.lodingList_Json[index], Laya.Handler.create(this, (any) => {
+                                if (any == null) {
+                                    console.log('XXXXXXXXXXX数据表' + Loding.lodingList_Json[index] + '加载失败！不会停止加载进程！', '数组下标为：', index, 'XXXXXXXXXXX');
+                                }
+                                else {
+                                    console.log('数据表' + Loding.lodingList_Json[index] + '加载完成！', '数组下标为：', index);
+                                }
+                                EventAdmin.notify(LodingType.progress);
+                            }), null, Laya.Loader.JSON);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                lodingPhaseComplete() { }
+                lwgInterior() {
+                }
+                lodingTaskEventReg() {
+                }
+                lodingComplete() { }
+            }
+            Loding.LodeScene = LodeScene;
+        })(Loding = lwg.Loding || (lwg.Loding = {}));
+        let Tomato;
+        (function (Tomato) {
+            let scenePointType;
+            (function (scenePointType) {
+                scenePointType["open"] = "open";
+                scenePointType["close"] = "close";
+            })(scenePointType = Tomato.scenePointType || (Tomato.scenePointType = {}));
+            function scenePrintPoint(sceneName, type) {
+                switch (sceneName) {
+                    case Admin.SceneName.UILoding:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'UIPreload');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'UIPreload');
+                        }
+                        break;
+                    case Admin.SceneName.UIStart:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'mianpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'mianpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIVictory:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'successpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'successpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIDefeated:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'failpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'failpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIResurgence:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'revivepage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'revivepage');
+                        }
+                        break;
+                    case Admin.SceneName.UISkinXD:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'limmitpage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'limmitpage');
+                        }
+                        break;
+                    case Admin.SceneName.UIShare:
+                        if (type === scenePointType.open) {
+                            ADManager.TAPoint(TaT.PageEnter, 'sharepage');
+                        }
+                        else if (type === scenePointType.close) {
+                            ADManager.TAPoint(TaT.PageLeave, 'sharepage');
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Tomato.scenePrintPoint = scenePrintPoint;
+            let btnPointType;
+            (function (btnPointType) {
+                btnPointType["show"] = "show";
+                btnPointType["click"] = "click";
+            })(btnPointType = Tomato.btnPointType || (Tomato.btnPointType = {}));
+            function btnPrintPoint() {
+            }
+            Tomato.btnPrintPoint = btnPrintPoint;
+        })(Tomato = lwg.Tomato || (lwg.Tomato = {}));
+    })(lwg || (lwg = {}));
+    let Admin = lwg.Admin;
+    let Gold = lwg.Gold;
+    let Click = lwg.Click;
+    let EventAdmin = lwg.EventAdmin;
+    let Tools = lwg.Tools;
+    let Effects = lwg.Effects;
+    let PalyAudio = lwg.PalyAudio;
+    let Setting = lwg.Setting;
+    let Dialog = lwg.Dialog;
+    let Animation2D = lwg.Animation2D;
+    let Animation3D = lwg.Animation3D;
+    let Loding = lwg.Loding;
+    let LodeScene = lwg.Loding.LodeScene;
+    let Shop = lwg.Shop;
+    let ShopScene = lwg.Shop.ShopScene;
+    let Task = lwg.Task;
+    let TaskScene = lwg.Task.TaskScene;
+    let VictoryBox = lwg.VictoryBox;
+    let VictoryBoxScene = lwg.VictoryBox.VictoryBoxScene;
+    let CheckIn = lwg.CheckIn;
+    let CheckInScene = lwg.CheckIn.CheckInScene;
+    let SkinXD = lwg.SkinXD;
+    let SkinXDScene = lwg.SkinXD.SkinXDScene;
+    let Skin = lwg.Skin;
+    let SkinScene = lwg.Skin.SkinScene;
+    let Tomato = lwg.Tomato;
+
+    var EasterEgg;
+    (function (EasterEgg) {
+        EasterEgg._easterEgg_1Arr = [];
+        EasterEgg._easterEgg_1 = {
+            get value() {
+                if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
+            }
+        };
+        function initEasterEgg() {
+            EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
+            Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
+        }
+        EasterEgg.initEasterEgg = initEasterEgg;
+        function getProperty(classify, name, property) {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            }
+            else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+        EasterEgg.getProperty = getProperty;
+        function setProperty(classify, name, property, value) {
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
+                }
+            }
+            let data = {};
+            data[classify] = arr;
+            Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
+        }
+        EasterEgg.setProperty = setProperty;
+        function getTaskProperty(classify, name, property) {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            }
+            else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
+        }
+        EasterEgg.getTaskProperty = getTaskProperty;
+        function getClassify(classify) {
+            let arr = [];
+            switch (classify) {
+                case Classify.EasterEgg_01:
+                    arr = EasterEgg._easterEgg_1Arr;
+                    break;
+                default:
+                    break;
+            }
+            return arr;
+        }
+        EasterEgg.getClassify = getClassify;
+        function doDetection(classify, name, number) {
+            if (!number) {
+                number = 0;
+            }
+            let resCondition = getProperty(classify, name, Property.resCondition);
+            let condition = getProperty(classify, name, Property.condition);
+            if (!getProperty(classify, name, Property.complete)) {
+                if (condition <= resCondition + number) {
+                    setProperty(classify, name, Property.resCondition, condition);
+                    setProperty(classify, name, Property.complete, true);
+                    console.log(getProperty(classify, name, Property.complete));
+                    return 1;
+                }
+                else {
+                    setProperty(classify, name, Property.resCondition, resCondition + number);
+                    return 0;
+                }
+            }
+            else {
+                return 1;
+            }
+        }
+        EasterEgg.doDetection = doDetection;
+        function detectAllTasks(classify) {
+            let num = 1;
+            let arr = getClassify(classify);
+            for (const key in arr) {
+                if (arr.hasOwnProperty(key)) {
+                    const element = arr[key];
+                    let resCondition = getProperty(classify, element.name, Property.resCondition);
+                    let condition = getProperty(classify, element.name, Property.condition);
+                    if (condition > resCondition) {
+                        num = 0;
+                    }
+                }
+            }
+            if (num == 1) {
+                console.log(classify, '完成了！');
+            }
+            else {
+                console.log(classify, '没有完成！');
+            }
+            return num;
+        }
+        EasterEgg.detectAllTasks = detectAllTasks;
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+            rewardType["assembly"] = "assembly";
+        })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
+        let Property;
+        (function (Property) {
+            Property["name"] = "name";
+            Property["explain"] = "explain";
+            Property["condition"] = "condition";
+            Property["resCondition"] = "resCondition";
+            Property["complete"] = "complete";
+        })(Property = EasterEgg.Property || (EasterEgg.Property = {}));
+        let Classify;
+        (function (Classify) {
+            Classify["EasterEgg_01"] = "EasterEgg_01";
+        })(Classify = EasterEgg.Classify || (EasterEgg.Classify = {}));
+        let Name;
+        (function (Name) {
+            Name["assembly_1"] = "assembly_1";
+            Name["assembly_2"] = "assembly_2";
+            Name["assembly_3"] = "assembly_3";
+            Name["assembly_4"] = "assembly_4";
+            Name["assembly_5"] = "assembly_5";
+        })(Name = EasterEgg.Name || (EasterEgg.Name = {}));
+        let EventType;
+        (function (EventType) {
+            EventType["trigger"] = "trigger";
+            EventType["easterEggAds"] = "easterEggAds";
+        })(EventType = EasterEgg.EventType || (EasterEgg.EventType = {}));
+        class EasterEggScene extends Admin.Scene {
+            lwgOnAwake() {
+                this.easterEggInitData();
+                this.easterEggOnAwake();
+            }
+            easterEggInitData() { }
+            lwgEventReg() { this.easterEggEventReg(); }
+            easterEggEventReg() { }
+            easterEggOnAwake() { }
+            lwgNodeDec() { this.easterEggNodeDec(); }
+            easterEggNodeDec() { }
+            lwgOnEnable() { this.easterEggOnEnable(); }
+            easterEggOnEnable() { }
+            lwgOpenAni() { return this.easterEggOpenAin(); }
+            easterEggOpenAin() { return 0; }
+            lwgBtnClick() { this.easterEggBtnClick(); }
+            easterEggBtnClick() { }
+            ;
+            lwgOnUpdate() { this.easterEggOnUpdate(); }
+            easterEggOnUpdate() { }
+            lwgOnDisable() { this.easterEggOnDisable(); }
+            easterEggOnDisable() { }
+        }
+        EasterEgg.EasterEggScene = EasterEggScene;
+    })(EasterEgg || (EasterEgg = {}));
+
+    var GameControl;
+    (function (GameControl) {
+        let _platformTpye;
+        (function (_platformTpye) {
+            _platformTpye["WeChat"] = "WeChat";
+            _platformTpye["OPPO"] = "OPPO";
+            _platformTpye["Bytedance"] = "Bytedance";
+            _platformTpye["any"] = "any";
+        })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
+        GameControl._gameSwitch = false;
+        GameControl._gameLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_gameLevel', val.toString());
+            }
+        };
+        GameControl._practicalLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
+            }
+        };
+        function getLevelData(levelNum) {
+            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
+            let level;
+            let num;
+            if (levelNum) {
+                num = levelNum;
+            }
+            else {
+                num = GameControl._gameLevel.value;
+            }
+            for (let index = 0; index < dataArr.length; index++) {
+                const element = dataArr[index];
+                if (element['name'] === 'level' + num) {
+                    level = element;
+                    break;
+                }
+            }
+            if (level) {
+                return level;
+            }
+            else {
+                return dataArr[num - 1];
+            }
+        }
+        GameControl.getLevelData = getLevelData;
+        function getLevelData_Condition(levelNum) {
+            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
+            let arr0;
+            for (const key in level) {
+                if (level.hasOwnProperty(key)) {
+                    if (key === 'condition') {
+                        arr0 = level[key];
+                    }
+                }
+            }
+            if (arr0) {
+                return arr0;
+            }
+            else {
+                console.log('获取关卡描述失败');
+            }
+        }
+        GameControl.getLevelData_Condition = getLevelData_Condition;
+        let gameProperty;
+        (function (gameProperty) {
+            gameProperty["name"] = "name";
+            gameProperty["condition"] = "condition";
+            gameProperty["resCondition"] = "resCondition";
+            gameProperty["rewardType"] = "rewardType";
+            gameProperty["rewardNum"] = "rewardNum";
+        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
+        function _createLevel(parent, x, y) {
+            let sp;
+            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                parent.addChild(sp);
+                sp.pos(x, y);
+                sp.zOrder = 0;
+                let level = sp.getChildByName('level');
+                GameControl.LevelNode = sp;
+            }));
+        }
+        GameControl._createLevel = _createLevel;
+        GameControl._execution = {
+            get value() {
+                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            },
+            set value(val) {
+                this.val = val;
+                Laya.LocalStorage.setItem('_execution', val.toString());
+            }
+        };
+        class GameScene extends Admin.Scene {
+            lwgOnAwake() {
+            }
+        }
+        GameControl.GameScene = GameScene;
+    })(GameControl || (GameControl = {}));
+    let Game = GameControl;
+    let GameScene = GameControl.GameScene;
+
+    class ADManager {
+        constructor() {
+        }
+        static ShowBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.ShowBanner(p);
+        }
+        static CloseBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.RemoveBanner(p);
+        }
+        static ShowNormal() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static showNormal2() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static ShowReward(rewardAction, CDTime = 500) {
+            if (Game._platform === Game._platformTpye.OPPO) {
+                rewardAction();
+                EventAdmin.notify(Task.EventType.adsTime);
+                EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+                return;
+            }
+            if (ADManager.CanShowCD) {
+                PalyAudio.stopMusic();
+                console.log("?????");
+                let p = new TJ.ADS.Param();
+                p.extraAd = true;
+                let getReward = false;
+                p.cbi.Add(TJ.Define.Event.Reward, () => {
+                    getReward = true;
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    if (rewardAction != null) {
+                        rewardAction();
+                        EventAdmin.notify(Task.EventType.adsTime);
+                        EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.Close, () => {
+                    if (!getReward) {
+                        PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                        Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.NoAds, () => {
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
+                });
+                TJ.ADS.Api.ShowReward(p);
+                ADManager.CanShowCD = false;
+                setTimeout(() => {
+                    ADManager.CanShowCD = true;
+                }, CDTime);
+            }
+        }
+        static Event(param, value) {
+            console.log("Param:>" + param + "Value:>" + value);
+            let p = new TJ.GSA.Param();
+            if (value == null) {
+                p.id = param;
+            }
+            else {
+                p.id = param + value;
+            }
+            console.log(p.id);
+            TJ.GSA.Api.Event(p);
+        }
+        static initShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.onShareAppMessage(() => {
+                    return {
+                        title: this.shareContent,
+                        imageUrl: this.shareImgUrl,
+                        query: ""
+                    };
+                });
+                this.wx.showShareMenu({
+                    withShareTicket: true,
+                    success: null,
+                    fail: null,
+                    complete: null
+                });
+            }
+        }
+        static lureShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.shareAppMessage({
+                    title: this.shareContent,
+                    imageUrl: this.shareImgUrl,
+                    query: ""
+                });
+            }
+        }
+        static VibrateShort() {
+            TJ.API.Vibrate.Short();
+        }
+        static Vibratelong() {
+            TJ.API.Vibrate.Long();
+        }
+        static TAPoint(type, name) {
+            let p = new TJ.API.TA.Param();
+            p.id = name;
+            switch (type) {
+                case TaT.BtnShow:
+                    TJ.API.TA.Event_Button_Show(p);
+                    break;
+                case TaT.BtnClick:
+                    TJ.API.TA.Event_Button_Click(p);
+                    break;
+                case TaT.PageShow:
+                    TJ.API.TA.Event_Page_Show(p);
+                    break;
+                case TaT.PageEnter:
+                    TJ.API.TA.Event_Page_Enter(p);
+                    break;
+                case TaT.PageLeave:
+                    TJ.API.TA.Event_Page_Leave(p);
+                    break;
+                case TaT.LevelStart:
+                    TJ.API.TA.Event_Level_Start(p);
+                    console.log('本关开始打点');
+                    break;
+                case TaT.LevelFail:
+                    TJ.API.TA.Event_Level_Fail(p);
+                    console.log('本关失败打点');
+                    break;
+                case TaT.LevelFinish:
+                    TJ.API.TA.Event_Level_Finish(p);
+                    console.log('本关胜利打点');
+                    break;
+            }
+        }
+    }
+    ADManager.CanShowCD = true;
+    ADManager.wx = Laya.Browser.window.wx;
+    ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
+    ADManager.shareContent = "快把锅甩给队友！";
+    var TaT;
+    (function (TaT) {
+        TaT[TaT["BtnShow"] = 0] = "BtnShow";
+        TaT[TaT["BtnClick"] = 1] = "BtnClick";
+        TaT[TaT["PageShow"] = 2] = "PageShow";
+        TaT[TaT["PageEnter"] = 3] = "PageEnter";
+        TaT[TaT["PageLeave"] = 4] = "PageLeave";
+        TaT[TaT["LevelStart"] = 5] = "LevelStart";
+        TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
+        TaT[TaT["LevelFail"] = 7] = "LevelFail";
+    })(TaT || (TaT = {}));
+
+    class UICheckIn extends CheckIn.CheckInScene {
+        checkInNodeDec() {
+            if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
+                this.self['BtnThreeGet_WeChat'].visible = false;
+                this.self['BtnGet_WeChat'].visible = false;
+                this.self['Select_WeChat'].visible = false;
+            }
+        }
+        checkInOnEnable() {
+            ADManager.TAPoint(TaT.BtnShow, 'AD3award');
+            Setting.setBtnVinish();
+            let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
+            ChinkTip.visible = false;
+            if (Game._platform === Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+            }
+            else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
+        }
+        checkList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Pic_Board = cell.getChildByName('Pic_Board');
+            let Pic_Gold = cell.getChildByName('Pic_Gold');
+            let Num = cell.getChildByName('Num');
+            let ChinkTip = cell.getChildByName('ChinkTip');
+            let DayNum = cell.getChildByName('DayNum');
+            if (dataSource[CheckIn.CheckProPerty.checkInState]) {
+                Pic_Gold.visible = false;
+                Num.visible = false;
+                ChinkTip.visible = true;
+                Pic_Board.skin = 'UI/Common/kuang1.png';
+            }
+            else {
+                Pic_Gold.visible = true;
+                Num.visible = true;
+                Num.text = dataSource[CheckIn.CheckProPerty.rewardNum];
+                ChinkTip.visible = false;
+                Pic_Board.skin = 'UI/Common/kuang2.png';
+            }
+            switch (dataSource[CheckIn.CheckProPerty.name]) {
+                case 'day1':
+                    DayNum.text = '第一天';
+                    break;
+                case 'day2':
+                    DayNum.text = '第二天';
+                    break;
+                case 'day3':
+                    DayNum.text = '第三天';
+                    break;
+                case 'day4':
+                    DayNum.text = '第四天';
+                    break;
+                case 'day5':
+                    DayNum.text = '第五天';
+                    break;
+                case 'day6':
+                    DayNum.text = '第六天';
+                    break;
+                case 'day7':
+                    DayNum.text = '第七天';
+                    break;
+                default:
+                    break;
+            }
+        }
+        checkInBtnClick() {
+            lwg.Click.on('largen', this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+            lwg.Click.on('largen', this.self['BtnThreeGet_WeChat'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.on(Click.Type.noEffect, this.self['Select_WeChat'], this, null, null, this.btnSelectUp);
+            lwg.Click.on(Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+            lwg.Click.on(Click.Type.largen, this.self['BtnThreeGet_OPPO'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnOffClick() {
+            lwg.Click.off('largen', this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+            lwg.Click.off('largen', this.self['BtnThreeGet_WeChat'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.off(Click.Type.noEffect, this.self['Select_WeChat'], this, null, null, this.btnSelectUp);
+            lwg.Click.off(Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+            lwg.Click.off(Click.Type.largen, this.self['BtnThreeGet_OPPO'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnThreeGetUp() {
+            ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'AD3award');
+                this.btnGetUpFunc(3);
+            });
+        }
+        btnBackUp(event) {
+            this.self.close();
+        }
+        btnGetUp(event) {
+            this.btnGetUpFunc(1);
+        }
+        btnGetUpFunc(number) {
+            this.btnOffClick();
+            let index = CheckIn._checkInNum.number;
+            let target;
+            if (index < 6) {
+                target = CheckIn._checkList.getCell(index);
+            }
+            else {
+                target = this.self['BtnSeven'];
+            }
+            Animation2D.swell_shrink(target, 1, 1.1, 100, 0, () => {
+                let arr = [[111, 191], [296, 191], [486, 191], [111, 394], [296, 394], [486, 394], [306, 597
+                    ]];
+                Effects.createExplosion_Rotate(this.self['SceneContent'], 25, arr[index][0], arr[index][1], 'star', 10, 15);
+                let rewardNum = CheckIn.todayCheckIn_7Days();
+                if (CheckIn._checkInNum.number === 7) {
+                    let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
+                    ChinkTip.visible = true;
+                    let Num = this.self['BtnSeven'].getChildByName('Num');
+                    Num.visible = false;
+                    let Pic_Gold = this.self['BtnSeven'].getChildByName('Pic_Gold');
+                    Pic_Gold.visible = false;
+                    this.self['BtnSeven'].skin = 'UI/Common/kuang1.png';
+                }
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Gold.addGold(rewardNum * number);
+                    this.self.close();
+                });
+            });
+        }
+        btnSelectUp() {
+            if (this.self['Dot'].visible) {
+                this.self['Dot'].visible = false;
+            }
+            else {
+                this.self['Dot'].visible = true;
+            }
+        }
+        checkInOnUpdate() {
+            if (CheckIn._lastCheckDate.date !== (new Date).getDate() && Game._platform === Game._platformTpye.WeChat) {
+                if (this.self['Dot'].visible) {
+                    this.self['BtnGet_WeChat'].visible = false;
+                    this.self['BtnThreeGet_WeChat'].visible = true;
+                }
+                else {
+                    this.self['BtnGet_WeChat'].visible = true;
+                    this.self['BtnThreeGet_WeChat'].visible = false;
+                }
+            }
+        }
+        checkInOnDisable() {
+            Setting.setBtnAppear();
+        }
+    }
+
+    var Global;
+    (function (Global) {
+        let GEnum;
+        (function (GEnum) {
+            let TaskType;
+            (function (TaskType) {
+                TaskType["HairParent"] = "HairParent";
+                TaskType["LeftBeard"] = "LeftBeard";
+                TaskType["RightBeard"] = "RightBeard";
+                TaskType["MiddleBeard"] = "MiddleBeard";
+                TaskType["UpLeftBeard"] = "UpLeftBeard";
+                TaskType["UpRightBeard"] = "UpRightBeard";
+                TaskType["movePhotoLocation"] = "movePhotoLocation";
+            })(TaskType = GEnum.TaskType || (GEnum.TaskType = {}));
+            let RazorState;
+            (function (RazorState) {
+                RazorState["move"] = "move";
+            })(RazorState = GEnum.RazorState || (GEnum.RazorState = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["HairParent"] = "HairParent";
+                EventType["LeftBeard"] = "LeftBeard";
+                EventType["RightBeard"] = "RightBeard";
+                EventType["MiddleBeard"] = "MiddleBeard";
+                EventType["UpLeftBeard"] = "UpLeftBeard";
+                EventType["UpRightBeard"] = "UpRightBeard";
+                EventType["taskProgress"] = "taskProgress";
+                EventType["cameraMove"] = "cameraMove";
+                EventType["changeProp"] = "changeProp";
+                EventType["changeOther"] = "changeOther";
+                EventType["changeHeadDecoration"] = " changeHeadDecoration";
+                EventType["changeEyeDecoration"] = " changeEyeDecoration";
+                EventType["changeTrySkin"] = "changeTrySkin";
+                EventType["goBack"] = "goBack";
+            })(EventType = GEnum.EventType || (GEnum.EventType = {}));
+        })(GEnum = Global.GEnum || (Global.GEnum = {}));
+        let GVariate;
+        (function (GVariate) {
+            GVariate._firstTask = null;
+            GVariate._stageClick = false;
+            GVariate._taskArr = [];
+            GVariate._taskNum = 0;
+        })(GVariate = Global.GVariate || (Global.GVariate = {}));
+        let GSene3D;
+        (function (GSene3D) {
+            GSene3D.LevelFpos = new Laya.Vector3();
+            GSene3D.razorFPos = new Laya.Vector3();
+            GSene3D.knifeParentFPos = new Laya.Vector3();
+            GSene3D.headFPos = new Laya.Vector3();
+        })(GSene3D = Global.GSene3D || (Global.GSene3D = {}));
+    })(Global || (Global = {}));
+    let GVariate = Global.GVariate;
+    let GEnum = Global.GEnum;
+    let GSene3D = Global.GSene3D;
+
+    class UIDefeated extends lwg.Admin.Scene {
+        lwgOnAwake() {
+            Admin._gameStart = false;
+        }
+        lwgNodeDec() {
+            this.self['BtnSelect_WeChat'].visible = true;
+            this.self['BtnAgain_WeChat'].visible = false;
+            this.self['Dot'].visible = true;
+        }
+        lwgOnEnable() {
+            ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
+            ADManager.TAPoint(TaT.BtnShow, 'ADnextbt_fail');
+            ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
+            Setting.setBtnAppear();
+            PalyAudio.playDefeatedSound();
+            if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+            }
+            else {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+            Click.on(Click.Type.largen, this.self['BtnNext_WeChat'], this, null, null, this.btnNextUp);
+            Click.on(Click.Type.largen, this.self['BtnSelect_WeChat'], this, null, null, this.btnSelectUp);
+            Click.on(Click.Type.largen, this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
+            Click.on(Click.Type.largen, this.self['BtnNext_OPPO'], this, null, null, this.btnNextUp);
+        }
+        btnSelectUp() {
+            if (this.self['Dot'].visible) {
+                this.self['Dot'].visible = false;
+                this.self['BtnSelect_WeChat'].visible = false;
+                this.self['BtnAgain_WeChat'].visible = true;
+            }
+            else {
+                this.self['Dot'].visible = true;
+                this.self['BtnSelect_WeChat'].visible = true;
+                this.self['BtnAgain_WeChat'].visible = false;
+            }
+        }
+        btnAgainUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'returnword_fail');
+            console.log('重新开始！');
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
+        }
+        btnNextUp() {
+            ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'ADnextbt_fail');
+                Game._gameLevel.value += 1;
+                EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+                Admin._openScene(Admin.SceneName.UIStart, null, this.self);
+            });
+        }
+        lwgOnDisable() {
+            EventAdmin.notify(GEnum.EventType.goBack);
+        }
+    }
+
+    class UIEasterEgg extends EasterEgg.EasterEggScene {
+        constructor() {
+            super(...arguments);
+            this.clickNum = 0;
+            this.clickSwitch = false;
+            this.clickTime = 0;
+        }
+        easterEggOnAwake() {
+            ADManager.TAPoint(TaT.BtnShow, 'power');
+            ADManager.TAPoint(TaT.BtnShow, 'Adtips');
+            Setting.setBtnVinish();
+            Gold.goldVinish();
+            this.initDisplay();
+            EasterEgg._easterEgg_1.value = true;
+        }
+        initDisplay() {
+            for (let index = 0; index < EasterEgg._easterEgg_1Arr.length; index++) {
+                const element = EasterEgg._easterEgg_1Arr[index];
+                let name = 'Complete' + (index + 1);
+                let complete = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.complete);
+                if (complete) {
+                    this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng.png';
+                }
+                else {
+                    this.self[name].skin = 'UI/EasterEgg_Aotoman/Task/wancheng2.png';
+                }
+                let assemblyName = 'Assembly' + (index + 1);
+                let Num = this.self[assemblyName].getChildByName('Num');
+                if (Num) {
+                    let condetion = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.condition);
+                    let resCondetion = EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, element.name, EasterEgg.Property.resCondition);
+                    Num.text = resCondetion + '/' + condetion;
+                }
+                switch (index) {
+                    case 0:
+                        if (complete !== 1) {
+                            Click.on(Click.Type.largen, this.self['BtnGoUp'], this, null, null, () => {
+                                Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
+                            });
+                        }
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        if (complete !== 1) {
+                            Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
+                                ADManager.ShowReward(() => {
+                                    this.self['DialogHint'].x = 0;
+                                });
+                            });
+                            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+                                this.self['DialogHint'].x = -800;
+                            });
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        easterEggBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, () => {
+                this.self.close();
+            });
+            Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+                this.clickNum++;
+                this.clickSwitch = true;
+            });
+            Click.on(Click.Type.largen, this.self['BtnInject'], this, null, null, () => {
+                ADManager.TAPoint(TaT.BtnClick, 'power');
+            });
+            Click.on(Click.Type.largen, this.self['BtnAssembly4No'], this, null, null, () => {
+                this.self['DialogAssembly4'].x = 800;
+            });
+            Click.on(Click.Type.largen, this.self['BtnAssembly4Yes'], this, null, null, () => {
+                ADManager.ShowReward(() => {
+                    this.self['DialogAssembly4'].x = 0;
+                });
+            });
+            Click.on(Click.Type.largen, this.self['BtnHint'], this, null, null, () => {
+                ADManager.ShowReward(() => {
+                    ADManager.TAPoint(TaT.BtnClick, 'Adtips');
+                    this.self['DialogHint'].x = 0;
+                });
+            });
+            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
+                this.self['DialogHint'].x = -800;
+            });
+        }
+        ;
+        clickStraight() {
+            if (this.clickSwitch) {
+                this.clickTime++;
+                if (this.clickTime >= 60) {
+                    this.clickSwitch = false;
+                    this.clickNum = 0;
+                }
+                else {
+                    if (this.clickNum >= 5) {
+                        this.self['DialogAssembly4'].x = 0;
+                        this.clickSwitch = false;
+                        this.clickNum = 0;
+                    }
+                }
+            }
+            else {
+                this.clickTime = 0;
+            }
+        }
+        easterEggOnUpdate() {
+            this.clickStraight();
+        }
+        easterEggOnDisable() {
+            Setting.setBtnAppear();
+            Gold.goldAppear();
+            EventAdmin.notify(EasterEgg.EventType.trigger);
+        }
+    }
+
+    class GameMain3D_Blade extends lwg.Admin.Object3D {
+        onTriggerEnter(other) {
+            if (!lwg.Admin._gameStart) {
+                return;
+            }
+            let otherOwner = other.owner;
+            let otherOwnerParent = otherOwner.parent;
+            switch (otherOwner.name) {
+                case 'Hairline':
+                    let length = otherOwnerParent.transform.localScaleY * 2 * otherOwner.transform.localScaleY;
+                    let HairlineH = lwg.Tools.dotRotateXY(otherOwnerParent.transform.position.x, otherOwnerParent.transform.position.y, otherOwnerParent.transform.position.x, otherOwnerParent.transform.position.y + length, otherOwnerParent.transform.localRotationEulerZ).y - otherOwnerParent.transform.position.y;
+                    let diffY = Math.abs((this.selfTransform.position.y - this.self.transform.localScaleY / 2) - otherOwnerParent.transform.position.y);
+                    let cutH = HairlineH - diffY;
+                    let cutRatio = cutH / HairlineH;
+                    otherOwnerParent.transform.localScaleY -= otherOwnerParent.transform.localScaleY * cutRatio;
+                    if (otherOwnerParent['HairLen']) {
+                        otherOwnerParent['HairLen'].setValue = otherOwnerParent.transform.localScaleY;
+                    }
+                    if (Math.floor(Math.random() * 4) === 1) {
+                        if (cutH >= 0.01) {
+                            let cutHair = otherOwnerParent.clone();
+                            cutHair.transform.localScaleY = cutHair.transform.localScaleY * cutRatio;
+                            let CutHairParent = GSene3D.Level.getChildByName('CutHairParent');
+                            cutHair.name = 'cutHair';
+                            CutHairParent.addChild(cutHair);
+                            cutHair.transform.position = this.self.transform.position;
+                            let cutHairline = cutHair.getChildAt(0);
+                            cutHairline.name = 'cutHairline';
+                            let rig3D = cutHairline.getComponent(Laya.Rigidbody3D);
+                            rig3D.isKinematic = false;
+                            rig3D.isTrigger = true;
+                            rig3D.gravity = (new Laya.Vector3(0, -20, 0));
+                            rig3D.rollingFriction = 0;
+                            rig3D.restitution = 0;
+                            Laya.timer.once(3000, this, f => { cutHair.removeSelf(); });
+                        }
+                    }
+                    break;
+                case 'standard':
+                    console.log('碰到线了，游戏失败！');
+                    EventAdmin.notify(EventAdmin.EventType.resurgence);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class GameMain3D_Razor extends lwg.Admin.Object3D {
+        lwgOnEnable() {
+            this.RazorState = GEnum.RazorState.move;
+            let Blade = this.self.getChildByName('Blade');
+            Blade.addComponent(GameMain3D_Blade);
+        }
+    }
+
+    class GameMain3D_Floor extends lwg.Admin.Object3D {
+        lwgOnEnable() {
+            this.rig3D.restitution = 0;
+        }
+        onTriggerEnter(other) {
+            let owner = other.owner;
+            switch (owner.name) {
+                case 'Beard':
+                    break;
+                case 'cutHairline':
+                    owner.parent.removeSelf();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class GameMain3D_knife extends lwg.Admin.Object3D {
+        onTriggerEnter(other) {
+            let owner = other.owner;
+            let ownerParent = owner.parent;
+            switch (owner.name.substring(0, 5)) {
+                case 'Beard':
+                    if (owner['already']) {
+                        return;
+                    }
+                    else {
+                        owner['already'] = true;
+                    }
+                    if (ownerParent.name === 'RightBeard') {
+                        EventAdmin.notify(GEnum.EventType.RightBeard);
+                    }
+                    else if (ownerParent.name === 'LeftBeard') {
+                        EventAdmin.notify(GEnum.EventType.LeftBeard);
+                    }
+                    else if (ownerParent.name === 'MiddleBeard') {
+                        EventAdmin.notify(GEnum.EventType.MiddleBeard);
+                    }
+                    else if (ownerParent.name === 'UpRightBeard') {
+                        EventAdmin.notify(GEnum.EventType.UpRightBeard);
+                    }
+                    else if (ownerParent.name === 'UpLeftBeard') {
+                        EventAdmin.notify(GEnum.EventType.UpLeftBeard);
+                    }
+                    other.isKinematic = false;
+                    other.isTrigger = false;
+                    other.linearVelocity = new Laya.Vector3(0, -3, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class GameMain3D extends lwg.Admin.Scene3D {
+        constructor() {
+            super();
+            this.moveSpeed = 1000;
+        }
+        lwgOnAwake() {
+            GSene3D.GameMain3D = this.self;
+            GSene3D.MainCamera = this.MainCamera;
+            GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark');
+            GSene3D.LevelParent_Mark = this.self.getChildByName('LevelParent_Mark');
+            GSene3D.LevelParent = Laya.loader.getRes("3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh");
+            this.self.addChild(GSene3D.LevelParent);
+            GSene3D.LevelParent.transform.position = GSene3D.LevelParent_Mark.transform.position;
+            for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
+                const element = GSene3D.LevelParent.getChildAt(index);
+                element.active = false;
+            }
+            GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
+            GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
+            GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
+            GSene3D.Landmark_Left = this.self.getChildByName('Landmark_Left');
+            GSene3D.Landmark_UpRight = this.self.getChildByName('Landmark_UpRight');
+            GSene3D.Landmark_UpLeft = this.self.getChildByName('Landmark_UpLeft');
+            GSene3D.LeftSignknife = this.self.getChildByName('LeftSignknife');
+            GSene3D.MiddleSignknife = this.self.getChildByName('MiddleSignknife');
+            GSene3D.RightSignknife = this.self.getChildByName('RightSignknife');
+            GSene3D.UpRightKnife = this.self.getChildByName('UpRightKnife');
+            GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
+            GSene3D.Floor = this.self.getChildByName('Floor');
+            GSene3D.Razor = this.self.getChildByName('Razor');
+            GSene3D.razorFPos.x = GSene3D.Razor.transform.position.x;
+            GSene3D.razorFPos.y = GSene3D.Razor.transform.position.y;
+            GSene3D.razorFPos.z = GSene3D.Razor.transform.position.z;
+            GSene3D.knifeParent = this.self.getChildByName('knifeParent');
+            GSene3D.knife = GSene3D.knifeParent.getChildByName('tixudao');
+            GSene3D.Role = this.self.getChildByName('Role');
+            GSene3D.TouchScreen = this.self.getChildByName('TouchScreen');
+            GSene3D.Headcollision = GSene3D.Role.getChildByName('Headcollision');
+            let TouchHeadRig = GSene3D.Headcollision.getComponent(Laya.Rigidbody3D);
+            TouchHeadRig.restitution = 0;
+            GSene3D.HeadSimulate = GSene3D.Role.getChildByName('HeadSimulate');
+            GSene3D.HingeMiddle = GSene3D.Headcollision.getChildByName('HingeMiddle');
+            GSene3D.HingeUp = GSene3D.Headcollision.getChildByName('HingeUp');
+            GSene3D.HingeDown = GSene3D.Headcollision.getChildByName('HingeDown');
+            GSene3D.HeadDecoration = this.self.getChildByName('HeadDecoration');
+            GSene3D.EyeDecoration = this.self.getChildByName('EyeDecoration');
+            GSene3D.DressUpMark = this.self.getChildByName('DressUpMark');
+        }
+        lwgEventReg() {
+            EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
+                this.getLevelContent();
+            });
+            EventAdmin.reg(GEnum.EventType.cameraMove, this, (direction) => {
+                this.cameraMove(direction);
+            });
+            EventAdmin.reg(EventAdmin.EventType.scene3DResurgence, this, () => {
+                GSene3D.Razor.transform.position = GSene3D.razorFPos;
+            });
+            EventAdmin.reg(GEnum.EventType.changeEyeDecoration, this, () => {
+                console.log('换眼部装饰');
+                for (let index = 0; index < GSene3D.EyeDecoration.numChildren; index++) {
+                    const element = GSene3D.EyeDecoration.getChildAt(index);
+                    if (element.name == Skin._currentEye.name) {
+                        element.active = true;
+                    }
+                    else {
+                        element.active = false;
+                    }
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.changeProp, this, () => {
+                console.log('换理发刀');
+                let name;
+                for (let index = 0; index < GSene3D.Razor.numChildren; index++) {
+                    const element = GSene3D.Razor.getChildAt(index);
+                    if (element.name !== 'Blade') {
+                        if (element.name !== Shop._currentProp.name) {
+                            element.active = false;
+                        }
+                        else {
+                            name = element.name;
+                            element.active = true;
+                        }
+                    }
+                }
+                if (!name) {
+                    GSene3D.Razor.getChildByName('jiandao').active = true;
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.changeOther, this, () => {
+                for (let index = 0; index < GSene3D.knifeParent.numChildren; index++) {
+                    const element = GSene3D.knifeParent.getChildAt(index);
+                    if (element.name == Shop._currentOther.name) {
+                        element.active = true;
+                        GSene3D.knife = element;
+                        let script = GSene3D.knife.getComponent(GameMain3D_knife);
+                        if (!script) {
+                            GSene3D.knife.addComponent(GameMain3D_knife);
+                        }
+                    }
+                    else {
+                        element.active = false;
+                    }
+                }
+                GSene3D.knife.active = false;
+            });
+            EventAdmin.reg(GEnum.EventType.changeHeadDecoration, this, () => {
+                for (let index = 0; index < GSene3D.HeadDecoration.numChildren; index++) {
+                    const element = GSene3D.HeadDecoration.getChildAt(index);
+                    if (element.name == Skin._currentHead.name) {
+                        element.active = true;
+                    }
+                    else {
+                        element.active = false;
+                    }
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.changeEyeDecoration, this, () => {
+                console.log('换眼部装饰');
+                for (let index = 0; index < GSene3D.EyeDecoration.numChildren; index++) {
+                    const element = GSene3D.EyeDecoration.getChildAt(index);
+                    if (element.name == Skin._currentEye.name) {
+                        element.active = true;
+                    }
+                    else {
+                        element.active = false;
+                    }
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.changeTrySkin, this, (skinClass, skinName) => {
+                console.log(skinClass, skinName);
+                let cla;
+                if (skinClass == Shop.GoodsClass.Other) {
+                    cla = GSene3D.knifeParent;
+                }
+                else if (skinClass == Shop.GoodsClass.Props) {
+                    cla = GSene3D.Razor;
+                }
+                cla.active = true;
+                for (let index = 0; index < cla.numChildren; index++) {
+                    const element = cla.getChildAt(index);
+                    if (element.name == skinName) {
+                        element.active = true;
+                        if (skinClass == Shop.GoodsClass.Other) {
+                            GSene3D.knife = element;
+                        }
+                        else if (skinClass == Shop.GoodsClass.Props) {
+                            cla = GSene3D.Razor;
+                        }
+                    }
+                    else {
+                        if (element.name !== 'Blade') {
+                            element.active = false;
+                        }
+                    }
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.goBack, this, () => {
+                GSene3D.MainCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
+                GSene3D.MainCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+                GSene3D.TouchScreen.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+            });
+        }
+        ;
+        lwgOnEnable() {
+            GSene3D.Floor.addComponent(GameMain3D_Floor);
+            GSene3D.Razor.addComponent(GameMain3D_Razor);
+            EventAdmin.notify(GEnum.EventType.changeProp);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            this.getLevelContent();
+        }
+        getLevelContent() {
+            if (GSene3D.Level) {
+                GSene3D.Level.removeSelf();
+            }
+            GSene3D.LevelParent.active = true;
+            let LevelParent0 = GSene3D.LevelParent.clone();
+            this.self.addChild(LevelParent0);
+            GSene3D.LevelParent.active = false;
+            console.log(Game._gameLevel.value);
+            let index;
+            if (Game._gameLevel.value > 10) {
+                index = Game._gameLevel.value % 10 + 1;
+            }
+            else {
+                index = Game._gameLevel.value;
+            }
+            GSene3D.Level = LevelParent0.getChildByName('Level' + index);
+            if (!GSene3D.Level) {
+                console.log('本关卡不存在');
+            }
+            else {
+                GSene3D.Level.active = true;
+                GVariate._taskArr = [];
+                for (let index = 0; index < GSene3D.Level.numChildren; index++) {
+                    const element = GSene3D.Level.getChildAt(index);
+                    if (element.name !== 'CutHairParent' && element.name !== 'StandardParent' && element.name !== 'RoleObj') {
+                        GVariate._taskArr.push(element.name);
+                    }
+                }
+                GSene3D.HairParent = GSene3D.Level.getChildByName('HairParent');
+                GSene3D.LeftBeard = GSene3D.Level.getChildByName('LeftBeard');
+                GSene3D.RightBeard = GSene3D.Level.getChildByName('RightBeard');
+                GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard');
+                GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard');
+                GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard');
+                GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent');
+                GSene3D.Razor.transform.position = GSene3D.razorFPos;
+                this.knifeTimeDisplay();
+            }
+        }
+        knifeTimeDisplay(name) {
+            if (name === 'k') {
+                GSene3D.knife.active = true;
+                if (GSene3D.StandardParent) {
+                    GSene3D.StandardParent.active = false;
+                }
+                GSene3D.Razor.active = false;
+            }
+            else if (name === 'r') {
+                GSene3D.knife.active = false;
+                if (GSene3D.StandardParent) {
+                    GSene3D.StandardParent.active = true;
+                }
+                GSene3D.Razor.active = true;
+                console.log('剃刀出现');
+            }
+            else if (!name) {
+                GSene3D.knife.active = false;
+                if (GSene3D.StandardParent) {
+                    GSene3D.StandardParent.active = false;
+                }
+                GSene3D.Razor.active = false;
+            }
+        }
+        cameraMove(direction) {
+            console.log('移动方向！', direction);
+            switch (direction) {
+                case GEnum.TaskType.HairParent:
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay('r');
+                    });
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.RightBeard:
+                    GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay('k');
+                    });
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.LeftBeard:
+                    GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay('k');
+                    });
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.MiddleBeard:
+                    GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay('k');
+                    });
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.UpLeftBeard:
+                    GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                    let Model2 = GSene3D.knife.getChildAt(0);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay('k');
+                    });
+                    let euler1 = new Laya.Vector3(GSene3D.Landmark_UpLeft.transform.localRotationEuler.x, GSene3D.Landmark_UpLeft.transform.localRotationEuler.y, GSene3D.Landmark_UpLeft.transform.localRotationEuler.z);
+                    Animation3D.RotateTo(GSene3D.MainCamera, euler1, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, euler1, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.UpRightBeard:
+                    GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                    let Model1 = GSene3D.knife.getChildAt(0);
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay('k');
+                    });
+                    Animation3D.RotateTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_UpRight.transform.localRotationEuler, this.moveSpeed, this);
+                    break;
+                case GEnum.TaskType.movePhotoLocation:
+                    Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.DressUpMark.transform.position, this.moveSpeed, this, null, () => {
+                        Admin._gameStart = true;
+                        this.knifeTimeDisplay();
+                    });
+                    let euler2 = new Laya.Vector3(GSene3D.DressUpMark.transform.localRotationEuler.x, GSene3D.DressUpMark.transform.localRotationEuler.y, GSene3D.DressUpMark.transform.localRotationEuler.z);
+                    Animation3D.RotateTo(GSene3D.MainCamera, euler2, this.moveSpeed, this);
+                    Animation3D.RotateTo(GSene3D.TouchScreen, euler2, this.moveSpeed, this);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class Init extends Admin.Scene {
+        lwgOnAwake() {
+            console.log('开始初始化');
+            this.gameInit();
+            this.skinInit();
+            this.shopInit();
+            this.taskInit();
+            this.easterEggInit();
+        }
+        gameInit() {
+            Game._platform = Game._platformTpye.OPPO;
+        }
+        ;
+        skinInit() {
+            Skin._currentEye.name = null;
+            Skin._currentHead.name = null;
+        }
+        ;
+        shopInit() {
+            Shop.initShop();
+            if (!Shop._currentOther.name) {
+                Shop._currentOther.name = 'tixudao';
+            }
+            if (!Shop._currentProp.name) {
+                Shop._currentProp.name = 'jiandao';
+            }
+            if (!Shop._currentSkin.name) {
+                Shop._currentSkin.name = 'anquanmao';
+            }
+        }
+        ;
+        taskInit() {
+            Task.initTask();
+            EventAdmin.reg(Task.EventType.useSkins, Task, () => {
+                let num = Shop.setUseSkinType();
+                let name = Task.TaskName.每日使用5种皮肤;
+                let num1 = Task.getTaskProperty(Task.TaskClass.everyday, name, Task.TaskProperty.resCondition);
+                if (num > num1) {
+                    Task.doDetectionTask(Task.TaskClass.everyday, name, num - num1);
+                }
+            });
+            EventAdmin.reg(Task.EventType.victory, Task, () => {
+                let name = Task.TaskName.每日服务10位客人;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
+            EventAdmin.reg(Task.EventType.adsTime, Task, () => {
+                let name = Task.TaskName.每日观看两个广告;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
+            EventAdmin.reg(Task.EventType.victoryBox, Task, () => {
+                let name = Task.TaskName.每日开启10个宝箱;
+                Task.doDetectionTask(Task.TaskClass.everyday, name, 1);
+            });
+        }
+        easterEggInit() {
+            EasterEgg.initEasterEgg();
+            EventAdmin.reg(EasterEgg.EventType.easterEggAds, Task, () => {
+                EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_3, 1);
+            });
+        }
+    }
+
+    class UILoding extends Loding.LodeScene {
+        constructor() {
+            super(...arguments);
+            this.maskMoveSwitch = true;
+            this.shearSpeed = 5;
+            this.shearSwitch = true;
+        }
+        lodingResList() {
+            Loding.lodingList_2D = [
+                "res/atlas/Frame/Effects.png",
+                "res/atlas/Frame/UI.png",
+                "res/atlas/UI/GameStart.png",
+                "res/atlas/UI/Common.png",
+                "res/atlas/UI/Shop/Skin.png",
+                "res/atlas/UI/Shop/Props.png",
+                "res/atlas/UI/Shop/Other.png",
+                "res/atlas/UI/Shop.png",
+                "res/atlas/UI/Skin.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Congratulation.png",
+                "res/atlas/UI/EasterEgg_Aotoman/GameStart.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Hint.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Unworthy.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Task.png",
+                "res/atlas/UI/XDSkin.png",
+                "res/atlas/UI/Set.png",
+                "res/atlas/UI/Task.png",
+                "res/atlas/UI/Register.png",
+                "res/atlas/UI/Common.png",
+            ];
+            Loding.lodingList_3DScene = [
+                "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
+            ];
+            Loding.lodingList_3DPrefab = [
+                "3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh"
+            ];
+            Loding.lodingList_Json = [
+                "GameData/Shop/Other.json",
+                "GameData/Shop/Props.json",
+                "GameData/Shop/Skin.json",
+                'GameData/Task/everydayTask.json',
+                "GameData/VictoryBox/VictoryBox.json",
+                "GameData/CheckIn/CheckIn.json",
+                "GameData/Dialog/Dialog.json",
+                "GameData/Game/GameLevel.json",
+                "GameData/EasterEgg/EasterEgg.json",
+                "Scene/UICheckIn.json",
+                "Scene/UIEasterEgg.json",
+                "Scene/UIOperation.json",
+                "Scene/UISet.json",
+                "Scene/UIShop.json",
+                "Scene/UISkinXD.json",
+                "Scene/UITask.json",
+            ];
+            this.shearAni();
+        }
+        lodingPhaseComplete() {
+        }
+        lodingComplete() {
+            this.self['Mask'].x = 0;
+            this.self['Shear'].x = this.self['Mask'].width;
+            this.self['Per'].text = 100 + '%';
+            this.maskMoveSwitch = false;
+            let Scene3D = Laya.loader.getRes("3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls");
+            Laya.stage.addChildAt(Scene3D, 0);
+            Admin._sceneControl[Admin.SceneName.GameMain3D] = Scene3D;
+            Scene3D.addComponent(GameMain3D);
+            Laya.timer.once(500, this, () => {
+                Gold.createGoldNode(Laya.stage);
+                Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
+                lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
+            });
+        }
+        lwgInterior() {
+            this.self.addComponent(Init);
+        }
+        lwgAdaptive() {
+            this.self['Bg'].y = Laya.stage.height / 2;
+            this.self['Logo'].y = Laya.stage.height * 0.174;
+            this.self['Progress'].y = Laya.stage.height * 0.827;
+            this.self['FCM'].y = Laya.stage.height * 0.910;
+        }
+        shearAni() {
+            Laya.timer.loop(20, this, () => {
+                if (this.self['Shear_02'].rotation > 15) {
+                    this.self['Shear_02']['dir'] = 'up';
+                }
+                else if (this.self['Shear_02'].rotation <= 0) {
+                    this.self['Shear_02']['dir'] = 'down';
+                }
+                if (this.self['Shear_02']['dir'] === 'up') {
+                    this.self['Shear_02'].rotation -= this.shearSpeed;
+                    this.self['Shear_01'].rotation += this.shearSpeed;
+                }
+                else if (this.self['Shear_02']['dir'] === 'down') {
+                    this.self['Shear_02'].rotation += this.shearSpeed;
+                    this.self['Shear_01'].rotation -= this.shearSpeed;
+                }
+            });
+        }
+        lwgOnUpdate() {
+            if (this.maskMoveSwitch) {
+                if (this.self['Mask'].x < -20) {
+                    this.self['Mask'].x += 3;
+                    this.self['Shear'].x += 3;
+                    let str = ((-this.self['Mask'].width - this.self['Mask'].x) / -this.self['Mask'].width * 100).toString().substring(0, 2);
+                    this.self['Per'].text = str + '%';
+                }
+            }
+        }
+        lwgOnDisable() {
+            lwg.PalyAudio.playMusic();
+        }
+    }
+
+    class UIOperation extends lwg.Admin.Scene {
+        constructor() {
+            super(...arguments);
+            this._numZoder = [];
+            this.residueNum = 10;
+            this._HairParentNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余需要修理的头发', this.value);
+                        let residue = [10, 10, 10, 10, 20, 10, 20, 10, 26, 28];
+                        let index;
+                        if (Game._gameLevel.value > 10) {
+                            index = Game._gameLevel.value % 10 + 1 - 1;
+                        }
+                        else {
+                            index = Game._gameLevel.value - 1;
+                        }
+                        if (!residue[index]) {
+                            index = 0;
+                        }
+                        if (this.value <= residue[index]) {
+                            this.switch = false;
+                            console.log('任务完成了！');
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._leftBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余左侧胡须', this.value);
+                        if (this.value <= 10) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._rightBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余剩余右侧胡须', this.value);
+                        if (this.value <= 10) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._middleBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余中间胡子', this.value);
+                        if (this.value <= 10) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._upRightBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余右上角', this.value);
+                        if (this.value <= 10) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this._upLeftBeardNum = {
+                index: 0,
+                sum: 0,
+                switch: true,
+                value: 0,
+                set setValue(vals) {
+                    this.value = vals;
+                    if (this.switch) {
+                        console.log('剩余左上角', this.value);
+                        if (this.value <= 10) {
+                            console.log('任务完成了！');
+                            this.switch = false;
+                            EventAdmin.notify(EventAdmin.EventType.taskReach);
+                        }
+                    }
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                }
+            };
+            this.touchPosX = null;
+            this.touchPosY = null;
+            this.moveSwitch = false;
+        }
+        lwgNodeDec() {
+            this.Rocker = this.self['Rocker'];
+            this.TaskBar = this.self['TaskBar'];
+            this.BtnLast = this.self['BtnLast'];
+        }
+        lwgOnAwake() {
+            GVariate._taskNum = 0;
+            Admin._gameStart = true;
+            this.createProgress();
+            EventAdmin.notify(Task.TaskType.useSkins);
+            ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
+        }
+        lwgOnEnable() {
+            this.BtnLast.visible = false;
+            this.createTaskContent();
+            this.mainCameraMove();
+            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
+        }
+        lwgEventReg() {
+            EventAdmin.reg(EventAdmin.EventType.closeOperation, this, () => {
+                this.self.close();
+            });
+            EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
+                if (Admin._gameStart) {
+                    this.BtnLast.visible = true;
+                }
+            });
+            EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
+                if (Admin._gameStart) {
+                    Admin._openScene(Admin.SceneName.UIDefeated);
+                    Admin._gameStart = false;
+                }
+            });
+            EventAdmin.reg(EventAdmin.EventType.resurgence, this, () => {
+                if (Admin._gameStart) {
+                    Admin._openScene(Admin.SceneName.UIResurgence);
+                    Admin._gameStart = false;
+                }
+            });
+            EventAdmin.reg(GEnum.EventType.LeftBeard, this, () => {
+                this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
+            });
+            EventAdmin.reg(GEnum.EventType.RightBeard, this, () => {
+                this._rightBeardNum.setValue = this._rightBeardNum.value - 1;
+            });
+            EventAdmin.reg(GEnum.EventType.MiddleBeard, this, () => {
+                this._middleBeardNum.setValue = this._middleBeardNum.value - 1;
+            });
+            EventAdmin.reg(GEnum.EventType.UpRightBeard, this, () => {
+                this._upRightBeardNum.setValue = this._upRightBeardNum.value - 1;
+            });
+            EventAdmin.reg(GEnum.EventType.UpLeftBeard, this, () => {
+                this._upLeftBeardNum.setValue = this._upLeftBeardNum.value - 1;
+            });
+            EventAdmin.reg(GEnum.EventType.taskProgress, this, () => {
+                let TaskBar0 = this.TaskBar.getChildAt(GVariate._taskNum);
+                let Bar = TaskBar0.getChildByName('Bar');
+                let sum;
+                let value;
+                switch (GVariate._taskArr[GVariate._taskNum]) {
+                    case GEnum.TaskType.HairParent:
+                        value = this._HairParentNum.value;
+                        sum = this._HairParentNum.sum;
+                        break;
+                    case GEnum.TaskType.LeftBeard:
+                        value = this._leftBeardNum.value;
+                        sum = this._leftBeardNum.sum;
+                        break;
+                    case GEnum.TaskType.RightBeard:
+                        value = this._rightBeardNum.value;
+                        sum = this._rightBeardNum.sum;
+                        break;
+                    case GEnum.TaskType.MiddleBeard:
+                        value = this._middleBeardNum.value;
+                        sum = this._middleBeardNum.sum;
+                        break;
+                    case GEnum.TaskType.UpRightBeard:
+                        value = this._upRightBeardNum.value;
+                        sum = this._upRightBeardNum.sum;
+                        break;
+                    case GEnum.TaskType.UpLeftBeard:
+                        value = this._upLeftBeardNum.value;
+                        sum = this._upLeftBeardNum.sum;
+                        break;
+                    default:
+                        break;
+                }
+                Bar.mask.x = (sum - value) * Bar.width / sum - Bar.mask.width;
+                if (Bar.mask.x > 0) {
+                    Bar.mask.x = 0;
+                }
+            });
+        }
+        createProgress() {
+            this.TaskBar.removeChildren(0, this.TaskBar.numChildren);
+            let spacing = 100;
+            for (let index = 0; index < GVariate._taskArr.length; index++) {
+                const TaskPro = Laya.Pool.getItemByCreateFun('TaskPro', this.TaskProgress.create, this.TaskProgress);
+                this.TaskBar.addChild(TaskPro);
+                TaskPro.pos(index * spacing, 0);
+                let Bar = TaskPro.getChildByName('Bar');
+                Bar.width = 80;
+                let Mask = new Laya.Sprite();
+                Mask.loadImage('Frame/UI/ui_orthogon_black.png');
+                Mask['renderType'] = 'mask';
+                Bar.mask = Mask;
+                Mask.width = Bar.width + 20;
+                Mask.x = -(Bar.width + 20);
+                Mask.height = 25;
+            }
+            this.TaskBar.width = GVariate._taskArr.length * spacing;
+            this.TaskBar.pivotX = this.TaskBar.width / 2;
+            this.TaskBar.x = Laya.stage.width / 2;
+        }
+        createTaskContent() {
+            for (let index = 0; index < GVariate._taskArr.length; index++) {
+                switch (GVariate._taskArr[index]) {
+                    case GEnum.TaskType.HairParent:
+                        this._HairParentNum.setValue = GSene3D.HairParent.numChildren;
+                        this._HairParentNum.sum = GSene3D.HairParent.numChildren;
+                        this._HairParentNum.index = index;
+                        this.monitorHiarLen();
+                        this._numZoder.push(this._HairParentNum);
+                        break;
+                    case GEnum.TaskType.LeftBeard:
+                        this._leftBeardNum.setValue = GSene3D.LeftBeard.numChildren;
+                        this._leftBeardNum.sum = GSene3D.LeftBeard.numChildren;
+                        this._leftBeardNum.index = index;
+                        this._numZoder.push(this._leftBeardNum);
+                        break;
+                    case GEnum.TaskType.RightBeard:
+                        this._rightBeardNum.setValue = GSene3D.RightBeard.numChildren;
+                        this._rightBeardNum.sum = GSene3D.RightBeard.numChildren;
+                        this._rightBeardNum.index = index;
+                        this._numZoder.push(this._rightBeardNum);
+                        break;
+                    case GEnum.TaskType.MiddleBeard:
+                        this._middleBeardNum.setValue = GSene3D.MiddleBeard.numChildren;
+                        this._middleBeardNum.sum = GSene3D.MiddleBeard.numChildren;
+                        this._middleBeardNum.index = index;
+                        this._numZoder.push(this._middleBeardNum);
+                        break;
+                    case GEnum.TaskType.UpRightBeard:
+                        this._upRightBeardNum.setValue = GSene3D.UpRightBeard.numChildren;
+                        this._upRightBeardNum.sum = GSene3D.UpRightBeard.numChildren;
+                        this._upRightBeardNum.index = index;
+                        this._numZoder.push(this._upRightBeardNum);
+                        break;
+                    case GEnum.TaskType.UpLeftBeard:
+                        this._upLeftBeardNum.setValue = GSene3D.UpLeftBeard.numChildren;
+                        this._upLeftBeardNum.sum = GSene3D.UpLeftBeard.numChildren;
+                        this._upLeftBeardNum.index = index;
+                        this._numZoder.push(this._upLeftBeardNum);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        monitorHiarLen() {
+            let _HairParentNum = this._HairParentNum;
+            for (let index = 0; index < GSene3D.HairParent.numChildren; index++) {
+                const element = GSene3D.HairParent.getChildAt(index);
+                let len = element.transform.localPositionY;
+                element['HairLen'] = {
+                    detection: true,
+                    value: len,
+                    get getValue() {
+                        return this.value;
+                    },
+                    set setValue(v) {
+                        if (this.detection) {
+                            if (v < 0.19) {
+                                this.detection = false;
+                                _HairParentNum.setValue = _HairParentNum.value - 1;
+                            }
+                            this.value = v;
+                        }
+                    }
+                };
+            }
+        }
+        mainCameraMove() {
+            if (GVariate._taskNum > GVariate._taskArr.length) {
+                return;
+            }
+            EventAdmin.notify(GEnum.EventType.cameraMove, GVariate._taskArr[GVariate._taskNum]);
+        }
+        lwgBtnClick() {
+            lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, this.btnLastUp, null);
+        }
+        btnLastUp(e) {
+            this.BtnLast.visible = false;
+            this.moveSwitch = false;
+            e.stopPropagation();
+            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                Admin._openScene(Admin.SceneName.UISkin, null, this.self);
+            }
+            else {
+                GVariate._taskNum++;
+                this.mainCameraMove();
+                EventAdmin.notify(GEnum.EventType.taskProgress);
+                if (this._numZoder[GVariate._taskNum].value <= 10) {
+                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+                }
+            }
+        }
+        onStageMouseDown(e) {
+            this.moveSwitch = true;
+            this.touchPosX = e.stageX;
+            this.touchPosY = e.stageY;
+            let Camera = GSene3D.MainCamera.getChildByName('MainCamera');
+            let hitResult_Touch = Tools.rayScanning(Camera, GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.TouchScreen.name);
+            if (hitResult_Touch) {
+                let x = GSene3D.Headcollision.transform.position.x - GSene3D.knife.transform.position.x + hitResult_Touch.point.x;
+                let y = GSene3D.Headcollision.transform.position.y - GSene3D.knife.transform.position.y + hitResult_Touch.point.y;
+                let z = GSene3D.Headcollision.transform.position.z - GSene3D.knife.transform.position.z + hitResult_Touch.point.z;
+                GSene3D.HeadSimulate.transform.position = new Laya.Vector3(x, y, z);
+            }
+        }
+        onStageMouseMove(e) {
+            if (!Admin._gameStart) {
+                return;
+            }
+            if (this.moveSwitch) {
+                switch (GVariate._taskArr[GVariate._taskNum]) {
+                    case GEnum.TaskType.HairParent:
+                        this.razorMove(e);
+                        break;
+                    case GEnum.TaskType.LeftBeard:
+                        this.knifeMove(e);
+                        break;
+                    case GEnum.TaskType.RightBeard:
+                        this.knifeMove(e);
+                        break;
+                    case GEnum.TaskType.MiddleBeard:
+                        this.knifeMove(e);
+                        break;
+                    case GEnum.TaskType.UpRightBeard:
+                        this.knifeMove(e);
+                        break;
+                    case GEnum.TaskType.UpLeftBeard:
+                        this.knifeMove(e);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        razorMove(e) {
+            let diffX = e.stageX - this.touchPosX;
+            let diffY = e.stageY - this.touchPosY;
+            this.Rocker.x += diffX;
+            this.Rocker.y += diffY;
+            this.touchPosX = e.stageX;
+            this.touchPosY = e.stageY;
+            GSene3D.Razor.transform.localPositionX -= diffX * 0.01;
+            GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
+            Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.5);
+        }
+        knifeMove(e) {
+            this.touchPosX = e.stageX;
+            this.touchPosY = e.stageY;
+            let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
+            if (hitResult) {
+                let x = GSene3D.Headcollision.transform.position.x - (GSene3D.HeadSimulate.transform.position.x - hitResult.point.x);
+                let y = GSene3D.Headcollision.transform.position.y - (GSene3D.HeadSimulate.transform.position.y - hitResult.point.y);
+                let z = GSene3D.Headcollision.transform.position.z - (GSene3D.HeadSimulate.transform.position.z - hitResult.point.z);
+                GSene3D.knife.transform.position = new Laya.Vector3(x, y, z);
+                if (GSene3D.knife.transform.position.y >= GSene3D.HingeUp.transform.position.y) {
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                }
+                else if (GSene3D.knife.transform.position.y <= GSene3D.HingeDown.transform.position.y) {
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeDown.transform.position, new Laya.Vector3(0, 1, 0));
+                }
+                else {
+                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                }
+            }
+        }
+        onStageMouseUp(e) {
+            this.touchPosX = null;
+            this.touchPosY = null;
+            this.moveSwitch = false;
+        }
+        lwgOnDisable() {
+        }
+    }
+
+    class UIResurgence extends Admin.Scene {
+        lwgOnEnable() {
+            Admin._gameStart = false;
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_revive');
+            ADManager.TAPoint(TaT.BtnShow, 'ADrevivebt_revive');
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnResurgence'], this, null, null, this.btnResurgenceUp);
+            Click.on(Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
+        }
+        btnResurgenceUp() {
+            ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'ADrevivebt_revive');
+                Admin._gameStart = true;
+                EventAdmin.notify(EventAdmin.EventType.scene3DResurgence);
+                this.self.close();
+            });
+        }
+        btnNoUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_revive');
+            EventAdmin.notify(EventAdmin.EventType.closeOperation);
+            Admin._openScene(Admin.SceneName.UIDefeated);
+            this.self.close();
+        }
+    }
+
+    class UISet extends lwg.Admin.Scene {
+        lwgOnAwake() {
+            Setting.setBtnVinish();
+            this.audioOnOff();
+            this.bgmOnOff();
+            ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
+        }
+        audioOnOff() {
+            if (Setting._sound.switch) {
+                this.self['AudioOff'].visible = false;
+            }
+            else {
+                this.self['AudioOff'].visible = true;
+            }
+        }
+        bgmOnOff() {
+            if (Setting._bgMusic.switch) {
+                this.self['BgmOff'].visible = false;
+            }
+            else {
+                this.self['BgmOff'].visible = true;
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnAudio'], this, null, null, this.btnAudioUp, null);
+            Click.on(Click.Type.largen, this.self['BtnBgm'], this, null, null, this.btnBgmUp, null);
+            Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp, null);
+        }
+        btnAudioUp() {
+            if (Setting._sound.switch) {
+                Setting._sound.switch = false;
+            }
+            else {
+                Setting._sound.switch = true;
+            }
+            this.audioOnOff();
+        }
+        btnBgmUp() {
+            if (Setting._bgMusic.switch) {
+                Setting._bgMusic.switch = false;
+            }
+            else {
+                Setting._bgMusic.switch = true;
+            }
+            this.bgmOnOff();
+        }
+        btnCloseUp() {
+            this.self.close();
+        }
+        lwgOnDisable() {
+            Setting.setBtnAppear();
+        }
+    }
+
+    class RecordManager {
+        constructor() {
+            this.GRV = null;
+            this.isRecordVideoing = false;
+            this.isVideoRecord = false;
+            this.videoRecordTimer = 0;
+            this.isHasVideoRecord = false;
+        }
+        static Init() {
+            RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();
+        }
+        static startAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.grv == null)
+                RecordManager.Init();
+            if (RecordManager.recording)
+                return;
+            RecordManager.autoRecording = true;
+            console.log("******************开始录屏");
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (!RecordManager.autoRecording) {
+                console.log("RecordManager.autoRecording", RecordManager.autoRecording);
+                return false;
+            }
+            RecordManager.autoRecording = false;
+            RecordManager._end(false);
+            if (Date.now() - RecordManager.lastRecordTime > 6000) {
+                return true;
+            }
+            if (Date.now() - RecordManager.lastRecordTime < 3000) {
+                console.log("小于3秒");
+                return false;
+            }
+            return true;
+        }
+        static startRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.autoRecording) {
+                this.stopAutoRecord();
+            }
+            RecordManager.recording = true;
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("time:" + (Date.now() - RecordManager.lastRecordTime));
+            if (Date.now() - RecordManager.lastRecordTime <= 3000) {
+                return false;
+            }
+            RecordManager.recording = false;
+            RecordManager._end(true);
+            return true;
+        }
+        static _start() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180s  ？？？？？");
+            RecordManager.grv.Start(180);
+        }
+        static _end(share) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180结束 ？？？？？");
+            RecordManager.grv.Stop(share);
+        }
+        static _share(type, successedAc, completedAc = null, failAc = null) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
+            if (RecordManager.grv.videoPath) {
+                let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
+                p.extra.videoTopics = ["解救小王子", "番茄小游戏", "抖音小游戏"];
+                p.channel = "video";
+                p.success = () => {
+                    Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
+                    successedAc();
+                };
+                p.fail = () => {
+                    if (type === 'noAward') {
+                        Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
+                    }
+                    else {
+                        Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
+                    }
+                    failAc();
+                };
+                RecordManager.grv.Share(p);
+            }
+            else {
+                Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
+            }
+        }
+    }
+    RecordManager.recording = false;
+    RecordManager.autoRecording = false;
+
+    class UIShare extends lwg.Admin.Scene {
+        lwgOnAwake() {
+            Admin._gameStart = false;
+        }
+        lwgOnEnable() {
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
+            ADManager.TAPoint(TaT.BtnShow, 'sharebt_share');
+            this.endPhoto();
+            let index;
+            if (Game._gameLevel.value > 10) {
+                index = Game._gameLevel.value % 10 + 1;
+            }
+            else {
+                index = Game._gameLevel.value;
+            }
+            let url = 'UI/Share/Photo/' + index + '.png';
+            this.self['SmallPhoto'].skin = url;
+            if (Game._platform !== Game._platformTpye.Bytedance) {
+                this.self['BtnComplete'].visible = true;
+                this.self['BtnShare'].visible = false;
+                this.self['BtnNoShare'].visible = false;
+            }
+            else {
+                this.self['BtnComplete'].visible = false;
+                this.self['BtnShare'].visible = true;
+                this.self['BtnNoShare'].visible = true;
+            }
+        }
+        lwgOpenAni() {
+            this.aniTime = 100;
+            this.aniDelayde = 100;
+            this.self['SmallFram'].x -= 500;
+            this.self['Logo'].y -= 500;
+            this.self['BtnShare'].alpha = 0;
+            Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
+                Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
+                Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
+                Animation2D.bombs_Appear(this.self['BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
+                let hotAddNum = Math.floor(Math.random() * 100 + 900);
+                Laya.timer.frameLoop(1, this, () => {
+                    if (Number(this.self['HotNum'].text) < hotAddNum) {
+                        this.self['HotNum'].text = Number(this.self['HotNum'].text) + 6;
+                    }
+                });
+                Laya.timer.once(this.aniDelayde * 7, this, () => { this.self['Icon_hand'].skin = 'UI/Share/tubiao_1-2.png'; });
+                Animation2D.rotate_Scale(this.self['Icon_hand'], -10, 2, 2, 0, 1, 1, this.aniTime * 4, this.aniDelayde * 7);
+            });
+            this.self['BtnNoShare'].alpha = 0;
+            Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
+            Effects.createExplosion_Rotate(this.self['SceneContent'], 40, this.self['SceneContent'].width / 2, this.self['SceneContent'].height / 2 - 100, Effects.SkinStyle.star, 20, 15);
+            return this.aniTime * 5;
+        }
+        endPhoto() {
+            this.EndCamera = GSene3D.MainCamera.clone();
+            GSene3D.GameMain3D.addChild(this.EndCamera);
+            this.EndCamera.transform.position = GSene3D.PhotoCameraMark.transform.position;
+            this.EndCamera.transform.localRotationEuler = GSene3D.PhotoCameraMark.transform.localRotationEuler;
+            let renderTargetCamera = this.EndCamera.getChildAt(0);
+            renderTargetCamera.renderTarget = new Laya.RenderTexture(this.self['BigPhoto'].width, this.self['BigPhoto'].height);
+            renderTargetCamera.renderingOrder = -1;
+            renderTargetCamera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY;
+            var rtex = new Laya.Texture(renderTargetCamera.renderTarget, Laya.Texture.DEF_UV);
+            var sp1 = new Laya.Sprite();
+            this.self['BigPhoto'].addChild(sp1);
+            sp1.graphics.drawTexture(rtex);
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
+                this.shareFunc();
+            });
+            Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp);
+        }
+        btnShareUp() {
+            RecordManager._share('award', () => {
+                this.shareFunc();
+                ADManager.TAPoint(TaT.BtnClick, 'sharebt_share');
+            });
+        }
+        btnNoShareUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_share');
+            this.shareFunc();
+        }
+        shareFunc() {
+            Admin._openScene(Admin.SceneName.UIVictoryBox, null, this.self);
+        }
+        lwgOnDisable() {
+            this.EndCamera.removeSelf();
+        }
+    }
+
+    class UIShop_Goods extends Admin.Object {
+        lwgOnEnable() {
+            this.Select = this.self.getChildByName('Select');
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
+        }
+        up() {
+            EventAdmin.notify(Shop.EventType.select, [this.self['_dataSource']]);
+        }
+    }
+
+    class UIShop extends Shop.ShopScene {
+        shopOnAwake() {
+            ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_skin');
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_skin');
+            ADManager.TAPoint(TaT.BtnShow, 'Adcoinget');
+            ADManager.TAPoint(TaT.BtnShow, 'Adxiangsu_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adjiguangjjian_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Admyworld_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adcat_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adstar_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adanquan_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adtomato_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adiron_get');
+            ADManager.TAPoint(TaT.BtnShow, 'Adhama_get');
+            ADManager.TAPoint(TaT.BtnShow, 'ADyuan_ge');
+            ADManager.TAPoint(TaT.BtnShow, 'ADjiemao1_get');
+            ADManager.TAPoint(TaT.BtnShow, 'ADjiemao2_get');
+            Gold.goldAppear();
+            Setting.setBtnVinish();
+            GVariate._stageClick = false;
+            Shop.goodsClassArr = [Shop.allOther, Shop.allProps, Shop.allSkin];
+            let SkinName;
+            (function (SkinName) {
+                SkinName["anquanmao"] = "anquanmao";
+                SkinName["yuanyanjing"] = "yuanyanjing";
+                SkinName["jiemao_01"] = "jiemao_01";
+                SkinName["hamajing"] = "hamajing";
+                SkinName["yanshemao_gangtie"] = "yanshemao_gangtie";
+                SkinName["yanshemao"] = "yanshemao";
+                SkinName["jiemao_02"] = "jiemao_02";
+                SkinName["xiaochoumao"] = "xiaochoumao";
+                SkinName["xingxingyanjing"] = "xingxingyanjing";
+                SkinName["yanshemao_shijie"] = "yanshemao_shijie";
+                SkinName["maomaozi"] = "maomaozi";
+            })(SkinName || (SkinName = {}));
+            let PropsName;
+            (function (PropsName) {
+                PropsName["yingguangbang"] = "yingguangbang";
+                PropsName["lifadao"] = "lifadao";
+                PropsName["jiandao"] = "jiandao";
+                PropsName["dianjupian"] = "dianjupian";
+                PropsName["dianju"] = "dianju";
+            })(PropsName || (PropsName = {}));
+            let OtherName;
+            (function (OtherName) {
+                OtherName["xiangsudao"] = "xiangsudao";
+                OtherName["tixudao"] = "tixudao";
+                OtherName["ruwu"] = "ruwu";
+                OtherName["lifadao"] = "lifadao";
+                OtherName["jundao"] = "jundao";
+                OtherName["tulongdao"] = "tulongdao";
+            })(OtherName || (OtherName = {}));
+            Tools.objPropertySort(Shop.allSkin, 'arrange');
+            Tools.objPropertySort(Shop.allProps, 'arrange');
+            Tools.objPropertySort(Shop.allOther, 'arrange');
+            if (!Shop._currentSkin.name) {
+                Shop._currentSkin.name = SkinName.anquanmao;
+            }
+            if (!Shop._currentProp.name) {
+                Shop._currentProp.name = PropsName.jiandao;
+            }
+            if (!Shop._currentOther.name) {
+                Shop._currentOther.name = OtherName.tixudao;
+            }
+            this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
+            let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.condition);
+            if (Game._gameLevel.value >= condition) {
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.have, true);
+            }
+            else {
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, SkinName.xiaochoumao, Shop.GoodsProperty.resCondition, Game._gameLevel.value);
+            }
+            this.buyPriceDisplay();
+        }
+        buyPriceDisplay() {
+            let noHaveGold = [];
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Skin, false);
+                    break;
+                case 1:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Props, false);
+                    break;
+                case 0:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Other, false);
+                    break;
+                default:
+                    break;
+            }
+            Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
+            if (noHaveGold[0]) {
+                let price = noHaveGold[0][Shop.GoodsProperty.condition];
+                this.self['BuyPrice'].value = price.toString();
+            }
+        }
+        shopEventReg() {
+            EventAdmin.reg(Shop.EventType.select, this, (dataSource) => {
+                if (dataSource.have) {
+                    this.sceletDisplay(dataSource, false);
+                }
+                else {
+                    if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
+                        ADManager.ShowReward(() => {
+                            this.adsAcquisition(dataSource);
+                            switch (dataSource.name) {
+                                case 'yingguangbang':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adjiguangjjian_get');
+                                    break;
+                                case 'yuanyanjing':
+                                    ADManager.TAPoint(TaT.BtnClick, 'ADyuan_ge');
+                                    break;
+                                case 'xingxingyanjing':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adstar_get');
+                                    break;
+                                case 'jiemao_01':
+                                    ADManager.TAPoint(TaT.BtnClick, 'ADjiemao1_get');
+                                    break;
+                                case 'jiemao_02':
+                                    ADManager.TAPoint(TaT.BtnClick, 'ADjiemao2_get');
+                                    break;
+                                case 'hamajing':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adhama_get');
+                                    break;
+                                case 'yanshemao_gangtie':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adiron_get');
+                                    break;
+                                case 'yanshemao':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adtomato_get');
+                                    break;
+                                case 'maomaozi':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adcat_get');
+                                    break;
+                                case 'xiangsudao':
+                                    ADManager.TAPoint(TaT.BtnClick, 'Adxiangsu_get');
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
+                        Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤限定界面获取!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
+                        Dialog.createHint_Middle(Dialog.HintContent["通过相应的关卡数达到就可以得到了!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
+                        Dialog.createHint_Middle(Dialog.HintContent["点击金币抽奖按钮购买!"]);
+                    }
+                }
+            });
+            Shop._ShopList.refresh();
+        }
+        sceletDisplay(dataSource, scrollTo) {
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    Shop._currentSkin.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    break;
+                case 1:
+                    Shop._currentProp.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    break;
+                case 0:
+                    Shop._currentOther.name = dataSource.name;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            if (scrollTo) {
+                let index = dataSource.arrange - 1;
+                Shop._ShopList.scrollTo(index);
+            }
+        }
+        adsAcquisition(dataSource) {
+            let claName;
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    claName = Shop.GoodsClass.Skin;
+                    break;
+                case 1:
+                    claName = Shop.GoodsClass.Props;
+                    break;
+                case 0:
+                    claName = Shop.GoodsClass.Other;
+                    break;
+                default:
+                    break;
+            }
+            let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
+            let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
+            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
+            if (condition <= resCondition + 1) {
+                Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
+                this.sceletDisplay(dataSource, false);
+            }
+            Shop._ShopList.refresh();
+        }
+        myTap_Select(index) {
+            PalyAudio.playSound();
+            switch (index) {
+                case 2:
+                    Shop._ShopList.array = Shop.allSkin;
+                    this.self['Dispaly'].skin = 'UI/Shop/Skin/' + Shop._currentSkin.name + '.png';
+                    break;
+                case 1:
+                    Shop._ShopList.array = Shop.allProps;
+                    this.self['Dispaly'].skin = 'UI/Shop/Props/' + Shop._currentProp.name + '.png';
+                    break;
+                case 0:
+                    Shop._ShopList.array = Shop.allOther;
+                    this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
+                    break;
+                default:
+                    break;
+            }
+            Shop._ShopList.refresh();
+            this.buyPriceDisplay();
+        }
+        myList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            Select.visible = false;
+            let Pic = cell.getChildByName('Pic');
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentSkin.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 1:
+                    Pic.skin = 'UI/Shop/Props/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentProp.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 0:
+                    Pic.skin = 'UI/Shop/Other/' + dataSource.name + '.png';
+                    if (cell.dataSource[Shop.GoodsProperty.name] == Shop._currentOther.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            let NoHave = cell.getChildByName('NoHave');
+            NoHave.visible = true;
+            let Board = cell.getChildByName('Board');
+            let Dec = NoHave.getChildByName('Dec');
+            let Icon = NoHave.getChildByName('Icon');
+            if (!cell.dataSource[Shop.GoodsProperty.have]) {
+                switch (cell.dataSource[Shop.GoodsProperty.getway]) {
+                    case Shop.Getway.ads:
+                        Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
+                        Dec.x = 88;
+                        Dec.fontSize = 30;
+                        Icon.visible = true;
+                        break;
+                    case Shop.Getway.adsXD:
+                        Dec.text = '限定获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.easterEgg:
+                        Dec.text = '彩蛋获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.ineedwin:
+                        Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.gold:
+                        Dec.text = '金币抽取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    default:
+                        Icon.visible = false;
+                        break;
+                }
+                Board.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                NoHave.visible = false;
+                Board.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnBuy'], this, null, null, this.btnBuyUp);
+            Click.on(Click.Type.largen, this.self['BtnGetGold'], this, null, null, this.btnGetGold);
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnBuyUp() {
+            ADManager.TAPoint(TaT.BtnShow, 'Adcoinget');
+            let noHaveGold = [];
+            switch (Shop._ShopTap.selectedIndex) {
+                case 2:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Skin, false);
+                    break;
+                case 1:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Props, false);
+                    break;
+                case 0:
+                    noHaveGold = Shop.getwayGoldArr(Shop.GoodsClass.Other, false);
+                    break;
+                default:
+                    break;
+            }
+            if (noHaveGold.length <= 0) {
+                Dialog.createHint_Middle(Dialog.HintContent["没有可以购买的皮肤了！"]);
+            }
+            else {
+                Tools.objPropertySort(noHaveGold, Shop.GoodsProperty.getOder);
+                let price = noHaveGold[0][Shop.GoodsProperty.condition];
+                if (noHaveGold[1]) {
+                    let price1 = noHaveGold[1][Shop.GoodsProperty.condition];
+                    this.self['BuyPrice'].value = price1.toString();
+                }
+                if (Gold._goldNum < price) {
+                    Dialog.createHint_Middle(Dialog.HintContent["金币不够了！"]);
+                }
+                else {
+                    Dialog.createHint_Middle(Dialog.HintContent["恭喜获得新皮肤!"]);
+                    switch (Shop._ShopTap.selectedIndex) {
+                        case 2:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Skin, noHaveGold[0].name, Shop.GoodsProperty.have, true);
+                            break;
+                        case 1:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Props, noHaveGold[0].name, Shop.GoodsProperty.have, true);
+                            break;
+                        case 0:
+                            Shop.setGoodsProperty(Shop.GoodsClass.Other, noHaveGold[0].name, Shop.GoodsProperty.have, true);
+                            break;
+                        default:
+                            break;
+                    }
+                    this.sceletDisplay(noHaveGold[0], true);
+                    Gold.addGold(-price);
+                }
+                Shop._ShopList.refresh();
+            }
+        }
+        btnGetGold() {
+            ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_skin');
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    this.advFunc();
+                });
+            });
+        }
+        advFunc() {
+            Gold.addGold(500);
+        }
+        btnBackUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'closeword_skin');
+            this.self.close();
+        }
+        shopOnDisable() {
+            GVariate._stageClick = true;
+            Setting.setBtnAppear();
+        }
+    }
+
+    class UISKin_Goods extends Admin.Object {
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
+        }
+        up() {
+            EventAdmin.notify(Skin.EventType.select, [this.self['_dataSource']]);
+        }
+    }
+
+    class UISkin extends SkinScene {
+        skinOnAwake() {
+            console.log(Laya.stage);
+            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
+            let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
+            Skin._headSkinArr = [];
+            Skin._eyeSkinArr = [];
+            Skin._currentEye.name = null;
+            Skin._currentHead.name = null;
+            for (let index = 0; index < skinArr.length; index++) {
+                const element = skinArr[index];
+                if (element[Skin.SkinProperty.classify] === Skin.SkinClass.head) {
+                    Skin._headSkinArr.push(element);
+                }
+                else if (element[Skin.SkinProperty.classify] === Skin.SkinClass.eye) {
+                    Skin._eyeSkinArr.push(element);
+                }
+            }
+        }
+        skinEventReg() {
+            EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
+                if (dataSource[Shop.GoodsProperty.have]) {
+                    switch (Skin._SkinTap.selectedIndex) {
+                        case 0:
+                            Skin._currentEye.name = dataSource[Shop.GoodsProperty.name];
+                            EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
+                            break;
+                        case 1:
+                            Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
+                            EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
+                            if (GSene3D.HairParent) {
+                                GSene3D.HairParent.active = false;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ads) {
+                        ADManager.ShowReward(() => {
+                            this.adsAcquisition(dataSource);
+                        });
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.adsXD) {
+                        Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤限定界面获取!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.ineedwin) {
+                        Dialog.createHint_Middle(Dialog.HintContent["通过相应的关卡数达到就可以得到了!"]);
+                    }
+                    else if (dataSource[Shop.GoodsProperty.getway] === Shop.Getway.gold) {
+                        Dialog.createHint_Middle(Dialog.HintContent["请前往皮肤界面购买！"]);
+                    }
+                }
+            });
+            Skin._SkinList.refresh();
+        }
+        adsAcquisition(dataSource) {
+            let claName = Shop.GoodsClass.Skin;
+            let condition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.condition);
+            let resCondition = Shop.getGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition);
+            Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.resCondition, resCondition + 1);
+            if (condition <= resCondition + 1) {
+                Shop.setGoodsProperty(claName, dataSource.name, Shop.GoodsProperty.have, true);
+                switch (Skin._SkinTap.selectedIndex) {
+                    case 0:
+                        Skin._currentEye.name = dataSource[Shop.GoodsProperty.name];
+                        break;
+                    case 1:
+                        Skin._currentHead.name = dataSource[Shop.GoodsProperty.name];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Skin._SkinList.refresh();
+        }
+        skinTap_Select(index) {
+            PalyAudio.playSound();
+            switch (index) {
+                case 0:
+                    Skin._SkinList.array = Skin._eyeSkinArr;
+                    break;
+                case 1:
+                    Skin._SkinList.array = Skin._headSkinArr;
+                    break;
+                default:
+                    break;
+            }
+            Skin._SkinList.refresh();
+        }
+        skinList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            Select.visible = false;
+            let Pic = cell.getChildByName('Pic');
+            Pic.skin = 'UI/Shop/Skin/' + dataSource.name + '.png';
+            switch (Skin._SkinTap.selectedIndex) {
+                case 0:
+                    if (cell.dataSource['name'] == Skin._currentEye.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                case 1:
+                    if (cell.dataSource['name'] == Skin._currentHead.name) {
+                        Select.visible = true;
+                    }
+                    else {
+                        Select.visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            let NoHave = cell.getChildByName('NoHave');
+            NoHave.visible = true;
+            let Board = cell.getChildByName('Board');
+            let Dec = NoHave.getChildByName('Dec');
+            let Icon = NoHave.getChildByName('Icon');
+            if (!cell.dataSource[Shop.GoodsProperty.have]) {
+                switch (cell.dataSource[Shop.GoodsProperty.getway]) {
+                    case Shop.Getway.ads:
+                        Dec.text = cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition];
+                        Dec.x = 88;
+                        Dec.fontSize = 30;
+                        Icon.visible = true;
+                        break;
+                    case Shop.Getway.adsXD:
+                        Dec.text = '限定获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.easterEgg:
+                        Dec.text = '彩蛋获取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.ineedwin:
+                        Dec.text = '过' + cell.dataSource[Shop.GoodsProperty.resCondition] + '/' + cell.dataSource[Shop.GoodsProperty.condition] + '关';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    case Shop.Getway.gold:
+                        Dec.text = '金币抽取';
+                        Dec.x = NoHave.width / 2;
+                        Dec.fontSize = 23;
+                        Icon.visible = false;
+                        break;
+                    default:
+                        Icon.visible = false;
+                        break;
+                }
+                Board.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                NoHave.visible = false;
+                Board.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        skinOnEnable() {
+            Skin._SkinList.array = Skin._eyeSkinArr;
+            Skin._SkinList.refresh();
+            EventAdmin.notify(GEnum.EventType.cameraMove, [GEnum.TaskType.movePhotoLocation]);
+        }
+        skinBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, this.btnCompleteUp, null);
+        }
+        btnCompleteUp() {
+            Admin._openScene(Admin.SceneName.UIShare, null, this.self);
+        }
+    }
+
+    class UISkinTry extends Admin.Scene {
+        lwgOnAwake() {
+            this.randomNoHave();
+            if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['BtnGet_OPPO'].visible = true;
+                this.self['BtnGet_WeChat'].visible = false;
+            }
+            else {
+                this.self['BtnGet_OPPO'].visible = false;
+                this.self['BtnGet_WeChat'].visible = true;
+            }
+        }
+        randomNoHave() {
+            let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
+            let arrProp = Shop.getwayGoldArr(Shop.GoodsClass.Props, undefined, true);
+            let hair;
+            let beard;
+            for (let index = 0; index < GVariate._taskArr.length; index++) {
+                const element = GVariate._taskArr[index];
+                if (element === GEnum.TaskType.HairParent) {
+                    hair = true;
+                }
+                else if (element === GEnum.TaskType.LeftBeard || element === GEnum.TaskType.RightBeard || element === GEnum.TaskType.UpLeftBeard || element === GEnum.TaskType.UpRightBeard || element === GEnum.TaskType.MiddleBeard) {
+                    beard = true;
+                }
+            }
+            if (hair) {
+                console.log('本关有剃头任务！');
+            }
+            if (beard) {
+                console.log('本关剃胡须任务！');
+            }
+            if (hair && beard) {
+                if (Math.floor(Math.random() * 2) === 1) {
+                    this.randomProp();
+                }
+                else {
+                    this.randomOther();
+                }
+            }
+            else if (hair && !beard) {
+                this.randomProp();
+            }
+            else if (!hair && beard) {
+                this.randomOther();
+            }
+        }
+        randomOther() {
+            let ele;
+            let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
+            ele = arrOther[Math.floor(Math.random() * arrOther.length)];
+            this.self['SkinPic'].skin = 'UI/Shop/Other/' + ele.name + '.png';
+            this.beforeTryOtherName = Shop._currentOther.name;
+            Shop._currentOther.name = ele.name;
+        }
+        randomProp() {
+            let ele;
+            let arrProp = Shop.getwayGoldArr(Shop.GoodsClass.Props, undefined, true);
+            ele = arrProp[Math.floor(Math.random() * arrProp.length)];
+            this.self['SkinPic'].skin = 'UI/Shop/Props/' + ele.name + '.png';
+            this.beforeTryPropName = Shop._currentProp.name;
+            Shop._currentProp.name = ele.name;
+        }
+        lwgBtnClick() {
+            Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
+            Click.on(lwg.Click.Type.largen, this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+            Click.on(lwg.Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+        }
+        btnGetUp(event) {
+            if (Game._platform == Game._platformTpye.OPPO) {
+                Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                EventAdmin.notify(GEnum.EventType.changeOther);
+                EventAdmin.notify(GEnum.EventType.changeProp);
+            }
+            else {
+                ADManager.ShowReward(() => {
+                    Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                    EventAdmin.notify(GEnum.EventType.changeOther);
+                    EventAdmin.notify(GEnum.EventType.changeProp);
+                });
+            }
+        }
+        btnNoUp(event) {
+            if (this.beforeTryOtherName) {
+                Shop._currentOther.name = this.beforeTryOtherName;
+            }
+            if (this.beforeTryPropName) {
+                Shop._currentProp.name = this.beforeTryPropName;
+            }
+            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
+        }
+        lwgOnDisable() {
+            if (this.beforeTryOtherName) {
+                Shop._currentOther.name = this.beforeTryOtherName;
+            }
+            if (this.beforeTryPropName) {
+                Shop._currentProp.name = this.beforeTryPropName;
+            }
+        }
+    }
+
+    class UISkinXD extends SkinXD.SkinXDScene {
+        skinXDOnAwake() {
+            console.log(Laya.stage);
+            ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
+            Gold.goldVinish();
+            Setting.setBtnVinish();
+        }
+        skinXDOnEnable() {
+            this.progressDisplay();
+        }
+        skinXDAdaptive() {
+            this.self['SceneContent'].y = Laya.stage.height / 2;
+        }
+        progressDisplay() {
+            let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.resCondition);
+            if (resCondition > 0) {
+                for (let index = 0; index < resCondition; index++) {
+                    let name = 'Bar' + (index + 1);
+                    this.self[name].skin = 'UI/XDSkin/tiao1.png';
+                }
+            }
+        }
+        skinXDBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp);
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        btnGetUp() {
+            ADManager.ShowReward(() => {
+                this.btnGetFunc();
+            });
+        }
+        btnBackUp() {
+            this.self.close();
+        }
+        btnGetFunc() {
+            ADManager.TAPoint(TaT.BtnClick, 'Adlimmitget');
+            let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
+            if (have === 1) {
+                this.progressDisplay();
+                Dialog.createHint_Middle(Dialog.HintContent["限定皮肤已经获得，请前往皮肤界面查看。"]);
+                Shop._currentOther.name = 'xiandanren';
+                EventAdmin.notify(SkinXD.EventType.acquisition);
+                Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {
+                    this.self.close();
+                });
+            }
+            else {
+                this.progressDisplay();
+            }
+        }
+        skinXDOnDisable() {
+            Setting.setBtnAppear();
+        }
+    }
+
+    class UIStart extends lwg.Admin.Scene {
+        constructor() {
+            super(...arguments);
+            this.easterEgg_AotumanSwitch = false;
+        }
+        lwgNodeDec() {
+            this.LevelDisplay = this.self['LevelDisplay'];
+            this.LevelStyle = this.self['LevelStyle'];
+            ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'startword_main');
+        }
+        lwgEventReg() {
+            EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
+                this.self['BtnXDSkin'].visible = false;
+            });
+            EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
+                this.self['BtnCheck'].visible = false;
+            });
+            EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
+                this.self['BtnAotuman'].visible = true;
+                this.self['EasterEgg_Aotuman'].visible = false;
+            });
+        }
+        lwgOnEnable() {
+            Skin._currentEye.name = null;
+            Skin._currentHead.name = null;
+            EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
+            EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
+            this.levelStyleDisplay();
+            if (Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.have)) {
+                this.self['BtnXDSkin'].visible = false;
+            }
+            if (!EasterEgg._easterEgg_1.value) {
+                this.self['BtnAotuman'].visible = false;
+            }
+            else {
+                this.self['EasterEgg_Aotuman'].visible = false;
+            }
+            CheckIn.openCheckIn();
+            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
+            Setting.setBtnAppear();
+        }
+        levelStyleDisplay() {
+            let location = Game._gameLevel.value % this.LevelStyle.numChildren;
+            for (let index = 0; index < this.LevelStyle.numChildren; index++) {
+                const element = this.LevelStyle.getChildAt(index);
+                let location0 = Number(element.name.substring(element.name.length - 1, element.name.length));
+                if (Game._gameLevel.value < 5) {
+                    location0 += 1;
+                }
+                let Num = element.getChildByName('Num');
+                if (location0 === location) {
+                    Num.value = Game._gameLevel.value.toString();
+                }
+                else if (location0 < location) {
+                    Num.value = (Game._gameLevel.value - (location - location0)).toString();
+                }
+                else if (location0 > location) {
+                    Num.value = (Game._gameLevel.value + (location0 - location)).toString();
+                    let Pic = element.getChildByName('Pic');
+                    Pic.skin = 'UI/GameStart/jindu_hui.png';
+                    let Color = element.getChildByName('Color');
+                    if (Color !== null) {
+                        Color.visible = false;
+                    }
+                    Num.skin = 'UI/Common/shuzi3.png';
+                }
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+                ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
+                lwg.Admin._openScene(Admin.SceneName.UIShop);
+            });
+            Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
+                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+            });
+            Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
+                Admin._openScene(lwg.Admin.SceneName.UITask);
+            });
+            Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
+                lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+                ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
+            });
+            Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+                lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
+            });
+            Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
+        }
+        btnXDSkinDown() {
+        }
+        btnXDSkinUp() {
+            lwg.Admin._openScene(Admin.SceneName.UISkinXD);
+            ADManager.TAPoint(TaT.BtnClick, 'limitskinbt_main');
+        }
+        onStageMouseMove(event) {
+            if (this.easterEgg_AotumanSwitch && !EasterEgg._easterEgg_1.value) {
+                this.self.addChild(this.self['Aotuman']);
+                this.self['Aotuman'].x = event.stageX;
+                this.self['Aotuman'].y = event.stageY;
+                let point = new Laya.Point(this.self['EasterEgg_Aotuman'].x, this.self['EasterEgg_Aotuman'].y);
+                if (point.distance(event.stageX, event.stageY) < 50) {
+                    this.aotumanBack();
+                    let time = 100;
+                    let delayed = 100;
+                    let fxClamp = this.self['Clamp'].x;
+                    let fyClamp = this.self['Clamp'].y;
+                    let frRightClamp = this.self['RightClamp'].rotation;
+                    let frLeftClamp = this.self['LeftClamp'].rotation;
+                    let fxPicAotuman = this.self['PicAotuman'].x;
+                    let fyPicAotuman = this.self['PicAotuman'].y;
+                    let frPicAotuman = this.self['PicAotuman'].rotation;
+                    Animation2D.simple_Rotate(this.self['RightClamp'], 0, -19, time * 0.5);
+                    Animation2D.simple_Rotate(this.self['LeftClamp'], 0, 19, time * 0.5, 0, () => {
+                        Animation2D.move_Simple(this.self['Clamp'], fxClamp, fyClamp, fxClamp, fyClamp - 200, time * 2, delayed * 4);
+                        Animation2D.drop_KickBack(this.self['PicAotuman'], 1, this.self['PicAotuman'].y, this.self['PicAotuman'].y + 600, 50, time * 8, 0, () => {
+                            this.self['Clamp'].x = fxClamp;
+                            this.self['Clamp'].y = fyClamp;
+                            this.self['RightClamp'].rotation = frRightClamp;
+                            this.self['LeftClamp'].rotation = frLeftClamp;
+                            this.self['PicAotuman'].x = fxPicAotuman;
+                            this.self['PicAotuman'].y = fyPicAotuman;
+                            this.self['PicAotuman'].rotation = frPicAotuman;
+                        });
+                        Animation2D.simple_Rotate(this.self['PicAotuman'], 0, 360, time * 6, 0, () => {
+                            Admin._openScene(Admin.SceneName.UIEasterEgg);
+                        });
+                    });
+                }
+            }
+        }
+        onStageMouseUp() {
+            this.aotumanBack();
+        }
+        aotumanBack() {
+            this.easterEgg_AotumanSwitch = false;
+            this.self['BtnXDSkin'].addChild(this.self['Aotuman']);
+            this.self['Aotuman'].x = 77;
+            this.self['Aotuman'].y = 63;
+        }
+        lwgOnDisable() {
+            Gold.GoldNode.visible = false;
+            Setting.setBtnVinish();
+        }
+    }
+
+    class SubpackController {
+        constructor() {
+            this.subPkgInfo = [
+                { name: "sp1", root: "res" },
+                { name: "sp2", root: "3DScene" },
+                { name: "sp3", root: "3DPrefab" },
+            ];
+        }
+        init(cb) {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.onCpl = cb;
+                this.pkgFlag = 0;
+                this.loadPkg_wx();
+            }
+        }
+        loadPkg_wx() {
+            if (this.pkgFlag == this.subPkgInfo.length) {
+                this.onCpl();
+            }
+            else {
+                let info = this.subPkgInfo[this.pkgFlag];
+                let name = info.name;
+                let root = info.root;
+                Laya.Browser.window.wx.loadSubpackage({
+                    name: name,
+                    success: (res) => {
+                        console.log(`load ${name} suc`);
+                        Laya.MiniAdpter.subNativeFiles[name] = root;
+                        Laya.MiniAdpter.nativefiles.push(root);
+                        this.pkgFlag++;
+                        console.log("加载次数", this.pkgFlag);
+                        this.loadPkg_wx();
+                    },
+                    fail: (res) => {
+                        console.error(`load ${name} err: `, res);
+                    },
+                });
+            }
+        }
+    }
+
+    let isInit = false;
+    TJ.Common.PriorityInit.Add(100, () => {
+        isInit = true;
+    });
+    class UISubpackages extends Laya.Script {
+        onAwake() {
+            let act = () => {
+                if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                    let gameContrl = new SubpackController();
+                    gameContrl.init(() => {
+                        Admin._openScene('UILoding');
+                    });
+                }
+                else {
+                    Admin._openScene('UILoding');
+                }
+            };
+            if (isInit) {
+                act();
+            }
+            else {
+                TJ.Common.PriorityInit.Add(100, act);
+            }
+        }
+    }
+
+    class UITask_GetAward extends Admin.Object {
+        lwgBtnClick() {
+            let BtnGet = this.self.getChildByName('BtnGet');
+            Click.on(Click.Type.largen, BtnGet, this, null, null, this.btnGetUp);
+        }
+        btnGetUp() {
+            if (this.self['dataSource'][Task.TaskProperty.name] === '观看广告获得金币') {
+                EventAdmin.notify(Task.EventType.adsGetAward_Every, [this.self['dataSource']]);
+                return;
+            }
+            if (this.self['dataSource'][Task.TaskProperty.get] === 1) {
+                EventAdmin.notify(Task.EventType.getAward, [this.self['dataSource']]);
+            }
+            else if (this.self['dataSource'][Task.TaskProperty.get] === 0) {
+                console.log('任务没有完成');
+            }
+            else if (this.self['dataSource'][Task.TaskProperty.get] === -1) {
+                console.log('或者已经领取过！');
+            }
+        }
+    }
+
+    class UITask extends lwg.Task.TaskScene {
+        taskOnAwake() {
+            console.log(Laya.stage);
+            ADManager.TAPoint(TaT.BtnShow, 'Adtask');
+            GVariate._stageClick = false;
+            Setting.setBtnVinish();
+        }
+        taskEventReg() {
+            EventAdmin.reg(Task.EventType.getAward, this, (dataSource) => {
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    Task.setTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.get, -1);
+                    Gold.addGold(dataSource[Task.TaskProperty.rewardNum]);
+                    Task._TaskList.refresh();
+                });
+            });
+            EventAdmin.reg(Task.EventType.adsGetAward_Every, this, (dataSource) => {
+                ADManager.ShowReward(() => {
+                    ADManager.TAPoint(TaT.BtnClick, 'Adtask');
+                    Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                        Gold.addGold(Task.getTaskProperty(Task.TaskClass.everyday, dataSource.name, Task.TaskProperty.rewardNum));
+                        Task._TaskList.refresh();
+                    });
+                });
+            });
+        }
+        taskList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Name = cell.getChildByName('Name');
+            Name.text = dataSource.name;
+            let BtnGet = cell.getChildByName('BtnGet');
+            if (dataSource.get === 0) {
+                BtnGet.skin = 'UI/Task/jinxing.png';
+            }
+            else if (dataSource.get === 1) {
+                BtnGet.skin = 'UI/Task/linqu.png';
+            }
+            else if (dataSource.get === -1) {
+                BtnGet.skin = 'UI/Task/yilingqu.png';
+            }
+            let ProgressBar = cell.getChildByName('ProgressBar');
+            ProgressBar.width = dataSource.resCondition / dataSource.condition * 169;
+            let ProNum = cell.getChildByName('ProNum');
+            ProNum.text = dataSource.resCondition + '/' + dataSource.condition;
+            let AwardNum = cell.getChildByName('AwardNum');
+            AwardNum.text = dataSource.rewardNum;
+            if (index === 0) {
+                ProgressBar.width = 169;
+                ProNum.text = '1/1';
+                BtnGet.skin = 'UI/Task/adslingqu.png';
+            }
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnBack'], this, null, null, this.btnBackUp);
+        }
+        ;
+        btnBackUp() {
+            this.self.close();
+        }
+        taskOnDisable() {
+            Setting.setBtnAppear();
+            GVariate._stageClick = true;
+        }
+    }
+
+    class UIVictory extends lwg.Admin.Scene {
+        constructor() {
+            super();
+            this.addOrSub = 'add';
+        }
+        lwgNodeDec() {
+            this.GlodNum = this.self['GlodNum'];
+            ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
+            ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
+        }
+        lwgOnEnable() {
+            ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
+            this.getGoldNum = 50;
+            this.getGoldDisPlay();
+            Gold.goldAppear(500);
+            Setting.setBtnAppear();
+            Game._gameLevel.value++;
+            PalyAudio.playVictorySound();
+            this.self['BtnAdv_Wechat'].visible = true;
+            this.self['BtnNormal_Wechat'].visible = false;
+            this.self['Dot'].visible = true;
+            lwg.Effects.createFireworks(Laya.stage, 40, 430, 200);
+            lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
+            lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
+            lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
+            EventAdmin.notify(Task.TaskType.victory);
+            if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+            }
+            else {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
+        }
+        lwgOpenAni() {
+            if (Game._platform == Game._platformTpye.OPPO) {
+                return;
+            }
+            this.self['Multiply10'].alpha = 0;
+            this.self['GlodNum'].alpha = 0;
+            this.self['BtnAdv_Wechat'].alpha = 0;
+            this.self['Select'].alpha = 0;
+            Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
+                Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
+                Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
+                Animation2D.bombs_Appear(this.self['BtnAdv_Wechat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+                Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
+            });
+            return 0;
+        }
+        getGoldDisPlay() {
+            let Num = this.GlodNum.getChildByName('Num');
+            Num.text = (this.getGoldNum * 10).toString();
+        }
+        lwgBtnClick() {
+            Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
+            Click.on(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+            Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
+            Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
+        }
+        offClick() {
+            Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
+            Click.off(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
+            Click.off(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+            Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
+            Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
+        }
+        btnSelectUp() {
+            if (this.self['Dot'].visible) {
+                this.self['Dot'].visible = false;
+                this.self['BtnAdv_Wechat'].visible = false;
+                this.self['BtnNormal_Wechat'].visible = true;
+                this.addOrSub = 'sub';
+                let Multiply10 = this.self['Multiply10'];
+                Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 0, 0, 0, 100);
+                let Num = this.GlodNum.getChildByName('Num');
+                Laya.timer.loop(30, this, () => {
+                    if (this.addOrSub == 'sub') {
+                        if (Number(Num.text) < this.getGoldNum) {
+                            Num.text = (this.getGoldNum).toString();
+                            this.addOrSub = null;
+                        }
+                        else {
+                            Num.text = (Number(Num.text) - 30).toString();
+                        }
+                    }
+                });
+            }
+            else {
+                this.self['Dot'].visible = true;
+                this.self['BtnAdv_Wechat'].visible = true;
+                this.self['BtnNormal_Wechat'].visible = false;
+                this.addOrSub = 'add';
+                let Multiply10 = this.self['Multiply10'];
+                Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 1, 1, 1, 100);
+                let Num = this.GlodNum.getChildByName('Num');
+                Laya.timer.loop(30, this, () => {
+                    if (this.addOrSub == 'add') {
+                        if (Number(Num.text) > this.getGoldNum * 10) {
+                            Num.text = (this.getGoldNum * 10).toString();
+                            this.addOrSub = null;
+                        }
+                        else {
+                            Num.text = (Number(Num.text) + 30).toString();
+                        }
+                    }
+                });
+            }
+        }
+        btnNormalUp() {
+            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_success');
+            this.offClick();
+            Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                this.advFunc(1);
+            });
+        }
+        btnAdvUp() {
+            ADManager.ShowReward(() => {
+                ADManager.TAPoint(TaT.BtnClick, 'closeword_success');
+                Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                    this.advFunc(10);
+                });
+            });
+        }
+        advFunc(number) {
+            Gold.addGold(this.getGoldNum * number);
+            EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
+        }
+        lwgOnDisable() {
+            EventAdmin.notify(GEnum.EventType.goBack);
+        }
+    }
+
+    class UIVictoryBox_Cell extends Admin.Object {
+        constructor() { super(); }
+        lwgBtnClick() {
+            Click.on(Click.Type.noEffect, this.self, this, null, null, this.up, null);
+        }
+        btnoff() {
+            Click.off(Click.Type.noEffect, this.self, this, null, null, this.up, null);
+        }
+        up(e) {
+            if (this.self['_dataSource'][VictoryBox.BoxProperty.openState]) {
+                return;
+            }
+            else {
+                if (VictoryBox._defaultOpenNum > 0) {
+                    let Pic_Box = this.self.getChildByName('Pic_Box');
+                    if (!this.self['_dataSource'][VictoryBox.BoxProperty.ads]) {
+                        Pic_Box.skin = 'UI/VictoryBox/baoxian3.png';
+                    }
+                    this.btnoff();
+                    Animation2D.shookHead_Simple(Pic_Box, 10, 100, 0, f => {
+                        EventAdmin.notify(VictoryBox.EventType.openBox, [this.self['_dataSource']]);
+                        this.lwgBtnClick();
+                    });
+                }
+                else {
+                    Dialog.createHint_Middle(Dialog.HintContent["观看广告可以获得三次开宝箱次数！"]);
+                }
+            }
+        }
+        lwgDisable() {
+        }
+    }
+
+    class UIVictoryBox extends VictoryBox.VictoryBoxScene {
+        constructor() { super(); }
+        victoryBoxOnAwake() {
+            ADManager.TAPoint(TaT.BtnShow, 'Adboxvideo');
+            ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
+            this.self['BtnAgain'].visible = false;
+            this.self['BtnNo'].visible = false;
+            if (VictoryBox._openVictoryBoxNum > 1) {
+                let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    VictoryBox.setBoxProperty('box' + arr[index], VictoryBox.BoxProperty.ads, true);
+                }
+            }
+        }
+        victoryBoxEventReg() {
+            EventAdmin.reg(VictoryBox.EventType.openBox, this, (dataSource) => {
+                console.log(dataSource, VictoryBox._defaultOpenNum);
+                if (VictoryBox._defaultOpenNum > 0) {
+                    if (dataSource[VictoryBox.BoxProperty.ads]) {
+                        ADManager.ShowReward(() => {
+                            ADManager.TAPoint(TaT.BtnClick, 'Adboxvideo');
+                            this.getRewardFunc(dataSource);
+                        });
+                    }
+                    else {
+                        this.getRewardFunc(dataSource);
+                    }
+                }
+                else {
+                    Dialog.createHint_Middle(Dialog.HintContent["观看广告可以获得三次开宝箱次数！"]);
+                }
+            });
+        }
+        getRewardFunc(dataSource) {
+            VictoryBox._alreadyOpenNum++;
+            let automan = false;
+            if (VictoryBox._alreadyOpenNum === 9 && !EasterEgg.getProperty(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, EasterEgg.Property.complete)) {
+                EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_4, 1);
+                let cell = VictoryBox._BoxList.getCell(dataSource.arrange - 1);
+                let Automan = cell.getChildByName('Automan');
+                Automan.visible = true;
+                automan = true;
+            }
+            VictoryBox._defaultOpenNum--;
+            VictoryBox._selectBox = dataSource[VictoryBox.BoxProperty.name];
+            let diffX = dataSource.arrange % 3;
+            if (diffX == 0) {
+                diffX = 3;
+            }
+            let diffY = Math.floor(dataSource.arrange / 3 + 0.5);
+            let x = VictoryBox._BoxList.x + VictoryBox._BoxList.width / 3 * diffX - 45;
+            let y = VictoryBox._BoxList.y + VictoryBox._BoxList.height / 3 * diffY + 92;
+            Effects.createExplosion_Rotate(this.self, 25, x, y, 'star', 10, 15);
+            VictoryBox.setBoxProperty(dataSource[VictoryBox.BoxProperty.name], VictoryBox.BoxProperty.openState, true);
+            if (!automan) {
+                Laya.timer.frameOnce(20, this, f => {
+                    Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
+                        Gold.addGold(VictoryBox.getBoxProperty(dataSource.name, VictoryBox.BoxProperty.rewardNum));
+                    });
+                });
+            }
+            EventAdmin.notify(Task.EventType.victoryBox);
+        }
+        boxList_Update(cell, index) {
+            let dataSource = cell.dataSource;
+            let Select = cell.getChildByName('Select');
+            if (VictoryBox._selectBox === dataSource[VictoryBox.BoxProperty.name]) {
+                Select.visible = true;
+            }
+            else {
+                Select.visible = false;
+            }
+            let Num = cell.getChildByName('Num');
+            let Pic_Gold = cell.getChildByName('Pic_Gold');
+            let Pic_Box = cell.getChildByName('Pic_Box');
+            let BordPic = cell.getChildByName('BordPic');
+            if (!dataSource[VictoryBox.BoxProperty.openState]) {
+                if (dataSource[VictoryBox.BoxProperty.ads]) {
+                    Pic_Box.skin = 'UI/VictoryBox/baoxian_adv.png';
+                }
+                else {
+                    Pic_Box.skin = 'UI/VictoryBox/baoxian2.png';
+                }
+                Pic_Box.visible = true;
+                Pic_Gold.visible = false;
+                Num.visible = false;
+                BordPic.skin = 'UI/Common/kuang2.png';
+            }
+            else {
+                Pic_Box.visible = false;
+                Pic_Gold.visible = true;
+                Num.visible = true;
+                Num.text = dataSource[VictoryBox.BoxProperty.rewardNum];
+                BordPic.skin = 'UI/Common/kuang1.png';
+            }
+        }
+        victoryBoxBtnClick() {
+            Click.on('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+            Click.on('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        }
+        btnOffClick() {
+            Click.off('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
+            Click.off('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        }
+        btnNoUp(event) {
+            lwg.Admin._openScene(lwg.Admin.SceneName.UIVictory, null, null, null);
+            this.self.close();
+        }
+        btnAgainUp(event) {
+            ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
+            ADManager.TAPoint(TaT.BtnClick, 'Adboxagain');
+            if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
+                ADManager.ShowReward(() => {
+                    Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
+                    VictoryBox._defaultOpenNum += 3;
+                    VictoryBox._adsMaxOpenNum -= 3;
+                });
+            }
+            else {
+                Dialog.createHint_Middle(Dialog.HintContent["没有宝箱领可以领了！"]);
+            }
+        }
+        victoryOnUpdate() {
+            if (VictoryBox._defaultOpenNum > 0) {
+                this.self['BtnAgain'].visible = false;
+                this.self['BtnNo'].visible = false;
+            }
+            else {
+                this.self['BtnAgain'].visible = true;
+                this.self['BtnNo'].visible = true;
+            }
+        }
+    }
+
+    var REG = Laya.ClassUtils.regClass;
+    var ui;
+    (function (ui) {
+        var test;
+        (function (test) {
+            class TestSceneUI extends Laya.Scene {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("test/TestScene");
+                }
+            }
+            test.TestSceneUI = TestSceneUI;
+            REG("ui.test.TestSceneUI", TestSceneUI);
+        })(test = ui.test || (ui.test = {}));
+    })(ui || (ui = {}));
+
+    class GameUI extends ui.test.TestSceneUI {
+        constructor() {
+            super();
+            this.newScene = Laya.stage.addChild(new Laya.Scene3D());
+            var camera = this.newScene.addChild(new Laya.Camera(0, 0.1, 100));
+            camera.transform.translate(new Laya.Vector3(0, 6, 9.5));
+            camera.transform.rotate(new Laya.Vector3(-15, 0, 0), true, false);
+            var directionLight = new Laya.DirectionLight();
+            this.newScene.addChild(directionLight);
+            directionLight.color = new Laya.Vector3(0.6, 0.6, 0.6);
+            var mat = directionLight.transform.worldMatrix;
+            mat.setForward(new Laya.Vector3(-1.0, -1.0, -1.0));
+            directionLight.transform.worldMatrix = mat;
+            var plane = this.newScene.addChild(new Laya.MeshSprite3D(Laya.PrimitiveMesh.createPlane(10, 10, 10, 10)));
+            var planeMat = new Laya.BlinnPhongMaterial();
+            Laya.Texture2D.load("res/grass.png", Laya.Handler.create(this, function (tex) {
+                planeMat.albedoTexture = tex;
+            }));
+            var tilingOffset = planeMat.tilingOffset;
+            tilingOffset.setValue(5, 5, 0, 0);
+            planeMat.tilingOffset = tilingOffset;
+            plane.meshRenderer.material = planeMat;
+            var planeStaticCollider = plane.addComponent(Laya.PhysicsCollider);
+            var planeShape = new Laya.BoxColliderShape(10, 0, 10);
+            planeStaticCollider.colliderShape = planeShape;
+            planeStaticCollider.friction = 2;
+            planeStaticCollider.restitution = 0.3;
+            this.mat1 = new Laya.BlinnPhongMaterial();
+            Laya.Texture2D.load("res/wood.jpg", Laya.Handler.create(this, function (tex) {
+                this.mat1.albedoTexture = tex;
+                Laya.timer.once(100, this, function () {
+                    this.addBox();
+                });
+            }));
+        }
+        addBox() {
+            var box = this.newScene.addChild(new Laya.MeshSprite3D(Laya.PrimitiveMesh.createBox(0.75, 0.5, 0.5)));
+            box.meshRenderer.material = this.mat1;
+            var transform = box.transform;
+            var pos = transform.position;
+            pos.setValue(0, 10, 0);
+            transform.position = pos;
+            var rigidBody = box.addComponent(Laya.Rigidbody3D);
+            var boxShape = new Laya.BoxColliderShape(0.75, 0.5, 0.5);
+            rigidBody.colliderShape = boxShape;
+            rigidBody.mass = 10;
+        }
+    }
+
+    class GameConfig {
+        constructor() { }
+        static init() {
+            var reg = Laya.ClassUtils.regClass;
+            reg("script/Game/UICheckIn.ts", UICheckIn);
+            reg("script/Game/UIDefeated.ts", UIDefeated);
+            reg("script/Game/UIEasterEgg.ts", UIEasterEgg);
+            reg("script/Game/UILoding.ts", UILoding);
+            reg("script/Game/UIOperation.ts", UIOperation);
+            reg("script/Game/UIResurgence.ts", UIResurgence);
+            reg("script/Game/UISet.ts", UISet);
+            reg("script/Game/UIShare.ts", UIShare);
+            reg("script/Game/UIShop_Goods.ts", UIShop_Goods);
+            reg("script/Game/UIShop.ts", UIShop);
+            reg("script/Game/UISKin_Goods.ts", UISKin_Goods);
+            reg("script/Game/UISkin.ts", UISkin);
+            reg("script/Game/UISkinTry.ts", UISkinTry);
+            reg("script/Game/UISkinXD.ts", UISkinXD);
+            reg("script/Game/UIStart.ts", UIStart);
+            reg("script/Game/UISubpackages.ts", UISubpackages);
+            reg("script/Game/UITask_GetAward.ts", UITask_GetAward);
+            reg("script/Game/UITask.ts", UITask);
+            reg("script/Game/UIVictory.ts", UIVictory);
+            reg("script/Game/UIVictoryBox_Cell.ts", UIVictoryBox_Cell);
+            reg("script/Game/UIVictoryBox.ts", UIVictoryBox);
+            reg("script/GameUI.ts", GameUI);
+        }
+    }
+    GameConfig.width = 720;
+    GameConfig.height = 1280;
+    GameConfig.scaleMode = "fixedwidth";
+    GameConfig.screenMode = "vertical";
+    GameConfig.alignV = "top";
+    GameConfig.alignH = "left";
+    GameConfig.startScene = "Scene/UISubpackages.scene";
+    GameConfig.sceneRoot = "";
+    GameConfig.debug = false;
+    GameConfig.stat = false;
+    GameConfig.physicsDebug = false;
+    GameConfig.exportSceneToJson = true;
+    GameConfig.init();
+
+    class Main {
+        constructor() {
+            if (window["Laya3D"])
+                Laya3D.init(GameConfig.width, GameConfig.height);
+            else
+                Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);
+            Laya["Physics"] && Laya["Physics"].enable();
+            Laya["DebugPanel"] && Laya["DebugPanel"].enable();
+            Laya.stage.scaleMode = GameConfig.scaleMode;
+            Laya.stage.screenMode = GameConfig.screenMode;
+            Laya.stage.alignV = GameConfig.alignV;
+            Laya.stage.alignH = GameConfig.alignH;
+            Laya.URL.exportSceneToJson = GameConfig.exportSceneToJson;
+            if (GameConfig.debug || Laya.Utils.getQueryString("debug") == "true")
+                Laya.enableDebugPanel();
+            if (GameConfig.physicsDebug && Laya["PhysicsDebugDraw"])
+                Laya["PhysicsDebugDraw"].enable();
+            if (GameConfig.stat)
+                Laya.Stat.show();
+            Laya.alertGlobalError = true;
+            Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
+        }
+        onVersionLoaded() {
+            Laya.AtlasInfoManager.enable("fileconfig.json", Laya.Handler.create(this, this.onConfigLoaded));
+        }
+        onConfigLoaded() {
+            GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
+        }
+    }
+    new Main();
+
+}());

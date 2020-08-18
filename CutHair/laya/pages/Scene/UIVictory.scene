@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":21,
+    "selecteID":26,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":25,
+    "maxID":37,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -118,82 +118,39 @@
         {
             "x":15,
             "type":"Sprite",
-            "searchKey":"Sprite,BtnAdv,BtnAdv",
-            "props":{"y":1115,"x":358,"width":288,"var":"BtnAdv","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv","height":128},
+            "searchKey":"Sprite,WeChat,WeChat",
+            "props":{"y":993,"x":187.5,"width":341,"var":"WeChat","name":"WeChat","height":207},
             "nodeParent":2,
-            "label":"BtnAdv",
+            "label":"WeChat",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":6,
+            "compId":25,
             "child":[
                 {
                     "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite,BtnAdv",
-                    "props":{"y":12.5,"x":205,"texture":"UI/Common/shipin.png","name":"BtnAdv"},
-                    "nodeParent":6,
-                    "label":"BtnAdv",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":10,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":44.5,"x":33,"texture":"UI/Settle/txt_10.png"},
-                    "nodeParent":6,
-                    "label":"Sprite",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":11,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,Select,Select",
-            "props":{"y":993,"x":205,"width":306,"var":"Select","name":"Select","height":42},
-            "nodeParent":2,
-            "label":"Select",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":7,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,BtnSelect,BtnSelect",
-                    "props":{"y":2,"x":21,"var":"BtnSelect","texture":"UI/Common/yuan1.png","name":"BtnSelect"},
-                    "nodeParent":7,
-                    "label":"BtnSelect",
-                    "isOpen":true,
+                    "searchKey":"Sprite,BtnNormal_Wechat,BtnNormal_Wechat",
+                    "props":{"y":122,"x":171,"width":288,"var":"BtnNormal_Wechat","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNormal_Wechat","height":128},
+                    "nodeParent":25,
+                    "label":"BtnNormal_Wechat",
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":12,
+                    "compId":21,
                     "child":[
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,Dot,Dot",
-                            "props":{"y":8.75,"x":7.75,"var":"Dot","texture":"UI/Common/yuan2.png","name":"Dot"},
-                            "nodeParent":12,
-                            "label":"Dot",
+                            "searchKey":"Sprite",
+                            "props":{"y":44.5,"x":65,"texture":"UI/Settle/putong.png"},
+                            "nodeParent":21,
+                            "label":"Sprite",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":13,
+                            "compId":23,
                             "child":[
                                 ]
                         }]
@@ -201,42 +158,163 @@
                 {
                     "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":3,"x":57,"texture":"UI/Settle/txt_kanguangg.png"},
-                    "nodeParent":7,
-                    "label":"Sprite",
-                    "isDirectory":false,
+                    "searchKey":"Sprite,Select",
+                    "props":{"y":0,"x":18,"width":306,"var":"Select","height":42},
+                    "nodeParent":25,
+                    "label":"Select",
+                    "isOpen":true,
+                    "isDirectory":true,
                     "isAniNode":true,
-                    "hasChild":false,
-                    "compId":14,
+                    "hasChild":true,
+                    "compId":7,
                     "child":[
-                        ]
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnSelect_Wechat,BtnSelect_Wechat",
+                            "props":{"y":2,"x":21,"var":"BtnSelect_Wechat","texture":"UI/Common/yuan1.png","name":"BtnSelect_Wechat"},
+                            "nodeParent":7,
+                            "label":"BtnSelect_Wechat",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":12,
+                            "child":[
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,Dot,Dot",
+                                    "props":{"y":8.75,"x":7.75,"var":"Dot","texture":"UI/Common/yuan2.png","name":"Dot"},
+                                    "nodeParent":12,
+                                    "label":"Dot",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":13,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":3,"x":57,"texture":"UI/Settle/txt_kanguangg.png"},
+                            "nodeParent":7,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":14,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnAdv_Wechat,BtnAdv_Wechat",
+                    "props":{"y":122,"x":171,"width":288,"var":"BtnAdv_Wechat","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv_Wechat","height":128},
+                    "nodeParent":25,
+                    "label":"BtnAdv_Wechat",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":6,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnAdv",
+                            "props":{"y":12.5,"x":205,"texture":"UI/Common/shipin.png","name":"BtnAdv"},
+                            "nodeParent":6,
+                            "label":"BtnAdv",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":10,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":44.5,"x":33,"texture":"UI/Settle/txt_10.png"},
+                            "nodeParent":6,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":11,
+                            "child":[
+                                ]
+                        }]
                 }]
         },
         {
             "x":15,
             "type":"Sprite",
-            "searchKey":"Sprite,BtnNormal,BtnNormal",
-            "props":{"y":1115,"x":358,"width":288,"var":"BtnNormal","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNormal","height":128},
+            "searchKey":"Sprite,OPPO,OPPO",
+            "props":{"y":1000,"x":186.5,"width":341,"var":"OPPO","name":"OPPO","height":200},
             "nodeParent":2,
-            "label":"BtnNormal",
+            "label":"OPPO",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":21,
+            "compId":26,
             "child":[
                 {
                     "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":44.5,"x":65,"texture":"UI/Settle/putong.png"},
-                    "nodeParent":21,
-                    "label":"Sprite",
+                    "searchKey":"Sprite,BtnAdv_OPPO,BtnAdv_OPPO",
+                    "props":{"y":68,"x":170.5,"width":288,"var":"BtnAdv_OPPO","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv_OPPO","height":128},
+                    "nodeParent":26,
+                    "label":"BtnAdv_OPPO",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":33,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnAdv",
+                            "props":{"y":12.5,"x":205,"texture":"UI/Common/shipin.png","name":"BtnAdv"},
+                            "nodeParent":33,
+                            "label":"BtnAdv",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":34,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":44.5,"x":33,"texture":"UI/Settle/txt_10.png"},
+                            "nodeParent":33,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":35,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnNormal_OPPO,BtnNormal_OPPO",
+                    "props":{"y":166,"x":110,"var":"BtnNormal_OPPO","texture":"UI/CheckIn/normalBtn.png","name":"BtnNormal_OPPO"},
+                    "nodeParent":26,
+                    "label":"BtnNormal_OPPO",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":23,
+                    "compId":36,
                     "child":[
                         ]
                 }]

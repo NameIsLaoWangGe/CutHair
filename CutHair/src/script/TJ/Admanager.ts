@@ -1,5 +1,6 @@
 import { PalyAudio, Dialog, EventAdmin, Task } from "../Lwg_Template/lwg";
 import { EasterEgg } from "../Lwg_Template/EasterEgg";
+import { Game } from "../Lwg_Template/Game";
 
 export default class ADManager {
     constructor() {
@@ -35,6 +36,13 @@ export default class ADManager {
     static CanShowCD: boolean = true;
     public static ShowReward(rewardAction: Function, CDTime: number = 500)//展示激励广告，一般是视频
     {
+
+        if (Game._platform === Game._platformTpye.OPPO) {
+            rewardAction();
+            EventAdmin.notify(Task.EventType.adsTime);
+            EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+            return;
+        }
 
         if (ADManager.CanShowCD) {
             PalyAudio.stopMusic();

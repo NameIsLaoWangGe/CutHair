@@ -1,6 +1,7 @@
 import { lwg } from "../Lwg_Template/lwg";
+import { lwg3D } from "../Lwg_Template/lwg3D";
 
-export default class GameMain3D_Floor extends lwg.Admin.Object3D {
+export default class GameMain3D_Floor extends lwg3D.Object3D {
 
     lwgOnEnable(): void {
         this.rig3D.restitution = 0;

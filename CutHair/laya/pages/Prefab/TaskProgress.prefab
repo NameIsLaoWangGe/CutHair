@@ -2,7 +2,7 @@
     "x":0,
     "type":"Sprite",
     "selectedBox":21,
-    "selecteID":24,
+    "selecteID":21,
     "searchKey":"Sprite,Task1",
     "props":{"width":80,"presetID":1,"preset":"laya/pages/Prefab/TaskProgress.prefab","name":"Task1","isPresetRoot":true,"height":25},
     "nodeParent":-1,

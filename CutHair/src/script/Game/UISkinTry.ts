@@ -1,11 +1,20 @@
 import { lwg, Admin, Shop, Click, Setting, EventAdmin } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UISkinTry extends Admin.Scene {
 
     lwgOnAwake(): void {
         this.randomNoHave();
+
+        if (Game._platform == Game._platformTpye.OPPO) {
+            this.self['BtnGet_OPPO'].visible = true;
+            this.self['BtnGet_WeChat'].visible = false;
+        } else {
+            this.self['BtnGet_OPPO'].visible = false;
+            this.self['BtnGet_WeChat'].visible = true;
+        }
     }
 
     beforeTryOtherName: string;
@@ -68,16 +77,24 @@ export default class UISkinTry extends Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-        Click.on(lwg.Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+        Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
+        Click.on(lwg.Click.Type.largen, this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+        Click.on(lwg.Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+
     }
 
     btnGetUp(event): void {
-        ADManager.ShowReward(() => {
+        if (Game._platform == Game._platformTpye.OPPO) {
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
             EventAdmin.notify(GEnum.EventType.changeOther);
             EventAdmin.notify(GEnum.EventType.changeProp);
-        })
+        } else {
+            ADManager.ShowReward(() => {
+                Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                EventAdmin.notify(GEnum.EventType.changeOther);
+                EventAdmin.notify(GEnum.EventType.changeProp);
+            })
+        }
     }
 
     btnNoUp(event): void {

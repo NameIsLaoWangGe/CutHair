@@ -101,8 +101,6 @@ export default class UIEasterEgg extends EasterEgg.EasterEggScene {
         Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, () => {
             this.self['DialogHint'].x = -800;
         });
-
-
     };
 
 

@@ -5,7 +5,8 @@ import GameMain3D_Floor from "./GameMain3D_Floor";
 import { Global, GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import GameMain3D_knife from "./GameMain3D_knife";
 import { Game } from "../Lwg_Template/Game";
-export default class GameMain3D extends lwg.Admin.Scene3D {
+import { lwg3D } from "../Lwg_Template/lwg3D";
+export default class GameMain3D extends lwg3D.Scene3D {
 
     constructor() { super(); }
 

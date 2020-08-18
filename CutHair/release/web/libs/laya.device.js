@@ -1,1 +1,655 @@
-!function(e,t){"use strict";class a{constructor(){}}class i{constructor(){}}class n extends t.EventDispatcher{constructor(e){super(),this.onDeviceOrientationChange=this.onDeviceOrientationChange.bind(this)}static get instance(){return n._instance=n._instance||new n(0),n._instance}on(e,a,i,n=null){return super.on(e,a,i,n),t.ILaya.Browser.window.addEventListener("devicemotion",this.onDeviceOrientationChange),this}off(e,a,i,n=!1){return this.hasListener(e)||t.ILaya.Browser.window.removeEventListener("devicemotion",this.onDeviceOrientationChange),super.off(e,a,i,n)}onDeviceOrientationChange(e){var a=e.interval;n.acceleration.x=e.acceleration.x,n.acceleration.y=e.acceleration.y,n.acceleration.z=e.acceleration.z,n.accelerationIncludingGravity.x=e.accelerationIncludingGravity.x,n.accelerationIncludingGravity.y=e.accelerationIncludingGravity.y,n.accelerationIncludingGravity.z=e.accelerationIncludingGravity.z,n.rotationRate.alpha=-1*e.rotationRate.gamma,n.rotationRate.beta=-1*e.rotationRate.alpha,n.rotationRate.gamma=e.rotationRate.beta,t.ILaya.Browser.onAndroid?(t.ILaya.Browser.userAgent.indexOf("Chrome")>-1&&(n.rotationRate.alpha*=180/Math.PI,n.rotationRate.beta*=180/Math.PI,n.rotationRate.gamma*=180/Math.PI),n.acceleration.x*=-1,n.accelerationIncludingGravity.x*=-1):t.ILaya.Browser.onIOS&&(n.acceleration.y*=-1,n.acceleration.z*=-1,n.accelerationIncludingGravity.y*=-1,n.accelerationIncludingGravity.z*=-1,a*=1e3),this.event(t.Event.CHANGE,[n.acceleration,n.accelerationIncludingGravity,n.rotationRate,a])}static getTransformedAcceleration(e){var i;return n.transformedAcceleration=n.transformedAcceleration||new a,n.transformedAcceleration.z=e.z,90==t.ILaya.Browser.window.orientation?(n.transformedAcceleration.x=e.y,n.transformedAcceleration.y=-e.x):-90==t.ILaya.Browser.window.orientation?(n.transformedAcceleration.x=-e.y,n.transformedAcceleration.y=e.x):t.ILaya.Browser.window.orientation?180==t.ILaya.Browser.window.orientation&&(n.transformedAcceleration.x=-e.x,n.transformedAcceleration.y=-e.y):(n.transformedAcceleration.x=e.x,n.transformedAcceleration.y=e.y),-90==t.ILaya.stage.canvasDegree?(i=n.transformedAcceleration.x,n.transformedAcceleration.x=-n.transformedAcceleration.y,n.transformedAcceleration.y=i):90==t.ILaya.stage.canvasDegree&&(i=n.transformedAcceleration.x,n.transformedAcceleration.x=n.transformedAcceleration.y,n.transformedAcceleration.y=-i),n.transformedAcceleration}}n.acceleration=new a,n.accelerationIncludingGravity=new a,n.rotationRate=new i;class o extends t.EventDispatcher{constructor(){super()}static get instance(){return o._instance=o._instance||new o,o._instance}start(e,a){this.throushold=e,this.shakeInterval=a,this.lastX=this.lastY=this.lastZ=NaN,n.instance.on(t.Event.CHANGE,this,this.onShake)}stop(){n.instance.off(t.Event.CHANGE,this,this.onShake)}onShake(e,a,i,n){if(isNaN(this.lastX))return this.lastX=a.x,this.lastY=a.y,this.lastZ=a.z,void(this.lastMillSecond=t.ILaya.Browser.now());var o=Math.abs(this.lastX-a.x),r=Math.abs(this.lastY-a.y),s=Math.abs(this.lastZ-a.z);this.isShaked(o,r,s)&&(t.ILaya.Browser.now()-this.lastMillSecond>this.shakeInterval&&(this.event(t.Event.CHANGE),this.lastMillSecond=t.ILaya.Browser.now()));this.lastX=a.x,this.lastY=a.y,this.lastZ=a.z}isShaked(e,t,a){return e>this.throushold&&t>this.throushold||e>this.throushold&&a>this.throushold||t>this.throushold&&a>this.throushold}}class r{setPosition(e){this.pos=e,this.coords=e.coords}get latitude(){return this.coords.latitude}get longitude(){return this.coords.longitude}get altitude(){return this.coords.altitude}get accuracy(){return this.coords.accuracy}get altitudeAccuracy(){return this.coords.altitudeAccuracy}get heading(){return this.coords.heading}get speed(){return this.coords.speed}get timestamp(){return this.pos.timestamp}}class s{constructor(){}static getCurrentPosition(e,t=null){s.navigator.geolocation.getCurrentPosition(function(t){s.position.setPosition(t),e.runWith(s.position)},function(e){t.runWith(e)},{enableHighAccuracy:s.enableHighAccuracy,timeout:s.timeout,maximumAge:s.maximumAge})}static watchPosition(e,t){return s.navigator.geolocation.watchPosition(function(t){s.position.setPosition(t),e.runWith(s.position)},function(e){t.runWith(e)},{enableHighAccuracy:s.enableHighAccuracy,timeout:s.timeout,maximumAge:s.maximumAge})}static clearWatch(e){s.navigator.geolocation.clearWatch(e)}}s.navigator=t.ILaya.Browser.window.navigator,s.position=new r,s.PERMISSION_DENIED=1,s.POSITION_UNAVAILABLE=2,s.TIMEOUT=3,s.supported=!!s.navigator.geolocation,s.enableHighAccuracy=!1,s.timeout=1e10,s.maximumAge=0;class d extends t.Bitmap{constructor(){super(),this._w=0,this._h=0,this._width=1,this._height=1,this.createDomElement()}createDomElement(){this._source=this.video=t.ILaya.Browser.createElement("video");var e=this.video.style;e.position="absolute",e.top="0px",e.left="0px",this.video.addEventListener("loadedmetadata",()=>{this._w=this.video.videoWidth,this._h=this.video.videoHeight})}setSource(e,t){for(;this.video.childElementCount;)this.video.firstChild.remove();1&t&&this.appendSource(e,"video/mp4"),2&t&&this.appendSource(e+".ogg","video/ogg")}appendSource(e,a){var i=t.ILaya.Browser.createElement("source");i.src=e,i.type=a,this.video.appendChild(i)}getVideo(){return this.video}_getSource(){return this._source}destroy(){super.destroy(),t.ILaya.Render.isConchApp&&this.video._destroy()}}d.create=function(){return new d};class l extends d{constructor(){super();var e=t.LayaGL.instance;!t.ILaya.Render.isConchApp&&t.ILaya.Browser.onIPhone||(this.gl=t.ILaya.Render.isConchApp?window.LayaGLContext.instance:t.WebGLContext.mainContext,this._source=this.gl.createTexture(),t.WebGLContext.bindTexture(this.gl,e.TEXTURE_2D,this._source),this.gl.texParameteri(e.TEXTURE_2D,e.TEXTURE_WRAP_S,e.CLAMP_TO_EDGE),this.gl.texParameteri(e.TEXTURE_2D,e.TEXTURE_WRAP_T,e.CLAMP_TO_EDGE),this.gl.texParameteri(e.TEXTURE_2D,e.TEXTURE_MAG_FILTER,e.LINEAR),this.gl.texParameteri(e.TEXTURE_2D,e.TEXTURE_MIN_FILTER,e.LINEAR),t.WebGLContext.bindTexture(this.gl,e.TEXTURE_2D,null))}updateTexture(){if(t.ILaya.Render.isConchApp||!t.ILaya.Browser.onIPhone){var e=t.LayaGL.instance;t.WebGLContext.bindTexture(this.gl,e.TEXTURE_2D,this._source),this.gl.texImage2D(e.TEXTURE_2D,0,e.RGB,e.RGB,e.UNSIGNED_BYTE,this.video),l.curBindSource=this._source}}get _glTexture(){return this._source}destroy(){this._source&&(this.gl=t.ILaya.Render.isConchApp?window.LayaGLContext.instance:t.WebGLContext.mainContext,l.curBindSource==this._source&&(t.WebGLContext.bindTexture(this.gl,this.gl.TEXTURE_2D,null),l.curBindSource=null),this.gl.deleteTexture(this._source)),super.destroy()}}class h extends t.Sprite{constructor(e=320,a=240){super(),this.htmlVideo=new l,this.videoElement=this.htmlVideo.getVideo(),this.videoElement.layaTarget=this,this.internalTexture=new t.Texture(this.htmlVideo),this.videoElement.addEventListener("abort",h.onAbort),this.videoElement.addEventListener("canplay",h.onCanplay),this.videoElement.addEventListener("canplaythrough",h.onCanplaythrough),this.videoElement.addEventListener("durationchange",h.onDurationchange),this.videoElement.addEventListener("emptied",h.onEmptied),this.videoElement.addEventListener("error",h.onError),this.videoElement.addEventListener("loadeddata",h.onLoadeddata),this.videoElement.addEventListener("loadedmetadata",h.onLoadedmetadata),this.videoElement.addEventListener("loadstart",h.onLoadstart),this.videoElement.addEventListener("pause",h.onPause),this.videoElement.addEventListener("play",h.onPlay),this.videoElement.addEventListener("playing",h.onPlaying),this.videoElement.addEventListener("progress",h.onProgress),this.videoElement.addEventListener("ratechange",h.onRatechange),this.videoElement.addEventListener("seeked",h.onSeeked),this.videoElement.addEventListener("seeking",h.onSeeking),this.videoElement.addEventListener("stalled",h.onStalled),this.videoElement.addEventListener("suspend",h.onSuspend),this.videoElement.addEventListener("timeupdate",h.onTimeupdate),this.videoElement.addEventListener("volumechange",h.onVolumechange),this.videoElement.addEventListener("waiting",h.onWaiting),this.videoElement.addEventListener("ended",this.onPlayComplete.bind(this)),this.size(e,a),t.ILaya.Browser.onMobile&&(this.onDocumentClick=this.onDocumentClick.bind(this),t.ILaya.Browser.document.addEventListener("touchend",this.onDocumentClick))}static onAbort(e){e.target.layaTarget.event("abort")}static onCanplay(e){e.target.layaTarget.event("canplay")}static onCanplaythrough(e){e.target.layaTarget.event("canplaythrough")}static onDurationchange(e){e.target.layaTarget.event("durationchange")}static onEmptied(e){e.target.layaTarget.event("emptied")}static onError(e){e.target.layaTarget.event("error")}static onLoadeddata(e){e.target.layaTarget.event("loadeddata")}static onLoadedmetadata(e){e.target.layaTarget.event("loadedmetadata")}static onLoadstart(e){e.target.layaTarget.event("loadstart")}static onPause(e){e.target.layaTarget.event("pause")}static onPlay(e){e.target.layaTarget.event("play")}static onPlaying(e){e.target.layaTarget.event("playing")}static onProgress(e){e.target.layaTarget.event("progress")}static onRatechange(e){e.target.layaTarget.event("ratechange")}static onSeeked(e){e.target.layaTarget.event("seeked")}static onSeeking(e){e.target.layaTarget.event("seeking")}static onStalled(e){e.target.layaTarget.event("stalled")}static onSuspend(e){e.target.layaTarget.event("suspend")}static onTimeupdate(e){e.target.layaTarget.event("timeupdate")}static onVolumechange(e){e.target.layaTarget.event("volumechange")}static onWaiting(e){e.target.layaTarget.event("waiting")}onPlayComplete(e){t.ILaya.Render.isConchApp&&this.videoElement&&this.videoElement.loop||t.ILaya.timer.clear(this,this.renderCanvas),this.event("ended")}load(e){0==e.indexOf("blob:")?this.videoElement.src=e:this.htmlVideo.setSource(e,1)}play(){this.videoElement.play(),t.ILaya.timer.frameLoop(1,this,this.renderCanvas)}pause(){this.videoElement.pause(),t.ILaya.timer.clear(this,this.renderCanvas)}reload(){this.videoElement.load()}canPlayType(e){var t;switch(e){case 1:t="video/mp4";break;case 2:t="video/ogg";break;case 8:t="video/webm"}return this.videoElement.canPlayType(t)}renderCanvas(){0!==this.readyState&&(this.htmlVideo.updateTexture(),this.graphics.clear(),this.graphics.drawTexture(this.internalTexture,0,0,this.width,this.height))}onDocumentClick(){this.videoElement.play(),this.videoElement.pause(),t.ILaya.Browser.document.removeEventListener("touchend",this.onDocumentClick)}get buffered(){return this.videoElement.buffered}get currentSrc(){return this.videoElement.currentSrc}get currentTime(){return this.videoElement.currentTime}set currentTime(e){this.videoElement.currentTime=e,this.renderCanvas()}set volume(e){this.videoElement.volume=e}get volume(){return this.videoElement.volume}get readyState(){return this.videoElement.readyState}get videoWidth(){return this.videoElement.videoWidth}get videoHeight(){return this.videoElement.videoHeight}get duration(){return this.videoElement.duration}get ended(){return this.videoElement.ended}get error(){return this.videoElement.error}get loop(){return this.videoElement.loop}set loop(e){this.videoElement.loop=e}set x(e){if(super.x=e,t.ILaya.Render.isConchApp){var a=t.ILaya.Utils.getTransformRelativeToWindow(this,0,0);this.videoElement.style.left=a.x}}get x(){return super.x}set y(e){if(super.y=e,t.ILaya.Render.isConchApp){var a=t.ILaya.Utils.getTransformRelativeToWindow(this,0,0);this.videoElement.style.top=a.y}}get y(){return super.y}get playbackRate(){return this.videoElement.playbackRate}set playbackRate(e){this.videoElement.playbackRate=e}get muted(){return this.videoElement.muted}set muted(e){this.videoElement.muted=e}get paused(){return this.videoElement.paused}get preload(){return this.videoElement.preload}set preload(e){this.videoElement.preload=e}get seekable(){return this.videoElement.seekable}get seeking(){return this.videoElement.seeking}size(e,a){if(super.size(e,a),t.ILaya.Render.isConchApp){var i=t.ILaya.Utils.getTransformRelativeToWindow(this,0,0);this.videoElement.width=e*i.scaleX}else this.videoElement.width=e/t.ILaya.Browser.pixelRatio;return this.paused&&this.renderCanvas(),this}set width(e){if(t.ILaya.Render.isConchApp){var a=t.ILaya.Utils.getTransformRelativeToWindow(this,0,0);this.videoElement.width=e*a.scaleX}else this.videoElement.width=this.width/t.ILaya.Browser.pixelRatio;super.width=e,this.paused&&this.renderCanvas()}get width(){return super.width}set height(e){if(t.ILaya.Render.isConchApp){var a=t.ILaya.Utils.getTransformRelativeToWindow(this,0,0);this.videoElement.height=e*a.scaleY}else this.videoElement.height=this.height/t.ILaya.Browser.pixelRatio;super.height=e}get height(){return super.height}destroy(e=!0){super.destroy(e),this.videoElement.removeEventListener("abort",h.onAbort),this.videoElement.removeEventListener("canplay",h.onCanplay),this.videoElement.removeEventListener("canplaythrough",h.onCanplaythrough),this.videoElement.removeEventListener("durationchange",h.onDurationchange),this.videoElement.removeEventListener("emptied",h.onEmptied),this.videoElement.removeEventListener("error",h.onError),this.videoElement.removeEventListener("loadeddata",h.onLoadeddata),this.videoElement.removeEventListener("loadedmetadata",h.onLoadedmetadata),this.videoElement.removeEventListener("loadstart",h.onLoadstart),this.videoElement.removeEventListener("pause",h.onPause),this.videoElement.removeEventListener("play",h.onPlay),this.videoElement.removeEventListener("playing",h.onPlaying),this.videoElement.removeEventListener("progress",h.onProgress),this.videoElement.removeEventListener("ratechange",h.onRatechange),this.videoElement.removeEventListener("seeked",h.onSeeked),this.videoElement.removeEventListener("seeking",h.onSeeking),this.videoElement.removeEventListener("stalled",h.onStalled),this.videoElement.removeEventListener("suspend",h.onSuspend),this.videoElement.removeEventListener("timeupdate",h.onTimeupdate),this.videoElement.removeEventListener("volumechange",h.onVolumechange),this.videoElement.removeEventListener("waiting",h.onWaiting),this.videoElement.removeEventListener("ended",this.onPlayComplete),this.pause(),this.videoElement.layaTarget=null,this.videoElement=null,this.htmlVideo.destroy()}syncVideoPosition(){var e,a=t.ILaya.stage;e=t.ILaya.Utils.getGlobalPosAndScale(this);var i=a._canvasTransform.a,n=a._canvasTransform.d,o=e.x*a.clientScaleX*i+a.offset.x,r=e.y*a.clientScaleY*n+a.offset.y;this.videoElement.style.left=o+"px",this.videoElement.style.top=r+"px",this.videoElement.width=this.width/t.ILaya.Browser.pixelRatio,this.videoElement.height=this.height/t.ILaya.Browser.pixelRatio}}h.MP4=1,h.OGG=2,h.CAMERA=4,h.WEBM=8,h.SUPPORT_PROBABLY="probably",h.SUPPORT_MAYBY="maybe",h.SUPPORT_NO="";class c extends t.EventDispatcher{constructor(e){super(),this.onDeviceOrientationChange=this.onDeviceOrientationChange.bind(this)}static get instance(){return c._instance=c._instance||new c(0),c._instance}on(e,a,i,n=null){return super.on(e,a,i,n),t.ILaya.Browser.window.addEventListener("deviceorientation",this.onDeviceOrientationChange),this}off(e,a,i,n=!1){return this.hasListener(e)||t.ILaya.Browser.window.removeEventListener("deviceorientation",this.onDeviceOrientationChange),super.off(e,a,i,n)}onDeviceOrientationChange(e){c.info.alpha=e.alpha,c.info.beta=e.beta,c.info.gamma=e.gamma,e.webkitCompassHeading&&(c.info.alpha=-1*e.webkitCompassHeading,c.info.compassAccuracy=e.webkitCompassAccuracy),this.event(t.Event.CHANGE,[e.absolute,c.info])}}c.info=new i,e.AccelerationInfo=a,e.Accelerator=n,e.Geolocation=s,e.GeolocationInfo=r,e.Gyroscope=c,e.HtmlVideo=d,e.Media=class{constructor(){}static supported(){return!!t.ILaya.Browser.window.navigator.getUserMedia}static getMedia(e,a,i){t.ILaya.Browser.window.navigator.getUserMedia&&t.ILaya.Browser.window.navigator.getUserMedia(e,function(e){a.runWith(t.ILaya.Browser.window.URL.createObjectURL(e))},function(e){i.runWith(e)})}},e.RotationInfo=i,e.Shake=o,e.Video=h,e.WebGLVideo=l}(window.Laya=window.Laya||{},Laya);
+(function (exports, Laya) {
+	'use strict';
+
+	class AccelerationInfo {
+	    constructor() {
+	    }
+	}
+
+	class RotationInfo {
+	    constructor() {
+	    }
+	}
+
+	class Accelerator extends Laya.EventDispatcher {
+	    constructor(singleton) {
+	        super();
+	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
+	    }
+	    static get instance() {
+	        Accelerator._instance = Accelerator._instance || new Accelerator(0);
+	        return Accelerator._instance;
+	    }
+	    on(type, caller, listener, args = null) {
+	        super.on(type, caller, listener, args);
+	        Laya.ILaya.Browser.window.addEventListener('devicemotion', this.onDeviceOrientationChange);
+	        return this;
+	    }
+	    off(type, caller, listener, onceOnly = false) {
+	        if (!this.hasListener(type))
+	            Laya.ILaya.Browser.window.removeEventListener('devicemotion', this.onDeviceOrientationChange);
+	        return super.off(type, caller, listener, onceOnly);
+	    }
+	    onDeviceOrientationChange(e) {
+	        var interval = e.interval;
+	        Accelerator.acceleration.x = e.acceleration.x;
+	        Accelerator.acceleration.y = e.acceleration.y;
+	        Accelerator.acceleration.z = e.acceleration.z;
+	        Accelerator.accelerationIncludingGravity.x = e.accelerationIncludingGravity.x;
+	        Accelerator.accelerationIncludingGravity.y = e.accelerationIncludingGravity.y;
+	        Accelerator.accelerationIncludingGravity.z = e.accelerationIncludingGravity.z;
+	        Accelerator.rotationRate.alpha = e.rotationRate.gamma * -1;
+	        Accelerator.rotationRate.beta = e.rotationRate.alpha * -1;
+	        Accelerator.rotationRate.gamma = e.rotationRate.beta;
+	        if (Laya.ILaya.Browser.onAndroid) {
+	            if (Laya.ILaya.Browser.userAgent.indexOf("Chrome") > -1) {
+	                Accelerator.rotationRate.alpha *= 180 / Math.PI;
+	                Accelerator.rotationRate.beta *= 180 / Math.PI;
+	                Accelerator.rotationRate.gamma *= 180 / Math.PI;
+	            }
+	            Accelerator.acceleration.x *= -1;
+	            Accelerator.accelerationIncludingGravity.x *= -1;
+	        }
+	        else if (Laya.ILaya.Browser.onIOS) {
+	            Accelerator.acceleration.y *= -1;
+	            Accelerator.acceleration.z *= -1;
+	            Accelerator.accelerationIncludingGravity.y *= -1;
+	            Accelerator.accelerationIncludingGravity.z *= -1;
+	            interval *= 1000;
+	        }
+	        this.event(Laya.Event.CHANGE, [Accelerator.acceleration, Accelerator.accelerationIncludingGravity, Accelerator.rotationRate, interval]);
+	    }
+	    static getTransformedAcceleration(acceleration) {
+	        Accelerator.transformedAcceleration = Accelerator.transformedAcceleration || new AccelerationInfo();
+	        Accelerator.transformedAcceleration.z = acceleration.z;
+	        if (Laya.ILaya.Browser.window.orientation == 90) {
+	            Accelerator.transformedAcceleration.x = acceleration.y;
+	            Accelerator.transformedAcceleration.y = -acceleration.x;
+	        }
+	        else if (Laya.ILaya.Browser.window.orientation == -90) {
+	            Accelerator.transformedAcceleration.x = -acceleration.y;
+	            Accelerator.transformedAcceleration.y = acceleration.x;
+	        }
+	        else if (!Laya.ILaya.Browser.window.orientation) {
+	            Accelerator.transformedAcceleration.x = acceleration.x;
+	            Accelerator.transformedAcceleration.y = acceleration.y;
+	        }
+	        else if (Laya.ILaya.Browser.window.orientation == 180) {
+	            Accelerator.transformedAcceleration.x = -acceleration.x;
+	            Accelerator.transformedAcceleration.y = -acceleration.y;
+	        }
+	        var tx;
+	        if (Laya.ILaya.stage.canvasDegree == -90) {
+	            tx = Accelerator.transformedAcceleration.x;
+	            Accelerator.transformedAcceleration.x = -Accelerator.transformedAcceleration.y;
+	            Accelerator.transformedAcceleration.y = tx;
+	        }
+	        else if (Laya.ILaya.stage.canvasDegree == 90) {
+	            tx = Accelerator.transformedAcceleration.x;
+	            Accelerator.transformedAcceleration.x = Accelerator.transformedAcceleration.y;
+	            Accelerator.transformedAcceleration.y = -tx;
+	        }
+	        return Accelerator.transformedAcceleration;
+	    }
+	}
+	Accelerator.acceleration = new AccelerationInfo();
+	Accelerator.accelerationIncludingGravity = new AccelerationInfo();
+	Accelerator.rotationRate = new RotationInfo();
+
+	class Shake extends Laya.EventDispatcher {
+	    constructor() {
+	        super();
+	    }
+	    static get instance() {
+	        Shake._instance = Shake._instance || new Shake();
+	        return Shake._instance;
+	    }
+	    start(throushold, interval) {
+	        this.throushold = throushold;
+	        this.shakeInterval = interval;
+	        this.lastX = this.lastY = this.lastZ = NaN;
+	        Accelerator.instance.on(Laya.Event.CHANGE, this, this.onShake);
+	    }
+	    stop() {
+	        Accelerator.instance.off(Laya.Event.CHANGE, this, this.onShake);
+	    }
+	    onShake(acceleration, accelerationIncludingGravity, rotationRate, interval) {
+	        if (isNaN(this.lastX)) {
+	            this.lastX = accelerationIncludingGravity.x;
+	            this.lastY = accelerationIncludingGravity.y;
+	            this.lastZ = accelerationIncludingGravity.z;
+	            this.lastMillSecond = Laya.ILaya.Browser.now();
+	            return;
+	        }
+	        var deltaX = Math.abs(this.lastX - accelerationIncludingGravity.x);
+	        var deltaY = Math.abs(this.lastY - accelerationIncludingGravity.y);
+	        var deltaZ = Math.abs(this.lastZ - accelerationIncludingGravity.z);
+	        if (this.isShaked(deltaX, deltaY, deltaZ)) {
+	            var deltaMillSecond = Laya.ILaya.Browser.now() - this.lastMillSecond;
+	            if (deltaMillSecond > this.shakeInterval) {
+	                this.event(Laya.Event.CHANGE);
+	                this.lastMillSecond = Laya.ILaya.Browser.now();
+	            }
+	        }
+	        this.lastX = accelerationIncludingGravity.x;
+	        this.lastY = accelerationIncludingGravity.y;
+	        this.lastZ = accelerationIncludingGravity.z;
+	    }
+	    isShaked(deltaX, deltaY, deltaZ) {
+	        return (deltaX > this.throushold && deltaY > this.throushold) ||
+	            (deltaX > this.throushold && deltaZ > this.throushold) ||
+	            (deltaY > this.throushold && deltaZ > this.throushold);
+	    }
+	}
+
+	class GeolocationInfo {
+	    setPosition(pos) {
+	        this.pos = pos;
+	        this.coords = pos.coords;
+	    }
+	    get latitude() {
+	        return this.coords.latitude;
+	    }
+	    get longitude() {
+	        return this.coords.longitude;
+	    }
+	    get altitude() {
+	        return this.coords.altitude;
+	    }
+	    get accuracy() {
+	        return this.coords.accuracy;
+	    }
+	    get altitudeAccuracy() {
+	        return this.coords.altitudeAccuracy;
+	    }
+	    get heading() {
+	        return this.coords.heading;
+	    }
+	    get speed() {
+	        return this.coords.speed;
+	    }
+	    get timestamp() {
+	        return this.pos.timestamp;
+	    }
+	}
+
+	class Geolocation {
+	    constructor() {
+	    }
+	    static getCurrentPosition(onSuccess, onError = null) {
+	        Geolocation.navigator.geolocation.getCurrentPosition(function (pos) {
+	            Geolocation.position.setPosition(pos);
+	            onSuccess.runWith(Geolocation.position);
+	        }, function (error) {
+	            onError.runWith(error);
+	        }, {
+	            enableHighAccuracy: Geolocation.enableHighAccuracy,
+	            timeout: Geolocation.timeout,
+	            maximumAge: Geolocation.maximumAge
+	        });
+	    }
+	    static watchPosition(onSuccess, onError) {
+	        return Geolocation.navigator.geolocation.watchPosition(function (pos) {
+	            Geolocation.position.setPosition(pos);
+	            onSuccess.runWith(Geolocation.position);
+	        }, function (error) {
+	            onError.runWith(error);
+	        }, {
+	            enableHighAccuracy: Geolocation.enableHighAccuracy,
+	            timeout: Geolocation.timeout,
+	            maximumAge: Geolocation.maximumAge
+	        });
+	    }
+	    static clearWatch(id) {
+	        Geolocation.navigator.geolocation.clearWatch(id);
+	    }
+	}
+	Geolocation.navigator = Laya.ILaya.Browser.window.navigator;
+	Geolocation.position = new GeolocationInfo();
+	Geolocation.PERMISSION_DENIED = 1;
+	Geolocation.POSITION_UNAVAILABLE = 2;
+	Geolocation.TIMEOUT = 3;
+	Geolocation.supported = !!Geolocation.navigator.geolocation;
+	Geolocation.enableHighAccuracy = false;
+	Geolocation.timeout = 1E10;
+	Geolocation.maximumAge = 0;
+
+	class HtmlVideo extends Laya.Bitmap {
+	    constructor() {
+	        super();
+	        this._w = 0;
+	        this._h = 0;
+	        this._width = 1;
+	        this._height = 1;
+	        this.createDomElement();
+	    }
+	    createDomElement() {
+	        this._source = this.video = Laya.ILaya.Browser.createElement("video");
+	        var style = this.video.style;
+	        style.position = 'absolute';
+	        style.top = '0px';
+	        style.left = '0px';
+	        this.video.addEventListener("loadedmetadata", () => {
+	            this._w = this.video.videoWidth;
+	            this._h = this.video.videoHeight;
+	        });
+	    }
+	    setSource(url, extension) {
+	        while (this.video.childElementCount)
+	            this.video.firstChild.remove();
+	        if (extension & 1)
+	            this.appendSource(url, "video/mp4");
+	        if (extension & 2)
+	            this.appendSource(url + ".ogg", "video/ogg");
+	    }
+	    appendSource(source, type) {
+	        var sourceElement = Laya.ILaya.Browser.createElement("source");
+	        sourceElement.src = source;
+	        sourceElement.type = type;
+	        this.video.appendChild(sourceElement);
+	    }
+	    getVideo() {
+	        return this.video;
+	    }
+	    _getSource() {
+	        return this._source;
+	    }
+	    destroy() {
+	        super.destroy();
+	        var isConchApp = Laya.ILaya.Render.isConchApp;
+	        if (isConchApp) {
+	            this.video._destroy();
+	        }
+	    }
+	}
+	HtmlVideo.create = function () {
+	    return new HtmlVideo();
+	};
+
+	class Media {
+	    constructor() {
+	    }
+	    static supported() {
+	        return !!Laya.ILaya.Browser.window.navigator.getUserMedia;
+	    }
+	    static getMedia(options, onSuccess, onError) {
+	        if (Laya.ILaya.Browser.window.navigator.getUserMedia) {
+	            Laya.ILaya.Browser.window.navigator.getUserMedia(options, function (stream) {
+	                onSuccess.runWith(Laya.ILaya.Browser.window.URL.createObjectURL(stream));
+	            }, function (err) {
+	                onError.runWith(err);
+	            });
+	        }
+	    }
+	}
+
+	class WebGLVideo extends HtmlVideo {
+	    constructor() {
+	        super();
+	        var gl = Laya.LayaGL.instance;
+	        if (!Laya.ILaya.Render.isConchApp && Laya.ILaya.Browser.onIPhone)
+	            return;
+	        this.gl = Laya.ILaya.Render.isConchApp ? window.LayaGLContext.instance : Laya.WebGLContext.mainContext;
+	        this._source = this.gl.createTexture();
+	        Laya.WebGLContext.bindTexture(this.gl, gl.TEXTURE_2D, this._source);
+	        this.gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+	        this.gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	        this.gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+	        this.gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+	        Laya.WebGLContext.bindTexture(this.gl, gl.TEXTURE_2D, null);
+	    }
+	    updateTexture() {
+	        if (!Laya.ILaya.Render.isConchApp && Laya.ILaya.Browser.onIPhone)
+	            return;
+	        var gl = Laya.LayaGL.instance;
+	        Laya.WebGLContext.bindTexture(this.gl, gl.TEXTURE_2D, this._source);
+	        this.gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, this.video);
+	        WebGLVideo.curBindSource = this._source;
+	    }
+	    get _glTexture() {
+	        return this._source;
+	    }
+	    destroy() {
+	        if (this._source) {
+	            this.gl = Laya.ILaya.Render.isConchApp ? window.LayaGLContext.instance : Laya.WebGLContext.mainContext;
+	            if (WebGLVideo.curBindSource == this._source) {
+	                Laya.WebGLContext.bindTexture(this.gl, this.gl.TEXTURE_2D, null);
+	                WebGLVideo.curBindSource = null;
+	            }
+	            this.gl.deleteTexture(this._source);
+	        }
+	        super.destroy();
+	    }
+	}
+
+	class Video extends Laya.Sprite {
+	    constructor(width = 320, height = 240) {
+	        super();
+	        this.htmlVideo = new WebGLVideo();
+	        this.videoElement = this.htmlVideo.getVideo();
+	        this.videoElement.layaTarget = this;
+	        this.internalTexture = new Laya.Texture(this.htmlVideo);
+	        this.videoElement.addEventListener("abort", Video.onAbort);
+	        this.videoElement.addEventListener("canplay", Video.onCanplay);
+	        this.videoElement.addEventListener("canplaythrough", Video.onCanplaythrough);
+	        this.videoElement.addEventListener("durationchange", Video.onDurationchange);
+	        this.videoElement.addEventListener("emptied", Video.onEmptied);
+	        this.videoElement.addEventListener("error", Video.onError);
+	        this.videoElement.addEventListener("loadeddata", Video.onLoadeddata);
+	        this.videoElement.addEventListener("loadedmetadata", Video.onLoadedmetadata);
+	        this.videoElement.addEventListener("loadstart", Video.onLoadstart);
+	        this.videoElement.addEventListener("pause", Video.onPause);
+	        this.videoElement.addEventListener("play", Video.onPlay);
+	        this.videoElement.addEventListener("playing", Video.onPlaying);
+	        this.videoElement.addEventListener("progress", Video.onProgress);
+	        this.videoElement.addEventListener("ratechange", Video.onRatechange);
+	        this.videoElement.addEventListener("seeked", Video.onSeeked);
+	        this.videoElement.addEventListener("seeking", Video.onSeeking);
+	        this.videoElement.addEventListener("stalled", Video.onStalled);
+	        this.videoElement.addEventListener("suspend", Video.onSuspend);
+	        this.videoElement.addEventListener("timeupdate", Video.onTimeupdate);
+	        this.videoElement.addEventListener("volumechange", Video.onVolumechange);
+	        this.videoElement.addEventListener("waiting", Video.onWaiting);
+	        this.videoElement.addEventListener("ended", this.onPlayComplete['bind'](this));
+	        this.size(width, height);
+	        if (Laya.ILaya.Browser.onMobile) {
+	            this.onDocumentClick = this.onDocumentClick.bind(this);
+	            Laya.ILaya.Browser.document.addEventListener("touchend", this.onDocumentClick);
+	        }
+	    }
+	    static onAbort(e) { e.target.layaTarget.event("abort"); }
+	    static onCanplay(e) { e.target.layaTarget.event("canplay"); }
+	    static onCanplaythrough(e) { e.target.layaTarget.event("canplaythrough"); }
+	    static onDurationchange(e) { e.target.layaTarget.event("durationchange"); }
+	    static onEmptied(e) { e.target.layaTarget.event("emptied"); }
+	    static onError(e) { e.target.layaTarget.event("error"); }
+	    static onLoadeddata(e) { e.target.layaTarget.event("loadeddata"); }
+	    static onLoadedmetadata(e) { e.target.layaTarget.event("loadedmetadata"); }
+	    static onLoadstart(e) { e.target.layaTarget.event("loadstart"); }
+	    static onPause(e) { e.target.layaTarget.event("pause"); }
+	    static onPlay(e) { e.target.layaTarget.event("play"); }
+	    static onPlaying(e) { e.target.layaTarget.event("playing"); }
+	    static onProgress(e) { e.target.layaTarget.event("progress"); }
+	    static onRatechange(e) { e.target.layaTarget.event("ratechange"); }
+	    static onSeeked(e) { e.target.layaTarget.event("seeked"); }
+	    static onSeeking(e) { e.target.layaTarget.event("seeking"); }
+	    static onStalled(e) { e.target.layaTarget.event("stalled"); }
+	    static onSuspend(e) { e.target.layaTarget.event("suspend"); }
+	    static onTimeupdate(e) { e.target.layaTarget.event("timeupdate"); }
+	    static onVolumechange(e) { e.target.layaTarget.event("volumechange"); }
+	    static onWaiting(e) { e.target.layaTarget.event("waiting"); }
+	    onPlayComplete(e) {
+	        if (!Laya.ILaya.Render.isConchApp || !this.videoElement || !this.videoElement.loop)
+	            Laya.ILaya.timer.clear(this, this.renderCanvas);
+	        this.event("ended");
+	    }
+	    load(url) {
+	        if (url.indexOf("blob:") == 0)
+	            this.videoElement.src = url;
+	        else
+	            this.htmlVideo.setSource(url, 1);
+	    }
+	    play() {
+	        this.videoElement.play();
+	        Laya.ILaya.timer.frameLoop(1, this, this.renderCanvas);
+	    }
+	    pause() {
+	        this.videoElement.pause();
+	        Laya.ILaya.timer.clear(this, this.renderCanvas);
+	    }
+	    reload() {
+	        this.videoElement.load();
+	    }
+	    canPlayType(type) {
+	        var typeString;
+	        switch (type) {
+	            case 1:
+	                typeString = "video/mp4";
+	                break;
+	            case 2:
+	                typeString = "video/ogg";
+	                break;
+	            case 8:
+	                typeString = "video/webm";
+	                break;
+	        }
+	        return this.videoElement.canPlayType(typeString);
+	    }
+	    renderCanvas() {
+	        if (this.readyState === 0)
+	            return;
+	        this.htmlVideo['updateTexture']();
+	        this.graphics.clear();
+	        this.graphics.drawTexture(this.internalTexture, 0, 0, this.width, this.height);
+	    }
+	    onDocumentClick() {
+	        this.videoElement.play();
+	        this.videoElement.pause();
+	        Laya.ILaya.Browser.document.removeEventListener("touchend", this.onDocumentClick);
+	    }
+	    get buffered() {
+	        return this.videoElement.buffered;
+	    }
+	    get currentSrc() {
+	        return this.videoElement.currentSrc;
+	    }
+	    get currentTime() {
+	        return this.videoElement.currentTime;
+	    }
+	    set currentTime(value) {
+	        this.videoElement.currentTime = value;
+	        this.renderCanvas();
+	    }
+	    set volume(value) {
+	        this.videoElement.volume = value;
+	    }
+	    get volume() {
+	        return this.videoElement.volume;
+	    }
+	    get readyState() {
+	        return this.videoElement.readyState;
+	    }
+	    get videoWidth() {
+	        return this.videoElement.videoWidth;
+	    }
+	    get videoHeight() {
+	        return this.videoElement.videoHeight;
+	    }
+	    get duration() {
+	        return this.videoElement.duration;
+	    }
+	    get ended() {
+	        return this.videoElement.ended;
+	    }
+	    get error() {
+	        return this.videoElement.error;
+	    }
+	    get loop() {
+	        return this.videoElement.loop;
+	    }
+	    set loop(value) {
+	        this.videoElement.loop = value;
+	    }
+	    set x(val) {
+	        super.x = val;
+	        if (Laya.ILaya.Render.isConchApp) {
+	            var transform = Laya.ILaya.Utils.getTransformRelativeToWindow(this, 0, 0);
+	            this.videoElement.style.left = transform.x;
+	        }
+	    }
+	    get x() {
+	        return super.x;
+	    }
+	    set y(val) {
+	        super.y = val;
+	        if (Laya.ILaya.Render.isConchApp) {
+	            var transform = Laya.ILaya.Utils.getTransformRelativeToWindow(this, 0, 0);
+	            this.videoElement.style.top = transform.y;
+	        }
+	    }
+	    get y() {
+	        return super.y;
+	    }
+	    get playbackRate() {
+	        return this.videoElement.playbackRate;
+	    }
+	    set playbackRate(value) {
+	        this.videoElement.playbackRate = value;
+	    }
+	    get muted() {
+	        return this.videoElement.muted;
+	    }
+	    set muted(value) {
+	        this.videoElement.muted = value;
+	    }
+	    get paused() {
+	        return this.videoElement.paused;
+	    }
+	    get preload() {
+	        return this.videoElement.preload;
+	    }
+	    set preload(value) {
+	        this.videoElement.preload = value;
+	    }
+	    get seekable() {
+	        return this.videoElement.seekable;
+	    }
+	    get seeking() {
+	        return this.videoElement.seeking;
+	    }
+	    size(width, height) {
+	        super.size(width, height);
+	        if (Laya.ILaya.Render.isConchApp) {
+	            var transform = Laya.ILaya.Utils.getTransformRelativeToWindow(this, 0, 0);
+	            this.videoElement.width = width * transform.scaleX;
+	        }
+	        else {
+	            this.videoElement.width = width / Laya.ILaya.Browser.pixelRatio;
+	        }
+	        if (this.paused)
+	            this.renderCanvas();
+	        return this;
+	    }
+	    set width(value) {
+	        if (Laya.ILaya.Render.isConchApp) {
+	            var transform = Laya.ILaya.Utils.getTransformRelativeToWindow(this, 0, 0);
+	            this.videoElement.width = value * transform.scaleX;
+	        }
+	        else {
+	            this.videoElement.width = this.width / Laya.ILaya.Browser.pixelRatio;
+	        }
+	        super.width = value;
+	        if (this.paused)
+	            this.renderCanvas();
+	    }
+	    get width() {
+	        return super.width;
+	    }
+	    set height(value) {
+	        if (Laya.ILaya.Render.isConchApp) {
+	            var transform = Laya.ILaya.Utils.getTransformRelativeToWindow(this, 0, 0);
+	            this.videoElement.height = value * transform.scaleY;
+	        }
+	        else {
+	            this.videoElement.height = this.height / Laya.ILaya.Browser.pixelRatio;
+	        }
+	        super.height = value;
+	    }
+	    get height() {
+	        return super.height;
+	    }
+	    destroy(detroyChildren = true) {
+	        super.destroy(detroyChildren);
+	        this.videoElement.removeEventListener("abort", Video.onAbort);
+	        this.videoElement.removeEventListener("canplay", Video.onCanplay);
+	        this.videoElement.removeEventListener("canplaythrough", Video.onCanplaythrough);
+	        this.videoElement.removeEventListener("durationchange", Video.onDurationchange);
+	        this.videoElement.removeEventListener("emptied", Video.onEmptied);
+	        this.videoElement.removeEventListener("error", Video.onError);
+	        this.videoElement.removeEventListener("loadeddata", Video.onLoadeddata);
+	        this.videoElement.removeEventListener("loadedmetadata", Video.onLoadedmetadata);
+	        this.videoElement.removeEventListener("loadstart", Video.onLoadstart);
+	        this.videoElement.removeEventListener("pause", Video.onPause);
+	        this.videoElement.removeEventListener("play", Video.onPlay);
+	        this.videoElement.removeEventListener("playing", Video.onPlaying);
+	        this.videoElement.removeEventListener("progress", Video.onProgress);
+	        this.videoElement.removeEventListener("ratechange", Video.onRatechange);
+	        this.videoElement.removeEventListener("seeked", Video.onSeeked);
+	        this.videoElement.removeEventListener("seeking", Video.onSeeking);
+	        this.videoElement.removeEventListener("stalled", Video.onStalled);
+	        this.videoElement.removeEventListener("suspend", Video.onSuspend);
+	        this.videoElement.removeEventListener("timeupdate", Video.onTimeupdate);
+	        this.videoElement.removeEventListener("volumechange", Video.onVolumechange);
+	        this.videoElement.removeEventListener("waiting", Video.onWaiting);
+	        this.videoElement.removeEventListener("ended", this.onPlayComplete);
+	        this.pause();
+	        this.videoElement.layaTarget = null;
+	        this.videoElement = null;
+	        this.htmlVideo.destroy();
+	    }
+	    syncVideoPosition() {
+	        var stage = Laya.ILaya.stage;
+	        var rec;
+	        rec = Laya.ILaya.Utils.getGlobalPosAndScale(this);
+	        var a = stage._canvasTransform.a, d = stage._canvasTransform.d;
+	        var x = rec.x * stage.clientScaleX * a + stage.offset.x;
+	        var y = rec.y * stage.clientScaleY * d + stage.offset.y;
+	        this.videoElement.style.left = x + 'px';
+	        this.videoElement.style.top = y + 'px';
+	        this.videoElement.width = this.width / Laya.ILaya.Browser.pixelRatio;
+	        this.videoElement.height = this.height / Laya.ILaya.Browser.pixelRatio;
+	    }
+	}
+	Video.MP4 = 1;
+	Video.OGG = 2;
+	Video.CAMERA = 4;
+	Video.WEBM = 8;
+	Video.SUPPORT_PROBABLY = "probably";
+	Video.SUPPORT_MAYBY = "maybe";
+	Video.SUPPORT_NO = "";
+
+	class Gyroscope extends Laya.EventDispatcher {
+	    constructor(singleton) {
+	        super();
+	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
+	    }
+	    static get instance() {
+	        Gyroscope._instance = Gyroscope._instance || new Gyroscope(0);
+	        return Gyroscope._instance;
+	    }
+	    on(type, caller, listener, args = null) {
+	        super.on(type, caller, listener, args);
+	        Laya.ILaya.Browser.window.addEventListener('deviceorientation', this.onDeviceOrientationChange);
+	        return this;
+	    }
+	    off(type, caller, listener, onceOnly = false) {
+	        if (!this.hasListener(type))
+	            Laya.ILaya.Browser.window.removeEventListener('deviceorientation', this.onDeviceOrientationChange);
+	        return super.off(type, caller, listener, onceOnly);
+	    }
+	    onDeviceOrientationChange(e) {
+	        Gyroscope.info.alpha = e.alpha;
+	        Gyroscope.info.beta = e.beta;
+	        Gyroscope.info.gamma = e.gamma;
+	        if (e.webkitCompassHeading) {
+	            Gyroscope.info.alpha = e.webkitCompassHeading * -1;
+	            Gyroscope.info.compassAccuracy = e.webkitCompassAccuracy;
+	        }
+	        this.event(Laya.Event.CHANGE, [e.absolute, Gyroscope.info]);
+	    }
+	}
+	Gyroscope.info = new RotationInfo();
+
+	exports.AccelerationInfo = AccelerationInfo;
+	exports.Accelerator = Accelerator;
+	exports.Geolocation = Geolocation;
+	exports.GeolocationInfo = GeolocationInfo;
+	exports.Gyroscope = Gyroscope;
+	exports.HtmlVideo = HtmlVideo;
+	exports.Media = Media;
+	exports.RotationInfo = RotationInfo;
+	exports.Shake = Shake;
+	exports.Video = Video;
+	exports.WebGLVideo = WebGLVideo;
+
+}(window.Laya = window.Laya|| {}, Laya));

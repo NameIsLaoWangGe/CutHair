@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":25,
+    "selectedBox":25,
+    "selecteID":56,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":54,
+    "maxID":58,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -62,14 +62,13 @@
                     "props":{"y":404,"x":328,"width":556,"var":"BigFrame","skin":"UI/Common/dikuang.png","sizeGrid":"33,44,66,43","pivotY":367,"pivotX":292,"name":"BigFrame","height":717,"alpha":1},
                     "nodeParent":25,
                     "label":"BigFrame",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":28,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,BigPhoto,BigPhoto",
                             "props":{"y":41,"x":42,"width":472,"var":"BigPhoto","skin":"UI/Share/kuang.png","sizeGrid":"87,74,180,67","name":"BigPhoto","height":422},
@@ -83,7 +82,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"y":463,"x":41,"width":474,"skin":"UI/Share/kuang_xia.png","sizeGrid":"0,15,0,14","height":196,"alpha":1},
@@ -97,7 +95,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":536.5,"x":64,"texture":"UI/Share/fire.png"},
@@ -111,7 +108,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":542,"x":96,"width":179,"valign":"middle","text":"热度        °C","height":29,"fontSize":30,"color":"#ea1c6f","bold":true,"align":"left"},
@@ -125,7 +121,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,HotNum,HotNum",
                             "props":{"y":543,"x":155,"width":69,"var":"HotNum","valign":"middle","text":"500","name":"HotNum","height":29,"fontSize":30,"color":"#ea1c6f","bold":true,"align":"center"},
@@ -139,7 +134,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Icon_hand,Icon_hand",
                             "props":{"y":555,"x":346,"width":38,"var":"Icon_hand","skin":"UI/Share/tubiao_1.png","pivotY":19,"pivotX":19,"name":"Icon_hand","height":38},
@@ -153,7 +147,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":537.5,"x":393,"texture":"UI/Share/tubiao_2.png"},
@@ -167,7 +160,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":538,"x":456,"texture":"UI/Share/tubiao_3.png"},
@@ -181,7 +173,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":537.5,"x":456,"texture":"UI/Share/tubiao_3.png"},
@@ -195,7 +186,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":596,"x":60.5,"width":71,"valign":"middle","text":"阿坤：","height":37,"fontSize":30,"color":"#323236","bold":true,"align":"center"},
@@ -209,7 +199,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"y":596,"x":141,"width":130,"valign":"middle","text":"酷啊兄弟！","height":37,"fontSize":30,"color":"#66676b","bold":true,"align":"center"},
@@ -291,6 +280,34 @@
                             "isAniNode":true,
                             "hasChild":false,
                             "compId":35,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnComplete,BtnComplete",
+                    "props":{"y":843,"x":315,"width":288,"var":"BtnComplete","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnComplete","height":128},
+                    "nodeParent":25,
+                    "label":"BtnComplete",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":56,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":42.5,"x":100.5,"texture":"UI/UISkin/txt_wancheng.png"},
+                            "nodeParent":56,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":57,
                             "child":[
                                 ]
                         }]

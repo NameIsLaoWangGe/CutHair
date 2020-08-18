@@ -2,8 +2,21 @@ import { Admin } from "./lwg";
 
 /**游戏中的一些基础数值,例如等级、体力等*/
 export module GameControl {
+
+    /**渠道类型，控制一些节点的变化*/
+    export let _platform: string;
+    /**渠道类型*/
+    export enum _platformTpye {
+        WeChat = 'WeChat',
+        OPPO = 'OPPO',
+        Bytedance = 'Bytedance',
+        /**通用*/ 
+        any = 'any',
+    }
+
     /**游戏控制开关*/
     export let _gameSwitch: boolean = false;
+
     /**等级*/
     export let _gameLevel = {
         get value(): number {
@@ -118,7 +131,7 @@ export module GameControl {
     /**体力*/
     export let _execution = {
         get value(): number {
-            return this.val = Laya.LocalStorage.getItem('_execution')? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
         },
         set value(val) {
             this.val = val;
@@ -128,43 +141,8 @@ export module GameControl {
     /**游戏进行时候的场景*/
     export class GameScene extends Admin.Scene {
         lwgOnAwake(): void {
-            this.initData();
-            this.gameOnAwake();
+            // this.gameOnAwake();
         }
-        /**初始化json数据*/
-        initData(): void {
-        }
-        lwgEventReg(): void {
-            this.gameEventReg();
-        }
-        /**任务中注册的一些事件*/
-        gameEventReg(): void { }
-
-        /**初始化前执行一次*/
-        gameOnAwake(): void { }
-        lwgNodeDec(): void {
-            this.gameNodeDec();
-        }
-        /**节点声明*/
-        gameNodeDec(): void { }
-
-        lwgOnEnable(): void {
-            this.gameOnEnable();
-        }
-        /**开始后执行*/
-        gameOnEnable(): void { }
-        lwgOpenAni(): number { return this.gameOpenAin(); }
-        /**开场动画*/
-        gameOpenAin(): number { return 0; }
-        /**按钮点击事件*/
-        lwgBtnClick(): void { this.gameBtnClick() }
-        gameBtnClick(): void { };
-
-        lwgOnDisable(): void {
-            this.gameOnDisable();
-        }
-        /**页面关闭后执行*/
-        gameOnDisable(): void { }
     }
 }
 export let Game = GameControl;

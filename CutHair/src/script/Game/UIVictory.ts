@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Shop, Task, Setting } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Shop, Task, Setting, PalyAudio } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import ADManager, { TaT } from "../TJ/Admanager";
@@ -26,9 +26,10 @@ export default class UIVictory extends lwg.Admin.Scene {
         Gold.goldAppear(500);
         Setting.setBtnAppear();
         Game._gameLevel.value++;
+        PalyAudio.playVictorySound();
 
-        this.self['BtnAdv'].visible = true;
-        this.self['BtnNormal'].visible = false;
+        this.self['BtnAdv_Wechat'].visible = true;
+        this.self['BtnNormal_Wechat'].visible = false;
         this.self['Dot'].visible = true;
 
         lwg.Effects.createFireworks(Laya.stage, 40, 430, 200);
@@ -38,18 +39,34 @@ export default class UIVictory extends lwg.Admin.Scene {
         lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
 
         EventAdmin.notify(Task.TaskType.victory);
+
+
+        if (Game._platform == Game._platformTpye.OPPO) {
+
+            this.self['OPPO'].visible = true;
+            this.self['WeChat'].visible = false;
+
+        } else {
+            this.self['OPPO'].visible = false;
+            this.self['WeChat'].visible = true;
+
+        }
     }
 
     lwgOpenAni(): number {
+        if (Game._platform == Game._platformTpye.OPPO) {
+            return;
+        }
+
         this.self['Multiply10'].alpha = 0;
         this.self['GlodNum'].alpha = 0;
-        this.self['BtnAdv'].alpha = 0;
+        this.self['BtnAdv_Wechat'].alpha = 0;
         this.self['Select'].alpha = 0;
         Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
             Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
 
             Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
-            Animation2D.bombs_Appear(this.self['BtnAdv'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+            Animation2D.bombs_Appear(this.self['BtnAdv_Wechat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
             Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
         });
 
@@ -63,15 +80,22 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        Click.on(Click.Type.largen, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-        Click.on(Click.Type.largen, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+        Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
+        Click.on(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
+        Click.on(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+
+
+        Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
+        Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
     }
 
     offClick(): void {
-        Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-        Click.off(Click.Type.largen, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-        Click.off(Click.Type.largen, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+        Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
+        Click.off(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
+        Click.off(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+
+        Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
+        Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
     }
 
     addOrSub: string = 'add';
@@ -79,8 +103,8 @@ export default class UIVictory extends lwg.Admin.Scene {
         if (this.self['Dot'].visible) {
             // 按钮格式
             this.self['Dot'].visible = false;
-            this.self['BtnAdv'].visible = false;
-            this.self['BtnNormal'].visible = true;
+            this.self['BtnAdv_Wechat'].visible = false;
+            this.self['BtnNormal_Wechat'].visible = true;
             this.addOrSub = 'sub';
 
             // 图片消失动画
@@ -103,8 +127,8 @@ export default class UIVictory extends lwg.Admin.Scene {
         } else {
             // 按钮格式
             this.self['Dot'].visible = true;
-            this.self['BtnAdv'].visible = true;
-            this.self['BtnNormal'].visible = false;
+            this.self['BtnAdv_Wechat'].visible = true;
+            this.self['BtnNormal_Wechat'].visible = false;
             this.addOrSub = 'add';
 
             // 图片出现动画
@@ -129,7 +153,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_success');
         this.offClick();
         Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-            this.advFunc();
+            this.advFunc(1);
         });
     }
 
@@ -137,17 +161,17 @@ export default class UIVictory extends lwg.Admin.Scene {
         ADManager.ShowReward(() => {
             ADManager.TAPoint(TaT.BtnClick, 'closeword_success');
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                this.advFunc();
+                this.advFunc(10);
             });
         })
     }
 
-    advFunc(): void {
-        if (this.self['Dot'].visible) {
-            Gold.addGold(this.getGoldNum * 10);
-        } else {
-            Gold.addGold(this.getGoldNum);
-        }
+    /**
+     * 奖励
+     * @param number 倍数
+     */
+    advFunc(number: number): void {
+        Gold.addGold(this.getGoldNum * number);
         EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
         Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }

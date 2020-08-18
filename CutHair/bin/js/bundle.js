@@ -97,7 +97,6 @@
                 event.stopPropagation();
                 event.currentTarget.scale(1, 1);
                 Global.refreshNum++;
-                Admin._refreshScene();
             }
             Global.btnAgainUp = btnAgainUp;
             function _createP201_01(parent) {
@@ -749,15 +748,6 @@
                 }));
             }
             Admin._openScene = _openScene;
-            function _nextCustomScene(subEx) {
-            }
-            Admin._nextCustomScene = _nextCustomScene;
-            function _refreshScene() {
-            }
-            Admin._refreshScene = _refreshScene;
-            function _closeCustomScene() {
-            }
-            Admin._closeCustomScene = _closeCustomScene;
             class Scene extends Laya.Script {
                 constructor() {
                     super();
@@ -776,6 +766,9 @@
                     Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
                 }
                 lwgOnAwake() { }
+                ;
+                lwgModuleOnAwake() {
+                }
                 onEnable() {
                     this.lwgEventReg();
                     this.lwgOnEnable();
@@ -975,44 +968,6 @@
                 }
             }
             Admin.Object = Object;
-            class Object3D extends Laya.Script3D {
-                constructor() {
-                    super();
-                }
-                onAwake() {
-                    this.self = this.owner;
-                    this.selfTransform = this.self.transform;
-                    this.selfScene = this.self.scene;
-                    let calssName = this['__proto__']['constructor'].name;
-                    this.self[calssName] = this;
-                    this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
-                    this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider);
-                    this.lwgNodeDec();
-                }
-                lwgNodeDec() { }
-                onEnable() {
-                    this.lwgEventReg();
-                    this.lwgOnEnable();
-                }
-                lwgOnEnable() { }
-                lwgBtnClick() {
-                }
-                lwgEventReg() {
-                }
-                onUpdate() {
-                    this.lwgOnUpdate();
-                }
-                lwgOnUpdate() {
-                }
-                onDisable() {
-                    this.lwgOnDisable();
-                    Laya.timer.clearAll(this);
-                    EventAdmin.offCaller(this);
-                }
-                lwgOnDisable() {
-                }
-            }
-            Admin.Object3D = Object3D;
         })(Admin = lwg.Admin || (lwg.Admin = {}));
         let Effects;
         (function (Effects) {
@@ -3603,10 +3558,7 @@
             })(LodingType = Loding.LodingType || (Loding.LodingType = {}));
             class LodeScene extends Admin.Scene {
                 lwgOnAwake() {
-                    this.subpackages();
                     this.lodingResList();
-                }
-                subpackages() {
                 }
                 lodingResList() { }
                 lwgEventReg() {
@@ -3994,6 +3946,120 @@
         EasterEgg.EasterEggScene = EasterEggScene;
     })(EasterEgg || (EasterEgg = {}));
 
+    var GameControl;
+    (function (GameControl) {
+        let _platformTpye;
+        (function (_platformTpye) {
+            _platformTpye["WeChat"] = "WeChat";
+            _platformTpye["OPPO"] = "OPPO";
+            _platformTpye["Bytedance"] = "Bytedance";
+            _platformTpye["any"] = "any";
+        })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
+        GameControl._gameSwitch = false;
+        GameControl._gameLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_gameLevel', val.toString());
+            }
+        };
+        GameControl._practicalLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
+            }
+        };
+        function getLevelData(levelNum) {
+            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
+            let level;
+            let num;
+            if (levelNum) {
+                num = levelNum;
+            }
+            else {
+                num = GameControl._gameLevel.value;
+            }
+            for (let index = 0; index < dataArr.length; index++) {
+                const element = dataArr[index];
+                if (element['name'] === 'level' + num) {
+                    level = element;
+                    break;
+                }
+            }
+            if (level) {
+                return level;
+            }
+            else {
+                return dataArr[num - 1];
+            }
+        }
+        GameControl.getLevelData = getLevelData;
+        function getLevelData_Condition(levelNum) {
+            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
+            let arr0;
+            for (const key in level) {
+                if (level.hasOwnProperty(key)) {
+                    if (key === 'condition') {
+                        arr0 = level[key];
+                    }
+                }
+            }
+            if (arr0) {
+                return arr0;
+            }
+            else {
+                console.log('获取关卡描述失败');
+            }
+        }
+        GameControl.getLevelData_Condition = getLevelData_Condition;
+        let gameProperty;
+        (function (gameProperty) {
+            gameProperty["name"] = "name";
+            gameProperty["condition"] = "condition";
+            gameProperty["resCondition"] = "resCondition";
+            gameProperty["rewardType"] = "rewardType";
+            gameProperty["rewardNum"] = "rewardNum";
+        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
+        function _createLevel(parent, x, y) {
+            let sp;
+            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                parent.addChild(sp);
+                sp.pos(x, y);
+                sp.zOrder = 0;
+                let level = sp.getChildByName('level');
+                GameControl.LevelNode = sp;
+            }));
+        }
+        GameControl._createLevel = _createLevel;
+        GameControl._execution = {
+            get value() {
+                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            },
+            set value(val) {
+                this.val = val;
+                Laya.LocalStorage.setItem('_execution', val.toString());
+            }
+        };
+        class GameScene extends Admin.Scene {
+            lwgOnAwake() {
+            }
+        }
+        GameControl.GameScene = GameScene;
+    })(GameControl || (GameControl = {}));
+    let Game = GameControl;
+    let GameScene = GameControl.GameScene;
+
     class ADManager {
         constructor() {
         }
@@ -4014,6 +4080,12 @@
             TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
         }
         static ShowReward(rewardAction, CDTime = 500) {
+            if (Game._platform === Game._platformTpye.OPPO) {
+                rewardAction();
+                EventAdmin.notify(Task.EventType.adsTime);
+                EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+                return;
+            }
             if (ADManager.CanShowCD) {
                 PalyAudio.stopMusic();
                 console.log("?????");
@@ -4143,17 +4215,24 @@
     class UICheckIn extends CheckIn.CheckInScene {
         checkInNodeDec() {
             if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-                this.self['BtnThreeGet'].visible = false;
-                this.self['BtnGet'].visible = false;
-                this.self['Select'].visible = false;
+                this.self['BtnThreeGet_WeChat'].visible = false;
+                this.self['BtnGet_WeChat'].visible = false;
+                this.self['Select_WeChat'].visible = false;
             }
         }
         checkInOnEnable() {
-            console.log(Laya.stage);
             ADManager.TAPoint(TaT.BtnShow, 'AD3award');
             Setting.setBtnVinish();
             let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
             ChinkTip.visible = false;
+            if (Game._platform === Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+            }
+            else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
         }
         checkList_Update(cell, index) {
             let dataSource = cell.dataSource;
@@ -4202,18 +4281,22 @@
             }
         }
         checkInBtnClick() {
-            lwg.Click.on('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-            lwg.Click.on('largen', this.self['BtnThreeGet'], this, null, null, this.btnTenGetUp, null);
-            lwg.Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-            lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+            lwg.Click.on('largen', this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+            lwg.Click.on('largen', this.self['BtnThreeGet_WeChat'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.on(Click.Type.noEffect, this.self['Select_WeChat'], this, null, null, this.btnSelectUp);
+            lwg.Click.on(Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+            lwg.Click.on(Click.Type.largen, this.self['BtnThreeGet_OPPO'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
         btnOffClick() {
-            lwg.Click.off('largen', this.self['BtnGet'], this, null, null, this.btnGetUp, null);
-            lwg.Click.off('largen', this.self['BtnThreeGet'], this, null, null, this.btnTenGetUp, null);
-            lwg.Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-            lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp, null);
+            lwg.Click.off('largen', this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+            lwg.Click.off('largen', this.self['BtnThreeGet_WeChat'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.off(Click.Type.noEffect, this.self['Select_WeChat'], this, null, null, this.btnSelectUp);
+            lwg.Click.off(Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+            lwg.Click.off(Click.Type.largen, this.self['BtnThreeGet_OPPO'], this, null, null, this.btnThreeGetUp);
+            lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
-        btnTenGetUp() {
+        btnThreeGetUp() {
             ADManager.ShowReward(() => {
                 ADManager.TAPoint(TaT.BtnClick, 'AD3award');
                 this.btnGetUpFunc(3);
@@ -4264,14 +4347,14 @@
             }
         }
         checkInOnUpdate() {
-            if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
+            if (CheckIn._lastCheckDate.date !== (new Date).getDate() && Game._platform === Game._platformTpye.WeChat) {
                 if (this.self['Dot'].visible) {
-                    this.self['BtnGet'].visible = false;
-                    this.self['BtnThreeGet'].visible = true;
+                    this.self['BtnGet_WeChat'].visible = false;
+                    this.self['BtnThreeGet_WeChat'].visible = true;
                 }
                 else {
-                    this.self['BtnGet'].visible = true;
-                    this.self['BtnThreeGet'].visible = false;
+                    this.self['BtnGet_WeChat'].visible = true;
+                    this.self['BtnThreeGet_WeChat'].visible = false;
                 }
             }
         }
@@ -4280,146 +4363,68 @@
         }
     }
 
-    var GameControl;
-    (function (GameControl) {
-        GameControl._gameSwitch = false;
-        GameControl._gameLevel = {
-            get value() {
-                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_gameLevel', val.toString());
-            }
-        };
-        GameControl._practicalLevel = {
-            get value() {
-                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
-            }
-        };
-        function getLevelData(levelNum) {
-            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
-            let level;
-            let num;
-            if (levelNum) {
-                num = levelNum;
-            }
-            else {
-                num = GameControl._gameLevel.value;
-            }
-            for (let index = 0; index < dataArr.length; index++) {
-                const element = dataArr[index];
-                if (element['name'] === 'level' + num) {
-                    level = element;
-                    break;
-                }
-            }
-            if (level) {
-                return level;
-            }
-            else {
-                return dataArr[num - 1];
-            }
-        }
-        GameControl.getLevelData = getLevelData;
-        function getLevelData_Condition(levelNum) {
-            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
-            let arr0;
-            for (const key in level) {
-                if (level.hasOwnProperty(key)) {
-                    if (key === 'condition') {
-                        arr0 = level[key];
-                    }
-                }
-            }
-            if (arr0) {
-                return arr0;
-            }
-            else {
-                console.log('获取关卡描述失败');
-            }
-        }
-        GameControl.getLevelData_Condition = getLevelData_Condition;
-        let gameProperty;
-        (function (gameProperty) {
-            gameProperty["name"] = "name";
-            gameProperty["condition"] = "condition";
-            gameProperty["resCondition"] = "resCondition";
-            gameProperty["rewardType"] = "rewardType";
-            gameProperty["rewardNum"] = "rewardNum";
-        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
-        let rewardType;
-        (function (rewardType) {
-            rewardType["gold"] = "gold";
-            rewardType["diamond"] = "diamond";
-        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
-        function _createLevel(parent, x, y) {
-            let sp;
-            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                parent.addChild(sp);
-                sp.pos(x, y);
-                sp.zOrder = 0;
-                let level = sp.getChildByName('level');
-                GameControl.LevelNode = sp;
-            }));
-        }
-        GameControl._createLevel = _createLevel;
-        GameControl._execution = {
-            get value() {
-                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
-            },
-            set value(val) {
-                this.val = val;
-                Laya.LocalStorage.setItem('_execution', val.toString());
-            }
-        };
-        class GameScene extends Admin.Scene {
-            lwgOnAwake() {
-                this.initData();
-                this.gameOnAwake();
-            }
-            initData() {
-            }
-            lwgEventReg() {
-                this.gameEventReg();
-            }
-            gameEventReg() { }
-            gameOnAwake() { }
-            lwgNodeDec() {
-                this.gameNodeDec();
-            }
-            gameNodeDec() { }
-            lwgOnEnable() {
-                this.gameOnEnable();
-            }
-            gameOnEnable() { }
-            lwgOpenAni() { return this.gameOpenAin(); }
-            gameOpenAin() { return 0; }
-            lwgBtnClick() { this.gameBtnClick(); }
-            gameBtnClick() { }
-            ;
-            lwgOnDisable() {
-                this.gameOnDisable();
-            }
-            gameOnDisable() { }
-        }
-        GameControl.GameScene = GameScene;
-    })(GameControl || (GameControl = {}));
-    let Game = GameControl;
-    let GameScene = GameControl.GameScene;
+    var Global;
+    (function (Global) {
+        let GEnum;
+        (function (GEnum) {
+            let TaskType;
+            (function (TaskType) {
+                TaskType["HairParent"] = "HairParent";
+                TaskType["LeftBeard"] = "LeftBeard";
+                TaskType["RightBeard"] = "RightBeard";
+                TaskType["MiddleBeard"] = "MiddleBeard";
+                TaskType["UpLeftBeard"] = "UpLeftBeard";
+                TaskType["UpRightBeard"] = "UpRightBeard";
+                TaskType["movePhotoLocation"] = "movePhotoLocation";
+            })(TaskType = GEnum.TaskType || (GEnum.TaskType = {}));
+            let RazorState;
+            (function (RazorState) {
+                RazorState["move"] = "move";
+            })(RazorState = GEnum.RazorState || (GEnum.RazorState = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["HairParent"] = "HairParent";
+                EventType["LeftBeard"] = "LeftBeard";
+                EventType["RightBeard"] = "RightBeard";
+                EventType["MiddleBeard"] = "MiddleBeard";
+                EventType["UpLeftBeard"] = "UpLeftBeard";
+                EventType["UpRightBeard"] = "UpRightBeard";
+                EventType["taskProgress"] = "taskProgress";
+                EventType["cameraMove"] = "cameraMove";
+                EventType["changeProp"] = "changeProp";
+                EventType["changeOther"] = "changeOther";
+                EventType["changeHeadDecoration"] = " changeHeadDecoration";
+                EventType["changeEyeDecoration"] = " changeEyeDecoration";
+                EventType["changeTrySkin"] = "changeTrySkin";
+                EventType["goBack"] = "goBack";
+            })(EventType = GEnum.EventType || (GEnum.EventType = {}));
+        })(GEnum = Global.GEnum || (Global.GEnum = {}));
+        let GVariate;
+        (function (GVariate) {
+            GVariate._firstTask = null;
+            GVariate._stageClick = false;
+            GVariate._taskArr = [];
+            GVariate._taskNum = 0;
+        })(GVariate = Global.GVariate || (Global.GVariate = {}));
+        let GSene3D;
+        (function (GSene3D) {
+            GSene3D.LevelFpos = new Laya.Vector3();
+            GSene3D.razorFPos = new Laya.Vector3();
+            GSene3D.knifeParentFPos = new Laya.Vector3();
+            GSene3D.headFPos = new Laya.Vector3();
+        })(GSene3D = Global.GSene3D || (Global.GSene3D = {}));
+    })(Global || (Global = {}));
+    let GVariate = Global.GVariate;
+    let GEnum = Global.GEnum;
+    let GSene3D = Global.GSene3D;
 
     class UIDefeated extends lwg.Admin.Scene {
         lwgOnAwake() {
             Admin._gameStart = false;
         }
         lwgNodeDec() {
-            this.self['BtnAdv'].visible = true;
-            this.self['BtnAgain'].visible = false;
+            this.self['BtnSelect_WeChat'].visible = true;
+            this.self['BtnAgain_WeChat'].visible = false;
             this.self['Dot'].visible = true;
         }
         lwgOnEnable() {
@@ -4428,40 +4433,50 @@
             ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
             Setting.setBtnAppear();
             PalyAudio.playDefeatedSound();
+            if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+            }
+            else {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
         }
         lwgBtnClick() {
-            Click.on(Click.Type.largen, this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
-            Click.on(Click.Type.largen, this.self['BtnNext'], this, null, null, this.btnNextUp, null);
-            Click.on(Click.Type.largen, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.largen, this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+            Click.on(Click.Type.largen, this.self['BtnNext_WeChat'], this, null, null, this.btnNextUp);
+            Click.on(Click.Type.largen, this.self['BtnSelect_WeChat'], this, null, null, this.btnSelectUp);
+            Click.on(Click.Type.largen, this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
+            Click.on(Click.Type.largen, this.self['BtnNext_OPPO'], this, null, null, this.btnNextUp);
         }
         btnSelectUp() {
             if (this.self['Dot'].visible) {
                 this.self['Dot'].visible = false;
-                this.self['BtnAdv'].visible = false;
-                this.self['BtnAgain'].visible = true;
+                this.self['BtnSelect_WeChat'].visible = false;
+                this.self['BtnAgain_WeChat'].visible = true;
             }
             else {
                 this.self['Dot'].visible = true;
-                this.self['BtnAdv'].visible = true;
-                this.self['BtnAgain'].visible = false;
+                this.self['BtnSelect_WeChat'].visible = true;
+                this.self['BtnAgain_WeChat'].visible = false;
             }
         }
         btnAgainUp() {
             ADManager.TAPoint(TaT.BtnClick, 'returnword_fail');
             console.log('重新开始！');
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
-            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         btnNextUp() {
             ADManager.ShowReward(() => {
                 ADManager.TAPoint(TaT.BtnClick, 'ADnextbt_fail');
-                EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
                 Game._gameLevel.value += 1;
+                EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
                 Admin._openScene(Admin.SceneName.UIStart, null, this.self);
             });
         }
         lwgOnDisable() {
-            Setting.setBtnVinish();
+            EventAdmin.notify(GEnum.EventType.goBack);
         }
     }
 
@@ -4584,62 +4599,107 @@
         }
     }
 
-    var Global;
-    (function (Global) {
-        let GEnum;
-        (function (GEnum) {
-            let TaskType;
-            (function (TaskType) {
-                TaskType["HairParent"] = "HairParent";
-                TaskType["LeftBeard"] = "LeftBeard";
-                TaskType["RightBeard"] = "RightBeard";
-                TaskType["MiddleBeard"] = "MiddleBeard";
-                TaskType["UpLeftBeard"] = "UpLeftBeard";
-                TaskType["UpRightBeard"] = "UpRightBeard";
-                TaskType["movePhotoLocation"] = "movePhotoLocation";
-            })(TaskType = GEnum.TaskType || (GEnum.TaskType = {}));
-            let RazorState;
-            (function (RazorState) {
-                RazorState["move"] = "move";
-            })(RazorState = GEnum.RazorState || (GEnum.RazorState = {}));
-            let EventType;
-            (function (EventType) {
-                EventType["HairParent"] = "HairParent";
-                EventType["LeftBeard"] = "LeftBeard";
-                EventType["RightBeard"] = "RightBeard";
-                EventType["MiddleBeard"] = "MiddleBeard";
-                EventType["UpLeftBeard"] = "UpLeftBeard";
-                EventType["UpRightBeard"] = "UpRightBeard";
-                EventType["taskProgress"] = "taskProgress";
-                EventType["cameraMove"] = "cameraMove";
-                EventType["changeProp"] = "changeProp";
-                EventType["changeOther"] = "changeOther";
-                EventType["changeHeadDecoration"] = " changeHeadDecoration";
-                EventType["changeEyeDecoration"] = " changeEyeDecoration";
-                EventType["changeTrySkin"] = "changeTrySkin";
-                EventType["goBack"] = "goBack";
-            })(EventType = GEnum.EventType || (GEnum.EventType = {}));
-        })(GEnum = Global.GEnum || (Global.GEnum = {}));
-        let GVariate;
-        (function (GVariate) {
-            GVariate._firstTask = null;
-            GVariate._stageClick = false;
-            GVariate._taskArr = [];
-            GVariate._taskNum = 0;
-        })(GVariate = Global.GVariate || (Global.GVariate = {}));
-        let GSene3D;
-        (function (GSene3D) {
-            GSene3D.LevelFpos = new Laya.Vector3();
-            GSene3D.razorFPos = new Laya.Vector3();
-            GSene3D.knifeParentFPos = new Laya.Vector3();
-            GSene3D.headFPos = new Laya.Vector3();
-        })(GSene3D = Global.GSene3D || (Global.GSene3D = {}));
-    })(Global || (Global = {}));
-    let GVariate = Global.GVariate;
-    let GEnum = Global.GEnum;
-    let GSene3D = Global.GSene3D;
+    var lwg3D;
+    (function (lwg3D) {
+        class Scene3D extends Laya.Script3D {
+            constructor() {
+                super();
+                this.mainCameraFpos = new Laya.Vector3();
+            }
+            onAwake() {
+                this.self = this.owner;
+                this.calssName = this['__proto__']['constructor'].name;
+                this.MainCamera = this.self.getChildByName("Main Camera");
+                if (this.MainCamera) {
+                    this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
+                    this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
+                    this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
+                }
+                this.lwgOnAwake();
+                this.lwgNodeDec();
+                this.lwgAdaptive();
+            }
+            lwgOnAwake() {
+            }
+            onEnable() {
+                this.self[this.calssName] = this;
+                this.lwgEventReg();
+                this.lwgOnEnable();
+                this.lwgBtnClick();
+                this.lwgAdaptive();
+                this.lwgOpenAni();
+            }
+            lwgNodeDec() {
+            }
+            lwgEventReg() {
+            }
+            lwgOnEnable() {
+            }
+            lwgBtnClick() {
+            }
+            lwgAdaptive() {
+            }
+            lwgOpenAni() {
+            }
+            lwgVanishAni() {
+            }
+            onUpdate() {
+                this.lwgOnUpDate();
+            }
+            lwgOnUpDate() {
+            }
+            onDisable() {
+                this.lwgOnDisable();
+                Laya.timer.clearAll(this);
+                Laya.Tween.clearAll(this);
+                EventAdmin.offCaller(this);
+            }
+            lwgOnDisable() {
+            }
+        }
+        lwg3D.Scene3D = Scene3D;
+        class Object3D extends Laya.Script3D {
+            constructor() {
+                super();
+            }
+            onAwake() {
+                this.self = this.owner;
+                this.selfTransform = this.self.transform;
+                this.selfScene = this.self.scene;
+                let calssName = this['__proto__']['constructor'].name;
+                this.self[calssName] = this;
+                this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
+                this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider);
+                this.lwgNodeDec();
+            }
+            lwgNodeDec() { }
+            onEnable() {
+                this.lwgEventReg();
+                this.lwgOnEnable();
+            }
+            lwgOnEnable() { }
+            lwgBtnClick() {
+            }
+            lwgEventReg() {
+            }
+            onUpdate() {
+                this.lwgOnUpdate();
+            }
+            lwgOnUpdate() {
+            }
+            onDisable() {
+                this.lwgOnDisable();
+                Laya.Tween.clearAll(this);
+                Laya.timer.clearAll(this);
+                EventAdmin.offCaller(this);
+            }
+            lwgOnDisable() {
+            }
+        }
+        lwg3D.Object3D = Object3D;
+    })(lwg3D || (lwg3D = {}));
 
-    class GameMain3D_Blade extends lwg.Admin.Object3D {
+    class GameMain3D_Blade extends lwg3D.Object3D {
         onTriggerEnter(other) {
             if (!lwg.Admin._gameStart) {
                 return;
@@ -4687,7 +4747,7 @@
         }
     }
 
-    class GameMain3D_Razor extends lwg.Admin.Object3D {
+    class GameMain3D_Razor extends lwg3D.Scene3D {
         lwgOnEnable() {
             this.RazorState = GEnum.RazorState.move;
             let Blade = this.self.getChildByName('Blade');
@@ -4695,7 +4755,7 @@
         }
     }
 
-    class GameMain3D_Floor extends lwg.Admin.Object3D {
+    class GameMain3D_Floor extends lwg3D.Object3D {
         lwgOnEnable() {
             this.rig3D.restitution = 0;
         }
@@ -4713,7 +4773,7 @@
         }
     }
 
-    class GameMain3D_knife extends lwg.Admin.Object3D {
+    class GameMain3D_knife extends lwg3D.Scene3D {
         onTriggerEnter(other) {
             let owner = other.owner;
             let ownerParent = owner.parent;
@@ -4750,7 +4810,7 @@
         }
     }
 
-    class GameMain3D extends lwg.Admin.Scene3D {
+    class GameMain3D extends lwg3D.Scene3D {
         constructor() {
             super();
             this.moveSpeed = 1000;
@@ -5068,7 +5128,7 @@
     }
 
     class Init extends Admin.Scene {
-        onEnable() {
+        lwgOnAwake() {
             console.log('开始初始化');
             this.gameInit();
             this.skinInit();
@@ -5076,12 +5136,15 @@
             this.taskInit();
             this.easterEggInit();
         }
-        gameInit() { }
+        gameInit() {
+            Game._platform = Game._platformTpye.WeChat;
+        }
         ;
         skinInit() {
             Skin._currentEye.name = null;
             Skin._currentHead.name = null;
         }
+        ;
         shopInit() {
             Shop.initShop();
             if (!Shop._currentOther.name) {
@@ -5094,6 +5157,7 @@
                 Shop._currentSkin.name = 'anquanmao';
             }
         }
+        ;
         taskInit() {
             Task.initTask();
             EventAdmin.reg(Task.EventType.useSkins, Task, () => {
@@ -5123,8 +5187,6 @@
                 EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_3, 1);
             });
         }
-        onDisable() {
-        }
     }
 
     class UILoding extends Loding.LodeScene {
@@ -5133,8 +5195,6 @@
             this.maskMoveSwitch = true;
             this.shearSpeed = 5;
             this.shearSwitch = true;
-        }
-        subpackages() {
         }
         lodingResList() {
             Loding.lodingList_2D = [
@@ -5147,6 +5207,16 @@
                 "res/atlas/UI/Shop/Other.png",
                 "res/atlas/UI/Shop.png",
                 "res/atlas/UI/Skin.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Congratulation.png",
+                "res/atlas/UI/EasterEgg_Aotoman/GameStart.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Hint.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Unworthy.png",
+                "res/atlas/UI/EasterEgg_Aotoman/Task.png",
+                "res/atlas/UI/XDSkin.png",
+                "res/atlas/UI/Set.png",
+                "res/atlas/UI/Task.png",
+                "res/atlas/UI/Register.png",
+                "res/atlas/UI/Common.png",
             ];
             Loding.lodingList_3DScene = [
                 "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
@@ -5172,6 +5242,7 @@
                 "Scene/UISkinXD.json",
                 "Scene/UITask.json",
             ];
+            this.shearAni();
         }
         lodingPhaseComplete() {
         }
@@ -5199,6 +5270,24 @@
             this.self['Progress'].y = Laya.stage.height * 0.827;
             this.self['FCM'].y = Laya.stage.height * 0.910;
         }
+        shearAni() {
+            Laya.timer.loop(20, this, () => {
+                if (this.self['Shear_02'].rotation > 15) {
+                    this.self['Shear_02']['dir'] = 'up';
+                }
+                else if (this.self['Shear_02'].rotation <= 0) {
+                    this.self['Shear_02']['dir'] = 'down';
+                }
+                if (this.self['Shear_02']['dir'] === 'up') {
+                    this.self['Shear_02'].rotation -= this.shearSpeed;
+                    this.self['Shear_01'].rotation += this.shearSpeed;
+                }
+                else if (this.self['Shear_02']['dir'] === 'down') {
+                    this.self['Shear_02'].rotation += this.shearSpeed;
+                    this.self['Shear_01'].rotation -= this.shearSpeed;
+                }
+            });
+        }
         lwgOnUpdate() {
             if (this.maskMoveSwitch) {
                 if (this.self['Mask'].x < -20) {
@@ -5207,20 +5296,6 @@
                     let str = ((-this.self['Mask'].width - this.self['Mask'].x) / -this.self['Mask'].width * 100).toString().substring(0, 2);
                     this.self['Per'].text = str + '%';
                 }
-            }
-            if (this.self['Shear_02'].rotation > 15) {
-                this.self['Shear_02']['dir'] = 'up';
-            }
-            else if (this.self['Shear_02'].rotation <= 0) {
-                this.self['Shear_02']['dir'] = 'down';
-            }
-            if (this.self['Shear_02']['dir'] === 'up') {
-                this.self['Shear_02'].rotation -= this.shearSpeed;
-                this.self['Shear_01'].rotation += this.shearSpeed;
-            }
-            else if (this.self['Shear_02']['dir'] === 'down') {
-                this.self['Shear_02'].rotation += this.shearSpeed;
-                this.self['Shear_01'].rotation -= this.shearSpeed;
             }
         }
         lwgOnDisable() {
@@ -5848,6 +5923,16 @@
             }
             let url = 'UI/Share/Photo/' + index + '.png';
             this.self['SmallPhoto'].skin = url;
+            if (Game._platform !== Game._platformTpye.Bytedance) {
+                this.self['BtnComplete'].visible = true;
+                this.self['BtnShare'].visible = false;
+                this.self['BtnNoShare'].visible = false;
+            }
+            else {
+                this.self['BtnComplete'].visible = false;
+                this.self['BtnShare'].visible = true;
+                this.self['BtnNoShare'].visible = true;
+            }
         }
         lwgOpenAni() {
             this.aniTime = 100;
@@ -5888,10 +5973,13 @@
             sp1.graphics.drawTexture(rtex);
         }
         lwgBtnClick() {
-            Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp, null);
-            Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp, null);
-            Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
-            Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
+            Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
+                this.shareFunc();
+            });
+            Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp);
         }
         btnShareUp() {
             RecordManager._share('award', () => {
@@ -5904,8 +5992,7 @@
             this.shareFunc();
         }
         shareFunc() {
-            this.self.close();
-            Admin._openScene(Admin.SceneName.UIVictoryBox);
+            Admin._openScene(Admin.SceneName.UIVictoryBox, null, this.self);
         }
         lwgOnDisable() {
             this.EndCamera.removeSelf();
@@ -6494,6 +6581,14 @@
     class UISkinTry extends Admin.Scene {
         lwgOnAwake() {
             this.randomNoHave();
+            if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['BtnGet_OPPO'].visible = true;
+                this.self['BtnGet_WeChat'].visible = false;
+            }
+            else {
+                this.self['BtnGet_OPPO'].visible = false;
+                this.self['BtnGet_WeChat'].visible = true;
+            }
         }
         randomNoHave() {
             let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
@@ -6547,15 +6642,23 @@
             Shop._currentProp.name = ele.name;
         }
         lwgBtnClick() {
-            Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-            Click.on(lwg.Click.Type.largen, this.self['BtnGet'], this, null, null, this.btnGetUp, null);
+            Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
+            Click.on(lwg.Click.Type.largen, this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
+            Click.on(lwg.Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
         }
         btnGetUp(event) {
-            ADManager.ShowReward(() => {
+            if (Game._platform == Game._platformTpye.OPPO) {
                 Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
                 EventAdmin.notify(GEnum.EventType.changeOther);
                 EventAdmin.notify(GEnum.EventType.changeProp);
-            });
+            }
+            else {
+                ADManager.ShowReward(() => {
+                    Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                    EventAdmin.notify(GEnum.EventType.changeOther);
+                    EventAdmin.notify(GEnum.EventType.changeProp);
+                });
+            }
         }
         btnNoUp(event) {
             if (this.beforeTryOtherName) {
@@ -6726,7 +6829,6 @@
             Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
         }
         btnXDSkinDown() {
-            this.easterEgg_AotumanSwitch = true;
         }
         btnXDSkinUp() {
             lwg.Admin._openScene(Admin.SceneName.UISkinXD);
@@ -6953,24 +7055,36 @@
             Gold.goldAppear(500);
             Setting.setBtnAppear();
             Game._gameLevel.value++;
-            this.self['BtnAdv'].visible = true;
-            this.self['BtnNormal'].visible = false;
+            PalyAudio.playVictorySound();
+            this.self['BtnAdv_Wechat'].visible = true;
+            this.self['BtnNormal_Wechat'].visible = false;
             this.self['Dot'].visible = true;
             lwg.Effects.createFireworks(Laya.stage, 40, 430, 200);
             lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
             EventAdmin.notify(Task.TaskType.victory);
+            if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+            }
+            else {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
         }
         lwgOpenAni() {
+            if (Game._platform == Game._platformTpye.OPPO) {
+                return;
+            }
             this.self['Multiply10'].alpha = 0;
             this.self['GlodNum'].alpha = 0;
-            this.self['BtnAdv'].alpha = 0;
+            this.self['BtnAdv_Wechat'].alpha = 0;
             this.self['Select'].alpha = 0;
             Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
                 Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
                 Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
-                Animation2D.bombs_Appear(this.self['BtnAdv'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+                Animation2D.bombs_Appear(this.self['BtnAdv_Wechat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
                 Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
             });
             return 0;
@@ -6980,20 +7094,24 @@
             Num.text = (this.getGoldNum * 10).toString();
         }
         lwgBtnClick() {
-            Click.on(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-            Click.on(Click.Type.largen, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-            Click.on(Click.Type.largen, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+            Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
+            Click.on(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
+            Click.on(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+            Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
+            Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
         }
         offClick() {
-            Click.off(Click.Type.noEffect, this.self['BtnSelect'], this, null, null, this.btnSelectUp, null);
-            Click.off(Click.Type.largen, this.self['BtnAdv'], this, null, null, this.btnAdvUp, null);
-            Click.off(Click.Type.largen, this.self['BtnNormal'], this, null, null, this.btnNormalUp, null);
+            Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
+            Click.off(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
+            Click.off(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+            Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
+            Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
         }
         btnSelectUp() {
             if (this.self['Dot'].visible) {
                 this.self['Dot'].visible = false;
-                this.self['BtnAdv'].visible = false;
-                this.self['BtnNormal'].visible = true;
+                this.self['BtnAdv_Wechat'].visible = false;
+                this.self['BtnNormal_Wechat'].visible = true;
                 this.addOrSub = 'sub';
                 let Multiply10 = this.self['Multiply10'];
                 Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 0, 0, 0, 100);
@@ -7012,8 +7130,8 @@
             }
             else {
                 this.self['Dot'].visible = true;
-                this.self['BtnAdv'].visible = true;
-                this.self['BtnNormal'].visible = false;
+                this.self['BtnAdv_Wechat'].visible = true;
+                this.self['BtnNormal_Wechat'].visible = false;
                 this.addOrSub = 'add';
                 let Multiply10 = this.self['Multiply10'];
                 Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 1, 1, 1, 100);
@@ -7035,24 +7153,19 @@
             ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_success');
             this.offClick();
             Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                this.advFunc();
+                this.advFunc(1);
             });
         }
         btnAdvUp() {
             ADManager.ShowReward(() => {
                 ADManager.TAPoint(TaT.BtnClick, 'closeword_success');
                 Gold.getGoldAni_Heap(Laya.stage, 15, 88, 69, 'UI/GameStart/qian.png', new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2), new Laya.Point(Gold.GoldNode.x - 80, Gold.GoldNode.y), null, () => {
-                    this.advFunc();
+                    this.advFunc(10);
                 });
             });
         }
-        advFunc() {
-            if (this.self['Dot'].visible) {
-                Gold.addGold(this.getGoldNum * 10);
-            }
-            else {
-                Gold.addGold(this.getGoldNum);
-            }
+        advFunc(number) {
+            Gold.addGold(this.getGoldNum * number);
             EventAdmin.notify(EventAdmin.EventType.scene3DRefresh);
             Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }

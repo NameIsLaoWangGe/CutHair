@@ -16,15 +16,29 @@ export default class UIShare extends lwg.Admin.Scene {
 
         this.endPhoto();
 
+        // 小照片
         let index;
         if (Game._gameLevel.value > 10) {
             index = Game._gameLevel.value % 10 + 1;
         } else {
             index = Game._gameLevel.value;
         }
-
         let url = 'UI/Share/Photo/' + index + '.png';
         this.self['SmallPhoto'].skin = url;
+
+        // 不同渠道显示不同内容
+        if (Game._platform !== Game._platformTpye.Bytedance) {
+
+            this.self['BtnComplete'].visible = true;
+            this.self['BtnShare'].visible = false;
+            this.self['BtnNoShare'].visible = false;
+
+        } else {
+
+            this.self['BtnComplete'].visible = false;
+            this.self['BtnShare'].visible = true;
+            this.self['BtnNoShare'].visible = true;
+        }
     }
 
     lwgOpenAni(): number {
@@ -50,7 +64,6 @@ export default class UIShare extends lwg.Admin.Scene {
             });
 
             Laya.timer.once(this.aniDelayde * 7, this, () => { this.self['Icon_hand'].skin = 'UI/Share/tubiao_1-2.png'; })
-            // Animation2D.simple_Rotate(this.self['Icon_hand'], -15, 0, this.aniTime * 2, this.aniDelayde * 0);
             Animation2D.rotate_Scale(this.self['Icon_hand'], -10, 2, 2, 0, 1, 1, this.aniTime * 4, this.aniDelayde * 7);
 
         })
@@ -86,43 +99,16 @@ export default class UIShare extends lwg.Admin.Scene {
         // let mt = new Laya.BlinnPhongMaterial();
         // GSene3D.TouchScreen.meshRenderer.material = mt;
         // mt.albedoTexture = renderTargetCamera.renderTarget;
-
     }
 
-
-    // /**渲染开始的照片*/
-    // CopyLevel: Laya.Sprite3D = new Laya.Sprite3D;
-    // StartCamara: Laya.Sprite3D = new Laya.Sprite3D;
-    // startPhoto(): void {
-
-    //     this.CopyLevel = GSene3D.LevelTem.clone() as Laya.Sprite3D;
-    //     this.CopyLevel.transform.position = new Laya.Vector3(GSene3D.Level.transform.position.x, GSene3D.Level.transform.position.y, GSene3D.Level.transform.position.z + 20);
-    //     GSene3D.GameMain3D.addChild(this.CopyLevel);
-
-    //     this.StartCamara = GSene3D.MainCamera.clone() as Laya.Sprite3D;
-    //     GSene3D.GameMain3D.addChild(this.StartCamara);
-    //     this.StartCamara.transform.position = new Laya.Vector3(GSene3D.PhotoCameraMark.transform.position.x, GSene3D.PhotoCameraMark.transform.position.y, GSene3D.PhotoCameraMark.transform.position.z + 20);
-    //     this.StartCamara.transform.localRotationEuler = GSene3D.PhotoCameraMark.transform.localRotationEuler;
-    //     //渲染到纹理的相机
-    //     let renderTargetCamera: Laya.Camera = this.StartCamara.getChildAt(0) as Laya.Camera;
-    //     //选择渲染目标为纹理
-    //     renderTargetCamera.renderTarget = new Laya.RenderTexture(this.self['SmallPhoto'].width, this.self['SmallPhoto'].height);
-    //     //渲染顺序
-    //     renderTargetCamera.renderingOrder = -1;
-    //     //清除标记
-    //     renderTargetCamera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY;
-    //     var rtex = new Laya.Texture(((<Laya.Texture2D>(renderTargetCamera.renderTarget as any))), Laya.Texture.DEF_UV);
-    //     var sp1 = new Laya.Sprite();
-    //     this.self['SmallPhoto'].addChild(sp1);
-    //     sp1.graphics.drawTexture(rtex);
-    // }
-
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp, null);
-        Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp, null);
-        Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp, null);
-
-        Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp, null);
+        Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
+            this.shareFunc();
+        });
+        Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp);
 
     }
 
@@ -139,14 +125,11 @@ export default class UIShare extends lwg.Admin.Scene {
     }
 
     shareFunc(): void {
-        this.self.close();
-        Admin._openScene(Admin.SceneName.UIVictoryBox);
+        Admin._openScene(Admin.SceneName.UIVictoryBox, null, this.self);
     }
 
     lwgOnDisable(): void {
         this.EndCamera.removeSelf();
-        // this.CopyLevel.removeSelf();
-        // this.StartCamara.removeSelf();
     }
 
 }

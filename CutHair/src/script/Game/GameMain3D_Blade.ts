@@ -1,7 +1,8 @@
 import { lwg, EventAdmin } from "../Lwg_Template/lwg";
 import { GEnum, GSene3D } from "../Lwg_Template/Global";
+import { lwg3D } from "../Lwg_Template/lwg3D";
 
-export default class GameMain3D_Blade extends lwg.Admin.Object3D {
+export default class GameMain3D_Blade extends lwg3D.Object3D {
 
     onTriggerEnter(other): void {
         if (!lwg.Admin._gameStart) {

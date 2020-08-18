@@ -1,8 +1,9 @@
 import { Skin, Shop, Task, Admin, EventAdmin } from "./lwg";
 import { EasterEgg } from "./EasterEgg";
+import { Game } from "./Game";
 
 export default class Init extends Admin.Scene {
-    onEnable(): void {
+    lwgOnAwake(): void {
         console.log('开始初始化');
         this.gameInit();
         this.skinInit();
@@ -10,11 +11,13 @@ export default class Init extends Admin.Scene {
         this.taskInit();
         this.easterEggInit();
     }
-    gameInit(): void { };
+    gameInit(): void {
+        Game._platform = Game._platformTpye.WeChat;
+    };
     skinInit(): void {
         Skin._currentEye.name = null;
         Skin._currentHead.name = null;
-    }
+    };
     /**商店初始化*/
     shopInit(): void {
         Shop.initShop();
@@ -27,7 +30,7 @@ export default class Init extends Admin.Scene {
         if (!Shop._currentSkin.name) {
             Shop._currentSkin.name = 'anquanmao';
         }
-    }
+    };
     /**任务始化*/
     taskInit(): void {
         Task.initTask();
@@ -58,8 +61,5 @@ export default class Init extends Admin.Scene {
         EventAdmin.reg(EasterEgg.EventType.easterEggAds, Task, () => {
             EasterEgg.doDetection(EasterEgg.Classify.EasterEgg_01, EasterEgg.Name.assembly_3, 1);
         })
-
-    }
-    onDisable(): void {
     }
 }

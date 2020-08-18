@@ -152,7 +152,6 @@ export module lwg {
             //     return;
             // }
             refreshNum++;
-            Admin._refreshScene();
         }
 
         /**动态创建一个互推*/
@@ -1005,6 +1004,7 @@ export module lwg {
             UISkin = 'UISkin',
             UIEasterEgg = 'UIEasterEgg',
         }
+        
         /**游戏当前的状态*/
         export enum GameState {
             /**开始界面*/
@@ -1053,45 +1053,6 @@ export module lwg {
 
         }
 
-        /**打开下一关场景，并且上传信息
-         * @param subEx 消耗多少体力值
-        */
-        export function _nextCustomScene(subEx): void {
-            // if (subEx > 0) {
-            //     Global._execution -= subEx;
-            //     let num = Global.ExecutionNumNode.getChildByName('Num') as Laya.FontClip;
-            //     num.value = Global._execution.toString();
-            //     Dialog.createHint_Middle(Dialog.HintContent["消耗2点体力！"]);
-            //     Global.createConsumeEx(subEx);
-            // }
-
-            // if (Admin.openLevelNum >= Global._gameLevel) {
-            //     Admin._closeCustomScene();
-            //     Global._gameLevel++;
-            //     Admin._openGLCustoms();
-            // } else {
-            //     Admin._closeCustomScene();
-            //     Admin.openLevelNum++;
-            //     Admin._openLevelNumCustom();
-            // }
-        }
-
-        /**
-          * 刷新当前实际打开的关卡场景
-          **/
-        export function _refreshScene(): void {
-            // _sceneControl[openCustomName].close();
-            // _openScene(openCustomName, null, null, null);
-        }
-
-        /**
-        * 关闭当前实际打开的关卡场景
-        **/
-        export function _closeCustomScene(): void {
-            // console.log('关闭当前关卡' + openCustomName);
-            // _sceneControl[openCustomName].close();
-        }
-
         /**2D场景通用父类*/
         export class Scene extends Laya.Script {
             /**挂载当前脚本的节点*/
@@ -1115,7 +1076,11 @@ export module lwg {
                 Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
             }
             /**游戏开始前执行一次，重写覆盖*/
-            lwgOnAwake(): void { }
+            lwgOnAwake(): void { };
+            /**每个模块中需要初始化的内容，不和lwgOnAwake*/ 
+            lwgModuleOnAwake():void{
+
+            }
             onEnable() {
                 this.lwgEventReg();
                 this.lwgOnEnable();
@@ -1205,107 +1170,6 @@ export module lwg {
             /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
             lwgOnDisable(): void { }
         }
-
-        /**3D场景通用父类*/
-        export class Scene3D extends Laya.Script3D {
-            /**挂载当前脚本的节点*/
-            self: Laya.Scene3D;
-            calssName: string;
-            MainCamera: Laya.MeshSprite3D;
-            mainCameraFpos: Laya.Vector3 = new Laya.Vector3();
-            constructor() {
-                super();
-            }
-            onAwake(): void {
-                this.self = this.owner as Laya.Scene3D;
-                // 类名
-                this.calssName = this['__proto__']['constructor'].name;
-                this.gameState(this.calssName);
-                this.MainCamera = this.self.getChildByName("Main Camera") as Laya.MeshSprite3D;
-                if (this.MainCamera) {
-                    this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
-                    this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
-                    this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
-                }
-                this.lwgOnAwake();
-                this.lwgNodeDec();
-                this.lwgAdaptive();
-
-            }
-            lwgOnAwake(): void {
-
-            }
-            onEnable() {
-                // 组件变为的self属性
-                this.self[this.calssName] = this;
-                this.lwgEventReg();
-                this.lwgOnEnable();
-                this.lwgBtnClick();
-                this.lwgAdaptive();
-                this.lwgOpenAni();
-            }
-            /**场景背部全局变量*/
-            lwgNodeDec(): void {
-            }
-
-            /**场景中的一些事件*/
-            lwgEventReg(): void {
-
-            }
-            /**游戏当前的状态*/
-            gameState(calssName): void {
-                switch (calssName) {
-                    case SceneName.UIStart:
-                        _gameState = GameState.GameStart;
-                        break;
-                    case SceneName.UIMain:
-                        _gameState = GameState.Play;
-                        break;
-                    case SceneName.UIDefeated:
-                        _gameState = GameState.Defeated;
-                        break;
-                    case SceneName.UIVictory:
-                        _gameState = GameState.Victory;
-                        break;
-                    default:
-                        break;
-                }
-                // console.log(lwg.Admin._gameState);
-            }
-            /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgOnEnable(): void {
-                // console.log('父类的初始化！');
-            }
-            /**点击事件注册*/
-            lwgBtnClick(): void {
-            }
-            /**一些节点自适应*/
-            lwgAdaptive(): void {
-            }
-            /**开场动画*/
-            lwgOpenAni(): void {
-            }
-            /**离场动画*/
-            lwgVanishAni(): void {
-            }
-
-            onUpdate(): void {
-                this.lwgOnUpDate();
-            }
-            /**每帧更新时执行，尽量不要在这里写大循环逻辑或者使用*/
-            lwgOnUpDate(): void {
-
-            }
-
-            onDisable(): void {
-                this.lwgOnDisable();
-            }
-            /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgOnDisable(): void {
-
-            }
-        }
-
         /**2D角色通用父类*/
         export class Person extends Laya.Script {
             /**挂载当前脚本的节点*/
@@ -1374,63 +1238,6 @@ export module lwg {
             lwgOnEnable(): void {
                 // console.log('父类的初始化！');
             }
-            /**点击事件注册*/
-            lwgBtnClick(): void {
-            }
-            /**事件注册*/
-            lwgEventReg(): void {
-            }
-            onUpdate(): void {
-                this.lwgOnUpdate();
-            }
-            lwgOnUpdate(): void {
-
-            }
-            onDisable(): void {
-                this.lwgOnDisable();
-                Laya.timer.clearAll(this);
-                EventAdmin.offCaller(this);
-            }
-            /**离开时执行，子类不执行onDisable，只执行lwgDisable*/
-            lwgOnDisable(): void {
-
-            }
-        }
-
-        /**3D物件通用父类*/
-        export class Object3D extends Laya.Script3D {
-            /**挂载当前脚本的节点*/
-            self: Laya.MeshSprite3D;
-            /**所在的3D场景*/
-            selfScene: Laya.Scene3D;
-            /***/
-            selfTransform: Laya.Transform3D;
-            /**物理组件*/
-            rig3D: Laya.Rigidbody3D;
-            /**物理组件*/
-            BoxCol3D: Laya.PhysicsCollider;
-            constructor() {
-                super();
-            }
-            onAwake(): void {
-                this.self = this.owner as Laya.MeshSprite3D;
-                this.selfTransform = this.self.transform;
-                this.selfScene = this.self.scene;
-                // 类名
-                let calssName = this['__proto__']['constructor'].name;
-                // 组件变为的self属性
-                this.self[calssName] = this;
-                this.rig3D = this.self.getComponent(Laya.Rigidbody3D);
-                this.BoxCol3D = this.self.getComponent(Laya.PhysicsCollider) as Laya.PhysicsCollider;
-                this.lwgNodeDec();
-            }
-            lwgNodeDec(): void { }
-            onEnable() {
-                this.lwgEventReg();
-                this.lwgOnEnable();
-            }
-            /**初始化，在onEnable中执行，重写即可覆盖*/
-            lwgOnEnable(): void { }
             /**点击事件注册*/
             lwgBtnClick(): void {
             }
@@ -1937,7 +1744,7 @@ export module lwg {
          * @param out 出屏幕函数
          * 以上4个只是函数名，不可传递函数，如果没有特殊执行，那么就用此模块定义的4个函数，包括通用效果。
          */
-        export function off(effect, target, caller, down, move, up, out): void {
+        export function off(effect, target, caller,  down?: Function, move?: Function, up?: Function, out?: Function): void {
             let btnEffect;
             switch (effect) {
                 case Type.noEffect:
@@ -5259,13 +5066,7 @@ export module lwg {
 
         export class LodeScene extends Admin.Scene {
             lwgOnAwake(): void {
-                this.subpackages();
                 this.lodingResList();
-            }
-
-            /**是否需要分包*/
-            subpackages(): void {
-
             }
 
             /**初始化的时候填写需要加载的内容，在三种加载数组中填写资源地址*/
@@ -5444,8 +5245,6 @@ export module lwg {
                     break;
             }
         }
-
-
         /**按钮打点类型*/
         export enum btnPointType {
             show = 'show',

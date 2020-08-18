@@ -126,7 +126,7 @@ export default class UIStart extends lwg.Admin.Scene {
 
     easterEgg_AotumanSwitch: boolean = false;
     btnXDSkinDown(): void {
-        this.easterEgg_AotumanSwitch = true;
+        // this.easterEgg_AotumanSwitch = true;
     }
 
     btnXDSkinUp(): void {
