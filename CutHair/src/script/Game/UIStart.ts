@@ -17,9 +17,7 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
-
     }
-
 
     lwgEventReg(): void {
         EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
@@ -55,6 +53,8 @@ export default class UIStart extends lwg.Admin.Scene {
         CheckIn.openCheckIn();
 
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
+
+        Setting.setBtnAppear();
     }
 
     /**关卡列表*/
@@ -102,7 +102,7 @@ export default class UIStart extends lwg.Admin.Scene {
         Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
             Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
             ADManager.TAPoint(TaT.BtnClick, 'startword_main');
-            
+
         });
 
         Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
@@ -112,7 +112,7 @@ export default class UIStart extends lwg.Admin.Scene {
         Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
             lwg.Admin._openScene(Admin.SceneName.UICheckIn);
             ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
-            
+
 
         });
 

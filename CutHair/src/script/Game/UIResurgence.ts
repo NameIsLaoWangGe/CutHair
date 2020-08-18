@@ -1,12 +1,13 @@
 import { Admin, Click, EventAdmin } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
+import { GVariate } from "../Lwg_Template/Global";
 
 export default class UIResurgence extends Admin.Scene {
 
     lwgOnEnable(): void {
+        Admin._gameStart = false;
         ADManager.TAPoint(TaT.BtnShow, 'closeword_revive');
         ADManager.TAPoint(TaT.BtnShow, 'ADrevivebt_revive');
-
     }
 
     lwgBtnClick(): void {
@@ -24,7 +25,7 @@ export default class UIResurgence extends Admin.Scene {
     }
     btnNoUp(): void {
         ADManager.TAPoint(TaT.BtnClick, 'closeword_revive');
-        
+
         EventAdmin.notify(EventAdmin.EventType.closeOperation);
         Admin._openScene(Admin.SceneName.UIDefeated);
         this.self.close();

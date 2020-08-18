@@ -2082,13 +2082,14 @@
                     let val;
                     if (value) {
                         val = 1;
+                        Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
                         PalyAudio.playMusic();
                     }
                     else {
                         val = 0;
+                        Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
                         PalyAudio.stopMusic();
                     }
-                    Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
                 }
             };
             Setting._shake = {
@@ -2179,10 +2180,10 @@
         (function (PalyAudio) {
             let voiceUrl;
             (function (voiceUrl) {
-                voiceUrl["btn"] = "Frame/voice/btn.wav";
-                voiceUrl["bgm"] = "Frame/voice/bgm.mp3";
-                voiceUrl["victory"] = "Frame/voice/guoguan.wav";
-                voiceUrl["defeated"] = "Frame/voice/wancheng.wav";
+                voiceUrl["btn"] = "res/Voice/btn.wav";
+                voiceUrl["bgm"] = "res/Voice/bgm.mp3";
+                voiceUrl["victory"] = "res/Voice/guoguan.wav";
+                voiceUrl["defeated"] = "res/Voice/wancheng.wav";
             })(voiceUrl = PalyAudio.voiceUrl || (PalyAudio.voiceUrl = {}));
             function playSound(url, number, func) {
                 if (!url) {
@@ -2242,7 +2243,9 @@
                 if (!delayed) {
                     delayed = 0;
                 }
-                Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), delayed);
+                if (Setting._bgMusic.switch) {
+                    Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), delayed);
+                }
             }
             PalyAudio.playMusic = playMusic;
             function stopMusic() {
@@ -4411,6 +4414,9 @@
     let GameScene = GameControl.GameScene;
 
     class UIDefeated extends lwg.Admin.Scene {
+        lwgOnAwake() {
+            Admin._gameStart = false;
+        }
         lwgNodeDec() {
             this.self['BtnAdv'].visible = true;
             this.self['BtnAgain'].visible = false;
@@ -5158,6 +5164,13 @@
                 "GameData/Dialog/Dialog.json",
                 "GameData/Game/GameLevel.json",
                 "GameData/EasterEgg/EasterEgg.json",
+                "Scene/UICheckIn.json",
+                "Scene/UIEasterEgg.json",
+                "Scene/UIOperation.json",
+                "Scene/UISet.json",
+                "Scene/UIShop.json",
+                "Scene/UISkinXD.json",
+                "Scene/UITask.json",
             ];
         }
         lodingPhaseComplete() {
@@ -5189,8 +5202,8 @@
         lwgOnUpdate() {
             if (this.maskMoveSwitch) {
                 if (this.self['Mask'].x < -20) {
-                    this.self['Mask'].x += 10;
-                    this.self['Shear'].x += 10;
+                    this.self['Mask'].x += 3;
+                    this.self['Shear'].x += 3;
                     let str = ((-this.self['Mask'].width - this.self['Mask'].x) / -this.self['Mask'].width * 100).toString().substring(0, 2);
                     this.self['Per'].text = str + '%';
                 }
@@ -5350,7 +5363,7 @@
         }
         lwgOnAwake() {
             GVariate._taskNum = 0;
-            lwg.Admin._gameStart = true;
+            Admin._gameStart = true;
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
             ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
@@ -5564,7 +5577,9 @@
             }
         }
         onStageMouseMove(e) {
-            Admin._gameStart = true;
+            if (!Admin._gameStart) {
+                return;
+            }
             if (this.moveSwitch) {
                 switch (GVariate._taskArr[GVariate._taskNum]) {
                     case GEnum.TaskType.HairParent:
@@ -5633,6 +5648,7 @@
 
     class UIResurgence extends Admin.Scene {
         lwgOnEnable() {
+            Admin._gameStart = false;
             ADManager.TAPoint(TaT.BtnShow, 'closeword_revive');
             ADManager.TAPoint(TaT.BtnShow, 'ADrevivebt_revive');
         }
@@ -5816,6 +5832,9 @@
     RecordManager.autoRecording = false;
 
     class UIShare extends lwg.Admin.Scene {
+        lwgOnAwake() {
+            Admin._gameStart = false;
+        }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
             ADManager.TAPoint(TaT.BtnShow, 'sharebt_share');
@@ -6656,6 +6675,7 @@
             }
             CheckIn.openCheckIn();
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
+            Setting.setBtnAppear();
         }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
@@ -6769,8 +6789,6 @@
                 { name: "sp1", root: "res" },
                 { name: "sp2", root: "3DScene" },
                 { name: "sp3", root: "3DPrefab" },
-                { name: "sp4", root: "UI" },
-                { name: "sp5", root: "Frame" },
             ];
         }
         init(cb) {
@@ -7039,7 +7057,6 @@
             Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         lwgOnDisable() {
-            Setting.setBtnVinish();
             EventAdmin.notify(GEnum.EventType.goBack);
         }
     }

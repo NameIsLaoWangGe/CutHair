@@ -8,10 +8,6 @@ export class SubpackController {
         { name: "sp1", root: "res" },
         { name: "sp2", root: "3DScene" },
         { name: "sp3", root: "3DPrefab" },
-        { name: "sp4", root: "UI" },
-        { name: "sp5", root: "Frame" },
-        
-        
     ];
 
     init(cb) {

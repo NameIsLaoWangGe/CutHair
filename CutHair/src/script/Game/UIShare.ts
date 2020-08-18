@@ -6,6 +6,9 @@ import { Game } from "../Lwg_Template/Game";
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIShare extends lwg.Admin.Scene {
+    lwgOnAwake(): void {
+        Admin._gameStart = false;
+    }
 
     lwgOnEnable(): void {
         ADManager.TAPoint(TaT.BtnShow, 'closeword_share');

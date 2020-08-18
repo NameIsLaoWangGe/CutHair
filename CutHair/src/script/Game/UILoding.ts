@@ -20,6 +20,20 @@ export default class UILoding extends Loding.LodeScene {
             "res/atlas/UI/Shop/Other.png",
             "res/atlas/UI/Shop.png",
             "res/atlas/UI/Skin.png",
+
+            "res/atlas/UI/EasterEgg_Aotoman/Congratulation.png",
+            "res/atlas/UI/EasterEgg_Aotoman/GameStart.png",
+            "res/atlas/UI/EasterEgg_Aotoman/Hint.png",
+            "res/atlas/UI/EasterEgg_Aotoman/Unworthy.png",
+            "res/atlas/UI/EasterEgg_Aotoman/Task.png",
+
+            "res/atlas/UI/XDSkin.png",
+
+            "res/atlas/UI/Set.png",
+
+            "res/atlas/UI/Task.png",
+            
+
         ];
         Loding.lodingList_3DScene = [
             "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
@@ -37,6 +51,13 @@ export default class UILoding extends Loding.LodeScene {
             "GameData/Dialog/Dialog.json",
             "GameData/Game/GameLevel.json",
             "GameData/EasterEgg/EasterEgg.json",
+            "Scene/UICheckIn.json",
+            "Scene/UIEasterEgg.json",
+            "Scene/UIOperation.json",
+            "Scene/UISet.json",
+            "Scene/UIShop.json",
+            "Scene/UISkinXD.json",
+            "Scene/UITask.json",
         ];
     }
 
@@ -85,8 +106,8 @@ export default class UILoding extends Loding.LodeScene {
         // 模拟加载进度,非真实进度，最后为1时为真实进度
         if (this.maskMoveSwitch) {
             if (this.self['Mask'].x < -20) {
-                this.self['Mask'].x += 10;
-                this.self['Shear'].x += 10;
+                this.self['Mask'].x += 3;
+                this.self['Shear'].x += 3;
                 // 百分比数字
                 let str: string = ((- this.self['Mask'].width - this.self['Mask'].x) / - this.self['Mask'].width * 100).toString().substring(0, 2);
                 this.self['Per'].text = str + '%';

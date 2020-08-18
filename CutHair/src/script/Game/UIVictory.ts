@@ -153,7 +153,7 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     lwgOnDisable(): void {
-        Setting.setBtnVinish();
+        // Setting.setBtnVinish();
         EventAdmin.notify(GEnum.EventType.goBack);
     }
 }

@@ -156,7 +156,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     lwgOnAwake(): void {
         GVariate._taskNum = 0;
-        lwg.Admin._gameStart = true;
+        Admin._gameStart = true;
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
 
@@ -442,7 +442,9 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     onStageMouseMove(e: Laya.Event) {
-        Admin._gameStart = true;
+        if (!Admin._gameStart) {
+            return;
+        }
         if (this.moveSwitch) {
             // 当前任务类型
             switch (GVariate._taskArr[GVariate._taskNum]) {
@@ -530,6 +532,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         this.moveSwitch = false;
     }
 
-    lwgOnDisable():void{
+    lwgOnDisable(): void {
     }
 }

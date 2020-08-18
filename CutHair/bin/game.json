@@ -19,14 +19,6 @@
     {
       "name": "sp3",
       "root": "3DPrefab"
-    },
-    {
-      "name": "sp4",
-      "root": "UI"
-    },
-    {
-      "name": "sp5",
-      "root": "Frame"
     }
   ]
 }

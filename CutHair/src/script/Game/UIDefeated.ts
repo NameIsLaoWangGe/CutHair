@@ -5,6 +5,10 @@ import { Game } from "../Lwg_Template/Game";
 
 export default class UIDefeated extends lwg.Admin.Scene {
 
+    lwgOnAwake(): void {
+        Admin._gameStart = false;
+    }
+
     lwgNodeDec(): void {
         this.self['BtnAdv'].visible = true;
         this.self['BtnAgain'].visible = false;
@@ -13,7 +17,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
     lwgOnEnable(): void {
         ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
-        
+
         ADManager.TAPoint(TaT.BtnShow, 'ADnextbt_fail');
         ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
 

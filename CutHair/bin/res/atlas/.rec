@@ -119,11 +119,6 @@ P 7331617A ui_square_c_010.png
 P 87918B79 ui_square_c_011.png
 P B253D6A3 ui_square_c_012.png
 D Frame/Voice
-R DF5F5D4D bgm.mp3
-R 626CADAF btn.wav
-R 9B501DC8 chijinbi.wav
-R E23D09D2 guoguan.wav
-R 6E72E92F wancheng.wav
 D UI/CheckIn
 P 035AA6AB biaoti.png
 P F3D8F48B qian.png
@@ -156,7 +151,7 @@ P A4DA340F yeqian2.png
 P BBADF635 yuan1.png
 P 08867EDD yuan2.png
 D UI/Congratulate
-R C4D3A2C3 guang.png
+P C4D3A2C3 guang.png
 P B7535474 qiandui.png
 P FA08FDE4 sanbei.png
 P 516ED890 txt_zhijie.png
@@ -193,22 +188,22 @@ D UI/Inherit
 P ECE7E04E bupei.png
 P E4FD158F jieshou.png
 P BCBCAD68 txt_biaoti.png
-R ACDD8DDF yangshi.png
-R 0B987673 zi.png
+P ACDD8DDF yangshi.png
+P 0B987673 zi.png
 D UI/Loding
 P E81ED0DF bg1.jpg
-R C94CCDE8 bg2.jpg
+P C94CCDE8 bg2.jpg
 P 2E8D4482 bg3.png
-R 363C3A11 fangchenmi.png
+P 363C3A11 fangchenmi.png
 P CE6D36CE icon_shear_01.png
 P BBEF0321 icon_shear_02.png
 P DCC5AB54 laya.png
-R F369565E LOGO.png
+P F369565E LOGO.png
 P 3A4418BB pro_01.png
 P D9D3120B pro_02.png
 P DFD6E778 word_Loding.png
 D UI/Resurgence
-R 1C81BD00 anniu.png
+P 1C81BD00 anniu.png
 P E5E4038C biaoti.png
 P 2D03710B quan.png
 P FA735650 shouhua.png
@@ -257,7 +252,7 @@ P 9E7C52F0 500.png
 P AEFE06A9 5002.png
 P 1E66CC60 anniu.png
 P E13446FA icon_ads.png
-R 89EEC1D4 penzi.png
+P 89EEC1D4 penzi.png
 P E9D8B8DD ui_board01.png
 P 8F855DE5 vscroll$bar.png
 P AA4E5183 vscroll$down.png
@@ -298,14 +293,13 @@ P 61893087 txt_leiji.png
 P 04AF5391 txt_xiexie.png
 D UI/EasterEgg_Aotoman/Congratulation
 P 907EDAED 3.png
-R B2EF2CDE biaoti.png
+P B2EF2CDE biaoti.png
 R 7162CBA2 bj.png
 P 95110F81 queding.png
-R 66957F45 tiantong.png
 P ECBF8410 tiantong1.png
 P E51D2ED9 txt_xiandan.png
 P 2488D3DD txt_yuansu.png
-R 02A94AC2 txt_zhenbang.png
+P 02A94AC2 txt_zhenbang.png
 D UI/EasterEgg_Aotoman/GameStart
 P B54C7443 renwu_xiao.png
 P 5AFD7362 zhazi_2.png
@@ -331,7 +325,7 @@ P 819EF66D wancheng2.png
 D UI/EasterEgg_Aotoman/Unworthy
 P A0E91C23 bupei.png
 P C459E226 jieshou.png
-R 8CD136BE zi.png
+P 8CD136BE zi.png
 D UI/Share/Photo
 P 9A39FE91 1.png
 P D90CBD3A 10.png

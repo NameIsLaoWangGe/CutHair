@@ -1875,7 +1875,7 @@ export module lwg {
             beetle = 'beetle',
         }
 
-        /**设置按钮音效*/
+        /**按钮音效*/
         export let audioUrl: string;
         /**
          * 当前气球被缩放的比例
@@ -1888,7 +1888,6 @@ export module lwg {
         /**b
          * 点击事件注册,可以用(e)=>{}简写传递的函数参数
          * @param effect 效果类型 1.'largen'
-         * @param soundUrl 音效的地址
          * @param target 节点
          * @param caller 指向脚本（this）引用
          * @param down 按下函数
@@ -3123,17 +3122,18 @@ export module lwg {
             get switch(): boolean {
                 return Laya.LocalStorage.getItem('Setting_bgMusic') == '0' ? false : true;
             },
-            /**次数写数字*/
+            /**开关*/
             set switch(value: boolean) {
                 let val;
                 if (value) {
                     val = 1;
+                    Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
                     PalyAudio.playMusic();
                 } else {
                     val = 0;
+                    Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
                     PalyAudio.stopMusic();
                 }
-                Laya.LocalStorage.setItem('Setting_bgMusic', val.toString());
             }
         };
 
@@ -3251,10 +3251,10 @@ export module lwg {
 
         /**音效地址*/
         export enum voiceUrl {
-            btn = 'Frame/voice/btn.wav',
-            bgm = 'Frame/voice/bgm.mp3',
-            victory = 'Frame/voice/guoguan.wav',
-            defeated = 'Frame/voice/wancheng.wav',
+            btn = 'res/Voice/btn.wav',
+            bgm = 'res/Voice/bgm.mp3',
+            victory = 'res/Voice/guoguan.wav',
+            defeated = 'res/Voice/wancheng.wav',
         }
 
         /**通用音效播放
@@ -3335,7 +3335,9 @@ export module lwg {
             if (!delayed) {
                 delayed = 0;
             }
-            Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), delayed);
+            if (Setting._bgMusic.switch) {
+                Laya.SoundManager.playMusic(url, number, Laya.Handler.create(this, function () { }), delayed);
+            }
         }
 
         /**停止播放背景音乐*/
@@ -5451,7 +5453,7 @@ export module lwg {
         }
         /**按钮打点*/
         export function btnPrintPoint(): void {
-            
+
         }
     }
 }
