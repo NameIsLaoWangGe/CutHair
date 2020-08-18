@@ -836,79 +836,6 @@
                 lwgOnDisable() { }
             }
             Admin.Scene = Scene;
-            class Scene3D extends Laya.Script3D {
-                constructor() {
-                    super();
-                    this.mainCameraFpos = new Laya.Vector3();
-                }
-                onAwake() {
-                    this.self = this.owner;
-                    this.calssName = this['__proto__']['constructor'].name;
-                    this.gameState(this.calssName);
-                    this.MainCamera = this.self.getChildByName("Main Camera");
-                    if (this.MainCamera) {
-                        this.mainCameraFpos.x = this.MainCamera.transform.localPositionX;
-                        this.mainCameraFpos.y = this.MainCamera.transform.localPositionY;
-                        this.mainCameraFpos.z = this.MainCamera.transform.localPositionZ;
-                    }
-                    this.lwgOnAwake();
-                    this.lwgNodeDec();
-                    this.lwgAdaptive();
-                }
-                lwgOnAwake() {
-                }
-                onEnable() {
-                    this.self[this.calssName] = this;
-                    this.lwgEventReg();
-                    this.lwgOnEnable();
-                    this.lwgBtnClick();
-                    this.lwgAdaptive();
-                    this.lwgOpenAni();
-                }
-                lwgNodeDec() {
-                }
-                lwgEventReg() {
-                }
-                gameState(calssName) {
-                    switch (calssName) {
-                        case SceneName.UIStart:
-                            Admin._gameState = GameState.GameStart;
-                            break;
-                        case SceneName.UIMain:
-                            Admin._gameState = GameState.Play;
-                            break;
-                        case SceneName.UIDefeated:
-                            Admin._gameState = GameState.Defeated;
-                            break;
-                        case SceneName.UIVictory:
-                            Admin._gameState = GameState.Victory;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                lwgOnEnable() {
-                }
-                lwgBtnClick() {
-                }
-                lwgAdaptive() {
-                }
-                lwgOpenAni() {
-                }
-                lwgVanishAni() {
-                }
-                onUpdate() {
-                    this.lwgOnUpDate();
-                }
-                lwgOnUpDate() {
-                }
-                onDisable() {
-                    this.lwgOnDisable();
-                }
-                lwgOnDisable() {
-                }
-            }
-            Admin.Scene3D = Scene3D;
             class Person extends Laya.Script {
                 constructor() {
                     super();
@@ -4700,6 +4627,8 @@
     })(lwg3D || (lwg3D = {}));
 
     class GameMain3D_Blade extends lwg3D.Object3D {
+        lwgOnEnable() {
+        }
         onTriggerEnter(other) {
             if (!lwg.Admin._gameStart) {
                 return;
@@ -4745,11 +4674,15 @@
                     break;
             }
         }
+        lwgOnUpdate() {
+            if (this.self.name === 'dianjupian') {
+                this.self.transform.localRotationEulerZ += 3;
+            }
+        }
     }
 
     class GameMain3D_Razor extends lwg3D.Scene3D {
         lwgOnEnable() {
-            this.RazorState = GEnum.RazorState.move;
             let Blade = this.self.getChildByName('Blade');
             Blade.addComponent(GameMain3D_Blade);
         }
@@ -4806,6 +4739,14 @@
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    class GameMain3D_Dianjupian extends lwg3D.Object3D {
+        lwgOnUpdate() {
+            if (this.self.name === 'dianjupian') {
+                this.self.transform.localRotationEulerZ -= 7;
             }
         }
     }
@@ -4892,6 +4833,9 @@
                         else {
                             name = element.name;
                             element.active = true;
+                            if (!element.getComponent(GameMain3D_Dianjupian)) {
+                                element.addComponent(GameMain3D_Dianjupian);
+                            }
                         }
                     }
                 }

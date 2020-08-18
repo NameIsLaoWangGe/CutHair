@@ -3633,7 +3633,26 @@
 								60
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"Animator",
+								"layers":[
+									{
+										"name":"Base Layer",
+										"weight":0,
+										"blendingMode":0,
+										"states":[
+											{
+												"name":"jdclip",
+												"clipPath":"Assets/Animator/jdclip-jdclip.lani"
+											}
+										]
+									}
+								],
+								"cullingMode":0,
+								"playOnWake":true
+							}
+						],
 						"child":[
 							{
 								"type":"MeshSprite3D",
@@ -3649,10 +3668,10 @@
 										0.0005767654
 									],
 									"rotation":[
-										0.7071068,
-										0,
-										0,
-										-0.7071068
+										0.6236396,
+										-0.1794548,
+										0.3168037,
+										-0.6917406
 									],
 									"scale":[
 										1,

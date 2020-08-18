@@ -4,6 +4,8 @@ import { lwg3D } from "../Lwg_Template/lwg3D";
 
 export default class GameMain3D_Blade extends lwg3D.Object3D {
 
+    lwgOnEnable(): void {
+    }
     onTriggerEnter(other): void {
         if (!lwg.Admin._gameStart) {
             return;
@@ -63,6 +65,12 @@ export default class GameMain3D_Blade extends lwg3D.Object3D {
                 break;
             default:
                 break;
+        }
+    }
+
+    lwgOnUpdate(): void {
+        if (this.self.name === 'dianjupian') {
+            this.self.transform.localRotationEulerZ += 3;
         }
     }
 }

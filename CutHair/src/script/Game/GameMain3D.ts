@@ -6,6 +6,7 @@ import { Global, GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import GameMain3D_knife from "./GameMain3D_knife";
 import { Game } from "../Lwg_Template/Game";
 import { lwg3D } from "../Lwg_Template/lwg3D";
+import GameMain3D_Dianjupian from "./GameMain3D_Dianjupian";
 export default class GameMain3D extends lwg3D.Scene3D {
 
     constructor() { super(); }
@@ -65,10 +66,7 @@ export default class GameMain3D extends lwg3D.Scene3D {
         GSene3D.EyeDecoration = this.self.getChildByName('EyeDecoration') as Laya.MeshSprite3D;
 
         GSene3D.DressUpMark = this.self.getChildByName('DressUpMark') as Laya.MeshSprite3D;
-
     }
-
-
 
     lwgEventReg(): void {
         // 重来
@@ -109,6 +107,9 @@ export default class GameMain3D extends lwg3D.Scene3D {
                     } else {
                         name = element.name;
                         element.active = true;
+                        if (!element.getComponent(GameMain3D_Dianjupian)) {
+                            element.addComponent(GameMain3D_Dianjupian);
+                        }
                     }
                 }
             }
