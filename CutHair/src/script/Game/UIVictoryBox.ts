@@ -1,23 +1,40 @@
-import { lwg, Admin, Dialog, VictoryBox, EventAdmin, Animation2D, Effects, Gold, Click, Task, Tools } from "../Lwg_Template/lwg";
+import { lwg, Admin, Dialog, VictoryBox, EventAdmin, Animation2D, Effects, Gold, Click, Task, Tools, EasterEgg } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
-import { EasterEgg } from "../Lwg_Template/EasterEgg";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     constructor() { super(); }
 
     victoryBoxOnAwake(): void {
+
         ADManager.TAPoint(TaT.BtnShow, 'Adboxvideo');
         ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
-        
+        Gold.goldAppear();
+
         // ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_box');
-        this.self['BtnAgain'].visible = false;
-        this.self['BtnNo'].visible = false;
+        this.self['BtnAgain_WeChat'].visible = false;
+        this.self['BtnNo_WeChat'].visible = false;
         if (VictoryBox._openVictoryBoxNum > 1) {
             let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
             for (let index = 0; index < arr.length; index++) {
                 const element = arr[index];
                 VictoryBox.setBoxProperty('box' + arr[index], VictoryBox.BoxProperty.ads, true);
             }
+        }
+
+        switch (Game._platform) {
+            case Game._platformTpye.WeChat:
+                this.self['Bytedance'].visible = false;
+                this.self['WeChat'].visible = true;
+
+                break;
+            case Game._platformTpye.Bytedance:
+                this.self['Bytedance'].visible = true;
+                this.self['WeChat'].visible = false;
+
+                break;
+            default:
+                break;
         }
     }
 
@@ -113,12 +130,29 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     }
 
     victoryBoxBtnClick(): void {
-        Click.on('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-        Click.on('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        Click.on('largen', this.self['BtnNo_WeChat'], this, null, null, this.btnNoUp);
+        Click.on('largen', this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+
+        Click.on('largen', this.self['BtnNo_Bytedance'], this, null, null, this.btnNoUp);
+        Click.on('largen', this.self['BtnAgain_Bytedance'], this, null, null, this.btnAgainUp);
+        Click.on('largen', this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelect_BytedanceUp);
+
     }
     btnOffClick(): void {
-        Click.off('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-        Click.off('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+        Click.off('largen', this.self['BtnNo_WeChat'], this, null, null, this.btnNoUp);
+        Click.off('largen', this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+    }
+
+    btnSelect_BytedanceUp(): void {
+        if (this.self['Dot_Bytedance'].visible) {
+            this.self['Dot_Bytedance'].visible = false;
+            this.self['BtnNo_Bytedance'].visible = true;
+            this.self['BtnAgain_Bytedance'].visible = false;
+        } else {
+            this.self['Dot_Bytedance'].visible = true;
+            this.self['BtnNo_Bytedance'].visible = false;
+            this.self['BtnAgain_Bytedance'].visible = true;
+        }
     }
 
     btnNoUp(event): void {
@@ -130,7 +164,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
     btnAgainUp(event): void {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
         ADManager.TAPoint(TaT.BtnClick, 'Adboxagain');
-        
+
         if (VictoryBox._alreadyOpenNum < 9 && VictoryBox._adsMaxOpenNum > 0) {
             ADManager.ShowReward(() => {
                 Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
@@ -144,11 +178,11 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
 
     victoryOnUpdate(): void {
         if (VictoryBox._defaultOpenNum > 0) {
-            this.self['BtnAgain'].visible = false;
-            this.self['BtnNo'].visible = false;
+            this.self['BtnAgain_WeChat'].visible = false;
+            this.self['BtnNo_WeChat'].visible = false;
         } else {
-            this.self['BtnAgain'].visible = true;
-            this.self['BtnNo'].visible = true;
+            this.self['BtnAgain_WeChat'].visible = true;
+            this.self['BtnNo_WeChat'].visible = true;
         }
     }
 }

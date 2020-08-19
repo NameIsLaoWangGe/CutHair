@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":26,
+    "selecteID":47,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":37,
+    "maxID":61,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -119,22 +119,21 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,WeChat,WeChat",
-            "props":{"y":993,"x":187.5,"width":341,"var":"WeChat","name":"WeChat","height":207},
+            "props":{"y":998,"x":187.5,"width":341,"var":"WeChat","name":"WeChat","height":207},
             "nodeParent":2,
             "label":"WeChat",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":25,
             "child":[
                 {
-                    "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite,BtnNormal_Wechat,BtnNormal_Wechat",
-                    "props":{"y":122,"x":171,"width":288,"var":"BtnNormal_Wechat","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNormal_Wechat","height":128},
+                    "searchKey":"Sprite,BtnNormal_WeChat,BtnNormal_WeChat",
+                    "props":{"y":122,"x":171,"width":288,"var":"BtnNormal_WeChat","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNormal_WeChat","height":128},
                     "nodeParent":25,
-                    "label":"BtnNormal_Wechat",
+                    "label":"BtnNormal_WeChat",
                     "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -156,7 +155,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,Select",
                     "props":{"y":0,"x":18,"width":306,"var":"Select","height":42},
@@ -169,13 +167,12 @@
                     "compId":7,
                     "child":[
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,BtnSelect_Wechat,BtnSelect_Wechat",
                             "props":{"y":2,"x":21,"var":"BtnSelect_Wechat","texture":"UI/Common/yuan1.png","name":"BtnSelect_Wechat"},
                             "nodeParent":7,
                             "label":"BtnSelect_Wechat",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
@@ -183,10 +180,10 @@
                             "child":[
                                 {
                                     "type":"Sprite",
-                                    "searchKey":"Sprite,Dot,Dot",
-                                    "props":{"y":8.75,"x":7.75,"var":"Dot","texture":"UI/Common/yuan2.png","name":"Dot"},
+                                    "searchKey":"Sprite,Dot_WeChat,Dot_WeChat",
+                                    "props":{"y":8.75,"x":7.75,"var":"Dot_WeChat","texture":"UI/Common/yuan2.png","name":"Dot_WeChat"},
                                     "nodeParent":12,
-                                    "label":"Dot",
+                                    "label":"Dot_WeChat",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
@@ -196,7 +193,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":3,"x":57,"texture":"UI/Settle/txt_kanguangg.png"},
@@ -211,10 +207,9 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite,BtnAdv_Wechat,BtnAdv_Wechat",
-                    "props":{"y":122,"x":171,"width":288,"var":"BtnAdv_Wechat","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv_Wechat","height":128},
+                    "searchKey":"Sprite,BtnAdv_Wechat,BtnAdv_WeChat",
+                    "props":{"y":122,"x":171,"width":288,"var":"BtnAdv_WeChat","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv_Wechat","height":128},
                     "nodeParent":25,
                     "label":"BtnAdv_Wechat",
                     "isOpen":false,
@@ -255,7 +250,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,OPPO,OPPO",
-            "props":{"y":1000,"x":186.5,"width":341,"var":"OPPO","name":"OPPO","height":200},
+            "props":{"y":1005,"x":186.5,"width":341,"var":"OPPO","name":"OPPO","height":200},
             "nodeParent":2,
             "label":"OPPO",
             "isOpen":true,
@@ -318,6 +313,306 @@
                     "child":[
                         ]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,Bytedance,Bytedance",
+            "props":{"y":1004,"x":187.5,"width":341,"var":"Bytedance","name":"Bytedance","height":207},
+            "nodeParent":2,
+            "label":"Bytedance",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":37,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnNext_Bytedance,BtnNext_Bytedance",
+                    "props":{"y":70,"x":170.5,"width":288,"var":"BtnNext_Bytedance","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNext_Bytedance","height":128},
+                    "nodeParent":37,
+                    "label":"BtnNext_Bytedance",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":38,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":45,"x":85,"texture":"UI/Settle/next.png"},
+                            "nodeParent":38,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":39,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite",
+                    "props":{"y":157,"x":24.5,"width":306,"height":42},
+                    "nodeParent":37,
+                    "label":"Sprite",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":40,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnSelect_Bytedance,BtnSelect_Bytedance",
+                            "props":{"y":2,"x":21,"var":"BtnSelect_Bytedance","texture":"UI/Common/yuan1.png","name":"BtnSelect_Bytedance"},
+                            "nodeParent":40,
+                            "label":"BtnSelect_Bytedance",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":41,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,Dot_Bytedance,Dot_Bytedance",
+                                    "props":{"y":8.75,"x":7.75,"var":"Dot_Bytedance","texture":"UI/Common/yuan2.png","name":"Dot_Bytedance"},
+                                    "nodeParent":41,
+                                    "label":"Dot_Bytedance",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":42,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":3,"x":57,"texture":"UI/Settle/txt_kanguangg.png"},
+                            "nodeParent":40,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":43,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,P202",
+            "props":{"width":552,"name":"P202","height":456,"centerY":70,"centerX":0,"anchorY":0.5,"anchorX":0.5},
+            "nodeParent":2,
+            "label":"P202",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":47,
+            "child":[
+                {
+                    "type":"Panel",
+                    "searchKey":"Panel,scroll",
+                    "props":{"top":0,"right":0,"name":"scroll","left":0,"elasticEnabled":false,"bottom":0,"anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":47,
+                    "label":"scroll",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":48,
+                    "child":[
+                        {
+                            "type":"List",
+                            "searchKey":"List,layout",
+                            "props":{"y":0,"spaceY":20,"spaceX":20,"space":10,"right":0,"name":"layout","left":0,"height":470,"anchorY":0,"anchorX":0.5,"align":"middle"},
+                            "nodeParent":48,
+                            "label":"layout",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":49,
+                            "child":[
+                                {
+                                    "type":"Box",
+                                    "searchKey":"Box,item",
+                                    "props":{"y":114,"x":92,"width":164,"renderType":"render","name":"item","height":208,"anchorY":0.5,"anchorX":0.5},
+                                    "nodeParent":49,
+                                    "label":"item",
+                                    "isOpen":true,
+                                    "isDirectory":true,
+                                    "isAniNode":false,
+                                    "hasChild":true,
+                                    "compId":50,
+                                    "child":[
+                                        {
+                                            "type":"Image",
+                                            "searchKey":"Image,icon",
+                                            "props":{"width":140,"skin":"TJ/Promo/image/jx8.png","name":"icon","height":140,"centerY":-22,"centerX":0,"anchorY":0.5,"anchorX":0.5},
+                                            "nodeParent":50,
+                                            "label":"icon",
+                                            "isOpen":true,
+                                            "isDirectory":true,
+                                            "isAniNode":false,
+                                            "hasChild":true,
+                                            "compId":51,
+                                            "child":[
+                                                {
+                                                    "type":"Image",
+                                                    "searchKey":"Image,kk",
+                                                    "props":{"width":164,"skin":"TJ/Promo/image/kk3.png","name":"kk","height":208,"centerY":22,"centerX":0},
+                                                    "nodeParent":51,
+                                                    "label":"kk",
+                                                    "isDirectory":false,
+                                                    "isAniNode":false,
+                                                    "hasChild":false,
+                                                    "compId":52,
+                                                    "child":[
+                                                        ]
+                                                },
+                                                {
+                                                    "type":"Image",
+                                                    "searchKey":"Image,flag1",
+                                                    "props":{"width":83,"visible":false,"skin":"TJ/Promo/image/new2.png","name":"flag1","height":83,"centerY":-39,"centerX":39,"anchorY":0.5,"anchorX":0.5},
+                                                    "nodeParent":51,
+                                                    "label":"flag1",
+                                                    "isDirectory":false,
+                                                    "isAniNode":false,
+                                                    "hasChild":false,
+                                                    "compId":53,
+                                                    "child":[
+                                                        ],
+                                                    "$HIDDEN":true
+                                                },
+                                                {
+                                                    "type":"Image",
+                                                    "searchKey":"Image,flag2",
+                                                    "props":{"width":83,"visible":false,"skin":"TJ/Promo/image/remen1.png","name":"flag2","height":83,"centerY":-39,"centerX":39,"anchorY":0.5,"anchorX":0.5},
+                                                    "nodeParent":51,
+                                                    "label":"flag2",
+                                                    "isDirectory":false,
+                                                    "isAniNode":false,
+                                                    "hasChild":false,
+                                                    "compId":54,
+                                                    "child":[
+                                                        ],
+                                                    "$HIDDEN":true
+                                                },
+                                                {
+                                                    "type":"Image",
+                                                    "searchKey":"Image,flag3",
+                                                    "props":{"width":83,"visible":false,"skin":"TJ/Promo/image/tuijian2.png","name":"flag3","height":83,"centerY":-39,"centerX":39,"anchorY":0.5,"anchorX":0.5},
+                                                    "nodeParent":51,
+                                                    "label":"flag3",
+                                                    "isDirectory":false,
+                                                    "isAniNode":false,
+                                                    "hasChild":false,
+                                                    "compId":55,
+                                                    "child":[
+                                                        ],
+                                                    "$HIDDEN":true
+                                                }],
+                                            "$HIDDEN":false
+                                        },
+                                        {
+                                            "type":"Label",
+                                            "searchKey":"Label,name",
+                                            "props":{"wordWrap":false,"width":164,"valign":"middle","text":"这里是游戏名称","name":"name","multiline":false,"mouseEnabled":false,"height":19,"fontSize":16,"editable":false,"color":"#ffffff","centerY":65,"centerX":0,"anchorY":0.5,"anchorX":0.5,"align":"center"},
+                                            "nodeParent":50,
+                                            "label":"name",
+                                            "isDirectory":false,
+                                            "isAniNode":false,
+                                            "hasChild":false,
+                                            "compId":56,
+                                            "child":[
+                                                ],
+                                            "$HIDDEN":false
+                                        },
+                                        {
+                                            "type":"Label",
+                                            "searchKey":"Label,info",
+                                            "props":{"wordWrap":false,"width":164,"valign":"middle","text":"1, 254, 546人在玩","name":"info","multiline":false,"mouseEnabled":false,"height":18,"fontSize":15,"editable":false,"color":"#ffffff","centerY":88,"centerX":0,"anchorY":0.5,"anchorX":0.5,"align":"center"},
+                                            "nodeParent":50,
+                                            "label":"info",
+                                            "isDirectory":false,
+                                            "isAniNode":false,
+                                            "hasChild":false,
+                                            "compId":57,
+                                            "child":[
+                                                ],
+                                            "$HIDDEN":false
+                                        },
+                                        {
+                                            "type":"Script",
+                                            "switchAble":true,
+                                            "source":"src/TJ/Promo/script/PromoItem.ts",
+                                            "searchKey":"Script,PromoItem",
+                                            "removeAble":true,
+                                            "props":{},
+                                            "nodeParent":50,
+                                            "label":"PromoItem",
+                                            "isDirectory":false,
+                                            "isAniNode":false,
+                                            "hasChild":false,
+                                            "compId":58,
+                                            "child":[
+                                                ]
+                                        },
+                                        {
+                                            "type":"Script",
+                                            "switchAble":true,
+                                            "source":"src/TJ/Promo/script/ButtonScale.ts",
+                                            "searchKey":"Script,ButtonScale",
+                                            "removeAble":true,
+                                            "props":{},
+                                            "nodeParent":50,
+                                            "label":"ButtonScale",
+                                            "isDirectory":false,
+                                            "isAniNode":false,
+                                            "hasChild":false,
+                                            "compId":59,
+                                            "child":[
+                                                ]
+                                        }],
+                                    "$HIDDEN":false
+                                }],
+                            "$HIDDEN":false
+                        }],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Script",
+                    "switchAble":true,
+                    "source":"src/TJ/Promo/script/P202.ts",
+                    "searchKey":"Script,P202",
+                    "removeAble":true,
+                    "props":{},
+                    "nodeParent":47,
+                    "label":"P202",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":60,
+                    "child":[
+                        ]
+                }],
+            "$HIDDEN":false
         }],
     "animations":[
         {

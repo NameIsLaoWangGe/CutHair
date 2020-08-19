@@ -8,14 +8,23 @@ export default class UICheckIn extends CheckIn.CheckInScene {
         if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
             this.self['WeChat'].visible = false;
             this.self['OPPO'].visible = false;
-        }else{
-            if (Game._platform === Game._platformTpye.OPPO) {
-                this.self['OPPO'].visible = true;
-                this.self['WeChat'].visible = false;
-    
-            } else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = true;
+        } else {
+            switch (Game._platform) {
+                case Game._platformTpye.OPPO:
+                    this.self['OPPO'].visible = true;
+                    this.self['WeChat'].visible = false;
+                    break;
+                case Game._platformTpye.WeChat:
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = true;
+                    break;
+                case Game._platformTpye.Bytedance:
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = true;
+                    break;
+
+                default:
+                    break;
             }
         }
     }
@@ -94,17 +103,18 @@ export default class UICheckIn extends CheckIn.CheckInScene {
 
         lwg.Click.on('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
     }
-
     btnOffClick(): void {
         lwg.Click.off('largen', this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
         lwg.Click.off('largen', this.self['BtnThreeGet_WeChat'], this, null, null, this.btnThreeGetUp);
         lwg.Click.off(Click.Type.noEffect, this.self['Select_WeChat'], this, null, null, this.btnSelectUp);
 
-
         lwg.Click.off(Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
         lwg.Click.off(Click.Type.largen, this.self['BtnThreeGet_OPPO'], this, null, null, this.btnThreeGetUp);
 
         lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
+    }
+    btnBackUp(): void {
+        this.self.close();
     }
     btnThreeGetUp(): void {
         ADManager.ShowReward(() => {
@@ -113,12 +123,19 @@ export default class UICheckIn extends CheckIn.CheckInScene {
         })
     }
 
-    btnBackUp(event): void {
-        this.self.close();
-    }
-
-    btnGetUp(event): void {
-        this.btnGetUpFunc(1);
+    btnGetUp(): void {
+        if (Game._platform === Game._platformTpye.Bytedance) {
+            if (this.self['Dot'].visible) {
+                ADManager.ShowReward(() => {
+                    ADManager.TAPoint(TaT.BtnClick, 'AD3award');
+                    this.btnGetUpFunc(3);
+                })
+            } else {
+                this.btnGetUpFunc(1);
+            }
+        } else {
+            this.btnGetUpFunc(1);
+        }
     }
 
     /**
@@ -166,13 +183,24 @@ export default class UICheckIn extends CheckIn.CheckInScene {
     }
 
     checkInOnUpdate(): void {
-        if (CheckIn._lastCheckDate.date !== (new Date).getDate() && Game._platform === Game._platformTpye.WeChat) {
-            if (this.self['Dot'].visible) {
-                this.self['BtnGet_WeChat'].visible = false;
-                this.self['BtnThreeGet_WeChat'].visible = true;
-            } else {
-                this.self['BtnGet_WeChat'].visible = true;
-                this.self['BtnThreeGet_WeChat'].visible = false;
+        if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
+            switch (Game._platform) {
+                case Game._platformTpye.WeChat:
+                    if (this.self['Dot'].visible) {
+                        this.self['BtnGet_WeChat'].visible = false;
+                        this.self['BtnThreeGet_WeChat'].visible = true;
+                    } else {
+                        this.self['BtnGet_WeChat'].visible = true;
+                        this.self['BtnThreeGet_WeChat'].visible = false;
+                    }
+                    break;
+
+                case Game._platformTpye.Bytedance:
+                    this.self['BtnGet_WeChat'].visible = true;
+                    this.self['BtnThreeGet_WeChat'].visible = false;
+                    break;
+                default:
+                    break;
             }
         }
     }

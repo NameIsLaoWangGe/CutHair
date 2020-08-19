@@ -8,6 +8,19 @@ import ADManager, { TaT } from "../TJ/Admanager";
 export default class UIShare extends lwg.Admin.Scene {
     lwgOnAwake(): void {
         Admin._gameStart = false;
+        // 不同渠道显示不同内容
+        if (Game._platform !== Game._platformTpye.Bytedance) {
+            this.self['WeChat'].visible = true;
+            this.self['Bytedance'].visible = false;
+        } else {
+            this.self['WeChat'].visible = false;
+            this.self['Bytedance'].visible = true;
+
+            this.self['BtnClose_Bytedance'].visible = false;
+            Laya.timer.frameOnce(120, this, () => {
+                this.self['BtnClose_Bytedance'].visible = true;
+            })
+        }
     }
 
     lwgOnEnable(): void {
@@ -25,20 +38,6 @@ export default class UIShare extends lwg.Admin.Scene {
         }
         let url = 'UI/Share/Photo/' + index + '.png';
         this.self['SmallPhoto'].skin = url;
-
-        // 不同渠道显示不同内容
-        if (Game._platform !== Game._platformTpye.Bytedance) {
-
-            this.self['BtnComplete'].visible = true;
-            this.self['BtnShare'].visible = false;
-            this.self['BtnNoShare'].visible = false;
-
-        } else {
-
-            this.self['BtnComplete'].visible = false;
-            this.self['BtnShare'].visible = true;
-            this.self['BtnNoShare'].visible = true;
-        }
     }
 
     lwgOpenAni(): number {
@@ -47,13 +46,13 @@ export default class UIShare extends lwg.Admin.Scene {
 
         this.self['SmallFram'].x -= 500;
         this.self['Logo'].y -= 500;
-        this.self['BtnShare'].alpha = 0;
+        this.self['BtnShare_Bytedance'].alpha = 0;
         Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
             Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
 
             Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
 
-            Animation2D.bombs_Appear(this.self['BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
+            Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
 
 
             let hotAddNum = Math.floor(Math.random() * 100 + 900);
@@ -68,8 +67,8 @@ export default class UIShare extends lwg.Admin.Scene {
 
         })
 
-        this.self['BtnNoShare'].alpha = 0;
-        Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
+        // this.self['BtnNoShare_Bytedance'].alpha = 0;
+        // Animation2D.fadeOut(this.self['BtnNoShare_Bytedance'], 0, 1, this.aniTime, this.aniDelayde * 20);
 
         Effects.createExplosion_Rotate(this.self['SceneContent'], 40, this.self['SceneContent'].width / 2, this.self['SceneContent'].height / 2 - 100, Effects.SkinStyle.star, 20, 15);
 
@@ -107,14 +106,16 @@ export default class UIShare extends lwg.Admin.Scene {
         Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
             this.shareFunc();
         });
-        Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp);
-        Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp);
-
+        Click.on(Click.Type.largen, this.self['BtnShare_Bytedance'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.largen, this.self['BtnClose_Bytedance'], this, null, null, this.btnNoShareUp);
+        // Click.on(Click.Type.largen, this.self['BtnNoShare_Bytedance'], this, null, null, this.btnNoShareUp);
     }
 
     btnShareUp(): void {
         RecordManager._share('award', () => {
             this.shareFunc();
+            Dialog.createHint_Middle(Dialog.HintContent["分享成功，获得50金币！"]);
+            Gold.addGold(50);
             ADManager.TAPoint(TaT.BtnClick, 'sharebt_share');
         })
     }
@@ -130,6 +131,7 @@ export default class UIShare extends lwg.Admin.Scene {
 
     lwgOnDisable(): void {
         this.EndCamera.removeSelf();
+
     }
 
 }

@@ -1,7 +1,6 @@
-import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin, Animation2D } from "../Lwg_Template/lwg";
+import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin, Animation2D, EasterEgg } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
-import { EasterEgg } from "../Lwg_Template/EasterEgg";
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIStart extends lwg.Admin.Scene {
@@ -17,6 +16,10 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
+
+        // if (Game.) {
+
+        // }
     }
 
     lwgEventReg(): void {
@@ -55,6 +58,10 @@ export default class UIStart extends lwg.Admin.Scene {
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
 
         Setting.setBtnAppear();
+    }
+
+    lwgAdaptive(): void {
+        this.self['P204'].y = Laya.stage.height;
     }
 
     /**关卡列表*/
@@ -112,7 +119,7 @@ export default class UIStart extends lwg.Admin.Scene {
 
         Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
-            
+
             e.stopPropagation();
             lwg.Admin._openScene(Admin.SceneName.UICheckIn);
 

@@ -1,7 +1,6 @@
 import { lwg, Animation2D, PalyAudio, EventAdmin, Admin, Loding, Task, Shop, Skin, Gold, Setting } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GSene3D } from "../Lwg_Template/Global";
-import { EasterEgg } from "../Lwg_Template/EasterEgg";
 import Init from "../Lwg_Template/Init";
 export default class UILoding extends Loding.LodeScene {
     lodingResList(): void {

@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":10,
+    "selectedBox":10,
+    "selecteID":117,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
@@ -286,13 +286,14 @@
                             "props":{"y":75,"x":142,"var":"BtnGet_WeChat","texture":"UI/Common/anniu.png","pivotY":66,"pivotX":144,"name":"BtnGet_WeChat"},
                             "nodeParent":117,
                             "label":"BtnGet_WeChat",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":104,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"y":44.5,"x":65,"texture":"UI/CheckIn/txt_lingqu.png"},
@@ -304,7 +305,8 @@
                                     "compId":106,
                                     "child":[
                                         ]
-                                }]
+                                }],
+                            "$HIDDEN":false
                         },
                         {
                             "x":45,
@@ -313,18 +315,19 @@
                             "props":{"y":75,"x":142,"var":"BtnThreeGet_WeChat","texture":"UI/Common/anniu.png","pivotY":66,"pivotX":144,"name":"BtnThreeGet_WeChat"},
                             "nodeParent":117,
                             "label":"BtnThreeGet_WeChat",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":74,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png"},
+                                    "searchKey":"Sprite,AdsPic",
+                                    "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png","name":"AdsPic"},
                                     "nodeParent":74,
-                                    "label":"Sprite",
+                                    "label":"AdsPic",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
@@ -333,33 +336,36 @@
                                         ]
                                 },
                                 {
+                                    "x":60,
                                     "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":45,"x":31,"texture":"UI/CheckIn/txt_lingqu.png"},
+                                    "searchKey":"Sprite,Word",
+                                    "props":{"y":44.5,"x":35,"texture":"UI/CheckIn/txt_lingqu.png","name":"Word"},
                                     "nodeParent":74,
-                                    "label":"Sprite",
+                                    "label":"Word",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
                                     "compId":103,
                                     "child":[
                                         ]
-                                }]
+                                }],
+                            "$HIDDEN":false
                         },
                         {
                             "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,Select_WeChat,Select_WeChat",
-                            "props":{"y":203,"x":114,"width":262,"var":"Select_WeChat","pivotY":14,"pivotX":114,"name":"Select_WeChat","height":30},
+                            "props":{"y":203,"x":114,"width":51,"var":"Select_WeChat","pivotY":14,"pivotX":114,"name":"Select_WeChat","height":30},
                             "nodeParent":117,
                             "label":"Select_WeChat",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":77,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"y":-2,"x":38,"texture":"UI/CheckIn/wordsthree.png"},
@@ -373,6 +379,7 @@
                                         ]
                                 },
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite,BtnSelect,BtnSelect",
                                     "props":{"y":-1,"x":7,"var":"BtnSelect","texture":"UI/Common/yuan1.png","name":"BtnSelect"},
@@ -386,6 +393,7 @@
                                         ]
                                 },
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite,Dot,Dot",
                                     "props":{"y":7,"x":15,"width":16,"var":"Dot","texture":"UI/Common/yuan2.png","name":"Dot","height":16},

@@ -2,6 +2,7 @@ import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, D
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
 import ADManager, { TaT } from "../TJ/Admanager";
+import RecordManager from "../TJ/RecordManager";
 
 export default class UIOperation extends lwg.Admin.Scene {
     /** @prop {name:TaskProgress, tips:"每个任务的进度条", type:Prefab}*/
@@ -159,6 +160,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         Admin._gameStart = true;
         this.createProgress();
         EventAdmin.notify(Task.TaskType.useSkins);
+        RecordManager.startAutoRecord();
 
         ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
     }

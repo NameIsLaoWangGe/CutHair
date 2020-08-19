@@ -2,17 +2,19 @@ import { lwg, Click, EventAdmin, Dialog, Admin, PalyAudio, Setting } from "../Lw
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 import ADManager, { TaT } from "../TJ/Admanager";
 import { Game } from "../Lwg_Template/Game";
+import RecordManager from "../TJ/RecordManager";
 
 export default class UIDefeated extends lwg.Admin.Scene {
 
     lwgOnAwake(): void {
+        RecordManager.stopAutoRecord();
         Admin._gameStart = false;
     }
 
     lwgNodeDec(): void {
         this.self['BtnSelect_WeChat'].visible = true;
         this.self['BtnAgain_WeChat'].visible = false;
-        this.self['Dot'].visible = true;
+        this.self['Dot_WeChat'].visible = true;
     }
 
     lwgOnEnable(): void {
@@ -24,15 +26,24 @@ export default class UIDefeated extends lwg.Admin.Scene {
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
 
+        switch (Game._platform) {
+            case Game._platformTpye.OPPO:
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+                this.self['Bytedance'].visible = false;
+                break;
+            case Game._platformTpye.WeChat:
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+                this.self['Bytedance'].visible = false;
+                break;
+            case Game._platformTpye.Bytedance:
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = false;
+                this.self['Bytedance'].visible = true;
 
-        if (Game._platform == Game._platformTpye.OPPO) {
-
-            this.self['OPPO'].visible = true;
-            this.self['WeChat'].visible = false;
-
-        } else {
-            this.self['OPPO'].visible = false;
-            this.self['WeChat'].visible = true;
+            default:
+                break;
         }
 
     }
@@ -44,17 +55,40 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
         Click.on(Click.Type.largen, this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
         Click.on(Click.Type.largen, this.self['BtnNext_OPPO'], this, null, null, this.btnNextUp);
+
+        Click.on(Click.Type.largen, this.self['BtnAgain_Bytedance'], this, null, null, this.btnAgainUp);
+        Click.on(Click.Type.largen, this.self['BtnNext_Bytedance'], this, null, null, this.btnNextUp);
+        Click.on(Click.Type.largen, this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelectUp);
     }
 
     btnSelectUp(): void {
-        if (this.self['Dot'].visible) {
-            this.self['Dot'].visible = false;
+        let Dot;
+        switch (Game._platform) {
+            case Game._platformTpye.WeChat:
+                Dot = this.self['Dot_WeChat'];
+                break;
+            case Game._platformTpye.Bytedance:
+                Dot = this.self['Dot_Bytedance'];
+                break;
+
+            default:
+                break;
+        }
+
+        if (Dot.visible) {
+            Dot.visible = false;
             this.self['BtnNext_WeChat'].visible = false;
             this.self['BtnAgain_WeChat'].visible = true;
+
+            this.self['BtnNext_Bytedance'].visible = false;
+            this.self['BtnAgain_Bytedance'].visible = true;
         } else {
-            this.self['Dot'].visible = true;
+            Dot.visible = true;
             this.self['BtnNext_WeChat'].visible = true;
             this.self['BtnAgain_WeChat'].visible = false;
+            
+            this.self['BtnNext_Bytedance'].visible = true;
+            this.self['BtnAgain_Bytedance'].visible = false;
         }
     }
 

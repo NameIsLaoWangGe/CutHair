@@ -1,11 +1,7 @@
-import { PalyAudio, Dialog, EventAdmin, Task } from "../Lwg_Template/lwg";
-import { EasterEgg } from "../Lwg_Template/EasterEgg";
+import { PalyAudio, Dialog, EventAdmin, Task, Admin, EasterEgg } from "../Lwg_Template/lwg";
 import { Game } from "../Lwg_Template/Game";
 
 export default class ADManager {
-    constructor() {
-
-    }
 
     public static ShowBanner() {
         // if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
@@ -33,10 +29,14 @@ export default class ADManager {
         TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
     }
 
+    /**当前广告奖励的奖励回调函数,用于在其他地方执行这个函数*/
+    static _currentRewardAction: Function;
+
     static CanShowCD: boolean = true;
     public static ShowReward(rewardAction: Function, CDTime: number = 500)//展示激励广告，一般是视频
     {
 
+        this._currentRewardAction = rewardAction;
         if (Game._platform === Game._platformTpye.OPPO) {
             rewardAction();
             EventAdmin.notify(Task.EventType.adsTime);
@@ -66,7 +66,10 @@ export default class ADManager {
                 if (!getReward) {
                     PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
                     //UIMgr.show("UISubSkinTry", 2);
-                    Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
+                    // Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
+                    Admin._openScene(Admin.SceneName.UIADSHint, null, null, () => {
+
+                    });
                     //TipPanel.ins.showString("观看完整广告才能获取奖励哦！");
                 }
             });

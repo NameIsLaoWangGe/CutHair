@@ -3,16 +3,17 @@ import { Admin } from "./lwg";
 /**游戏中的一些基础数值,例如等级、体力等*/
 export module GameControl {
 
-    /**平摊，控制一些节点的变化*/
-    export let _platform: string;
     /**渠道类型*/
     export enum _platformTpye {
         WeChat = 'WeChat',
         OPPO = 'OPPO',
         Bytedance = 'Bytedance',
-        /**通用*/ 
+        /**通用*/
         All = 'All',
     }
+
+    /**平摊，控制一些节点的变化,默认为字节*/
+    export let _platform: string = _platformTpye.Bytedance;
 
     /**游戏控制开关*/
     export let _gameSwitch: boolean = false;
@@ -139,11 +140,11 @@ export module GameControl {
         }
     };
     /**游戏进行时候的场景*/
-    export class GameScene extends Admin.Scene {
-        lwgOnAwake(): void {
-            // this.gameOnAwake();
-        }
-    }
+    // export class GameScene extends Admin.Scene {
+    //     lwgOnAwake(): void {
+    //         // this.gameOnAwake();
+    //     }
+    // }
 }
 export let Game = GameControl;
-export let GameScene = GameControl.GameScene;
+// export let GameScene = GameControl.GameScene;

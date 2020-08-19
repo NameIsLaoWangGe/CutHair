@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Sprite",
-    "selectedBox":44,
-    "selecteID":45,
+    "selectedBox":48,
+    "selecteID":48,
     "searchKey":"Sprite,DialogHint,DialogHint",
-    "props":{"y":0,"x":0,"var":"DialogHint","presetID":1,"preset":"laya/pages/Prefab/DialogHint.prefab","name":"DialogHint","isPresetRoot":true},
+    "props":{"y":0,"x":0,"var":"DialogHint","preset":"laya/pages/Prefab/DialogHint.prefab","name":"DialogHint"},
     "nodeParent":-1,
-    "maxID":52,
+    "maxID":54,
     "label":"DialogHint",
     "isOpen":true,
     "isDirectory":true,
@@ -18,7 +18,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"y":0,"x":4,"width":720,"skin":"Frame/UI/ui_orthogon_black.png","sizeGrid":"22,22,32,22","presetID":2,"preset":"laya/pages/Prefab/DialogHint.prefab","height":1650,"alpha":0.7},
+            "props":{"y":0,"x":4,"width":720,"skin":"Frame/UI/ui_orthogon_black.png","sizeGrid":"22,22,32,22","preset":"laya/pages/Prefab/DialogHint.prefab","height":1650,"alpha":0.7},
             "nodeParent":44,
             "label":"Image(DialogHint)",
             "isDirectory":false,
@@ -32,7 +32,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,BtnConfirm,BtnConfirm",
-            "props":{"y":938,"x":361,"width":288,"var":"BtnConfirm","texture":"UI/Common/anniu.png","presetID":3,"preset":"laya/pages/Prefab/DialogHint.prefab","pivotY":64,"pivotX":144,"name":"BtnConfirm","height":128},
+            "props":{"y":938,"x":361,"width":288,"var":"BtnConfirm","texture":"UI/Common/anniu.png","preset":"laya/pages/Prefab/DialogHint.prefab","pivotY":64,"pivotX":144,"name":"BtnConfirm","height":128},
             "nodeParent":44,
             "label":"BtnConfirm",
             "isOpen":true,
@@ -45,7 +45,7 @@
                     "x":30,
                     "type":"Label",
                     "searchKey":"Label",
-                    "props":{"y":26.5,"x":68,"width":154,"valign":"middle","text":"确认","presetID":4,"preset":"laya/pages/Prefab/DialogHint.prefab","height":75,"fontSize":60,"color":"#e46415","align":"center"},
+                    "props":{"y":26.5,"x":68,"width":154,"valign":"middle","text":"确认","preset":"laya/pages/Prefab/DialogHint.prefab","height":75,"fontSize":60,"color":"#e46415","align":"center"},
                     "nodeParent":50,
                     "label":"Label(DialogHint)",
                     "isDirectory":false,
@@ -60,7 +60,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"y":485,"x":92,"width":538,"skin":"UI/Common/dikuang.png","sizeGrid":"43,37,50,50","presetID":5,"preset":"laya/pages/Prefab/DialogHint.prefab","height":340},
+            "props":{"y":485,"x":92,"width":538,"skin":"UI/Common/dikuang.png","sizeGrid":"43,37,50,50","preset":"laya/pages/Prefab/DialogHint.prefab","height":340},
             "nodeParent":44,
             "label":"Image(DialogHint)",
             "isOpen":true,
@@ -73,7 +73,7 @@
                     "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
-                    "props":{"y":139,"x":269,"width":438,"texture":"UI/EasterEgg_Aotoman/Hint/zi.png","presetID":6,"preset":"laya/pages/Prefab/DialogHint.prefab","pivotY":55,"pivotX":219,"height":110},
+                    "props":{"y":139,"x":269,"width":438,"texture":"UI/EasterEgg_Aotoman/Hint/zi.png","preset":"laya/pages/Prefab/DialogHint.prefab","pivotY":55,"pivotX":219,"height":110},
                     "nodeParent":48,
                     "label":"Sprite(DialogHint)",
                     "isDirectory":false,
@@ -83,6 +83,20 @@
                     "child":[
                         ]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,BtnClose,BtnClose",
+            "props":{"y":468,"x":571,"var":"BtnClose","texture":"UI/Common/X.png","preset":"laya/pages/Prefab/DialogHint.prefab","name":"BtnClose"},
+            "nodeParent":44,
+            "label":"BtnClose",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":52,
+            "child":[
+                ]
         }],
     "animations":[
         {

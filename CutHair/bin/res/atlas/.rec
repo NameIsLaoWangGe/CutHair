@@ -39,6 +39,7 @@ P 5FD17798 vscroll.png
 P DDDDFB9E vslider$bar.png
 P 01BAE7F5 vslider.png
 D Frame
+D TJ
 D UI
 D Frame/Effects
 P 03F236DC cir_black.png
@@ -119,6 +120,7 @@ P 7331617A ui_square_c_010.png
 P 87918B79 ui_square_c_011.png
 P B253D6A3 ui_square_c_012.png
 D Frame/Voice
+D TJ/Promo
 D UI/CheckIn
 P 3E1D7C79 3bei.png
 P 035AA6AB biaoti.png
@@ -227,6 +229,7 @@ P BD3E1C51 caidai_5.png
 P 8C511614 chenggong_biaoti.png
 P 987B8481 chongxin.png
 P 9E9DF7E0 hutui_kuang.png
+P DBA46817 next.png
 P 8294145D putong.png
 P B84B86C9 shibai_biaoti.png
 P A02BA9D5 txt_10.png
@@ -237,6 +240,7 @@ P DC6BCAB6 txt_xiayiguan.png
 P F51F9B5D word.png
 P 5DC88460 x10.png
 D UI/Share
+P 591DD20A 50Gold.png
 P 98515309 biaoti.png
 P D7E94CD0 fire.png
 P 49EA9E6D kuang.png
@@ -278,11 +282,14 @@ P 6388FD1D shipin.png
 P 0A9AD531 txt_wancheng.png
 P 81B28711 xin.png
 D UI/VictoryBox
+P 3B746D5B adsthree.png
 P 5CD14092 baoxian2.png
 P 213C8C48 baoxian3.png
 P 780D4550 baoxian_adv.png
 P 00F0F762 baoxiang.png
 P 4E99B0E5 biaoti.png
+P A2E7E2B8 buxiexie.png
+P 2CEF8DD9 likekaiqi.png
 P 3196043F txt_xiexie.png
 P BA257865 txt_zaikai.png
 D UI/XDSkin
@@ -294,6 +301,37 @@ P BA861BD4 tiao2.png
 P FBF9F77D txt_huoqu.png
 P 61893087 txt_leiji.png
 P 04AF5391 txt_xiexie.png
+D TJ/Promo/image
+P A43D9CBA cnxh.png
+P 99431921 di2.png
+P 324E0C01 gdyx.png
+P DD5E998F gdyx2.png
+P 065547DB gdyx3.png
+P E8CF5470 hb2.png
+P A91EA1E1 jx1.png
+P 3EECC3B9 jx10.png
+P 35991AF2 jx11.png
+P C7132F1F jx14.png
+P 626301A7 jx3.png
+P 494CC67B jx6.png
+P 3DD8E94B jx8.png
+P C167ACB2 kk1.png
+P 211D25A9 kk2.png
+P B6E1ED76 kk3.png
+P 5206FB64 new2.png
+P 42063299 remen1.png
+P F56500C5 rm3.png
+P 3BB6C3A1 sw.png
+P 821E80DE swdjl.png
+P B254AEFE tc2.png
+P 45A53A2D tc23.png
+P A01AFDAA tc3.png
+P EA808596 tishi.png
+P 46BBD479 tuijian2.png
+P A24BEE5A white.jpg
+P BCCD0083 y1.png
+P 3ECD784B yjjx14.png
+P BBB689A3 zt_1_10.png
 D UI/EasterEgg_Aotoman/Congratulation
 P 907EDAED 3.png
 P B2EF2CDE biaoti.png

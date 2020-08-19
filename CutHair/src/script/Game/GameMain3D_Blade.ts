@@ -62,7 +62,7 @@ export default class GameMain3D_Blade extends lwg3D.Object3D {
             case 'standard':
                 console.log('碰到线了，游戏失败！');
                 EventAdmin.notify(GEnum.EventType.lianHong);
-                Laya.timer.frameOnce(60, this, () => {
+                Laya.timer.frameOnce(90, this, () => {
                     EventAdmin.notify(EventAdmin.EventType.resurgence);
                 });
                 break;

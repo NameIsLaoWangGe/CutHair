@@ -3,9 +3,13 @@ import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import ADManager, { TaT } from "../TJ/Admanager";
 import { Game } from "../Lwg_Template/Game";
+import RecordManager from "../TJ/RecordManager";
 
 export default class UIVictory extends lwg.Admin.Scene {
-    constructor() { super(); }
+
+    lwgOnAwake(): void {
+        RecordManager.stopAutoRecord();
+    };
 
     GlodNum: Laya.Sprite;
     /**本关应该给予多少金币*/
@@ -22,15 +26,10 @@ export default class UIVictory extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
 
         this.getGoldNum = 50;
-        this.getGoldDisPlay();
-        Gold.goldAppear(500);
+        Gold.goldAppear();
         Setting.setBtnAppear();
         Game._gameLevel.value++;
         PalyAudio.playVictorySound();
-
-        this.self['BtnAdv_Wechat'].visible = true;
-        this.self['BtnNormal_Wechat'].visible = false;
-        this.self['Dot'].visible = true;
 
         lwg.Effects.createFireworks(Laya.stage, 40, 430, 200);
         lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
@@ -40,33 +39,53 @@ export default class UIVictory extends lwg.Admin.Scene {
 
         EventAdmin.notify(Task.TaskType.victory);
 
+        switch (Game._platform) {
+            case Game._platformTpye.OPPO:
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+                this.self['Bytedance'].visible = false;
 
-        if (Game._platform == Game._platformTpye.OPPO) {
+                this.getGoldDisPlay(1);
+                break;
 
-            this.self['OPPO'].visible = true;
-            this.self['WeChat'].visible = false;
+            case Game._platformTpye.WeChat:
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+                this.self['Bytedance'].visible = false;
+                this.self['BtnAdv_WeChat'].visible = true;
+                this.self['BtnNormal_WeChat'].visible = false;
+                this.self['Dot_WeChat'].visible = true;
+                this.getGoldDisPlay(10);
+                break;
 
-        } else {
-            this.self['OPPO'].visible = false;
-            this.self['WeChat'].visible = true;
+            case Game._platformTpye.Bytedance:
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = false;
+                this.self['Bytedance'].visible = true;
+                this.self['Dot_Bytedance'].visible = true;
+                this.getGoldDisPlay(10);
 
+                break;
+
+            default:
+                break;
         }
     }
 
     lwgOpenAni(): number {
         if (Game._platform == Game._platformTpye.OPPO) {
+            this.self['Multiply10'].alpha = 0;
             return;
         }
-
         this.self['Multiply10'].alpha = 0;
         this.self['GlodNum'].alpha = 0;
-        this.self['BtnAdv_Wechat'].alpha = 0;
+        this.self['BtnAdv_WeChat'].alpha = 0;
         this.self['Select'].alpha = 0;
         Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
             Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
 
             Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
-            Animation2D.bombs_Appear(this.self['BtnAdv_Wechat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+            Animation2D.bombs_Appear(this.self['BtnAdv_WeChat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
             Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
         });
 
@@ -74,37 +93,63 @@ export default class UIVictory extends lwg.Admin.Scene {
     }
 
     /**本关获得金币显示*/
-    getGoldDisPlay(): void {
+    getGoldDisPlay(number): void {
         let Num = this.GlodNum.getChildByName('Num') as Laya.Label;
-        Num.text = (this.getGoldNum * 10).toString();
+        Num.text = (this.getGoldNum * number).toString();
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
-        Click.on(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
-        Click.on(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+        Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp);
+        Click.on(Click.Type.largen, this.self['BtnAdv_WeChat'], this, null, null, this.btnAdvUp);
+        Click.on(Click.Type.largen, this.self['BtnNormal_WeChat'], this, null, null, this.btnNormalUp);
 
+        Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp);
+        Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp);
 
-        Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
-        Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
+        Click.on(Click.Type.largen, this.self['BtnNext_Bytedance'], this, null, null, this.btnNext_BytedanceUp);
+        Click.on(Click.Type.largen, this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelectUp);
     }
 
     offClick(): void {
-        Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
-        Click.off(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
-        Click.off(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
+        Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp);
+        Click.off(Click.Type.largen, this.self['BtnAdv_WeChat'], this, null, null, this.btnAdvUp);
+        Click.off(Click.Type.largen, this.self['BtnNormal_WeChat'], this, null, null, this.btnNormalUp);
 
-        Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
-        Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
+        Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp);
+        Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp);
+
+        Click.off(Click.Type.largen, this.self['BtnNext_Bytedance'], this, null, null, this.btnNext_BytedanceUp);
+        Click.off(Click.Type.largen, this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelectUp);
+    }
+
+    btnNext_BytedanceUp(): void {
+        if (this.self['Dot_Bytedance'].visible) {
+            this.btnAdvUp();
+        } else {
+            this.btnNormalUp();
+        }
     }
 
     addOrSub: string = 'add';
     btnSelectUp(): void {
-        if (this.self['Dot'].visible) {
+
+        let Dot;
+        switch (Game._platform) {
+            case Game._platformTpye.Bytedance:
+                Dot = this.self['Dot_Bytedance'];
+                break;
+            case Game._platformTpye.Bytedance:
+                Dot = this.self['Dot_WeChat'];
+                break;
+
+            default:
+                break;
+        }
+        if (Dot.visible) {
             // 按钮格式
-            this.self['Dot'].visible = false;
-            this.self['BtnAdv_Wechat'].visible = false;
-            this.self['BtnNormal_Wechat'].visible = true;
+            Dot.visible = false;
+            this.self['BtnAdv_WeChat'].visible = false;
+            this.self['BtnNormal_WeChat'].visible = true;
             this.addOrSub = 'sub';
 
             // 图片消失动画
@@ -126,9 +171,9 @@ export default class UIVictory extends lwg.Admin.Scene {
 
         } else {
             // 按钮格式
-            this.self['Dot'].visible = true;
-            this.self['BtnAdv_Wechat'].visible = true;
-            this.self['BtnNormal_Wechat'].visible = false;
+            Dot.visible = true;
+            this.self['BtnAdv_WeChat'].visible = true;
+            this.self['BtnNormal_WeChat'].visible = false;
             this.addOrSub = 'add';
 
             // 图片出现动画

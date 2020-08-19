@@ -1,5 +1,4 @@
-import { EasterEgg } from "../Lwg_Template/EasterEgg";
-import { Click, Admin, Setting, Gold, Shop, EventAdmin, Task } from "../Lwg_Template/lwg";
+import { Click, Admin, Setting, Gold, Shop, EventAdmin, Task, EasterEgg } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UIEasterEgg extends EasterEgg.EasterEggScene {

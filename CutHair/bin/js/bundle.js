@@ -1,6 +1,1176 @@
 (function () {
     'use strict';
 
+    class PromoOpen extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.target = null;
+        }
+        onClick() {
+            this.target.active = this.target.visible = true;
+        }
+    }
+
+    class ButtonScale extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.time = .1;
+            this.ratio = 1.04;
+            this.startScaleX = 1;
+            this.startScaleY = 1;
+            this.scaled = false;
+        }
+        onAwake() {
+            this.owner.on(Laya.Event.MOUSE_DOWN, null, () => { this.ScaleBig(); });
+            this.owner.on(Laya.Event.MOUSE_UP, null, () => { this.ScaleSmall(); });
+            this.owner.on(Laya.Event.MOUSE_OUT, null, () => { this.ScaleSmall(); });
+        }
+        ScaleBig() {
+            if (this.scaled)
+                return;
+            this.scaled = true;
+            Laya.Tween.to(this.owner, { scaleX: this.startScaleX * this.ratio, scaleY: this.startScaleY * this.ratio }, this.time * 1000);
+        }
+        ScaleSmall() {
+            if (!this.scaled)
+                return;
+            this.scaled = false;
+            Laya.Tween.to(this.owner, { scaleX: this.startScaleX, scaleY: this.startScaleY }, this.time * 1000);
+        }
+    }
+
+    class PromoItem extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.bgImage = null;
+            this.iconImage = null;
+            this.nameText = null;
+            this.infoText = null;
+            this.flag1 = null;
+            this.flag2 = null;
+            this.flag3 = null;
+        }
+        onAwake() {
+            this.bgImage = this.owner.getChildByName("bg");
+            this.iconImage = this.owner.getChildByName("icon");
+            if (this.iconImage != null) {
+                this.flag1 = this.iconImage.getChildByName("flag1");
+                this.flag2 = this.iconImage.getChildByName("flag2");
+                this.flag3 = this.iconImage.getChildByName("flag3");
+            }
+            this.nameText = this.owner.getChildByName("name");
+            this.infoText = this.owner.getChildByName("info");
+        }
+        DoLoad() {
+            if (this.data == null)
+                return;
+            if (this.iconImage != null)
+                this.iconImage.skin = this.data.icon;
+            if (this.nameText != null)
+                this.nameText.text = this.data.title;
+            this.SetFlag();
+        }
+        SetFlag() {
+            if (this.flag1 != null)
+                this.flag1.active = this.flag1.visible = false;
+            if (this.flag2 != null)
+                this.flag2.active = this.flag2.visible = false;
+            if (this.flag3 != null)
+                this.flag3.active = this.flag3.visible = false;
+            switch (this.data.tag) {
+                case 1:
+                    if (this.flag1 != null)
+                        this.flag1.active = this.flag1.visible = true;
+                    break;
+                case 2:
+                    if (this.flag2 != null)
+                        this.flag2.active = this.flag2.visible = true;
+                    break;
+                case 3:
+                    if (this.flag3 != null)
+                        this.flag3.active = this.flag3.visible = true;
+                    break;
+            }
+        }
+        OnShow() {
+            this.data.ReportShow();
+        }
+        OnClick() {
+            this.data.Click();
+            if (this.onClick_ != null) {
+                this.onClick_(this);
+            }
+        }
+        onClick() {
+            this.OnClick();
+        }
+    }
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    class Behaviour extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.isAwake = false;
+            this.isStart = false;
+            this.isEnable = false;
+            this.isDestroy = false;
+        }
+        OnAwake() { }
+        OnStart() { }
+        OnUpdate() { }
+        OnEnable() { }
+        OnDisable() { }
+        OnDestroy() { }
+        DoAwake() {
+            if (!this.active)
+                return;
+            if (!this.isAwake) {
+                this.isAwake = true;
+                this.OnAwake();
+            }
+        }
+        DoStart() {
+            if (!this.active)
+                return;
+            if (!this.isStart) {
+                this.isStart = true;
+                this.OnStart();
+            }
+        }
+        DoUpdate() {
+            if (!this.active)
+                return;
+            if (this.isStart) {
+                this.OnUpdate();
+            }
+        }
+        DoEnable() {
+            if (!this.active)
+                return;
+            if (!this.isEnable) {
+                this.isEnable = true;
+                this.OnEnable();
+            }
+        }
+        DoDisable() {
+            if (this.isEnable) {
+                this.isEnable = false;
+                this.OnDisable();
+            }
+        }
+        DoDestroy() {
+            if (!this.isDestroy) {
+                this.isDestroy = true;
+                this.OnDestroy();
+            }
+        }
+        onAwake() {
+            this.DoAwake();
+        }
+        onStart() {
+            this.DoAwake();
+            this.DoStart();
+        }
+        onUpdate() {
+            this.DoAwake();
+            this.DoEnable();
+            this.DoStart();
+            this.DoUpdate();
+        }
+        onEnable() {
+            this.DoAwake();
+            this.DoEnable();
+            this.DoStart();
+        }
+        onDisable() {
+            this.DoDisable();
+        }
+        onDestroy() {
+            this.DoDestroy();
+        }
+        static SetActive(node, value) {
+            if (node == null)
+                return;
+            node.active = value;
+            if (node instanceof Laya.Box) {
+                node.visible = value;
+            }
+        }
+        static GetActive(node) {
+            if (node == null)
+                return false;
+            if (!node.active)
+                return false;
+            if (node instanceof Laya.Box) {
+                if (!node.visible)
+                    return false;
+            }
+            return true;
+        }
+        get active() {
+            return Behaviour.GetActive(this.owner);
+        }
+        set active(value) {
+            Behaviour.SetActive(this.owner, value);
+            if (value) {
+                this.DoEnable();
+            }
+            else {
+                this.DoDisable();
+            }
+        }
+    }
+
+    class P201 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoItem = null;
+            this.shake = false;
+            this.animTime = 0;
+            this.refrTime = 0;
+        }
+        OnAwake() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.promoItem = this.owner.getComponent(PromoItem);
+                TJ.Develop.Yun.Promo.Data.ReportAwake(P201.style);
+                this.promoItem.style = P201.style;
+                this.active = false;
+                if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                    return;
+                }
+                if (P201.promoList == null) {
+                    let list = yield TJ.Develop.Yun.Promo.List.Get(P201.style);
+                    if (P201.promoList == null)
+                        P201.promoList = list;
+                }
+                if (P201.promoList.count > 0) {
+                    TJ.Develop.Yun.Promo.Data.ReportStart(P201.style);
+                    this.active = true;
+                }
+                else {
+                    this.owner.destroy();
+                }
+            });
+        }
+        OnEnable() {
+            this.LoadAndShowIcon();
+        }
+        OnDisable() {
+            if (P201.promoList != null) {
+                P201.promoList.Unload(this.promoItem.data);
+            }
+        }
+        OnUpdate() {
+            let deltaTime = Laya.timer.delta / 1000;
+            this.refrTime += deltaTime;
+            if (this.refrTime > 5) {
+                this.refrTime -= 5;
+                this.LoadAndShowIcon();
+            }
+            if (!this.shake)
+                return;
+            this.animTime += deltaTime;
+            this.animTime %= 2.5;
+            if (this.animTime <= .75) {
+                this.promoItem.owner.rotation = Math.sin(this.animTime * 6 * Math.PI) * 25 * (1 - this.animTime / .75);
+            }
+            else {
+                this.promoItem.owner.rotation = 0;
+            }
+        }
+        LoadIcon() {
+            let data = P201.promoList.Load();
+            if (data != null) {
+                P201.promoList.Unload(this.promoItem.data);
+                this.promoItem.data = data;
+                this.promoItem.onClick_ = () => { this.LoadAndShowIcon(); };
+                this.promoItem.DoLoad();
+            }
+            return data;
+        }
+        LoadAndShowIcon() {
+            if (this.LoadIcon() != null) {
+                this.promoItem.OnShow();
+            }
+            else {
+                if (this.promoItem.data == null) {
+                    this.owner.destroy();
+                }
+            }
+        }
+    }
+    P201.style = "P201";
+    P201.promoList = null;
+
+    class P202 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoList = null;
+            this.itemList = [];
+            this.scroll = null;
+            this.layout = null;
+            this.prefab = null;
+            this.paddingTop = 10;
+            this.paddingBottom = 10;
+            this.line = 0;
+            this.column = 0;
+            this.toTop = false;
+            this.showing = [];
+        }
+        OnAwake() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.scroll = this.owner.getChildByName("scroll");
+                this.layout = this.scroll.getChildByName("layout");
+                this.prefab = this.layout.getCell(0);
+                let w = this.owner.width - this.paddingTop - this.paddingBottom;
+                while (w >= this.prefab.width) {
+                    w = w - this.prefab.width - this.layout.spaceX;
+                    this.column++;
+                }
+                TJ.Develop.Yun.Promo.Data.ReportAwake(P202.style);
+                this.active = false;
+                if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                    return;
+                }
+                this.promoList = yield TJ.Develop.Yun.Promo.List.Get(P202.style);
+                if (this.promoList.count > 0) {
+                    TJ.Develop.Yun.Promo.Data.ReportStart(P202.style);
+                    this.line = Math.ceil(this.promoList.count / this.column);
+                    this.layout.repeatX = this.column;
+                    this.layout.repeatY = this.line;
+                    for (let i = 0; i < this.layout.cells.length; i++) {
+                        let node = this.layout.getCell(i);
+                        if (i < this.promoList.count) {
+                            let item = node.getComponent(PromoItem);
+                            if (item != null) {
+                                this.itemList.push(item);
+                                item.style = P202.style;
+                            }
+                            Behaviour.SetActive(node, true);
+                        }
+                        else {
+                            Behaviour.SetActive(node, false);
+                        }
+                    }
+                    this.line = Math.ceil(this.itemList.length / this.column);
+                    let h = this.paddingTop + this.paddingBottom;
+                    h += this.prefab.height * this.line + this.layout.spaceY * (this.line - 1);
+                    this.layout.height = h;
+                    if (this.scroll.height < this.layout.height) {
+                        this.scroll.vScrollBarSkin = "";
+                        this.scroll.vScrollBar.rollRatio = 0;
+                    }
+                    for (let item of this.itemList) {
+                        this.LoadIcon(item);
+                    }
+                    this.active = true;
+                }
+                else {
+                    this.owner.destroy();
+                }
+            });
+        }
+        OnDisable() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.promoList = yield TJ.Develop.Yun.Promo.List.Get(P202.style);
+                for (let item of this.itemList) {
+                    this.LoadIcon(item);
+                }
+            });
+        }
+        get maxTop() {
+            return 0;
+        }
+        get maxBottom() {
+            let y = this.paddingTop + this.paddingBottom;
+            y += this.prefab.height * this.line + this.layout.spaceY * (this.line - 1) - this.scroll.height;
+            return y;
+        }
+        get scrollValue() {
+            if (this.scroll.vScrollBar != null) {
+                return this.scroll.vScrollBar.value;
+            }
+            return 0;
+        }
+        set scrollValue(v) {
+            if (this.scroll.vScrollBar != null) {
+                this.scroll.vScrollBar.value = v;
+            }
+        }
+        OnUpdate() {
+            let deltaTime = Laya.timer.delta / 1000;
+            if (this.scroll.height < this.layout.height) {
+                if (this.scrollValue <= this.maxTop) {
+                    this.toTop = false;
+                }
+                else if (this.scrollValue >= this.maxBottom) {
+                    this.toTop = true;
+                }
+                if (this.toTop) {
+                    this.scrollValue -= 50 * deltaTime;
+                }
+                else {
+                    this.scrollValue += 50 * deltaTime;
+                }
+            }
+            else {
+                this.scrollValue = this.maxTop;
+            }
+            this.CheckShow();
+        }
+        LoadIcon(promoItem) {
+            let data = this.promoList.Load();
+            if (data != null) {
+                this.promoList.Unload(promoItem.data);
+                promoItem.data = data;
+                promoItem.onClick_ = (item) => { this.LoadAndShowIcon(item); };
+                promoItem.DoLoad();
+                promoItem.infoText.text = 1 + Math.floor(Math.random() * 40) / 10 + "w人在玩";
+            }
+            return data;
+        }
+        LoadAndShowIcon(promoItem) {
+            if (this.LoadIcon(promoItem) != null) {
+                promoItem.OnShow();
+            }
+        }
+        CheckShow() {
+            for (let item of this.itemList) {
+                let i = this.showing.indexOf(item);
+                let node = item.owner;
+                let d = Math.abs(-node.y - this.paddingTop - this.prefab.height / 2 + this.scrollValue + this.scroll.height / 2);
+                if (d < this.scroll.height / 2) {
+                    if (i < 0) {
+                        this.showing.push(item);
+                        item.OnShow();
+                    }
+                }
+                else {
+                    if (i >= 0) {
+                        this.showing.splice(i, 1);
+                    }
+                }
+            }
+        }
+    }
+    P202.style = "P202";
+
+    class P204 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoList = null;
+            this.itemList = [];
+            this.scroll = null;
+            this.layout = null;
+            this.prefab = null;
+            this.paddingLeft = 20;
+            this.paddingRight = 20;
+            this.toLeft = false;
+            this.showing = [];
+        }
+        OnAwake() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.scroll = this.owner.getChildByName("scroll");
+                this.layout = this.scroll.getChildByName("layout");
+                this.prefab = this.layout.getCell(0);
+                TJ.Develop.Yun.Promo.Data.ReportAwake(P204.style);
+                this.active = false;
+                if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                    return;
+                }
+                let list = yield TJ.Develop.Yun.Promo.List.Get(P204.style);
+                if (this.promoList == null)
+                    this.promoList = list;
+                if (this.promoList.count > 0) {
+                    TJ.Develop.Yun.Promo.Data.ReportStart(P204.style);
+                    this.layout.repeatX = this.promoList.count;
+                    for (let i = 0; i < this.layout.cells.length; i++) {
+                        let node = this.layout.getCell(i);
+                        if (i < this.promoList.count) {
+                            let item = node.getComponent(PromoItem);
+                            if (item != null) {
+                                this.itemList.push(item);
+                                item.style = P204.style;
+                            }
+                            node.active = node.visible = true;
+                        }
+                        else {
+                            node.active = node.visible = false;
+                        }
+                    }
+                    let w = this.paddingLeft + this.paddingRight;
+                    w += this.prefab.width * this.itemList.length + this.layout.spaceX * (this.itemList.length - 1);
+                    this.layout.width = w;
+                    if (this.scroll.width < this.layout.width) {
+                        this.scroll.hScrollBarSkin = "";
+                        this.scroll.hScrollBar.rollRatio = 0;
+                    }
+                    this.layout.width = w;
+                    for (let item of this.itemList) {
+                        this.LoadIcon(item);
+                    }
+                    this.active = true;
+                }
+                else {
+                    this.owner.destroy();
+                }
+            });
+        }
+        get maxLeft() {
+            let x = 0;
+            return x;
+        }
+        get maxRight() {
+            let x = this.scroll.hScrollBar.max;
+            return x;
+        }
+        get scrollValue() {
+            if (this.scroll.hScrollBar != null) {
+                return this.scroll.hScrollBar.value;
+            }
+            return 0;
+        }
+        set scrollValue(v) {
+            if (this.scroll.hScrollBar != null) {
+                this.scroll.hScrollBar.value = v;
+            }
+        }
+        OnUpdate() {
+            let deltaTime = Laya.timer.delta / 1000;
+            if (this.scroll.width < this.layout.width) {
+                if (this.scrollValue >= this.maxRight) {
+                    this.toLeft = true;
+                }
+                else if (this.scrollValue <= this.maxLeft) {
+                    this.toLeft = false;
+                }
+                if (this.toLeft) {
+                    this.scrollValue -= 50 * deltaTime;
+                }
+                else {
+                    this.scrollValue += 50 * deltaTime;
+                }
+            }
+            else {
+                this.layout.x = this.maxLeft;
+            }
+            this.CheckShow();
+        }
+        LoadIcon(promoItem) {
+            let data = this.promoList.Load();
+            if (data != null) {
+                this.promoList.Unload(promoItem.data);
+                promoItem.data = data;
+                promoItem.onClick_ = (item) => { this.LoadIcon(item); };
+                promoItem.DoLoad();
+                let i = this.showing.indexOf(promoItem);
+                if (i >= 0) {
+                    this.showing.splice(i, 1);
+                }
+            }
+            return data;
+        }
+        CheckShow() {
+            for (let item of this.itemList) {
+                let node = item.owner;
+                let d = Math.abs(node.x - this.scrollValue - this.scroll.width / 2 + node.width / 2 + this.layout.spaceX);
+                let i = this.showing.indexOf(item);
+                if (d < this.scroll.width / 2) {
+                    if (i < 0) {
+                        this.showing.push(item);
+                        item.OnShow();
+                    }
+                }
+                else {
+                    if (i >= 0) {
+                        this.showing.splice(i, 1);
+                    }
+                }
+            }
+        }
+    }
+    P204.style = "P204";
+
+    class P205 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoList = null;
+            this.itemList = [];
+            this.scroll = null;
+            this.layout = null;
+            this.prefab = null;
+            this.paddingTop = 10;
+            this.paddingBottom = 10;
+            this.move = null;
+            this.show = null;
+            this.hide = null;
+            this.maxX = 620;
+            this.line = 0;
+            this.column = 0;
+            this.targetX = 0;
+            this.showing = [];
+        }
+        OnAwake() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.move = this.owner.getChildByName("move");
+                let button = this.move.getChildByName("button");
+                this.show = button.getChildByName("show");
+                this.hide = button.getChildByName("hide");
+                let board = this.move.getChildByName("board");
+                this.scroll = board.getChildByName("scroll");
+                this.layout = this.scroll.getChildByName("layout");
+                this.prefab = this.layout.getCell(0);
+                this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); });
+                this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); });
+                let w = this.scroll.width - this.paddingTop - this.paddingBottom;
+                while (w >= this.prefab.width) {
+                    w = w - this.prefab.width - this.layout.spaceX;
+                    this.column++;
+                }
+                TJ.Develop.Yun.Promo.Data.ReportAwake(P205.style);
+                if (this.show.parent.scaleX < 0)
+                    this.maxX = -this.maxX;
+                if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                    if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                        this.active = false;
+                        return;
+                    }
+                    return;
+                }
+                this.promoList = yield TJ.Develop.Yun.Promo.List.Get(P205.style);
+                if (this.promoList.count > 0) {
+                    TJ.Develop.Yun.Promo.Data.ReportStart(P205.style);
+                    this.line = Math.ceil(this.promoList.count / this.column);
+                    this.layout.repeatX = this.column;
+                    this.layout.repeatY = this.line;
+                    for (let i = 0; i < this.layout.cells.length; i++) {
+                        let node = this.layout.getCell(i);
+                        if (i < this.promoList.count) {
+                            let item = node.getComponent(PromoItem);
+                            if (item != null) {
+                                this.itemList.push(item);
+                                item.style = P205.style;
+                            }
+                            node.active = node.visible = true;
+                        }
+                        else {
+                            node.active = node.visible = false;
+                        }
+                    }
+                    this.line = Math.ceil(this.itemList.length / this.column);
+                    let h = this.paddingTop + this.paddingBottom;
+                    h += this.prefab.height * this.line + this.layout.spaceY * (this.line - 1);
+                    this.layout.height = h;
+                    if (this.scroll.height < this.layout.height) {
+                        this.scroll.vScrollBarSkin = "";
+                        this.scroll.vScrollBar.rollRatio = 0;
+                    }
+                    for (let item of this.itemList) {
+                        this.LoadIcon(item);
+                    }
+                    this.active = true;
+                }
+                else {
+                    this.owner.destroy();
+                }
+            });
+        }
+        get scrollValue() {
+            if (this.scroll.vScrollBar != null) {
+                return this.scroll.vScrollBar.value;
+            }
+            return 0;
+        }
+        set scrollValue(v) {
+            if (this.scroll.vScrollBar != null) {
+                this.scroll.vScrollBar.value = v;
+            }
+        }
+        LoadIcon(promoItem) {
+            let data = this.promoList.Load();
+            if (data != null) {
+                this.promoList.Unload(promoItem.data);
+                promoItem.data = data;
+                promoItem.onClick_ = (item) => { this.LoadAndShowIcon(item); };
+                promoItem.DoLoad();
+            }
+            return data;
+        }
+        LoadAndShowIcon(promoItem) {
+            if (this.LoadIcon(promoItem) != null) {
+                promoItem.OnShow();
+            }
+        }
+        Show() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                let param = new TJ.API.Promo.Param();
+                param.extraData = { "TJ_App": TJ.API.AppInfo.AppGuid() };
+                TJ.API.Promo.Pop(param);
+                return;
+            }
+            this.targetX = this.maxX;
+            this.show.active = this.show.visible = false;
+            this.hide.active = this.hide.visible = true;
+            this.scrollValue = 0;
+        }
+        Hide() {
+            this.targetX = 0;
+            this.showing = [];
+        }
+        OnUpdate() {
+            let deltaTime = Laya.timer.delta / 1000;
+            if (this.move.centerX != this.targetX) {
+                let d = this.targetX - this.move.centerX;
+                let s = 3000 * deltaTime;
+                if (d > 0) {
+                    d = Math.min(this.move.centerX + s, this.targetX);
+                }
+                else {
+                    d = Math.max(this.move.centerX - s, this.targetX);
+                }
+                this.move.centerX = d;
+                if (this.move.centerX == 0) {
+                    this.show.active = this.show.visible = true;
+                    this.hide.active = this.hide.visible = false;
+                    window.setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                        this.promoList = yield TJ.Develop.Yun.Promo.List.Get(P205.style);
+                        for (let item of this.itemList) {
+                            this.LoadIcon(item);
+                        }
+                    }), 0);
+                }
+            }
+            else {
+                if (this.move.centerX == this.maxX) {
+                    this.CheckShow();
+                }
+            }
+        }
+        CheckShow() {
+            for (let item of this.itemList) {
+                let i = this.showing.indexOf(item);
+                let node = item.owner;
+                let d = Math.abs(-node.y - this.paddingTop - this.prefab.height / 2 + this.scrollValue + this.scroll.height / 2);
+                if (d < this.scroll.height / 2) {
+                    if (i < 0) {
+                        this.showing.push(item);
+                        item.OnShow();
+                    }
+                }
+                else {
+                    if (i >= 0) {
+                        this.showing.splice(i, 1);
+                    }
+                }
+            }
+        }
+    }
+    P205.style = "P205";
+
+    class P106 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoList = null;
+            this.itemList = [];
+            this.layout = null;
+            this.showing = [];
+        }
+        OnAwake() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.scrollView = this.owner.getChildByName("scroll");
+                this.layout = this.scrollView.getChildByName("layout");
+                this.scrollView.vScrollBarSkin = "";
+                let close = this.owner.getChildByName("close");
+                close.clickHandler = new Laya.Handler(null, () => { this.OnClose(); });
+                TJ.Develop.Yun.Promo.Data.ReportAwake(P106.style);
+                this.active = false;
+                if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                    return;
+                }
+                let list = yield TJ.Develop.Yun.Promo.List.Get(P106.style);
+                if (this.promoList == null)
+                    this.promoList = list;
+                if (this.promoList.count > 0) {
+                    TJ.Develop.Yun.Promo.Data.ReportStart(P106.style);
+                    this.layout.repeatY = this.promoList.count;
+                    let h = 0;
+                    for (let i = 0; i < this.layout.cells.length; i++) {
+                        let node = this.layout.getCell(i);
+                        if (i < this.promoList.count) {
+                            let item = node.getComponent(PromoItem);
+                            if (item != null) {
+                                this.itemList.push(item);
+                                item.style = P106.style;
+                            }
+                            Behaviour.SetActive(node, true);
+                        }
+                        else {
+                            Behaviour.SetActive(node, false);
+                        }
+                        if (i > 0) {
+                            h += this.layout.spaceY;
+                        }
+                        h += node.height;
+                    }
+                    this.layout.height = h;
+                    for (let item of this.itemList) {
+                        this.LoadIcon(item);
+                    }
+                    this.active = true;
+                }
+                else {
+                    this.owner.destroy();
+                }
+            });
+        }
+        OnEnable() {
+            this.scrollValue = 0;
+        }
+        OnDisable() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.promoList = yield TJ.Develop.Yun.Promo.List.Get(P106.style);
+                for (let item of this.itemList) {
+                    this.LoadIcon(item);
+                }
+            });
+        }
+        OnUpdate() {
+            this.CheckShow();
+        }
+        LoadIcon(promoItem) {
+            let data = this.promoList.Load();
+            if (data != null) {
+                this.promoList.Unload(promoItem.data);
+                promoItem.data = data;
+                promoItem.onClick_ = (item) => { this.LoadIcon(item); };
+                promoItem.DoLoad();
+                let i = this.showing.indexOf(promoItem);
+                if (i >= 0) {
+                    this.showing.splice(i, 1);
+                }
+            }
+            return data;
+        }
+        get scrollValue() {
+            if (this.scrollView.vScrollBar != null) {
+                return this.scrollView.vScrollBar.value;
+            }
+            return 0;
+        }
+        set scrollValue(v) {
+            if (this.scrollView.vScrollBar != null) {
+                this.scrollView.vScrollBar.value = v;
+            }
+        }
+        CheckShow() {
+            for (let item of this.itemList) {
+                let node = item.owner;
+                let d = Math.abs(node.y - this.scrollValue - this.scrollView.height / 2 + node.height / 2 + this.layout.spaceY);
+                let i = this.showing.indexOf(item);
+                if (d < this.scrollView.height / 2) {
+                    if (i < 0) {
+                        this.showing.push(item);
+                        item.OnShow();
+                    }
+                }
+                else {
+                    if (i >= 0) {
+                        this.showing.splice(i, 1);
+                    }
+                }
+            }
+        }
+        OnClose() {
+            let node = this.owner;
+            node.active = node.visible = false;
+        }
+    }
+    P106.style = "P106";
+
+    var GameControl;
+    (function (GameControl) {
+        let _platformTpye;
+        (function (_platformTpye) {
+            _platformTpye["WeChat"] = "WeChat";
+            _platformTpye["OPPO"] = "OPPO";
+            _platformTpye["Bytedance"] = "Bytedance";
+            _platformTpye["All"] = "All";
+        })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
+        GameControl._platform = _platformTpye.Bytedance;
+        GameControl._gameSwitch = false;
+        GameControl._gameLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_gameLevel', val.toString());
+            }
+        };
+        GameControl._practicalLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
+            }
+        };
+        function getLevelData(levelNum) {
+            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
+            let level;
+            let num;
+            if (levelNum) {
+                num = levelNum;
+            }
+            else {
+                num = GameControl._gameLevel.value;
+            }
+            for (let index = 0; index < dataArr.length; index++) {
+                const element = dataArr[index];
+                if (element['name'] === 'level' + num) {
+                    level = element;
+                    break;
+                }
+            }
+            if (level) {
+                return level;
+            }
+            else {
+                return dataArr[num - 1];
+            }
+        }
+        GameControl.getLevelData = getLevelData;
+        function getLevelData_Condition(levelNum) {
+            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
+            let arr0;
+            for (const key in level) {
+                if (level.hasOwnProperty(key)) {
+                    if (key === 'condition') {
+                        arr0 = level[key];
+                    }
+                }
+            }
+            if (arr0) {
+                return arr0;
+            }
+            else {
+                console.log('获取关卡描述失败');
+            }
+        }
+        GameControl.getLevelData_Condition = getLevelData_Condition;
+        let gameProperty;
+        (function (gameProperty) {
+            gameProperty["name"] = "name";
+            gameProperty["condition"] = "condition";
+            gameProperty["resCondition"] = "resCondition";
+            gameProperty["rewardType"] = "rewardType";
+            gameProperty["rewardNum"] = "rewardNum";
+        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
+        function _createLevel(parent, x, y) {
+            let sp;
+            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                parent.addChild(sp);
+                sp.pos(x, y);
+                sp.zOrder = 0;
+                let level = sp.getChildByName('level');
+                GameControl.LevelNode = sp;
+            }));
+        }
+        GameControl._createLevel = _createLevel;
+        GameControl._execution = {
+            get value() {
+                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            },
+            set value(val) {
+                this.val = val;
+                Laya.LocalStorage.setItem('_execution', val.toString());
+            }
+        };
+    })(GameControl || (GameControl = {}));
+    let Game = GameControl;
+
+    class ADManager {
+        static ShowBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.ShowBanner(p);
+        }
+        static CloseBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.RemoveBanner(p);
+        }
+        static ShowNormal() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static showNormal2() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static ShowReward(rewardAction, CDTime = 500) {
+            this._currentRewardAction = rewardAction;
+            if (Game._platform === Game._platformTpye.OPPO) {
+                rewardAction();
+                EventAdmin.notify(Task.EventType.adsTime);
+                EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+                return;
+            }
+            if (ADManager.CanShowCD) {
+                PalyAudio.stopMusic();
+                console.log("?????");
+                let p = new TJ.ADS.Param();
+                p.extraAd = true;
+                let getReward = false;
+                p.cbi.Add(TJ.Define.Event.Reward, () => {
+                    getReward = true;
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    if (rewardAction != null) {
+                        rewardAction();
+                        EventAdmin.notify(Task.EventType.adsTime);
+                        EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.Close, () => {
+                    if (!getReward) {
+                        PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                        Admin._openScene(Admin.SceneName.UIADSHint, null, null, () => {
+                        });
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.NoAds, () => {
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
+                });
+                TJ.ADS.Api.ShowReward(p);
+                ADManager.CanShowCD = false;
+                setTimeout(() => {
+                    ADManager.CanShowCD = true;
+                }, CDTime);
+            }
+        }
+        static Event(param, value) {
+            console.log("Param:>" + param + "Value:>" + value);
+            let p = new TJ.GSA.Param();
+            if (value == null) {
+                p.id = param;
+            }
+            else {
+                p.id = param + value;
+            }
+            console.log(p.id);
+            TJ.GSA.Api.Event(p);
+        }
+        static initShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.onShareAppMessage(() => {
+                    return {
+                        title: this.shareContent,
+                        imageUrl: this.shareImgUrl,
+                        query: ""
+                    };
+                });
+                this.wx.showShareMenu({
+                    withShareTicket: true,
+                    success: null,
+                    fail: null,
+                    complete: null
+                });
+            }
+        }
+        static lureShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.shareAppMessage({
+                    title: this.shareContent,
+                    imageUrl: this.shareImgUrl,
+                    query: ""
+                });
+            }
+        }
+        static VibrateShort() {
+            TJ.API.Vibrate.Short();
+        }
+        static Vibratelong() {
+            TJ.API.Vibrate.Long();
+        }
+        static TAPoint(type, name) {
+            let p = new TJ.API.TA.Param();
+            p.id = name;
+            switch (type) {
+                case TaT.BtnShow:
+                    TJ.API.TA.Event_Button_Show(p);
+                    break;
+                case TaT.BtnClick:
+                    TJ.API.TA.Event_Button_Click(p);
+                    break;
+                case TaT.PageShow:
+                    TJ.API.TA.Event_Page_Show(p);
+                    break;
+                case TaT.PageEnter:
+                    TJ.API.TA.Event_Page_Enter(p);
+                    break;
+                case TaT.PageLeave:
+                    TJ.API.TA.Event_Page_Leave(p);
+                    break;
+                case TaT.LevelStart:
+                    TJ.API.TA.Event_Level_Start(p);
+                    console.log('本关开始打点');
+                    break;
+                case TaT.LevelFail:
+                    TJ.API.TA.Event_Level_Fail(p);
+                    console.log('本关失败打点');
+                    break;
+                case TaT.LevelFinish:
+                    TJ.API.TA.Event_Level_Finish(p);
+                    console.log('本关胜利打点');
+                    break;
+            }
+        }
+    }
+    ADManager.CanShowCD = true;
+    ADManager.wx = Laya.Browser.window.wx;
+    ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
+    ADManager.shareContent = "快把锅甩给队友！";
+    var TaT;
+    (function (TaT) {
+        TaT[TaT["BtnShow"] = 0] = "BtnShow";
+        TaT[TaT["BtnClick"] = 1] = "BtnClick";
+        TaT[TaT["PageShow"] = 2] = "PageShow";
+        TaT[TaT["PageEnter"] = 3] = "PageEnter";
+        TaT[TaT["PageLeave"] = 4] = "PageLeave";
+        TaT[TaT["LevelStart"] = 5] = "LevelStart";
+        TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
+        TaT[TaT["LevelFail"] = 7] = "LevelFail";
+    })(TaT || (TaT = {}));
+
     var lwg;
     (function (lwg) {
         let Global;
@@ -265,20 +1435,21 @@
                 HintContent[HintContent["\u6D88\u80172\u70B9\u4F53\u529B\uFF01"] = 11] = "\u6D88\u80172\u70B9\u4F53\u529B\uFF01";
                 HintContent[HintContent["\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01"] = 12] = "\u4ECA\u65E5\u4F53\u529B\u798F\u5229\u5DF2\u9886\u53D6\uFF01";
                 HintContent[HintContent["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01"] = 13] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F97125\u91D1\u5E01\uFF01";
-                HintContent[HintContent["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002"] = 14] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002";
-                HintContent[HintContent["\u5206\u4EAB\u5931\u8D25\uFF01"] = 15] = "\u5206\u4EAB\u5931\u8D25\uFF01";
-                HintContent[HintContent["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 16] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
-                HintContent[HintContent["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 17] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
-                HintContent[HintContent["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 18] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
-                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 19] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
-                HintContent[HintContent["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 20] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
-                HintContent[HintContent["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 21] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
-                HintContent[HintContent["\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01"] = 22] = "\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01";
-                HintContent[HintContent["\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 23] = "\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01";
-                HintContent[HintContent["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 24] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
-                HintContent[HintContent["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 25] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
-                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01"] = 26] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01";
-                HintContent[HintContent["\u4ECA\u5929\u5DF2\u7ECF\u7B7E\u5230\u8FC7\u4E86\uFF01"] = 27] = "\u4ECA\u5929\u5DF2\u7ECF\u7B7E\u5230\u8FC7\u4E86\uFF01";
+                HintContent[HintContent["\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F9750\u91D1\u5E01\uFF01"] = 14] = "\u5206\u4EAB\u6210\u529F\uFF0C\u83B7\u5F9750\u91D1\u5E01\uFF01";
+                HintContent[HintContent["\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002"] = 15] = "\u9650\u5B9A\u76AE\u80A4\u5DF2\u7ECF\u83B7\u5F97\uFF0C\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u67E5\u770B\u3002";
+                HintContent[HintContent["\u5206\u4EAB\u5931\u8D25\uFF01"] = 16] = "\u5206\u4EAB\u5931\u8D25\uFF01";
+                HintContent[HintContent["\u5151\u6362\u7801\u9519\u8BEF\uFF01"] = 17] = "\u5151\u6362\u7801\u9519\u8BEF\uFF01";
+                HintContent[HintContent["\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!"] = 18] = "\u5C1A\u672A\u83B7\u5F97\u8BE5\u5546\u54C1!";
+                HintContent[HintContent["\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!"] = 19] = "\u606D\u559C\u83B7\u5F97\u65B0\u76AE\u80A4!";
+                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!"] = 20] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u9650\u5B9A\u754C\u9762\u83B7\u53D6!";
+                HintContent[HintContent["\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!"] = 21] = "\u901A\u8FC7\u76F8\u5E94\u7684\u5173\u5361\u6570\u8FBE\u5230\u5C31\u53EF\u4EE5\u5F97\u5230\u4E86!";
+                HintContent[HintContent["\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!"] = 22] = "\u70B9\u51FB\u91D1\u5E01\u62BD\u5956\u6309\u94AE\u8D2D\u4E70!";
+                HintContent[HintContent["\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01"] = 23] = "\u6CA1\u6709\u9886\u53D6\u6B21\u6570\u4E86\uFF01";
+                HintContent[HintContent["\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 24] = "\u589E\u52A0\u4E09\u6B21\u5F00\u542F\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintContent[HintContent["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 25] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
+                HintContent[HintContent["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 26] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
+                HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01"] = 27] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01";
+                HintContent[HintContent["\u4ECA\u5929\u5DF2\u7ECF\u7B7E\u5230\u8FC7\u4E86\uFF01"] = 28] = "\u4ECA\u5929\u5DF2\u7ECF\u7B7E\u5230\u8FC7\u4E86\uFF01";
             })(HintContent = Dialog.HintContent || (Dialog.HintContent = {}));
             let Skin;
             (function (Skin) {
@@ -452,6 +1623,11 @@
                 });
             }
             Dialog.createVoluntarilyDialogue = createVoluntarilyDialogue;
+            function createDialogHint() {
+                Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                }));
+            }
+            Dialog.createDialogHint = createDialogHint;
         })(Dialog = lwg.Dialog || (lwg.Dialog = {}));
         let Gold;
         (function (Gold_1) {
@@ -714,6 +1890,7 @@
                 SceneName["UIResurgence"] = "UIResurgence";
                 SceneName["UISkin"] = "UISkin";
                 SceneName["UIEasterEgg"] = "UIEasterEgg";
+                SceneName["UIADSHint"] = "UIADSHint";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -1290,7 +2467,6 @@
             constructor() {
             }
             down(event) {
-                console.log('无点击效果的点击');
             }
             move(event) {
             }
@@ -3444,6 +4620,192 @@
             }
             Skin.SkinScene = SkinScene;
         })(Skin = lwg.Skin || (lwg.Skin = {}));
+        let EasterEgg;
+        (function (EasterEgg) {
+            EasterEgg._easterEgg_1Arr = [];
+            EasterEgg._easterEgg_1 = {
+                get value() {
+                    if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                },
+                set value(val) {
+                    Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
+                }
+            };
+            function initEasterEgg() {
+                EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
+                Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
+            }
+            EasterEgg.initEasterEgg = initEasterEgg;
+            function getProperty(classify, name, property) {
+                let pro = null;
+                let arr = getClassify(classify);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            EasterEgg.getProperty = getProperty;
+            function setProperty(classify, name, property, value) {
+                let arr = getClassify(classify);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        element[property] = value;
+                        break;
+                    }
+                }
+                let data = {};
+                data[classify] = arr;
+                Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
+            }
+            EasterEgg.setProperty = setProperty;
+            function getTaskProperty(classify, name, property) {
+                let pro = null;
+                let arr = getClassify(classify);
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+                    if (element['name'] === name) {
+                        pro = element[property];
+                        break;
+                    }
+                }
+                if (pro !== null) {
+                    return pro;
+                }
+                else {
+                    console.log(name + '找不到属性:' + property, pro);
+                    return null;
+                }
+            }
+            EasterEgg.getTaskProperty = getTaskProperty;
+            function getClassify(classify) {
+                let arr = [];
+                switch (classify) {
+                    case Classify.EasterEgg_01:
+                        arr = EasterEgg._easterEgg_1Arr;
+                        break;
+                    default:
+                        break;
+                }
+                return arr;
+            }
+            EasterEgg.getClassify = getClassify;
+            function doDetection(classify, name, number) {
+                if (!number) {
+                    number = 0;
+                }
+                let resCondition = getProperty(classify, name, Property.resCondition);
+                let condition = getProperty(classify, name, Property.condition);
+                if (!getProperty(classify, name, Property.complete)) {
+                    if (condition <= resCondition + number) {
+                        setProperty(classify, name, Property.resCondition, condition);
+                        setProperty(classify, name, Property.complete, true);
+                        console.log(getProperty(classify, name, Property.complete));
+                        return 1;
+                    }
+                    else {
+                        setProperty(classify, name, Property.resCondition, resCondition + number);
+                        return 0;
+                    }
+                }
+                else {
+                    return 1;
+                }
+            }
+            EasterEgg.doDetection = doDetection;
+            function detectAllTasks(classify) {
+                let num = 1;
+                let arr = getClassify(classify);
+                for (const key in arr) {
+                    if (arr.hasOwnProperty(key)) {
+                        const element = arr[key];
+                        let resCondition = getProperty(classify, element.name, Property.resCondition);
+                        let condition = getProperty(classify, element.name, Property.condition);
+                        if (condition > resCondition) {
+                            num = 0;
+                        }
+                    }
+                }
+                if (num == 1) {
+                    console.log(classify, '完成了！');
+                }
+                else {
+                    console.log(classify, '没有完成！');
+                }
+                return num;
+            }
+            EasterEgg.detectAllTasks = detectAllTasks;
+            let rewardType;
+            (function (rewardType) {
+                rewardType["gold"] = "gold";
+                rewardType["diamond"] = "diamond";
+                rewardType["assembly"] = "assembly";
+            })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
+            let Property;
+            (function (Property) {
+                Property["name"] = "name";
+                Property["explain"] = "explain";
+                Property["condition"] = "condition";
+                Property["resCondition"] = "resCondition";
+                Property["complete"] = "complete";
+            })(Property = EasterEgg.Property || (EasterEgg.Property = {}));
+            let Classify;
+            (function (Classify) {
+                Classify["EasterEgg_01"] = "EasterEgg_01";
+            })(Classify = EasterEgg.Classify || (EasterEgg.Classify = {}));
+            let Name;
+            (function (Name) {
+                Name["assembly_1"] = "assembly_1";
+                Name["assembly_2"] = "assembly_2";
+                Name["assembly_3"] = "assembly_3";
+                Name["assembly_4"] = "assembly_4";
+                Name["assembly_5"] = "assembly_5";
+            })(Name = EasterEgg.Name || (EasterEgg.Name = {}));
+            let EventType;
+            (function (EventType) {
+                EventType["trigger"] = "trigger";
+                EventType["easterEggAds"] = "easterEggAds";
+            })(EventType = EasterEgg.EventType || (EasterEgg.EventType = {}));
+            class EasterEggScene extends Admin.Scene {
+                lwgOnAwake() {
+                    this.easterEggInitData();
+                    this.easterEggOnAwake();
+                }
+                easterEggInitData() { }
+                lwgEventReg() { this.easterEggEventReg(); }
+                easterEggEventReg() { }
+                easterEggOnAwake() { }
+                lwgNodeDec() { this.easterEggNodeDec(); }
+                easterEggNodeDec() { }
+                lwgOnEnable() { this.easterEggOnEnable(); }
+                easterEggOnEnable() { }
+                lwgOpenAni() { return this.easterEggOpenAin(); }
+                easterEggOpenAin() { return 0; }
+                lwgBtnClick() { this.easterEggBtnClick(); }
+                easterEggBtnClick() { }
+                ;
+                lwgOnUpdate() { this.easterEggOnUpdate(); }
+                easterEggOnUpdate() { }
+                lwgOnDisable() { this.easterEggOnDisable(); }
+                easterEggOnDisable() { }
+            }
+            EasterEgg.EasterEggScene = EasterEggScene;
+        })(EasterEgg = lwg.EasterEgg || (lwg.EasterEgg = {}));
         let Loding;
         (function (Loding) {
             Loding.lodingList_3DScene = [];
@@ -3686,460 +5048,31 @@
     let SkinXDScene = lwg.SkinXD.SkinXDScene;
     let Skin = lwg.Skin;
     let SkinScene = lwg.Skin.SkinScene;
+    let EasterEgg = lwg.EasterEgg;
     let Tomato = lwg.Tomato;
 
-    var EasterEgg;
-    (function (EasterEgg) {
-        EasterEgg._easterEgg_1Arr = [];
-        EasterEgg._easterEgg_1 = {
-            get value() {
-                if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
-            }
-        };
-        function initEasterEgg() {
-            EasterEgg._easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
-            Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
+    class UIADSHint extends Admin.Scene {
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp);
+            Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, this.btnConfirmUp);
         }
-        EasterEgg.initEasterEgg = initEasterEgg;
-        function getProperty(classify, name, property) {
-            let pro = null;
-            let arr = getClassify(classify);
-            for (let index = 0; index < arr.length; index++) {
-                const element = arr[index];
-                if (element['name'] === name) {
-                    pro = element[property];
-                    break;
-                }
-            }
-            if (pro !== null) {
-                return pro;
-            }
-            else {
-                console.log(name + '找不到属性:' + property, pro);
-                return null;
-            }
-        }
-        EasterEgg.getProperty = getProperty;
-        function setProperty(classify, name, property, value) {
-            let arr = getClassify(classify);
-            for (let index = 0; index < arr.length; index++) {
-                const element = arr[index];
-                if (element['name'] === name) {
-                    element[property] = value;
-                    break;
-                }
-            }
-            let data = {};
-            data[classify] = arr;
-            Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
-        }
-        EasterEgg.setProperty = setProperty;
-        function getTaskProperty(classify, name, property) {
-            let pro = null;
-            let arr = getClassify(classify);
-            for (let index = 0; index < arr.length; index++) {
-                const element = arr[index];
-                if (element['name'] === name) {
-                    pro = element[property];
-                    break;
-                }
-            }
-            if (pro !== null) {
-                return pro;
-            }
-            else {
-                console.log(name + '找不到属性:' + property, pro);
-                return null;
-            }
-        }
-        EasterEgg.getTaskProperty = getTaskProperty;
-        function getClassify(classify) {
-            let arr = [];
-            switch (classify) {
-                case Classify.EasterEgg_01:
-                    arr = EasterEgg._easterEgg_1Arr;
-                    break;
-                default:
-                    break;
-            }
-            return arr;
-        }
-        EasterEgg.getClassify = getClassify;
-        function doDetection(classify, name, number) {
-            if (!number) {
-                number = 0;
-            }
-            let resCondition = getProperty(classify, name, Property.resCondition);
-            let condition = getProperty(classify, name, Property.condition);
-            if (!getProperty(classify, name, Property.complete)) {
-                if (condition <= resCondition + number) {
-                    setProperty(classify, name, Property.resCondition, condition);
-                    setProperty(classify, name, Property.complete, true);
-                    console.log(getProperty(classify, name, Property.complete));
-                    return 1;
-                }
-                else {
-                    setProperty(classify, name, Property.resCondition, resCondition + number);
-                    return 0;
-                }
-            }
-            else {
-                return 1;
-            }
-        }
-        EasterEgg.doDetection = doDetection;
-        function detectAllTasks(classify) {
-            let num = 1;
-            let arr = getClassify(classify);
-            for (const key in arr) {
-                if (arr.hasOwnProperty(key)) {
-                    const element = arr[key];
-                    let resCondition = getProperty(classify, element.name, Property.resCondition);
-                    let condition = getProperty(classify, element.name, Property.condition);
-                    if (condition > resCondition) {
-                        num = 0;
-                    }
-                }
-            }
-            if (num == 1) {
-                console.log(classify, '完成了！');
-            }
-            else {
-                console.log(classify, '没有完成！');
-            }
-            return num;
-        }
-        EasterEgg.detectAllTasks = detectAllTasks;
-        let rewardType;
-        (function (rewardType) {
-            rewardType["gold"] = "gold";
-            rewardType["diamond"] = "diamond";
-            rewardType["assembly"] = "assembly";
-        })(rewardType = EasterEgg.rewardType || (EasterEgg.rewardType = {}));
-        let Property;
-        (function (Property) {
-            Property["name"] = "name";
-            Property["explain"] = "explain";
-            Property["condition"] = "condition";
-            Property["resCondition"] = "resCondition";
-            Property["complete"] = "complete";
-        })(Property = EasterEgg.Property || (EasterEgg.Property = {}));
-        let Classify;
-        (function (Classify) {
-            Classify["EasterEgg_01"] = "EasterEgg_01";
-        })(Classify = EasterEgg.Classify || (EasterEgg.Classify = {}));
-        let Name;
-        (function (Name) {
-            Name["assembly_1"] = "assembly_1";
-            Name["assembly_2"] = "assembly_2";
-            Name["assembly_3"] = "assembly_3";
-            Name["assembly_4"] = "assembly_4";
-            Name["assembly_5"] = "assembly_5";
-        })(Name = EasterEgg.Name || (EasterEgg.Name = {}));
-        let EventType;
-        (function (EventType) {
-            EventType["trigger"] = "trigger";
-            EventType["easterEggAds"] = "easterEggAds";
-        })(EventType = EasterEgg.EventType || (EasterEgg.EventType = {}));
-        class EasterEggScene extends Admin.Scene {
-            lwgOnAwake() {
-                this.easterEggInitData();
-                this.easterEggOnAwake();
-            }
-            easterEggInitData() { }
-            lwgEventReg() { this.easterEggEventReg(); }
-            easterEggEventReg() { }
-            easterEggOnAwake() { }
-            lwgNodeDec() { this.easterEggNodeDec(); }
-            easterEggNodeDec() { }
-            lwgOnEnable() { this.easterEggOnEnable(); }
-            easterEggOnEnable() { }
-            lwgOpenAni() { return this.easterEggOpenAin(); }
-            easterEggOpenAin() { return 0; }
-            lwgBtnClick() { this.easterEggBtnClick(); }
-            easterEggBtnClick() { }
-            ;
-            lwgOnUpdate() { this.easterEggOnUpdate(); }
-            easterEggOnUpdate() { }
-            lwgOnDisable() { this.easterEggOnDisable(); }
-            easterEggOnDisable() { }
-        }
-        EasterEgg.EasterEggScene = EasterEggScene;
-    })(EasterEgg || (EasterEgg = {}));
-
-    var GameControl;
-    (function (GameControl) {
-        let _platformTpye;
-        (function (_platformTpye) {
-            _platformTpye["WeChat"] = "WeChat";
-            _platformTpye["OPPO"] = "OPPO";
-            _platformTpye["Bytedance"] = "Bytedance";
-            _platformTpye["All"] = "All";
-        })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
-        GameControl._gameSwitch = false;
-        GameControl._gameLevel = {
-            get value() {
-                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_gameLevel', val.toString());
-            }
-        };
-        GameControl._practicalLevel = {
-            get value() {
-                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
-            }
-        };
-        function getLevelData(levelNum) {
-            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
-            let level;
-            let num;
-            if (levelNum) {
-                num = levelNum;
-            }
-            else {
-                num = GameControl._gameLevel.value;
-            }
-            for (let index = 0; index < dataArr.length; index++) {
-                const element = dataArr[index];
-                if (element['name'] === 'level' + num) {
-                    level = element;
-                    break;
-                }
-            }
-            if (level) {
-                return level;
-            }
-            else {
-                return dataArr[num - 1];
-            }
-        }
-        GameControl.getLevelData = getLevelData;
-        function getLevelData_Condition(levelNum) {
-            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
-            let arr0;
-            for (const key in level) {
-                if (level.hasOwnProperty(key)) {
-                    if (key === 'condition') {
-                        arr0 = level[key];
-                    }
-                }
-            }
-            if (arr0) {
-                return arr0;
-            }
-            else {
-                console.log('获取关卡描述失败');
-            }
-        }
-        GameControl.getLevelData_Condition = getLevelData_Condition;
-        let gameProperty;
-        (function (gameProperty) {
-            gameProperty["name"] = "name";
-            gameProperty["condition"] = "condition";
-            gameProperty["resCondition"] = "resCondition";
-            gameProperty["rewardType"] = "rewardType";
-            gameProperty["rewardNum"] = "rewardNum";
-        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
-        let rewardType;
-        (function (rewardType) {
-            rewardType["gold"] = "gold";
-            rewardType["diamond"] = "diamond";
-        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
-        function _createLevel(parent, x, y) {
-            let sp;
-            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                parent.addChild(sp);
-                sp.pos(x, y);
-                sp.zOrder = 0;
-                let level = sp.getChildByName('level');
-                GameControl.LevelNode = sp;
-            }));
-        }
-        GameControl._createLevel = _createLevel;
-        GameControl._execution = {
-            get value() {
-                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
-            },
-            set value(val) {
-                this.val = val;
-                Laya.LocalStorage.setItem('_execution', val.toString());
-            }
-        };
-        class GameScene extends Admin.Scene {
-            lwgOnAwake() {
-            }
-        }
-        GameControl.GameScene = GameScene;
-    })(GameControl || (GameControl = {}));
-    let Game = GameControl;
-    let GameScene = GameControl.GameScene;
-
-    class ADManager {
-        constructor() {
-        }
-        static ShowBanner() {
-            let p = new TJ.ADS.Param();
-            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
-            TJ.ADS.Api.ShowBanner(p);
-        }
-        static CloseBanner() {
-            let p = new TJ.ADS.Param();
-            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
-            TJ.ADS.Api.RemoveBanner(p);
-        }
-        static ShowNormal() {
-            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
-        }
-        static showNormal2() {
-            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
-        }
-        static ShowReward(rewardAction, CDTime = 500) {
-            if (Game._platform === Game._platformTpye.OPPO) {
-                rewardAction();
-                EventAdmin.notify(Task.EventType.adsTime);
-                EventAdmin.notify(EasterEgg.EventType.easterEggAds);
-                return;
-            }
-            if (ADManager.CanShowCD) {
-                PalyAudio.stopMusic();
-                console.log("?????");
-                let p = new TJ.ADS.Param();
-                p.extraAd = true;
-                let getReward = false;
-                p.cbi.Add(TJ.Define.Event.Reward, () => {
-                    getReward = true;
-                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                    if (rewardAction != null) {
-                        rewardAction();
-                        EventAdmin.notify(Task.EventType.adsTime);
-                        EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+        lwgEventReg() {
+            EventAdmin.reg('continue', this, () => {
+                ADManager.ShowReward(() => {
+                    if (ADManager._currentRewardAction) {
+                        ADManager._currentRewardAction();
                     }
                 });
-                p.cbi.Add(TJ.Define.Event.Close, () => {
-                    if (!getReward) {
-                        PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                        Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
-                    }
-                });
-                p.cbi.Add(TJ.Define.Event.NoAds, () => {
-                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                    Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
-                });
-                TJ.ADS.Api.ShowReward(p);
-                ADManager.CanShowCD = false;
-                setTimeout(() => {
-                    ADManager.CanShowCD = true;
-                }, CDTime);
-            }
+            });
         }
-        static Event(param, value) {
-            console.log("Param:>" + param + "Value:>" + value);
-            let p = new TJ.GSA.Param();
-            if (value == null) {
-                p.id = param;
-            }
-            else {
-                p.id = param + value;
-            }
-            console.log(p.id);
-            TJ.GSA.Api.Event(p);
+        btnCloseUp() {
+            this.self.close();
         }
-        static initShare() {
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                this.wx.onShareAppMessage(() => {
-                    return {
-                        title: this.shareContent,
-                        imageUrl: this.shareImgUrl,
-                        query: ""
-                    };
-                });
-                this.wx.showShareMenu({
-                    withShareTicket: true,
-                    success: null,
-                    fail: null,
-                    complete: null
-                });
-            }
-        }
-        static lureShare() {
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                this.wx.shareAppMessage({
-                    title: this.shareContent,
-                    imageUrl: this.shareImgUrl,
-                    query: ""
-                });
-            }
-        }
-        static VibrateShort() {
-            TJ.API.Vibrate.Short();
-        }
-        static Vibratelong() {
-            TJ.API.Vibrate.Long();
-        }
-        static TAPoint(type, name) {
-            let p = new TJ.API.TA.Param();
-            p.id = name;
-            switch (type) {
-                case TaT.BtnShow:
-                    TJ.API.TA.Event_Button_Show(p);
-                    break;
-                case TaT.BtnClick:
-                    TJ.API.TA.Event_Button_Click(p);
-                    break;
-                case TaT.PageShow:
-                    TJ.API.TA.Event_Page_Show(p);
-                    break;
-                case TaT.PageEnter:
-                    TJ.API.TA.Event_Page_Enter(p);
-                    break;
-                case TaT.PageLeave:
-                    TJ.API.TA.Event_Page_Leave(p);
-                    break;
-                case TaT.LevelStart:
-                    TJ.API.TA.Event_Level_Start(p);
-                    console.log('本关开始打点');
-                    break;
-                case TaT.LevelFail:
-                    TJ.API.TA.Event_Level_Fail(p);
-                    console.log('本关失败打点');
-                    break;
-                case TaT.LevelFinish:
-                    TJ.API.TA.Event_Level_Finish(p);
-                    console.log('本关胜利打点');
-                    break;
-            }
+        btnConfirmUp() {
+            EventAdmin.notify('continue');
+            this.self.close();
         }
     }
-    ADManager.CanShowCD = true;
-    ADManager.wx = Laya.Browser.window.wx;
-    ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
-    ADManager.shareContent = "快把锅甩给队友！";
-    var TaT;
-    (function (TaT) {
-        TaT[TaT["BtnShow"] = 0] = "BtnShow";
-        TaT[TaT["BtnClick"] = 1] = "BtnClick";
-        TaT[TaT["PageShow"] = 2] = "PageShow";
-        TaT[TaT["PageEnter"] = 3] = "PageEnter";
-        TaT[TaT["PageLeave"] = 4] = "PageLeave";
-        TaT[TaT["LevelStart"] = 5] = "LevelStart";
-        TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
-        TaT[TaT["LevelFail"] = 7] = "LevelFail";
-    })(TaT || (TaT = {}));
 
     class UICheckIn extends CheckIn.CheckInScene {
         checkInNodeDec() {
@@ -4148,13 +5081,21 @@
                 this.self['OPPO'].visible = false;
             }
             else {
-                if (Game._platform === Game._platformTpye.OPPO) {
-                    this.self['OPPO'].visible = true;
-                    this.self['WeChat'].visible = false;
-                }
-                else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = true;
+                switch (Game._platform) {
+                    case Game._platformTpye.OPPO:
+                        this.self['OPPO'].visible = true;
+                        this.self['WeChat'].visible = false;
+                        break;
+                    case Game._platformTpye.WeChat:
+                        this.self['OPPO'].visible = false;
+                        this.self['WeChat'].visible = true;
+                        break;
+                    case Game._platformTpye.Bytedance:
+                        this.self['OPPO'].visible = false;
+                        this.self['WeChat'].visible = true;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -4226,17 +5167,30 @@
             lwg.Click.off(Click.Type.largen, this.self['BtnThreeGet_OPPO'], this, null, null, this.btnThreeGetUp);
             lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
+        btnBackUp() {
+            this.self.close();
+        }
         btnThreeGetUp() {
             ADManager.ShowReward(() => {
                 ADManager.TAPoint(TaT.BtnClick, 'AD3award');
                 this.btnGetUpFunc(3);
             });
         }
-        btnBackUp(event) {
-            this.self.close();
-        }
-        btnGetUp(event) {
-            this.btnGetUpFunc(1);
+        btnGetUp() {
+            if (Game._platform === Game._platformTpye.Bytedance) {
+                if (this.self['Dot'].visible) {
+                    ADManager.ShowReward(() => {
+                        ADManager.TAPoint(TaT.BtnClick, 'AD3award');
+                        this.btnGetUpFunc(3);
+                    });
+                }
+                else {
+                    this.btnGetUpFunc(1);
+                }
+            }
+            else {
+                this.btnGetUpFunc(1);
+            }
         }
         btnGetUpFunc(number) {
             this.btnOffClick();
@@ -4277,14 +5231,24 @@
             }
         }
         checkInOnUpdate() {
-            if (CheckIn._lastCheckDate.date !== (new Date).getDate() && Game._platform === Game._platformTpye.WeChat) {
-                if (this.self['Dot'].visible) {
-                    this.self['BtnGet_WeChat'].visible = false;
-                    this.self['BtnThreeGet_WeChat'].visible = true;
-                }
-                else {
-                    this.self['BtnGet_WeChat'].visible = true;
-                    this.self['BtnThreeGet_WeChat'].visible = false;
+            if (CheckIn._lastCheckDate.date !== (new Date).getDate()) {
+                switch (Game._platform) {
+                    case Game._platformTpye.WeChat:
+                        if (this.self['Dot'].visible) {
+                            this.self['BtnGet_WeChat'].visible = false;
+                            this.self['BtnThreeGet_WeChat'].visible = true;
+                        }
+                        else {
+                            this.self['BtnGet_WeChat'].visible = true;
+                            this.self['BtnThreeGet_WeChat'].visible = false;
+                        }
+                        break;
+                    case Game._platformTpye.Bytedance:
+                        this.self['BtnGet_WeChat'].visible = true;
+                        this.self['BtnThreeGet_WeChat'].visible = false;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -4349,14 +5313,120 @@
     let GEnum = Global.GEnum;
     let GSene3D = Global.GSene3D;
 
+    class RecordManager {
+        constructor() {
+            this.GRV = null;
+            this.isRecordVideoing = false;
+            this.isVideoRecord = false;
+            this.videoRecordTimer = 0;
+            this.isHasVideoRecord = false;
+        }
+        static Init() {
+            RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();
+        }
+        static startAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.grv == null)
+                RecordManager.Init();
+            if (RecordManager.recording)
+                return;
+            RecordManager.autoRecording = true;
+            console.log("******************开始录屏");
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (!RecordManager.autoRecording) {
+                console.log("RecordManager.autoRecording", RecordManager.autoRecording);
+                return false;
+            }
+            RecordManager.autoRecording = false;
+            RecordManager._end(false);
+            if (Date.now() - RecordManager.lastRecordTime > 6000) {
+                return true;
+            }
+            if (Date.now() - RecordManager.lastRecordTime < 3000) {
+                console.log("小于3秒");
+                return false;
+            }
+            return true;
+        }
+        static startRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.autoRecording) {
+                this.stopAutoRecord();
+            }
+            RecordManager.recording = true;
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("time:" + (Date.now() - RecordManager.lastRecordTime));
+            if (Date.now() - RecordManager.lastRecordTime <= 3000) {
+                return false;
+            }
+            RecordManager.recording = false;
+            RecordManager._end(true);
+            return true;
+        }
+        static _start() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180s  ？？？？？");
+            RecordManager.grv.Start(180);
+        }
+        static _end(share) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180结束 ？？？？？");
+            RecordManager.grv.Stop(share);
+        }
+        static _share(type, successedAc, completedAc = null, failAc = null) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
+            if (RecordManager.grv.videoPath) {
+                let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
+                p.extra.videoTopics = ["剃头大师", "番茄小游戏", "抖音小游戏"];
+                p.channel = "video";
+                p.success = () => {
+                    Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
+                    successedAc();
+                };
+                p.fail = () => {
+                    if (type === 'noAward') {
+                        Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
+                    }
+                    else {
+                        Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
+                    }
+                    failAc();
+                };
+                RecordManager.grv.Share(p);
+            }
+            else {
+                Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
+            }
+        }
+    }
+    RecordManager.recording = false;
+    RecordManager.autoRecording = false;
+
     class UIDefeated extends lwg.Admin.Scene {
         lwgOnAwake() {
+            RecordManager.stopAutoRecord();
             Admin._gameStart = false;
         }
         lwgNodeDec() {
             this.self['BtnSelect_WeChat'].visible = true;
             this.self['BtnAgain_WeChat'].visible = false;
-            this.self['Dot'].visible = true;
+            this.self['Dot_WeChat'].visible = true;
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
@@ -4364,13 +5434,23 @@
             ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
             Setting.setBtnAppear();
             PalyAudio.playDefeatedSound();
-            if (Game._platform == Game._platformTpye.OPPO) {
-                this.self['OPPO'].visible = true;
-                this.self['WeChat'].visible = false;
-            }
-            else {
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = true;
+            switch (Game._platform) {
+                case Game._platformTpye.OPPO:
+                    this.self['OPPO'].visible = true;
+                    this.self['WeChat'].visible = false;
+                    this.self['Bytedance'].visible = false;
+                    break;
+                case Game._platformTpye.WeChat:
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = true;
+                    this.self['Bytedance'].visible = false;
+                    break;
+                case Game._platformTpye.Bytedance:
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = false;
+                    this.self['Bytedance'].visible = true;
+                default:
+                    break;
             }
         }
         lwgBtnClick() {
@@ -4379,17 +5459,35 @@
             Click.on(Click.Type.largen, this.self['BtnSelect_WeChat'], this, null, null, this.btnSelectUp);
             Click.on(Click.Type.largen, this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
             Click.on(Click.Type.largen, this.self['BtnNext_OPPO'], this, null, null, this.btnNextUp);
+            Click.on(Click.Type.largen, this.self['BtnAgain_Bytedance'], this, null, null, this.btnAgainUp);
+            Click.on(Click.Type.largen, this.self['BtnNext_Bytedance'], this, null, null, this.btnNextUp);
+            Click.on(Click.Type.largen, this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelectUp);
         }
         btnSelectUp() {
-            if (this.self['Dot'].visible) {
-                this.self['Dot'].visible = false;
+            let Dot;
+            switch (Game._platform) {
+                case Game._platformTpye.WeChat:
+                    Dot = this.self['Dot_WeChat'];
+                    break;
+                case Game._platformTpye.Bytedance:
+                    Dot = this.self['Dot_Bytedance'];
+                    break;
+                default:
+                    break;
+            }
+            if (Dot.visible) {
+                Dot.visible = false;
                 this.self['BtnNext_WeChat'].visible = false;
                 this.self['BtnAgain_WeChat'].visible = true;
+                this.self['BtnNext_Bytedance'].visible = false;
+                this.self['BtnAgain_Bytedance'].visible = true;
             }
             else {
-                this.self['Dot'].visible = true;
+                Dot.visible = true;
                 this.self['BtnNext_WeChat'].visible = true;
                 this.self['BtnAgain_WeChat'].visible = false;
+                this.self['BtnNext_Bytedance'].visible = true;
+                this.self['BtnAgain_Bytedance'].visible = false;
             }
         }
         btnAgainUp() {
@@ -4673,7 +5771,7 @@
                 case 'standard':
                     console.log('碰到线了，游戏失败！');
                     EventAdmin.notify(GEnum.EventType.lianHong);
-                    Laya.timer.frameOnce(60, this, () => {
+                    Laya.timer.frameOnce(90, this, () => {
                         EventAdmin.notify(EventAdmin.EventType.resurgence);
                     });
                     break;
@@ -5096,7 +6194,7 @@
             this.easterEggInit();
         }
         gameInit() {
-            Game._platform = Game._platformTpye.WeChat;
+            Game._platform = Game._platformTpye.Bytedance;
         }
         ;
         skinInit() {
@@ -5394,6 +6492,7 @@
             Admin._gameStart = true;
             this.createProgress();
             EventAdmin.notify(Task.TaskType.useSkins);
+            RecordManager.startAutoRecord();
             ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
         }
         lwgOnEnable() {
@@ -5751,114 +6850,21 @@
         }
     }
 
-    class RecordManager {
-        constructor() {
-            this.GRV = null;
-            this.isRecordVideoing = false;
-            this.isVideoRecord = false;
-            this.videoRecordTimer = 0;
-            this.isHasVideoRecord = false;
-        }
-        static Init() {
-            RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();
-        }
-        static startAutoRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            if (RecordManager.grv == null)
-                RecordManager.Init();
-            if (RecordManager.recording)
-                return;
-            RecordManager.autoRecording = true;
-            console.log("******************开始录屏");
-            RecordManager._start();
-            RecordManager.lastRecordTime = Date.now();
-        }
-        static stopAutoRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            if (!RecordManager.autoRecording) {
-                console.log("RecordManager.autoRecording", RecordManager.autoRecording);
-                return false;
-            }
-            RecordManager.autoRecording = false;
-            RecordManager._end(false);
-            if (Date.now() - RecordManager.lastRecordTime > 6000) {
-                return true;
-            }
-            if (Date.now() - RecordManager.lastRecordTime < 3000) {
-                console.log("小于3秒");
-                return false;
-            }
-            return true;
-        }
-        static startRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            if (RecordManager.autoRecording) {
-                this.stopAutoRecord();
-            }
-            RecordManager.recording = true;
-            RecordManager._start();
-            RecordManager.lastRecordTime = Date.now();
-        }
-        static stopRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("time:" + (Date.now() - RecordManager.lastRecordTime));
-            if (Date.now() - RecordManager.lastRecordTime <= 3000) {
-                return false;
-            }
-            RecordManager.recording = false;
-            RecordManager._end(true);
-            return true;
-        }
-        static _start() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("******************180s  ？？？？？");
-            RecordManager.grv.Start(180);
-        }
-        static _end(share) {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("******************180结束 ？？？？？");
-            RecordManager.grv.Stop(share);
-        }
-        static _share(type, successedAc, completedAc = null, failAc = null) {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
-            if (RecordManager.grv.videoPath) {
-                let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
-                p.extra.videoTopics = ["解救小王子", "番茄小游戏", "抖音小游戏"];
-                p.channel = "video";
-                p.success = () => {
-                    Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
-                    successedAc();
-                };
-                p.fail = () => {
-                    if (type === 'noAward') {
-                        Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
-                    }
-                    else {
-                        Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
-                    }
-                    failAc();
-                };
-                RecordManager.grv.Share(p);
-            }
-            else {
-                Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
-            }
-        }
-    }
-    RecordManager.recording = false;
-    RecordManager.autoRecording = false;
-
     class UIShare extends lwg.Admin.Scene {
         lwgOnAwake() {
             Admin._gameStart = false;
+            if (Game._platform !== Game._platformTpye.Bytedance) {
+                this.self['WeChat'].visible = true;
+                this.self['Bytedance'].visible = false;
+            }
+            else {
+                this.self['WeChat'].visible = false;
+                this.self['Bytedance'].visible = true;
+                this.self['BtnClose_Bytedance'].visible = false;
+                Laya.timer.frameOnce(120, this, () => {
+                    this.self['BtnClose_Bytedance'].visible = true;
+                });
+            }
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
@@ -5873,27 +6879,17 @@
             }
             let url = 'UI/Share/Photo/' + index + '.png';
             this.self['SmallPhoto'].skin = url;
-            if (Game._platform !== Game._platformTpye.Bytedance) {
-                this.self['BtnComplete'].visible = true;
-                this.self['BtnShare'].visible = false;
-                this.self['BtnNoShare'].visible = false;
-            }
-            else {
-                this.self['BtnComplete'].visible = false;
-                this.self['BtnShare'].visible = true;
-                this.self['BtnNoShare'].visible = true;
-            }
         }
         lwgOpenAni() {
             this.aniTime = 100;
             this.aniDelayde = 100;
             this.self['SmallFram'].x -= 500;
             this.self['Logo'].y -= 500;
-            this.self['BtnShare'].alpha = 0;
+            this.self['BtnShare_Bytedance'].alpha = 0;
             Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
                 Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
                 Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
-                Animation2D.bombs_Appear(this.self['BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
+                Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
                 let hotAddNum = Math.floor(Math.random() * 100 + 900);
                 Laya.timer.frameLoop(1, this, () => {
                     if (Number(this.self['HotNum'].text) < hotAddNum) {
@@ -5903,8 +6899,6 @@
                 Laya.timer.once(this.aniDelayde * 7, this, () => { this.self['Icon_hand'].skin = 'UI/Share/tubiao_1-2.png'; });
                 Animation2D.rotate_Scale(this.self['Icon_hand'], -10, 2, 2, 0, 1, 1, this.aniTime * 4, this.aniDelayde * 7);
             });
-            this.self['BtnNoShare'].alpha = 0;
-            Animation2D.fadeOut(this.self['BtnNoShare'], 0, 1, this.aniTime, this.aniDelayde * 20);
             Effects.createExplosion_Rotate(this.self['SceneContent'], 40, this.self['SceneContent'].width / 2, this.self['SceneContent'].height / 2 - 100, Effects.SkinStyle.star, 20, 15);
             return this.aniTime * 5;
         }
@@ -5928,12 +6922,14 @@
             Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
                 this.shareFunc();
             });
-            Click.on(Click.Type.largen, this.self['BtnShare'], this, null, null, this.btnShareUp);
-            Click.on(Click.Type.largen, this.self['BtnNoShare'], this, null, null, this.btnNoShareUp);
+            Click.on(Click.Type.largen, this.self['BtnShare_Bytedance'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.largen, this.self['BtnClose_Bytedance'], this, null, null, this.btnNoShareUp);
         }
         btnShareUp() {
             RecordManager._share('award', () => {
                 this.shareFunc();
+                Dialog.createHint_Middle(Dialog.HintContent["分享成功，获得50金币！"]);
+                Gold.addGold(50);
                 ADManager.TAPoint(TaT.BtnClick, 'sharebt_share');
             });
         }
@@ -6730,6 +7726,9 @@
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
             Setting.setBtnAppear();
         }
+        lwgAdaptive() {
+            this.self['P204'].y = Laya.stage.height;
+        }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
             for (let index = 0; index < this.LevelStyle.numChildren; index++) {
@@ -6994,9 +7993,13 @@
 
     class UIVictory extends lwg.Admin.Scene {
         constructor() {
-            super();
+            super(...arguments);
             this.addOrSub = 'add';
         }
+        lwgOnAwake() {
+            RecordManager.stopAutoRecord();
+        }
+        ;
         lwgNodeDec() {
             this.GlodNum = this.self['GlodNum'];
             ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
@@ -7005,67 +8008,105 @@
         lwgOnEnable() {
             ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
             this.getGoldNum = 50;
-            this.getGoldDisPlay();
-            Gold.goldAppear(500);
+            Gold.goldAppear();
             Setting.setBtnAppear();
             Game._gameLevel.value++;
             PalyAudio.playVictorySound();
-            this.self['BtnAdv_Wechat'].visible = true;
-            this.self['BtnNormal_Wechat'].visible = false;
-            this.self['Dot'].visible = true;
             lwg.Effects.createFireworks(Laya.stage, 40, 430, 200);
             lwg.Effects.createFireworks(Laya.stage, 40, 109, 200);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
             EventAdmin.notify(Task.TaskType.victory);
-            if (Game._platform == Game._platformTpye.OPPO) {
-                this.self['OPPO'].visible = true;
-                this.self['WeChat'].visible = false;
-            }
-            else {
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = true;
+            switch (Game._platform) {
+                case Game._platformTpye.OPPO:
+                    this.self['OPPO'].visible = true;
+                    this.self['WeChat'].visible = false;
+                    this.self['Bytedance'].visible = false;
+                    this.getGoldDisPlay(1);
+                    break;
+                case Game._platformTpye.WeChat:
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = true;
+                    this.self['Bytedance'].visible = false;
+                    this.self['BtnAdv_WeChat'].visible = true;
+                    this.self['BtnNormal_WeChat'].visible = false;
+                    this.self['Dot_WeChat'].visible = true;
+                    this.getGoldDisPlay(10);
+                    break;
+                case Game._platformTpye.Bytedance:
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = false;
+                    this.self['Bytedance'].visible = true;
+                    this.self['Dot_Bytedance'].visible = true;
+                    this.getGoldDisPlay(10);
+                    break;
+                default:
+                    break;
             }
         }
         lwgOpenAni() {
             if (Game._platform == Game._platformTpye.OPPO) {
+                this.self['Multiply10'].alpha = 0;
                 return;
             }
             this.self['Multiply10'].alpha = 0;
             this.self['GlodNum'].alpha = 0;
-            this.self['BtnAdv_Wechat'].alpha = 0;
+            this.self['BtnAdv_WeChat'].alpha = 0;
             this.self['Select'].alpha = 0;
             Animation2D.move_Simple(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y - 500, this.self['Logo'].x, this.self['Logo'].y, this.aniTime * 5, this.aniDelayde * 0, Laya.Ease.cubicOut, () => {
                 Animation2D.scale_Alpha(this.self['Multiply10'], 0, 0, 0, 1, 1, 1, this.aniTime * 3);
                 Animation2D.bombs_Appear(this.self['GlodNum'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 3);
-                Animation2D.bombs_Appear(this.self['BtnAdv_Wechat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
+                Animation2D.bombs_Appear(this.self['BtnAdv_WeChat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
                 Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
             });
             return 0;
         }
-        getGoldDisPlay() {
+        getGoldDisPlay(number) {
             let Num = this.GlodNum.getChildByName('Num');
-            Num.text = (this.getGoldNum * 10).toString();
+            Num.text = (this.getGoldNum * number).toString();
         }
         lwgBtnClick() {
-            Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
-            Click.on(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
-            Click.on(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
-            Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
-            Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
+            Click.on(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp);
+            Click.on(Click.Type.largen, this.self['BtnAdv_WeChat'], this, null, null, this.btnAdvUp);
+            Click.on(Click.Type.largen, this.self['BtnNormal_WeChat'], this, null, null, this.btnNormalUp);
+            Click.on(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp);
+            Click.on(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp);
+            Click.on(Click.Type.largen, this.self['BtnNext_Bytedance'], this, null, null, this.btnNext_BytedanceUp);
+            Click.on(Click.Type.largen, this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelectUp);
         }
         offClick() {
-            Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp, null);
-            Click.off(Click.Type.largen, this.self['BtnAdv_Wechat'], this, null, null, this.btnAdvUp, null);
-            Click.off(Click.Type.largen, this.self['BtnNormal_Wechat'], this, null, null, this.btnNormalUp, null);
-            Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp, null);
-            Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp, null);
+            Click.off(Click.Type.noEffect, this.self['BtnSelect_Wechat'], this, null, null, this.btnSelectUp);
+            Click.off(Click.Type.largen, this.self['BtnAdv_WeChat'], this, null, null, this.btnAdvUp);
+            Click.off(Click.Type.largen, this.self['BtnNormal_WeChat'], this, null, null, this.btnNormalUp);
+            Click.off(Click.Type.largen, this.self['BtnAdv_OPPO'], this, null, null, this.btnAdvUp);
+            Click.off(Click.Type.largen, this.self['BtnNormal_OPPO'], this, null, null, this.btnNormalUp);
+            Click.off(Click.Type.largen, this.self['BtnNext_Bytedance'], this, null, null, this.btnNext_BytedanceUp);
+            Click.off(Click.Type.largen, this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelectUp);
+        }
+        btnNext_BytedanceUp() {
+            if (this.self['Dot_Bytedance'].visible) {
+                this.btnAdvUp();
+            }
+            else {
+                this.btnNormalUp();
+            }
         }
         btnSelectUp() {
-            if (this.self['Dot'].visible) {
-                this.self['Dot'].visible = false;
-                this.self['BtnAdv_Wechat'].visible = false;
-                this.self['BtnNormal_Wechat'].visible = true;
+            let Dot;
+            switch (Game._platform) {
+                case Game._platformTpye.Bytedance:
+                    Dot = this.self['Dot_Bytedance'];
+                    break;
+                case Game._platformTpye.Bytedance:
+                    Dot = this.self['Dot_WeChat'];
+                    break;
+                default:
+                    break;
+            }
+            if (Dot.visible) {
+                Dot.visible = false;
+                this.self['BtnAdv_WeChat'].visible = false;
+                this.self['BtnNormal_WeChat'].visible = true;
                 this.addOrSub = 'sub';
                 let Multiply10 = this.self['Multiply10'];
                 Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 0, 0, 0, 100);
@@ -7083,9 +8124,9 @@
                 });
             }
             else {
-                this.self['Dot'].visible = true;
-                this.self['BtnAdv_Wechat'].visible = true;
-                this.self['BtnNormal_Wechat'].visible = false;
+                Dot.visible = true;
+                this.self['BtnAdv_WeChat'].visible = true;
+                this.self['BtnNormal_WeChat'].visible = false;
                 this.addOrSub = 'add';
                 let Multiply10 = this.self['Multiply10'];
                 Animation2D.scale_Alpha(Multiply10, Multiply10.alpha, Multiply10.scaleX, Multiply10.scaleY, 1, 1, 1, 100);
@@ -7166,14 +8207,27 @@
         victoryBoxOnAwake() {
             ADManager.TAPoint(TaT.BtnShow, 'Adboxvideo');
             ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
-            this.self['BtnAgain'].visible = false;
-            this.self['BtnNo'].visible = false;
+            Gold.goldAppear();
+            this.self['BtnAgain_WeChat'].visible = false;
+            this.self['BtnNo_WeChat'].visible = false;
             if (VictoryBox._openVictoryBoxNum > 1) {
                 let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
                 for (let index = 0; index < arr.length; index++) {
                     const element = arr[index];
                     VictoryBox.setBoxProperty('box' + arr[index], VictoryBox.BoxProperty.ads, true);
                 }
+            }
+            switch (Game._platform) {
+                case Game._platformTpye.WeChat:
+                    this.self['Bytedance'].visible = false;
+                    this.self['WeChat'].visible = true;
+                    break;
+                case Game._platformTpye.Bytedance:
+                    this.self['Bytedance'].visible = true;
+                    this.self['WeChat'].visible = false;
+                    break;
+                default:
+                    break;
             }
         }
         victoryBoxEventReg() {
@@ -7259,12 +8313,27 @@
             }
         }
         victoryBoxBtnClick() {
-            Click.on('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-            Click.on('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+            Click.on('largen', this.self['BtnNo_WeChat'], this, null, null, this.btnNoUp);
+            Click.on('largen', this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+            Click.on('largen', this.self['BtnNo_Bytedance'], this, null, null, this.btnNoUp);
+            Click.on('largen', this.self['BtnAgain_Bytedance'], this, null, null, this.btnAgainUp);
+            Click.on('largen', this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelect_BytedanceUp);
         }
         btnOffClick() {
-            Click.off('largen', this.self['BtnNo'], this, null, null, this.btnNoUp, null);
-            Click.off('largen', this.self['BtnAgain'], this, null, null, this.btnAgainUp, null);
+            Click.off('largen', this.self['BtnNo_WeChat'], this, null, null, this.btnNoUp);
+            Click.off('largen', this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+        }
+        btnSelect_BytedanceUp() {
+            if (this.self['Dot_Bytedance'].visible) {
+                this.self['Dot_Bytedance'].visible = false;
+                this.self['BtnNo_Bytedance'].visible = true;
+                this.self['BtnAgain_Bytedance'].visible = false;
+            }
+            else {
+                this.self['Dot_Bytedance'].visible = true;
+                this.self['BtnNo_Bytedance'].visible = false;
+                this.self['BtnAgain_Bytedance'].visible = true;
+            }
         }
         btnNoUp(event) {
             lwg.Admin._openScene(lwg.Admin.SceneName.UIVictory, null, null, null);
@@ -7286,12 +8355,12 @@
         }
         victoryOnUpdate() {
             if (VictoryBox._defaultOpenNum > 0) {
-                this.self['BtnAgain'].visible = false;
-                this.self['BtnNo'].visible = false;
+                this.self['BtnAgain_WeChat'].visible = false;
+                this.self['BtnNo_WeChat'].visible = false;
             }
             else {
-                this.self['BtnAgain'].visible = true;
-                this.self['BtnNo'].visible = true;
+                this.self['BtnAgain_WeChat'].visible = true;
+                this.self['BtnNo_WeChat'].visible = true;
             }
         }
     }
@@ -7366,6 +8435,15 @@
         constructor() { }
         static init() {
             var reg = Laya.ClassUtils.regClass;
+            reg("TJ/Promo/script/PromoOpen.ts", PromoOpen);
+            reg("TJ/Promo/script/ButtonScale.ts", ButtonScale);
+            reg("TJ/Promo/script/PromoItem.ts", PromoItem);
+            reg("TJ/Promo/script/P201.ts", P201);
+            reg("TJ/Promo/script/P202.ts", P202);
+            reg("TJ/Promo/script/P204.ts", P204);
+            reg("TJ/Promo/script/P205.ts", P205);
+            reg("TJ/Promo/script/P106.ts", P106);
+            reg("script/Game/UIADSHint.ts", UIADSHint);
             reg("script/Game/UICheckIn.ts", UICheckIn);
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UIEasterEgg.ts", UIEasterEgg);

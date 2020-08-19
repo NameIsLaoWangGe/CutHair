@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":25,
-    "selecteID":56,
+    "selectedBox":2,
+    "selecteID":25,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":58,
+    "maxID":68,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -41,20 +41,6 @@
             "hasChild":true,
             "compId":25,
             "child":[
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,Logo,Logo",
-                    "props":{"y":-66,"x":326,"width":408,"var":"Logo","texture":"UI/Share/biaoti.png","pivotY":29,"pivotX":204,"name":"Logo","height":58},
-                    "nodeParent":25,
-                    "label":"Logo",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":39,
-                    "child":[
-                        ]
-                },
                 {
                     "x":30,
                     "type":"Image",
@@ -219,14 +205,13 @@
                     "props":{"y":-1,"x":-15,"var":"SmallFram","texture":"UI/Share/lifaqian_di.png","name":"SmallFrame"},
                     "nodeParent":25,
                     "label":"SmallFrame",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":29,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,SmallPhoto,SmallPhoto",
                             "props":{"y":16,"x":34,"width":151,"var":"SmallPhoto","skin":"UI/Share/Photo/1.png","sizeGrid":"23,12,16,27","rotation":4.9,"name":"SmallPhoto","height":113},
@@ -244,73 +229,127 @@
                 {
                     "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite,BtnNoShare,BtnNoShare",
-                    "props":{"y":958,"x":315,"width":211,"var":"BtnNoShare","texture":"UI/Share/txt_cai.png","pivotY":15,"pivotX":106,"name":"BtnNoShare","height":29},
+                    "searchKey":"Sprite,WeChat,WeChat",
+                    "props":{"y":763,"x":155,"width":314,"var":"WeChat","name":"WeChat","height":178},
                     "nodeParent":25,
-                    "label":"BtnNoShare",
+                    "label":"WeChat",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":58,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnComplete,BtnComplete",
+                            "props":{"y":83,"x":157,"width":288,"var":"BtnComplete","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnComplete","height":128},
+                            "nodeParent":58,
+                            "label":"BtnComplete",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":56,
+                            "child":[
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":42.5,"x":100.5,"texture":"UI/UISkin/txt_wancheng.png"},
+                                    "nodeParent":56,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":57,
+                                    "child":[
+                                        ]
+                                }]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,Bytedance,Bytedance",
+                    "props":{"y":-1,"x":14,"width":606,"var":"Bytedance","name":"Bytedance","height":931},
+                    "nodeParent":25,
+                    "label":"Bytedance",
                     "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":63,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnClose_Bytedance,BtnClose_Bytedance",
+                            "props":{"y":55,"x":556,"width":72,"var":"BtnClose_Bytedance","texture":"UI/Common/X.png","pivotY":36,"pivotX":36,"name":"BtnClose_Bytedance","height":72},
+                            "nodeParent":63,
+                            "label":"BtnClose_Bytedance",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":64,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,BtnShare_Bytedance,BtnShare_Bytedance",
+                            "props":{"y":847,"x":298,"width":288,"var":"BtnShare_Bytedance","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnShare_Bytedance","height":128},
+                            "nodeParent":63,
+                            "label":"BtnShare_Bytedance",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":34,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":42.5,"x":77.5,"texture":"UI/Share/txt_zhanshi.png"},
+                                    "nodeParent":34,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":35,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-2,"x":284,"texture":"UI/Share/50Gold.png"},
+                                    "nodeParent":34,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":67,
+                                    "child":[
+                                        ]
+                                }]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,Logo,Logo",
+                    "props":{"y":-66,"x":326,"width":408,"var":"Logo","texture":"UI/Share/biaoti.png","pivotY":29,"pivotX":204,"name":"Logo","height":58},
+                    "nodeParent":25,
+                    "label":"Logo",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":36,
+                    "compId":39,
                     "child":[
                         ]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,BtnShare,BtnShare",
-                    "props":{"y":843,"x":315,"width":288,"var":"BtnShare","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnShare","height":128},
-                    "nodeParent":25,
-                    "label":"BtnShare",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":34,
-                    "child":[
-                        {
-                            "x":45,
-                            "type":"Sprite",
-                            "searchKey":"Sprite",
-                            "props":{"y":42.5,"x":77.5,"texture":"UI/Share/txt_zhanshi.png"},
-                            "nodeParent":34,
-                            "label":"Sprite",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":35,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,BtnComplete,BtnComplete",
-                    "props":{"y":843,"x":315,"width":288,"var":"BtnComplete","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnComplete","height":128},
-                    "nodeParent":25,
-                    "label":"BtnComplete",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":56,
-                    "child":[
-                        {
-                            "x":45,
-                            "type":"Sprite",
-                            "searchKey":"Sprite",
-                            "props":{"y":42.5,"x":100.5,"texture":"UI/UISkin/txt_wancheng.png"},
-                            "nodeParent":56,
-                            "label":"Sprite",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":57,
-                            "child":[
-                                ]
-                        }]
                 }]
         },
         {
@@ -320,7 +359,7 @@
             "source":"src/script/Game/UIShare.ts",
             "searchKey":"Script,UIShare",
             "removeAble":true,
-            "props":{},
+            "props":{"y":0,"x":0},
             "nodeParent":2,
             "label":"UIShare",
             "isDirectory":false,

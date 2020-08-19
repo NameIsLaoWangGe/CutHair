@@ -1,4 +1,4 @@
-import { Dialog } from "../Lwg_Template/lwg";
+import { Dialog, Admin } from "../Lwg_Template/lwg";
 
 
 export default class RecordManager {
@@ -86,7 +86,7 @@ export default class RecordManager {
         console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
         if (RecordManager.grv.videoPath) {
             let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
-            p.extra.videoTopics = ["解救小王子", "番茄小游戏", "抖音小游戏"]
+            p.extra.videoTopics = ["剃头大师", "番茄小游戏", "抖音小游戏"]
             p.channel = "video";
             p.success = () => {
                 Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
@@ -107,8 +107,4 @@ export default class RecordManager {
             // UIMgr.tip("暂无录屏，玩一局游戏可以分享");
         }
     }
-
-
-
-
 }

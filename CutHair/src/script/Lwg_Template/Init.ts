@@ -1,5 +1,4 @@
-import { Skin, Shop, Task, Admin, EventAdmin } from "./lwg";
-import { EasterEgg } from "./EasterEgg";
+import { Skin, Shop, Task, Admin, EventAdmin, EasterEgg } from "./lwg";
 import { Game } from "./Game";
 
 export default class Init extends Admin.Scene {
@@ -12,7 +11,7 @@ export default class Init extends Admin.Scene {
         this.easterEggInit();
     }
     gameInit(): void {
-        Game._platform = Game._platformTpye.WeChat;
+        Game._platform = Game._platformTpye.Bytedance;
     };
     skinInit(): void {
         Skin._currentEye.name = null;
