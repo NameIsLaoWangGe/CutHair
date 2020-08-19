@@ -49,11 +49,11 @@ export default class UIDefeated extends lwg.Admin.Scene {
     btnSelectUp(): void {
         if (this.self['Dot'].visible) {
             this.self['Dot'].visible = false;
-            this.self['BtnSelect_WeChat'].visible = false;
+            this.self['BtnNext_WeChat'].visible = false;
             this.self['BtnAgain_WeChat'].visible = true;
         } else {
             this.self['Dot'].visible = true;
-            this.self['BtnSelect_WeChat'].visible = true;
+            this.self['BtnNext_WeChat'].visible = true;
             this.self['BtnAgain_WeChat'].visible = false;
         }
     }

@@ -1,14 +1,22 @@
 import ADManager, { TaT } from "../TJ/Admanager";
-import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin, Setting } from "../Lwg_Template/lwg";
+import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin, Setting, Dialog } from "../Lwg_Template/lwg";
 import { Game } from "../Lwg_Template/Game";
 
 export default class UICheckIn extends CheckIn.CheckInScene {
 
     checkInNodeDec(): void {
         if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-            this.self['BtnThreeGet_WeChat'].visible = false;
-            this.self['BtnGet_WeChat'].visible = false;
-            this.self['Select_WeChat'].visible = false;
+            this.self['WeChat'].visible = false;
+            this.self['OPPO'].visible = false;
+        }else{
+            if (Game._platform === Game._platformTpye.OPPO) {
+                this.self['OPPO'].visible = true;
+                this.self['WeChat'].visible = false;
+    
+            } else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
+                this.self['OPPO'].visible = false;
+                this.self['WeChat'].visible = true;
+            }
         }
     }
 
@@ -19,15 +27,6 @@ export default class UICheckIn extends CheckIn.CheckInScene {
         Setting.setBtnVinish();
         let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip') as Laya.Image;
         ChinkTip.visible = false;
-
-        if (Game._platform === Game._platformTpye.OPPO) {
-            this.self['OPPO'].visible = true;
-            this.self['WeChat'].visible = false;
-
-        } else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
-            this.self['OPPO'].visible = false;
-            this.self['WeChat'].visible = true;
-        }
     }
 
     checkList_Update(cell: Laya.Box, index: number): void {
@@ -127,6 +126,7 @@ export default class UICheckIn extends CheckIn.CheckInScene {
      * @param number 几倍领取
      */
     btnGetUpFunc(number): void {
+
         this.btnOffClick();
         let index = CheckIn._checkInNum.number;
         let target;

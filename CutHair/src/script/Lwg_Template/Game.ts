@@ -3,7 +3,7 @@ import { Admin } from "./lwg";
 /**游戏中的一些基础数值,例如等级、体力等*/
 export module GameControl {
 
-    /**渠道类型，控制一些节点的变化*/
+    /**平摊，控制一些节点的变化*/
     export let _platform: string;
     /**渠道类型*/
     export enum _platformTpye {
@@ -11,7 +11,7 @@ export module GameControl {
         OPPO = 'OPPO',
         Bytedance = 'Bytedance',
         /**通用*/ 
-        any = 'any',
+        All = 'All',
     }
 
     /**游戏控制开关*/

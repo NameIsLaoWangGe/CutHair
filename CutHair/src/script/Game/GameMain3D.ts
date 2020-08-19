@@ -19,6 +19,7 @@ export default class GameMain3D extends lwg3D.Scene3D {
         // 获取关卡prefab
         GSene3D.LevelParent = Laya.loader.getRes("3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh") as Laya.MeshSprite3D;
 
+
         this.self.addChild(GSene3D.LevelParent);
         GSene3D.LevelParent.transform.position = GSene3D.LevelParent_Mark.transform.position;
 
@@ -196,6 +197,16 @@ export default class GameMain3D extends lwg3D.Scene3D {
             GSene3D.MainCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
             GSene3D.TouchScreen.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
         });
+
+        //脸红 
+        EventAdmin.reg(GEnum.EventType.lianHong, this, () => {
+            Admin._gameStart = false;
+            let RoleObj = GSene3D.Level.getChildByName('RoleObj') as Laya.MeshSprite3D;
+            let ani = RoleObj.getComponent(Laya.Animator) as Laya.Animator;
+            if (ani) {
+                ani.play("touHongclip");
+            }
+        })
     };
 
     lwgOnEnable(): void {

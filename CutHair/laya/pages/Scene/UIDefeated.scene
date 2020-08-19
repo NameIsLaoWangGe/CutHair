@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":148,
+    "selectedBox":142,
+    "selecteID":143,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -92,13 +92,14 @@
                             "props":{"y":2,"x":21,"visible":true,"var":"BtnSelect_WeChat","texture":"UI/Common/yuan1.png","name":"BtnSelect_WeChat"},
                             "nodeParent":142,
                             "label":"BtnSelect_WeChat",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":143,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite,Dot,Dot",
                                     "props":{"y":8.75,"x":7.75,"var":"Dot","texture":"UI/Common/yuan2.png","name":"Dot"},

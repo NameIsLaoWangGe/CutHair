@@ -93,35 +93,45 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+        Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
-
+            e.stopPropagation();
             lwg.Admin._openScene(Admin.SceneName.UIShop);
         });
 
-        Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
-            Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
-            ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+        // Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
+        //     Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+        //     ADManager.TAPoint(TaT.BtnClick, 'startword_main');
 
-        });
+        // });
 
-        Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
+        Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e: Laya.Event) => {
+            e.stopPropagation();
             Admin._openScene(lwg.Admin.SceneName.UITask);
         });
 
-        Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
-            lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+        Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
-
+            
+            e.stopPropagation();
+            lwg.Admin._openScene(Admin.SceneName.UICheckIn);
 
         });
 
-        Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+        Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, (e: Laya.Event) => {
+
+            e.stopPropagation();
             lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
 
         });
 
         Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
+
+        Click.on(Click.Type.largen, this.self['Background'], this, () => {
+            ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+            Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+        });
+
     }
 
     easterEgg_AotumanSwitch: boolean = false;

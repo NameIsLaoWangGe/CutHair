@@ -44,6 +44,8 @@ export module Global {
             changeTrySkin = 'changeTrySkin',
             /**皮肤试用换装*/
             goBack = 'goBack',
+            /**脸红*/
+            lianHong = 'lianHong',
         }
     }
 

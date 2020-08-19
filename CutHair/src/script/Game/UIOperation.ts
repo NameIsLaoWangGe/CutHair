@@ -26,7 +26,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         set setValue(vals) {
             this.value = vals;
             if (this.switch) {
-                console.log('剩余需要修理的头发', this.value);
+                // console.log('剩余需要修理的头发', this.value);
 
                 let residue = [10, 10, 10, 10, 20, 10, 20, 10, 26, 28];
                 let index;
@@ -57,7 +57,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         set setValue(vals) {
             this.value = vals;
             if (this.switch) {
-                console.log('剩余左侧胡须', this.value);
+                // console.log('剩余左侧胡须', this.value);
                 if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
@@ -77,7 +77,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         set setValue(vals) {
             this.value = vals;
             if (this.switch) {
-                console.log('剩余剩余右侧胡须', this.value);
+                // console.log('剩余剩余右侧胡须', this.value);
                 if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
@@ -97,7 +97,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         set setValue(vals) {
             this.value = vals;
             if (this.switch) {
-                console.log('剩余中间胡子', this.value);
+                // console.log('剩余中间胡子', this.value);
                 if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
@@ -117,7 +117,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         set setValue(vals) {
             this.value = vals;
             if (this.switch) {
-                console.log('剩余右上角', this.value);
+                // console.log('剩余右上角', this.value);
                 if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
@@ -137,7 +137,7 @@ export default class UIOperation extends lwg.Admin.Scene {
         set setValue(vals) {
             this.value = vals;
             if (this.switch) {
-                console.log('剩余左上角', this.value);
+                // console.log('剩余左上角', this.value);
                 if (this.value <= 10) {
                     console.log('任务完成了！');
                     this.switch = false;
@@ -193,10 +193,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         // 复活
         EventAdmin.reg(EventAdmin.EventType.resurgence, this, () => {
-            if (Admin._gameStart) {
-                Admin._openScene(Admin.SceneName.UIResurgence);
-                Admin._gameStart = false;
-            }
+            Admin._openScene(Admin.SceneName.UIResurgence);
         })
 
         // 左侧胡子修剪
@@ -493,8 +490,6 @@ export default class UIOperation extends lwg.Admin.Scene {
         GSene3D.Razor.transform.localPositionY -= diffY * 0.01;
         Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.5);
     }
-
-
 
     /**刮刀在脸上的移动规则*/
     knifeMove(e): void {

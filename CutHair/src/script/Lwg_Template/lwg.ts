@@ -410,6 +410,8 @@ export module lwg {
             '观看广告可以获得三次开宝箱次数！',
             '没有宝箱领可以领了！',
             '请前往皮肤界面购买！',
+            '今天已经签到过了！',
+
         }
         enum Skin {
             blackBord = 'Frame/UI/ui_orthogon_black.png'
@@ -583,7 +585,7 @@ export module lwg {
             }
             Laya.timer.once(startDelayed, this, () => {
                 let Pre_Dialogue;
-                Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+                Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
                     let _prefab = new Laya.Prefab();
                     _prefab.json = prefab;
                     Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
@@ -627,7 +629,19 @@ export module lwg {
                 }));
             })
         }
+
+
+
+
+        export function createDialogHint(): void {
+            Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
+
+                
+            }))
+        }
     }
+
+
 
     /**金币模块*/
     export module Gold {
@@ -1004,7 +1018,7 @@ export module lwg {
             UISkin = 'UISkin',
             UIEasterEgg = 'UIEasterEgg',
         }
-        
+
         /**游戏当前的状态*/
         export enum GameState {
             /**开始界面*/
@@ -1077,8 +1091,8 @@ export module lwg {
             }
             /**游戏开始前执行一次，重写覆盖*/
             lwgOnAwake(): void { };
-            /**每个模块中需要初始化的内容，不和lwgOnAwake*/ 
-            lwgModuleOnAwake():void{
+            /**每个模块中需要初始化的内容，不和lwgOnAwake*/
+            lwgModuleOnAwake(): void {
 
             }
             onEnable() {
@@ -1744,7 +1758,7 @@ export module lwg {
          * @param out 出屏幕函数
          * 以上4个只是函数名，不可传递函数，如果没有特殊执行，那么就用此模块定义的4个函数，包括通用效果。
          */
-        export function off(effect, target, caller,  down?: Function, move?: Function, up?: Function, out?: Function): void {
+        export function off(effect, target, caller, down?: Function, move?: Function, up?: Function, out?: Function): void {
             let btnEffect;
             switch (effect) {
                 case Type.noEffect:
@@ -3003,7 +3017,8 @@ export module lwg {
             btn.y = y;
 
             btn.zOrder = 100;
-            var btnSetUp = function (): void {
+            var btnSetUp = function (e: Laya.Event): void {
+                e.stopPropagation();
                 Admin._openScene(Admin.SceneName.UISet);
             }
             Click.on(Click.Type.largen, btn, null, null, null, btnSetUp, null);
@@ -4570,7 +4585,7 @@ export module lwg {
 
     /**签到模块*/
     export module CheckIn {
-        /**签到list*/
+        /**签到list列表*/
         export let _checkList: Laya.List;
         /**列表信息*/
         export let _checkArray: Array<any>;

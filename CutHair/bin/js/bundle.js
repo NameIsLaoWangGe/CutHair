@@ -278,6 +278,7 @@
                 HintContent[HintContent["\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01"] = 24] = "\u89C2\u770B\u5E7F\u544A\u53EF\u4EE5\u83B7\u5F97\u4E09\u6B21\u5F00\u5B9D\u7BB1\u6B21\u6570\uFF01";
                 HintContent[HintContent["\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01"] = 25] = "\u6CA1\u6709\u5B9D\u7BB1\u9886\u53EF\u4EE5\u9886\u4E86\uFF01";
                 HintContent[HintContent["\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01"] = 26] = "\u8BF7\u524D\u5F80\u76AE\u80A4\u754C\u9762\u8D2D\u4E70\uFF01";
+                HintContent[HintContent["\u4ECA\u5929\u5DF2\u7ECF\u7B7E\u5230\u8FC7\u4E86\uFF01"] = 27] = "\u4ECA\u5929\u5DF2\u7ECF\u7B7E\u5230\u8FC7\u4E86\uFF01";
             })(HintContent = Dialog.HintContent || (Dialog.HintContent = {}));
             let Skin;
             (function (Skin) {
@@ -407,7 +408,7 @@
                 }
                 Laya.timer.once(startDelayed, this, () => {
                     let Pre_Dialogue;
-                    Laya.loader.load('prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                    Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
                         let _prefab = new Laya.Prefab();
                         _prefab.json = prefab;
                         Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
@@ -2021,7 +2022,8 @@
                 btn.x = x;
                 btn.y = y;
                 btn.zOrder = 100;
-                var btnSetUp = function () {
+                var btnSetUp = function (e) {
+                    e.stopPropagation();
                     Admin._openScene(Admin.SceneName.UISet);
                 };
                 Click.on(Click.Type.largen, btn, null, null, null, btnSetUp, null);
@@ -3880,7 +3882,7 @@
             _platformTpye["WeChat"] = "WeChat";
             _platformTpye["OPPO"] = "OPPO";
             _platformTpye["Bytedance"] = "Bytedance";
-            _platformTpye["any"] = "any";
+            _platformTpye["All"] = "All";
         })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
         GameControl._gameSwitch = false;
         GameControl._gameLevel = {
@@ -4142,9 +4144,18 @@
     class UICheckIn extends CheckIn.CheckInScene {
         checkInNodeDec() {
             if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-                this.self['BtnThreeGet_WeChat'].visible = false;
-                this.self['BtnGet_WeChat'].visible = false;
-                this.self['Select_WeChat'].visible = false;
+                this.self['WeChat'].visible = false;
+                this.self['OPPO'].visible = false;
+            }
+            else {
+                if (Game._platform === Game._platformTpye.OPPO) {
+                    this.self['OPPO'].visible = true;
+                    this.self['WeChat'].visible = false;
+                }
+                else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
+                    this.self['OPPO'].visible = false;
+                    this.self['WeChat'].visible = true;
+                }
             }
         }
         checkInOnEnable() {
@@ -4152,14 +4163,6 @@
             Setting.setBtnVinish();
             let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
             ChinkTip.visible = false;
-            if (Game._platform === Game._platformTpye.OPPO) {
-                this.self['OPPO'].visible = true;
-                this.self['WeChat'].visible = false;
-            }
-            else if (Game._platform === Game._platformTpye.WeChat || Game._platform === Game._platformTpye.Bytedance) {
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = true;
-            }
         }
         checkList_Update(cell, index) {
             let dataSource = cell.dataSource;
@@ -4324,6 +4327,7 @@
                 EventType["changeEyeDecoration"] = " changeEyeDecoration";
                 EventType["changeTrySkin"] = "changeTrySkin";
                 EventType["goBack"] = "goBack";
+                EventType["lianHong"] = "lianHong";
             })(EventType = GEnum.EventType || (GEnum.EventType = {}));
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
@@ -4379,12 +4383,12 @@
         btnSelectUp() {
             if (this.self['Dot'].visible) {
                 this.self['Dot'].visible = false;
-                this.self['BtnSelect_WeChat'].visible = false;
+                this.self['BtnNext_WeChat'].visible = false;
                 this.self['BtnAgain_WeChat'].visible = true;
             }
             else {
                 this.self['Dot'].visible = true;
-                this.self['BtnSelect_WeChat'].visible = true;
+                this.self['BtnNext_WeChat'].visible = true;
                 this.self['BtnAgain_WeChat'].visible = false;
             }
         }
@@ -4668,7 +4672,10 @@
                     break;
                 case 'standard':
                     console.log('碰到线了，游戏失败！');
-                    EventAdmin.notify(EventAdmin.EventType.resurgence);
+                    EventAdmin.notify(GEnum.EventType.lianHong);
+                    Laya.timer.frameOnce(60, this, () => {
+                        EventAdmin.notify(EventAdmin.EventType.resurgence);
+                    });
                     break;
                 default:
                     break;
@@ -4915,6 +4922,14 @@
                 GSene3D.MainCamera.transform.position = GSene3D.Landmark_Middle.transform.position;
                 GSene3D.MainCamera.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
                 GSene3D.TouchScreen.transform.localRotationEuler = GSene3D.Landmark_Middle.transform.localRotationEuler;
+            });
+            EventAdmin.reg(GEnum.EventType.lianHong, this, () => {
+                Admin._gameStart = false;
+                let RoleObj = GSene3D.Level.getChildByName('RoleObj');
+                let ani = RoleObj.getComponent(Laya.Animator);
+                if (ani) {
+                    ani.play("touHongclip");
+                }
             });
         }
         ;
@@ -5260,7 +5275,6 @@
                 set setValue(vals) {
                     this.value = vals;
                     if (this.switch) {
-                        console.log('剩余需要修理的头发', this.value);
                         let residue = [10, 10, 10, 10, 20, 10, 20, 10, 26, 28];
                         let index;
                         if (Game._gameLevel.value > 10) {
@@ -5289,7 +5303,6 @@
                 set setValue(vals) {
                     this.value = vals;
                     if (this.switch) {
-                        console.log('剩余左侧胡须', this.value);
                         if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
@@ -5307,7 +5320,6 @@
                 set setValue(vals) {
                     this.value = vals;
                     if (this.switch) {
-                        console.log('剩余剩余右侧胡须', this.value);
                         if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
@@ -5325,7 +5337,6 @@
                 set setValue(vals) {
                     this.value = vals;
                     if (this.switch) {
-                        console.log('剩余中间胡子', this.value);
                         if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
@@ -5343,7 +5354,6 @@
                 set setValue(vals) {
                     this.value = vals;
                     if (this.switch) {
-                        console.log('剩余右上角', this.value);
                         if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
@@ -5361,7 +5371,6 @@
                 set setValue(vals) {
                     this.value = vals;
                     if (this.switch) {
-                        console.log('剩余左上角', this.value);
                         if (this.value <= 10) {
                             console.log('任务完成了！');
                             this.switch = false;
@@ -5409,10 +5418,7 @@
                 }
             });
             EventAdmin.reg(EventAdmin.EventType.resurgence, this, () => {
-                if (Admin._gameStart) {
-                    Admin._openScene(Admin.SceneName.UIResurgence);
-                    Admin._gameStart = false;
-                }
+                Admin._openScene(Admin.SceneName.UIResurgence);
             });
             EventAdmin.reg(GEnum.EventType.LeftBeard, this, () => {
                 this._leftBeardNum.setValue = this._leftBeardNum.value - 1;
@@ -6752,25 +6758,29 @@
             }
         }
         lwgBtnClick() {
-            Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, () => {
+            Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e) => {
                 ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
+                e.stopPropagation();
                 lwg.Admin._openScene(Admin.SceneName.UIShop);
             });
-            Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
-                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
-                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
-            });
-            Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, () => {
+            Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e) => {
+                e.stopPropagation();
                 Admin._openScene(lwg.Admin.SceneName.UITask);
             });
-            Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, () => {
-                lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+            Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, (e) => {
                 ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
+                e.stopPropagation();
+                lwg.Admin._openScene(Admin.SceneName.UICheckIn);
             });
-            Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, () => {
+            Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, (e) => {
+                e.stopPropagation();
                 lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
             });
             Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
+            Click.on(Click.Type.largen, this.self['Background'], this, () => {
+                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+            });
         }
         btnXDSkinDown() {
         }
