@@ -12,8 +12,8 @@ export default class UIStart extends lwg.Admin.Scene {
         // Admin._openScene(Admin.SceneName.UIADSHint,null,null,()=>{
         //     console.log(Admin._sceneControl['UIADSHint']['UIADSHint']);
         // });
-   
-        
+
+
         this.LevelDisplay = this.self['LevelDisplay'];
         this.LevelStyle = this.self['LevelStyle'];
 
@@ -24,6 +24,8 @@ export default class UIStart extends lwg.Admin.Scene {
 
         if (Game._platform !== Game._platformTpye.Bytedance) {
             this.self['P204'].visible = false;
+            this.self['P201'].visible = false;
+            this.self['P205'].visible = false;
         }
     }
 

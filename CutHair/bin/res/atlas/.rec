@@ -162,6 +162,14 @@ P FA08FDE4 sanbei.png
 P 516ED890 txt_zhijie.png
 P 63B58DAD 标题.png
 D UI/EasterEgg_Aotoman
+D UI/Elect
+P ED1E3FE1 hutui_xia_icon.png
+P 7BF04EF4 label_blue.png
+P BCD6EDF6 label_green.png
+P 8DB72CF1 label_red.png
+P 82C4DDBC mainpush.png
+P D6DE1101 more_di.png
+P D683B3F2 red_dot.png
 D UI/GameMain
 P C942384B bai.png
 P F5FCFD0A hui.png

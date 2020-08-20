@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":62,
-    "selecteID":47,
+    "selectedBox":49,
+    "selecteID":50,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -432,25 +432,27 @@
                     "props":{"y":257,"x":289,"width":552,"visible":true,"name":"P202","height":456,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":62,
                     "label":"P202",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":47,
                     "child":[
                         {
+                            "x":45,
                             "type":"Panel",
                             "searchKey":"Panel,scroll",
                             "props":{"top":0,"right":0,"name":"scroll","left":0,"elasticEnabled":false,"bottom":0,"anchorY":0.5,"anchorX":0.5},
                             "nodeParent":47,
                             "label":"scroll",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":48,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"List",
                                     "searchKey":"List,layout",
                                     "props":{"y":0,"spaceY":20,"spaceX":20,"space":10,"right":0,"name":"layout","left":0,"height":470,"anchorY":0,"anchorX":0.5,"align":"middle"},
@@ -463,6 +465,7 @@
                                     "compId":49,
                                     "child":[
                                         {
+                                            "x":75,
                                             "type":"Box",
                                             "searchKey":"Box,item",
                                             "props":{"y":114,"x":92,"width":164,"renderType":"render","name":"item","height":208,"anchorY":0.5,"anchorX":0.5},
@@ -475,6 +478,7 @@
                                             "compId":50,
                                             "child":[
                                                 {
+                                                    "x":90,
                                                     "type":"Image",
                                                     "searchKey":"Image,icon",
                                                     "props":{"width":140,"skin":"TJ/Promo/image/jx8.png","name":"icon","height":140,"centerY":-22,"centerX":0,"anchorY":0.5,"anchorX":0.5},
@@ -487,9 +491,10 @@
                                                     "compId":51,
                                                     "child":[
                                                         {
+                                                            "x":105,
                                                             "type":"Image",
                                                             "searchKey":"Image,kk",
-                                                            "props":{"width":164,"skin":"TJ/Promo/image/kk3.png","name":"kk","height":208,"centerY":22,"centerX":0},
+                                                            "props":{"width":164,"skin":"UI/Elect/mainpush.png","sizeGrid":" ","name":"kk","height":208,"centerY":22,"centerX":0},
                                                             "nodeParent":51,
                                                             "label":"kk",
                                                             "isDirectory":false,
@@ -500,6 +505,7 @@
                                                                 ]
                                                         },
                                                         {
+                                                            "x":105,
                                                             "type":"Image",
                                                             "searchKey":"Image,flag1",
                                                             "props":{"width":83,"visible":false,"skin":"TJ/Promo/image/new2.png","name":"flag1","height":83,"centerY":-39,"centerX":39,"anchorY":0.5,"anchorX":0.5},
@@ -514,6 +520,7 @@
                                                             "$HIDDEN":true
                                                         },
                                                         {
+                                                            "x":105,
                                                             "type":"Image",
                                                             "searchKey":"Image,flag2",
                                                             "props":{"width":83,"visible":false,"skin":"TJ/Promo/image/remen1.png","name":"flag2","height":83,"centerY":-39,"centerX":39,"anchorY":0.5,"anchorX":0.5},
@@ -528,6 +535,7 @@
                                                             "$HIDDEN":true
                                                         },
                                                         {
+                                                            "x":105,
                                                             "type":"Image",
                                                             "searchKey":"Image,flag3",
                                                             "props":{"width":83,"visible":false,"skin":"TJ/Promo/image/tuijian2.png","name":"flag3","height":83,"centerY":-39,"centerX":39,"anchorY":0.5,"anchorX":0.5},
@@ -544,6 +552,7 @@
                                                     "$HIDDEN":false
                                                 },
                                                 {
+                                                    "x":90,
                                                     "type":"Label",
                                                     "searchKey":"Label,name",
                                                     "props":{"wordWrap":false,"width":164,"valign":"middle","text":"这里是游戏名称","name":"name","multiline":false,"mouseEnabled":false,"height":19,"fontSize":16,"editable":false,"color":"#ffffff","centerY":65,"centerX":0,"anchorY":0.5,"anchorX":0.5,"align":"center"},
@@ -558,6 +567,7 @@
                                                     "$HIDDEN":false
                                                 },
                                                 {
+                                                    "x":90,
                                                     "type":"Label",
                                                     "searchKey":"Label,info",
                                                     "props":{"wordWrap":false,"width":164,"valign":"middle","text":"1, 254, 546人在玩","name":"info","multiline":false,"mouseEnabled":false,"height":18,"fontSize":15,"editable":false,"color":"#ffffff","centerY":88,"centerX":0,"anchorY":0.5,"anchorX":0.5,"align":"center"},
@@ -572,6 +582,7 @@
                                                     "$HIDDEN":false
                                                 },
                                                 {
+                                                    "x":90,
                                                     "type":"Script",
                                                     "switchAble":true,
                                                     "source":"src/TJ/Promo/script/PromoItem.ts",
@@ -588,6 +599,7 @@
                                                         ]
                                                 },
                                                 {
+                                                    "x":90,
                                                     "type":"Script",
                                                     "switchAble":true,
                                                     "source":"src/TJ/Promo/script/ButtonScale.ts",
@@ -610,6 +622,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Script",
                             "switchAble":true,
                             "source":"src/TJ/Promo/script/P202.ts",

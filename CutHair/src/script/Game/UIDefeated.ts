@@ -7,7 +7,6 @@ import RecordManager from "../TJ/RecordManager";
 export default class UIDefeated extends lwg.Admin.Scene {
 
     lwgOnAwake(): void {
-        RecordManager.stopAutoRecord();
         Admin._gameStart = false;
     }
 

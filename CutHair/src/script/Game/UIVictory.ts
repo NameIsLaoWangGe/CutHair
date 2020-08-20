@@ -7,9 +7,6 @@ import RecordManager from "../TJ/RecordManager";
 
 export default class UIVictory extends lwg.Admin.Scene {
 
-    lwgOnAwake(): void {
-        RecordManager.stopAutoRecord();
-    };
 
     GlodNum: Laya.Sprite;
     /**本关应该给予多少金币*/

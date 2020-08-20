@@ -10,6 +10,10 @@ export default class UIShare extends lwg.Admin.Scene {
         Admin._gameStart = false;
         // 不同渠道显示不同内容
         if (Game._platform !== Game._platformTpye.Bytedance) {
+            this.self['BtnClose'].visible = false;
+            Laya.timer.once(2000, this, () => {
+                this.self['BtnClose'].visible = true;
+            })
             this.self['WeChat'].visible = true;
             this.self['Bytedance'].visible = false;
         } else {
@@ -17,7 +21,7 @@ export default class UIShare extends lwg.Admin.Scene {
             this.self['Bytedance'].visible = true;
 
             this.self['BtnClose_Bytedance'].visible = false;
-            Laya.timer.frameOnce(120, this, () => {
+            Laya.timer.frameOnce(180, this, () => {
                 this.self['BtnClose_Bytedance'].visible = true;
             })
         }
@@ -52,7 +56,9 @@ export default class UIShare extends lwg.Admin.Scene {
 
             Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
 
-            Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
+            Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4, null, () => {
+                RecordManager.stopAutoRecord();
+            });
 
 
             let hotAddNum = Math.floor(Math.random() * 100 + 900);
@@ -103,6 +109,10 @@ export default class UIShare extends lwg.Admin.Scene {
     lwgBtnClick(): void {
         Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp);
         Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.noEffect, this.self['Click1'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.noEffect, this.self['Click2'], this, null, null, this.btnShareUp);
+
         Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
             this.shareFunc();
         });
@@ -112,6 +122,7 @@ export default class UIShare extends lwg.Admin.Scene {
     }
 
     btnShareUp(): void {
+        console.log('分享！')
         RecordManager._share('award', () => {
             this.shareFunc();
             Dialog.createHint_Middle(Dialog.HintContent["分享成功，获得50金币！"]);

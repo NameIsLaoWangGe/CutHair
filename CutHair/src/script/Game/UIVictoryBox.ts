@@ -12,8 +12,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         Gold.goldAppear();
 
         // ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_box');
-        this.self['BtnAgain_WeChat'].visible = false;
-        this.self['BtnNo_WeChat'].visible = false;
+
         if (VictoryBox._openVictoryBoxNum > 1) {
             let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
             for (let index = 0; index < arr.length; index++) {
@@ -26,11 +25,15 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
             case Game._platformTpye.WeChat:
                 this.self['Bytedance'].visible = false;
                 this.self['WeChat'].visible = true;
-
+                this.self['BtnAgain_WeChat'].visible = false;
+                this.self['BtnNo_WeChat'].visible = false;
                 break;
             case Game._platformTpye.Bytedance:
                 this.self['Bytedance'].visible = true;
                 this.self['WeChat'].visible = false;
+                this.self['BtnAgain_Bytedance'].visible = false;
+                this.self['BtnNo_Bytedance'].visible = false;
+                this.self['Select_Bytedance'].visible = false;
 
                 break;
             default:
@@ -69,6 +72,12 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         }
 
         VictoryBox._defaultOpenNum--;
+        if (VictoryBox._defaultOpenNum == 0) {
+            this.self['BtnAgain_Bytedance'].visible = true;
+            this.self['BtnNo_Bytedance'].visible = true;
+            this.self['Select_Bytedance'].visible = true;
+
+        }
         VictoryBox._selectBox = dataSource[VictoryBox.BoxProperty.name];
         // 特效
         let diffX = dataSource.arrange % 3;
@@ -170,6 +179,9 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
                 Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
                 VictoryBox._defaultOpenNum += 3;
                 VictoryBox._adsMaxOpenNum -= 3;
+                this.self['BtnAgain_Bytedance'].visible = false;
+                this.self['BtnNo_Bytedance'].visible = false;
+                this.self['Select_Bytedance'].visible = false;
             })
         } else {
             Dialog.createHint_Middle(Dialog.HintContent["没有宝箱领可以领了！"]);
@@ -180,9 +192,11 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         if (VictoryBox._defaultOpenNum > 0) {
             this.self['BtnAgain_WeChat'].visible = false;
             this.self['BtnNo_WeChat'].visible = false;
+
         } else {
             this.self['BtnAgain_WeChat'].visible = true;
             this.self['BtnNo_WeChat'].visible = true;
+
         }
     }
 }

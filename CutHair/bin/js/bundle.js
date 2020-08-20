@@ -5059,6 +5059,10 @@
         lwgOnEnable() {
             this.self.x = 0;
             this.self.y = 0;
+            this.self['BtnClose'].visible = false;
+            Laya.timer.frameOnce(120, this, () => {
+                this.self['BtnClose'].visible = true;
+            });
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp);
@@ -5315,114 +5319,8 @@
     let GEnum = Global.GEnum;
     let GSene3D = Global.GSene3D;
 
-    class RecordManager {
-        constructor() {
-            this.GRV = null;
-            this.isRecordVideoing = false;
-            this.isVideoRecord = false;
-            this.videoRecordTimer = 0;
-            this.isHasVideoRecord = false;
-        }
-        static Init() {
-            RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();
-        }
-        static startAutoRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            if (RecordManager.grv == null)
-                RecordManager.Init();
-            if (RecordManager.recording)
-                return;
-            RecordManager.autoRecording = true;
-            console.log("******************开始录屏");
-            RecordManager._start();
-            RecordManager.lastRecordTime = Date.now();
-        }
-        static stopAutoRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            if (!RecordManager.autoRecording) {
-                console.log("RecordManager.autoRecording", RecordManager.autoRecording);
-                return false;
-            }
-            RecordManager.autoRecording = false;
-            RecordManager._end(false);
-            if (Date.now() - RecordManager.lastRecordTime > 6000) {
-                return true;
-            }
-            if (Date.now() - RecordManager.lastRecordTime < 3000) {
-                console.log("小于3秒");
-                return false;
-            }
-            return true;
-        }
-        static startRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            if (RecordManager.autoRecording) {
-                this.stopAutoRecord();
-            }
-            RecordManager.recording = true;
-            RecordManager._start();
-            RecordManager.lastRecordTime = Date.now();
-        }
-        static stopRecord() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("time:" + (Date.now() - RecordManager.lastRecordTime));
-            if (Date.now() - RecordManager.lastRecordTime <= 3000) {
-                return false;
-            }
-            RecordManager.recording = false;
-            RecordManager._end(true);
-            return true;
-        }
-        static _start() {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("******************180s  ？？？？？");
-            RecordManager.grv.Start(180);
-        }
-        static _end(share) {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("******************180结束 ？？？？？");
-            RecordManager.grv.Stop(share);
-        }
-        static _share(type, successedAc, completedAc = null, failAc = null) {
-            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
-                return;
-            console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
-            if (RecordManager.grv.videoPath) {
-                let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
-                p.extra.videoTopics = ["剃头大师", "番茄小游戏", "抖音小游戏"];
-                p.channel = "video";
-                p.success = () => {
-                    Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
-                    successedAc();
-                };
-                p.fail = () => {
-                    if (type === 'noAward') {
-                        Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
-                    }
-                    else {
-                        Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
-                    }
-                    failAc();
-                };
-                RecordManager.grv.Share(p);
-            }
-            else {
-                Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
-            }
-        }
-    }
-    RecordManager.recording = false;
-    RecordManager.autoRecording = false;
-
     class UIDefeated extends lwg.Admin.Scene {
         lwgOnAwake() {
-            RecordManager.stopAutoRecord();
             Admin._gameStart = false;
         }
         lwgNodeDec() {
@@ -6365,6 +6263,111 @@
         }
     }
 
+    class RecordManager {
+        constructor() {
+            this.GRV = null;
+            this.isRecordVideoing = false;
+            this.isVideoRecord = false;
+            this.videoRecordTimer = 0;
+            this.isHasVideoRecord = false;
+        }
+        static Init() {
+            RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();
+        }
+        static startAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.grv == null)
+                RecordManager.Init();
+            if (RecordManager.recording)
+                return;
+            RecordManager.autoRecording = true;
+            console.log("******************开始录屏");
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopAutoRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (!RecordManager.autoRecording) {
+                console.log("RecordManager.autoRecording", RecordManager.autoRecording);
+                return false;
+            }
+            RecordManager.autoRecording = false;
+            RecordManager._end(false);
+            if (Date.now() - RecordManager.lastRecordTime > 6000) {
+                return true;
+            }
+            if (Date.now() - RecordManager.lastRecordTime < 3000) {
+                console.log("小于3秒");
+                return false;
+            }
+            return true;
+        }
+        static startRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            if (RecordManager.autoRecording) {
+                this.stopAutoRecord();
+            }
+            RecordManager.recording = true;
+            RecordManager._start();
+            RecordManager.lastRecordTime = Date.now();
+        }
+        static stopRecord() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("time:" + (Date.now() - RecordManager.lastRecordTime));
+            if (Date.now() - RecordManager.lastRecordTime <= 3000) {
+                return false;
+            }
+            RecordManager.recording = false;
+            RecordManager._end(true);
+            return true;
+        }
+        static _start() {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180s  ？？？？？");
+            RecordManager.grv.Start(180);
+        }
+        static _end(share) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************180结束 ？？？？？");
+            RecordManager.grv.Stop(share);
+        }
+        static _share(type, successedAc, completedAc = null, failAc = null) {
+            if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.ZJTD_AppRt)
+                return;
+            console.log("******************吊起分享 ？？？？？", RecordManager.grv, RecordManager.grv.videoPath);
+            if (RecordManager.grv.videoPath) {
+                let p = new TJ.Platform.AppRt.Extern.TT.ShareAppMessageParam();
+                p.extra.videoTopics = ["剃头大师", "番茄小游戏", "抖音小游戏"];
+                p.channel = "video";
+                p.success = () => {
+                    Dialog.createHint_Middle(Dialog.HintContent["分享成功!"]);
+                    successedAc();
+                };
+                p.fail = () => {
+                    if (type === 'noAward') {
+                        Dialog.createHint_Middle(Dialog.HintContent["分享成功后才能获取奖励！"]);
+                    }
+                    else {
+                        Dialog.createHint_Middle(Dialog.HintContent["分享失败！"]);
+                    }
+                    failAc();
+                };
+                RecordManager.grv.Share(p);
+            }
+            else {
+                Dialog.createHint_Middle(Dialog.HintContent["暂无视频，玩一局游戏之后分享！"]);
+            }
+        }
+    }
+    RecordManager.recording = false;
+    RecordManager.autoRecording = false;
+
     class UIOperation extends lwg.Admin.Scene {
         constructor() {
             super(...arguments);
@@ -6859,6 +6862,10 @@
         lwgOnAwake() {
             Admin._gameStart = false;
             if (Game._platform !== Game._platformTpye.Bytedance) {
+                this.self['BtnClose'].visible = false;
+                Laya.timer.once(2000, this, () => {
+                    this.self['BtnClose'].visible = true;
+                });
                 this.self['WeChat'].visible = true;
                 this.self['Bytedance'].visible = false;
             }
@@ -6866,7 +6873,7 @@
                 this.self['WeChat'].visible = false;
                 this.self['Bytedance'].visible = true;
                 this.self['BtnClose_Bytedance'].visible = false;
-                Laya.timer.frameOnce(120, this, () => {
+                Laya.timer.frameOnce(180, this, () => {
                     this.self['BtnClose_Bytedance'].visible = true;
                 });
             }
@@ -6894,7 +6901,9 @@
             Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
                 Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
                 Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
-                Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4);
+                Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4, null, () => {
+                    RecordManager.stopAutoRecord();
+                });
                 let hotAddNum = Math.floor(Math.random() * 100 + 900);
                 Laya.timer.frameLoop(1, this, () => {
                     if (Number(this.self['HotNum'].text) < hotAddNum) {
@@ -6924,6 +6933,9 @@
         lwgBtnClick() {
             Click.on(Click.Type.noEffect, this.self['SmallFram'], this, null, null, this.btnShareUp);
             Click.on(Click.Type.noEffect, this.self['BigFrame'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.noEffect, this.self['Click1'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.noEffect, this.self['Click2'], this, null, null, this.btnShareUp);
             Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
                 this.shareFunc();
             });
@@ -6931,6 +6943,7 @@
             Click.on(Click.Type.largen, this.self['BtnClose_Bytedance'], this, null, null, this.btnNoShareUp);
         }
         btnShareUp() {
+            console.log('分享！');
             RecordManager._share('award', () => {
                 this.shareFunc();
                 Dialog.createHint_Middle(Dialog.HintContent["分享成功，获得50金币！"]);
@@ -7708,6 +7721,8 @@
             ADManager.TAPoint(TaT.BtnShow, 'startword_main');
             if (Game._platform !== Game._platformTpye.Bytedance) {
                 this.self['P204'].visible = false;
+                this.self['P201'].visible = false;
+                this.self['P205'].visible = false;
             }
         }
         lwgEventReg() {
@@ -8018,10 +8033,6 @@
             super(...arguments);
             this.addOrSub = 'add';
         }
-        lwgOnAwake() {
-            RecordManager.stopAutoRecord();
-        }
-        ;
         lwgNodeDec() {
             this.GlodNum = this.self['GlodNum'];
             ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
@@ -8232,8 +8243,6 @@
             ADManager.TAPoint(TaT.BtnShow, 'Adboxvideo');
             ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
             Gold.goldAppear();
-            this.self['BtnAgain_WeChat'].visible = false;
-            this.self['BtnNo_WeChat'].visible = false;
             if (VictoryBox._openVictoryBoxNum > 1) {
                 let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
                 for (let index = 0; index < arr.length; index++) {
@@ -8245,10 +8254,15 @@
                 case Game._platformTpye.WeChat:
                     this.self['Bytedance'].visible = false;
                     this.self['WeChat'].visible = true;
+                    this.self['BtnAgain_WeChat'].visible = false;
+                    this.self['BtnNo_WeChat'].visible = false;
                     break;
                 case Game._platformTpye.Bytedance:
                     this.self['Bytedance'].visible = true;
                     this.self['WeChat'].visible = false;
+                    this.self['BtnAgain_Bytedance'].visible = false;
+                    this.self['BtnNo_Bytedance'].visible = false;
+                    this.self['Select_Bytedance'].visible = false;
                     break;
                 default:
                     break;
@@ -8284,6 +8298,11 @@
                 automan = true;
             }
             VictoryBox._defaultOpenNum--;
+            if (VictoryBox._defaultOpenNum == 0) {
+                this.self['BtnAgain_Bytedance'].visible = true;
+                this.self['BtnNo_Bytedance'].visible = true;
+                this.self['Select_Bytedance'].visible = true;
+            }
             VictoryBox._selectBox = dataSource[VictoryBox.BoxProperty.name];
             let diffX = dataSource.arrange % 3;
             if (diffX == 0) {
@@ -8371,6 +8390,9 @@
                     Dialog.createHint_Middle(Dialog.HintContent["增加三次开启宝箱次数！"]);
                     VictoryBox._defaultOpenNum += 3;
                     VictoryBox._adsMaxOpenNum -= 3;
+                    this.self['BtnAgain_Bytedance'].visible = false;
+                    this.self['BtnNo_Bytedance'].visible = false;
+                    this.self['Select_Bytedance'].visible = false;
                 });
             }
             else {
