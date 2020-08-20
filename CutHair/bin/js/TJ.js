@@ -2,12 +2,12 @@ var DP =
 {
     Basic:
     {
-        appGuid:"45174a50-fd36-04bb-effb-cb3eea7596b3",
+        appGuid:"6766da55-6f97-9ec5-7fa7-6eb1530342ea",
         productName:"剃头大师",
-        packageName:"com.tomato.joy.ttds.wx",
-        versionName:"0.0.1",
+        packageName:"com.tomatojoy.ttds.toutiao",
+        versionName:"1.0.0",
         versionCode:1,
-        channel:"WX_AppRt",
+        channel:"ZJTD_AppRt",
     },
     XIAOMI:
     {
@@ -42,14 +42,14 @@ var DP =
     },
     TT:   //字节跳动小游戏
     {
-        appId:null,
-        bannerId:null,
-        insertId:null,
-        videoId:null,
+        appId:"tt2bba5d07b48073ec",
+        bannerId:"27k90ckf1mg1695abo",
+        insertId:"eeiikeccgjaac53li4",
+        videoId:"lk9mc463d799d27k52",
     },
     ReYun:   //热云统计
     {
-        appId:"262edc71c5c934ba4435fbf8142b26d6",
+        appId:"76951ffa3e9d80bba5f2cd67f2786b17",
     },
     QTTGame:   //趣头条游戏
     {
@@ -147,7 +147,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/8/14 17:03:28
+中国标准时间 2020/8/19 19:45:47
 */
 var TJ;
 (function (TJ) {

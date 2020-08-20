@@ -30,7 +30,7 @@
 					"layer":0,
 					"position":[
 						5.71,
-						94.135,
+						92.96,
 						6.6
 					],
 					"rotation":[
@@ -1147,7 +1147,7 @@
 					"layer":0,
 					"position":[
 						5.71,
-						94.135,
+						92.828,
 						6.6
 					],
 					"rotation":[
@@ -3443,7 +3443,7 @@
 						"type":"MeshSprite3D",
 						"instanceID":78,
 						"props":{
-							"name":"aotoman",
+							"name":"xiandanren",
 							"active":true,
 							"isStatic":false,
 							"layer":0,

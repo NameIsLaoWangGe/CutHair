@@ -5,9 +5,8 @@ import ADManager, { TaT } from "../TJ/Admanager";
 export default class UISkinXD extends SkinXD.SkinXDScene {
 
     skinXDOnAwake(): void {
-        console.log(Laya.stage);
         ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
-        
+
         Gold.goldVinish();
         Setting.setBtnVinish();
     }
@@ -47,12 +46,11 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     /**看完广告的返回函数*/
     btnGetFunc(): void {
         ADManager.TAPoint(TaT.BtnClick, 'Adlimmitget');
-        
-        let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
-        if (have === 1) {
+        let have = Shop.buyGoods(Shop.GoodsClass.Props, 'xiandanren', 1);
+        if (have) {
             this.progressDisplay();
             Dialog.createHint_Middle(Dialog.HintContent["限定皮肤已经获得，请前往皮肤界面查看。"]);
-            Shop._currentOther.name = 'xiandanren';
+            Shop._currentProp.name = 'xiandanren';
             EventAdmin.notify(SkinXD.EventType.acquisition);
             Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {
                 this.self.close();
@@ -62,7 +60,8 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
         }
     }
 
-    skinXDOnDisable():void{
+    skinXDOnDisable(): void {
         Setting.setBtnAppear();
+        Gold.goldAppear();
     }
 }

@@ -77,6 +77,7 @@ export default class UIShop extends Shop.ShopScene {
         if (!Shop._currentOther.name) {
             Shop._currentOther.name = OtherName.tixudao;
         }
+        
         this.self['Dispaly'].skin = 'UI/Shop/Other/' + Shop._currentOther.name + '.png';
 
         // 设置通过关卡获取的显示,目前就一个

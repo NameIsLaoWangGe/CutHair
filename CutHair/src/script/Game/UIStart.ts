@@ -9,6 +9,11 @@ export default class UIStart extends lwg.Admin.Scene {
     LevelStyle: Laya.Sprite;
 
     lwgNodeDec(): void {
+        // Admin._openScene(Admin.SceneName.UIADSHint,null,null,()=>{
+        //     console.log(Admin._sceneControl['UIADSHint']['UIADSHint']);
+        // });
+   
+        
         this.LevelDisplay = this.self['LevelDisplay'];
         this.LevelStyle = this.self['LevelStyle'];
 
@@ -17,9 +22,9 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
-        // if (Game.) {
-
-        // }
+        if (Game._platform !== Game._platformTpye.Bytedance) {
+            this.self['P204'].visible = false;
+        }
     }
 
     lwgEventReg(): void {
@@ -62,6 +67,8 @@ export default class UIStart extends lwg.Admin.Scene {
 
     lwgAdaptive(): void {
         this.self['P204'].y = Laya.stage.height;
+        this.self['Guide'].y = Laya.stage.height * 0.732;
+        this.self['SceneContent'].y = Laya.stage.height * 0.378;
     }
 
     /**关卡列表*/

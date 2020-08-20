@@ -2,11 +2,10 @@ import { Admin, Dialog, Shop, SkinScene, Skin, PalyAudio, EventAdmin, Click } fr
 import UIShop from "./UIShop";
 import ADManager, { TaT } from "../TJ/Admanager";
 import { GEnum, GSene3D } from "../Lwg_Template/Global";
+import { Game } from "../Lwg_Template/Game";
 
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
-        console.log(Laya.stage);
-
         Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
 
         let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
@@ -24,7 +23,16 @@ export default class UISkin extends SkinScene {
                 Skin._eyeSkinArr.push(element);
             }
         }
+
+        // 设置通过关卡获取的显示,目前就一个
+        let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.condition);
+        if (Game._gameLevel.value >= condition) {
+            Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.have, true);
+        } else {
+            Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.resCondition, Game._gameLevel.value);
+        }
     }
+
 
     skinEventReg(): void {
         EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
@@ -66,6 +74,7 @@ export default class UISkin extends SkinScene {
         Skin._SkinList.refresh();
     }
 
+
     /**看广告获得*/
     adsAcquisition(dataSource): void {
         let claName = Shop.GoodsClass.Skin;
@@ -106,6 +115,7 @@ export default class UISkin extends SkinScene {
     }
 
     skinList_Update(cell: Laya.Box, index: number): void {
+        console.log(Skin._SkinList);
         let dataSource = cell.dataSource;
         let Select = cell.getChildByName('Select') as Laya.Sprite;
         Select.visible = false;
@@ -185,14 +195,14 @@ export default class UISkin extends SkinScene {
     }
 
     skinOnEnable(): void {
-        Skin._SkinList.array = Skin._eyeSkinArr;
+        Skin._SkinList.array = Skin._headSkinArr;
         Skin._SkinList.refresh();
 
         EventAdmin.notify(GEnum.EventType.cameraMove, [GEnum.TaskType.movePhotoLocation])
     }
 
     skinBtnClick(): void {
-        
+
         Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, this.btnCompleteUp, null);
     }
 

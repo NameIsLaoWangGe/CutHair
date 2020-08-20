@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":496,
+    "selecteID":534,
     "searchKey":"View",
     "props":{"y":0,"x":0,"width":720,"visible":true,"sceneColor":"#494949","height":1280},
     "nodeParent":-1,
-    "maxID":534,
+    "maxID":535,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -27,110 +27,6 @@
             "compId":494,
             "child":[
                 ]
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,BtnCheck,BtnCheck",
-            "props":{"y":851,"x":651,"width":116,"var":"BtnCheck","texture":"UI/GameStart/qiandao.png","pivotY":59,"pivotX":58,"name":"BtnCheck","height":117},
-            "nodeParent":2,
-            "label":"BtnCheck",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":424,
-            "child":[
-                ],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,BtnSkin,BtnSkin",
-            "props":{"y":990,"x":651,"width":116,"var":"BtnSkin","texture":"UI/GameStart/pifu.png","pivotY":59,"pivotX":58,"name":"BtnSkin","height":117},
-            "nodeParent":2,
-            "label":"BtnSkin",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":425,
-            "child":[
-                ],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,BtnXDSkin,BtnXDSkin",
-            "props":{"y":839,"x":84,"width":154,"var":"BtnXDSkin","texture":"UI/GameStart/xiandin2.png","pivotY":74,"pivotX":77,"name":"BtnXDSkin","height":147},
-            "nodeParent":2,
-            "label":"BtnXDSkin",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":426,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,Aotuman,Aotuman",
-                    "props":{"y":63,"x":77,"width":100,"var":"Aotuman","skin":"UI/Shop/Props/xiandanren.png","pivotY":60,"pivotX":50,"name":"Aotuman","height":120},
-                    "nodeParent":426,
-                    "label":"Aotuman",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":495,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":-13,"x":85,"texture":"UI/GameStart/xiandin1.png"},
-                    "nodeParent":426,
-                    "label":"Sprite",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":427,
-                    "child":[
-                        ],
-                    "$HIDDEN":false
-                }],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,BtnTask,BtnTask",
-            "props":{"y":990,"x":65,"width":116,"var":"BtnTask","texture":"UI/GameStart/renwu.png","pivotY":59,"pivotX":58,"name":"BtnTask","height":117},
-            "nodeParent":2,
-            "label":"BtnTask",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":428,
-            "child":[
-                ],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,BtnMore,BtnMore",
-            "props":{"y":548,"x":0,"visible":false,"var":"BtnMore","texture":"UI/GameStart/genduo.png","name":"BtnMore"},
-            "nodeParent":2,
-            "label":"BtnMore",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":429,
-            "child":[
-                ],
-            "$HIDDEN":false
         },
         {
             "x":15,
@@ -466,14 +362,13 @@
             "props":{"y":938,"x":372,"width":279,"var":"Guide","texture":"UI/GameStart/ui_guide.png","pivotY":64,"pivotX":140,"name":"Guide","height":128},
             "nodeParent":2,
             "label":"Guide",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":496,
             "child":[
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,Hand,Hand",
                     "props":{"y":0,"x":65,"var":"Hand","texture":"UI/GameStart/icon_hand.png","name":"Hand"},
@@ -494,14 +389,13 @@
             "props":{"y":-300,"x":428,"width":104,"var":"EasterEgg_Aotuman","pivotY":73,"pivotX":52,"name":"EasterEgg_Aotuman","height":145},
             "nodeParent":2,
             "label":"EasterEgg_Aotuman",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":498,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Clamp,Clamp",
                     "props":{"y":-21,"x":26,"var":"Clamp","name":"Clamp"},
@@ -554,7 +448,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,PicAotuman,PicAotuman",
                     "props":{"y":118,"x":52,"width":33,"var":"PicAotuman","skin":"UI/EasterEgg_Aotoman/GameStart/renwu_xiao.png","pivotY":31,"pivotX":17,"name":"PicAotuman","height":61},
@@ -570,33 +463,18 @@
         },
         {
             "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,BtnAotuman,BtnAotuman",
-            "props":{"y":671,"x":635,"width":166,"var":"BtnAotuman","texture":"UI/EasterEgg_Aotoman/GameStart/zhujiem.png","pivotY":89,"pivotX":83,"name":"BtnAotuman","height":178},
-            "nodeParent":2,
-            "label":"BtnAotuman",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":504,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"Box",
             "searchKey":"Box,P204,P204",
             "props":{"y":1280,"width":700,"visible":true,"var":"P204","pivotY":150,"pivotX":350,"name":"P204","height":150,"centerX":10},
             "nodeParent":2,
             "label":"P204",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":521,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,bg",
                     "props":{"width":720,"visible":true,"top":0,"skin":"Frame/UI/ui_orthogon_black.png","name":"bg","left":-20,"bottom":0,"anchorY":0.5,"anchorX":0.5,"alpha":0.7},
@@ -611,7 +489,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Panel",
                     "searchKey":"Panel,scroll",
                     "props":{"top":0,"right":0,"name":"scroll","left":0,"elasticEnabled":false,"bottom":0,"anchorY":0.5,"anchorX":0.5},
@@ -624,7 +501,6 @@
                     "compId":523,
                     "child":[
                         {
-                            "x":45,
                             "type":"List",
                             "searchKey":"List,layout",
                             "props":{"y":0,"x":0,"width":700,"spaceX":20,"repeatY":1,"name":"layout","height":150,"anchorY":0,"anchorX":0},
@@ -637,7 +513,6 @@
                             "compId":524,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Box",
                                     "searchKey":"Box,item",
                                     "props":{"y":75,"x":75,"width":110,"renderType":"render","name":"item","height":150,"anchorY":0.5,"anchorX":0.5},
@@ -650,7 +525,6 @@
                                     "compId":525,
                                     "child":[
                                         {
-                                            "x":75,
                                             "type":"Image",
                                             "searchKey":"Image,icon",
                                             "props":{"width":110,"skin":"TJ/Promo/image/jx8.png","name":"icon","height":110,"centerY":-10,"centerX":0,"anchorY":0.5,"anchorX":0.5},
@@ -663,7 +537,6 @@
                                             "compId":526,
                                             "child":[
                                                 {
-                                                    "x":90,
                                                     "type":"Image",
                                                     "searchKey":"Image,flag1",
                                                     "props":{"width":23,"visible":false,"skin":"TJ/Promo/image/y1.png","name":"flag1","height":23,"centerY":-50,"centerX":50,"anchorY":0.5,"anchorX":0.5},
@@ -678,7 +551,6 @@
                                                     "$HIDDEN":true
                                                 },
                                                 {
-                                                    "x":90,
                                                     "type":"Image",
                                                     "searchKey":"Image,flag2",
                                                     "props":{"width":45,"visible":false,"skin":"TJ/Promo/image/hb2.png","name":"flag2","height":23,"centerY":-50,"centerX":45,"anchorY":0.5,"anchorX":0.5},
@@ -693,7 +565,6 @@
                                                     "$HIDDEN":true
                                                 },
                                                 {
-                                                    "x":90,
                                                     "type":"Image",
                                                     "searchKey":"Image,flag3",
                                                     "props":{"width":45,"visible":false,"skin":"TJ/Promo/image/rm3.png","name":"flag3","height":23,"centerY":-50,"centerX":45,"anchorY":0.5,"anchorX":0.5},
@@ -710,7 +581,6 @@
                                             "$HIDDEN":false
                                         },
                                         {
-                                            "x":75,
                                             "type":"Script",
                                             "switchAble":true,
                                             "source":"src/TJ/Promo/script/PromoItem.ts",
@@ -727,7 +597,6 @@
                                                 ]
                                         },
                                         {
-                                            "x":75,
                                             "type":"Script",
                                             "switchAble":true,
                                             "source":"src/TJ/Promo/script/ButtonScale.ts",
@@ -744,7 +613,6 @@
                                                 ]
                                         },
                                         {
-                                            "x":75,
                                             "type":"Label",
                                             "searchKey":"Label,name",
                                             "props":{"x":0,"wordWrap":false,"width":126,"valign":"middle","text":"游戏名字","name":"name","multiline":false,"mouseEnabled":false,"height":21,"fontSize":18,"editable":false,"color":"#ffffff","centerY":60,"centerX":0,"anchorY":0.5,"anchorX":0.5,"align":"center"},
@@ -765,7 +633,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/TJ/Promo/script/P204.ts",
@@ -782,6 +649,130 @@
                         ]
                 }],
             "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,SceneContent,SceneContent",
+            "props":{"y":485,"x":0,"width":1,"var":"SceneContent","name":"SceneContent","height":1},
+            "nodeParent":2,
+            "label":"SceneContent",
+            "isOpen":null,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":534,
+            "child":[
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnMore,BtnMore",
+                    "props":{"y":63,"x":0,"visible":false,"var":"BtnMore","texture":"UI/GameStart/genduo.png","name":"BtnMore"},
+                    "nodeParent":534,
+                    "label":"BtnMore",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":429,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnTask,BtnTask",
+                    "props":{"y":505,"x":65,"width":116,"var":"BtnTask","texture":"UI/GameStart/renwu.png","pivotY":59,"pivotX":58,"name":"BtnTask","height":117},
+                    "nodeParent":534,
+                    "label":"BtnTask",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":428,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnXDSkin,BtnXDSkin",
+                    "props":{"y":354,"x":84,"width":154,"var":"BtnXDSkin","texture":"UI/GameStart/xiandin2.png","pivotY":74,"pivotX":77,"name":"BtnXDSkin","height":147},
+                    "nodeParent":534,
+                    "label":"BtnXDSkin",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":426,
+                    "child":[
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,Aotuman,Aotuman",
+                            "props":{"y":63,"x":77,"width":100,"var":"Aotuman","skin":"UI/Shop/Props/xiandanren.png","pivotY":60,"pivotX":50,"name":"Aotuman","height":120},
+                            "nodeParent":426,
+                            "label":"Aotuman",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":495,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":-13,"x":85,"texture":"UI/GameStart/xiandin1.png"},
+                            "nodeParent":426,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":427,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        }],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnSkin,BtnSkin",
+                    "props":{"y":505,"x":651,"width":116,"var":"BtnSkin","texture":"UI/GameStart/pifu.png","pivotY":59,"pivotX":58,"name":"BtnSkin","height":117},
+                    "nodeParent":534,
+                    "label":"BtnSkin",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":425,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnCheck,BtnCheck",
+                    "props":{"y":366,"x":651,"width":116,"var":"BtnCheck","texture":"UI/GameStart/qiandao.png","pivotY":59,"pivotX":58,"name":"BtnCheck","height":117},
+                    "nodeParent":534,
+                    "label":"BtnCheck",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":424,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,BtnAotuman,BtnAotuman",
+                    "props":{"y":186,"x":635,"width":166,"var":"BtnAotuman","texture":"UI/EasterEgg_Aotoman/GameStart/zhujiem.png","pivotY":89,"pivotX":83,"name":"BtnAotuman","height":178},
+                    "nodeParent":534,
+                    "label":"BtnAotuman",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":504,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {
@@ -1032,20 +1023,6 @@
                                 "label":null,
                                 "key":"x",
                                 "index":80
-                            }]
-                    }
-                },
-                {
-                    "target":496,
-                    "keyframes":{
-                        "y":[
-                            {
-                                "value":1150,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":496,
-                                "key":"y",
-                                "index":0
                             }]
                     }
                 }],

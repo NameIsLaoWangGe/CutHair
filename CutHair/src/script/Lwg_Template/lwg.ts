@@ -4952,6 +4952,7 @@ export module lwg {
                 /**结构，如果没有则为null*/
                 Skin._SkinTap = this.self['SkinTap'];
                 Skin._SkinList = this.self['SkinList'];
+
                 _skinClassArr = [_eyeSkinArr, _headSkinArr];
             }
 
@@ -5004,7 +5005,7 @@ export module lwg {
             skinList_Update(cell: Laya.Box, index: number): void { }
             /**刷新list数据,重写覆盖，默认为皮肤*/
             skinList_refresh(): void {
-                if (Skin._SkinList && _skinClassArr.length > 0) {
+                if (Skin._SkinList && _skinClassArr.length > 1) {
                     Skin._SkinList.array = _skinClassArr[0];
                     Skin._SkinList.refresh();
                 }
@@ -5018,255 +5019,255 @@ export module lwg {
         }
     }
     /**对游戏总的一些彩蛋进行管理*/
-export module EasterEgg {
-    /**彩蛋1任务集合*/
-    export let _easterEgg_1Arr: Array<any> = [];
+    export module EasterEgg {
+        /**彩蛋1任务集合*/
+        export let _easterEgg_1Arr: Array<any> = [];
 
-    /**彩蛋1是否已经被触发*/
-    export let _easterEgg_1 = {
-        get value(): boolean {
-            if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
-                return false;
-            } else {
-                return true;
+        /**彩蛋1是否已经被触发*/
+        export let _easterEgg_1 = {
+            get value(): boolean {
+                if (!Laya.LocalStorage.getItem('_easterEgg_01')) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            set value(val: boolean) {
+                Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
             }
-        },
-        set value(val: boolean) {
-            Laya.LocalStorage.setItem('_easterEgg_01', val.toString());
-        }
-    };
-    /**彩蛋1是否达成*/
-    export let _easterEgg_1Complete: boolean;
+        };
+        /**彩蛋1是否达成*/
+        export let _easterEgg_1Complete: boolean;
 
-    /**初始化彩蛋模块*/
-    export function initEasterEgg(): void {
-        _easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
-        Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
-        // console.log(  Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS']);
-        
-    }
+        /**初始化彩蛋模块*/
+        export function initEasterEgg(): void {
+            _easterEgg_1Arr = Tools.dataCompare("GameData/EasterEgg/EasterEgg.json", Classify.EasterEgg_01, Property.name);
+            Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS'];
+            // console.log(  Laya.loader.getRes("GameData/EasterEgg/EasterEgg.json")['RECORDS']);
 
-    /**
-     * 获取一个彩蛋中的某个属性信息
-     * @param className 彩蛋种类
-     * @param name 某个任务名称
-     * @param property 属性名
-     * */
-    export function getProperty(classify: string, name: string, property: string): any {
-        let pro = null;
-        let arr = getClassify(classify);
-        for (let index = 0; index < arr.length; index++) {
-            const element = arr[index];
-            if (element['name'] === name) {
-                pro = element[property];
-                break;
-            }
         }
-        if (pro !== null) {
-            return pro;
-        } else {
-            console.log(name + '找不到属性:' + property, pro);
-            return null;
-        }
-    }
 
-    /**
-     * 设置某个彩蛋的某个属性，并且返回这个值
-     * @param classify 彩蛋种类
-     * @param name 彩蛋中某个任务名称
-     * @param property 彩蛋属性
-     * @param value 属性值
-    */
-    export function setProperty(classify: string, name: string, property: string, value: any): void {
-        let arr = getClassify(classify);
-        for (let index = 0; index < arr.length; index++) {
-            const element = arr[index];
-            if (element['name'] === name) {
-                element[property] = value;
-                break;
-            }
-        }
-        let data = {};
-        data[classify] = arr;
-        Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
-    }
-
-    /**
-     * 通过名称获取任务的一个属性值
-     * @param ClassName 任务类型名称
-     * @param name 任务名称
-     * @param property 任务属性
-     * */
-    export function getTaskProperty(classify: string, name: string, property: string): any {
-        let pro = null;
-        let arr = getClassify(classify);
-        for (let index = 0; index < arr.length; index++) {
-            const element = arr[index];
-            if (element['name'] === name) {
-                pro = element[property];
-                break;
-            }
-        }
-        if (pro !== null) {
-            return pro;
-        } else {
-            console.log(name + '找不到属性:' + property, pro);
-            return null;
-        }
-    }
-
-    /**根据彩蛋类型返回一个彩蛋的所有任务*/
-    export function getClassify(classify: string): Array<any> {
-        let arr = [];
-        switch (classify) {
-            case Classify.EasterEgg_01:
-                arr = _easterEgg_1Arr;
-                break;
-            default:
-                break;
-        }
-        return arr;
-    }
-
-    /** 
-     * 通过resCondition/condition，做任务并且完成了这次任务，然后检总进度是否完成,返回是否完成
-    * @param classify 任务种类
-    * @param name 任务名称
-    * @param number 做几次任务，不传则默认为0次，不传则是检测完成状况
-    */
-    export function doDetection(classify: string, name: string, number?: number): number {
-        if (!number) {
-            number = 0;
-        }
-        let resCondition = getProperty(classify, name, Property.resCondition);
-        let condition = getProperty(classify, name, Property.condition);
-        if (!getProperty(classify, name, Property.complete)) {
-            if (condition <= resCondition + number) {
-                setProperty(classify, name, Property.resCondition, condition);
-                setProperty(classify, name, Property.complete, true);
-                console.log(getProperty(classify, name, Property.complete));
-                return 1;
-            } else {
-                setProperty(classify, name, Property.resCondition, resCondition + number);
-
-                return 0;
-            }
-        } else {
-            return 1;
-        }
-    }
-
-    /**
-     * 检测所有彩蛋任务是否完成,完成则返回1，没有完成则返回0
-     * @param classify 哪一个彩蛋
-     * */
-    export function detectAllTasks(classify: string): number {
-        let num = 1;
-        let arr = getClassify(classify);
-        for (const key in arr) {
-            if (arr.hasOwnProperty(key)) {
-                const element = arr[key];
-                let resCondition = getProperty(classify, element.name, Property.resCondition);
-                let condition = getProperty(classify, element.name, Property.condition);
-                if (condition > resCondition) {
-                    num = 0;
+        /**
+         * 获取一个彩蛋中的某个属性信息
+         * @param className 彩蛋种类
+         * @param name 某个任务名称
+         * @param property 属性名
+         * */
+        export function getProperty(classify: string, name: string, property: string): any {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
                 }
             }
+            if (pro !== null) {
+                return pro;
+            } else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
         }
-        if (num == 1) {
-            console.log(classify, '完成了！');
-        } else {
-            console.log(classify, '没有完成！');
+
+        /**
+         * 设置某个彩蛋的某个属性，并且返回这个值
+         * @param classify 彩蛋种类
+         * @param name 彩蛋中某个任务名称
+         * @param property 彩蛋属性
+         * @param value 属性值
+        */
+        export function setProperty(classify: string, name: string, property: string, value: any): void {
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    element[property] = value;
+                    break;
+                }
+            }
+            let data = {};
+            data[classify] = arr;
+            Laya.LocalStorage.setJSON(classify, JSON.stringify(data));
         }
-        return num;
-    }
 
-    /**奖励类型*/
-    export enum rewardType {
-        gold = 'gold',
-        diamond = 'diamond',
-        /**部件*/
-        assembly = 'assembly',
-    }
-
-    /**
-     * 彩蛋中通用属性
-     */
-    export enum Property {
-        /**名称*/
-        name = 'name',
-        /**彩蛋描述*/
-        explain = 'explain',
-        /**需要完成任务的总数*/
-        condition = 'condition',
-        /**根据获取途径，剩余需要条件的数量，会平凡改这个数量*/
-        resCondition = 'resCondition',
-        /**是否完成*/
-        complete = 'complete',
-    }
-
-    /**彩蛋列表种类*/
-    export enum Classify {
-        EasterEgg_01 = 'EasterEgg_01',
-    }
-
-    /**彩蛋中的任务名称*/
-    export enum Name {
-        assembly_1 = 'assembly_1',
-        assembly_2 = 'assembly_2',
-        assembly_3 = 'assembly_3',
-        assembly_4 = 'assembly_4',
-        assembly_5 = 'assembly_5',
-    }
-
-    /**彩蛋模块事件类型*/
-    export enum EventType {
-        /**触发彩蛋*/
-        trigger = 'trigger',
-        /**看广告完成任务*/
-        easterEggAds = 'easterEggAds',
-    }
-
-    /**彩蛋场景继承类*/
-    export class EasterEggScene extends Admin.Scene {
-        lwgOnAwake(): void {
-            this.easterEggInitData();
-            this.easterEggOnAwake();
+        /**
+         * 通过名称获取任务的一个属性值
+         * @param ClassName 任务类型名称
+         * @param name 任务名称
+         * @param property 任务属性
+         * */
+        export function getTaskProperty(classify: string, name: string, property: string): any {
+            let pro = null;
+            let arr = getClassify(classify);
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element['name'] === name) {
+                    pro = element[property];
+                    break;
+                }
+            }
+            if (pro !== null) {
+                return pro;
+            } else {
+                console.log(name + '找不到属性:' + property, pro);
+                return null;
+            }
         }
-        /**初始化json数据*/
-        easterEggInitData(): void { }
-        lwgEventReg(): void { this.easterEggEventReg(); }
-        /**任务中注册的一些事件*/
-        easterEggEventReg(): void { }
 
-        /**初始化前执行一次*/
-        easterEggOnAwake(): void { }
-        lwgNodeDec(): void { this.easterEggNodeDec(); }
-        /**节点声明*/
-        easterEggNodeDec(): void { }
+        /**根据彩蛋类型返回一个彩蛋的所有任务*/
+        export function getClassify(classify: string): Array<any> {
+            let arr = [];
+            switch (classify) {
+                case Classify.EasterEgg_01:
+                    arr = _easterEgg_1Arr;
+                    break;
+                default:
+                    break;
+            }
+            return arr;
+        }
 
-        lwgOnEnable(): void { this.easterEggOnEnable(); }
-        /**开始后执行*/
-        easterEggOnEnable(): void { }
-        lwgOpenAni(): number { return this.easterEggOpenAin(); }
-        /**开场动画*/
-        easterEggOpenAin(): number { return 0; }
+        /** 
+         * 通过resCondition/condition，做任务并且完成了这次任务，然后检总进度是否完成,返回是否完成
+        * @param classify 任务种类
+        * @param name 任务名称
+        * @param number 做几次任务，不传则默认为0次，不传则是检测完成状况
+        */
+        export function doDetection(classify: string, name: string, number?: number): number {
+            if (!number) {
+                number = 0;
+            }
+            let resCondition = getProperty(classify, name, Property.resCondition);
+            let condition = getProperty(classify, name, Property.condition);
+            if (!getProperty(classify, name, Property.complete)) {
+                if (condition <= resCondition + number) {
+                    setProperty(classify, name, Property.resCondition, condition);
+                    setProperty(classify, name, Property.complete, true);
+                    console.log(getProperty(classify, name, Property.complete));
+                    return 1;
+                } else {
+                    setProperty(classify, name, Property.resCondition, resCondition + number);
 
-        lwgBtnClick(): void { this.easterEggBtnClick() }
-        /**按钮点击事件*/
-        easterEggBtnClick(): void { };
+                    return 0;
+                }
+            } else {
+                return 1;
+            }
+        }
 
-        lwgOnUpdate(): void { this.easterEggOnUpdate(); }
-        /**每帧执行*/
-        easterEggOnUpdate(): void { }
+        /**
+         * 检测所有彩蛋任务是否完成,完成则返回1，没有完成则返回0
+         * @param classify 哪一个彩蛋
+         * */
+        export function detectAllTasks(classify: string): number {
+            let num = 1;
+            let arr = getClassify(classify);
+            for (const key in arr) {
+                if (arr.hasOwnProperty(key)) {
+                    const element = arr[key];
+                    let resCondition = getProperty(classify, element.name, Property.resCondition);
+                    let condition = getProperty(classify, element.name, Property.condition);
+                    if (condition > resCondition) {
+                        num = 0;
+                    }
+                }
+            }
+            if (num == 1) {
+                console.log(classify, '完成了！');
+            } else {
+                console.log(classify, '没有完成！');
+            }
+            return num;
+        }
 
-        lwgOnDisable(): void { this.easterEggOnDisable(); }
-        /**页面关闭后执行*/
-        easterEggOnDisable(): void { }
+        /**奖励类型*/
+        export enum rewardType {
+            gold = 'gold',
+            diamond = 'diamond',
+            /**部件*/
+            assembly = 'assembly',
+        }
 
+        /**
+         * 彩蛋中通用属性
+         */
+        export enum Property {
+            /**名称*/
+            name = 'name',
+            /**彩蛋描述*/
+            explain = 'explain',
+            /**需要完成任务的总数*/
+            condition = 'condition',
+            /**根据获取途径，剩余需要条件的数量，会平凡改这个数量*/
+            resCondition = 'resCondition',
+            /**是否完成*/
+            complete = 'complete',
+        }
+
+        /**彩蛋列表种类*/
+        export enum Classify {
+            EasterEgg_01 = 'EasterEgg_01',
+        }
+
+        /**彩蛋中的任务名称*/
+        export enum Name {
+            assembly_1 = 'assembly_1',
+            assembly_2 = 'assembly_2',
+            assembly_3 = 'assembly_3',
+            assembly_4 = 'assembly_4',
+            assembly_5 = 'assembly_5',
+        }
+
+        /**彩蛋模块事件类型*/
+        export enum EventType {
+            /**触发彩蛋*/
+            trigger = 'trigger',
+            /**看广告完成任务*/
+            easterEggAds = 'easterEggAds',
+        }
+
+        /**彩蛋场景继承类*/
+        export class EasterEggScene extends Admin.Scene {
+            lwgOnAwake(): void {
+                this.easterEggInitData();
+                this.easterEggOnAwake();
+            }
+            /**初始化json数据*/
+            easterEggInitData(): void { }
+            lwgEventReg(): void { this.easterEggEventReg(); }
+            /**任务中注册的一些事件*/
+            easterEggEventReg(): void { }
+
+            /**初始化前执行一次*/
+            easterEggOnAwake(): void { }
+            lwgNodeDec(): void { this.easterEggNodeDec(); }
+            /**节点声明*/
+            easterEggNodeDec(): void { }
+
+            lwgOnEnable(): void { this.easterEggOnEnable(); }
+            /**开始后执行*/
+            easterEggOnEnable(): void { }
+            lwgOpenAni(): number { return this.easterEggOpenAin(); }
+            /**开场动画*/
+            easterEggOpenAin(): number { return 0; }
+
+            lwgBtnClick(): void { this.easterEggBtnClick() }
+            /**按钮点击事件*/
+            easterEggBtnClick(): void { };
+
+            lwgOnUpdate(): void { this.easterEggOnUpdate(); }
+            /**每帧执行*/
+            easterEggOnUpdate(): void { }
+
+            lwgOnDisable(): void { this.easterEggOnDisable(); }
+            /**页面关闭后执行*/
+            easterEggOnDisable(): void { }
+
+        }
     }
-}
-    
+
     export module Loding {
         /**3D场景的加载，其他3D物体，贴图，Mesh详见：  https://ldc2.layabox.com/doc/?nav=zh-ts-4-3-1   */
         export let lodingList_3DScene: Array<any> = [];

@@ -44,7 +44,7 @@ export default class UIVictory extends lwg.Admin.Scene {
                 this.self['OPPO'].visible = true;
                 this.self['WeChat'].visible = false;
                 this.self['Bytedance'].visible = false;
-
+                this.self['P202'].removeSelf();
                 this.getGoldDisPlay(1);
                 break;
 
@@ -55,6 +55,7 @@ export default class UIVictory extends lwg.Admin.Scene {
                 this.self['BtnAdv_WeChat'].visible = true;
                 this.self['BtnNormal_WeChat'].visible = false;
                 this.self['Dot_WeChat'].visible = true;
+                this.self['P202'].removeSelf();
                 this.getGoldDisPlay(10);
                 break;
 
@@ -138,7 +139,7 @@ export default class UIVictory extends lwg.Admin.Scene {
             case Game._platformTpye.Bytedance:
                 Dot = this.self['Dot_Bytedance'];
                 break;
-            case Game._platformTpye.Bytedance:
+            case Game._platformTpye.WeChat:
                 Dot = this.self['Dot_WeChat'];
                 break;
 

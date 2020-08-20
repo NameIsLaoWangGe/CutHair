@@ -31,11 +31,13 @@ export default class UIDefeated extends lwg.Admin.Scene {
                 this.self['OPPO'].visible = true;
                 this.self['WeChat'].visible = false;
                 this.self['Bytedance'].visible = false;
+                this.self['P202'].removeSelf();
                 break;
             case Game._platformTpye.WeChat:
                 this.self['OPPO'].visible = false;
                 this.self['WeChat'].visible = true;
                 this.self['Bytedance'].visible = false;
+                this.self['P202'].removeSelf();
                 break;
             case Game._platformTpye.Bytedance:
                 this.self['OPPO'].visible = false;
@@ -45,7 +47,6 @@ export default class UIDefeated extends lwg.Admin.Scene {
             default:
                 break;
         }
-
     }
 
     lwgBtnClick(): void {
@@ -86,7 +87,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
             Dot.visible = true;
             this.self['BtnNext_WeChat'].visible = true;
             this.self['BtnAgain_WeChat'].visible = false;
-            
+
             this.self['BtnNext_Bytedance'].visible = true;
             this.self['BtnAgain_Bytedance'].visible = false;
         }

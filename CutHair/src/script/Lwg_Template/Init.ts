@@ -5,8 +5,8 @@ export default class Init extends Admin.Scene {
     lwgOnAwake(): void {
         console.log('开始初始化');
         this.gameInit();
-        this.skinInit();
         this.shopInit();
+        this.skinInit();
         this.taskInit();
         this.easterEggInit();
     }

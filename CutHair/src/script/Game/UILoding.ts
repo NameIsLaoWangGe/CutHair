@@ -55,6 +55,7 @@ export default class UILoding extends Loding.LodeScene {
             "Scene/UIShop.json",
             "Scene/UISkinXD.json",
             "Scene/UITask.json",
+            "Scene/UIADSHint.json",
         ];
 
         this.shearAni(); 

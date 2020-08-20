@@ -1,5 +1,6 @@
 import { PalyAudio, Dialog, EventAdmin, Task, Admin, EasterEgg } from "../Lwg_Template/lwg";
 import { Game } from "../Lwg_Template/Game";
+import UIADSHint from "../Game/UIADSHint";
 
 export default class ADManager {
 
@@ -30,13 +31,10 @@ export default class ADManager {
     }
 
     /**当前广告奖励的奖励回调函数,用于在其他地方执行这个函数*/
-    static _currentRewardAction: Function;
-
     static CanShowCD: boolean = true;
     public static ShowReward(rewardAction: Function, CDTime: number = 500)//展示激励广告，一般是视频
     {
 
-        this._currentRewardAction = rewardAction;
         if (Game._platform === Game._platformTpye.OPPO) {
             rewardAction();
             EventAdmin.notify(Task.EventType.adsTime);
@@ -67,8 +65,9 @@ export default class ADManager {
                     PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
                     //UIMgr.show("UISubSkinTry", 2);
                     // Dialog.createHint_Middle(Dialog.HintContent["观看完整广告才能获取奖励哦！"]);
+                    console.log('观看完整广告才能获取奖励哦！');
                     Admin._openScene(Admin.SceneName.UIADSHint, null, null, () => {
-
+                        Admin._sceneControl['UIADSHint'].getComponent(UIADSHint).setCallBack(rewardAction);
                     });
                     //TipPanel.ins.showString("观看完整广告才能获取奖励哦！");
                 }
@@ -109,7 +108,7 @@ export default class ADManager {
     static wx = Laya.Browser.window.wx;
 
     static shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
-    static shareContent = "快把锅甩给队友！";
+    static shareContent = "剃头大师！";
     static initShare() {
         if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
             this.wx.onShareAppMessage(() => {

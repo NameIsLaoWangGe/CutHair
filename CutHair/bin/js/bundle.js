@@ -1037,7 +1037,6 @@
             TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
         }
         static ShowReward(rewardAction, CDTime = 500) {
-            this._currentRewardAction = rewardAction;
             if (Game._platform === Game._platformTpye.OPPO) {
                 rewardAction();
                 EventAdmin.notify(Task.EventType.adsTime);
@@ -1062,7 +1061,9 @@
                 p.cbi.Add(TJ.Define.Event.Close, () => {
                     if (!getReward) {
                         PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                        console.log('观看完整广告才能获取奖励哦！');
                         Admin._openScene(Admin.SceneName.UIADSHint, null, null, () => {
+                            Admin._sceneControl['UIADSHint'].getComponent(UIADSHint).setCallBack(rewardAction);
                         });
                     }
                 });
@@ -1158,7 +1159,7 @@
     ADManager.CanShowCD = true;
     ADManager.wx = Laya.Browser.window.wx;
     ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
-    ADManager.shareContent = "快把锅甩给队友！";
+    ADManager.shareContent = "剃头大师！";
     var TaT;
     (function (TaT) {
         TaT[TaT["BtnShow"] = 0] = "BtnShow";
@@ -4607,7 +4608,7 @@
                 skinList_Scelet(index) { }
                 skinList_Update(cell, index) { }
                 skinList_refresh() {
-                    if (Skin._SkinList && Skin._skinClassArr.length > 0) {
+                    if (Skin._SkinList && Skin._skinClassArr.length > 1) {
                         Skin._SkinList.array = Skin._skinClassArr[0];
                         Skin._SkinList.refresh();
                     }
@@ -5052,25 +5053,26 @@
     let Tomato = lwg.Tomato;
 
     class UIADSHint extends Admin.Scene {
+        setCallBack(_adAction) {
+            this.adAction = _adAction;
+        }
+        lwgOnEnable() {
+            this.self.x = 0;
+            this.self.y = 0;
+        }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp);
             Click.on(Click.Type.largen, this.self['BtnConfirm'], this, null, null, this.btnConfirmUp);
-        }
-        lwgEventReg() {
-            EventAdmin.reg('continue', this, () => {
-                ADManager.ShowReward(() => {
-                    if (ADManager._currentRewardAction) {
-                        ADManager._currentRewardAction();
-                    }
-                });
-            });
         }
         btnCloseUp() {
             this.self.close();
         }
         btnConfirmUp() {
-            EventAdmin.notify('continue');
+            ADManager.ShowReward(this.adAction, null);
             this.self.close();
+        }
+        lwgOnDisable() {
+            console.log('退出');
         }
     }
 
@@ -5439,11 +5441,13 @@
                     this.self['OPPO'].visible = true;
                     this.self['WeChat'].visible = false;
                     this.self['Bytedance'].visible = false;
+                    this.self['P202'].removeSelf();
                     break;
                 case Game._platformTpye.WeChat:
                     this.self['OPPO'].visible = false;
                     this.self['WeChat'].visible = true;
                     this.self['Bytedance'].visible = false;
+                    this.self['P202'].removeSelf();
                     break;
                 case Game._platformTpye.Bytedance:
                     this.self['OPPO'].visible = false;
@@ -6188,8 +6192,8 @@
         lwgOnAwake() {
             console.log('开始初始化');
             this.gameInit();
-            this.skinInit();
             this.shopInit();
+            this.skinInit();
             this.taskInit();
             this.easterEggInit();
         }
@@ -6298,6 +6302,7 @@
                 "Scene/UIShop.json",
                 "Scene/UISkinXD.json",
                 "Scene/UITask.json",
+                "Scene/UIADSHint.json",
             ];
             this.shearAni();
         }
@@ -7348,7 +7353,6 @@
 
     class UISkin extends SkinScene {
         skinOnAwake() {
-            console.log(Laya.stage);
             Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
             let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
             Skin._headSkinArr = [];
@@ -7363,6 +7367,13 @@
                 else if (element[Skin.SkinProperty.classify] === Skin.SkinClass.eye) {
                     Skin._eyeSkinArr.push(element);
                 }
+            }
+            let condition = Shop.getGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.condition);
+            if (Game._gameLevel.value >= condition) {
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.have, true);
+            }
+            else {
+                Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.resCondition, Game._gameLevel.value);
             }
         }
         skinEventReg() {
@@ -7438,6 +7449,7 @@
             Skin._SkinList.refresh();
         }
         skinList_Update(cell, index) {
+            console.log(Skin._SkinList);
             let dataSource = cell.dataSource;
             let Select = cell.getChildByName('Select');
             Select.visible = false;
@@ -7512,7 +7524,7 @@
             }
         }
         skinOnEnable() {
-            Skin._SkinList.array = Skin._eyeSkinArr;
+            Skin._SkinList.array = Skin._headSkinArr;
             Skin._SkinList.refresh();
             EventAdmin.notify(GEnum.EventType.cameraMove, [GEnum.TaskType.movePhotoLocation]);
         }
@@ -7629,7 +7641,6 @@
 
     class UISkinXD extends SkinXD.SkinXDScene {
         skinXDOnAwake() {
-            console.log(Laya.stage);
             ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
             Gold.goldVinish();
             Setting.setBtnVinish();
@@ -7663,11 +7674,11 @@
         }
         btnGetFunc() {
             ADManager.TAPoint(TaT.BtnClick, 'Adlimmitget');
-            let have = Shop.buyGoods(Shop.GoodsClass.Other, 'xiandanren', 1);
-            if (have === 1) {
+            let have = Shop.buyGoods(Shop.GoodsClass.Props, 'xiandanren', 1);
+            if (have) {
                 this.progressDisplay();
                 Dialog.createHint_Middle(Dialog.HintContent["限定皮肤已经获得，请前往皮肤界面查看。"]);
-                Shop._currentOther.name = 'xiandanren';
+                Shop._currentProp.name = 'xiandanren';
                 EventAdmin.notify(SkinXD.EventType.acquisition);
                 Animation2D.fadeOut(this.self, 1, 0, 500, 500, () => {
                     this.self.close();
@@ -7679,6 +7690,7 @@
         }
         skinXDOnDisable() {
             Setting.setBtnAppear();
+            Gold.goldAppear();
         }
     }
 
@@ -7694,6 +7706,9 @@
             ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'startword_main');
+            if (Game._platform !== Game._platformTpye.Bytedance) {
+                this.self['P204'].visible = false;
+            }
         }
         lwgEventReg() {
             EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
@@ -7728,6 +7743,8 @@
         }
         lwgAdaptive() {
             this.self['P204'].y = Laya.stage.height;
+            this.self['Guide'].y = Laya.stage.height * 0.732;
+            this.self['SceneContent'].y = Laya.stage.height * 0.378;
         }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
@@ -7885,6 +7902,11 @@
     });
     class UISubpackages extends Laya.Script {
         onAwake() {
+            Game._platform == Game._platformTpye.Bytedance;
+            if (Game._platform !== Game._platformTpye.WeChat) {
+                Admin._openScene('UILoding');
+                return;
+            }
             let act = () => {
                 if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
                     let gameContrl = new SubpackController();
@@ -8022,6 +8044,7 @@
                     this.self['OPPO'].visible = true;
                     this.self['WeChat'].visible = false;
                     this.self['Bytedance'].visible = false;
+                    this.self['P202'].removeSelf();
                     this.getGoldDisPlay(1);
                     break;
                 case Game._platformTpye.WeChat:
@@ -8031,6 +8054,7 @@
                     this.self['BtnAdv_WeChat'].visible = true;
                     this.self['BtnNormal_WeChat'].visible = false;
                     this.self['Dot_WeChat'].visible = true;
+                    this.self['P202'].removeSelf();
                     this.getGoldDisPlay(10);
                     break;
                 case Game._platformTpye.Bytedance:
@@ -8097,7 +8121,7 @@
                 case Game._platformTpye.Bytedance:
                     Dot = this.self['Dot_Bytedance'];
                     break;
-                case Game._platformTpye.Bytedance:
+                case Game._platformTpye.WeChat:
                     Dot = this.self['Dot_WeChat'];
                     break;
                 default:
