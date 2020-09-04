@@ -1,5 +1,6 @@
 import { Skin, Shop, Task, Admin, EventAdmin, EasterEgg } from "./lwg";
 import { Game } from "./Game";
+import ZJADMgr from "../TJ/ZJADMgr";
 
 export default class Init extends Admin.Scene {
     lwgOnAwake(): void {
@@ -9,6 +10,7 @@ export default class Init extends Admin.Scene {
         this.skinInit();
         this.taskInit();
         this.easterEggInit();
+        new ZJADMgr();
     }
     gameInit(): void {
         Game._platform = Game._platformTpye.Bytedance;

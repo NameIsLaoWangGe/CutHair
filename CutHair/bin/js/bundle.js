@@ -3316,6 +3316,30 @@
         })(PalyAudio = lwg.PalyAudio || (lwg.PalyAudio = {}));
         let Tools;
         (function (Tools) {
+            function node_ShowExcludedChild(node, childNameArr, bool) {
+                for (let i = 0; i < node.numChildren; i++) {
+                    let Child = node.getChildAt(i);
+                    for (let j = 0; j < childNameArr.length; j++) {
+                        if (Child.name == childNameArr[j]) {
+                            if (bool) {
+                                Child.visible = true;
+                            }
+                            else {
+                                Child.visible = false;
+                            }
+                        }
+                        else {
+                            if (bool) {
+                                Child.visible = false;
+                            }
+                            else {
+                                Child.visible = true;
+                            }
+                        }
+                    }
+                }
+            }
+            Tools.node_ShowExcludedChild = node_ShowExcludedChild;
             function randomNumOfArray(arr, num) {
                 let arr0 = [];
                 if (num > arr.length) {
@@ -5768,13 +5792,16 @@
             GSene3D.MainCamera = this.MainCamera;
             GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark');
             GSene3D.LevelParent_Mark = this.self.getChildByName('LevelParent_Mark');
-            GSene3D.LevelParent = Laya.loader.getRes("3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh");
-            this.self.addChild(GSene3D.LevelParent);
-            GSene3D.LevelParent.transform.position = GSene3D.LevelParent_Mark.transform.position;
-            for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
-                const element = GSene3D.LevelParent.getChildAt(index);
-                element.active = false;
+            GSene3D.LevelParent = this.self.getChildByName('LevelParent');
+            let Mark = GSene3D.LevelParent.getChildByName('LevelMark');
+            for (let index = 0; index < 10; index++) {
+                let url = "3DPrefab/LayaScene_SampleScene/Conventional/Level" + (index + 1) + ".lh";
+                let Level = Laya.loader.getRes(url);
+                Level.active = false;
+                GSene3D.LevelParent.addChild(Level);
+                Level.transform.position = Mark.transform.position;
             }
+            Mark.removeSelf();
             GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side');
             GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right');
             GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle');
@@ -6086,6 +6113,216 @@
         }
     }
 
+    var ShieldLevel;
+    (function (ShieldLevel) {
+        ShieldLevel["low"] = "Low";
+        ShieldLevel["mid"] = "Mid";
+        ShieldLevel["high"] = "High";
+    })(ShieldLevel || (ShieldLevel = {}));
+    class ZJADMgr {
+        constructor() {
+            this.tt = Laya.Browser.window.tt;
+            this.shieldLevel = ShieldLevel.high;
+            this.prk_init = "platform_init";
+            this.prk_shareTimes = "platform_shareTimes";
+            this.prk_shareTs = "platform_shareTs";
+            this.shareItv = 1 * 3600 * 1000;
+            this.shareMaxTimes = 5;
+            this.shareImgUrl = "http://image.tomatojoy.cn/fkbxs01.jpg";
+            this.shareContent = "消灭方块，人人有责！";
+            this.shieldArea = false;
+            this.shieldUser = false;
+            this.shieldVersion = false;
+            this.shieldtime = false;
+            this.shareTimes = 0;
+            this.lastShareTs = 0;
+            this.configInited = false;
+            this.ipInfoInited = false;
+            this.inited = false;
+            this.playVideoIndex = 0;
+            ZJADMgr.ins = this;
+            this.requestInfo();
+        }
+        GameCfg() {
+            return __awaiter(this, void 0, void 0, function* () {
+                let www = new TJ.Common.WWW("https://h5.tomatojoy.cn/res/" + TJ.API.AppInfo.AppGuid() + "/config/game.json");
+                yield www.Send();
+                if (www.error == null && www.text != null) {
+                    this.onGameCfgSuccess(www.text);
+                    return;
+                }
+                else {
+                    let www = new TJ.Common.WWW("https://h5.tomatojoy.cn/res/" + TJ.API.AppInfo.AppGuid() + "/config/game.json");
+                    yield www.Send();
+                    if (www.error == null && www.text != null) {
+                        this.onGameCfgSuccess(www.text);
+                        return;
+                    }
+                    else {
+                        let www = new TJ.Common.WWW("https://h5.tomatojoy.cn/res/" + TJ.API.AppInfo.AppGuid() + "/config/game.json");
+                        yield www.Send();
+                        if (www.error == null && www.text != null) {
+                            this.onGameCfgSuccess(www.text);
+                            return;
+                        }
+                    }
+                }
+                return null;
+            });
+        }
+        GetIP() {
+            return __awaiter(this, void 0, void 0, function* () {
+                let www = new TJ.Common.WWW("https://api1.tomatojoy.cn/getIp");
+                yield www.Send();
+                if (www.error == null && www.text != null) {
+                    this.onGetIpSuccess(www.text);
+                    return;
+                }
+                else {
+                    let www = new TJ.Common.WWW("https://api1.tomatojoy.cn/getIp");
+                    yield www.Send();
+                    if (www.error == null && www.text != null) {
+                        this.onGetIpSuccess(www.text);
+                        return;
+                    }
+                    else {
+                        let www = new TJ.Common.WWW("https://api1.tomatojoy.cn/getIp");
+                        yield www.Send();
+                        if (www.error == null && www.text != null) {
+                            this.onGetIpSuccess(www.text);
+                            return;
+                        }
+                        else {
+                            console.log(www.error);
+                        }
+                    }
+                }
+                return null;
+            });
+        }
+        onGameCfgSuccess(config) {
+            let _configinfo = JSON.parse(config);
+            this.configinfo = _configinfo;
+            this.configInited = true;
+            if (this.ipInfoInited) {
+                this.init();
+            }
+        }
+        onGetIpSuccess(ipInfo) {
+            let _iPInfo = JSON.parse(ipInfo);
+            this.iPInfo = _iPInfo;
+            this.ipInfoInited = true;
+            if (this.configInited) {
+                this.init();
+            }
+        }
+        requestInfo() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                this.GameCfg();
+                this.GetIP();
+            }
+        }
+        init() {
+            if (this.configinfo.shieldStatus) {
+                if (TJ.API.AppInfo.VersionName() == this.configinfo.codeVer)
+                    this.shieldVersion = true;
+            }
+            if (this.iPInfo != null) {
+                if (this.iPInfo.code == 200) {
+                    let m_cityName = this.iPInfo.data.city;
+                    if (this.configinfo.shieldCity != "") {
+                        if (this.configinfo.shieldCity == "all") {
+                            this.shieldArea = true;
+                        }
+                        else {
+                            this.shieldArea = false;
+                            let shieldcities = this.configinfo.shieldCity.split(",");
+                            for (var i = 0; i < shieldcities.length; i++) {
+                                if (m_cityName.indexOf(shieldcities[i]) >= 0) {
+                                    this.shieldArea = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        this.shieldArea = false;
+                    }
+                }
+                else {
+                    this.shieldArea = true;
+                }
+            }
+            if (this.configinfo.shieldTime.status) {
+                let timeLimit = this.configinfo.shieldTime.time.split("-");
+                let date = new Date();
+                if (date.getHours() >= Number(timeLimit[0]) && date.getHours() <= Number(timeLimit[1])) {
+                    this.shieldtime = true;
+                }
+                else {
+                    this.shieldtime = false;
+                }
+            }
+            else {
+                this.shieldtime = false;
+            }
+            let launchRes = this.tt.getLaunchOptionsSync();
+            console.log(launchRes);
+            if (this.configinfo.ShieldScene.status) {
+                let timeLimit = this.configinfo.ShieldScene.Scene.split("|");
+                this.shieldUser = timeLimit.indexOf(launchRes.scene) >= 0;
+                console.log(this.shieldUser);
+            }
+            this.inited = true;
+            if (this.onConFigInited != null)
+                this.onConFigInited();
+            this.tt.getNetworkType({
+                success: (obj) => {
+                    if (obj.networkType == "wifi") {
+                        if (ZJADMgr.ins.shieldArea) {
+                            ZJADMgr.ins.shieldLevel = ShieldLevel.mid;
+                        }
+                        else {
+                            ZJADMgr.ins.shieldLevel = ShieldLevel.low;
+                        }
+                    }
+                    else {
+                        ZJADMgr.ins.shieldLevel = ShieldLevel.mid;
+                    }
+                    if (ZJADMgr.ins.shieldUser) {
+                        ZJADMgr.ins.shieldLevel = ShieldLevel.high;
+                    }
+                    if (ZJADMgr.ins.shieldVersion) {
+                        ZJADMgr.ins.shieldLevel = ShieldLevel.high;
+                    }
+                    if (ZJADMgr.ins.shieldtime) {
+                        ZJADMgr.ins.shieldLevel = ShieldLevel.high;
+                    }
+                    console.log("--------ZJADMgr.ins.shieldLevel-------");
+                    console.log(ZJADMgr.ins.shieldLevel);
+                },
+                fail: null,
+                complete: null
+            });
+            this.showVideo = this.configinfo.ADPoint;
+        }
+        CheckPlayVideo() {
+            if (!this.inited)
+                return false;
+            if (this.shieldLevel == ShieldLevel.low) {
+                if (this.showVideo[this.playVideoIndex % this.showVideo.length] == '0') {
+                    this.playVideoIndex++;
+                    return false;
+                }
+                else {
+                    this.playVideoIndex++;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     class Init extends Admin.Scene {
         lwgOnAwake() {
             console.log('开始初始化');
@@ -6094,6 +6331,7 @@
             this.skinInit();
             this.taskInit();
             this.easterEggInit();
+            new ZJADMgr();
         }
         gameInit() {
             Game._platform = Game._platformTpye.Bytedance;
@@ -6178,10 +6416,19 @@
                 "res/atlas/UI/Common.png",
             ];
             Loding.lodingList_3DScene = [
-                "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
+                "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls",
             ];
             Loding.lodingList_3DPrefab = [
-                "3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh"
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level1.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level2.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level3.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level4.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level5.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level6.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level7.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level8.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level9.lh",
+                "3DPrefab/LayaScene_SampleScene/Conventional/Level10.lh",
             ];
             Loding.lodingList_Json = [
                 "GameData/Shop/Other.json",
@@ -7552,14 +7799,9 @@
     class UISkinTry extends Admin.Scene {
         lwgOnAwake() {
             this.randomNoHave();
-            if (Game._platform == Game._platformTpye.OPPO) {
-                this.self['BtnGet_OPPO'].visible = true;
-                this.self['BtnGet_WeChat'].visible = false;
-            }
-            else {
-                this.self['BtnGet_OPPO'].visible = false;
-                this.self['BtnGet_WeChat'].visible = true;
-            }
+            Tools.node_ShowExcludedChild(this.self['Platform'], [Game._platformTpye.Bytedance], true);
+            Tools.node_ShowExcludedChild(this.self[Game._platformTpye.Bytedance], [ZJADMgr.ins.shieldLevel], true);
+            console.log(ZJADMgr.ins.shieldLevel);
         }
         randomNoHave() {
             let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
@@ -7613,11 +7855,83 @@
             Shop._currentProp.name = ele.name;
         }
         lwgBtnClick() {
-            Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
-            Click.on(lwg.Click.Type.largen, this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
-            Click.on(lwg.Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+            Click.on(Click.Type.noEffect, this.self['Bytedance_Low_Select'], this, null, null, this.bytedanceSelectUp);
+            Click.on(Click.Type.largen, this.self['Bytedance_Low_BtnGet'], this, null, null, this.bytedanceGetUp);
+            Click.on(Click.Type.noEffect, this.self['Bytedance_Mid_Select'], this, null, null, this.bytedanceSelectUp);
+            Click.on(Click.Type.largen, this.self['Bytedance_Mid_BtnGet'], this, null, null, this.bytedanceGetUp);
+            Click.on(Click.Type.noEffect, this.self['ClickBg'], this, null, null, this.clickBgtUp);
+            Click.on(Click.Type.largen, this.self['Bytedance_High_BtnGet'], this, null, null, this.btnGetUp);
+            Click.on(Click.Type.largen, this.self['Bytedance_High_BtnNo'], this, null, null, this.btnNoUp);
+            Click.on(Click.Type.largen, this.self['OPPO_BtnNo'], this, null, null, this.btnNoUp);
+            Click.on(Click.Type.largen, this.self['OPPO_BtnGet'], this, null, null, this.btnGetUp);
         }
-        btnGetUp(event) {
+        clickBgtUp() {
+            let Dot;
+            if (this.self['Low'].visible) {
+                Dot = this.self['Bytedance_Low_Dot'];
+            }
+            else if (this.self['Mid'].visible) {
+                Dot = this.self['Bytedance_Mid_Dot'];
+            }
+            if (!Dot) {
+                return;
+            }
+            if (Dot.visible) {
+                this.advFunc();
+            }
+            else {
+                if (this.beforeTryOtherName) {
+                    Shop._currentOther.name = this.beforeTryOtherName;
+                }
+                if (this.beforeTryPropName) {
+                    Shop._currentProp.name = this.beforeTryPropName;
+                }
+                Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                EventAdmin.notify(GEnum.EventType.changeOther);
+                EventAdmin.notify(GEnum.EventType.changeProp);
+            }
+        }
+        bytedanceGetUp(e) {
+            e.stopPropagation();
+            this.advFunc();
+        }
+        bytedanceSelectUp(e) {
+            e.stopPropagation();
+            if (this.self['Low'].visible) {
+                if (this.self['Bytedance_Low_Dot'].visible) {
+                    this.self['Bytedance_Low_Dot'].visible = false;
+                }
+                else {
+                    this.self['Bytedance_Low_Dot'].visible = true;
+                }
+                if (ZJADMgr.ins.CheckPlayVideo()) {
+                    ADManager.ShowReward(null);
+                }
+            }
+            else if (this.self['Mid'].visible) {
+                if (!this.self['Mid']['count']) {
+                    this.self['Mid']['count'] = 0;
+                }
+                this.self['Mid']['count']++;
+                if (this.self['Mid']['count'] >= 4) {
+                    if (this.self['Bytedance_Mid_Dot'].visible) {
+                        this.self['Bytedance_Mid_Dot'].visible = false;
+                    }
+                    else {
+                        this.self['Bytedance_Mid_Dot'].visible = true;
+                    }
+                }
+            }
+        }
+        advFunc() {
+            ADManager.ShowReward(() => {
+                Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+                EventAdmin.notify(GEnum.EventType.changeOther);
+                EventAdmin.notify(GEnum.EventType.changeProp);
+            });
+        }
+        btnGetUp(e) {
+            e.stopPropagation();
             if (Game._platform == Game._platformTpye.OPPO) {
                 Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
                 EventAdmin.notify(GEnum.EventType.changeOther);

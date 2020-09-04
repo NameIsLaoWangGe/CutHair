@@ -1,6 +1,5 @@
 import { Dialog, Admin } from "../Lwg_Template/lwg";
 
-
 export default class RecordManager {
     static Init() {
         RecordManager.grv = new TJ.Platform.AppRt.DevKit.TT.GameRecorderVideo();

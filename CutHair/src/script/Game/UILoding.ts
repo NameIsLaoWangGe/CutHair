@@ -33,11 +33,20 @@ export default class UILoding extends Loding.LodeScene {
 
         ];
         Loding.lodingList_3DScene = [
-            "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls"
+            "3DScene/LayaScene_SampleScene/Conventional/SampleScene.ls",
         ];
         Loding.lodingList_3DPrefab = [
-            "3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh"
-        ]
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level1.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level2.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level3.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level4.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level5.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level6.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level7.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level8.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level9.lh",
+            "3DPrefab/LayaScene_SampleScene/Conventional/Level10.lh",
+        ];
         Loding.lodingList_Json = [
             "GameData/Shop/Other.json",
             "GameData/Shop/Props.json",

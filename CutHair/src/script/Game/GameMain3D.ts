@@ -17,17 +17,17 @@ export default class GameMain3D extends lwg3D.Scene3D {
         GSene3D.PhotoCameraMark = this.self.getChildByName('PhotoCameraMark') as Laya.MeshSprite3D;
         GSene3D.LevelParent_Mark = this.self.getChildByName('LevelParent_Mark') as Laya.MeshSprite3D;
         // 获取关卡prefab
-        GSene3D.LevelParent = Laya.loader.getRes("3DPrefab/LayaScene_SampleScene/Conventional/LevelParent.lh") as Laya.MeshSprite3D;
-
-
-        this.self.addChild(GSene3D.LevelParent);
-        GSene3D.LevelParent.transform.position = GSene3D.LevelParent_Mark.transform.position;
-
-        for (let index = 0; index < GSene3D.LevelParent.numChildren; index++) {
-            const element = GSene3D.LevelParent.getChildAt(index);
-            element.active = false;
+        GSene3D.LevelParent = this.self.getChildByName('LevelParent') as Laya.MeshSprite3D;
+        let Mark = GSene3D.LevelParent.getChildByName('LevelMark') as Laya.MeshSprite3D;
+        for (let index = 0; index < 10; index++) {
+            let url = "3DPrefab/LayaScene_SampleScene/Conventional/Level" + (index + 1) + ".lh"
+            let Level = Laya.loader.getRes(url) as Laya.MeshSprite3D;
+            Level.active = false;
+            GSene3D.LevelParent.addChild(Level);
+            Level.transform.position = Mark.transform.position;
         }
-
+        Mark.removeSelf();
+       
         GSene3D.Landmark_Side = this.self.getChildByName('Landmark_Side') as Laya.MeshSprite3D;
         GSene3D.Landmark_Right = this.self.getChildByName('Landmark_Right') as Laya.MeshSprite3D;
         GSene3D.Landmark_Middle = this.self.getChildByName('Landmark_Middle') as Laya.MeshSprite3D;
@@ -235,7 +235,7 @@ export default class GameMain3D extends lwg3D.Scene3D {
             index = Game._gameLevel.value;
         }
         GSene3D.Level = LevelParent0.getChildByName('Level' + index) as Laya.MeshSprite3D;
-
+        // console.log(GSene3D.Level);
         if (!GSene3D.Level) {
             console.log('本关卡不存在');
         } else {

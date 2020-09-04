@@ -1,20 +1,16 @@
-import { lwg, Admin, Shop, Click, Setting, EventAdmin } from "../Lwg_Template/lwg";
+import { lwg, Admin, Shop, Click, Setting, EventAdmin, Tools } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
+import ZJADMgr, { ShieldLevel } from "../TJ/ZJADMgr";
 
 export default class UISkinTry extends Admin.Scene {
 
     lwgOnAwake(): void {
         this.randomNoHave();
-
-        if (Game._platform == Game._platformTpye.OPPO) {
-            this.self['BtnGet_OPPO'].visible = true;
-            this.self['BtnGet_WeChat'].visible = false;
-        } else {
-            this.self['BtnGet_OPPO'].visible = false;
-            this.self['BtnGet_WeChat'].visible = true;
-        }
+        Tools.node_ShowExcludedChild(this.self['Platform'], [Game._platformTpye.Bytedance], true);
+        Tools.node_ShowExcludedChild(this.self[Game._platformTpye.Bytedance], [ZJADMgr.ins.shieldLevel], true);
+        console.log(ZJADMgr.ins.shieldLevel);
     }
 
     beforeTryOtherName: string;
@@ -77,13 +73,89 @@ export default class UISkinTry extends Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        Click.on(lwg.Click.Type.largen, this.self['BtnNo'], this, null, null, this.btnNoUp);
-        Click.on(lwg.Click.Type.largen, this.self['BtnGet_WeChat'], this, null, null, this.btnGetUp);
-        Click.on(lwg.Click.Type.largen, this.self['BtnGet_OPPO'], this, null, null, this.btnGetUp);
+        Click.on(Click.Type.noEffect, this.self['Bytedance_Low_Select'], this, null, null, this.bytedanceSelectUp);
+        Click.on(Click.Type.largen, this.self['Bytedance_Low_BtnGet'], this, null, null, this.bytedanceGetUp);
 
+        Click.on(Click.Type.noEffect, this.self['Bytedance_Mid_Select'], this, null, null, this.bytedanceSelectUp);
+        Click.on(Click.Type.largen, this.self['Bytedance_Mid_BtnGet'], this, null, null, this.bytedanceGetUp);
+
+        Click.on(Click.Type.noEffect, this.self['ClickBg'], this, null, null, this.clickBgtUp);
+        Click.on(Click.Type.largen, this.self['Bytedance_High_BtnGet'], this, null, null, this.btnGetUp);
+        Click.on(Click.Type.largen, this.self['Bytedance_High_BtnNo'], this, null, null, this.btnNoUp);
+
+        Click.on(Click.Type.largen, this.self['OPPO_BtnNo'], this, null, null, this.btnNoUp);
+        Click.on(Click.Type.largen, this.self['OPPO_BtnGet'], this, null, null, this.btnGetUp);
+
+        // Click.on(Click.Type.largen, this.self['WeChat_BtnNo'], this, null, null, this.btnNoUp);
+        // Click.on(Click.Type.largen, this.self['WeChat_BtnGet'], this, null, null, this.btnGetUp);
     }
 
-    btnGetUp(event): void {
+    clickBgtUp(): void {
+        let Dot;
+        if (this.self['Low'].visible) {
+            Dot = this.self['Bytedance_Low_Dot'];
+        } else if (this.self['Mid'].visible) {
+            Dot = this.self['Bytedance_Mid_Dot'];
+        }
+        if (!Dot) {
+            return;
+        }
+        if (Dot.visible) {
+            this.advFunc();
+        } else {
+            if (this.beforeTryOtherName) {
+                Shop._currentOther.name = this.beforeTryOtherName;
+            }
+            if (this.beforeTryPropName) {
+                Shop._currentProp.name = this.beforeTryPropName;
+            }
+            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
+        }
+    }
+
+    bytedanceGetUp(e: Laya.Event): void {
+        e.stopPropagation();
+        this.advFunc();
+    }
+
+    bytedanceSelectUp(e: Laya.Event): void {
+        e.stopPropagation();
+        if (this.self['Low'].visible) {
+            if (this.self['Bytedance_Low_Dot'].visible) {
+                this.self['Bytedance_Low_Dot'].visible = false;
+            } else {
+                this.self['Bytedance_Low_Dot'].visible = true;
+            }
+            if (ZJADMgr.ins.CheckPlayVideo()) {
+                ADManager.ShowReward(null);
+            }
+        } else if (this.self['Mid'].visible) {
+            if (!this.self['Mid']['count']) {
+                this.self['Mid']['count'] = 0;
+            }
+            this.self['Mid']['count']++;
+            if (this.self['Mid']['count'] >= 4) {
+                if (this.self['Bytedance_Mid_Dot'].visible) {
+                    this.self['Bytedance_Mid_Dot'].visible = false;
+                } else {
+                    this.self['Bytedance_Mid_Dot'].visible = true;
+                }
+            }
+        }
+    }
+
+    advFunc(): void {
+        ADManager.ShowReward(() => {
+            Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            EventAdmin.notify(GEnum.EventType.changeProp);
+        })
+    }
+
+    btnGetUp(e: Laya.Event): void {
+        e.stopPropagation();
         if (Game._platform == Game._platformTpye.OPPO) {
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
             EventAdmin.notify(GEnum.EventType.changeOther);

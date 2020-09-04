@@ -3961,6 +3961,63 @@
 				},
 				"components":[],
 				"child":[]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":92,
+				"props":{
+					"name":"LevelParent",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.0312709,
+						93.58971,
+						6.582908
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[],
+				"child":[
+					{
+						"type":"Sprite3D",
+						"instanceID":93,
+						"props":{
+							"name":"LevelMark",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0.7112709,
+								-0.1187057,
+								-0.7209082
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							]
+						},
+						"components":[],
+						"child":[]
+					}
+				]
 			}
 		]
 	}
