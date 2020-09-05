@@ -1505,56 +1505,68 @@
             Dialog.createHint_Middle = createHint_Middle;
             Dialog._dialogContent = {
                 get Array() {
-                    return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] !== null ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
+                    return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
                 },
             };
-            function getDialogContent(useWhere, name) {
-                let dia;
-                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
-                    const element = Dialog._dialogContent.Array[index];
-                    if (element['useWhere'] == useWhere && element['name'] == name) {
-                        dia = element;
-                        break;
+            function getContentByUseWhereAndSerial(useWhere, serialArr) {
+                let useWhereArr = [];
+                for (let i = 0; i < Dialog._dialogContent.Array.length; i++) {
+                    const element = Dialog._dialogContent.Array[i];
+                    if (!serialArr) {
+                        if (element[DialogProperty.useWhere] == useWhere) {
+                            useWhereArr.push(element);
+                        }
+                    }
+                    else {
+                        for (let j = 0; j < serialArr.length; j++) {
+                            if (element[DialogProperty.useWhere] == useWhere && element[DialogProperty.serial] == serialArr[j]) {
+                                useWhereArr.push(element);
+                                break;
+                            }
+                        }
                     }
                 }
                 let arr = [];
-                for (const key in dia) {
-                    if (dia.hasOwnProperty(key)) {
-                        const value = dia[key];
-                        if (key.substring(0, 7) == 'content' || value !== -1) {
-                            arr.push(value);
+                for (let k = 0; k < useWhereArr.length; k++) {
+                    const element = useWhereArr[k];
+                    let arr0 = [];
+                    for (const key in element) {
+                        if (element.hasOwnProperty(key)) {
+                            if (key.substring(0, 7) == DialogProperty.content && element[key] !== "-1") {
+                                arr0.push(element[key]);
+                                if (Number(key.substring(DialogProperty.content.length)) == element[DialogProperty.max]) {
+                                    arr.push(arr0);
+                                }
+                            }
                         }
                     }
                 }
                 return arr;
             }
-            Dialog.getDialogContent = getDialogContent;
-            function getDialogContent_Random(useWhere) {
+            Dialog.getContentByUseWhereAndSerial = getContentByUseWhereAndSerial;
+            function getOneContentByUseWhereRandom(useWhere) {
+                let dilogArr1 = Dialog.getContentByUseWhereAndSerial(useWhere);
+                let contentArr = Tools.randomNumOfArray(dilogArr1)[0];
+                return contentArr;
+            }
+            Dialog.getOneContentByUseWhereRandom = getOneContentByUseWhereRandom;
+            function getContentArrByUseWhere(useWhere) {
                 let contentArr = [];
-                let whereArr = getUseWhere(useWhere);
-                let index = Math.floor(Math.random() * whereArr.length);
-                for (const key in whereArr[index]) {
-                    if (whereArr[index].hasOwnProperty(key)) {
-                        const value = whereArr[index][key];
-                        if (key.substring(0, 7) == 'content' && value !== "-1") {
-                            contentArr.push(value);
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element[DialogProperty.useWhere] == useWhere) {
+                        for (const key in element) {
+                            if (element.hasOwnProperty(key)) {
+                                if (key.substring(0, 7) == DialogProperty.content && element[key] !== "-1") {
+                                    contentArr.push(element[key]);
+                                }
+                            }
                         }
                     }
                 }
                 return contentArr;
             }
-            Dialog.getDialogContent_Random = getDialogContent_Random;
-            function getUseWhere(useWhere) {
-                let arr = [];
-                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
-                    const element = Dialog._dialogContent.Array[index];
-                    if (element['useWhere'] == useWhere) {
-                        arr.push(element);
-                    }
-                }
-                return arr;
-            }
-            Dialog.getUseWhere = getUseWhere;
+            Dialog.getContentArrByUseWhere = getContentArrByUseWhere;
             let UseWhere;
             (function (UseWhere) {
                 UseWhere["scene1"] = "scene1";
@@ -1563,7 +1575,7 @@
             })(UseWhere = Dialog.UseWhere || (Dialog.UseWhere = {}));
             let DialogProperty;
             (function (DialogProperty) {
-                DialogProperty["name"] = "name";
+                DialogProperty["serial"] = "serial";
                 DialogProperty["useWhere"] = "useWhere";
                 DialogProperty["content"] = "content";
                 DialogProperty["max"] = "max";
@@ -1574,7 +1586,15 @@
                 PlayMode["manual"] = "manual";
                 PlayMode["clickContent"] = "clickContent";
             })(PlayMode = Dialog.PlayMode || (Dialog.PlayMode = {}));
-            function createVoluntarilyDialogue(x, y, useWhere, startDelayed, delayed, parent, content) {
+            function createVoluntarilyDialogue(x, y, useWhere, startDelayed, delayed, parent, contentArr0, func, cover) {
+                if (!cover) {
+                    cover = true;
+                }
+                if (cover) {
+                    if (Dialog.VoluntarilyDialogueNode) {
+                        Dialog.VoluntarilyDialogueNode.removeSelf();
+                    }
+                }
                 if (startDelayed == undefined) {
                     startDelayed = 0;
                 }
@@ -1594,24 +1614,28 @@
                         Pre_Dialogue.y = y;
                         let ContentLabel = Pre_Dialogue.getChildByName('Content');
                         let contentArr;
-                        if (content !== undefined) {
-                            ContentLabel.text = content[0];
+                        if (!contentArr0) {
+                            contentArr = getOneContentByUseWhereRandom(useWhere);
+                            if (contentArr[0].length == 0) {
+                                return;
+                            }
+                            ContentLabel.text = contentArr[0];
                         }
                         else {
-                            contentArr = getDialogContent_Random(useWhere);
-                            ContentLabel.text = contentArr[0];
+                            contentArr = contentArr0;
                         }
                         Pre_Dialogue.zOrder = 100;
                         if (delayed == undefined) {
                             delayed = 1000;
                         }
-                        Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 1000, () => {
+                        Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 300, () => {
                             for (let index = 0; index < contentArr.length; index++) {
                                 Laya.timer.once(index * delayed, this, () => {
                                     ContentLabel.text = contentArr[index];
                                     if (index == contentArr.length - 1) {
                                         Laya.timer.once(delayed, this, () => {
                                             Animation2D.scale_Alpha(Pre_Dialogue, 1, 1, 1, 0, 0, 0, 150, null, 1000, () => {
+                                                func ? func() : null;
                                                 Pre_Dialogue.removeSelf();
                                             });
                                         });
@@ -1619,16 +1643,20 @@
                                 });
                             }
                         });
-                        Dialog.DialogueNode = Pre_Dialogue;
+                        Dialog.VoluntarilyDialogueNode = Pre_Dialogue;
                     }));
                 });
             }
             Dialog.createVoluntarilyDialogue = createVoluntarilyDialogue;
-            function createDialogHint() {
+            function createDialogueNode(x, y, useWhere, startDelayed, delayed, parent, contentArr0) {
+                let Pre_Dialogue;
                 Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
                 }));
             }
-            Dialog.createDialogHint = createDialogHint;
+            Dialog.createDialogueNode = createDialogueNode;
         })(Dialog = lwg.Dialog || (lwg.Dialog = {}));
         let Gold;
         (function (Gold_1) {
@@ -3342,12 +3370,15 @@
             Tools.node_ShowExcludedChild = node_ShowExcludedChild;
             function randomNumOfArray(arr, num) {
                 let arr0 = [];
+                if (!num) {
+                    num = 1;
+                }
                 if (num > arr.length) {
                     return '数组长度小于取出的数！';
                 }
                 else {
                     for (let index = 0; index < num; index++) {
-                        let ran = Math.floor(Math.random() * (arr.length - 1));
+                        let ran = Math.round(Math.random() * (arr.length - 1));
                         let a1 = arr[ran];
                         arr.splice(ran, 1);
                         arr0.push(a1);
@@ -5135,6 +5166,10 @@
             let ChinkTip = this.self['BtnSeven'].getChildByName('ChinkTip');
             ChinkTip.visible = false;
         }
+        lwgAdaptive() {
+            let y = this.self['WeChat'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+            this.self['Select_WeChat'].y = y;
+        }
         checkList_Update(cell, index) {
             let dataSource = cell.dataSource;
             let Pic_Board = cell.getChildByName('Pic_Board');
@@ -5322,6 +5357,8 @@
                 EventType["changeTrySkin"] = "changeTrySkin";
                 EventType["goBack"] = "goBack";
                 EventType["lianHong"] = "lianHong";
+                EventType["knifeAndBladeRecover"] = "knifeAndBladeRecover";
+                EventType["taskDialog"] = "taskDialog";
             })(EventType = GEnum.EventType || (GEnum.EventType = {}));
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
@@ -5346,8 +5383,6 @@
     class UIDefeated extends lwg.Admin.Scene {
         lwgOnAwake() {
             Admin._gameStart = false;
-        }
-        lwgNodeDec() {
             this.self['BtnSelect_WeChat'].visible = true;
             this.self['BtnAgain_WeChat'].visible = false;
             this.self['Dot_WeChat'].visible = true;
@@ -5378,6 +5413,10 @@
                 default:
                     break;
             }
+        }
+        lwgAdaptive() {
+            let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+            this.self['Select_Bytedance'].y = y;
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
@@ -5697,7 +5736,7 @@
                 case 'standard':
                     console.log('碰到线了，游戏失败！');
                     EventAdmin.notify(GEnum.EventType.lianHong);
-                    Laya.timer.frameOnce(90, this, () => {
+                    Laya.timer.frameOnce(350, this, () => {
                         EventAdmin.notify(EventAdmin.EventType.resurgence);
                     });
                     break;
@@ -5815,9 +5854,7 @@
             GSene3D.UpLeftKnife = this.self.getChildByName('UpLeftKnife');
             GSene3D.Floor = this.self.getChildByName('Floor');
             GSene3D.Razor = this.self.getChildByName('Razor');
-            GSene3D.razorFPos.x = GSene3D.Razor.transform.position.x;
-            GSene3D.razorFPos.y = GSene3D.Razor.transform.position.y;
-            GSene3D.razorFPos.z = GSene3D.Razor.transform.position.z;
+            GSene3D.razorFPos = new Laya.Vector3(GSene3D.Razor.transform.position.x, GSene3D.Razor.transform.position.y, GSene3D.Razor.transform.position.z);
             GSene3D.knifeParent = this.self.getChildByName('knifeParent');
             GSene3D.knife = GSene3D.knifeParent.getChildByName('tixudao');
             GSene3D.Role = this.self.getChildByName('Role');
@@ -5832,6 +5869,53 @@
             GSene3D.HeadDecoration = this.self.getChildByName('HeadDecoration');
             GSene3D.EyeDecoration = this.self.getChildByName('EyeDecoration');
             GSene3D.DressUpMark = this.self.getChildByName('DressUpMark');
+        }
+        lwgOnEnable() {
+            GSene3D.Floor.addComponent(GameMain3D_Floor);
+            GSene3D.Razor.addComponent(GameMain3D_Razor);
+            EventAdmin.notify(GEnum.EventType.changeProp);
+            EventAdmin.notify(GEnum.EventType.changeOther);
+            this.getLevelContent();
+        }
+        getLevelContent() {
+            if (GSene3D.Level) {
+                GSene3D.Level.removeSelf();
+            }
+            GSene3D.LevelParent.active = true;
+            let LevelParent0 = GSene3D.LevelParent.clone();
+            this.self.addChild(LevelParent0);
+            GSene3D.LevelParent.active = false;
+            console.log(Game._gameLevel.value);
+            let index;
+            if (Game._gameLevel.value > 10) {
+                index = Game._gameLevel.value % 10 + 1;
+            }
+            else {
+                index = Game._gameLevel.value;
+            }
+            GSene3D.Level = LevelParent0.getChildByName('Level' + index);
+            if (!GSene3D.Level) {
+                console.log('本关卡不存在');
+            }
+            else {
+                GSene3D.Level.active = true;
+                GVariate._taskArr = [];
+                for (let index = 0; index < GSene3D.Level.numChildren; index++) {
+                    const element = GSene3D.Level.getChildAt(index);
+                    if (element.name !== 'CutHairParent' && element.name !== 'StandardParent' && element.name !== 'RoleObj') {
+                        GVariate._taskArr.push(element.name);
+                    }
+                }
+                GSene3D.HairParent = GSene3D.Level.getChildByName('HairParent');
+                GSene3D.LeftBeard = GSene3D.Level.getChildByName('LeftBeard');
+                GSene3D.RightBeard = GSene3D.Level.getChildByName('RightBeard');
+                GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard');
+                GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard');
+                GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard');
+                GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent');
+                GSene3D.Razor.transform.position = GSene3D.razorFPos;
+                this.knifeTimeDisplay();
+            }
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.scene3DRefresh, this, () => {
@@ -5957,56 +6041,44 @@
                 if (ani) {
                     ani.play("touHongclip");
                 }
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIDefeated, 0, 2000);
+            });
+            EventAdmin.reg(GEnum.EventType.knifeAndBladeRecover, this, (direction) => {
+                switch (direction) {
+                    case GEnum.TaskType.HairParent:
+                        GSene3D.Razor.transform.position = GSene3D.razorFPos;
+                        break;
+                    case GEnum.TaskType:
+                        GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
+                        GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                        GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                        break;
+                    case GEnum.TaskType.LeftBeard:
+                        GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
+                        GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                        GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                        break;
+                    case GEnum.TaskType.MiddleBeard:
+                        GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
+                        GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
+                        GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                        break;
+                    case GEnum.TaskType.UpRightBeard:
+                        GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
+                        GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                        let Model1 = GSene3D.knife.getChildAt(0);
+                        break;
+                    case GEnum.TaskType.UpLeftBeard:
+                        GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
+                        GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
+                        let Model2 = GSene3D.knife.getChildAt(0);
+                        break;
+                    default:
+                        break;
+                }
             });
         }
         ;
-        lwgOnEnable() {
-            GSene3D.Floor.addComponent(GameMain3D_Floor);
-            GSene3D.Razor.addComponent(GameMain3D_Razor);
-            EventAdmin.notify(GEnum.EventType.changeProp);
-            EventAdmin.notify(GEnum.EventType.changeOther);
-            this.getLevelContent();
-        }
-        getLevelContent() {
-            if (GSene3D.Level) {
-                GSene3D.Level.removeSelf();
-            }
-            GSene3D.LevelParent.active = true;
-            let LevelParent0 = GSene3D.LevelParent.clone();
-            this.self.addChild(LevelParent0);
-            GSene3D.LevelParent.active = false;
-            console.log(Game._gameLevel.value);
-            let index;
-            if (Game._gameLevel.value > 10) {
-                index = Game._gameLevel.value % 10 + 1;
-            }
-            else {
-                index = Game._gameLevel.value;
-            }
-            GSene3D.Level = LevelParent0.getChildByName('Level' + index);
-            if (!GSene3D.Level) {
-                console.log('本关卡不存在');
-            }
-            else {
-                GSene3D.Level.active = true;
-                GVariate._taskArr = [];
-                for (let index = 0; index < GSene3D.Level.numChildren; index++) {
-                    const element = GSene3D.Level.getChildAt(index);
-                    if (element.name !== 'CutHairParent' && element.name !== 'StandardParent' && element.name !== 'RoleObj') {
-                        GVariate._taskArr.push(element.name);
-                    }
-                }
-                GSene3D.HairParent = GSene3D.Level.getChildByName('HairParent');
-                GSene3D.LeftBeard = GSene3D.Level.getChildByName('LeftBeard');
-                GSene3D.RightBeard = GSene3D.Level.getChildByName('RightBeard');
-                GSene3D.MiddleBeard = GSene3D.Level.getChildByName('MiddleBeard');
-                GSene3D.UpRightBeard = GSene3D.Level.getChildByName('UpRightBeard');
-                GSene3D.UpLeftBeard = GSene3D.Level.getChildByName('UpLeftBeard');
-                GSene3D.StandardParent = GSene3D.Level.getChildByName('StandardParent');
-                GSene3D.Razor.transform.position = GSene3D.razorFPos;
-                this.knifeTimeDisplay();
-            }
-        }
         knifeTimeDisplay(name) {
             if (name === 'k') {
                 GSene3D.knife.active = true;
@@ -6035,6 +6107,7 @@
             console.log('移动方向！', direction);
             switch (direction) {
                 case GEnum.TaskType.HairParent:
+                    EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, direction);
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Side.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                         this.knifeTimeDisplay('r');
@@ -6043,9 +6116,7 @@
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Side.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.RightBeard:
-                    GSene3D.knife.transform.position = GSene3D.RightSignknife.transform.position;
-                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, direction);
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Right.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                         this.knifeTimeDisplay('k');
@@ -6054,9 +6125,7 @@
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Right.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.LeftBeard:
-                    GSene3D.knife.transform.position = GSene3D.LeftSignknife.transform.position;
-                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, direction);
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Left.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                         this.knifeTimeDisplay('k');
@@ -6065,9 +6134,7 @@
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Left.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.MiddleBeard:
-                    GSene3D.knife.transform.position = GSene3D.MiddleSignknife.transform.position;
-                    GSene3D.HingeMiddle.transform.position = new Laya.Vector3(GSene3D.HingeMiddle.transform.position.x, GSene3D.knife.transform.position.y, GSene3D.HingeMiddle.transform.position.z);
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeMiddle.transform.position, new Laya.Vector3(0, 1, 0));
+                    EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, direction);
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_Middle.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                         this.knifeTimeDisplay('k');
@@ -6076,9 +6143,7 @@
                     Animation3D.RotateTo(GSene3D.TouchScreen, GSene3D.Landmark_Middle.transform.localRotationEuler, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.UpLeftBeard:
-                    GSene3D.knife.transform.position = GSene3D.UpLeftKnife.transform.position;
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
-                    let Model2 = GSene3D.knife.getChildAt(0);
+                    EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, direction);
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpLeft.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                         this.knifeTimeDisplay('k');
@@ -6088,9 +6153,7 @@
                     Animation3D.RotateTo(GSene3D.TouchScreen, euler1, this.moveSpeed, this);
                     break;
                 case GEnum.TaskType.UpRightBeard:
-                    GSene3D.knife.transform.position = GSene3D.UpRightKnife.transform.position;
-                    GSene3D.knife.transform.lookAt(GSene3D.HingeUp.transform.position, new Laya.Vector3(0, 1, 0));
-                    let Model1 = GSene3D.knife.getChildAt(0);
+                    EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, direction);
                     Animation3D.MoveTo(GSene3D.MainCamera, GSene3D.Landmark_UpRight.transform.position, this.moveSpeed, this, null, () => {
                         Admin._gameStart = true;
                         this.knifeTimeDisplay('k');
@@ -6749,12 +6812,12 @@
             EventAdmin.notify(Task.TaskType.useSkins);
             RecordManager.startAutoRecord();
             ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
+            Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation', 0, 1000, this.self);
         }
         lwgOnEnable() {
             this.BtnLast.visible = false;
             this.createTaskContent();
             this.mainCameraMove();
-            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.closeOperation, this, () => {
@@ -6763,6 +6826,7 @@
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (Admin._gameStart) {
                     this.BtnLast.visible = true;
+                    EventAdmin.notify(GEnum.EventType.taskDialog);
                 }
             });
             EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
@@ -6826,6 +6890,9 @@
                 if (Bar.mask.x > 0) {
                     Bar.mask.x = 0;
                 }
+            });
+            EventAdmin.reg(GEnum.EventType.taskDialog, this, () => {
+                console.log(Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation_Task', 0, 1000, this.self));
             });
         }
         createProgress() {
@@ -6924,23 +6991,25 @@
             EventAdmin.notify(GEnum.EventType.cameraMove, GVariate._taskArr[GVariate._taskNum]);
         }
         lwgBtnClick() {
-            lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, this.btnLastUp, null);
-        }
-        btnLastUp(e) {
-            this.BtnLast.visible = false;
-            this.moveSwitch = false;
-            e.stopPropagation();
-            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-                Admin._openScene(Admin.SceneName.UISkin, null, this.self);
-            }
-            else {
-                GVariate._taskNum++;
-                this.mainCameraMove();
-                EventAdmin.notify(GEnum.EventType.taskProgress);
-                if (this._numZoder[GVariate._taskNum].value <= 10) {
-                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+            lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, (e) => {
+                this.BtnLast.visible = false;
+                this.moveSwitch = false;
+                e.stopPropagation();
+                if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                    Admin._openScene(Admin.SceneName.UISkin, null, this.self);
                 }
-            }
+                else {
+                    GVariate._taskNum++;
+                    this.mainCameraMove();
+                    EventAdmin.notify(GEnum.EventType.taskProgress);
+                    if (this._numZoder[GVariate._taskNum].value <= 10) {
+                        EventAdmin.notify(EventAdmin.EventType.taskReach);
+                    }
+                }
+            });
+            lwg.Click.on(Click.Type.largen, this.self['BtnRecover'], this, null, null, () => {
+                EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, GVariate._taskArr[GVariate._taskNum]);
+            });
         }
         onStageMouseDown(e) {
             this.moveSwitch = true;
@@ -6985,6 +7054,10 @@
             }
         }
         razorMove(e) {
+            if (!this.self['RazorNnm'] && Shop._currentOther.name !== 'xiandanren') {
+                this.self['RazorNnm'] = true;
+                Dialog.createVoluntarilyDialogue(150, 334, Shop._currentProp.name, 0, 2000, this.self);
+            }
             let diffX = e.stageX - this.touchPosX;
             let diffY = e.stageY - this.touchPosY;
             this.Rocker.x += diffX;
@@ -6996,6 +7069,10 @@
             Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.5);
         }
         knifeMove(e) {
+            if (!this.self['KnifeNnm'] && Shop._currentOther.name !== 'tulongdao') {
+                this.self['KnifeNnm'] = true;
+                Dialog.createVoluntarilyDialogue(150, 334, Shop._currentOther.name, 0, 2000, this.self);
+            }
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
             let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
@@ -7607,13 +7684,13 @@
             Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
         }
         up() {
+            Dialog.createVoluntarilyDialogue(135, 250, this.self['_dataSource'].name, 0, 1000);
             EventAdmin.notify(Skin.EventType.select, [this.self['_dataSource']]);
         }
     }
 
     class UISkin extends SkinScene {
         skinOnAwake() {
-            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
             let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
             Skin._headSkinArr = [];
             Skin._eyeSkinArr = [];
@@ -7635,6 +7712,7 @@
             else {
                 Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.resCondition, Game._gameLevel.value);
             }
+            Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIVictory, 0, 2000, this.self);
         }
         skinEventReg() {
             EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
@@ -7709,7 +7787,6 @@
             Skin._SkinList.refresh();
         }
         skinList_Update(cell, index) {
-            console.log(Skin._SkinList);
             let dataSource = cell.dataSource;
             let Select = cell.getChildByName('Select');
             Select.visible = false;
@@ -8073,7 +8150,16 @@
                 this.self['EasterEgg_Aotuman'].visible = false;
             }
             CheckIn.openCheckIn();
-            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
+            let dilogArr0 = Dialog.getContentByUseWhereAndSerial(Admin.SceneName.UIStart);
+            if (Game._gameLevel.value == 1) {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[0]);
+            }
+            else if (Game._gameLevel.value == 2) {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[1]);
+            }
+            else {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self);
+            }
             Setting.setBtnAppear();
         }
         lwgAdaptive() {
@@ -8399,6 +8485,10 @@
                     break;
             }
         }
+        lwgAdaptive() {
+            let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+            this.self['Select_Bytedance'].y = y;
+        }
         lwgOpenAni() {
             if (Game._platform == Game._platformTpye.OPPO) {
                 this.self['Multiply10'].alpha = 0;
@@ -8587,6 +8677,10 @@
                 default:
                     break;
             }
+        }
+        lwgAdaptive() {
+            let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+            this.self['Select_Bytedance'].y = y;
         }
         victoryBoxEventReg() {
             EventAdmin.reg(VictoryBox.EventType.openBox, this, (dataSource) => {

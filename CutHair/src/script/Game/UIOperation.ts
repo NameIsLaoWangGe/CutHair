@@ -1,4 +1,4 @@
-import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, Dialog } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, Dialog, Shop } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
 import ADManager, { TaT } from "../TJ/Admanager";
@@ -163,13 +163,14 @@ export default class UIOperation extends lwg.Admin.Scene {
         RecordManager.startAutoRecord();
 
         ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
+
+        Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation', 0, 1000, this.self);
     }
 
     lwgOnEnable(): void {
         this.BtnLast.visible = false;
         this.createTaskContent();
         this.mainCameraMove();
-        Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
     }
 
     lwgEventReg(): void {
@@ -178,10 +179,11 @@ export default class UIOperation extends lwg.Admin.Scene {
             this.self.close();
         })
 
-        // 胜利
+        // 阶段性胜利
         EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
             if (Admin._gameStart) {
                 this.BtnLast.visible = true;
+                EventAdmin.notify(GEnum.EventType.taskDialog);
             }
         })
 
@@ -269,6 +271,13 @@ export default class UIOperation extends lwg.Admin.Scene {
                 Bar.mask.x = 0;
             }
         })
+
+        // 随机播放一个小关卡完成对话
+        EventAdmin.reg(GEnum.EventType.taskDialog, this, () => {
+            console.log(Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation_Task', 0, 1000, this.self));
+        })
+
+        // 随机播放剃刀或者刮刀动画
     }
 
     /**
@@ -400,7 +409,7 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, (e: Laya.Event)=>{
+        lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, (e: Laya.Event) => {
             this.BtnLast.visible = false;
             this.moveSwitch = false;
             e.stopPropagation();
@@ -415,13 +424,11 @@ export default class UIOperation extends lwg.Admin.Scene {
                 }
             }
         });
-        
+
         lwg.Click.on(Click.Type.largen, this.self['BtnRecover'], this, null, null, () => {
             EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, GVariate._taskArr[GVariate._taskNum])
         });
     }
-
-  
 
     /**触摸位置*/
     touchPosX: number = null;
@@ -454,6 +461,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
                 case GEnum.TaskType.HairParent:
                     this.razorMove(e);
+
                     break;
 
                 case GEnum.TaskType.LeftBeard:
@@ -484,6 +492,11 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     /**剃刀在头上运动规则*/
     razorMove(e): void {
+        if (!this.self['RazorNnm'] && Shop._currentOther.name !== 'xiandanren') {
+            this.self['RazorNnm'] = true;
+            Dialog.createVoluntarilyDialogue(150, 334, Shop._currentProp.name, 0, 2000, this.self);
+        }
+
         let diffX = e.stageX - this.touchPosX;
         let diffY = e.stageY - this.touchPosY;
 
@@ -499,6 +512,11 @@ export default class UIOperation extends lwg.Admin.Scene {
 
     /**刮刀在脸上的移动规则*/
     knifeMove(e): void {
+        if (!this.self['KnifeNnm'] && Shop._currentOther.name !== 'tulongdao') {
+            this.self['KnifeNnm'] = true;
+            Dialog.createVoluntarilyDialogue(150, 334, Shop._currentOther.name, 0, 2000, this.self);
+        }
+
         this.touchPosX = e.stageX;
         this.touchPosY = e.stageY;
 
@@ -535,5 +553,6 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     lwgOnDisable(): void {
+
     }
 }

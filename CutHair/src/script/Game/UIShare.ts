@@ -42,6 +42,7 @@ export default class UIShare extends lwg.Admin.Scene {
         }
         let url = 'UI/Share/Photo/' + index + '.png';
         this.self['SmallPhoto'].skin = url;
+
     }
 
     lwgOpenAni(): number {

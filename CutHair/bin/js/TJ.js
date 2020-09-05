@@ -5,8 +5,8 @@ var DP =
         appGuid:"6766da55-6f97-9ec5-7fa7-6eb1530342ea",
         productName:"剃头大师",
         packageName:"com.tomatojoy.ttds.toutiao",
-        versionName:"1.0.1",
-        versionCode:2,
+        versionName:"1.0.2",
+        versionCode:3,
         channel:"ZJTD_AppRt",
     },
     XIAOMI:
@@ -147,7 +147,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/9/4 14:41:45
+中国标准时间 2020/9/5 18:07:05
 */
 var TJ;
 (function (TJ) {

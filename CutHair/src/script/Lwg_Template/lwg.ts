@@ -412,7 +412,6 @@ export module lwg {
             '没有宝箱领可以领了！',
             '请前往皮肤界面购买！',
             '今天已经签到过了！',
-
         }
         enum Skin {
             blackBord = 'Frame/UI/ui_orthogon_black.png'
@@ -477,33 +476,50 @@ export module lwg {
             });
         }
 
-        /**获取对话框内容，内容必须已经预加载*/
+        /**对话框内容，内容必须已经预加载*/
         export let _dialogContent = {
             get Array(): Array<any> {
-                return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] !== null ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
+                return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
             },
         };
 
         /**
-         * 获取对单个话框中指定的内容条目数组，通过适用场景和序号获取
+         * 通过适用场景和序号获取单个话框中指定的内容条目数组,如果不写序号则是全部此场景下的内容
          * @param useWhere 适用场景
-         * @param name 对话的名称
+         * @param serialArr 序号数组，默认是全部
          * */
-        export function getDialogContent(useWhere: string, name: number): Array<string> {
-            let dia;
-            for (let index = 0; index < _dialogContent.Array.length; index++) {
-                const element = _dialogContent.Array[index];
-                if (element['useWhere'] == useWhere && element['name'] == name) {
-                    dia = element;
-                    break;
+        export function getContentByUseWhereAndSerial(useWhere: string, serialArr?: Array<number>): Array<Array<string>> {
+
+            let useWhereArr: Array<any> = [];
+            for (let i = 0; i < _dialogContent.Array.length; i++) {
+                const element = _dialogContent.Array[i];
+                if (!serialArr) {
+                    if (element[DialogProperty.useWhere] == useWhere) {
+                        useWhereArr.push(element);
+                    }
+                } else {
+                    for (let j = 0; j < serialArr.length; j++) {
+                        if (element[DialogProperty.useWhere] == useWhere && element[DialogProperty.serial] == serialArr[j]) {
+                            useWhereArr.push(element);
+                            break;
+                        }
+                    }
                 }
             }
-            let arr = [];
-            for (const key in dia) {
-                if (dia.hasOwnProperty(key)) {
-                    const value = dia[key];
-                    if (key.substring(0, 7) == 'content' || value !== -1) {
-                        arr.push(value);
+
+            // 提取对话
+            let arr: Array<Array<string>> = [];
+            for (let k = 0; k < useWhereArr.length; k++) {
+                const element = useWhereArr[k];
+                let arr0: Array<string> = [];
+                for (const key in element) {
+                    if (element.hasOwnProperty(key)) {
+                        if (key.substring(0, 7) == DialogProperty.content && element[key] !== "-1") {
+                            arr0.push(element[key]);
+                            if (Number(key.substring(DialogProperty.content.length)) == element[DialogProperty.max]) {
+                                arr.push(arr0);
+                            }
+                        }
                     }
                 }
             }
@@ -511,34 +527,34 @@ export module lwg {
         }
 
         /**
-          * 随机从列表中获取一个内容数组
+          * 根据适用场景随机从列表中获取一个内容数组
           * @param useWhere 适用场景
           * */
-        export function getDialogContent_Random(useWhere: string): Array<string> {
+        export function getOneContentByUseWhereRandom(useWhere: string): Array<string> {
+            let dilogArr1 = Dialog.getContentByUseWhereAndSerial(useWhere);
+            let contentArr = Tools.randomNumOfArray(dilogArr1)[0];
+            return contentArr;
+        }
+
+        /**
+         * 根据适用场景取出所有该场景下的数组
+         * @param useWhere 适用场景
+        */
+        export function getContentArrByUseWhere(useWhere: string): Array<Array<string>> {
             let contentArr = [];
-            let whereArr = getUseWhere(useWhere);
-            let index = Math.floor(Math.random() * whereArr.length);
-            for (const key in whereArr[index]) {
-                if (whereArr[index].hasOwnProperty(key)) {
-                    const value = whereArr[index][key];
-                    if (key.substring(0, 7) == 'content' && value !== "-1") {
-                        contentArr.push(value);
+            for (let index = 0; index < _dialogContent.Array.length; index++) {
+                const element = _dialogContent.Array[index];
+                if (element[DialogProperty.useWhere] == useWhere) {
+                    for (const key in element) {
+                        if (element.hasOwnProperty(key)) {
+                            if (key.substring(0, 7) == DialogProperty.content && element[key] !== "-1") {
+                                contentArr.push(element[key]);
+                            }
+                        }
                     }
                 }
             }
             return contentArr;
-        }
-
-        /**根据适用场景取出所有该场景下的数组*/
-        export function getUseWhere(useWhere: string): Array<any> {
-            let arr = [];
-            for (let index = 0; index < _dialogContent.Array.length; index++) {
-                const element = _dialogContent.Array[index];
-                if (element['useWhere'] == useWhere) {
-                    arr.push(element);
-                }
-            }
-            return arr;
         }
 
         /**对话框中应用的场景类型*/
@@ -551,7 +567,7 @@ export module lwg {
         /**对话框中的属性*/
         export enum DialogProperty {
             /**名称，必须有*/
-            name = 'name',
+            serial = 'serial',
             /**试用场景*/
             useWhere = 'useWhere',
             /**内容条数，内容条数是content+数字，contentMax为最大条数*/
@@ -569,18 +585,31 @@ export module lwg {
             clickContent = 'clickContent',
         }
 
-        export let DialogueNode;
+        export let VoluntarilyDialogueNode;
         /**
-         * 动态创建一个自动播放的对话框
+         * 动态创建一个自动播放的对话框,随机播放某个适用场景的内容，这些内容通过序号数组表示
          * @param x x位置
          * @param y y位置
          * @param useWhere 适用场景
          * @param parent 父节点
-         * @param content 内容
-         * @param startDelayed 起始延时时间
+         * @param startDelayed 起始延时时间，默认立即执行
          * @param delayed 每段文字延迟时间，默认为2秒
+         * @param contentArr0 内容数组，挨个播放这个数组中的内容，默认是随机,如果随机出空值，则不会播放
+         * @param func 播完回调
+         * @param cover 是否覆盖前面的对话，默认是覆盖
          */
-        export function createVoluntarilyDialogue(x: number, y: number, useWhere: string, startDelayed?: number, delayed?: number, parent?: Laya.Sprite, content?: Array<string>): void {
+        export function createVoluntarilyDialogue(x: number, y: number, useWhere: string, startDelayed?: number, delayed?: number, parent?: Laya.Sprite, contentArr0?: Array<string>, func?: Function, cover?: boolean): void {
+
+            // 覆盖前面的
+            if (!cover) {
+                cover = true;
+            }
+            if (cover) {
+                if (VoluntarilyDialogueNode) {
+                    VoluntarilyDialogueNode.removeSelf();
+                }
+            }
+
             if (startDelayed == undefined) {
                 startDelayed = 0;
             }
@@ -599,18 +628,21 @@ export module lwg {
                     Pre_Dialogue.y = y;
                     let ContentLabel = Pre_Dialogue.getChildByName('Content') as Laya.Label;
                     let contentArr;
-                    if (content !== undefined) {
-                        ContentLabel.text = content[0];
-                    } else {
-                        contentArr = getDialogContent_Random(useWhere);
+                    if (!contentArr0) {
+                        contentArr = getOneContentByUseWhereRandom(useWhere);
+                        if (contentArr[0].length == 0) {
+                            return;
+                        }
                         ContentLabel.text = contentArr[0];
+                       
+                    } else {
+                        contentArr = contentArr0;
                     }
                     Pre_Dialogue.zOrder = 100;
-
                     if (delayed == undefined) {
                         delayed = 1000;
                     }
-                    Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 1000, () => {
+                    Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 300, () => {
                         for (let index = 0; index < contentArr.length; index++) {
 
                             Laya.timer.once(index * delayed, this, () => {
@@ -619,6 +651,7 @@ export module lwg {
                                 if (index == contentArr.length - 1) {
                                     Laya.timer.once(delayed, this, () => {
                                         Animation2D.scale_Alpha(Pre_Dialogue, 1, 1, 1, 0, 0, 0, 150, null, 1000, () => {
+                                            func ? func() : null;
                                             Pre_Dialogue.removeSelf();
                                         })
                                     })
@@ -626,21 +659,32 @@ export module lwg {
                             })
                         }
                     });
-                    DialogueNode = Pre_Dialogue;
+                    VoluntarilyDialogueNode = Pre_Dialogue;
                 }));
             })
         }
 
-
-        export function createDialogHint(): void {
+        export let StaticDialogueNode;
+        /**
+         * 创建一个静止的对话框,这个对话框的内容是必须的
+         * @param x x位置
+         * @param y y位置
+         * @param useWhere 适用场景
+         * @param parent 父节点
+         * @param startDelayed 起始延时时间，默认立即执行
+         * @param delayed 每段文字延迟时间，默认为2秒
+         * @param contentArr0 内容数组，默认是随机
+        */
+        export function createDialogueNode(x: number, y: number, useWhere: string, startDelayed?: number, delayed?: number, parent?: Laya.Sprite, contentArr0?: Array<string>): void {
+            let Pre_Dialogue;
             Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
-
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
 
             }))
         }
     }
-
-
 
     /**金币模块*/
     export module Gold {
@@ -3200,17 +3244,20 @@ export module lwg {
         }
 
         /**
-         * 从一个数组中随机取出几个数，如果刚好是数组长度，则等于是乱序
-         * @param arr 
-         * @param num 
+         * 从一个数组中随机取出几个元素，如果刚好是数组长度，则等于是乱序
+         * @param arr 数组
+         * @param num 个数，默认为1
          */
-        export function randomNumOfArray(arr: Array<any>, num: number): any {
+        export function randomNumOfArray(arr: Array<any>, num?: number): any {
             let arr0 = [];
+            if (!num) {
+                num = 1;
+            }
             if (num > arr.length) {
                 return '数组长度小于取出的数！';
             } else {
                 for (let index = 0; index < num; index++) {
-                    let ran = Math.floor(Math.random() * (arr.length - 1));
+                    let ran = Math.round(Math.random() * (arr.length - 1));
                     let a1 = arr[ran];
                     arr.splice(ran, 1);
                     arr0.push(a1);

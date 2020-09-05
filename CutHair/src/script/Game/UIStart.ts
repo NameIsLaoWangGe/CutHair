@@ -1,4 +1,4 @@
-import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin, Animation2D, EasterEgg } from "../Lwg_Template/lwg";
+import { lwg, Gold, EventAdmin, Click, Admin, Shop, CheckIn, SkinXD, Setting, Dialog, Skin, Animation2D, EasterEgg, Tools } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
 import ADManager, { TaT } from "../TJ/Admanager";
@@ -9,10 +9,6 @@ export default class UIStart extends lwg.Admin.Scene {
     LevelStyle: Laya.Sprite;
 
     lwgNodeDec(): void {
-        // Admin._openScene(Admin.SceneName.UIADSHint,null,null,()=>{
-        //     console.log(Admin._sceneControl['UIADSHint']['UIADSHint']);
-        // });
-
 
         this.LevelDisplay = this.self['LevelDisplay'];
         this.LevelStyle = this.self['LevelStyle'];
@@ -62,8 +58,14 @@ export default class UIStart extends lwg.Admin.Scene {
 
         CheckIn.openCheckIn();
 
-        Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
-
+        let dilogArr0 = Dialog.getContentByUseWhereAndSerial(Admin.SceneName.UIStart);
+        if (Game._gameLevel.value == 1) {
+            Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[0]);
+        } else if (Game._gameLevel.value == 2) {
+            Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[1]);
+        } else {
+            Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self);
+        }
         Setting.setBtnAppear();
     }
 

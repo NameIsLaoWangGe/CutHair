@@ -1,4 +1,4 @@
-import { lwg, EventAdmin, Admin, Animation3D, Shop, Skin } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Admin, Animation3D, Shop, Skin, Dialog } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";
@@ -255,6 +255,7 @@ export default class GameMain3D extends lwg3D.Scene3D {
             if (ani) {
                 ani.play("touHongclip");
             }
+            Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIDefeated, 0, 2000);
         })
 
         // 剃刀或者剪刀回到原来位置

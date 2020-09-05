@@ -1505,56 +1505,68 @@
             Dialog.createHint_Middle = createHint_Middle;
             Dialog._dialogContent = {
                 get Array() {
-                    return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] !== null ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
+                    return Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] ? Laya.loader.getRes("GameData/Dialog/Dialog.json")['RECORDS'] : [];
                 },
             };
-            function getDialogContent(useWhere, name) {
-                let dia;
-                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
-                    const element = Dialog._dialogContent.Array[index];
-                    if (element['useWhere'] == useWhere && element['name'] == name) {
-                        dia = element;
-                        break;
+            function getContentByUseWhereAndSerial(useWhere, serialArr) {
+                let useWhereArr = [];
+                for (let i = 0; i < Dialog._dialogContent.Array.length; i++) {
+                    const element = Dialog._dialogContent.Array[i];
+                    if (!serialArr) {
+                        if (element[DialogProperty.useWhere] == useWhere) {
+                            useWhereArr.push(element);
+                        }
+                    }
+                    else {
+                        for (let j = 0; j < serialArr.length; j++) {
+                            if (element[DialogProperty.useWhere] == useWhere && element[DialogProperty.serial] == serialArr[j]) {
+                                useWhereArr.push(element);
+                                break;
+                            }
+                        }
                     }
                 }
                 let arr = [];
-                for (const key in dia) {
-                    if (dia.hasOwnProperty(key)) {
-                        const value = dia[key];
-                        if (key.substring(0, 7) == 'content' || value !== -1) {
-                            arr.push(value);
+                for (let k = 0; k < useWhereArr.length; k++) {
+                    const element = useWhereArr[k];
+                    let arr0 = [];
+                    for (const key in element) {
+                        if (element.hasOwnProperty(key)) {
+                            if (key.substring(0, 7) == DialogProperty.content && element[key] !== "-1") {
+                                arr0.push(element[key]);
+                                if (Number(key.substring(DialogProperty.content.length)) == element[DialogProperty.max]) {
+                                    arr.push(arr0);
+                                }
+                            }
                         }
                     }
                 }
                 return arr;
             }
-            Dialog.getDialogContent = getDialogContent;
-            function getDialogContent_Random(useWhere) {
+            Dialog.getContentByUseWhereAndSerial = getContentByUseWhereAndSerial;
+            function getOneContentByUseWhereRandom(useWhere) {
+                let dilogArr1 = Dialog.getContentByUseWhereAndSerial(useWhere);
+                let contentArr = Tools.randomNumOfArray(dilogArr1)[0];
+                return contentArr;
+            }
+            Dialog.getOneContentByUseWhereRandom = getOneContentByUseWhereRandom;
+            function getContentArrByUseWhere(useWhere) {
                 let contentArr = [];
-                let whereArr = getUseWhere(useWhere);
-                let index = Math.floor(Math.random() * whereArr.length);
-                for (const key in whereArr[index]) {
-                    if (whereArr[index].hasOwnProperty(key)) {
-                        const value = whereArr[index][key];
-                        if (key.substring(0, 7) == 'content' && value !== "-1") {
-                            contentArr.push(value);
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element[DialogProperty.useWhere] == useWhere) {
+                        for (const key in element) {
+                            if (element.hasOwnProperty(key)) {
+                                if (key.substring(0, 7) == DialogProperty.content && element[key] !== "-1") {
+                                    contentArr.push(element[key]);
+                                }
+                            }
                         }
                     }
                 }
                 return contentArr;
             }
-            Dialog.getDialogContent_Random = getDialogContent_Random;
-            function getUseWhere(useWhere) {
-                let arr = [];
-                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
-                    const element = Dialog._dialogContent.Array[index];
-                    if (element['useWhere'] == useWhere) {
-                        arr.push(element);
-                    }
-                }
-                return arr;
-            }
-            Dialog.getUseWhere = getUseWhere;
+            Dialog.getContentArrByUseWhere = getContentArrByUseWhere;
             let UseWhere;
             (function (UseWhere) {
                 UseWhere["scene1"] = "scene1";
@@ -1563,7 +1575,7 @@
             })(UseWhere = Dialog.UseWhere || (Dialog.UseWhere = {}));
             let DialogProperty;
             (function (DialogProperty) {
-                DialogProperty["name"] = "name";
+                DialogProperty["serial"] = "serial";
                 DialogProperty["useWhere"] = "useWhere";
                 DialogProperty["content"] = "content";
                 DialogProperty["max"] = "max";
@@ -1574,7 +1586,15 @@
                 PlayMode["manual"] = "manual";
                 PlayMode["clickContent"] = "clickContent";
             })(PlayMode = Dialog.PlayMode || (Dialog.PlayMode = {}));
-            function createVoluntarilyDialogue(x, y, useWhere, startDelayed, delayed, parent, content) {
+            function createVoluntarilyDialogue(x, y, useWhere, startDelayed, delayed, parent, contentArr0, func, cover) {
+                if (!cover) {
+                    cover = true;
+                }
+                if (cover) {
+                    if (Dialog.VoluntarilyDialogueNode) {
+                        Dialog.VoluntarilyDialogueNode.removeSelf();
+                    }
+                }
                 if (startDelayed == undefined) {
                     startDelayed = 0;
                 }
@@ -1594,24 +1614,28 @@
                         Pre_Dialogue.y = y;
                         let ContentLabel = Pre_Dialogue.getChildByName('Content');
                         let contentArr;
-                        if (content !== undefined) {
-                            ContentLabel.text = content[0];
+                        if (!contentArr0) {
+                            contentArr = getOneContentByUseWhereRandom(useWhere);
+                            if (contentArr[0].length == 0) {
+                                return;
+                            }
+                            ContentLabel.text = contentArr[0];
                         }
                         else {
-                            contentArr = getDialogContent_Random(useWhere);
-                            ContentLabel.text = contentArr[0];
+                            contentArr = contentArr0;
                         }
                         Pre_Dialogue.zOrder = 100;
                         if (delayed == undefined) {
                             delayed = 1000;
                         }
-                        Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 1000, () => {
+                        Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 300, () => {
                             for (let index = 0; index < contentArr.length; index++) {
                                 Laya.timer.once(index * delayed, this, () => {
                                     ContentLabel.text = contentArr[index];
                                     if (index == contentArr.length - 1) {
                                         Laya.timer.once(delayed, this, () => {
                                             Animation2D.scale_Alpha(Pre_Dialogue, 1, 1, 1, 0, 0, 0, 150, null, 1000, () => {
+                                                func ? func() : null;
                                                 Pre_Dialogue.removeSelf();
                                             });
                                         });
@@ -1619,16 +1643,20 @@
                                 });
                             }
                         });
-                        Dialog.DialogueNode = Pre_Dialogue;
+                        Dialog.VoluntarilyDialogueNode = Pre_Dialogue;
                     }));
                 });
             }
             Dialog.createVoluntarilyDialogue = createVoluntarilyDialogue;
-            function createDialogHint() {
+            function createDialogueNode(x, y, useWhere, startDelayed, delayed, parent, contentArr0) {
+                let Pre_Dialogue;
                 Laya.loader.load('Prefab/Pre_Dialogue.json', Laya.Handler.create(this, function (prefab) {
+                    let _prefab = new Laya.Prefab();
+                    _prefab.json = prefab;
+                    Pre_Dialogue = Laya.Pool.getItemByCreateFun('Pre_Dialogue', _prefab.create, _prefab);
                 }));
             }
-            Dialog.createDialogHint = createDialogHint;
+            Dialog.createDialogueNode = createDialogueNode;
         })(Dialog = lwg.Dialog || (lwg.Dialog = {}));
         let Gold;
         (function (Gold_1) {
@@ -3342,12 +3370,15 @@
             Tools.node_ShowExcludedChild = node_ShowExcludedChild;
             function randomNumOfArray(arr, num) {
                 let arr0 = [];
+                if (!num) {
+                    num = 1;
+                }
                 if (num > arr.length) {
                     return '数组长度小于取出的数！';
                 }
                 else {
                     for (let index = 0; index < num; index++) {
-                        let ran = Math.floor(Math.random() * (arr.length - 1));
+                        let ran = Math.round(Math.random() * (arr.length - 1));
                         let a1 = arr[ran];
                         arr.splice(ran, 1);
                         arr0.push(a1);
@@ -5327,6 +5358,7 @@
                 EventType["goBack"] = "goBack";
                 EventType["lianHong"] = "lianHong";
                 EventType["knifeAndBladeRecover"] = "knifeAndBladeRecover";
+                EventType["taskDialog"] = "taskDialog";
             })(EventType = GEnum.EventType || (GEnum.EventType = {}));
         })(GEnum = Global.GEnum || (Global.GEnum = {}));
         let GVariate;
@@ -5704,7 +5736,7 @@
                 case 'standard':
                     console.log('碰到线了，游戏失败！');
                     EventAdmin.notify(GEnum.EventType.lianHong);
-                    Laya.timer.frameOnce(90, this, () => {
+                    Laya.timer.frameOnce(350, this, () => {
                         EventAdmin.notify(EventAdmin.EventType.resurgence);
                     });
                     break;
@@ -6009,6 +6041,7 @@
                 if (ani) {
                     ani.play("touHongclip");
                 }
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIDefeated, 0, 2000);
             });
             EventAdmin.reg(GEnum.EventType.knifeAndBladeRecover, this, (direction) => {
                 switch (direction) {
@@ -6779,12 +6812,12 @@
             EventAdmin.notify(Task.TaskType.useSkins);
             RecordManager.startAutoRecord();
             ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
+            Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation', 0, 1000, this.self);
         }
         lwgOnEnable() {
             this.BtnLast.visible = false;
             this.createTaskContent();
             this.mainCameraMove();
-            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene2, 0, 2000, this.self);
         }
         lwgEventReg() {
             EventAdmin.reg(EventAdmin.EventType.closeOperation, this, () => {
@@ -6793,6 +6826,7 @@
             EventAdmin.reg(EventAdmin.EventType.taskReach, this, () => {
                 if (Admin._gameStart) {
                     this.BtnLast.visible = true;
+                    EventAdmin.notify(GEnum.EventType.taskDialog);
                 }
             });
             EventAdmin.reg(EventAdmin.EventType.defeated, this, () => {
@@ -6856,6 +6890,9 @@
                 if (Bar.mask.x > 0) {
                     Bar.mask.x = 0;
                 }
+            });
+            EventAdmin.reg(GEnum.EventType.taskDialog, this, () => {
+                console.log(Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation_Task', 0, 1000, this.self));
             });
         }
         createProgress() {
@@ -7017,6 +7054,10 @@
             }
         }
         razorMove(e) {
+            if (!this.self['RazorNnm'] && Shop._currentOther.name !== 'xiandanren') {
+                this.self['RazorNnm'] = true;
+                Dialog.createVoluntarilyDialogue(150, 334, Shop._currentProp.name, 0, 2000, this.self);
+            }
             let diffX = e.stageX - this.touchPosX;
             let diffY = e.stageY - this.touchPosY;
             this.Rocker.x += diffX;
@@ -7028,6 +7069,10 @@
             Tools.maximumDistanceLimi_3D(GSene3D.razorFPos, GSene3D.Razor, 1.5);
         }
         knifeMove(e) {
+            if (!this.self['KnifeNnm'] && Shop._currentOther.name !== 'tulongdao') {
+                this.self['KnifeNnm'] = true;
+                Dialog.createVoluntarilyDialogue(150, 334, Shop._currentOther.name, 0, 2000, this.self);
+            }
             this.touchPosX = e.stageX;
             this.touchPosY = e.stageY;
             let hitResult = Tools.rayScanning(GSene3D.MainCamera.getChildByName('MainCamera'), GSene3D.GameMain3D, new Laya.Vector2(this.touchPosX, this.touchPosY), GSene3D.HeadSimulate.name);
@@ -7639,13 +7684,13 @@
             Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);
         }
         up() {
+            Dialog.createVoluntarilyDialogue(135, 250, this.self['_dataSource'].name, 0, 1000);
             EventAdmin.notify(Skin.EventType.select, [this.self['_dataSource']]);
         }
     }
 
     class UISkin extends SkinScene {
         skinOnAwake() {
-            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
             let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
             Skin._headSkinArr = [];
             Skin._eyeSkinArr = [];
@@ -7667,6 +7712,7 @@
             else {
                 Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.resCondition, Game._gameLevel.value);
             }
+            Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIVictory, 0, 2000, this.self);
         }
         skinEventReg() {
             EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
@@ -8104,7 +8150,16 @@
                 this.self['EasterEgg_Aotuman'].visible = false;
             }
             CheckIn.openCheckIn();
-            Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene1, 1000, 2000, this.self);
+            let dilogArr0 = Dialog.getContentByUseWhereAndSerial(Admin.SceneName.UIStart);
+            if (Game._gameLevel.value == 1) {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[0]);
+            }
+            else if (Game._gameLevel.value == 2) {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[1]);
+            }
+            else {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self);
+            }
             Setting.setBtnAppear();
         }
         lwgAdaptive() {

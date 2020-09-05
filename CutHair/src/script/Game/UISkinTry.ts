@@ -62,7 +62,7 @@ export default class UISkinTry extends Admin.Scene {
         Shop._currentOther.name = ele.name;
     }
 
-    /**随机剃头道具*/
+    /**随机剪刀道具*/
     randomProp(): void {
         let ele;
         let arrProp = Shop.getwayGoldArr(Shop.GoodsClass.Props, undefined, true);

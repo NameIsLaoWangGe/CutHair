@@ -6,7 +6,7 @@ import { Game } from "../Lwg_Template/Game";
 
 export default class UISkin extends SkinScene {
     skinOnAwake(): void {
-        Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
+        // Dialog.createVoluntarilyDialogue(150, 334, Dialog.UseWhere.scene3, 0, 2000, this.self);
 
         let skinArr = Shop.getGoodsClassArr(Shop.GoodsClass.Skin);
 
@@ -31,6 +31,9 @@ export default class UISkin extends SkinScene {
         } else {
             Shop.setGoodsProperty(Shop.GoodsClass.Skin, "xiaochoumao", Shop.GoodsProperty.resCondition, Game._gameLevel.value);
         }
+
+        Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIVictory, 0, 2000, this.self);
+        
     }
 
     skinEventReg(): void {

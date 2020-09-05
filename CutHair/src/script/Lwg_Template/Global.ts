@@ -48,6 +48,9 @@ export module Global {
             lianHong = 'lianHong',
             /**剃刀或者剪刀回位*/
             knifeAndBladeRecover = 'knifeAndBladeRecover',
+            /**播放完成小关卡时候的对话*/
+            taskDialog = 'taskDialog',
+            /**播放*/ 
         }
     }
 
