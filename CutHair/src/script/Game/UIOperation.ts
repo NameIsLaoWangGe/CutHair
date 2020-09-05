@@ -400,24 +400,28 @@ export default class UIOperation extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, this.btnLastUp, null);
+        lwg.Click.on(Click.Type.largen, this.BtnLast, this, null, null, (e: Laya.Event)=>{
+            this.BtnLast.visible = false;
+            this.moveSwitch = false;
+            e.stopPropagation();
+            if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
+                Admin._openScene(Admin.SceneName.UISkin, null, this.self);
+            } else {
+                GVariate._taskNum++;
+                this.mainCameraMove();
+                EventAdmin.notify(GEnum.EventType.taskProgress);
+                if (this._numZoder[GVariate._taskNum].value <= 10) {
+                    EventAdmin.notify(EventAdmin.EventType.taskReach);
+                }
+            }
+        });
+        
+        lwg.Click.on(Click.Type.largen, this.self['BtnRecover'], this, null, null, () => {
+            EventAdmin.notify(GEnum.EventType.knifeAndBladeRecover, GVariate._taskArr[GVariate._taskNum])
+        });
     }
 
-    btnLastUp(e: Laya.Event): void {
-        this.BtnLast.visible = false;
-        this.moveSwitch = false;
-        e.stopPropagation();
-        if (GVariate._taskNum >= GVariate._taskArr.length - 1) {
-            Admin._openScene(Admin.SceneName.UISkin, null, this.self);
-        } else {
-            GVariate._taskNum++;
-            this.mainCameraMove();
-            EventAdmin.notify(GEnum.EventType.taskProgress);
-            if (this._numZoder[GVariate._taskNum].value <= 10) {
-                EventAdmin.notify(EventAdmin.EventType.taskReach);
-            }
-        }
-    }
+  
 
     /**触摸位置*/
     touchPosX: number = null;
@@ -523,6 +527,7 @@ export default class UIOperation extends lwg.Admin.Scene {
             }
         }
     }
+
     onStageMouseUp(e: Laya.Event) {
         this.touchPosX = null;
         this.touchPosY = null;

@@ -41,6 +41,11 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         }
     }
 
+    lwgAdaptive(): void {
+        let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+        this.self['Select_Bytedance'].y = y;
+    }
+
     victoryBoxEventReg(): void {
         EventAdmin.reg(VictoryBox.EventType.openBox, this, (dataSource) => {
             console.log(dataSource, VictoryBox._defaultOpenNum);

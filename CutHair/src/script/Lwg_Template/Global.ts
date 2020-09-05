@@ -46,6 +46,8 @@ export module Global {
             goBack = 'goBack',
             /**脸红*/
             lianHong = 'lianHong',
+            /**剃刀或者剪刀回位*/
+            knifeAndBladeRecover = 'knifeAndBladeRecover',
         }
     }
 

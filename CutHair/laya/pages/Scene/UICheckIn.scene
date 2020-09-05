@@ -6,7 +6,7 @@
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":128,
+    "maxID":139,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -103,14 +103,13 @@
                     "props":{"y":81,"x":16,"width":564,"var":"CheckList","spaceY":-23,"spaceX":-22,"repeatY":2,"repeatX":3,"name":"CheckList","height":422},
                     "nodeParent":10,
                     "label":"CheckList",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":73,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":113,"x":97,"width":206,"renderType":"render","pivotY":113,"pivotX":103,"height":226},
@@ -123,7 +122,6 @@
                             "compId":72,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic_Board",
                                     "props":{"y":22,"x":23,"width":160,"skin":"UI/Common/kuang2.png","sizeGrid":"37,0,57,0","name":"Pic_Board","height":181},
@@ -138,7 +136,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic_Gold",
                                     "props":{"y":78,"x":64,"width":81,"skin":"UI/GameStart/qian.png","name":"Pic_Gold","height":60},
@@ -152,7 +149,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,Num",
                                     "props":{"y":144,"x":54,"width":98,"valign":"middle","underlineColor":"#ffffff","text":"x25","strokeColor":"#ffffff","stroke":5,"rotation":0,"name":"Num","height":48,"fontSize":30,"font":"Microsoft YaHei","color":"#367a21","bold":true,"align":"center"},
@@ -166,7 +162,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,DayNum",
                                     "props":{"y":38,"x":68,"width":62,"valign":"middle","text":"第一天","name":"DayNum","height":29,"fontSize":22,"color":"#ffffff","bold":true,"align":"center"},
@@ -180,7 +175,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,ChinkTip",
                                     "props":{"y":102.5,"x":55,"width":96,"text":"已领取","name":"ChinkTip","height":33,"fontSize":30,"color":"#ffffff","bold":true},
@@ -202,14 +196,13 @@
                     "props":{"y":774,"x":153.5,"width":287,"var":"OPPO","name":"OPPO","height":221},
                     "nodeParent":10,
                     "label":"OPPO",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":118,
                     "child":[
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,BtnGet_OPPO,BtnGet_OPPO",
                             "props":{"y":203,"x":143.5,"width":121,"var":"BtnGet_OPPO","texture":"UI/CheckIn/normalBtn.png","pivotY":15,"pivotX":61,"name":"BtnGet_OPPO","height":30},
@@ -224,7 +217,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,BtnThreeGet_OPPO,BtnThreeGet_OPPO",
                             "props":{"y":75,"x":142,"var":"BtnThreeGet_OPPO","texture":"UI/Common/anniu.png","pivotY":66,"pivotX":144,"name":"BtnThreeGet_OPPO"},
@@ -237,7 +229,6 @@
                             "compId":121,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png"},
@@ -251,7 +242,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"y":48.5,"x":39,"width":153,"texture":"UI/CheckIn/3bei.png","height":37},
@@ -355,7 +345,7 @@
                             "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,Select_WeChat,Select_WeChat",
-                            "props":{"y":203,"x":114,"width":51,"var":"Select_WeChat","pivotY":14,"pivotX":114,"name":"Select_WeChat","height":30},
+                            "props":{"y":203,"x":114,"width":51,"var":"Select_WeChat","pivotY":14,"pivotX":114,"name":"Select_WeChat","height":30,"alpha":0.7},
                             "nodeParent":117,
                             "label":"Select_WeChat",
                             "isOpen":true,
@@ -415,14 +405,13 @@
                     "props":{"y":597,"x":298,"width":527,"var":"BtnSeven","skin":"UI/Common/kuang2.png","sizeGrid":"0,42,0,35","pivotY":90,"pivotX":264,"name":"BtnSeven","height":180},
                     "nodeParent":10,
                     "label":"BtnSeven",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":85,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Pic_Gold",
                             "props":{"y":55,"x":228,"width":83,"skin":"UI/CheckIn/qian.png","name":"Pic_Gold","height":65},
@@ -436,7 +425,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,Num",
                             "props":{"y":127.5,"x":197.5,"width":140,"valign":"middle","underlineColor":"#ffffff","text":"x1000","strokeColor":"#ffffff","stroke":5,"name":"Num","height":36,"fontSize":40,"font":"Microsoft YaHei","color":"#367a21","bold":true,"align":"center"},
@@ -450,7 +438,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,DayNum",
                             "props":{"y":19,"x":224.5,"width":89,"valign":"middle","text":"第七天","name":"DayNum","height":35,"fontSize":22,"color":"#ffffff","bold":true,"align":"center"},
@@ -464,7 +451,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,ChinkTip",
                             "props":{"y":79,"x":221,"width":96,"text":"已领取","name":"ChinkTip","height":33,"fontSize":30,"color":"#ffffff","bold":true},

@@ -123,10 +123,16 @@ export default class UISkinTry extends Admin.Scene {
     bytedanceSelectUp(e: Laya.Event): void {
         e.stopPropagation();
         if (this.self['Low'].visible) {
-            if (this.self['Bytedance_Low_Dot'].visible) {
-                this.self['Bytedance_Low_Dot'].visible = false;
-            } else {
-                this.self['Bytedance_Low_Dot'].visible = true;
+            if (!this.self['Low']['count']) {
+                this.self['Low']['count'] = 0;
+            }
+            this.self['Low']['count']++;
+            if (this.self['Low']['count'] >= 4) {
+                if (this.self['Bytedance_Low_Dot'].visible) {
+                    this.self['Bytedance_Low_Dot'].visible = false;
+                } else {
+                    this.self['Bytedance_Low_Dot'].visible = true;
+                }
             }
             if (ZJADMgr.ins.CheckPlayVideo()) {
                 ADManager.ShowReward(null);

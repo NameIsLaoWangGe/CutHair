@@ -38,6 +38,11 @@ export default class UICheckIn extends CheckIn.CheckInScene {
         ChinkTip.visible = false;
     }
 
+    lwgAdaptive(): void {
+        let y = this.self['WeChat'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+        this.self['Select_WeChat'].y = y;
+    }
+
     checkList_Update(cell: Laya.Box, index: number): void {
         let dataSource = cell.dataSource;
 

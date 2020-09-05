@@ -70,6 +70,12 @@ export default class UIVictory extends lwg.Admin.Scene {
         }
     }
 
+    lwgAdaptive(): void {
+        let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+        this.self['Select_Bytedance'].y = y;
+    }
+
+
     lwgOpenAni(): number {
         if (Game._platform == Game._platformTpye.OPPO) {
             this.self['Multiply10'].alpha = 0;

@@ -8,14 +8,11 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
     lwgOnAwake(): void {
         Admin._gameStart = false;
-    }
-
-    lwgNodeDec(): void {
         this.self['BtnSelect_WeChat'].visible = true;
         this.self['BtnAgain_WeChat'].visible = false;
         this.self['Dot_WeChat'].visible = true;
     }
-
+    
     lwgOnEnable(): void {
         ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
 
@@ -46,6 +43,11 @@ export default class UIDefeated extends lwg.Admin.Scene {
             default:
                 break;
         }
+    }
+    
+    lwgAdaptive(): void {
+        let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
+        this.self['Select_Bytedance'].y = y;
     }
 
     lwgBtnClick(): void {

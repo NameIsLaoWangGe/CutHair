@@ -33,7 +33,6 @@ export default class UISkin extends SkinScene {
         }
     }
 
-
     skinEventReg(): void {
         EventAdmin.reg(Skin.EventType.select, this, (dataSource) => {
             if (dataSource[Shop.GoodsProperty.have]) {
@@ -115,7 +114,7 @@ export default class UISkin extends SkinScene {
     }
 
     skinList_Update(cell: Laya.Box, index: number): void {
-        console.log(Skin._SkinList);
+        // console.log(Skin._SkinList);
         let dataSource = cell.dataSource;
         let Select = cell.getChildByName('Select') as Laya.Sprite;
         Select.visible = false;
