@@ -1,4 +1,4 @@
-import { lwg, EventAdmin, Admin, Animation3D, Shop, Skin, Dialog } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Admin, Animation3D, Shop, Skin, Dialog, PalyAudio } from "../Lwg_Template/lwg";
 import GameMain3D_Razor from "./GameMain3D_Razor";
 import GameMain3D_Moustache from "./GameMain3D_Moustache";
 import GameMain3D_Floor from "./GameMain3D_Floor";

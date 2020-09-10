@@ -1,4 +1,4 @@
-import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, Dialog, Shop } from "../Lwg_Template/lwg";
+import { lwg, Click, Animation2D, Animation3D, Tools, EventAdmin, Admin, Task, Dialog, Shop, PalyAudio } from "../Lwg_Template/lwg";
 import { GVariate, GEnum, GSene3D } from "../Lwg_Template/Global";
 import { Game } from "../Lwg_Template/Game";
 import ADManager, { TaT } from "../TJ/Admanager";
@@ -164,6 +164,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
 
+        // PalyAudio.playSound('res/Voice/Dialog/' + 'UIOperation_01' + '.mp3');
         Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation', 0, 1000, this.self);
     }
 
@@ -274,6 +275,7 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         // 随机播放一个小关卡完成对话
         EventAdmin.reg(GEnum.EventType.taskDialog, this, () => {
+            // PalyAudio.playSound('res/Voice/Dialog/' + 'UIOperation_Task' + '_1' + '.mp3');
             console.log(Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation_Task', 0, 1000, this.self));
         })
 

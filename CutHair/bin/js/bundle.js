@@ -1567,6 +1567,38 @@
                 return contentArr;
             }
             Dialog.getContentArrByUseWhere = getContentArrByUseWhere;
+            function getSerialAndUseWhereByContent(contentArr) {
+                let arr = [];
+                let str = '';
+                for (let index = 0; index < contentArr.length; index++) {
+                    str += contentArr[index];
+                }
+                for (let i = 0; i < Dialog._dialogContent.Array.length; i++) {
+                    const element = Dialog._dialogContent.Array[i];
+                    let str0 = '';
+                    for (let j = 0; j < element[DialogProperty.max]; j++) {
+                        str0 += element[DialogProperty.content + (j + 1)];
+                        if (j == element[DialogProperty.max] - 1) {
+                            if (str == str0) {
+                                arr.push(element[DialogProperty.useWhere], element[DialogProperty.serial]);
+                                return arr;
+                            }
+                        }
+                    }
+                }
+            }
+            Dialog.getSerialAndUseWhereByContent = getSerialAndUseWhereByContent;
+            function getVioceByUseWhereAndSerial(UseWhere, Serial) {
+                let bool = false;
+                for (let index = 0; index < Dialog._dialogContent.Array.length; index++) {
+                    const element = Dialog._dialogContent.Array[index];
+                    if (element[DialogProperty.useWhere] == UseWhere && element[DialogProperty.serial] == Serial) {
+                        bool = element[DialogProperty.voice];
+                    }
+                }
+                return bool;
+            }
+            Dialog.getVioceByUseWhereAndSerial = getVioceByUseWhereAndSerial;
             let UseWhere;
             (function (UseWhere) {
                 UseWhere["scene1"] = "scene1";
@@ -1579,6 +1611,7 @@
                 DialogProperty["useWhere"] = "useWhere";
                 DialogProperty["content"] = "content";
                 DialogProperty["max"] = "max";
+                DialogProperty["voice"] = "voice";
             })(DialogProperty = Dialog.DialogProperty || (Dialog.DialogProperty = {}));
             let PlayMode;
             (function (PlayMode) {
@@ -1627,6 +1660,12 @@
                         Pre_Dialogue.zOrder = 100;
                         if (delayed == undefined) {
                             delayed = 1000;
+                        }
+                        let arrUS = getSerialAndUseWhereByContent(contentArr);
+                        let vioce = getVioceByUseWhereAndSerial(arrUS[0], arrUS[1]);
+                        console.log(arrUS, vioce);
+                        if (arrUS && vioce) {
+                            PalyAudio.playSound('res/Voice/Dialog/' + arrUS[0] + arrUS[1] + '.mp3');
                         }
                         Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 300, () => {
                             for (let index = 0; index < contentArr.length; index++) {

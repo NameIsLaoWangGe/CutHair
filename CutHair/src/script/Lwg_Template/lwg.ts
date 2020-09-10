@@ -377,8 +377,6 @@ export module lwg {
         }
     }
 
-
-
     /**提示模块*/
     export module Dialog {
         /**提示文字的类型描述*/
@@ -557,6 +555,43 @@ export module lwg {
             return contentArr;
         }
 
+        /**
+         * 通过内容数组获取适用场景和序号
+         * @param contentArr 内容数组
+         */
+        export function getSerialAndUseWhereByContent(contentArr: Array<string>): Array<any> {
+            let arr = [];
+            let str = '';
+            for (let index = 0; index < contentArr.length; index++) {
+                str += contentArr[index];
+            }
+            for (let i = 0; i < _dialogContent.Array.length; i++) {
+                const element = _dialogContent.Array[i];
+                let str0 = '';
+                for (let j = 0; j < element[DialogProperty.max]; j++) {
+                    str0 += element[DialogProperty.content + (j + 1)];
+                    if (j == element[DialogProperty.max] - 1) {
+                        if (str == str0) {
+                            arr.push(element[DialogProperty.useWhere], element[DialogProperty.serial]);
+                            return arr;
+                        }
+                    }
+                }
+            }
+        }
+
+        /**根据适用场景和序号查找需不需要播放声音*/
+        export function getVioceByUseWhereAndSerial(UseWhere: string, Serial: number): boolean {
+            let bool = false;
+            for (let index = 0; index < _dialogContent.Array.length; index++) {
+                const element = _dialogContent.Array[index];
+                if (element[DialogProperty.useWhere] == UseWhere && element[DialogProperty.serial] == Serial) {
+                    bool = element[DialogProperty.voice];
+                }
+            }
+            return bool;
+        }
+
         /**对话框中应用的场景类型*/
         export enum UseWhere {
             scene1 = 'scene1',
@@ -566,7 +601,7 @@ export module lwg {
 
         /**对话框中的属性*/
         export enum DialogProperty {
-            /**名称，必须有*/
+            /**名称，或者序号*/
             serial = 'serial',
             /**试用场景*/
             useWhere = 'useWhere',
@@ -574,6 +609,8 @@ export module lwg {
             content = 'content',
             /**语句的最大条目数，配合content属性查找*/
             max = 'max',
+            /**是否需要音乐*/
+            voice = 'voice',
         }
 
         export enum PlayMode {
@@ -634,7 +671,7 @@ export module lwg {
                             return;
                         }
                         ContentLabel.text = contentArr[0];
-                       
+
                     } else {
                         contentArr = contentArr0;
                     }
@@ -642,6 +679,13 @@ export module lwg {
                     if (delayed == undefined) {
                         delayed = 1000;
                     }
+                    // 音效
+                    let arrUS = getSerialAndUseWhereByContent(contentArr);
+                    let vioce = getVioceByUseWhereAndSerial(arrUS[0], arrUS[1]);
+                    if (arrUS && vioce) {
+                        PalyAudio.playSound('res/Voice/Dialog/' + arrUS[0] + arrUS[1] + '.mp3');
+                    }
+
                     Animation2D.scale_Alpha(Pre_Dialogue, 0, 0, 0, 1, 1, 1, 150, null, 300, () => {
                         for (let index = 0; index < contentArr.length; index++) {
 
