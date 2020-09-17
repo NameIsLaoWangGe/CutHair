@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion p_compileSdkVersion.toInteger()
+    buildToolsVersion p_buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion p_minSdkVersion.toInteger()
+        targetSdkVersion p_targetSdkVersion.toInteger()
+        applicationId p_applicationId
+        versionName p_versionName
+        versionCode p_versionCode.toInteger()
+        ndk {
+            abiFilters p_abiFilters.split(':')
+        }
+        multiDexEnabled true
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        preDexLibraries false
+        javaMaxHeapSize "4g"
+    }
+    
+    packagingOptions {
+        doNotStrip "*/*/*.so"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    aaptOptions {
+        noCompress '.unity3d', '.ress', '.resource', '.obb'
+    }
+
+    signingConfigs {
+        release {
+            v2SigningEnabled false
+        	storeFile file(p_storeFile)
+        	storePassword p_storePassword
+        	keyAlias p_keyAlias
+        	keyPassword p_keyPassword
+        }
+    }
+
+    buildTypes {
+        release {
+            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-unity.txt'
+            signingConfig signingConfigs.release
+            manifestPlaceholders Eval.me(p_manifestPlaceholders)
+        }
+    }
+}
+
+dependencies {
+    implementation(name:'unity-classes', ext:'jar')
+    implementation(name:'tj.unity', ext:'jar')
+    implementation(name:'tj.activity.unity', ext:'jar')
+    implementation(name:'tj.tools.unity', ext:'jar')
+    
+	implementation project(':A_file_paths')
+	implementation project(':BaseLibs')
+	implementation project(':location')
+	implementation project(':reyun')
+	implementation project(':TA')
+	implementation project(':WakeUpAd')
+
+}

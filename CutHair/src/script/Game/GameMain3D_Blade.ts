@@ -1,6 +1,7 @@
-import { lwg, EventAdmin } from "../Lwg_Template/lwg";
+import { lwg, EventAdmin, Admin } from "../Lwg_Template/lwg";
 import { GEnum, GSene3D, GVariate } from "../Lwg_Template/Global";
 import { lwg3D } from "../Lwg_Template/lwg3D";
+import ADManager from "../TJ/Admanager";
 
 export default class GameMain3D_Blade extends lwg3D.Object3D {
 
@@ -15,6 +16,7 @@ export default class GameMain3D_Blade extends lwg3D.Object3D {
 
         switch (otherOwner.name) {
             case 'Hairline':
+                ADManager.VibrateShort();
                 // 当前头发的实际长度
                 let length = otherOwnerParent.transform.localScaleY * 2 * otherOwner.transform.localScaleY;
                 // 实际高度，带有角度后的高度必定短于实际长度 
@@ -61,6 +63,7 @@ export default class GameMain3D_Blade extends lwg3D.Object3D {
                 break;
             case 'standard':
                 console.log('碰到线了，游戏失败！');
+                ADManager.Vibratelong();
                 EventAdmin.notify(GEnum.EventType.lianHong);
                 Laya.timer.frameOnce(350, this, () => {
                     EventAdmin.notify(EventAdmin.EventType.resurgence);

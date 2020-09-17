@@ -2,6 +2,7 @@ import { lwg, EventAdmin } from "../Lwg_Template/lwg";
 import GameMain3D_Blade from "./GameMain3D_Blade";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 import { lwg3D } from "../Lwg_Template/lwg3D";
+import ADManager from "../TJ/Admanager";
 var notify;
 export default class GameMain3D_knife extends lwg3D.Scene3D {
     onTriggerEnter(other: Laya.Rigidbody3D): void {
@@ -30,7 +31,7 @@ export default class GameMain3D_knife extends lwg3D.Scene3D {
                 else if (ownerParent.name === 'UpLeftBeard') {
                     EventAdmin.notify(GEnum.EventType.UpLeftBeard)
                 }
-
+                ADManager.VibrateShort();
                 other.isKinematic = false;
                 other.isTrigger = false;
                 other.linearVelocity = new Laya.Vector3(0, -3, 0);

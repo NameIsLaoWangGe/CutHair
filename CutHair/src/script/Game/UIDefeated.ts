@@ -21,7 +21,6 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
-
         switch (Game._platform) {
             case Game._platformTpye.OPPO:
                 this.self['OPPO'].visible = true;
