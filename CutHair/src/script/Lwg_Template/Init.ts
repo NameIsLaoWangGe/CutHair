@@ -13,7 +13,8 @@ export default class Init extends Admin.Scene {
         new ZJADMgr();
     }
     gameInit(): void {
-        Game._platform = Game._platformTpye.Bytedance;
+        Admin._platform = Game._platformTpye.OPPO;
+        Admin._evaluating = false;
     };
     skinInit(): void {
         Skin._currentEye.name = null;

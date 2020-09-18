@@ -1061,6 +1061,20 @@ export module lwg {
 
     /**场景和UI模块的一些通用属性*/
     export module Admin {
+        /**渠道类型*/
+        export enum _platformTpye {
+            WeChat = 'WeChat',
+            OPPO = 'OPPO',
+            Bytedance = 'Bytedance',
+            /**通用*/
+            All = 'All',
+        }
+        /**渠道，控制一些节点的变化,默认为字节*/
+        export let _platform: string = _platformTpye.Bytedance;
+
+        /**是否为评测包，评测包广告默认关闭，默认为非评测包，直接获得广告奖励*/
+        export let _evaluating: boolean = false;
+
         /**场景控制,访问特定场景用_sceneControl[name]方位*/
         export let _sceneControl: any = {};
         /**游戏当前处于什么状态中*/
@@ -1176,6 +1190,13 @@ export module lwg {
                 this.lwgAdaptive();
 
                 Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
+            }
+            var(str): Laya.Sprite {
+                if (this.self[str]) {
+                    return this.self[str]
+                } else {
+                    console.log('没有全局节点：', str);
+                }
             }
             /**游戏开始前执行一次，重写覆盖*/
             lwgOnAwake(): void { };
@@ -3265,18 +3286,18 @@ export module lwg {
         * @param childNameArr 子节点名称数组
         * @param bool 隐藏还是显示，true为显示，flase为隐藏
         */
-        export function node_ShowExcludedChild(node: Laya.Sprite, childNameArr: Array<string>, bool: boolean): void {
+        export function node_ShowExcludedChild(node: Laya.Sprite, childNameArr: Array<string>, bool?: boolean): void {
             for (let i = 0; i < node.numChildren; i++) {
                 let Child = node.getChildAt(i) as Laya.Sprite;
                 for (let j = 0; j < childNameArr.length; j++) {
                     if (Child.name == childNameArr[j]) {
-                        if (bool) {
+                        if (bool || bool == undefined) {
                             Child.visible = true;
                         } else {
                             Child.visible = false;
                         }
                     } else {
-                        if (bool) {
+                        if (bool || bool == undefined) {
                             Child.visible = false;
                         } else {
                             Child.visible = true;

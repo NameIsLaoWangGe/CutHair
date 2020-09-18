@@ -872,115 +872,6 @@
     }
     P106.style = "P106";
 
-    var GameControl;
-    (function (GameControl) {
-        let _platformTpye;
-        (function (_platformTpye) {
-            _platformTpye["WeChat"] = "WeChat";
-            _platformTpye["OPPO"] = "OPPO";
-            _platformTpye["Bytedance"] = "Bytedance";
-            _platformTpye["All"] = "All";
-        })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
-        GameControl._platform = _platformTpye.Bytedance;
-        GameControl._gameSwitch = false;
-        GameControl._gameLevel = {
-            get value() {
-                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_gameLevel', val.toString());
-            }
-        };
-        GameControl._practicalLevel = {
-            get value() {
-                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
-            },
-            set value(val) {
-                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
-            }
-        };
-        function getLevelData(levelNum) {
-            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
-            let level;
-            let num;
-            if (levelNum) {
-                num = levelNum;
-            }
-            else {
-                num = GameControl._gameLevel.value;
-            }
-            for (let index = 0; index < dataArr.length; index++) {
-                const element = dataArr[index];
-                if (element['name'] === 'level' + num) {
-                    level = element;
-                    break;
-                }
-            }
-            if (level) {
-                return level;
-            }
-            else {
-                return dataArr[num - 1];
-            }
-        }
-        GameControl.getLevelData = getLevelData;
-        function getLevelData_Condition(levelNum) {
-            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
-            let arr0;
-            for (const key in level) {
-                if (level.hasOwnProperty(key)) {
-                    if (key === 'condition') {
-                        arr0 = level[key];
-                    }
-                }
-            }
-            if (arr0) {
-                return arr0;
-            }
-            else {
-                console.log('获取关卡描述失败');
-            }
-        }
-        GameControl.getLevelData_Condition = getLevelData_Condition;
-        let gameProperty;
-        (function (gameProperty) {
-            gameProperty["name"] = "name";
-            gameProperty["condition"] = "condition";
-            gameProperty["resCondition"] = "resCondition";
-            gameProperty["rewardType"] = "rewardType";
-            gameProperty["rewardNum"] = "rewardNum";
-        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
-        let rewardType;
-        (function (rewardType) {
-            rewardType["gold"] = "gold";
-            rewardType["diamond"] = "diamond";
-        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
-        function _createLevel(parent, x, y) {
-            let sp;
-            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
-                let _prefab = new Laya.Prefab();
-                _prefab.json = prefab;
-                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
-                parent.addChild(sp);
-                sp.pos(x, y);
-                sp.zOrder = 0;
-                let level = sp.getChildByName('level');
-                GameControl.LevelNode = sp;
-            }));
-        }
-        GameControl._createLevel = _createLevel;
-        GameControl._execution = {
-            get value() {
-                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
-            },
-            set value(val) {
-                this.val = val;
-                Laya.LocalStorage.setItem('_execution', val.toString());
-            }
-        };
-    })(GameControl || (GameControl = {}));
-    let Game = GameControl;
-
     class ADManager {
         static ShowBanner() {
             let p = new TJ.ADS.Param();
@@ -999,10 +890,8 @@
             TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
         }
         static ShowReward(rewardAction, CDTime = 500) {
-            if (Game._platform === Game._platformTpye.OPPO) {
+            if (Admin._evaluating) {
                 rewardAction();
-                EventAdmin.notify(Task.EventType.adsTime);
-                EventAdmin.notify(EasterEgg.EventType.easterEggAds);
                 return;
             }
             if (ADManager.CanShowCD) {
@@ -1883,6 +1772,15 @@
         })(Gold = lwg.Gold || (lwg.Gold = {}));
         let Admin;
         (function (Admin) {
+            let _platformTpye;
+            (function (_platformTpye) {
+                _platformTpye["WeChat"] = "WeChat";
+                _platformTpye["OPPO"] = "OPPO";
+                _platformTpye["Bytedance"] = "Bytedance";
+                _platformTpye["All"] = "All";
+            })(_platformTpye = Admin._platformTpye || (Admin._platformTpye = {}));
+            Admin._platform = _platformTpye.Bytedance;
+            Admin._evaluating = false;
             Admin._sceneControl = {};
             Admin._gameStart = false;
             let JsonProperty;
@@ -1971,6 +1869,14 @@
                     this.lwgVariateInit();
                     this.lwgAdaptive();
                     Tomato.scenePrintPoint(this.calssName, Tomato.scenePointType.open);
+                }
+                var(str) {
+                    if (this.self[str]) {
+                        return this.self[str];
+                    }
+                    else {
+                        console.log('没有全局节点：', str);
+                    }
                 }
                 lwgOnAwake() { }
                 ;
@@ -3349,7 +3255,7 @@
                     let Child = node.getChildAt(i);
                     for (let j = 0; j < childNameArr.length; j++) {
                         if (Child.name == childNameArr[j]) {
-                            if (bool) {
+                            if (bool || bool == undefined) {
                                 Child.visible = true;
                             }
                             else {
@@ -3357,7 +3263,7 @@
                             }
                         }
                         else {
-                            if (bool) {
+                            if (bool || bool == undefined) {
                                 Child.visible = false;
                             }
                             else {
@@ -5135,29 +5041,122 @@
         }
     }
 
+    var GameControl;
+    (function (GameControl) {
+        let _platformTpye;
+        (function (_platformTpye) {
+            _platformTpye["WeChat"] = "WeChat";
+            _platformTpye["OPPO"] = "OPPO";
+            _platformTpye["Bytedance"] = "Bytedance";
+            _platformTpye["All"] = "All";
+        })(_platformTpye = GameControl._platformTpye || (GameControl._platformTpye = {}));
+        GameControl._platform = _platformTpye.Bytedance;
+        GameControl._gameSwitch = false;
+        GameControl._gameLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_gameLevel') ? Number(Laya.LocalStorage.getItem('_gameLevel')) : 1;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_gameLevel', val.toString());
+            }
+        };
+        GameControl._practicalLevel = {
+            get value() {
+                return Laya.LocalStorage.getItem('_practicalLevel') ? Number(Laya.LocalStorage.getItem('_practicalLevel')) : GameControl._gameLevel.value;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_practicalLevel', val.toString());
+            }
+        };
+        function getLevelData(levelNum) {
+            let dataArr = Laya.loader.getRes("GameData/Game/GameLevel.json")['RECORDS'];
+            let level;
+            let num;
+            if (levelNum) {
+                num = levelNum;
+            }
+            else {
+                num = GameControl._gameLevel.value;
+            }
+            for (let index = 0; index < dataArr.length; index++) {
+                const element = dataArr[index];
+                if (element['name'] === 'level' + num) {
+                    level = element;
+                    break;
+                }
+            }
+            if (level) {
+                return level;
+            }
+            else {
+                return dataArr[num - 1];
+            }
+        }
+        GameControl.getLevelData = getLevelData;
+        function getLevelData_Condition(levelNum) {
+            let level = getLevelData(levelNum ? levelNum : GameControl._gameLevel.value);
+            let arr0;
+            for (const key in level) {
+                if (level.hasOwnProperty(key)) {
+                    if (key === 'condition') {
+                        arr0 = level[key];
+                    }
+                }
+            }
+            if (arr0) {
+                return arr0;
+            }
+            else {
+                console.log('获取关卡描述失败');
+            }
+        }
+        GameControl.getLevelData_Condition = getLevelData_Condition;
+        let gameProperty;
+        (function (gameProperty) {
+            gameProperty["name"] = "name";
+            gameProperty["condition"] = "condition";
+            gameProperty["resCondition"] = "resCondition";
+            gameProperty["rewardType"] = "rewardType";
+            gameProperty["rewardNum"] = "rewardNum";
+        })(gameProperty = GameControl.gameProperty || (GameControl.gameProperty = {}));
+        let rewardType;
+        (function (rewardType) {
+            rewardType["gold"] = "gold";
+            rewardType["diamond"] = "diamond";
+        })(rewardType = GameControl.rewardType || (GameControl.rewardType = {}));
+        function _createLevel(parent, x, y) {
+            let sp;
+            Laya.loader.load('prefab/LevelNode.json', Laya.Handler.create(this, function (prefab) {
+                let _prefab = new Laya.Prefab();
+                _prefab.json = prefab;
+                sp = Laya.Pool.getItemByCreateFun('prefab', _prefab.create, _prefab);
+                parent.addChild(sp);
+                sp.pos(x, y);
+                sp.zOrder = 0;
+                let level = sp.getChildByName('level');
+                GameControl.LevelNode = sp;
+            }));
+        }
+        GameControl._createLevel = _createLevel;
+        GameControl._execution = {
+            get value() {
+                return this.val = Laya.LocalStorage.getItem('_execution') ? Number(Laya.LocalStorage.getItem('_execution')) : 15;
+            },
+            set value(val) {
+                this.val = val;
+                Laya.LocalStorage.setItem('_execution', val.toString());
+            }
+        };
+    })(GameControl || (GameControl = {}));
+    let Game = GameControl;
+
     class UICheckIn extends CheckIn.CheckInScene {
         checkInNodeDec() {
             if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-                this.self['WeChat'].visible = false;
-                this.self['OPPO'].visible = false;
+                this.var('Platform').visible = false;
             }
             else {
-                switch (Game._platform) {
-                    case Game._platformTpye.OPPO:
-                        this.self['OPPO'].visible = true;
-                        this.self['WeChat'].visible = false;
-                        break;
-                    case Game._platformTpye.WeChat:
-                        this.self['OPPO'].visible = false;
-                        this.self['WeChat'].visible = true;
-                        break;
-                    case Game._platformTpye.Bytedance:
-                        this.self['OPPO'].visible = false;
-                        this.self['WeChat'].visible = true;
-                        break;
-                    default:
-                        break;
-                }
+                Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
             }
         }
         checkInOnEnable() {
@@ -5242,7 +5241,7 @@
             });
         }
         btnGetUp() {
-            if (Game._platform === Game._platformTpye.Bytedance) {
+            if (Admin._platform == Admin._platformTpye.Bytedance) {
                 if (this.self['Dot'].visible) {
                     ADManager.ShowReward(() => {
                         ADManager.TAPoint(TaT.BtnClick, 'AD3award');
@@ -5386,6 +5385,7 @@
             this.self['BtnSelect_WeChat'].visible = true;
             this.self['BtnAgain_WeChat'].visible = false;
             this.self['Dot_WeChat'].visible = true;
+            Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
@@ -5393,26 +5393,6 @@
             ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
             Setting.setBtnAppear();
             PalyAudio.playDefeatedSound();
-            switch (Game._platform) {
-                case Game._platformTpye.OPPO:
-                    this.self['OPPO'].visible = true;
-                    this.self['WeChat'].visible = false;
-                    this.self['Bytedance'].visible = false;
-                    this.self['P202'].removeSelf();
-                    break;
-                case Game._platformTpye.WeChat:
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = true;
-                    this.self['Bytedance'].visible = false;
-                    this.self['P202'].removeSelf();
-                    break;
-                case Game._platformTpye.Bytedance:
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = false;
-                    this.self['Bytedance'].visible = true;
-                default:
-                    break;
-            }
         }
         lwgAdaptive() {
             let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
@@ -6396,7 +6376,8 @@
             new ZJADMgr();
         }
         gameInit() {
-            Game._platform = Game._platformTpye.Bytedance;
+            Admin._platform = Game._platformTpye.OPPO;
+            Admin._evaluating = false;
         }
         ;
         skinInit() {
@@ -7875,9 +7856,10 @@
     class UISkinTry extends Admin.Scene {
         lwgOnAwake() {
             this.randomNoHave();
-            Tools.node_ShowExcludedChild(this.self['Platform'], [Game._platformTpye.Bytedance], true);
-            Tools.node_ShowExcludedChild(this.self[Game._platformTpye.Bytedance], [ZJADMgr.ins.shieldLevel], true);
-            console.log(ZJADMgr.ins.shieldLevel);
+            Tools.node_ShowExcludedChild(this.self['Platform'], [Admin._platform], true);
+            if (Admin._platform == Admin._platformTpye.Bytedance) {
+                Tools.node_ShowExcludedChild(this.self[Admin._platformTpye.Bytedance], [ZJADMgr.ins.shieldLevel], true);
+            }
         }
         randomNoHave() {
             let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
@@ -8014,18 +7996,11 @@
         }
         btnGetUp(e) {
             e.stopPropagation();
-            if (Game._platform == Game._platformTpye.OPPO) {
+            ADManager.ShowReward(() => {
                 Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
                 EventAdmin.notify(GEnum.EventType.changeOther);
                 EventAdmin.notify(GEnum.EventType.changeProp);
-            }
-            else {
-                ADManager.ShowReward(() => {
-                    Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
-                    EventAdmin.notify(GEnum.EventType.changeOther);
-                    EventAdmin.notify(GEnum.EventType.changeProp);
-                });
-            }
+            });
         }
         btnNoUp(event) {
             if (this.beforeTryOtherName) {
@@ -8442,6 +8417,7 @@
             this.GlodNum = this.self['GlodNum'];
             ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
             ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
+            Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
@@ -8457,27 +8433,13 @@
             EventAdmin.notify(Task.TaskType.victory);
             switch (Game._platform) {
                 case Game._platformTpye.OPPO:
-                    this.self['OPPO'].visible = true;
-                    this.self['WeChat'].visible = false;
-                    this.self['Bytedance'].visible = false;
-                    this.self['P202'].removeSelf();
                     this.getGoldDisPlay(1);
                     break;
                 case Game._platformTpye.WeChat:
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = true;
-                    this.self['Bytedance'].visible = false;
-                    this.self['BtnAdv_WeChat'].visible = true;
-                    this.self['BtnNormal_WeChat'].visible = false;
-                    this.self['Dot_WeChat'].visible = true;
                     this.self['P202'].removeSelf();
                     this.getGoldDisPlay(10);
                     break;
                 case Game._platformTpye.Bytedance:
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = false;
-                    this.self['Bytedance'].visible = true;
-                    this.self['Dot_Bytedance'].visible = true;
                     this.getGoldDisPlay(10);
                     break;
                 default:
@@ -8537,11 +8499,11 @@
         }
         btnSelectUp() {
             let Dot;
-            switch (Game._platform) {
-                case Game._platformTpye.Bytedance:
+            switch (Admin._platform) {
+                case Admin._platformTpye.Bytedance:
                     Dot = this.self['Dot_Bytedance'];
                     break;
-                case Game._platformTpye.WeChat:
+                case Admin._platformTpye.WeChat:
                     Dot = this.self['Dot_WeChat'];
                     break;
                 default:
@@ -8659,23 +8621,7 @@
                     VictoryBox.setBoxProperty('box' + arr[index], VictoryBox.BoxProperty.ads, true);
                 }
             }
-            switch (Game._platform) {
-                case Game._platformTpye.WeChat:
-                    this.self['Bytedance'].visible = false;
-                    this.self['WeChat'].visible = true;
-                    this.self['BtnAgain_WeChat'].visible = false;
-                    this.self['BtnNo_WeChat'].visible = false;
-                    break;
-                case Game._platformTpye.Bytedance:
-                    this.self['Bytedance'].visible = true;
-                    this.self['WeChat'].visible = false;
-                    this.self['BtnAgain_Bytedance'].visible = false;
-                    this.self['BtnNo_Bytedance'].visible = false;
-                    this.self['Select_Bytedance'].visible = false;
-                    break;
-                default:
-                    break;
-            }
+            Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
         }
         lwgAdaptive() {
             let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
@@ -8771,6 +8717,8 @@
         victoryBoxBtnClick() {
             Click.on('largen', this.self['BtnNo_WeChat'], this, null, null, this.btnNoUp);
             Click.on('largen', this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
+            Click.on('largen', this.self['BtnNo_OPPO'], this, null, null, this.btnNoUp);
+            Click.on('largen', this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
             Click.on('largen', this.self['BtnNo_Bytedance'], this, null, null, this.btnNoUp);
             Click.on('largen', this.self['BtnAgain_Bytedance'], this, null, null, this.btnAgainUp);
             Click.on('largen', this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelect_BytedanceUp);
@@ -8814,12 +8762,10 @@
         }
         victoryOnUpdate() {
             if (VictoryBox._defaultOpenNum > 0) {
-                this.self['BtnAgain_WeChat'].visible = false;
-                this.self['BtnNo_WeChat'].visible = false;
+                this.var('Platform').visible = false;
             }
             else {
-                this.self['BtnAgain_WeChat'].visible = true;
-                this.self['BtnNo_WeChat'].visible = true;
+                this.var('Platform').visible = true;
             }
         }
     }

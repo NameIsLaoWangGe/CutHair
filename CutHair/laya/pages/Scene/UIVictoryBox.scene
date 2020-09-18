@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":97,
-    "selecteID":98,
+    "selectedBox":105,
+    "selecteID":107,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":102,
+    "maxID":110,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -237,194 +237,269 @@
                 },
                 {
                     "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,WeChat,WeChat",
-                    "props":{"y":847,"x":144,"width":306,"var":"WeChat","name":"WeChat","height":195},
+                    "type":"Image",
+                    "searchKey":"Image,Platform,Platform",
+                    "props":{"y":793,"x":115,"width":380,"var":"Platform","name":"Platform","height":303},
                     "nodeParent":10,
-                    "label":"WeChat",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":101,
-                    "child":[
-                        {
-                            "type":"Sprite",
-                            "searchKey":"Sprite,BtnNo_WeChat,BtnNo_WeChat",
-                            "props":{"y":181,"x":144,"width":121,"var":"BtnNo_WeChat","texture":"UI/VictoryBox/txt_xiexie.png","pivotY":15,"pivotX":61,"name":"BtnNo_WeChat","height":29},
-                            "nodeParent":101,
-                            "label":"BtnNo_WeChat",
-                            "isOpen":true,
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":77,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Sprite",
-                            "searchKey":"Sprite,BtnAgain_WeChat,BtnAgain_WeChat",
-                            "props":{"y":71,"x":126,"var":"BtnAgain_WeChat","texture":"UI/Common/anniu.png","pivotY":63,"pivotX":117,"name":"BtnAgain_WeChat"},
-                            "nodeParent":101,
-                            "label":"BtnAgain_WeChat",
-                            "isOpen":false,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":74,
-                            "child":[
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":45.5,"x":33,"texture":"UI/VictoryBox/txt_zaikai.png"},
-                                    "nodeParent":74,
-                                    "label":"Sprite",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":75,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png"},
-                                    "nodeParent":74,
-                                    "label":"Sprite",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":76,
-                                    "child":[
-                                        ]
-                                }]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite,Bytedance,Bytedance",
-                    "props":{"y":841,"x":129,"width":341,"var":"Bytedance","name":"Bytedance","height":207},
-                    "nodeParent":10,
-                    "label":"Bytedance",
+                    "label":"Platform",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":92,
+                    "compId":104,
                     "child":[
                         {
                             "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,BtnNo_Bytedance,BtnNo_Bytedance",
-                            "props":{"y":79,"x":168,"width":288,"var":"BtnNo_Bytedance","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNo_Bytedance","height":128},
-                            "nodeParent":92,
-                            "label":"BtnNo_Bytedance",
-                            "isOpen":true,
+                            "searchKey":"Sprite,Bytedance,Bytedance",
+                            "props":{"y":60,"x":22.5,"width":341,"var":"Bytedance","name":"Bytedance","height":207},
+                            "nodeParent":104,
+                            "label":"Bytedance",
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
-                            "compId":95,
+                            "compId":92,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":41.5,"x":55.5,"texture":"UI/VictoryBox/buxiexie.png"},
-                                    "nodeParent":95,
-                                    "label":"Sprite",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":96,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"Sprite",
-                            "searchKey":"Sprite,BtnAgain_Bytedance,BtnAgain_Bytedance",
-                            "props":{"y":79,"x":168,"width":288,"var":"BtnAgain_Bytedance","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAgain_Bytedance","height":128},
-                            "nodeParent":92,
-                            "label":"BtnAgain_Bytedance",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":93,
-                            "child":[
-                                {
-                                    "x":60,
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":41.5,"x":56.5,"texture":"UI/VictoryBox/likekaiqi.png"},
-                                    "nodeParent":93,
-                                    "label":"Sprite",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":94,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"Sprite",
-                            "searchKey":"Sprite,Select_Bytedance,Select_Bytedance",
-                            "props":{"y":156,"x":21.5,"width":321,"var":"Select_Bytedance","name":"Select_Bytedance","height":42},
-                            "nodeParent":92,
-                            "label":"Select_Bytedance",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":97,
-                            "child":[
-                                {
-                                    "x":60,
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite,BtnSelect_Bytedance,BtnSelect_Bytedance",
-                                    "props":{"y":2,"x":21,"var":"BtnSelect_Bytedance","texture":"UI/Common/yuan1.png","name":"BtnSelect_Bytedance","alpha":0.6},
-                                    "nodeParent":97,
-                                    "label":"BtnSelect_Bytedance",
+                                    "searchKey":"Sprite,BtnNo_Bytedance,BtnNo_Bytedance",
+                                    "props":{"y":79,"x":168,"width":288,"var":"BtnNo_Bytedance","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNo_Bytedance","height":128},
+                                    "nodeParent":92,
+                                    "label":"BtnNo_Bytedance",
                                     "isOpen":true,
                                     "isDirectory":true,
                                     "isAniNode":true,
                                     "hasChild":true,
-                                    "compId":98,
+                                    "compId":95,
                                     "child":[
                                         {
-                                            "x":75,
                                             "type":"Sprite",
-                                            "searchKey":"Sprite,Dot_Bytedance,Dot_Bytedance",
-                                            "props":{"y":8.75,"x":7.75,"var":"Dot_Bytedance","texture":"UI/Common/yuan2.png","name":"Dot_Bytedance"},
-                                            "nodeParent":98,
-                                            "label":"Dot_Bytedance",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":41.5,"x":55.5,"texture":"UI/VictoryBox/buxiexie.png"},
+                                            "nodeParent":95,
+                                            "label":"Sprite",
                                             "isDirectory":false,
                                             "isAniNode":true,
                                             "hasChild":false,
-                                            "compId":99,
+                                            "compId":96,
                                             "child":[
                                                 ]
                                         }]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":6,"x":59,"texture":"UI/VictoryBox/adsthree.png"},
-                                    "nodeParent":97,
-                                    "label":"Sprite",
+                                    "searchKey":"Sprite,BtnAgain_Bytedance,BtnAgain_Bytedance",
+                                    "props":{"y":79,"x":168,"width":288,"var":"BtnAgain_Bytedance","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAgain_Bytedance","height":128},
+                                    "nodeParent":92,
+                                    "label":"BtnAgain_Bytedance",
+                                    "isOpen":true,
+                                    "isDirectory":true,
+                                    "isAniNode":true,
+                                    "hasChild":true,
+                                    "compId":93,
+                                    "child":[
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":41.5,"x":56.5,"texture":"UI/VictoryBox/likekaiqi.png"},
+                                            "nodeParent":93,
+                                            "label":"Sprite",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":94,
+                                            "child":[
+                                                ]
+                                        }]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,Select_Bytedance,Select_Bytedance",
+                                    "props":{"y":156,"x":21.5,"width":321,"var":"Select_Bytedance","name":"Select_Bytedance","height":42},
+                                    "nodeParent":92,
+                                    "label":"Select_Bytedance",
+                                    "isOpen":true,
+                                    "isDirectory":true,
+                                    "isAniNode":true,
+                                    "hasChild":true,
+                                    "compId":97,
+                                    "child":[
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite,BtnSelect_Bytedance,BtnSelect_Bytedance",
+                                            "props":{"y":2,"x":21,"var":"BtnSelect_Bytedance","texture":"UI/Common/yuan1.png","name":"BtnSelect_Bytedance","alpha":0.6},
+                                            "nodeParent":97,
+                                            "label":"BtnSelect_Bytedance",
+                                            "isOpen":true,
+                                            "isDirectory":true,
+                                            "isAniNode":true,
+                                            "hasChild":true,
+                                            "compId":98,
+                                            "child":[
+                                                {
+                                                    "type":"Sprite",
+                                                    "searchKey":"Sprite,Dot_Bytedance,Dot_Bytedance",
+                                                    "props":{"y":8.75,"x":7.75,"var":"Dot_Bytedance","texture":"UI/Common/yuan2.png","name":"Dot_Bytedance"},
+                                                    "nodeParent":98,
+                                                    "label":"Dot_Bytedance",
+                                                    "isDirectory":false,
+                                                    "isAniNode":true,
+                                                    "hasChild":false,
+                                                    "compId":99,
+                                                    "child":[
+                                                        ]
+                                                }]
+                                        },
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":6,"x":59,"texture":"UI/VictoryBox/adsthree.png"},
+                                            "nodeParent":97,
+                                            "label":"Sprite",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":100,
+                                            "child":[
+                                                ]
+                                        }]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,WeChat,WeChat",
+                            "props":{"y":66,"x":37,"width":306,"var":"WeChat","name":"WeChat","height":195},
+                            "nodeParent":104,
+                            "label":"WeChat",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":101,
+                            "child":[
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,BtnNo_WeChat,BtnNo_WeChat",
+                                    "props":{"y":181,"x":144,"width":121,"var":"BtnNo_WeChat","texture":"UI/VictoryBox/txt_xiexie.png","pivotY":15,"pivotX":61,"name":"BtnNo_WeChat","height":29},
+                                    "nodeParent":101,
+                                    "label":"BtnNo_WeChat",
+                                    "isOpen":true,
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":100,
+                                    "compId":77,
                                     "child":[
                                         ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,BtnAgain_WeChat,BtnAgain_WeChat",
+                                    "props":{"y":71,"x":126,"var":"BtnAgain_WeChat","texture":"UI/Common/anniu.png","pivotY":63,"pivotX":117,"name":"BtnAgain_WeChat"},
+                                    "nodeParent":101,
+                                    "label":"BtnAgain_WeChat",
+                                    "isOpen":false,
+                                    "isDirectory":true,
+                                    "isAniNode":true,
+                                    "hasChild":true,
+                                    "compId":74,
+                                    "child":[
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":45.5,"x":33,"texture":"UI/VictoryBox/txt_zaikai.png"},
+                                            "nodeParent":74,
+                                            "label":"Sprite",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":75,
+                                            "child":[
+                                                ]
+                                        },
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png"},
+                                            "nodeParent":74,
+                                            "label":"Sprite",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":76,
+                                            "child":[
+                                                ]
+                                        }]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,OPPO,OPPO",
+                            "props":{"y":66,"x":37,"width":306,"var":"OPPO","name":"OPPO","height":195},
+                            "nodeParent":104,
+                            "label":"OPPO",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":105,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,BtnNo_OPPO,BtnNo_OPPO",
+                                    "props":{"y":181,"x":144,"width":121,"var":"BtnNo_OPPO","texture":"UI/VictoryBox/txt_xiexie.png","pivotY":15,"pivotX":61,"name":"BtnNo_OPPO","height":29},
+                                    "nodeParent":105,
+                                    "label":"BtnNo_OPPO",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":106,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite,BtnAgain_OPPO,BtnAgain_OPPO",
+                                    "props":{"y":71,"x":126,"var":"BtnAgain_OPPO","texture":"UI/Common/anniu.png","pivotY":63,"pivotX":117,"name":"BtnAgain_OPPO"},
+                                    "nodeParent":105,
+                                    "label":"BtnAgain_OPPO",
+                                    "isOpen":false,
+                                    "isDirectory":true,
+                                    "isAniNode":true,
+                                    "hasChild":true,
+                                    "compId":107,
+                                    "child":[
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":45.5,"x":33,"texture":"UI/VictoryBox/txt_zaikai.png"},
+                                            "nodeParent":107,
+                                            "label":"Sprite",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":108,
+                                            "child":[
+                                                ]
+                                        },
+                                        {
+                                            "type":"Sprite",
+                                            "searchKey":"Sprite",
+                                            "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png"},
+                                            "nodeParent":107,
+                                            "label":"Sprite",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":109,
+                                            "child":[
+                                                ]
+                                        }]
                                 }]
                         }]
                 }]

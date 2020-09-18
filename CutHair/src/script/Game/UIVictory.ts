@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Shop, Task, Setting, PalyAudio } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Shop, Task, Setting, PalyAudio, Tools } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import ADManager, { TaT } from "../TJ/Admanager";
@@ -6,7 +6,6 @@ import { Game } from "../Lwg_Template/Game";
 import RecordManager from "../TJ/RecordManager";
 
 export default class UIVictory extends lwg.Admin.Scene {
-
 
     GlodNum: Laya.Sprite;
     /**本关应该给予多少金币*/
@@ -16,7 +15,7 @@ export default class UIVictory extends lwg.Admin.Scene {
 
         ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
         ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
-
+        Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
     }
 
     lwgOnEnable(): void {
@@ -38,33 +37,15 @@ export default class UIVictory extends lwg.Admin.Scene {
 
         switch (Game._platform) {
             case Game._platformTpye.OPPO:
-                this.self['OPPO'].visible = true;
-                this.self['WeChat'].visible = false;
-                this.self['Bytedance'].visible = false;
-                this.self['P202'].removeSelf();
                 this.getGoldDisPlay(1);
                 break;
-
             case Game._platformTpye.WeChat:
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = true;
-                this.self['Bytedance'].visible = false;
-                this.self['BtnAdv_WeChat'].visible = true;
-                this.self['BtnNormal_WeChat'].visible = false;
-                this.self['Dot_WeChat'].visible = true;
                 this.self['P202'].removeSelf();
                 this.getGoldDisPlay(10);
                 break;
-
             case Game._platformTpye.Bytedance:
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = false;
-                this.self['Bytedance'].visible = true;
-                this.self['Dot_Bytedance'].visible = true;
                 this.getGoldDisPlay(10);
-
                 break;
-
             default:
                 break;
         }
@@ -136,13 +117,12 @@ export default class UIVictory extends lwg.Admin.Scene {
 
     addOrSub: string = 'add';
     btnSelectUp(): void {
-
         let Dot;
-        switch (Game._platform) {
-            case Game._platformTpye.Bytedance:
+        switch (Admin._platform) {
+            case Admin._platformTpye.Bytedance:
                 Dot = this.self['Dot_Bytedance'];
                 break;
-            case Game._platformTpye.WeChat:
+            case Admin._platformTpye.WeChat:
                 Dot = this.self['Dot_WeChat'];
                 break;
 

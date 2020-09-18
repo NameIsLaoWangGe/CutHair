@@ -1,31 +1,14 @@
 import ADManager, { TaT } from "../TJ/Admanager";
-import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin, Setting, Dialog } from "../Lwg_Template/lwg";
+import { Task, lwg, Animation2D, CheckIn, Gold, Click, Effects, EventAdmin, Setting, Dialog, Tools, Admin } from "../Lwg_Template/lwg";
 import { Game } from "../Lwg_Template/Game";
 
 export default class UICheckIn extends CheckIn.CheckInScene {
 
     checkInNodeDec(): void {
         if (CheckIn._lastCheckDate.date == (new Date).getDate()) {
-            this.self['WeChat'].visible = false;
-            this.self['OPPO'].visible = false;
+            this.var('Platform').visible = false;
         } else {
-            switch (Game._platform) {
-                case Game._platformTpye.OPPO:
-                    this.self['OPPO'].visible = true;
-                    this.self['WeChat'].visible = false;
-                    break;
-                case Game._platformTpye.WeChat:
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = true;
-                    break;
-                case Game._platformTpye.Bytedance:
-                    this.self['OPPO'].visible = false;
-                    this.self['WeChat'].visible = true;
-                    break;
-
-                default:
-                    break;
-            }
+            Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
         }
     }
 
@@ -129,7 +112,7 @@ export default class UICheckIn extends CheckIn.CheckInScene {
     }
 
     btnGetUp(): void {
-        if (Game._platform === Game._platformTpye.Bytedance) {
+        if (Admin._platform == Admin._platformTpye.Bytedance) {
             if (this.self['Dot'].visible) {
                 ADManager.ShowReward(() => {
                     ADManager.TAPoint(TaT.BtnClick, 'AD3award');

@@ -11,8 +11,6 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         ADManager.TAPoint(TaT.BtnShow, 'Adboxagain');
         Gold.goldAppear();
 
-        // ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_box');
-
         if (VictoryBox._openVictoryBoxNum > 1) {
             let arr = Tools.randomNumOfArray([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
             for (let index = 0; index < arr.length; index++) {
@@ -21,24 +19,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
             }
         }
 
-        switch (Game._platform) {
-            case Game._platformTpye.WeChat:
-                this.self['Bytedance'].visible = false;
-                this.self['WeChat'].visible = true;
-                this.self['BtnAgain_WeChat'].visible = false;
-                this.self['BtnNo_WeChat'].visible = false;
-                break;
-            case Game._platformTpye.Bytedance:
-                this.self['Bytedance'].visible = true;
-                this.self['WeChat'].visible = false;
-                this.self['BtnAgain_Bytedance'].visible = false;
-                this.self['BtnNo_Bytedance'].visible = false;
-                this.self['Select_Bytedance'].visible = false;
-
-                break;
-            default:
-                break;
-        }
+        Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
     }
 
     lwgAdaptive(): void {
@@ -147,6 +128,9 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         Click.on('largen', this.self['BtnNo_WeChat'], this, null, null, this.btnNoUp);
         Click.on('largen', this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
 
+        Click.on('largen', this.self['BtnNo_OPPO'], this, null, null, this.btnNoUp);
+        Click.on('largen', this.self['BtnAgain_OPPO'], this, null, null, this.btnAgainUp);
+
         Click.on('largen', this.self['BtnNo_Bytedance'], this, null, null, this.btnNoUp);
         Click.on('largen', this.self['BtnAgain_Bytedance'], this, null, null, this.btnAgainUp);
         Click.on('largen', this.self['BtnSelect_Bytedance'], this, null, null, this.btnSelect_BytedanceUp);
@@ -174,7 +158,7 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
         this.self.close();
     }
 
-    // /**看广告获取的最大次数为6次*/
+    /**看广告获取的最大次数为6次*/
     btnAgainUp(event): void {
         ADManager.TAPoint(TaT.BtnClick, 'ADrewardbt_box');
         ADManager.TAPoint(TaT.BtnClick, 'Adboxagain');
@@ -195,13 +179,9 @@ export default class UIVictoryBox extends VictoryBox.VictoryBoxScene {
 
     victoryOnUpdate(): void {
         if (VictoryBox._defaultOpenNum > 0) {
-            this.self['BtnAgain_WeChat'].visible = false;
-            this.self['BtnNo_WeChat'].visible = false;
-
+            this.var('Platform').visible = false;
         } else {
-            this.self['BtnAgain_WeChat'].visible = true;
-            this.self['BtnNo_WeChat'].visible = true;
-
+            this.var('Platform').visible = true;
         }
     }
 }

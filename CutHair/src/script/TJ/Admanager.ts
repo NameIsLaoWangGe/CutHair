@@ -34,14 +34,10 @@ export default class ADManager {
     static CanShowCD: boolean = true;
     public static ShowReward(rewardAction: Function, CDTime: number = 500)//展示激励广告，一般是视频
     {
-
-        if (Game._platform === Game._platformTpye.OPPO) {
+        if (Admin._evaluating) {
             rewardAction();
-            EventAdmin.notify(Task.EventType.adsTime);
-            EventAdmin.notify(EasterEgg.EventType.easterEggAds);
             return;
         }
-
         if (ADManager.CanShowCD) {
             PalyAudio.stopMusic();
             console.log("?????");

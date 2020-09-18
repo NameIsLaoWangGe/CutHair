@@ -1,4 +1,4 @@
-import { lwg, Click, EventAdmin, Dialog, Admin, PalyAudio, Setting } from "../Lwg_Template/lwg";
+import { lwg, Click, EventAdmin, Dialog, Admin, PalyAudio, Setting, Tools } from "../Lwg_Template/lwg";
 import { GEnum, GVariate } from "../Lwg_Template/Global";
 import ADManager, { TaT } from "../TJ/Admanager";
 import { Game } from "../Lwg_Template/Game";
@@ -11,8 +11,9 @@ export default class UIDefeated extends lwg.Admin.Scene {
         this.self['BtnSelect_WeChat'].visible = true;
         this.self['BtnAgain_WeChat'].visible = false;
         this.self['Dot_WeChat'].visible = true;
+        Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]); 
     }
-    
+
     lwgOnEnable(): void {
         ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
 
@@ -21,29 +22,28 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
-        switch (Game._platform) {
-            case Game._platformTpye.OPPO:
-                this.self['OPPO'].visible = true;
-                this.self['WeChat'].visible = false;
-                this.self['Bytedance'].visible = false;
-                this.self['P202'].removeSelf();
-                break;
-            case Game._platformTpye.WeChat:
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = true;
-                this.self['Bytedance'].visible = false;
-                this.self['P202'].removeSelf();
-                break;
-            case Game._platformTpye.Bytedance:
-                this.self['OPPO'].visible = false;
-                this.self['WeChat'].visible = false;
-                this.self['Bytedance'].visible = true;
-
-            default:
-                break;
-        }
+        // switch (Game._platform) {
+        //     case Game._platformTpye.OPPO:
+        //         this.self['OPPO'].visible = true;
+        //         this.self['WeChat'].visible = false;
+        //         this.self['Bytedance'].visible = false;
+        //         this.self['P202'].removeSelf();
+        //         break;
+        //     case Game._platformTpye.WeChat:
+        //         this.self['OPPO'].visible = false;
+        //         this.self['WeChat'].visible = true;
+        //         this.self['Bytedance'].visible = false;
+        //         this.self['P202'].removeSelf();
+        //         break;
+        //     case Game._platformTpye.Bytedance:
+        //         this.self['OPPO'].visible = false;
+        //         this.self['WeChat'].visible = false;
+        //         this.self['Bytedance'].visible = true;
+        //     default:
+        //         break;
+        // }
     }
-    
+
     lwgAdaptive(): void {
         let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
         this.self['Select_Bytedance'].y = y;

@@ -8,9 +8,10 @@ export default class UISkinTry extends Admin.Scene {
 
     lwgOnAwake(): void {
         this.randomNoHave();
-        Tools.node_ShowExcludedChild(this.self['Platform'], [Game._platformTpye.Bytedance], true);
-        Tools.node_ShowExcludedChild(this.self[Game._platformTpye.Bytedance], [ZJADMgr.ins.shieldLevel], true);
-        console.log(ZJADMgr.ins.shieldLevel);
+        Tools.node_ShowExcludedChild(this.self['Platform'], [Admin._platform], true);
+        if (Admin._platform == Admin._platformTpye.Bytedance) {
+            Tools.node_ShowExcludedChild(this.self[Admin._platformTpye.Bytedance], [ZJADMgr.ins.shieldLevel], true);
+        }
     }
 
     beforeTryOtherName: string;
@@ -162,17 +163,11 @@ export default class UISkinTry extends Admin.Scene {
 
     btnGetUp(e: Laya.Event): void {
         e.stopPropagation();
-        if (Game._platform == Game._platformTpye.OPPO) {
+        ADManager.ShowReward(() => {
             Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
             EventAdmin.notify(GEnum.EventType.changeOther);
             EventAdmin.notify(GEnum.EventType.changeProp);
-        } else {
-            ADManager.ShowReward(() => {
-                Admin._openScene(Admin.SceneName.UIOperation, null, this.self);
-                EventAdmin.notify(GEnum.EventType.changeOther);
-                EventAdmin.notify(GEnum.EventType.changeProp);
-            })
-        }
+        })
     }
 
     btnNoUp(event): void {
