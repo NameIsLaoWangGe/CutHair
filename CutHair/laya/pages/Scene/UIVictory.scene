@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":64,
+    "selectedBox":64,
+    "selecteID":26,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":65,
+    "maxID":66,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -335,7 +335,7 @@
             "props":{"y":951,"x":123,"width":496,"var":"Platform","name":"Platform","height":300},
             "nodeParent":2,
             "label":"Platform",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
@@ -456,7 +456,7 @@
                             "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,BtnAdv_OPPO,BtnAdv_OPPO",
-                            "props":{"y":68,"x":170.5,"width":288,"var":"BtnAdv_OPPO","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv_OPPO","height":128},
+                            "props":{"y":72,"x":324,"width":288,"var":"BtnAdv_OPPO","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnAdv_OPPO","height":128},
                             "nodeParent":26,
                             "label":"BtnAdv_OPPO",
                             "isOpen":false,
@@ -496,15 +496,29 @@
                             "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,BtnNormal_OPPO,BtnNormal_OPPO",
-                            "props":{"y":166,"x":110,"var":"BtnNormal_OPPO","texture":"UI/CheckIn/normalBtn.png","name":"BtnNormal_OPPO"},
+                            "props":{"y":72,"x":20,"width":288,"var":"BtnNormal_OPPO","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnNormal_OPPO","height":128},
                             "nodeParent":26,
                             "label":"BtnNormal_OPPO",
-                            "isDirectory":false,
+                            "isOpen":true,
+                            "isDirectory":true,
                             "isAniNode":true,
-                            "hasChild":false,
+                            "hasChild":true,
                             "compId":36,
                             "child":[
-                                ]
+                                {
+                                    "x":60,
+                                    "type":"Label",
+                                    "searchKey":"Label",
+                                    "props":{"y":45,"x":60,"width":165,"text":"普通领取","height":39,"fontSize":40,"color":"#e25754","bold":true},
+                                    "nodeParent":36,
+                                    "label":"Label",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":65,
+                                    "child":[
+                                        ]
+                                }]
                         }]
                 },
                 {

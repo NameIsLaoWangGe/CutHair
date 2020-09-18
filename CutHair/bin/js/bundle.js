@@ -7924,6 +7924,9 @@
             Click.on(Click.Type.largen, this.self['OPPO_BtnGet'], this, null, null, this.btnGetUp);
         }
         clickBgtUp() {
+            if (Admin._platform !== Admin._platformTpye.Bytedance) {
+                return;
+            }
             let Dot;
             if (this.self['Low'].visible) {
                 Dot = this.self['Bytedance_Low_Dot'];

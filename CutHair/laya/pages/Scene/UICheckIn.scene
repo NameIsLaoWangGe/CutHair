@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":10,
-    "selecteID":139,
+    "selectedBox":139,
+    "selecteID":118,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":140,
+    "maxID":143,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -408,30 +408,45 @@
                             "props":{"y":61,"x":106,"width":287,"var":"OPPO","name":"OPPO","height":221},
                             "nodeParent":139,
                             "label":"OPPO",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":118,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite,BtnGet_OPPO,BtnGet_OPPO",
-                                    "props":{"y":203,"x":143.5,"width":121,"var":"BtnGet_OPPO","texture":"UI/CheckIn/normalBtn.png","pivotY":15,"pivotX":61,"name":"BtnGet_OPPO","height":30},
+                                    "props":{"y":49,"x":-6,"width":288,"var":"BtnGet_OPPO","texture":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"name":"BtnGet_OPPO","height":128},
                                     "nodeParent":118,
                                     "label":"BtnGet_OPPO",
                                     "isOpen":true,
-                                    "isDirectory":false,
+                                    "isDirectory":true,
                                     "isAniNode":true,
-                                    "hasChild":false,
+                                    "hasChild":true,
                                     "compId":119,
                                     "child":[
-                                        ]
+                                        {
+                                            "x":75,
+                                            "type":"Label",
+                                            "searchKey":"Label",
+                                            "props":{"y":45,"x":60,"width":165,"text":"普通领取","height":39,"fontSize":40,"color":"#e25754","bold":true},
+                                            "nodeParent":119,
+                                            "label":"Label",
+                                            "isDirectory":false,
+                                            "isAniNode":true,
+                                            "hasChild":false,
+                                            "compId":142,
+                                            "child":[
+                                                ]
+                                        }]
                                 },
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite,BtnThreeGet_OPPO,BtnThreeGet_OPPO",
-                                    "props":{"y":75,"x":142,"var":"BtnThreeGet_OPPO","texture":"UI/Common/anniu.png","pivotY":66,"pivotX":144,"name":"BtnThreeGet_OPPO"},
+                                    "props":{"y":46.5,"x":303,"var":"BtnThreeGet_OPPO","texture":"UI/Common/anniu.png","pivotY":66,"pivotX":144,"name":"BtnThreeGet_OPPO"},
                                     "nodeParent":118,
                                     "label":"BtnThreeGet_OPPO",
                                     "isOpen":true,
@@ -441,6 +456,7 @@
                                     "compId":121,
                                     "child":[
                                         {
+                                            "x":75,
                                             "type":"Sprite",
                                             "searchKey":"Sprite",
                                             "props":{"y":12.5,"x":204,"texture":"UI/Common/shipin.png"},
@@ -454,6 +470,7 @@
                                                 ]
                                         },
                                         {
+                                            "x":75,
                                             "type":"Sprite",
                                             "searchKey":"Sprite",
                                             "props":{"y":48.5,"x":39,"width":153,"texture":"UI/CheckIn/3bei.png","height":37},
