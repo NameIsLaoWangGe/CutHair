@@ -21,6 +21,7 @@ import UIShop from "./script/Game/UIShop"
 import UISKin_Goods from "./script/Game/UISKin_Goods"
 import UISkin from "./script/Game/UISkin"
 import UISkinTry from "./script/Game/UISkinTry"
+import NativeAd from "./script/TJ/NativeAd"
 import UISkinXD from "./script/Game/UISkinXD"
 import UIStart from "./script/Game/UIStart"
 import UISubpackages from "./script/Game/UISubpackages"
@@ -71,6 +72,7 @@ export default class GameConfig{
         reg("script/Game/UISKin_Goods.ts",UISKin_Goods);
         reg("script/Game/UISkin.ts",UISkin);
         reg("script/Game/UISkinTry.ts",UISkinTry);
+        reg("script/TJ/NativeAd.ts",NativeAd);
         reg("script/Game/UISkinXD.ts",UISkinXD);
         reg("script/Game/UIStart.ts",UIStart);
         reg("script/Game/UISubpackages.ts",UISubpackages);

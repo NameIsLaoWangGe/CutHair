@@ -18,11 +18,11 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
-        if (Game._platform !== Game._platformTpye.Bytedance) {
-            this.self['P204'].visible = false;
-            this.self['P201'].visible = false;
-            this.self['P205'].visible = false;
-        }
+        // if (Game._platform !== Game._platformTpye.Bytedance) {
+        //     this.self['P204'].visible = false;
+        //     this.self['P201'].visible = false;
+        //     this.self['P205'].visible = false;
+        // }
     }
 
     lwgEventReg(): void {

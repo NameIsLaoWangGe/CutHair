@@ -11,7 +11,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
         this.self['BtnSelect_WeChat'].visible = true;
         this.self['BtnAgain_WeChat'].visible = false;
         this.self['Dot_WeChat'].visible = true;
-        Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]); 
+        Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
     }
 
     lwgOnEnable(): void {
@@ -114,5 +114,23 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
     lwgOnDisable(): void {
         EventAdmin.notify(GEnum.EventType.goBack);
+        //          //判断是否已经添加到桌面
+        //  if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
+
+        //     if (DataMgr.getPlayerData("addTable") == 0) {
+        //         this.AddToDesk.visible = true;
+        //         ADManager.TAPoint(TaT.BtnShow, "tablebt_main")
+        //         if (this.turn > 2 && this.out == true) {
+        //            //判断游戏轮次
+        //             if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
+        //                 this.showShortcutInstall();
+        //                 this.out = false;
+        //             }
+        //         }
+        //     }
+        //     else {
+        //         this.AddToDesk.visible = false;
+        //     }
+        // }
     }
 }

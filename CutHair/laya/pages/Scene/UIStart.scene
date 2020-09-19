@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":638,
+    "selecteID":496,
     "searchKey":"View",
     "props":{"y":0,"x":0,"width":720,"visible":true,"sceneColor":"#494949","height":1280},
     "nodeParent":-1,
-    "maxID":660,
+    "maxID":689,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -652,18 +652,19 @@
         },
         {
             "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,SceneContent,SceneContent",
-            "props":{"y":485,"x":0,"width":1,"var":"SceneContent","name":"SceneContent","height":1},
+            "type":"Image",
+            "searchKey":"Image,SceneContent,SceneContent",
+            "props":{"y":485,"x":0,"width":200,"var":"SceneContent","name":"SceneContent","height":200},
             "nodeParent":2,
             "label":"SceneContent",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":534,
             "child":[
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnTask,BtnTask",
                     "props":{"y":505,"x":65,"width":116,"var":"BtnTask","texture":"UI/GameStart/renwu.png","pivotY":59,"pivotX":58,"name":"BtnTask","height":117},
@@ -678,6 +679,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnXDSkin,BtnXDSkin",
                     "props":{"y":354,"x":84,"width":154,"var":"BtnXDSkin","texture":"UI/GameStart/xiandin2.png","pivotY":74,"pivotX":77,"name":"BtnXDSkin","height":147},
@@ -719,6 +721,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnSkin,BtnSkin",
                     "props":{"y":505,"x":651,"width":116,"var":"BtnSkin","texture":"UI/GameStart/pifu.png","pivotY":59,"pivotX":58,"name":"BtnSkin","height":117},
@@ -733,6 +736,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnCheck,BtnCheck",
                     "props":{"y":366,"x":651,"width":116,"var":"BtnCheck","texture":"UI/GameStart/qiandao.png","pivotY":59,"pivotX":58,"name":"BtnCheck","height":117},
@@ -747,6 +751,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,BtnAotuman,BtnAotuman",
                     "props":{"y":186,"x":635,"width":166,"var":"BtnAotuman","texture":"UI/EasterEgg_Aotoman/GameStart/zhujiem.png","pivotY":89,"pivotX":83,"name":"BtnAotuman","height":178},
@@ -758,6 +763,46 @@
                     "compId":504,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,AddToDesk,AddToDesk",
+                    "props":{"y":157,"x":22,"var":"AddToDesk","skin":"UI/Common/yuansheng3.png","name":"AddToDesk"},
+                    "nodeParent":534,
+                    "label":"AddToDesk",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":684,
+                    "child":[
+                        {
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"y":12.75,"x":25.25,"skin":"UI/Common/yuansheng4.png"},
+                            "nodeParent":684,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":686,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Label",
+                            "searchKey":"Label,添加至桌面",
+                            "props":{"y":90,"x":5.75,"text":"添加至桌面","name":"添加至桌面","fontSize":15,"color":"#ffffff"},
+                            "nodeParent":684,
+                            "label":"添加至桌面",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":687,
+                            "child":[
+                                ]
+                        }]
                 }]
         },
         {

@@ -8026,6 +8026,9 @@
         }
     }
 
+    class NativeAd extends Laya.Script {
+    }
+
     class UISkinXD extends SkinXD.SkinXDScene {
         skinXDOnAwake() {
             ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
@@ -8093,11 +8096,6 @@
             ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'startword_main');
-            if (Game._platform !== Game._platformTpye.Bytedance) {
-                this.self['P204'].visible = false;
-                this.self['P201'].visible = false;
-                this.self['P205'].visible = false;
-            }
         }
         lwgEventReg() {
             EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
@@ -8865,6 +8863,7 @@
             reg("script/Game/UISKin_Goods.ts", UISKin_Goods);
             reg("script/Game/UISkin.ts", UISkin);
             reg("script/Game/UISkinTry.ts", UISkinTry);
+            reg("script/TJ/NativeAd.ts", NativeAd);
             reg("script/Game/UISkinXD.ts", UISkinXD);
             reg("script/Game/UIStart.ts", UIStart);
             reg("script/Game/UISubpackages.ts", UISubpackages);

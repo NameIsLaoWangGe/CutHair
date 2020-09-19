@@ -2,12 +2,12 @@ var DP =
 {
     Basic:
     {
-        appGuid:"6766da55-6f97-9ec5-7fa7-6eb1530342ea",
+        appGuid:"a8b14912-ac92-597c-cd35-a1788ae9c035",
         productName:"剃头大师",
-        packageName:"com.tomatojoy.ttds.toutiao",
-        versionName:"1.0.3",
-        versionCode:4,
-        channel:"ZJTD_AppRt",
+        packageName:"com.tomatojoy.ttds.kyx.nearme.gamecenter",
+        versionName:"1.0.0",
+        versionCode:1,
+        channel:"OPPO_AppRt",
     },
     XIAOMI:
     {
@@ -42,14 +42,14 @@ var DP =
     },
     TT:   //字节跳动小游戏
     {
-        appId:"tt2bba5d07b48073ec",
-        bannerId:"27k90ckf1mg1695abo",
-        insertId:"eeiikeccgjaac53li4",
-        videoId:"lk9mc463d799d27k52",
+        appId:"tt6c281a95f313eb43",
+        bannerId:"4e1filmc2hl1mgrva5",
+        insertId:"1ak155d2nnobmcacal",
+        videoId:"4pg2ga2vj821jb800f",
     },
     ReYun:   //热云统计
     {
-        appId:"76951ffa3e9d80bba5f2cd67f2786b17",
+        appId:"c03016cb083f0a9b550e88f449dc13a5",
     },
     QTTGame:   //趣头条游戏
     {
@@ -67,11 +67,11 @@ var DP =
     {
         QG:   //oppo小游戏
         {
-            appId:null,
-            bannerId:null,
+            appId:"30328407",
+            bannerId:"214580",
             insertId:null,
-            videoId:null,
-            nativeId:null,
+            videoId:" 214589",
+            nativeId:"214588",
             nativeCustomInsert:null,
         },
     },
@@ -152,7 +152,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/9/10 15:49:09
+中国标准时间 2020/9/19 9:32:48
 */
 var TJ;
 (function (TJ) {
