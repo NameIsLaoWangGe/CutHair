@@ -18,7 +18,7 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
         if (Admin._platform == Admin._platformTpye.OPPO) {
-            // this.self['P204'].visible = false;
+            this.self['P204'].visible = false;
             ADManager.ShowBanner();
             // this.self['P201'].visible = false;
             // this.self['P205'].visible = false;

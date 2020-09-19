@@ -6524,7 +6524,7 @@
             Laya.timer.once(500, this, () => {
                 Gold.createGoldNode(Laya.stage);
                 Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
-                lwg.Admin._openScene(lwg.Admin.SceneName.UISkinXD, null, this.self);
+                lwg.Admin._openScene(lwg.Admin.SceneName.UIStart, null, this.self);
             });
         }
         lwgInterior() {
@@ -8186,6 +8186,7 @@
             ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'startword_main');
             if (Admin._platform == Admin._platformTpye.OPPO) {
+                this.self['P204'].visible = false;
                 ADManager.ShowBanner();
             }
             Admin._UIStartCount.value++;
