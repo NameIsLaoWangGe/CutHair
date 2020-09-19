@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":534,
-    "selecteID":660,
+    "selectedBox":2,
+    "selecteID":435,
     "searchKey":"View",
     "props":{"y":0,"x":0,"width":720,"visible":true,"sceneColor":"#494949","height":1280},
     "nodeParent":-1,
@@ -35,13 +35,14 @@
             "props":{"y":157,"x":111,"width":510,"var":"LevelDisplay","name":"LevelDisplay","height":85},
             "nodeParent":2,
             "label":"LevelDisplay",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":435,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"y":33,"x":43,"width":428,"skin":"UI/GameStart/jindu_di.png","sizeGrid":"0,9,0,10","height":28},
@@ -56,6 +57,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,LevelStyle,LevelStyle",
                     "props":{"var":"LevelStyle","name":"LevelStyle"},
@@ -68,6 +70,7 @@
                     "compId":445,
                     "child":[
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,location_04",
                             "props":{"y":10,"x":423,"width":75,"name":"location_04","height":70},
@@ -80,6 +83,7 @@
                             "compId":462,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Color",
                                     "props":{"y":26,"x":-48,"width":64,"skin":"UI/GameStart/jindu_2.png","sizeGrid":"0,16,0,7","name":"Color","height":18},
@@ -94,6 +98,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic",
                                     "props":{"y":0,"x":0,"skin":"UI/GameStart/jindu_hui.png","name":"Pic"},
@@ -108,6 +113,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"FontClip",
                                     "searchKey":"FontClip,Num",
                                     "props":{"y":14,"x":15,"width":36,"value":"15","spaceX":-10,"skin":"UI/Common/shuzi2.png","sheet":"0123456789","name":"Num","height":41,"align":"center"},
@@ -124,6 +130,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,location_03",
                             "props":{"y":10,"x":319,"width":75,"name":"location_03","height":70},
@@ -136,6 +143,7 @@
                             "compId":467,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Color",
                                     "props":{"y":26,"x":-48,"width":64,"skin":"UI/GameStart/jindu_2.png","sizeGrid":"0,16,0,7","name":"Color","height":18},
@@ -150,6 +158,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic",
                                     "props":{"y":0,"x":0,"skin":"UI/GameStart/jindi_huan.png","name":"Pic"},
@@ -164,6 +173,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"FontClip",
                                     "searchKey":"FontClip,Num",
                                     "props":{"y":14,"x":15,"width":36,"value":"15","spaceX":-10,"skin":"UI/Common/shuzi2.png","sheet":"0123456789","name":"Num","height":41,"align":"center"},
@@ -180,6 +190,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,location_02",
                             "props":{"y":10,"x":217,"width":75,"name":"location_02","height":70},
@@ -192,6 +203,7 @@
                             "compId":471,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Color",
                                     "props":{"y":26,"x":-48,"width":64,"skin":"UI/GameStart/jindu_2.png","sizeGrid":"0,16,0,7","name":"Color","height":18},
@@ -206,6 +218,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic",
                                     "props":{"y":0,"x":0,"skin":"UI/GameStart/jindi_huan.png","name":"Pic"},
@@ -220,6 +233,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"FontClip",
                                     "searchKey":"FontClip,Num",
                                     "props":{"y":14,"x":15,"width":36,"value":"15","spaceX":-10,"skin":"UI/Common/shuzi2.png","sheet":"0123456789","name":"Num","height":41,"align":"center"},
@@ -236,6 +250,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,location_01",
                             "props":{"y":10,"x":113,"width":75,"name":"location_01","height":70},
@@ -248,6 +263,7 @@
                             "compId":475,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Color",
                                     "props":{"y":26,"x":-48,"width":64,"skin":"UI/GameStart/jindu_2.png","sizeGrid":"0,16,0,7","name":"Color","height":18},
@@ -262,6 +278,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic",
                                     "props":{"y":0,"x":0,"skin":"UI/GameStart/jindi_huan.png","name":"Pic"},
@@ -276,6 +293,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"FontClip",
                                     "searchKey":"FontClip,Num",
                                     "props":{"y":14,"x":15,"width":36,"value":"15","spaceX":-10,"skin":"UI/Common/shuzi2.png","sheet":"0123456789","name":"Num","height":41,"align":"center"},
@@ -292,6 +310,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,location_00",
                             "props":{"y":10,"x":10,"width":75,"name":"location_00","height":70},
@@ -304,6 +323,7 @@
                             "compId":479,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Pic",
                                     "props":{"y":0,"x":0,"skin":"UI/GameStart/jindi_huan.png","name":"Pic"},
@@ -318,6 +338,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"FontClip",
                                     "searchKey":"FontClip,Num",
                                     "props":{"y":14,"x":15,"width":36,"value":"15","spaceX":-10,"skin":"UI/Common/shuzi2.png","sheet":"0123456789","name":"Num","height":41,"align":"center"},
@@ -465,7 +486,7 @@
             "x":15,
             "type":"Box",
             "searchKey":"Box,P204,P204",
-            "props":{"y":1280,"width":700,"visible":true,"var":"P204","pivotY":150,"pivotX":350,"name":"P204","height":150,"centerX":10},
+            "props":{"y":1280,"width":700,"visible":true,"var":"P204","pivotY":150,"pivotX":350,"name":"P204","height":150,"centerX":-36},
             "nodeParent":2,
             "label":"P204",
             "isOpen":false,

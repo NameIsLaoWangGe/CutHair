@@ -774,6 +774,9 @@ export module lwg {
          * @param y 允许改变一次Y轴位置
         */
         export function goldAppear(delayed?: number, x?: number, y?: number): void {
+            if (!GoldNode) {
+                return;
+            }
             if (delayed) {
                 Animation2D.scale_Alpha(GoldNode, 0, 1, 1, 1, 1, 1, delayed, null, 0, f => {
                     GoldNode.visible = true;
@@ -796,6 +799,9 @@ export module lwg {
          * @param delayed 延时时间
         */
         export function goldVinish(delayed?: number): void {
+            if (!GoldNode) {
+                return;
+            }
             if (delayed) {
                 Animation2D.scale_Alpha(GoldNode, 1, 1, 1, 1, 1, 0, delayed, null, 0, f => {
                     GoldNode.visible = false;
@@ -1071,7 +1077,15 @@ export module lwg {
         }
         /**渠道，控制一些节点的变化,默认为字节*/
         export let _platform: string = _platformTpye.Bytedance;
-
+        /**第几次返回主界面*/
+        export let _UIStartCount = {
+            get value(): number {
+                return Laya.LocalStorage.getItem('_UIStartCount') ? Number(Laya.LocalStorage.getItem('_UIStartCount')) : 0;
+            },
+            set value(val) {
+                Laya.LocalStorage.setItem('_UIStartCount', val.toString());
+            }
+        }
         /**是否为评测包，评测包广告默认关闭，默认为非评测包，直接获得广告奖励*/
         export let _evaluating: boolean = false;
 

@@ -7,7 +7,6 @@ export default class UIStart extends lwg.Admin.Scene {
 
     LevelDisplay: Laya.Sprite;
     LevelStyle: Laya.Sprite;
-    AddToDesk;
     lwgNodeDec(): void {
 
         this.LevelDisplay = this.self['LevelDisplay'];
@@ -19,24 +18,12 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
         if (Admin._platform == Admin._platformTpye.OPPO) {
-            this.self['P204'].visible = false;
+            // this.self['P204'].visible = false;
             ADManager.ShowBanner();
             // this.self['P201'].visible = false;
             // this.self['P205'].visible = false;
         }
-
-        var showShortcutInstall = () => {
-            ADManager.TAPoint(TaT.BtnClick, "tablebt_main");
-            let self = this;
-            TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut((has) => {
-                if (has) {
-                    self.AddToDesk.visible = false;//添加桌面按钮
-                    // DataMgr.setValue("addTable", 1);
-                }
-                else {
-                }
-            }, "");
-        }
+        Admin._UIStartCount.value++;
     }
 
     lwgEventReg(): void {
@@ -84,9 +71,9 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgAdaptive(): void {
-        this.self['P204'].y = Laya.stage.height;
-        this.self['Guide'].y = Laya.stage.height * 0.732;
-        this.self['SceneContent'].y = Laya.stage.height * 0.378;
+        // this.self['P204'].y = Laya.stage.height;
+        // this.self['Guide'].y = Laya.stage.height * 0.732;
+        // this.self['SceneContent'].y = Laya.stage.height * 0.378;
     }
 
     /**关卡列表*/
@@ -125,6 +112,32 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
+        if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
+            if (Admin._UIStartCount.value >= 2) {
+                this.var('AddToDesk').visible = true;
+                if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
+                    showShortcutInstall();
+                }
+            } else {
+                this.var('AddToDesk').visible = false;
+            }
+        }
+        var showShortcutInstall = () => {
+            let self = this;
+            TJ.Platform.AppRt.DevKit.OPPO.QG.HasShortcutInstalled((has) => {
+                if (!has) {
+                    self.var('AddToDesk').visible = true;//添加桌面按钮
+                    TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
+                } else {
+                    self.var('AddToDesk').visible = false;//添加桌面按钮
+                }
+            })
+        }
+
+        Click.on(Click.Type.largen, this.self['AddToDesk'], this, null, null, (e: Laya.Event) => {
+            TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
+        });
+
         Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
             e.stopPropagation();

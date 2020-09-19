@@ -1,0 +1,13 @@
+{
+    "package": "com.tomatojoy.ttds.kyx.nearme.gamecenter",
+    "name": "剃头大师",
+    "versionName": "1.0.0",
+    "versionCode": 1,
+    "minPlatformVersion": 1060,
+    "icon": "./icon.png",
+    "orientation": "portrait",
+    "type": "game",
+    "config": {
+        "logLevel": "log"
+    }
+}
