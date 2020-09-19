@@ -7,7 +7,7 @@ export default class UIStart extends lwg.Admin.Scene {
 
     LevelDisplay: Laya.Sprite;
     LevelStyle: Laya.Sprite;
-
+    AddToDesk;
     lwgNodeDec(): void {
 
         this.LevelDisplay = this.self['LevelDisplay'];
@@ -18,10 +18,24 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
-        if (Game._platform !== Game._platformTpye.Bytedance) {
+        if (Admin._platform == Admin._platformTpye.OPPO) {
             this.self['P204'].visible = false;
-            this.self['P201'].visible = false;
-            this.self['P205'].visible = false;
+            ADManager.ShowBanner();
+            // this.self['P201'].visible = false;
+            // this.self['P205'].visible = false;
+        }
+
+        var showShortcutInstall = () => {
+            ADManager.TAPoint(TaT.BtnClick, "tablebt_main");
+            let self = this;
+            TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut((has) => {
+                if (has) {
+                    self.AddToDesk.visible = false;//添加桌面按钮
+                    // DataMgr.setValue("addTable", 1);
+                }
+                else {
+                }
+            }, "");
         }
     }
 
@@ -217,6 +231,7 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgOnDisable(): void {
+        ADManager.CloseBanner();
         Gold.GoldNode.visible = false;
         Setting.setBtnVinish();
     }

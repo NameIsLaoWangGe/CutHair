@@ -11,10 +11,12 @@ export default class UIADSHint extends Admin.Scene {
     lwgOnEnable(): void {
         this.self.x = 0;
         this.self.y = 0;
-        this.self['BtnClose'].visible = false;
-        Laya.timer.frameOnce(120, this, () => {
-            this.self['BtnClose'].visible = true;
-        })
+        if (Admin._platform == Admin._platformTpye.Bytedance) {
+            this.self['BtnClose'].visible = false;
+            Laya.timer.frameOnce(120, this, () => {
+                this.self['BtnClose'].visible = true;
+            })
+        }
     }
     lwgBtnClick(): void {
         Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp);

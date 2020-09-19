@@ -5020,10 +5020,12 @@
         lwgOnEnable() {
             this.self.x = 0;
             this.self.y = 0;
-            this.self['BtnClose'].visible = false;
-            Laya.timer.frameOnce(120, this, () => {
-                this.self['BtnClose'].visible = true;
-            });
+            if (Admin._platform == Admin._platformTpye.Bytedance) {
+                this.self['BtnClose'].visible = false;
+                Laya.timer.frameOnce(120, this, () => {
+                    this.self['BtnClose'].visible = true;
+                });
+            }
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, this.btnCloseUp);
@@ -5038,6 +5040,79 @@
         }
         lwgOnDisable() {
             console.log('退出');
+        }
+    }
+
+    class NativeAd extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.defaultNode = null;
+            this.nativetNode = null;
+            this.icon = null;
+            this.title = null;
+            this.desc = null;
+            this.contant = null;
+            this.WatchAD1 = null;
+            this.WatchAD2 = null;
+        }
+        onAwake() {
+            this.defaultNode = this.owner.getChildByName("defaultNode");
+            this.nativetNode = this.owner.getChildByName("nativeNode");
+            this.icon = this.nativetNode.getChildByName("Icon");
+            this.title = this.nativetNode.getChildByName("Title");
+            this.desc = this.nativetNode.getChildByName("Des");
+            this.WatchAD2 = this.owner.getChildByName("WatchAD2");
+            if (this.WatchAD2) {
+                this.WatchAD2.on(Laya.Event.CLICK, this, this.Click);
+            }
+            else {
+                this.WatchAD2 = this.nativetNode.getChildByName("WatchAD2");
+                if (this.WatchAD2) {
+                    this.WatchAD2.on(Laya.Event.CLICK, this, this.Click);
+                }
+            }
+            this.WatchAD1 = this.owner.getChildByName("WatchAD1");
+            if (this.WatchAD1) {
+                this.WatchAD1.on(Laya.Event.CLICK, this, this.Click);
+            }
+            else {
+                this.WatchAD1 = this.nativetNode.getChildByName("WatchAD1");
+                if (this.WatchAD1) {
+                    this.WatchAD1.on(Laya.Event.CLICK, this, this.Click);
+                }
+            }
+            this.nativetNode.on(Laya.Event.CLICK, this, this.Click);
+            this.owner.visible = false;
+        }
+        onEnable() {
+            this.Show();
+        }
+        Show() {
+            let p = new TJ.API.AdService.Param();
+            this.nativeAd = TJ.API.AdService.LoadNative(p);
+            console.log("展示原生广告 =》", this.nativeAd);
+            if (this.nativeAd != null) {
+                console.log("展示原生广告 =》", this.nativeAd.iconUrl);
+                console.log("展示原生广告 =》", this.nativeAd.title);
+            }
+            if (this.nativeAd != null) {
+                this.owner.visible = true;
+                if (this.nativeAd) {
+                    console.log("this.nativeAd = ", this.nativeAd);
+                    this.nativeAd.OnShow();
+                    this.icon.skin = this.nativeAd.iconUrl;
+                    this.title.text = this.nativeAd.title;
+                    this.desc.text = this.nativeAd.desc;
+                }
+            }
+            else {
+                this.owner.visible = false;
+            }
+        }
+        Click() {
+            if (this.nativeAd != null) {
+                this.nativeAd.OnClick();
+            }
         }
     }
 
@@ -7181,6 +7256,9 @@
                     this.self['BtnClose_Bytedance'].visible = true;
                 });
             }
+            if (Admin._platform == Admin._platformTpye.OPPO) {
+                this.self['BtnClose'].visible = true;
+            }
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
@@ -8093,10 +8171,9 @@
             ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'startword_main');
-            if (Game._platform !== Game._platformTpye.Bytedance) {
+            if (Admin._platform == Admin._platformTpye.OPPO) {
                 this.self['P204'].visible = false;
-                this.self['P201'].visible = false;
-                this.self['P205'].visible = false;
+                ADManager.ShowBanner();
             }
         }
         lwgEventReg() {
@@ -8248,6 +8325,7 @@
             this.self['Aotuman'].y = 63;
         }
         lwgOnDisable() {
+            ADManager.CloseBanner();
             Gold.GoldNode.visible = false;
             Setting.setBtnVinish();
         }
@@ -8852,6 +8930,7 @@
             reg("TJ/Promo/script/P205.ts", P205);
             reg("TJ/Promo/script/P106.ts", P106);
             reg("script/Game/UIADSHint.ts", UIADSHint);
+            reg("script/TJ/NativeAd.ts", NativeAd);
             reg("script/Game/UICheckIn.ts", UICheckIn);
             reg("script/Game/UIDefeated.ts", UIDefeated);
             reg("script/Game/UIEasterEgg.ts", UIEasterEgg);

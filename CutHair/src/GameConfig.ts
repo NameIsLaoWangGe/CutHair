@@ -8,6 +8,7 @@ import P204 from "./TJ/Promo/script/P204"
 import P205 from "./TJ/Promo/script/P205"
 import P106 from "./TJ/Promo/script/P106"
 import UIADSHint from "./script/Game/UIADSHint"
+import NativeAd from "./script/TJ/NativeAd"
 import UICheckIn from "./script/Game/UICheckIn"
 import UIDefeated from "./script/Game/UIDefeated"
 import UIEasterEgg from "./script/Game/UIEasterEgg"
@@ -58,6 +59,7 @@ export default class GameConfig{
         reg("TJ/Promo/script/P205.ts",P205);
         reg("TJ/Promo/script/P106.ts",P106);
         reg("script/Game/UIADSHint.ts",UIADSHint);
+        reg("script/TJ/NativeAd.ts",NativeAd);
         reg("script/Game/UICheckIn.ts",UICheckIn);
         reg("script/Game/UIDefeated.ts",UIDefeated);
         reg("script/Game/UIEasterEgg.ts",UIEasterEgg);

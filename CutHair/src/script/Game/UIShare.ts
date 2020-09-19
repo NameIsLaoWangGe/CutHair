@@ -25,6 +25,9 @@ export default class UIShare extends lwg.Admin.Scene {
                 this.self['BtnClose_Bytedance'].visible = true;
             })
         }
+        if (Admin._platform == Admin._platformTpye.OPPO) {
+            this.self['BtnClose'].visible = true;
+        }
     }
 
     lwgOnEnable(): void {

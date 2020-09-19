@@ -43,12 +43,14 @@ export default class NativeAd extends Laya.Script {
         this.nativetNode.on(Laya.Event.CLICK, this, this.Click);
         (this.owner as Laya.Box).visible = false;
     }
+    onEnable(): void {
+        this.Show();
+    }
     Show() {
         let p = new TJ.API.AdService.Param();
         this.nativeAd = TJ.API.AdService.LoadNative(p);
         console.log("展示原生广告 =》", this.nativeAd);
-        if(this.nativeAd != null)
-        {
+        if (this.nativeAd != null) {
             console.log("展示原生广告 =》", this.nativeAd.iconUrl);
             console.log("展示原生广告 =》", this.nativeAd.title);
         }
@@ -65,16 +67,13 @@ export default class NativeAd extends Laya.Script {
         else {
             (this.owner as Laya.Box).visible = false;
         }
-
     }
     Click() {
         if (this.nativeAd != null) {
-
             this.nativeAd.OnClick();
             // if (GameDataMgr._Instance().IsTaskPage) {
             //     ADManager.TAPoint(TaT.BtnClick, "YSbt_task")
             // }
         }
     }
-
 }
