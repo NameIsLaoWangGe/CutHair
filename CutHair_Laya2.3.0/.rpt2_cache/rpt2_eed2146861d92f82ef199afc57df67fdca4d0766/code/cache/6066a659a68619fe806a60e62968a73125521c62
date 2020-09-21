@@ -1,0 +1,4 @@
+{
+  "code": "export default class NativeAd extends Laya.Script {\r\n}\r\n",
+  "references": []
+}
