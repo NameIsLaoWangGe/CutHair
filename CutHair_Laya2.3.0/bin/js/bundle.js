@@ -582,447 +582,6 @@
     }
     P204.style = "P204";
 
-    class P205 extends Behaviour {
-        constructor() {
-            super(...arguments);
-            this.promoList = null;
-            this.itemList = [];
-            this.scroll = null;
-            this.layout = null;
-            this.prefab = null;
-            this.paddingTop = 10;
-            this.paddingBottom = 10;
-            this.move = null;
-            this.show = null;
-            this.hide = null;
-            this.maxX = 620;
-            this.line = 0;
-            this.column = 0;
-            this.targetX = 0;
-            this.showing = [];
-        }
-        async OnAwake() {
-            this.move = this.owner.getChildByName("move");
-            let button = this.move.getChildByName("button");
-            this.show = button.getChildByName("show");
-            this.hide = button.getChildByName("hide");
-            let board = this.move.getChildByName("board");
-            this.scroll = board.getChildByName("scroll");
-            this.layout = this.scroll.getChildByName("layout");
-            this.prefab = this.layout.getCell(0);
-            this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); });
-            this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); });
-            let w = this.scroll.width - this.paddingTop - this.paddingBottom;
-            while (w >= this.prefab.width) {
-                w = w - this.prefab.width - this.layout.spaceX;
-                this.column++;
-            }
-            TJ.Develop.Yun.Promo.Data.ReportAwake(P205.style);
-            if (this.show.parent.scaleX < 0)
-                this.maxX = -this.maxX;
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
-                if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
-                    this.active = false;
-                    return;
-                }
-                return;
-            }
-            this.promoList = await TJ.Develop.Yun.Promo.List.Get(P205.style);
-            if (this.promoList.count > 0) {
-                TJ.Develop.Yun.Promo.Data.ReportStart(P205.style);
-                this.line = Math.ceil(this.promoList.count / this.column);
-                this.layout.repeatX = this.column;
-                this.layout.repeatY = this.line;
-                for (let i = 0; i < this.layout.cells.length; i++) {
-                    let node = this.layout.getCell(i);
-                    if (i < this.promoList.count) {
-                        let item = node.getComponent(PromoItem);
-                        if (item != null) {
-                            this.itemList.push(item);
-                            item.style = P205.style;
-                        }
-                        node.active = node.visible = true;
-                    }
-                    else {
-                        node.active = node.visible = false;
-                    }
-                }
-                this.line = Math.ceil(this.itemList.length / this.column);
-                let h = this.paddingTop + this.paddingBottom;
-                h += this.prefab.height * this.line + this.layout.spaceY * (this.line - 1);
-                this.layout.height = h;
-                if (this.scroll.height < this.layout.height) {
-                    this.scroll.vScrollBarSkin = "";
-                    this.scroll.vScrollBar.rollRatio = 0;
-                }
-                for (let item of this.itemList) {
-                    this.LoadIcon(item);
-                }
-                this.active = true;
-            }
-            else {
-                this.owner.destroy();
-            }
-        }
-        get scrollValue() {
-            if (this.scroll.vScrollBar != null) {
-                return this.scroll.vScrollBar.value;
-            }
-            return 0;
-        }
-        set scrollValue(v) {
-            if (this.scroll.vScrollBar != null) {
-                this.scroll.vScrollBar.value = v;
-            }
-        }
-        LoadIcon(promoItem) {
-            let data = this.promoList.Load();
-            if (data != null) {
-                this.promoList.Unload(promoItem.data);
-                promoItem.data = data;
-                promoItem.onClick_ = (item) => { this.LoadAndShowIcon(item); };
-                promoItem.DoLoad();
-            }
-            return data;
-        }
-        LoadAndShowIcon(promoItem) {
-            if (this.LoadIcon(promoItem) != null) {
-                promoItem.OnShow();
-            }
-        }
-        Show() {
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
-                let param = new TJ.API.Promo.Param();
-                param.extraData = { "TJ_App": TJ.API.AppInfo.AppGuid() };
-                TJ.API.Promo.Pop(param);
-                return;
-            }
-            this.targetX = this.maxX;
-            this.show.active = this.show.visible = false;
-            this.hide.active = this.hide.visible = true;
-            this.scrollValue = 0;
-        }
-        Hide() {
-            this.targetX = 0;
-            this.showing = [];
-        }
-        OnUpdate() {
-            let deltaTime = Laya.timer.delta / 1000;
-            if (this.move.centerX != this.targetX) {
-                let d = this.targetX - this.move.centerX;
-                let s = 3000 * deltaTime;
-                if (d > 0) {
-                    d = Math.min(this.move.centerX + s, this.targetX);
-                }
-                else {
-                    d = Math.max(this.move.centerX - s, this.targetX);
-                }
-                this.move.centerX = d;
-                if (this.move.centerX == 0) {
-                    this.show.active = this.show.visible = true;
-                    this.hide.active = this.hide.visible = false;
-                    window.setTimeout(async () => {
-                        this.promoList = await TJ.Develop.Yun.Promo.List.Get(P205.style);
-                        for (let item of this.itemList) {
-                            this.LoadIcon(item);
-                        }
-                    }, 0);
-                }
-            }
-            else {
-                if (this.move.centerX == this.maxX) {
-                    this.CheckShow();
-                }
-            }
-        }
-        CheckShow() {
-            for (let item of this.itemList) {
-                let i = this.showing.indexOf(item);
-                let node = item.owner;
-                let d = Math.abs(-node.y - this.paddingTop - this.prefab.height / 2 + this.scrollValue + this.scroll.height / 2);
-                if (d < this.scroll.height / 2) {
-                    if (i < 0) {
-                        this.showing.push(item);
-                        item.OnShow();
-                    }
-                }
-                else {
-                    if (i >= 0) {
-                        this.showing.splice(i, 1);
-                    }
-                }
-            }
-        }
-    }
-    P205.style = "P205";
-
-    class P106 extends Behaviour {
-        constructor() {
-            super(...arguments);
-            this.promoList = null;
-            this.itemList = [];
-            this.layout = null;
-            this.showing = [];
-        }
-        async OnAwake() {
-            this.scrollView = this.owner.getChildByName("scroll");
-            this.layout = this.scrollView.getChildByName("layout");
-            this.scrollView.vScrollBarSkin = "";
-            let close = this.owner.getChildByName("close");
-            close.clickHandler = new Laya.Handler(null, () => { this.OnClose(); });
-            TJ.Develop.Yun.Promo.Data.ReportAwake(P106.style);
-            this.active = false;
-            if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
-                return;
-            }
-            let list = await TJ.Develop.Yun.Promo.List.Get(P106.style);
-            if (this.promoList == null)
-                this.promoList = list;
-            if (this.promoList.count > 0) {
-                TJ.Develop.Yun.Promo.Data.ReportStart(P106.style);
-                this.layout.repeatY = this.promoList.count;
-                let h = 0;
-                for (let i = 0; i < this.layout.cells.length; i++) {
-                    let node = this.layout.getCell(i);
-                    if (i < this.promoList.count) {
-                        let item = node.getComponent(PromoItem);
-                        if (item != null) {
-                            this.itemList.push(item);
-                            item.style = P106.style;
-                        }
-                        Behaviour.SetActive(node, true);
-                    }
-                    else {
-                        Behaviour.SetActive(node, false);
-                    }
-                    if (i > 0) {
-                        h += this.layout.spaceY;
-                    }
-                    h += node.height;
-                }
-                this.layout.height = h;
-                for (let item of this.itemList) {
-                    this.LoadIcon(item);
-                }
-                this.active = true;
-            }
-            else {
-                this.owner.destroy();
-            }
-        }
-        OnEnable() {
-            this.scrollValue = 0;
-        }
-        async OnDisable() {
-            this.promoList = await TJ.Develop.Yun.Promo.List.Get(P106.style);
-            for (let item of this.itemList) {
-                this.LoadIcon(item);
-            }
-        }
-        OnUpdate() {
-            this.CheckShow();
-        }
-        LoadIcon(promoItem) {
-            let data = this.promoList.Load();
-            if (data != null) {
-                this.promoList.Unload(promoItem.data);
-                promoItem.data = data;
-                promoItem.onClick_ = (item) => { this.LoadIcon(item); };
-                promoItem.DoLoad();
-                let i = this.showing.indexOf(promoItem);
-                if (i >= 0) {
-                    this.showing.splice(i, 1);
-                }
-            }
-            return data;
-        }
-        get scrollValue() {
-            if (this.scrollView.vScrollBar != null) {
-                return this.scrollView.vScrollBar.value;
-            }
-            return 0;
-        }
-        set scrollValue(v) {
-            if (this.scrollView.vScrollBar != null) {
-                this.scrollView.vScrollBar.value = v;
-            }
-        }
-        CheckShow() {
-            for (let item of this.itemList) {
-                let node = item.owner;
-                let d = Math.abs(node.y - this.scrollValue - this.scrollView.height / 2 + node.height / 2 + this.layout.spaceY);
-                let i = this.showing.indexOf(item);
-                if (d < this.scrollView.height / 2) {
-                    if (i < 0) {
-                        this.showing.push(item);
-                        item.OnShow();
-                    }
-                }
-                else {
-                    if (i >= 0) {
-                        this.showing.splice(i, 1);
-                    }
-                }
-            }
-        }
-        OnClose() {
-            let node = this.owner;
-            node.active = node.visible = false;
-        }
-    }
-    P106.style = "P106";
-
-    class ADManager {
-        static ShowBanner() {
-            let p = new TJ.ADS.Param();
-            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
-            TJ.ADS.Api.ShowBanner(p);
-        }
-        static CloseBanner() {
-            let p = new TJ.ADS.Param();
-            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
-            TJ.ADS.Api.RemoveBanner(p);
-        }
-        static ShowNormal() {
-            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
-        }
-        static showNormal2() {
-            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
-        }
-        static ShowReward(rewardAction, CDTime = 500) {
-            if (Admin._evaluating) {
-                rewardAction();
-                return;
-            }
-            if (ADManager.CanShowCD) {
-                PalyAudio.stopMusic();
-                console.log("?????");
-                let p = new TJ.ADS.Param();
-                p.extraAd = true;
-                let getReward = false;
-                p.cbi.Add(TJ.Define.Event.Reward, () => {
-                    getReward = true;
-                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                    if (rewardAction != null) {
-                        rewardAction();
-                        EventAdmin.notify(Task.EventType.adsTime);
-                        EventAdmin.notify(EasterEgg.EventType.easterEggAds);
-                    }
-                });
-                p.cbi.Add(TJ.Define.Event.Close, () => {
-                    if (!getReward) {
-                        PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                        console.log('观看完整广告才能获取奖励哦！');
-                        Admin._openScene(Admin.SceneName.UIADSHint, null, null, () => {
-                            Admin._sceneControl['UIADSHint'].getComponent(UIADSHint).setCallBack(rewardAction);
-                        });
-                    }
-                });
-                p.cbi.Add(TJ.Define.Event.NoAds, () => {
-                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
-                    Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
-                });
-                TJ.ADS.Api.ShowReward(p);
-                ADManager.CanShowCD = false;
-                setTimeout(() => {
-                    ADManager.CanShowCD = true;
-                }, CDTime);
-            }
-        }
-        static Event(param, value) {
-            console.log("Param:>" + param + "Value:>" + value);
-            let p = new TJ.GSA.Param();
-            if (value == null) {
-                p.id = param;
-            }
-            else {
-                p.id = param + value;
-            }
-            console.log(p.id);
-            TJ.GSA.Api.Event(p);
-        }
-        static initShare() {
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                this.wx.onShareAppMessage(() => {
-                    return {
-                        title: this.shareContent,
-                        imageUrl: this.shareImgUrl,
-                        query: ""
-                    };
-                });
-                this.wx.showShareMenu({
-                    withShareTicket: true,
-                    success: null,
-                    fail: null,
-                    complete: null
-                });
-            }
-        }
-        static lureShare() {
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                this.wx.shareAppMessage({
-                    title: this.shareContent,
-                    imageUrl: this.shareImgUrl,
-                    query: ""
-                });
-            }
-        }
-        static VibrateShort() {
-            TJ.API.Vibrate.Short();
-        }
-        static Vibratelong() {
-            TJ.API.Vibrate.Long();
-        }
-        static TAPoint(type, name) {
-            let p = new TJ.API.TA.Param();
-            p.id = name;
-            switch (type) {
-                case TaT.BtnShow:
-                    TJ.API.TA.Event_Button_Show(p);
-                    break;
-                case TaT.BtnClick:
-                    TJ.API.TA.Event_Button_Click(p);
-                    break;
-                case TaT.PageShow:
-                    TJ.API.TA.Event_Page_Show(p);
-                    break;
-                case TaT.PageEnter:
-                    TJ.API.TA.Event_Page_Enter(p);
-                    break;
-                case TaT.PageLeave:
-                    TJ.API.TA.Event_Page_Leave(p);
-                    break;
-                case TaT.LevelStart:
-                    TJ.API.TA.Event_Level_Start(p);
-                    console.log('本关开始打点');
-                    break;
-                case TaT.LevelFail:
-                    TJ.API.TA.Event_Level_Fail(p);
-                    console.log('本关失败打点');
-                    break;
-                case TaT.LevelFinish:
-                    TJ.API.TA.Event_Level_Finish(p);
-                    console.log('本关胜利打点');
-                    break;
-            }
-        }
-    }
-    ADManager.CanShowCD = true;
-    ADManager.wx = Laya.Browser.window.wx;
-    ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
-    ADManager.shareContent = "剃头大师！";
-    var TaT;
-    (function (TaT) {
-        TaT[TaT["BtnShow"] = 0] = "BtnShow";
-        TaT[TaT["BtnClick"] = 1] = "BtnClick";
-        TaT[TaT["PageShow"] = 2] = "PageShow";
-        TaT[TaT["PageEnter"] = 3] = "PageEnter";
-        TaT[TaT["PageLeave"] = 4] = "PageLeave";
-        TaT[TaT["LevelStart"] = 5] = "LevelStart";
-        TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
-        TaT[TaT["LevelFail"] = 7] = "LevelFail";
-    })(TaT || (TaT = {}));
-
     var lwg;
     (function (lwg) {
         let Global;
@@ -1513,6 +1072,10 @@
                             delayed = 1000;
                         }
                         let arrUS = getSerialAndUseWhereByContent(contentArr);
+                        if (!arrUS) {
+                            Pre_Dialogue.removeSelf();
+                            return;
+                        }
                         let vioce = getVioceByUseWhereAndSerial(arrUS[0], arrUS[1]);
                         if (arrUS && vioce) {
                             PalyAudio.playSound('res/Voice/Dialog/' + arrUS[0] + arrUS[1] + '.mp3');
@@ -5057,6 +4620,447 @@
         }
     }
 
+    class ADManager {
+        static ShowBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.ShowBanner(p);
+        }
+        static CloseBanner() {
+            let p = new TJ.ADS.Param();
+            p.place = TJ.ADS.Place.BOTTOM | TJ.ADS.Place.CENTER;
+            TJ.ADS.Api.RemoveBanner(p);
+        }
+        static ShowNormal() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static showNormal2() {
+            TJ.API.AdService.ShowNormal(new TJ.API.AdService.Param());
+        }
+        static ShowReward(rewardAction, CDTime = 500) {
+            if (Admin._evaluating) {
+                rewardAction();
+                return;
+            }
+            if (ADManager.CanShowCD) {
+                PalyAudio.stopMusic();
+                console.log("?????");
+                let p = new TJ.ADS.Param();
+                p.extraAd = true;
+                let getReward = false;
+                p.cbi.Add(TJ.Define.Event.Reward, () => {
+                    getReward = true;
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    if (rewardAction != null) {
+                        rewardAction();
+                        EventAdmin.notify(Task.EventType.adsTime);
+                        EventAdmin.notify(EasterEgg.EventType.easterEggAds);
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.Close, () => {
+                    if (!getReward) {
+                        PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                        console.log('观看完整广告才能获取奖励哦！');
+                        Admin._openScene(Admin.SceneName.UIADSHint, null, null, () => {
+                            Admin._sceneControl['UIADSHint'].getComponent(UIADSHint).setCallBack(rewardAction);
+                        });
+                    }
+                });
+                p.cbi.Add(TJ.Define.Event.NoAds, () => {
+                    PalyAudio.playMusic(PalyAudio.voiceUrl.bgm, 0, 1000);
+                    Dialog.createHint_Middle(Dialog.HintContent["暂时没有广告，过会儿再试试吧！"]);
+                });
+                TJ.ADS.Api.ShowReward(p);
+                ADManager.CanShowCD = false;
+                setTimeout(() => {
+                    ADManager.CanShowCD = true;
+                }, CDTime);
+            }
+        }
+        static Event(param, value) {
+            console.log("Param:>" + param + "Value:>" + value);
+            let p = new TJ.GSA.Param();
+            if (value == null) {
+                p.id = param;
+            }
+            else {
+                p.id = param + value;
+            }
+            console.log(p.id);
+            TJ.GSA.Api.Event(p);
+        }
+        static initShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.onShareAppMessage(() => {
+                    return {
+                        title: this.shareContent,
+                        imageUrl: this.shareImgUrl,
+                        query: ""
+                    };
+                });
+                this.wx.showShareMenu({
+                    withShareTicket: true,
+                    success: null,
+                    fail: null,
+                    complete: null
+                });
+            }
+        }
+        static lureShare() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
+                this.wx.shareAppMessage({
+                    title: this.shareContent,
+                    imageUrl: this.shareImgUrl,
+                    query: ""
+                });
+            }
+        }
+        static VibrateShort() {
+            TJ.API.Vibrate.Short();
+        }
+        static Vibratelong() {
+            TJ.API.Vibrate.Long();
+        }
+        static TAPoint(type, name) {
+            let p = new TJ.API.TA.Param();
+            p.id = name;
+            switch (type) {
+                case TaT.BtnShow:
+                    TJ.API.TA.Event_Button_Show(p);
+                    break;
+                case TaT.BtnClick:
+                    TJ.API.TA.Event_Button_Click(p);
+                    break;
+                case TaT.PageShow:
+                    TJ.API.TA.Event_Page_Show(p);
+                    break;
+                case TaT.PageEnter:
+                    TJ.API.TA.Event_Page_Enter(p);
+                    break;
+                case TaT.PageLeave:
+                    TJ.API.TA.Event_Page_Leave(p);
+                    break;
+                case TaT.LevelStart:
+                    TJ.API.TA.Event_Level_Start(p);
+                    console.log('本关开始打点');
+                    break;
+                case TaT.LevelFail:
+                    TJ.API.TA.Event_Level_Fail(p);
+                    console.log('本关失败打点');
+                    break;
+                case TaT.LevelFinish:
+                    TJ.API.TA.Event_Level_Finish(p);
+                    console.log('本关胜利打点');
+                    break;
+            }
+        }
+    }
+    ADManager.CanShowCD = true;
+    ADManager.wx = Laya.Browser.window.wx;
+    ADManager.shareImgUrl = "http://image.tomatojoy.cn/6847506204006681a5d5fa0cd91ce408";
+    ADManager.shareContent = "剃头大师！";
+    var TaT;
+    (function (TaT) {
+        TaT[TaT["BtnShow"] = 0] = "BtnShow";
+        TaT[TaT["BtnClick"] = 1] = "BtnClick";
+        TaT[TaT["PageShow"] = 2] = "PageShow";
+        TaT[TaT["PageEnter"] = 3] = "PageEnter";
+        TaT[TaT["PageLeave"] = 4] = "PageLeave";
+        TaT[TaT["LevelStart"] = 5] = "LevelStart";
+        TaT[TaT["LevelFinish"] = 6] = "LevelFinish";
+        TaT[TaT["LevelFail"] = 7] = "LevelFail";
+    })(TaT || (TaT = {}));
+
+    class P205 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoList = null;
+            this.itemList = [];
+            this.scroll = null;
+            this.layout = null;
+            this.prefab = null;
+            this.paddingTop = 10;
+            this.paddingBottom = 10;
+            this.move = null;
+            this.show = null;
+            this.hide = null;
+            this.maxX = 620;
+            this.line = 0;
+            this.column = 0;
+            this.targetX = 0;
+            this.showing = [];
+        }
+        async OnAwake() {
+            this.move = this.owner.getChildByName("move");
+            let button = this.move.getChildByName("button");
+            this.show = button.getChildByName("show");
+            this.hide = button.getChildByName("hide");
+            let board = this.move.getChildByName("board");
+            this.scroll = board.getChildByName("scroll");
+            this.layout = this.scroll.getChildByName("layout");
+            this.prefab = this.layout.getCell(0);
+            this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); ADManager.CloseBanner(); });
+            this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); ADManager.ShowBanner(); });
+            let w = this.scroll.width - this.paddingTop - this.paddingBottom;
+            while (w >= this.prefab.width) {
+                w = w - this.prefab.width - this.layout.spaceX;
+                this.column++;
+            }
+            TJ.Develop.Yun.Promo.Data.ReportAwake(P205.style);
+            if (this.show.parent.scaleX < 0)
+                this.maxX = -this.maxX;
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                    this.active = false;
+                    return;
+                }
+                return;
+            }
+            this.promoList = await TJ.Develop.Yun.Promo.List.Get(P205.style);
+            if (this.promoList.count > 0) {
+                TJ.Develop.Yun.Promo.Data.ReportStart(P205.style);
+                this.line = Math.ceil(this.promoList.count / this.column);
+                this.layout.repeatX = this.column;
+                this.layout.repeatY = this.line;
+                for (let i = 0; i < this.layout.cells.length; i++) {
+                    let node = this.layout.getCell(i);
+                    if (i < this.promoList.count) {
+                        let item = node.getComponent(PromoItem);
+                        if (item != null) {
+                            this.itemList.push(item);
+                            item.style = P205.style;
+                        }
+                        node.active = node.visible = true;
+                    }
+                    else {
+                        node.active = node.visible = false;
+                    }
+                }
+                this.line = Math.ceil(this.itemList.length / this.column);
+                let h = this.paddingTop + this.paddingBottom;
+                h += this.prefab.height * this.line + this.layout.spaceY * (this.line - 1);
+                this.layout.height = h;
+                if (this.scroll.height < this.layout.height) {
+                    this.scroll.vScrollBarSkin = "";
+                    this.scroll.vScrollBar.rollRatio = 0;
+                }
+                for (let item of this.itemList) {
+                    this.LoadIcon(item);
+                }
+                this.active = true;
+            }
+            else {
+                this.owner.destroy();
+            }
+        }
+        get scrollValue() {
+            if (this.scroll.vScrollBar != null) {
+                return this.scroll.vScrollBar.value;
+            }
+            return 0;
+        }
+        set scrollValue(v) {
+            if (this.scroll.vScrollBar != null) {
+                this.scroll.vScrollBar.value = v;
+            }
+        }
+        LoadIcon(promoItem) {
+            let data = this.promoList.Load();
+            if (data != null) {
+                this.promoList.Unload(promoItem.data);
+                promoItem.data = data;
+                promoItem.onClick_ = (item) => { this.LoadAndShowIcon(item); };
+                promoItem.DoLoad();
+            }
+            return data;
+        }
+        LoadAndShowIcon(promoItem) {
+            if (this.LoadIcon(promoItem) != null) {
+                promoItem.OnShow();
+            }
+        }
+        Show() {
+            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                let param = new TJ.API.Promo.Param();
+                param.extraData = { "TJ_App": TJ.API.AppInfo.AppGuid() };
+                TJ.API.Promo.Pop(param);
+                return;
+            }
+            this.targetX = this.maxX;
+            this.show.active = this.show.visible = false;
+            this.hide.active = this.hide.visible = true;
+            this.scrollValue = 0;
+        }
+        Hide() {
+            this.targetX = 0;
+            this.showing = [];
+        }
+        OnUpdate() {
+            let deltaTime = Laya.timer.delta / 1000;
+            if (this.move.centerX != this.targetX) {
+                let d = this.targetX - this.move.centerX;
+                let s = 3000 * deltaTime;
+                if (d > 0) {
+                    d = Math.min(this.move.centerX + s, this.targetX);
+                }
+                else {
+                    d = Math.max(this.move.centerX - s, this.targetX);
+                }
+                this.move.centerX = d;
+                if (this.move.centerX == 0) {
+                    this.show.active = this.show.visible = true;
+                    this.hide.active = this.hide.visible = false;
+                    window.setTimeout(async () => {
+                        this.promoList = await TJ.Develop.Yun.Promo.List.Get(P205.style);
+                        for (let item of this.itemList) {
+                            this.LoadIcon(item);
+                        }
+                    }, 0);
+                }
+            }
+            else {
+                if (this.move.centerX == this.maxX) {
+                    this.CheckShow();
+                }
+            }
+        }
+        CheckShow() {
+            for (let item of this.itemList) {
+                let i = this.showing.indexOf(item);
+                let node = item.owner;
+                let d = Math.abs(-node.y - this.paddingTop - this.prefab.height / 2 + this.scrollValue + this.scroll.height / 2);
+                if (d < this.scroll.height / 2) {
+                    if (i < 0) {
+                        this.showing.push(item);
+                        item.OnShow();
+                    }
+                }
+                else {
+                    if (i >= 0) {
+                        this.showing.splice(i, 1);
+                    }
+                }
+            }
+        }
+    }
+    P205.style = "P205";
+
+    class P106 extends Behaviour {
+        constructor() {
+            super(...arguments);
+            this.promoList = null;
+            this.itemList = [];
+            this.layout = null;
+            this.showing = [];
+        }
+        async OnAwake() {
+            this.scrollView = this.owner.getChildByName("scroll");
+            this.layout = this.scrollView.getChildByName("layout");
+            this.scrollView.vScrollBarSkin = "";
+            let close = this.owner.getChildByName("close");
+            close.clickHandler = new Laya.Handler(null, () => { this.OnClose(); });
+            TJ.Develop.Yun.Promo.Data.ReportAwake(P106.style);
+            this.active = false;
+            if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
+                return;
+            }
+            let list = await TJ.Develop.Yun.Promo.List.Get(P106.style);
+            if (this.promoList == null)
+                this.promoList = list;
+            if (this.promoList.count > 0) {
+                TJ.Develop.Yun.Promo.Data.ReportStart(P106.style);
+                this.layout.repeatY = this.promoList.count;
+                let h = 0;
+                for (let i = 0; i < this.layout.cells.length; i++) {
+                    let node = this.layout.getCell(i);
+                    if (i < this.promoList.count) {
+                        let item = node.getComponent(PromoItem);
+                        if (item != null) {
+                            this.itemList.push(item);
+                            item.style = P106.style;
+                        }
+                        Behaviour.SetActive(node, true);
+                    }
+                    else {
+                        Behaviour.SetActive(node, false);
+                    }
+                    if (i > 0) {
+                        h += this.layout.spaceY;
+                    }
+                    h += node.height;
+                }
+                this.layout.height = h;
+                for (let item of this.itemList) {
+                    this.LoadIcon(item);
+                }
+                this.active = true;
+            }
+            else {
+                this.owner.destroy();
+            }
+        }
+        OnEnable() {
+            this.scrollValue = 0;
+        }
+        async OnDisable() {
+            this.promoList = await TJ.Develop.Yun.Promo.List.Get(P106.style);
+            for (let item of this.itemList) {
+                this.LoadIcon(item);
+            }
+        }
+        OnUpdate() {
+            this.CheckShow();
+        }
+        LoadIcon(promoItem) {
+            let data = this.promoList.Load();
+            if (data != null) {
+                this.promoList.Unload(promoItem.data);
+                promoItem.data = data;
+                promoItem.onClick_ = (item) => { this.LoadIcon(item); };
+                promoItem.DoLoad();
+                let i = this.showing.indexOf(promoItem);
+                if (i >= 0) {
+                    this.showing.splice(i, 1);
+                }
+            }
+            return data;
+        }
+        get scrollValue() {
+            if (this.scrollView.vScrollBar != null) {
+                return this.scrollView.vScrollBar.value;
+            }
+            return 0;
+        }
+        set scrollValue(v) {
+            if (this.scrollView.vScrollBar != null) {
+                this.scrollView.vScrollBar.value = v;
+            }
+        }
+        CheckShow() {
+            for (let item of this.itemList) {
+                let node = item.owner;
+                let d = Math.abs(node.y - this.scrollValue - this.scrollView.height / 2 + node.height / 2 + this.layout.spaceY);
+                let i = this.showing.indexOf(item);
+                if (d < this.scrollView.height / 2) {
+                    if (i < 0) {
+                        this.showing.push(item);
+                        item.OnShow();
+                    }
+                }
+                else {
+                    if (i >= 0) {
+                        this.showing.splice(i, 1);
+                    }
+                }
+            }
+        }
+        OnClose() {
+            let node = this.owner;
+            node.active = node.visible = false;
+        }
+    }
+    P106.style = "P106";
+
     var GameControl;
     (function (GameControl) {
         let _platformTpye;
@@ -7293,6 +7297,7 @@
             this.title = null;
             this.desc = null;
             this.contant = null;
+            this.close = null;
             this.WatchAD1 = null;
             this.WatchAD2 = null;
         }
@@ -7304,6 +7309,7 @@
             this.desc = this.nativetNode.getChildByName("Des");
             this.contant = this.nativetNode.getChildByName('Contant');
             this.WatchAD2 = this.owner.getChildByName("WatchAD2");
+            this.close = this.owner.getChildByName("Close");
             if (this.WatchAD2) {
                 this.WatchAD2.on(Laya.Event.CLICK, this, this.Click);
             }
@@ -7325,7 +7331,12 @@
             }
             this.nativetNode.on(Laya.Event.CLICK, this, this.Click);
             this.owner.visible = false;
-            this.Show();
+            this.close.on(Laya.Event.CLICK, this, () => {
+                this.owner.removeSelf();
+            });
+            Laya.timer.once(100, this, () => {
+                this.Show();
+            });
         }
         Show() {
             let p = new TJ.API.AdService.Param();

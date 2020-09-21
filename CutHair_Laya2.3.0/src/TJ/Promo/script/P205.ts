@@ -1,5 +1,6 @@
 import PromoItem from "./PromoItem";
 import Behaviour from "./Behaviour";
+import ADManager from "../../../script/TJ/Admanager";
 
 export default class P205 extends Behaviour {
     private static style = "P205";
@@ -20,7 +21,7 @@ export default class P205 extends Behaviour {
     hide: Laya.Button = null;
 
     maxX = 620;
-    async OnAwake()  {
+    async OnAwake() {
         this.move = this.owner.getChildByName("move") as Laya.Box;
         let button = this.move.getChildByName("button") as Laya.Box;
         this.show = button.getChildByName("show") as Laya.Button;
@@ -30,11 +31,11 @@ export default class P205 extends Behaviour {
         this.layout = this.scroll.getChildByName("layout") as Laya.List;
         this.prefab = this.layout.getCell(0);
 
-        this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); });
-        this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); });
+        this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); ADManager.CloseBanner(); });
+        this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); ADManager.ShowBanner(); });
 
         let w = this.scroll.width - this.paddingTop - this.paddingBottom;
-        while (w >= this.prefab.width)  {
+        while (w >= this.prefab.width) {
             w = w - this.prefab.width - this.layout.spaceX;
             this.column++;
         }
@@ -43,7 +44,7 @@ export default class P205 extends Behaviour {
 
         if ((this.show.parent as Laya.Box).scaleX < 0) this.maxX = -this.maxX;
 
-        if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt)  {
+        if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
 
             if (Laya.Browser.onIOS && TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
                 this.active = false;
@@ -53,23 +54,23 @@ export default class P205 extends Behaviour {
         }
 
         this.promoList = await TJ.Develop.Yun.Promo.List.Get(P205.style);
-        if (this.promoList.count > 0)  {
+        if (this.promoList.count > 0) {
             TJ.Develop.Yun.Promo.Data.ReportStart(P205.style);
 
             this.line = Math.ceil(this.promoList.count / this.column);
             this.layout.repeatX = this.column;
             this.layout.repeatY = this.line;
-            for (let i = 0; i < this.layout.cells.length; i++)  {
+            for (let i = 0; i < this.layout.cells.length; i++) {
                 let node = this.layout.getCell(i);
-                if (i < this.promoList.count)  {
+                if (i < this.promoList.count) {
                     let item = node.getComponent(PromoItem);
-                    if (item != null)  {
+                    if (item != null) {
                         this.itemList.push(item);
                         item.style = P205.style;
                     }
                     node.active = node.visible = true;
                 }
-                else  {
+                else {
                     node.active = node.visible = false;
                 }
             }
@@ -78,38 +79,38 @@ export default class P205 extends Behaviour {
             let h = this.paddingTop + this.paddingBottom;
             h += this.prefab.height * this.line + this.layout.spaceY * (this.line - 1);
             this.layout.height = h;
-            if (this.scroll.height < this.layout.height)  {
+            if (this.scroll.height < this.layout.height) {
                 this.scroll.vScrollBarSkin = "";
                 this.scroll.vScrollBar.rollRatio = 0;
             }
 
-            for (let item of this.itemList)  {
+            for (let item of this.itemList) {
                 this.LoadIcon(item);
             }
             this.active = true;
         }
-        else  {
+        else {
             this.owner.destroy();
         }
     }
 
     line = 0;
     column = 0;
-    get scrollValue()  {
-        if (this.scroll.vScrollBar != null)  {
+    get scrollValue() {
+        if (this.scroll.vScrollBar != null) {
             return this.scroll.vScrollBar.value;
         }
         return 0;
     }
-    set scrollValue(v)  {
-        if (this.scroll.vScrollBar != null)  {
+    set scrollValue(v) {
+        if (this.scroll.vScrollBar != null) {
             this.scroll.vScrollBar.value = v;
         }
     }
 
-    LoadIcon(promoItem: PromoItem)  {
+    LoadIcon(promoItem: PromoItem) {
         let data = this.promoList.Load();
-        if (data != null)  {
+        if (data != null) {
             this.promoList.Unload(promoItem.data);
             promoItem.data = data;
             promoItem.onClick_ = (item) => { this.LoadAndShowIcon(item); };
@@ -117,14 +118,14 @@ export default class P205 extends Behaviour {
         }
         return data;
     }
-    LoadAndShowIcon(promoItem: PromoItem)  {
-        if (this.LoadIcon(promoItem) != null)  {
+    LoadAndShowIcon(promoItem: PromoItem) {
+        if (this.LoadIcon(promoItem) != null) {
             promoItem.OnShow();
         }
     }
 
-    public Show()  {
-        if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt)  {
+    public Show() {
+        if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
             let param = new TJ.API.Promo.Param();
             param.extraData = { "TJ_App": TJ.API.AppInfo.AppGuid() };
             TJ.API.Promo.Pop(param);
@@ -135,56 +136,56 @@ export default class P205 extends Behaviour {
         this.hide.active = this.hide.visible = true;
         this.scrollValue = 0;
     }
-    public Hide()  {
+    public Hide() {
         this.targetX = 0;
         this.showing = [];
     }
     targetX: number = 0;
-    OnUpdate()  {
+    OnUpdate() {
         let deltaTime = Laya.timer.delta / 1000;
-        if (this.move.centerX != this.targetX)  {
+        if (this.move.centerX != this.targetX) {
             let d = this.targetX - this.move.centerX;
             let s = 3000 * deltaTime;
-            if (d > 0)  {
+            if (d > 0) {
                 d = Math.min(this.move.centerX + s, this.targetX);
             }
-            else  {
+            else {
                 d = Math.max(this.move.centerX - s, this.targetX);
             }
             this.move.centerX = d;
-            if (this.move.centerX == 0)  {
+            if (this.move.centerX == 0) {
                 this.show.active = this.show.visible = true;
                 this.hide.active = this.hide.visible = false;
-                window.setTimeout(async () =>  {
+                window.setTimeout(async () => {
                     this.promoList = await TJ.Develop.Yun.Promo.List.Get(P205.style);
-                    for (let item of this.itemList)  {
+                    for (let item of this.itemList) {
                         this.LoadIcon(item);
                     }
                 }, 0);
             }
         }
-        else  {
-            if (this.move.centerX == this.maxX)  {
+        else {
+            if (this.move.centerX == this.maxX) {
                 this.CheckShow();
             }
         }
     }
 
     showing: PromoItem[] = [];
-    CheckShow()  {
-        for (let item of this.itemList)  {
+    CheckShow() {
+        for (let item of this.itemList) {
             let i = this.showing.indexOf(item);
             let node = item.owner as Laya.Box;
             let d = Math.abs(-node.y - this.paddingTop - this.prefab.height / 2 + this.scrollValue + this.scroll.height / 2);
-            if (d < this.scroll.height / 2)  {
-                if (i < 0)  {
+            if (d < this.scroll.height / 2) {
+                if (i < 0) {
                     this.showing.push(item);
                     item.OnShow();
                     // console.log("P205 show " + item.data.title);
                 }
             }
-            else  {
-                if (i >= 0)  {
+            else {
+                if (i >= 0) {
                     this.showing.splice(i, 1);
                 }
             }

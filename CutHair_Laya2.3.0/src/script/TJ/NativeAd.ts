@@ -9,6 +9,7 @@ export default class NativeAd extends Laya.Script {
     private title: Laya.Text = null;
     private desc: Laya.Text = null;
     private contant: Laya.Image = null;
+    private close: Laya.Image = null;
 
     private WatchAD1: Laya.Image = null;
     private WatchAD2: Laya.Image = null;
@@ -20,6 +21,7 @@ export default class NativeAd extends Laya.Script {
         this.desc = this.nativetNode.getChildByName("Des") as Laya.Text;
         this.contant = this.nativetNode.getChildByName('Contant') as Laya.Image;
         this.WatchAD2 = this.owner.getChildByName("WatchAD2") as Laya.Image;
+        this.close = this.owner.getChildByName("Close") as Laya.Image;
         if (this.WatchAD2) {
             this.WatchAD2.on(Laya.Event.CLICK, this, this.Click);
         }
@@ -42,7 +44,14 @@ export default class NativeAd extends Laya.Script {
         }
         this.nativetNode.on(Laya.Event.CLICK, this, this.Click);
         (this.owner as Laya.Box).visible = false;
-        this.Show();
+
+        this.close.on(Laya.Event.CLICK, this, () => {
+            this.owner.removeSelf();
+        });
+
+        Laya.timer.once(100, this, () => {
+            this.Show();
+        })
     }
 
     Show() {

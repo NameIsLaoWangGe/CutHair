@@ -5,8 +5,8 @@ var DP =
         appGuid:"a8b14912-ac92-597c-cd35-a1788ae9c035",
         productName:"剃头大师",
         packageName:"com.tomatojoy.ttds.kyx.nearme.gamecenter",
-        versionName:"1.0.0",
-        versionCode:1,
+        versionName:"1.0.1",
+        versionCode:2,
         channel:"OPPO_AppRt",
     },
     XIAOMI:
@@ -70,8 +70,8 @@ var DP =
             appId:"30328407",
             bannerId:"214580",
             insertId:null,
-            videoId:" 214589",
-            nativeId:"214588",
+            videoId:"214589",
+            nativeId:"221104",
             nativeCustomInsert:null,
         },
     },
@@ -152,7 +152,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/9/21 15:43:32
+中国标准时间 2020/9/21 16:22:20
 */
 var TJ;
 (function (TJ) {

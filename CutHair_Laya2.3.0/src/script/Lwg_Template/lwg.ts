@@ -681,6 +681,10 @@ export module lwg {
                     }
                     // 音效
                     let arrUS = getSerialAndUseWhereByContent(contentArr);
+                    if (!arrUS) {
+                        Pre_Dialogue.removeSelf();
+                        return;
+                    }
                     let vioce = getVioceByUseWhereAndSerial(arrUS[0], arrUS[1]);
                     if (arrUS && vioce) {
                         PalyAudio.playSound('res/Voice/Dialog/' + arrUS[0] + arrUS[1] + '.mp3');

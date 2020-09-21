@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":25,
-    "selecteID":103,
+    "selectedBox":103,
+    "selecteID":113,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -377,13 +377,14 @@
                     "nodeParent":25,
                     "maxID":424,
                     "label":"NativeRoot",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":103,
                     "child":[
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box,nativeNode",
                             "props":{"top":0,"scaleY":1,"scaleX":1,"right":0,"pivotY":194.5,"pivotX":222.5,"name":"nativeNode","left":0,"bottom":0,"anchorY":0.5,"anchorX":0.5},
@@ -396,6 +397,7 @@
                             "compId":104,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
                                     "props":{"visible":true,"top":0,"skin":"UI/Common/yuansheng1.png","sizeGrid":"50,50,50,50","right":0,"left":0,"bottom":0},
@@ -410,6 +412,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Contant",
                                     "props":{"visible":true,"top":0,"skin":"UI/Common/yuansheng1.png","sizeGrid":"45,28,44,24","right":0,"name":"Contant","left":0,"bottom":0},
@@ -424,6 +427,7 @@
                                     "$HIDDEN":false
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
                                     "props":{"width":180,"visible":false,"left":27,"height":180,"centerY":0},
@@ -438,6 +442,7 @@
                                     "$HIDDEN":true
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Icon",
                                     "props":{"width":180,"visible":false,"name":"Icon","left":27,"height":180,"centerY":0},
@@ -452,6 +457,7 @@
                                     "$HIDDEN":true
                                 },
                                 {
+                                    "x":60,
                                     "type":"Text",
                                     "searchKey":"Text,Title",
                                     "props":{"y":50,"x":228,"width":350,"visible":false,"valign":"middle","text":"广告名字","name":"Title","height":81,"fontSize":30,"color":"#000000","align":"left"},
@@ -466,6 +472,7 @@
                                     "$HIDDEN":true
                                 },
                                 {
+                                    "x":60,
                                     "type":"Text",
                                     "searchKey":"Text,Des",
                                     "props":{"y":124,"x":228,"wordWrap":true,"width":383,"visible":false,"valign":"middle","text":"广告内容广告内容广告内容","name":"Des","height":125,"fontSize":30,"color":"#000000","align":"left"},
@@ -480,6 +487,7 @@
                                     "$HIDDEN":true
                                 },
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
                                     "props":{"skin":"UI/Common/yuansheng2.png","right":0,"bottom":0},
@@ -496,6 +504,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box,defaultNode",
                             "props":{"top":0,"right":0,"name":"defaultNode","left":0,"bottom":0},
@@ -510,9 +519,10 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,Close",
-                            "props":{"width":24,"visible":false,"top":0,"skin":"UI/Common/X.png","scaleY":1.5,"scaleX":1.5,"right":13,"name":"Close","height":24},
+                            "props":{"width":24,"visible":true,"top":3,"skin":"UI/Common/X.png","scaleY":1.5,"scaleX":1.5,"right":4,"name":"Close","height":24},
                             "nodeParent":103,
                             "label":"Close",
                             "isDirectory":false,
@@ -521,9 +531,10 @@
                             "compId":113,
                             "child":[
                                 ],
-                            "$HIDDEN":true
+                            "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Script",
                             "switchAble":true,
                             "source":"src/script/TJ/NativeAd.ts",

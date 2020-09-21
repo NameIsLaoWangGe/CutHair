@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":67,
+    "selectedBox":67,
+    "selecteID":773,
     "searchKey":"View",
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":773,
+    "maxID":774,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -397,21 +397,6 @@
                 },
                 {
                     "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,Close",
-                    "props":{"width":24,"visible":false,"top":0,"skin":"UI/Common/X.png","scaleY":1.5,"scaleX":1.5,"right":13,"name":"Close","height":24},
-                    "nodeParent":67,
-                    "label":"Close",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":769,
-                    "child":[
-                        ],
-                    "$HIDDEN":true
-                },
-                {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/script/TJ/NativeAd.ts",
@@ -426,6 +411,21 @@
                     "compId":772,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,Close",
+                    "props":{"y":0,"x":0,"width":24,"visible":true,"top":3,"skin":"UI/Common/X.png","scaleY":1.5,"scaleX":1.5,"right":3,"name":"Close","height":24},
+                    "nodeParent":67,
+                    "label":"Close",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":773,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
                 }],
             "animations":[
                 {
