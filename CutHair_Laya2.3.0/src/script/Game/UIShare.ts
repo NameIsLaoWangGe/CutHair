@@ -1,4 +1,4 @@
-import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Effects } from "../Lwg_Template/lwg";
+import { lwg, Click, Admin, EventAdmin, Gold, Dialog, Animation2D, Effects, Tools } from "../Lwg_Template/lwg";
 import GameMain3D from "./GameMain3D";
 import { GEnum, GVariate, GSene3D } from "../Lwg_Template/Global";
 import RecordManager from "../TJ/RecordManager";
@@ -9,25 +9,7 @@ export default class UIShare extends lwg.Admin.Scene {
     lwgOnAwake(): void {
         Admin._gameStart = false;
         // 不同渠道显示不同内容
-        if (Game._platform !== Game._platformTpye.Bytedance) {
-            this.self['BtnClose'].visible = false;
-            Laya.timer.once(2000, this, () => {
-                this.self['BtnClose'].visible = true;
-            })
-            this.self['WeChat'].visible = true;
-            this.self['Bytedance'].visible = false;
-        } else {
-            this.self['WeChat'].visible = false;
-            this.self['Bytedance'].visible = true;
-
-            this.self['BtnClose_Bytedance'].visible = false;
-            Laya.timer.frameOnce(180, this, () => {
-                this.self['BtnClose_Bytedance'].visible = true;
-            })
-        }
-        if (Admin._platform == Admin._platformTpye.OPPO) {
-            this.self['BtnClose'].visible = true;
-        }
+        Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
     }
 
     lwgOnEnable(): void {
@@ -54,13 +36,13 @@ export default class UIShare extends lwg.Admin.Scene {
 
         this.self['SmallFram'].x -= 500;
         this.self['Logo'].y -= 500;
-        this.self['BtnShare_Bytedance'].alpha = 0;
+        this.self['Bytedance_BtnShare'].alpha = 0;
         Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
             Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
 
             Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
 
-            Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4, null, () => {
+            Animation2D.bombs_Appear(this.self['Bytedance_BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4, null, () => {
                 RecordManager.stopAutoRecord();
             });
 
@@ -117,11 +99,14 @@ export default class UIShare extends lwg.Admin.Scene {
         Click.on(Click.Type.noEffect, this.self['Click1'], this, null, null, this.btnShareUp);
         Click.on(Click.Type.noEffect, this.self['Click2'], this, null, null, this.btnShareUp);
 
-        Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
+        Click.on(Click.Type.largen, this.self['WeChat_BtnComplete'], this, null, null, () => {
             this.shareFunc();
         });
-        Click.on(Click.Type.largen, this.self['BtnShare_Bytedance'], this, null, null, this.btnShareUp);
-        Click.on(Click.Type.largen, this.self['BtnClose_Bytedance'], this, null, null, this.btnNoShareUp);
+        Click.on(Click.Type.largen, this.self['OPPO_BtnComplete'], this, null, null, () => {
+            this.shareFunc();
+        });
+        Click.on(Click.Type.largen, this.self['Bytedance_BtnShare'], this, null, null, this.btnShareUp);
+        Click.on(Click.Type.largen, this.self['Bytedance_BtnClose'], this, null, null, this.btnNoShareUp);
         // Click.on(Click.Type.largen, this.self['BtnNoShare_Bytedance'], this, null, null, this.btnNoShareUp);
     }
 

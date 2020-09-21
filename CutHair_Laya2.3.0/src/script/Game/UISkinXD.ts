@@ -1,12 +1,10 @@
-import { lwg, SkinXD, Gold, Click, Dialog, Shop, Animation2D, EventAdmin, Setting } from "../Lwg_Template/lwg";
-import UIStart from "./UIStart";
+import { lwg, SkinXD, Gold, Click, Dialog, Shop, Animation2D, EventAdmin, Setting, Admin } from "../Lwg_Template/lwg";
 import ADManager, { TaT } from "../TJ/Admanager";
 
 export default class UISkinXD extends SkinXD.SkinXDScene {
 
     skinXDOnAwake(): void {
         ADManager.TAPoint(TaT.BtnShow, 'Adlimmitget');
-
         Gold.goldVinish();
         Setting.setBtnVinish();
     }
@@ -63,5 +61,6 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     skinXDOnDisable(): void {
         Setting.setBtnAppear();
         Gold.goldAppear();
+        Admin._openScene(Admin.SceneName.UIStart);
     }
 }

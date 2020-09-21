@@ -56,11 +56,11 @@
         ""
     ],
     "clearReleaseDir": true,
-    "compile": false,
+    "compile": true,
     "forceCompile": false,
     "onlyIndexJS": true,
     "projectType": "ts",
-    "pubTime": 1600510528695,
+    "pubTime": 1600668926836,
     "oppoInfo": {
         "name": "剃头大师",
         "projName": "quickgame",

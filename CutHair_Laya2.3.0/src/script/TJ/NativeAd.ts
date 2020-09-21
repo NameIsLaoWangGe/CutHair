@@ -42,10 +42,9 @@ export default class NativeAd extends Laya.Script {
         }
         this.nativetNode.on(Laya.Event.CLICK, this, this.Click);
         (this.owner as Laya.Box).visible = false;
-    }
-    onEnable(): void {
         this.Show();
     }
+   
     Show() {
         let p = new TJ.API.AdService.Param();
         this.nativeAd = TJ.API.AdService.LoadNative(p);

@@ -339,6 +339,7 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
+                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P202.style;
                         }
@@ -481,6 +482,7 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
+                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P204.style;
                         }
@@ -638,6 +640,7 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
+                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P205.style;
                         }
@@ -787,6 +790,7 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
+                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P106.style;
                         }
@@ -6524,7 +6528,7 @@
             Laya.timer.once(500, this, () => {
                 Gold.createGoldNode(Laya.stage);
                 Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
-                lwg.Admin._openScene(lwg.Admin.SceneName.UISkinXD, null, this.self);
+                Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
             });
         }
         lwgInterior() {
@@ -7181,25 +7185,7 @@
     class UIShare extends lwg.Admin.Scene {
         lwgOnAwake() {
             Admin._gameStart = false;
-            if (Game._platform !== Game._platformTpye.Bytedance) {
-                this.self['BtnClose'].visible = false;
-                Laya.timer.once(2000, this, () => {
-                    this.self['BtnClose'].visible = true;
-                });
-                this.self['WeChat'].visible = true;
-                this.self['Bytedance'].visible = false;
-            }
-            else {
-                this.self['WeChat'].visible = false;
-                this.self['Bytedance'].visible = true;
-                this.self['BtnClose_Bytedance'].visible = false;
-                Laya.timer.frameOnce(180, this, () => {
-                    this.self['BtnClose_Bytedance'].visible = true;
-                });
-            }
-            if (Admin._platform == Admin._platformTpye.OPPO) {
-                this.self['BtnClose'].visible = true;
-            }
+            Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.BtnShow, 'closeword_share');
@@ -7220,11 +7206,11 @@
             this.aniDelayde = 100;
             this.self['SmallFram'].x -= 500;
             this.self['Logo'].y -= 500;
-            this.self['BtnShare_Bytedance'].alpha = 0;
+            this.self['Bytedance_BtnShare'].alpha = 0;
             Animation2D.rotate_Scale(this.self['BigFrame'], 45, 0, 0, 600, 1, 1, this.aniTime * 4.5, this.aniDelayde * 1, () => {
                 Animation2D.move_Simple_01(this.self['SmallFram'], this.self['SmallFram'].x, this.self['SmallFram'].y, this.self['SmallFram'].x += 500, this.self['SmallFram'].y, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde);
                 Animation2D.move_Simple_01(this.self['Logo'], this.self['Logo'].x, this.self['Logo'].y, this.self['Logo'].x, this.self['Logo'].y += 500, this.aniTime * 2, Laya.Ease.cubicOut, this.aniDelayde * 2);
-                Animation2D.bombs_Appear(this.self['BtnShare_Bytedance'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4, null, () => {
+                Animation2D.bombs_Appear(this.self['Bytedance_BtnShare'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 4, null, () => {
                     RecordManager.stopAutoRecord();
                 });
                 let hotAddNum = Math.floor(Math.random() * 100 + 900);
@@ -7259,11 +7245,14 @@
             Click.on(Click.Type.noEffect, this.self['Background'], this, null, null, this.btnShareUp);
             Click.on(Click.Type.noEffect, this.self['Click1'], this, null, null, this.btnShareUp);
             Click.on(Click.Type.noEffect, this.self['Click2'], this, null, null, this.btnShareUp);
-            Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, () => {
+            Click.on(Click.Type.largen, this.self['WeChat_BtnComplete'], this, null, null, () => {
                 this.shareFunc();
             });
-            Click.on(Click.Type.largen, this.self['BtnShare_Bytedance'], this, null, null, this.btnShareUp);
-            Click.on(Click.Type.largen, this.self['BtnClose_Bytedance'], this, null, null, this.btnNoShareUp);
+            Click.on(Click.Type.largen, this.self['OPPO_BtnComplete'], this, null, null, () => {
+                this.shareFunc();
+            });
+            Click.on(Click.Type.largen, this.self['Bytedance_BtnShare'], this, null, null, this.btnShareUp);
+            Click.on(Click.Type.largen, this.self['Bytedance_BtnClose'], this, null, null, this.btnNoShareUp);
         }
         btnShareUp() {
             console.log('分享！');
@@ -7338,8 +7327,6 @@
             }
             this.nativetNode.on(Laya.Event.CLICK, this, this.Click);
             this.owner.visible = false;
-        }
-        onEnable() {
             this.Show();
         }
         Show() {
@@ -8170,6 +8157,7 @@
         skinXDOnDisable() {
             Setting.setBtnAppear();
             Gold.goldAppear();
+            Admin._openScene(Admin.SceneName.UIStart);
         }
     }
 
@@ -8179,56 +8167,10 @@
             this.easterEgg_AotumanSwitch = false;
         }
         lwgNodeDec() {
-            this.LevelDisplay = this.self['LevelDisplay'];
-            this.LevelStyle = this.self['LevelStyle'];
-            ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
-            ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
-            ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
-            ADManager.TAPoint(TaT.BtnShow, 'startword_main');
-            if (Admin._platform == Admin._platformTpye.OPPO) {
-                ADManager.ShowBanner();
-            }
-            Admin._UIStartCount.value++;
         }
         lwgEventReg() {
-            EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
-                this.self['BtnXDSkin'].visible = false;
-            });
-            EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
-                this.self['BtnCheck'].visible = false;
-            });
-            EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
-                this.self['BtnAotuman'].visible = true;
-                this.self['EasterEgg_Aotuman'].visible = false;
-            });
         }
         lwgOnEnable() {
-            Skin._currentEye.name = null;
-            Skin._currentHead.name = null;
-            EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
-            EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
-            this.levelStyleDisplay();
-            if (Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.have)) {
-                this.self['BtnXDSkin'].visible = false;
-            }
-            if (!EasterEgg._easterEgg_1.value) {
-                this.self['BtnAotuman'].visible = false;
-            }
-            else {
-                this.self['EasterEgg_Aotuman'].visible = false;
-            }
-            CheckIn.openCheckIn();
-            let dilogArr0 = Dialog.getContentByUseWhereAndSerial(Admin.SceneName.UIStart);
-            if (Game._gameLevel.value == 1) {
-                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[0]);
-            }
-            else if (Game._gameLevel.value == 2) {
-                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[1]);
-            }
-            else {
-                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self);
-            }
-            Setting.setBtnAppear();
         }
         lwgAdaptive() {
         }
@@ -8260,29 +8202,6 @@
             }
         }
         lwgBtnClick() {
-            if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
-                if (Admin._UIStartCount.value >= 2) {
-                    this.var('AddToDesk').visible = true;
-                    if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
-                        showShortcutInstall();
-                    }
-                }
-                else {
-                    this.var('AddToDesk').visible = false;
-                }
-            }
-            var showShortcutInstall = () => {
-                let self = this;
-                TJ.Platform.AppRt.DevKit.OPPO.QG.HasShortcutInstalled((has) => {
-                    if (!has) {
-                        self.var('AddToDesk').visible = true;
-                        TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
-                    }
-                    else {
-                        self.var('AddToDesk').visible = false;
-                    }
-                });
-            };
             Click.on(Click.Type.largen, this.self['AddToDesk'], this, null, null, (e) => {
                 TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
             });
@@ -8290,6 +8209,10 @@
                 ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
                 e.stopPropagation();
                 lwg.Admin._openScene(Admin.SceneName.UIShop);
+            });
+            Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
+                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
             });
             Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e) => {
                 e.stopPropagation();

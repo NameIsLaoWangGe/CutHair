@@ -9,34 +9,34 @@ export default class UIStart extends lwg.Admin.Scene {
     LevelStyle: Laya.Sprite;
     lwgNodeDec(): void {
 
-        this.LevelDisplay = this.self['LevelDisplay'];
-        this.LevelStyle = this.self['LevelStyle'];
+        // this.LevelDisplay = this.self['LevelDisplay'];
+        // this.LevelStyle = this.self['LevelStyle'];
 
-        ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
-        ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
-        ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
-        ADManager.TAPoint(TaT.BtnShow, 'startword_main');
+        // // ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
+        // // ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
+        // // ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
+        // // ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
-        if (Admin._platform == Admin._platformTpye.OPPO) {
-            this.self['P204'].visible = false;
-            ADManager.ShowBanner();
-            // this.self['P201'].visible = false;
-            // this.self['P205'].visible = false;
-        }
-        Admin._UIStartCount.value++;
+        // if (Admin._platform == Admin._platformTpye.OPPO) {
+        //     // this.self['P204'].visible = false;
+        //     // ADManager.ShowBanner();
+        //     // this.self['P201'].visible = false;
+        //     // this.self['P205'].visible = false;
+        // }
+        // Admin._UIStartCount.value++;
     }
 
     lwgEventReg(): void {
-        EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
-            this.self['BtnXDSkin'].visible = false;
-        })
-        EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
-            this.self['BtnCheck'].visible = false;
-        })
-        EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
-            this.self['BtnAotuman'].visible = true;
-            this.self['EasterEgg_Aotuman'].visible = false;
-        })
+        // EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
+        //     this.self['BtnXDSkin'].visible = false;
+        // })
+        // EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
+        //     this.self['BtnCheck'].visible = false;
+        // })
+        // EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
+        //     this.self['BtnAotuman'].visible = true;
+        //     this.self['EasterEgg_Aotuman'].visible = false;
+        // })
     }
 
     lwgOnEnable(): void {
@@ -51,13 +51,13 @@ export default class UIStart extends lwg.Admin.Scene {
             this.self['BtnXDSkin'].visible = false;
         }
 
-        if (!EasterEgg._easterEgg_1.value) {
-            this.self['BtnAotuman'].visible = false;
-        } else {
-            this.self['EasterEgg_Aotuman'].visible = false;
-        }
+        // if (!EasterEgg._easterEgg_1.value) {
+        //     this.self['BtnAotuman'].visible = false;
+        // } else {
+        //     this.self['EasterEgg_Aotuman'].visible = false;
+        // }
 
-        CheckIn.openCheckIn();
+        // CheckIn.openCheckIn();
 
         let dilogArr0 = Dialog.getContentByUseWhereAndSerial(Admin.SceneName.UIStart);
         if (Game._gameLevel.value == 1) {
@@ -71,9 +71,9 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgAdaptive(): void {
-        // this.self['P204'].y = Laya.stage.height;
-        // this.self['Guide'].y = Laya.stage.height * 0.732;
-        // this.self['SceneContent'].y = Laya.stage.height * 0.378;
+        this.self['P204'].y = Laya.stage.height;
+        this.self['Guide'].y = Laya.stage.height * 0.732;
+        this.self['SceneContent'].y = Laya.stage.height * 0.378;
     }
 
     /**关卡列表*/
@@ -112,31 +112,31 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     lwgBtnClick(): void {
-        if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
-            if (Admin._UIStartCount.value >= 2) {
-                this.var('AddToDesk').visible = true;
-                if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
-                    showShortcutInstall();
-                }
-            } else {
-                this.var('AddToDesk').visible = false;
-            }
-        }
-        var showShortcutInstall = () => {
-            let self = this;
-            TJ.Platform.AppRt.DevKit.OPPO.QG.HasShortcutInstalled((has) => {
-                if (!has) {
-                    self.var('AddToDesk').visible = true;//添加桌面按钮
-                    TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
-                } else {
-                    self.var('AddToDesk').visible = false;//添加桌面按钮
-                }
-            })
-        }
+        // if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
+        //     if (Admin._UIStartCount.value >= 2) {
+        //         this.var('AddToDesk').visible = true;
+        //         if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.OPPO_AppRt) {
+        //             showShortcutInstall();
+        //         }
+        //     } else {
+        //         this.var('AddToDesk').visible = false;
+        //     }
+        // }
+        // var showShortcutInstall = () => {
+        //     let self = this;
+        //     TJ.Platform.AppRt.DevKit.OPPO.QG.HasShortcutInstalled((has) => {
+        //         if (!has) {
+        //             self.var('AddToDesk').visible = true;//添加桌面按钮
+        //             TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
+        //         } else {
+        //             self.var('AddToDesk').visible = false;//添加桌面按钮
+        //         }
+        //     })
+        // }
 
-        Click.on(Click.Type.largen, this.self['AddToDesk'], this, null, null, (e: Laya.Event) => {
-            TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
-        });
+        // Click.on(Click.Type.largen, this.self['AddToDesk'], this, null, null, (e: Laya.Event) => {
+        //     TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
+        // });
 
         Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
@@ -144,11 +144,11 @@ export default class UIStart extends lwg.Admin.Scene {
             lwg.Admin._openScene(Admin.SceneName.UIShop);
         });
 
-        // Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
-        //     Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
-        //     ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+        Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
+            Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+            ADManager.TAPoint(TaT.BtnClick, 'startword_main');
 
-        // });
+        });
 
         Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e: Laya.Event) => {
             e.stopPropagation();
