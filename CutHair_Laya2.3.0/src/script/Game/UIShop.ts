@@ -438,7 +438,7 @@ export default class UIShop extends Shop.ShopScene {
     }
 
     shopOnDisable(): void {
-
+        ADManager.ShowBanner();        
         GVariate._stageClick = true;
         Setting.setBtnAppear();
     }

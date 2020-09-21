@@ -339,7 +339,6 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
-                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P202.style;
                         }
@@ -482,7 +481,6 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
-                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P204.style;
                         }
@@ -640,7 +638,6 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
-                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P205.style;
                         }
@@ -790,7 +787,6 @@
                     if (i < this.promoList.count) {
                         let item = node.getComponent(PromoItem);
                         if (item != null) {
-                            item.OnAwake();
                             this.itemList.push(item);
                             item.style = P106.style;
                         }
@@ -5338,6 +5334,7 @@
         }
         checkInOnDisable() {
             Setting.setBtnAppear();
+            ADManager.ShowBanner();
         }
     }
 
@@ -6528,7 +6525,7 @@
             Laya.timer.once(500, this, () => {
                 Gold.createGoldNode(Laya.stage);
                 Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
-                Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
+                Admin._openScene(Admin.SceneName.UIStart, null, this.self);
             });
         }
         lwgInterior() {
@@ -7305,6 +7302,7 @@
             this.icon = this.nativetNode.getChildByName("Icon");
             this.title = this.nativetNode.getChildByName("Title");
             this.desc = this.nativetNode.getChildByName("Des");
+            this.contant = this.nativetNode.getChildByName('Contant');
             this.WatchAD2 = this.owner.getChildByName("WatchAD2");
             if (this.WatchAD2) {
                 this.WatchAD2.on(Laya.Event.CLICK, this, this.Click);
@@ -7345,6 +7343,7 @@
                     this.icon.skin = this.nativeAd.iconUrl;
                     this.title.text = this.nativeAd.title;
                     this.desc.text = this.nativeAd.desc;
+                    this.contant.skin = this.nativeAd.imgUrl;
                 }
             }
             else {
@@ -7733,6 +7732,7 @@
             this.self.close();
         }
         shopOnDisable() {
+            ADManager.ShowBanner();
             GVariate._stageClick = true;
             Setting.setBtnAppear();
         }
@@ -8155,9 +8155,9 @@
             }
         }
         skinXDOnDisable() {
+            ADManager.ShowBanner();
             Setting.setBtnAppear();
             Gold.goldAppear();
-            Admin._openScene(Admin.SceneName.UIStart);
         }
     }
 
@@ -8167,12 +8167,55 @@
             this.easterEgg_AotumanSwitch = false;
         }
         lwgNodeDec() {
+            this.LevelDisplay = this.self['LevelDisplay'];
+            this.LevelStyle = this.self['LevelStyle'];
+            ADManager.TAPoint(TaT.BtnShow, 'setbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'signbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
+            ADManager.TAPoint(TaT.BtnShow, 'startword_main');
+            if (Admin._platform == Admin._platformTpye.OPPO) {
+                this.self['P204'].visible = false;
+                ADManager.ShowBanner();
+            }
+            Admin._UIStartCount.value++;
         }
         lwgEventReg() {
+            EventAdmin.reg(SkinXD.EventType.acquisition, this, () => {
+                this.self['BtnXDSkin'].visible = false;
+            });
+            EventAdmin.regOnce(CheckIn.EventType.removeCheckBtn, this, () => {
+                this.self['BtnCheck'].visible = false;
+            });
+            EventAdmin.reg(EasterEgg.EventType.trigger, this, () => {
+                this.self['BtnAotuman'].visible = true;
+                this.self['EasterEgg_Aotuman'].visible = false;
+            });
         }
         lwgOnEnable() {
+            Skin._currentEye.name = null;
+            Skin._currentHead.name = null;
+            EventAdmin.notify(GEnum.EventType.changeHeadDecoration);
+            EventAdmin.notify(GEnum.EventType.changeEyeDecoration);
+            this.levelStyleDisplay();
+            if (Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.have)) {
+                this.self['BtnXDSkin'].visible = false;
+            }
+            let dilogArr0 = Dialog.getContentByUseWhereAndSerial(Admin.SceneName.UIStart);
+            if (Game._gameLevel.value == 1) {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[0]);
+            }
+            else if (Game._gameLevel.value == 2) {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self, dilogArr0[1]);
+            }
+            else {
+                Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIStart, 1000, 2000, this.self);
+            }
+            Setting.setBtnAppear();
         }
         lwgAdaptive() {
+            this.self['P204'].y = Laya.stage.height;
+            this.self['Guide'].y = Laya.stage.height * 0.732;
+            this.self['SceneContent'].y = Laya.stage.height * 0.378;
         }
         levelStyleDisplay() {
             let location = Game._gameLevel.value % this.LevelStyle.numChildren;
@@ -8202,40 +8245,42 @@
             }
         }
         lwgBtnClick() {
-            Click.on(Click.Type.largen, this.self['AddToDesk'], this, null, null, (e) => {
-                TJ.Platform.AppRt.DevKit.OPPO.QG.InstallShortcut(() => { }, "");
-            });
             Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e) => {
                 ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
                 e.stopPropagation();
                 lwg.Admin._openScene(Admin.SceneName.UIShop);
+                ADManager.CloseBanner();
             });
             Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
                 Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
                 ADManager.TAPoint(TaT.BtnClick, 'startword_main');
             });
+            Click.on(Click.Type.largen, this.self['Background'], this, () => {
+                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
+                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
+            });
             Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e) => {
                 e.stopPropagation();
                 Admin._openScene(lwg.Admin.SceneName.UITask);
+                ADManager.CloseBanner();
             });
             Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, (e) => {
                 ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
                 e.stopPropagation();
                 lwg.Admin._openScene(Admin.SceneName.UICheckIn);
+                ADManager.CloseBanner();
             });
             Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, (e) => {
                 e.stopPropagation();
                 lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
+                ADManager.CloseBanner();
             });
             Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
-            Click.on(Click.Type.largen, this.self['Background'], this, () => {
-                ADManager.TAPoint(TaT.BtnClick, 'startword_main');
-                Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
-            });
         }
         btnXDSkinDown() {
         }
         btnXDSkinUp() {
+            ADManager.CloseBanner();
             lwg.Admin._openScene(Admin.SceneName.UISkinXD);
             ADManager.TAPoint(TaT.BtnClick, 'limitskinbt_main');
         }
@@ -8444,6 +8489,7 @@
             this.self.close();
         }
         taskOnDisable() {
+            ADManager.ShowBanner();
             Setting.setBtnAppear();
             GVariate._stageClick = true;
         }

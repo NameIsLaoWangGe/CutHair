@@ -76,6 +76,7 @@ export default class UITask extends lwg.Task.TaskScene {
     }
 
     taskOnDisable(): void {
+        ADManager.ShowBanner();        
         Setting.setBtnAppear();
         GVariate._stageClick = true;
     }

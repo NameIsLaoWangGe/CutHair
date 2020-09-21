@@ -36,7 +36,6 @@ export default class P204 extends Behaviour {
                 if (i < this.promoList.count) {
                     let item = node.getComponent(PromoItem);
                     if (item != null) {
-                        item.OnAwake();
                         this.itemList.push(item);
                         item.style = P204.style;
                     }

@@ -48,7 +48,6 @@ export default class P202 extends Behaviour
                     let item = node.getComponent(PromoItem);
                     if (item != null)
                     {
-                        item.OnAwake();
                         this.itemList.push(item);
                         item.style = P202.style;
                     }

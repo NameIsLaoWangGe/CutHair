@@ -59,8 +59,8 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
 
     skinXDOnDisable(): void {
+        ADManager.ShowBanner();
         Setting.setBtnAppear();
         Gold.goldAppear();
-        Admin._openScene(Admin.SceneName.UIStart);
     }
 }

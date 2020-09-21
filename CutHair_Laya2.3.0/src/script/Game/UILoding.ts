@@ -88,7 +88,7 @@ export default class UILoding extends Loding.LodeScene {
         Laya.timer.once(500, this, () => {
             Gold.createGoldNode(Laya.stage);
             Setting.createSetBtn(65, 104, 47, 54, 'UI/GameStart/shezhi.png', Laya.stage);
-            Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         })
     }
 

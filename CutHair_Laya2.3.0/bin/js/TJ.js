@@ -42,10 +42,10 @@ var DP =
     },
     TT:   //字节跳动小游戏
     {
-        appId:"tt2bba5d07b48073ec",
-        bannerId:"27k90ckf1mg1695abo",
-        insertId:"eeiikeccgjaac53li4",
-        videoId:"lk9mc463d799d27k52",
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
     },
     ReYun:   //热云统计
     {
@@ -152,7 +152,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/9/21 10:09:02
+中国标准时间 2020/9/21 15:43:32
 */
 var TJ;
 (function (TJ) {

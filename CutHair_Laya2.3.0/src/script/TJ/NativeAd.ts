@@ -18,7 +18,7 @@ export default class NativeAd extends Laya.Script {
         this.icon = this.nativetNode.getChildByName("Icon") as Laya.Image;
         this.title = this.nativetNode.getChildByName("Title") as Laya.Text;
         this.desc = this.nativetNode.getChildByName("Des") as Laya.Text;
-
+        this.contant = this.nativetNode.getChildByName('Contant') as Laya.Image;
         this.WatchAD2 = this.owner.getChildByName("WatchAD2") as Laya.Image;
         if (this.WatchAD2) {
             this.WatchAD2.on(Laya.Event.CLICK, this, this.Click);
@@ -44,7 +44,7 @@ export default class NativeAd extends Laya.Script {
         (this.owner as Laya.Box).visible = false;
         this.Show();
     }
-   
+
     Show() {
         let p = new TJ.API.AdService.Param();
         this.nativeAd = TJ.API.AdService.LoadNative(p);
@@ -61,6 +61,7 @@ export default class NativeAd extends Laya.Script {
                 this.icon.skin = this.nativeAd.iconUrl;
                 this.title.text = this.nativeAd.title;
                 this.desc.text = this.nativeAd.desc;
+                this.contant.skin = this.nativeAd.imgUrl;
             }
         }
         else {

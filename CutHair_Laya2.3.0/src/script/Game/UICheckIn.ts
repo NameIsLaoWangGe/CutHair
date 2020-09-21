@@ -195,5 +195,6 @@ export default class UICheckIn extends CheckIn.CheckInScene {
 
     checkInOnDisable(): void {
         Setting.setBtnAppear();
+        ADManager.ShowBanner();
     }
 }
