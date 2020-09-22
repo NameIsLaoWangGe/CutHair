@@ -4800,7 +4800,7 @@
             this.layout = this.scroll.getChildByName("layout");
             this.prefab = this.layout.getCell(0);
             this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); ADManager.CloseBanner(); });
-            this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); ADManager.ShowBanner(); });
+            this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); });
             let w = this.scroll.width - this.paddingTop - this.paddingBottom;
             while (w >= this.prefab.width) {
                 w = w - this.prefab.width - this.layout.spaceX;
@@ -7939,7 +7939,7 @@
             Click.on(Click.Type.largen, this.self['BtnComplete'], this, null, null, this.btnCompleteUp, null);
         }
         btnCompleteUp() {
-            Admin._openScene(Admin.SceneName.UIShare, null, this.self);
+            Admin._openScene(Admin.SceneName.UIVictory, null, this.self);
         }
     }
 

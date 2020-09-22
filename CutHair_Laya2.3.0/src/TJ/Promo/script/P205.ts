@@ -32,7 +32,7 @@ export default class P205 extends Behaviour {
         this.prefab = this.layout.getCell(0);
 
         this.show.clickHandler = new Laya.Handler(null, () => { this.Show(); ADManager.CloseBanner(); });
-        this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide(); ADManager.ShowBanner(); });
+        this.hide.clickHandler = new Laya.Handler(null, () => { this.Hide()});
 
         let w = this.scroll.width - this.paddingTop - this.paddingBottom;
         while (w >= this.prefab.width) {

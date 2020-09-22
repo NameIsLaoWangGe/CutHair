@@ -33,7 +33,7 @@ export default class UISkin extends SkinScene {
         }
 
         Dialog.createVoluntarilyDialogue(150, 334, Admin.SceneName.UIVictory, 0, 2000, this.self);
-        
+
     }
 
     skinEventReg(): void {
@@ -209,7 +209,7 @@ export default class UISkin extends SkinScene {
     }
 
     btnCompleteUp(): void {
-        Admin._openScene(Admin.SceneName.UIShare, null, this.self)
+        Admin._openScene(Admin.SceneName.UIVictory, null, this.self)
     }
 }
 
