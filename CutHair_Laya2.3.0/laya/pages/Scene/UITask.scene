@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":168,
-    "selecteID":203,
+    "selectedBox":164,
+    "selecteID":209,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":204,
+    "maxID":227,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -90,14 +90,13 @@
                     "props":{"y":88,"x":28,"var":"TaskList","repeatY":5,"name":"TaskList"},
                     "nodeParent":164,
                     "label":"TaskList",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":162,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":545,"renderType":"render","height":147},
@@ -110,7 +109,6 @@
                             "compId":161,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Board",
                                     "props":{"y":0,"x":0,"width":545,"skin":"UI/Task/di.png","sizeGrid":"0,36,0,48","name":"Board","height":140,"alpha":1},
@@ -125,7 +123,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,Name,Name",
                                     "props":{"y":53,"x":136,"width":224,"var":"Name","valign":"middle","text":"每日登陆游戏","pivotY":19,"name":"Name","height":37,"fontSize":28,"color":"#ffffff","bold":true,"align":"left"},
@@ -139,7 +136,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"y":23,"x":22,"texture":"UI/Task/kuang.png","alpha":1},
@@ -153,7 +149,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite,Progress,Progress",
                                     "props":{"y":84,"x":141,"var":"Progress","texture":"UI/Task/jindu1.png","name":"Progress"},
@@ -168,7 +163,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,ProgressBar,ProgressBar",
                                     "props":{"y":97,"x":141,"width":169,"var":"ProgressBar","skin":"UI/Task/jindu2.png","sizeGrid":"0,14,0,12","scaleX":1,"pivotY":13,"name":"ProgressBar","height":25},
@@ -182,7 +176,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,ProNum",
                                     "props":{"y":84.5,"x":180.5,"width":90,"valign":"middle","text":"1/2","name":"ProNum","height":25,"fontSize":18,"bold":true,"align":"center"},
@@ -196,7 +189,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,BtnGet,BtnGet",
                                     "props":{"y":75,"x":453,"width":139,"var":"BtnGet","skin":"UI/Shop/icon_ads.png","pivotY":36,"pivotX":70,"name":"BtnGet","height":72},
@@ -210,7 +202,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,AwardNum,AwardNum",
                                     "props":{"y":108,"x":79,"width":87,"var":"AwardNum","valign":"middle","text":"x45","strokeColor":"#ffffff","stroke":2,"pivotY":11,"pivotX":51,"name":"AwardNum","height":21,"fontSize":20,"color":"#216b18","bold":true,"align":"right"},
@@ -224,7 +215,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,AwardPic,AwardPic",
                                     "props":{"y":33,"x":28,"var":"AwardPic","skin":"UI/GameStart/qian.png","name":"AwardPic"},
@@ -238,7 +228,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Script",
                                     "switchAble":true,
                                     "source":"src/script/Game/UITask_GetAward.ts",
@@ -275,7 +264,7 @@
                     "type":"Box",
                     "selectedBox":329,
                     "searchKey":"Box,NativeRoot,NativeRoot",
-                    "props":{"y":0,"x":0,"width":500,"visible":false,"var":"NativeRoot","scaleY":0.8,"scaleX":0.8,"name":"NativeRoot","height":250,"centerX":7,"bottom":-209},
+                    "props":{"width":600,"visible":false,"var":"NativeRoot","scaleY":0.8,"scaleX":0.8,"name":"NativeRoot","height":276,"centerX":2,"bottom":-225},
                     "nodeParent":164,
                     "maxID":424,
                     "label":"NativeRoot",
@@ -283,62 +272,145 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":168,
+                    "compId":209,
                     "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"top":0,"skin":"Frame/UI/ui_square_c_012.png","sizeGrid":"26,25,22,26","right":0,"left":0,"bottom":0,"alpha":0.3},
+                            "nodeParent":209,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":210,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"y":1,"x":0,"width":599,"skin":"Frame/UI/ui_square_007.png","sizeGrid":"40,26,21,35","height":126},
+                            "nodeParent":209,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":211,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"y":203,"x":451,"width":273,"skin":"Frame/UI/ui_square_006.png","sizeGrid":"42,44,29,41","pivotY":54,"pivotX":137,"height":108},
+                            "nodeParent":209,
+                            "label":"Image",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":212,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Label",
+                                    "searchKey":"Label",
+                                    "props":{"text":"立即领取","fontSize":40,"color":"#ffffff","centerY":0,"centerX":0,"bold":true},
+                                    "nodeParent":212,
+                                    "label":"Label",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":213,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"y":201,"x":153,"width":288,"skin":"UI/Common/anniu.png","pivotY":64,"pivotX":144,"height":128},
+                            "nodeParent":209,
+                            "label":"Image",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":214,
+                            "child":[
+                                {
+                                    "type":"Label",
+                                    "searchKey":"Label",
+                                    "props":{"y":44,"x":52,"text":"查看广告","strokeColor":"#9f5c5e","stroke":3,"fontSize":45,"color":"#ffffff","bold":true},
+                                    "nodeParent":214,
+                                    "label":"Label",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":215,
+                                    "child":[
+                                        ]
+                                }]
+                        },
                         {
                             "x":45,
                             "type":"Box",
                             "searchKey":"Box,nativeNode",
-                            "props":{"top":0,"scaleY":1,"scaleX":1,"right":0,"pivotY":194.5,"pivotX":222.5,"name":"nativeNode","left":0,"bottom":0,"anchorY":0.5,"anchorX":0.5},
-                            "nodeParent":168,
+                            "props":{"width":500,"top":0,"scaleY":1,"scaleX":1,"right":0,"pivotY":194.5,"pivotX":222.5,"name":"nativeNode","left":0,"height":250,"bottom":0,"anchorY":0.5,"anchorX":0.5},
+                            "nodeParent":209,
                             "label":"nativeNode",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
-                            "compId":169,
+                            "compId":216,
                             "child":[
                                 {
                                     "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
                                     "props":{"visible":true,"top":0,"skin":"UI/Common/yuansheng1.png","sizeGrid":"50,50,50,50","right":0,"left":0,"bottom":0},
-                                    "nodeParent":169,
+                                    "nodeParent":216,
                                     "label":"Image",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":170,
+                                    "compId":217,
                                     "child":[
                                         ],
-                                    "$HIDDEN":false
+                                    "$HIDDEN":true
                                 },
                                 {
                                     "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Contant",
-                                    "props":{"visible":true,"top":0,"skin":"UI/Common/yuansheng1.png","sizeGrid":"45,28,44,24","right":0,"name":"Contant","left":0,"bottom":0},
-                                    "nodeParent":169,
+                                    "props":{"visible":false,"top":-1,"skin":"UI/Common/yuansheng1.png","sizeGrid":"45,28,44,24","right":0,"name":"Contant","left":0,"bottom":0},
+                                    "nodeParent":216,
                                     "label":"Contant",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":171,
+                                    "compId":218,
                                     "child":[
                                         ],
-                                    "$HIDDEN":false
+                                    "$HIDDEN":true
                                 },
                                 {
                                     "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
-                                    "props":{"width":180,"visible":false,"left":27,"height":180,"centerY":0},
-                                    "nodeParent":169,
+                                    "props":{"width":180,"visible":false,"left":27,"height":180,"centerY":-1},
+                                    "nodeParent":216,
                                     "label":"Image",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":172,
+                                    "compId":219,
                                     "child":[
                                         ],
                                     "$HIDDEN":true
@@ -347,61 +419,61 @@
                                     "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Icon",
-                                    "props":{"width":180,"visible":false,"name":"Icon","left":27,"height":180,"centerY":0},
-                                    "nodeParent":169,
+                                    "props":{"width":110,"visible":true,"skin":"UI/Common/bg.png","name":"Icon","left":25,"height":110,"centerY":-75},
+                                    "nodeParent":216,
                                     "label":"Icon",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":173,
+                                    "compId":220,
                                     "child":[
                                         ],
-                                    "$HIDDEN":true
+                                    "$HIDDEN":false
                                 },
                                 {
                                     "x":60,
                                     "type":"Text",
                                     "searchKey":"Text,Title",
-                                    "props":{"y":50,"x":228,"width":350,"visible":false,"valign":"middle","text":"广告名字","name":"Title","height":81,"fontSize":30,"color":"#000000","align":"left"},
-                                    "nodeParent":169,
+                                    "props":{"y":-7,"x":154,"width":350,"visible":false,"valign":"middle","text":"广告名字","name":"Title","height":81,"fontSize":30,"color":"#000000","align":"left"},
+                                    "nodeParent":216,
                                     "label":"Title",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":174,
+                                    "compId":221,
                                     "child":[
                                         ],
-                                    "$HIDDEN":true
+                                    "$HIDDEN":false
                                 },
                                 {
                                     "x":60,
                                     "type":"Text",
                                     "searchKey":"Text,Des",
-                                    "props":{"y":124,"x":228,"wordWrap":true,"width":383,"visible":false,"valign":"middle","text":"广告内容广告内容广告内容","name":"Des","height":125,"fontSize":30,"color":"#000000","align":"left"},
-                                    "nodeParent":169,
+                                    "props":{"y":25,"x":154,"wordWrap":true,"width":383,"visible":false,"valign":"middle","text":"广告内容广告内容广告内容","name":"Des","height":125,"fontSize":30,"color":"#000000","align":"left"},
+                                    "nodeParent":216,
                                     "label":"Des",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":175,
+                                    "compId":222,
                                     "child":[
                                         ],
-                                    "$HIDDEN":true
+                                    "$HIDDEN":false
                                 },
                                 {
                                     "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
-                                    "props":{"skin":"UI/Common/yuansheng2.png","right":0,"bottom":0},
-                                    "nodeParent":169,
+                                    "props":{"visible":false,"skin":"UI/Common/yuansheng2.png","right":0,"bottom":0},
+                                    "nodeParent":216,
                                     "label":"Image",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":176,
+                                    "compId":223,
                                     "child":[
                                         ],
-                                    "$HIDDEN":false
+                                    "$HIDDEN":true
                                 }],
                             "$HIDDEN":false
                         },
@@ -410,12 +482,12 @@
                             "type":"Box",
                             "searchKey":"Box,defaultNode",
                             "props":{"top":0,"right":0,"name":"defaultNode","left":0,"bottom":0},
-                            "nodeParent":168,
+                            "nodeParent":209,
                             "label":"defaultNode",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":177,
+                            "compId":224,
                             "child":[
                                 ],
                             "$HIDDEN":false
@@ -428,12 +500,12 @@
                             "searchKey":"Script,NativeAd",
                             "removeAble":true,
                             "props":{},
-                            "nodeParent":168,
+                            "nodeParent":209,
                             "label":"NativeAd",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":201,
+                            "compId":225,
                             "child":[
                                 ]
                         },
@@ -441,16 +513,16 @@
                             "x":45,
                             "type":"Image",
                             "searchKey":"Image,Close",
-                            "props":{"y":0,"x":0,"width":24,"visible":true,"top":3,"skin":"UI/Common/X.png","scaleY":1.5,"scaleX":1.5,"right":3,"name":"Close","height":24},
-                            "nodeParent":168,
+                            "props":{"y":0,"x":0,"width":24,"visible":false,"top":3,"skin":"UI/Common/X.png","scaleY":1.5,"scaleX":1.5,"right":3,"name":"Close","height":24},
+                            "nodeParent":209,
                             "label":"Close",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":203,
+                            "compId":226,
                             "child":[
                                 ],
-                            "$HIDDEN":false
+                            "$HIDDEN":true
                         }],
                     "animations":[
                         {

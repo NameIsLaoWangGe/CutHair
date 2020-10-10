@@ -2,12 +2,12 @@ var DP =
 {
     Basic:
     {
-        appGuid:"a8b14912-ac92-597c-cd35-a1788ae9c035",
+        appGuid:"7d5bcb7e-cd62-be5f-04e3-11c393952a82",
         productName:"剃头大师",
-        packageName:"com.tomatojoy.ttds.kyx.nearme.gamecenter",
-        versionName:"1.0.1",
-        versionCode:2,
-        channel:"OPPO_AppRt",
+        packageName:"com.tomatojoy.ttds.vivominigame",
+        versionName:"1.0.0",
+        versionCode:1,
+        channel:"VIVO_AppRt",
     },
     XIAOMI:
     {
@@ -28,10 +28,10 @@ var DP =
     {
         QG:   //vivo小游戏
         {
-            bannerId:null,
-            insertId:null,
-            videoId:null,
-            nativeId:null,
+            bannerId:"a06f50fe4849413eb2644412734197dc",
+            insertId:"0298c76ee2ec44258056cc357930469d",
+            videoId:"0f37dd9eec1a442fac0dfc39723b9342",
+            nativeId:"99351dc533db46e29f0260cf8146bc1b",
             nativeCustomInsert:null,
         },
     },
@@ -49,7 +49,7 @@ var DP =
     },
     ReYun:   //热云统计
     {
-        appId:"c03016cb083f0a9b550e88f449dc13a5",
+        appId:"2990f7eeaf4df351f7a59f86ceb2b7b0",
     },
     QTTGame:   //趣头条游戏
     {
@@ -73,6 +73,8 @@ var DP =
             videoId:"214589",
             nativeId:"221104",
             nativeCustomInsert:null,
+            gameBannerId:null,
+            gamePortalId:null,
         },
     },
     MZ:   //魅族快游戏
@@ -152,7 +154,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 /*
 DESKTOP-BT8F2H9
 Microsoft Windows NT 10.0.17763.0
-中国标准时间 2020/9/21 16:22:20
+中国标准时间 2020/10/10 10:08:39
 */
 var TJ;
 (function (TJ) {
@@ -264,7 +266,7 @@ var TJ;
     (function (Define) {
         var SDK;
         (function (SDK) {
-            SDK.version = "3.1.2.0";
+            SDK.version = "3.1.3.0";
         })(SDK = Define.SDK || (Define.SDK = {}));
     })(Define = TJ.Define || (TJ.Define = {}));
 })(TJ || (TJ = {}));
@@ -2263,28 +2265,39 @@ var TJ;
                 }
                 IAccount.prototype.Login = function (param) {
                     return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-                        return [2 /*return*/];
+                        return [2 /*return*/, {}];
                     }); });
                 };
-                IAccount.prototype.SetUserInfo = function (param) {
+                IAccount.prototype.GetUserInfo = function (param) {
                     return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-                        return [2 /*return*/];
+                        return [2 /*return*/, {}];
                     }); });
                 };
                 IAccount.prototype.OnInit = function () {
                     return __awaiter(this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
+                        var _a;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
                                 case 0:
-                                    if (!Account.autoLogin) return [3 /*break*/, 3];
+                                    if (!Account.autoLogin) return [3 /*break*/, 5];
                                     return [4 /*yield*/, this.Login(null)];
                                 case 1:
-                                    _a.sent();
-                                    return [4 /*yield*/, this.SetUserInfo(null)];
+                                    Account.userId = _b.sent();
+                                    _a = TJ.Common.SystemInfo;
+                                    return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(Account.userId)];
                                 case 2:
-                                    _a.sent();
-                                    _a.label = 3;
-                                case 3: return [2 /*return*/];
+                                    _a.userGuid = _b.sent();
+                                    Account.loginPromiseWrap.Resolve();
+                                    if (!Account.autoGetUserInfo) return [3 /*break*/, 5];
+                                    return [4 /*yield*/, this.GetUserInfo(null)];
+                                case 3:
+                                    Account.userInfo = _b.sent();
+                                    return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(Account.userInfo)];
+                                case 4:
+                                    _b.sent();
+                                    Account.getUserInfoPromiseWrap.Resolve();
+                                    _b.label = 5;
+                                case 5: return [2 /*return*/];
                             }
                         });
                     });
@@ -2301,6 +2314,70 @@ var TJ;
             Account.Param = Param;
             Account.autoLogin = true;
             Account.loginPromiseWrap = new TJ.Common.PromiseWrap();
+            function Login(param) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var _i, _a, item, e_1;
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                _i = 0, _a = TJ.Common.Component.Manager.GetComponentsWithInit(IAccount);
+                                _b.label = 1;
+                            case 1:
+                                if (!(_i < _a.length)) return [3 /*break*/, 6];
+                                item = _a[_i];
+                                _b.label = 2;
+                            case 2:
+                                _b.trys.push([2, 4, , 5]);
+                                return [4 /*yield*/, item.Login(param)];
+                            case 3:
+                                Account.userId = _b.sent();
+                                return [3 /*break*/, 5];
+                            case 4:
+                                e_1 = _b.sent();
+                                console.log(JSON.stringify(e_1));
+                                return [3 /*break*/, 5];
+                            case 5:
+                                _i++;
+                                return [3 /*break*/, 1];
+                            case 6: return [2 /*return*/];
+                        }
+                    });
+                });
+            }
+            Account.Login = Login;
+            Account.autoGetUserInfo = true;
+            Account.getUserInfoPromiseWrap = new TJ.Common.PromiseWrap();
+            function GetUserInfo(param) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var _i, _a, item, e_2;
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                _i = 0, _a = TJ.Common.Component.Manager.GetComponentsWithInit(IAccount);
+                                _b.label = 1;
+                            case 1:
+                                if (!(_i < _a.length)) return [3 /*break*/, 6];
+                                item = _a[_i];
+                                _b.label = 2;
+                            case 2:
+                                _b.trys.push([2, 4, , 5]);
+                                return [4 /*yield*/, item.GetUserInfo(param)];
+                            case 3:
+                                Account.userInfo = _b.sent();
+                                return [3 /*break*/, 5];
+                            case 4:
+                                e_2 = _b.sent();
+                                console.log(JSON.stringify(e_2));
+                                return [3 /*break*/, 5];
+                            case 5:
+                                _i++;
+                                return [3 /*break*/, 1];
+                            case 6: return [2 /*return*/];
+                        }
+                    });
+                });
+            }
+            Account.GetUserInfo = GetUserInfo;
         })(Account = API.Account || (API.Account = {}));
     })(API = TJ.API || (TJ.API = {}));
 })(TJ || (TJ = {}));
@@ -6021,40 +6098,40 @@ var TJ;
                         QG.InitAdService = InitAdService;
                         var BannerAd = /** @class */ (function () {
                             function BannerAd(obj) {
-                                this.bannerAd = obj;
+                                this.obj = obj;
                             }
                             BannerAd.prototype.Show = function () {
-                                this.bannerAd.show();
+                                this.obj.show();
                             };
                             BannerAd.prototype.Hide = function () {
-                                this.bannerAd.hide();
+                                this.obj.hide();
                             };
                             BannerAd.prototype.OnShow = function (callback) {
-                                this.bannerAd.onShow(callback);
+                                this.obj.onShow(callback);
                             };
                             BannerAd.prototype.OffShow = function (callback) {
-                                this.bannerAd.offShow(callback);
+                                this.obj.offShow(callback);
                             };
                             BannerAd.prototype.OnHide = function (callback) {
-                                this.bannerAd.onHide(callback);
+                                this.obj.onHide(callback);
                             };
                             BannerAd.prototype.OffHide = function (callback) {
-                                this.bannerAd.offHide(callback);
+                                this.obj.offHide(callback);
                             };
                             BannerAd.prototype.OnError = function (callback) {
-                                this.bannerAd.onError(callback);
+                                this.obj.onError(callback);
                             };
                             BannerAd.prototype.OffError = function (callback) {
-                                this.bannerAd.offError(callback);
+                                this.obj.offError(callback);
                             };
                             BannerAd.prototype.OnResize = function (callback) {
-                                this.bannerAd.onResize(callback);
+                                this.obj.onResize(callback);
                             };
                             BannerAd.prototype.OffResize = function () {
-                                this.bannerAd.offResize();
+                                this.obj.offResize();
                             };
                             BannerAd.prototype.Destroy = function () {
-                                this.bannerAd.destroy();
+                                this.obj.destroy();
                             };
                             return BannerAd;
                         }());
@@ -6068,34 +6145,34 @@ var TJ;
                         QG.CreateBannerAd = CreateBannerAd;
                         var InsertAd = /** @class */ (function () {
                             function InsertAd(obj) {
-                                this.insertAd = obj;
+                                this.obj = obj;
                             }
                             InsertAd.prototype.Load = function () {
-                                this.insertAd.load();
+                                this.obj.load();
                             };
                             InsertAd.prototype.Show = function () {
-                                this.insertAd.show();
+                                this.obj.show();
                             };
                             InsertAd.prototype.OnLoad = function (callback) {
-                                this.insertAd.onLoad(callback);
+                                this.obj.onLoad(callback);
                             };
                             InsertAd.prototype.OffLoad = function () {
-                                this.insertAd.offLoad();
+                                this.obj.offLoad();
                             };
                             InsertAd.prototype.OnShow = function (callback) {
-                                this.insertAd.onShow(callback);
+                                this.obj.onShow(callback);
                             };
                             InsertAd.prototype.OffShow = function () {
-                                this.insertAd.offShow();
+                                this.obj.offShow();
                             };
                             InsertAd.prototype.OnError = function (callback) {
-                                this.insertAd.onError(callback);
+                                this.obj.onError(callback);
                             };
                             InsertAd.prototype.OffError = function () {
-                                this.insertAd.offError();
+                                this.obj.offError();
                             };
                             InsertAd.prototype.Destroy = function () {
-                                this.insertAd.destroy();
+                                this.obj.destroy();
                             };
                             return InsertAd;
                         }());
@@ -6116,46 +6193,46 @@ var TJ;
                         }(QG.CallbackResult));
                         var RewardedVideoAd = /** @class */ (function () {
                             function RewardedVideoAd(obj) {
-                                this.videoAd = obj;
+                                this.obj = obj;
                             }
                             RewardedVideoAd.prototype.Load = function () {
-                                this.videoAd.load();
+                                this.obj.load();
                             };
                             RewardedVideoAd.prototype.Show = function () {
-                                this.videoAd.show();
+                                this.obj.show();
                             };
                             RewardedVideoAd.prototype.OnLoad = function (callback) {
-                                this.videoAd.onLoad(callback);
+                                this.obj.onLoad(callback);
                             };
                             RewardedVideoAd.prototype.OffLoad = function () {
-                                this.videoAd.offLoad();
+                                this.obj.offLoad();
                             };
                             RewardedVideoAd.prototype.OnVideoStart = function (callback) {
-                                this.videoAd.onVideoStart(callback);
+                                this.obj.onVideoStart(callback);
                             };
                             RewardedVideoAd.prototype.OffVideoStart = function () {
-                                this.videoAd.offVideoStart();
+                                this.obj.offVideoStart();
                             };
                             RewardedVideoAd.prototype.OnRewarded = function (callback) {
-                                this.videoAd.onRewarded(callback);
+                                this.obj.onRewarded(callback);
                             };
                             RewardedVideoAd.prototype.OffRewarded = function () {
-                                this.videoAd.offRewarded();
+                                this.obj.offRewarded();
                             };
                             RewardedVideoAd.prototype.OnClose = function (callback) {
-                                this.videoAd.onClose(callback);
+                                this.obj.onClose(callback);
                             };
                             RewardedVideoAd.prototype.OffClose = function () {
-                                this.videoAd.offClose();
+                                this.obj.offClose();
                             };
                             RewardedVideoAd.prototype.OnError = function (callback) {
-                                this.videoAd.onError(callback);
+                                this.obj.onError(callback);
                             };
                             RewardedVideoAd.prototype.OffError = function () {
-                                this.videoAd.offError();
+                                this.obj.offError();
                             };
                             RewardedVideoAd.prototype.Destroy = function () {
-                                this.videoAd.destroy();
+                                this.obj.destroy();
                             };
                             return RewardedVideoAd;
                         }());
@@ -6175,35 +6252,35 @@ var TJ;
                         QG.NativeAdData = NativeAdData;
                         var NativeAd = /** @class */ (function () {
                             function NativeAd(obj) {
-                                this.nativeAd = obj;
+                                this.obj = obj;
                             }
                             NativeAd.prototype.Load = function () {
-                                this.nativeAd.load();
+                                this.obj.load();
                             };
                             NativeAd.prototype.ReportAdShow = function (adId) {
                                 var obj = {};
                                 obj.adId = adId;
-                                this.nativeAd.reportAdShow(obj);
+                                this.obj.reportAdShow(obj);
                             };
                             NativeAd.prototype.ReportAdClick = function (adId) {
                                 var obj = {};
                                 obj.adId = adId;
-                                this.nativeAd.reportAdClick(obj);
+                                this.obj.reportAdClick(obj);
                             };
                             NativeAd.prototype.OnLoad = function (callback) {
-                                this.nativeAd.onLoad(callback);
+                                this.obj.onLoad(callback);
                             };
                             NativeAd.prototype.OffLoad = function () {
-                                this.nativeAd.offLoad();
+                                this.obj.offLoad();
                             };
                             NativeAd.prototype.OnError = function (callback) {
-                                this.nativeAd.onError(callback);
+                                this.obj.onError(callback);
                             };
                             NativeAd.prototype.OffError = function () {
-                                this.nativeAd.offError();
+                                this.obj.offError();
                             };
                             NativeAd.prototype.Destroy = function () {
-                                this.nativeAd.destroy();
+                                this.obj.destroy();
                             };
                             return NativeAd;
                         }());
@@ -6215,6 +6292,82 @@ var TJ;
                             return new NativeAd(obj);
                         }
                         QG.CreateNativeAd = CreateNativeAd;
+                        var GameBannerAd = /** @class */ (function () {
+                            function GameBannerAd(obj) {
+                                this.obj = obj;
+                            }
+                            GameBannerAd.prototype.Show = function () {
+                                return this.obj.show();
+                            };
+                            GameBannerAd.prototype.Hide = function () {
+                                return this.obj.hide();
+                            };
+                            GameBannerAd.prototype.OnLoad = function (callback) {
+                                this.obj.onLoad(callback);
+                            };
+                            GameBannerAd.prototype.OffLoad = function (callback) {
+                                this.obj.offLoad(callback);
+                            };
+                            GameBannerAd.prototype.OnError = function (callback) {
+                                this.obj.onError(callback);
+                            };
+                            GameBannerAd.prototype.OffError = function (callback) {
+                                this.obj.offError(callback);
+                            };
+                            GameBannerAd.prototype.Destroy = function () {
+                                return this.obj.destroy();
+                            };
+                            return GameBannerAd;
+                        }());
+                        QG.GameBannerAd = GameBannerAd;
+                        function CreateGameBannerAd(param) {
+                            if (typeof qg.createGameBannerAd != 'function')
+                                return null;
+                            var obj = qg.createGameBannerAd(param);
+                            return new GameBannerAd(obj);
+                        }
+                        QG.CreateGameBannerAd = CreateGameBannerAd;
+                        var GamePortalAd = /** @class */ (function () {
+                            function GamePortalAd(obj) {
+                                this.obj = obj;
+                            }
+                            GamePortalAd.prototype.Load = function () {
+                                return this.obj.load();
+                            };
+                            GamePortalAd.prototype.Show = function () {
+                                return this.obj.show();
+                            };
+                            GamePortalAd.prototype.OnLoad = function (callback) {
+                                this.obj.onLoad(callback);
+                            };
+                            GamePortalAd.prototype.OffLoad = function (callback) {
+                                this.obj.offLoad(callback);
+                            };
+                            GamePortalAd.prototype.OnClose = function (callback) {
+                                this.obj.onClose(callback);
+                            };
+                            GamePortalAd.prototype.OffClose = function (callback) {
+                                this.obj.offClose(callback);
+                            };
+                            GamePortalAd.prototype.OnError = function (callback) {
+                                this.obj.onError(callback);
+                            };
+                            GamePortalAd.prototype.OffError = function (callback) {
+                                this.obj.offError(callback);
+                            };
+                            GamePortalAd.prototype.Destroy = function () {
+                                return this.obj.destroy();
+                            };
+                            return GamePortalAd;
+                        }());
+                        QG.GamePortalAd = GamePortalAd;
+                        function CreateGamePortalAd(param) {
+                            if (typeof qg.createGamePortalAd != 'function')
+                                return null;
+                            var obj = qg.createGamePortalAd(param);
+                            return new GamePortalAd(obj);
+                        }
+                        QG.CreateGamePortalAd = CreateGamePortalAd;
                     })(QG = OPPO.QG || (OPPO.QG = {}));
                 })(OPPO = Extern.OPPO || (Extern.OPPO = {}));
             })(Extern = AppRt.Extern || (AppRt.Extern = {}));
@@ -7048,7 +7201,6 @@ var TJ;
                         function ShareAppMessageParamExtra() {
                             this.createChallenge = false; //是否分享为挑战视频 (头条支持)
                             this.video_title = ""; //生成输入的默认文案
-                            //hashtag_list: string[] | boolean = false; //视频话题(只在抖音可用)
                         }
                         return ShareAppMessageParamExtra;
                     }());
@@ -7164,6 +7316,11 @@ var TJ;
                             tt.showMoreGamesModal(param);
                     }
                     TT.ShowMoreGamesModal = ShowMoreGamesModal;
+                    function SetMoreGamesInfo(param) {
+                        if (tt.setMoreGamesInfo != null)
+                            tt.setMoreGamesInfo(param);
+                    }
+                    TT.SetMoreGamesInfo = SetMoreGamesInfo;
                     function VibrateShort(parm) {
                         tt.vibrateShort(parm);
                     }
@@ -8197,6 +8354,8 @@ var TJ;
                     }());
                     WX.CreateGridAdParam = CreateGridAdParam;
                     function CreateGridAd(param) {
+                        if (typeof wx.createGridAd != 'function')
+                            return null;
                         var obj = wx.createGridAd(param);
                         return new GridAd(obj);
                     }
@@ -8252,6 +8411,8 @@ var TJ;
                     }());
                     WX.CreateCustomAdParam = CreateCustomAdParam;
                     function CreateCustomAd(param) {
+                        if (typeof wx.createCustomAd != 'function')
+                            return null;
                         var obj = wx.createCustomAd(param);
                         return new CustomAd(obj);
                     }
@@ -8605,6 +8766,69 @@ var TJ;
                         }
                         Account.GetUserInfo = GetUserInfo;
                     })(Account = OPPO.Account || (OPPO.Account = {}));
+                })(OPPO = Develop.OPPO || (Develop.OPPO = {}));
+            })(Develop = AppRt.Develop || (AppRt.Develop = {}));
+        })(AppRt = Platform.AppRt || (Platform.AppRt = {}));
+    })(Platform = TJ.Platform || (TJ.Platform = {}));
+})(TJ || (TJ = {}));
+(function (TJ) {
+    var Platform;
+    (function (Platform) {
+        var AppRt;
+        (function (AppRt) {
+            var Develop;
+            (function (Develop) {
+                var OPPO;
+                (function (OPPO) {
+                    var GameAd;
+                    (function (GameAd) {
+                        var gameBannerAd;
+                        function ShowBanner() {
+                            if (DP.OPPO.QG.gameBannerId == null)
+                                return;
+                            if (gameBannerAd == null) {
+                                gameBannerAd = AppRt.Extern.OPPO.QG.CreateGameBannerAd({ adUnitId: DP.OPPO.QG.gameBannerId });
+                                if (gameBannerAd == null)
+                                    return;
+                                gameBannerAd.OnLoad(function (res) {
+                                    console.log("OPPO.QG.GameBannerAd OnLoad = " + JSON.stringify(res));
+                                });
+                                gameBannerAd.OnError(function (res) {
+                                    console.log("OPPO.QG.GameBannerAd OnError = " + JSON.stringify(res));
+                                });
+                            }
+                            if (gameBannerAd != null) {
+                                gameBannerAd.Show();
+                            }
+                        }
+                        GameAd.ShowBanner = ShowBanner;
+                        function RemoveBanner() {
+                            if (gameBannerAd != null) {
+                                gameBannerAd.Destroy();
+                                gameBannerAd = null;
+                            }
+                        }
+                        GameAd.RemoveBanner = RemoveBanner;
+                        function ShowPortal() {
+                            if (DP.OPPO.QG.gamePortalId == null)
+                                return;
+                            var ad = AppRt.Extern.OPPO.QG.CreateGamePortalAd({ adUnitId: DP.OPPO.QG.gamePortalId });
+                            ad.OnLoad(function (res) {
+                                console.log("OPPO.QG.GamePortalAd OnLoad = " + JSON.stringify(res));
+                                ad.Show();
+                            });
+                            ad.OnError(function (res) {
+                                console.log("OPPO.QG.GamePortalAd OnError = " + JSON.stringify(res));
+                                ad.Destroy();
+                            });
+                            ad.OnClose(function (res) {
+                                console.log("OPPO.QG.GamePortalAd OnClose = " + JSON.stringify(res));
+                                ad.Destroy();
+                            });
+                            ad.Load();
+                        }
+                        GameAd.ShowPortal = ShowPortal;
+                    })(GameAd = OPPO.GameAd || (OPPO.GameAd = {}));
                 })(OPPO = Develop.OPPO || (Develop.OPPO = {}));
             })(Develop = AppRt.Develop || (AppRt.Develop = {}));
         })(AppRt = Platform.AppRt || (Platform.AppRt = {}));
@@ -9107,7 +9331,8 @@ var TJ;
                         var loginWaiter;
                         var code;
                         var anonymousCode;
-                        function Login() {
+                        function Login(force) {
+                            if (force === void 0) { force = false; }
                             return __awaiter(this, void 0, void 0, function () {
                                 var param;
                                 return __generator(this, function (_a) {
@@ -9117,7 +9342,7 @@ var TJ;
                                                 loginWaiter = new TJ.Common.PromiseWrap();
                                                 if (DP.Basic.channel == TJ.Define.Channel.AppRt.ZJTD_AppRt) {
                                                     param = new AppRt.Extern.TT.LoginParam();
-                                                    param.force = false;
+                                                    param.force = force;
                                                     param.success = function (res) {
                                                         code = res.code;
                                                         anonymousCode = res.anonymousCode;
@@ -9141,12 +9366,13 @@ var TJ;
                             });
                         }
                         Account.Login = Login;
-                        function YLogin() {
+                        function YLogin(force) {
+                            if (force === void 0) { force = false; }
                             return __awaiter(this, void 0, void 0, function () {
                                 var obj, res;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0: return [4 /*yield*/, Login()];
+                                        case 0: return [4 /*yield*/, Login(force)];
                                         case 1:
                                             obj = _a.sent();
                                             return [4 /*yield*/, TJ.Develop.Yun.Login.CLogin.TTAppRT(obj)];
@@ -10270,7 +10496,7 @@ var TJ;
                                 case 0:
                                     if (TJ.API.AppInfo.Channel() != TJ.Define.Channel.AppRt.QTT_AppRt)
                                         return [2 /*return*/];
-                                    return [4 /*yield*/, TJ.API.Account.loginPromiseWrap.promise];
+                                    return [4 /*yield*/, TJ.API.Account.getUserInfoPromiseWrap.promise];
                                 case 1:
                                     _a.sent();
                                     return [4 /*yield*/, AppRt.Develop.Yun.Player.GetUserInfo()];
@@ -11351,23 +11577,13 @@ var TJ;
                         }
                         Account.prototype.Login = function (param) {
                             return __awaiter(this, void 0, void 0, function () {
-                                var userId, _a;
-                                return __generator(this, function (_b) {
-                                    switch (_b.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userId = param.userId;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.HBS.Account.Login()];
-                                        case 2:
-                                            userId = _b.sent();
-                                            _b.label = 3;
-                                        case 3:
-                                            _a = TJ.Common.SystemInfo;
-                                            return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                        case 4:
-                                            _a.userGuid = _b.sent();
-                                            return [2 /*return*/];
+                                var userId;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, AppRt.Develop.HBS.Account.Login()];
+                                        case 1:
+                                            userId = _a.sent();
+                                            return [2 /*return*/, userId];
                                     }
                                 });
                             });
@@ -11377,19 +11593,10 @@ var TJ;
                                 var userInfo;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userInfo = param.userInfo;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.HBS.Account.GetUserInfo()];
-                                        case 2:
+                                        case 0: return [4 /*yield*/, AppRt.Develop.HBS.Account.GetUserInfo()];
+                                        case 1:
                                             userInfo = _a.sent();
-                                            _a.label = 3;
-                                        case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                        case 4:
-                                            _a.sent();
-                                            TJ.API.Account.loginPromiseWrap.Resolve();
-                                            return [2 /*return*/];
+                                            return [2 /*return*/, userInfo];
                                     }
                                 });
                             });
@@ -12060,6 +12267,7 @@ var TJ;
                                     AppRt.Develop.TA.LaunchOptions(options);
                                     console.log("OPPO.QG.GetLaunchOptionsSync " + JSON.stringify(options));
                                 }
+                                GetNoAdTime();
                             };
                             return Manager;
                         }(TJ.Common.Component.Interface));
@@ -12071,24 +12279,14 @@ var TJ;
                             }
                             Account.prototype.Login = function (param) {
                                 return __awaiter(this, void 0, void 0, function () {
-                                    var userId, res, _a;
-                                    return __generator(this, function (_b) {
-                                        switch (_b.label) {
-                                            case 0:
-                                                if (!(param != null)) return [3 /*break*/, 1];
-                                                userId = param.userId;
-                                                return [3 /*break*/, 3];
-                                            case 1: return [4 /*yield*/, AppRt.Develop.OPPO.Account.Login()];
-                                            case 2:
-                                                res = _b.sent();
+                                    var res, userId;
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0: return [4 /*yield*/, AppRt.Develop.OPPO.Account.Login()];
+                                            case 1:
+                                                res = _a.sent();
                                                 userId = res.data;
-                                                _b.label = 3;
-                                            case 3:
-                                                _a = TJ.Common.SystemInfo;
-                                                return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                            case 4:
-                                                _a.userGuid = _b.sent();
-                                                return [2 /*return*/];
+                                                return [2 /*return*/, userId];
                                         }
                                     });
                                 });
@@ -12098,19 +12296,10 @@ var TJ;
                                     var userInfo;
                                     return __generator(this, function (_a) {
                                         switch (_a.label) {
-                                            case 0:
-                                                if (!(param != null)) return [3 /*break*/, 1];
-                                                userInfo = param.userInfo;
-                                                return [3 /*break*/, 3];
-                                            case 1: return [4 /*yield*/, AppRt.Develop.OPPO.Account.GetUserInfo()];
-                                            case 2:
+                                            case 0: return [4 /*yield*/, AppRt.Develop.OPPO.Account.GetUserInfo()];
+                                            case 1:
                                                 userInfo = _a.sent();
-                                                _a.label = 3;
-                                            case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                            case 4:
-                                                _a.sent();
-                                                TJ.API.Account.loginPromiseWrap.Resolve();
-                                                return [2 /*return*/];
+                                                return [2 /*return*/, userInfo];
                                         }
                                     });
                                 });
@@ -12157,6 +12346,29 @@ var TJ;
                             };
                             return Promo;
                         }(TJ.API.Promo.IPromo));
+                        function GetNoAdTime() {
+                            return __awaiter(this, void 0, void 0, function () {
+                                var obj;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, TJ.Develop.Yun.Config.GameCfg()];
+                                        case 1:
+                                            obj = _a.sent();
+                                            if (typeof obj.NoAdTime == 'number') {
+                                                noAdTime = obj.NoAdTime;
+                                            }
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            });
+                        }
+                        var noAdTime = 60;
+                        function OnNoAd() {
+                            if (TJ.Common.Date_.nowSeconds - TJ.Common.SystemInfo.startupTime > noAdTime) {
+                                return false;
+                            }
+                            return true;
+                        }
                         var Ads = /** @class */ (function (_super) {
                             __extends(Ads, _super);
                             function Ads() {
@@ -12203,7 +12415,7 @@ var TJ;
                                 switch (grade) {
                                     case AppRt.API.AdPoly.Grade.banner:
                                         if (this.banner != null) {
-                                            if (TJ.Common.Date_.nowSeconds - TJ.Common.SystemInfo.startupTime < 60) {
+                                            if (OnNoAd()) {
                                                 return false;
                                             }
                                             return true;
@@ -12479,7 +12691,7 @@ var TJ;
                                 this.nad = new NativeAdHelper(DP.OPPO.QG.nativeId);
                             };
                             NativeAd.prototype.LoadNative = function (param) {
-                                if (TJ.Common.Date_.nowSeconds - TJ.Common.SystemInfo.startupTime < 60) {
+                                if (OnNoAd()) {
                                     return null;
                                 }
                                 return this.nad.Pop();
@@ -12633,23 +12845,13 @@ var TJ;
                         }
                         Account.prototype.Login = function (param) {
                             return __awaiter(this, void 0, void 0, function () {
-                                var userId, _a;
-                                return __generator(this, function (_b) {
-                                    switch (_b.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userId = param.userId;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.QQ.Account.YLogin()];
-                                        case 2:
-                                            userId = _b.sent();
-                                            _b.label = 3;
-                                        case 3:
-                                            _a = TJ.Common.SystemInfo;
-                                            return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                        case 4:
-                                            _a.userGuid = _b.sent();
-                                            return [2 /*return*/];
+                                var userId;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, AppRt.Develop.QQ.Account.YLogin()];
+                                        case 1:
+                                            userId = _a.sent();
+                                            return [2 /*return*/, userId];
                                     }
                                 });
                             });
@@ -12659,19 +12861,10 @@ var TJ;
                                 var userInfo;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userInfo = param.userInfo;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.QQ.Account.GetUserInfo()];
-                                        case 2:
+                                        case 0: return [4 /*yield*/, AppRt.Develop.QQ.Account.GetUserInfo()];
+                                        case 1:
                                             userInfo = _a.sent();
-                                            _a.label = 3;
-                                        case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                        case 4:
-                                            _a.sent();
-                                            TJ.API.Account.loginPromiseWrap.Resolve();
-                                            return [2 /*return*/];
+                                            return [2 /*return*/, userInfo];
                                     }
                                 });
                             });
@@ -13014,24 +13207,14 @@ var TJ;
                         }
                         Account.prototype.Login = function (param) {
                             return __awaiter(this, void 0, void 0, function () {
-                                var userId, res, _a;
-                                return __generator(this, function (_b) {
-                                    switch (_b.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userId = param.userId;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.QTT.Account.YLogin()];
-                                        case 2:
-                                            res = _b.sent();
+                                var res, userId;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, AppRt.Develop.QTT.Account.YLogin()];
+                                        case 1:
+                                            res = _a.sent();
                                             userId = res.data;
-                                            _b.label = 3;
-                                        case 3:
-                                            _a = TJ.Common.SystemInfo;
-                                            return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                        case 4:
-                                            _a.userGuid = _b.sent();
-                                            return [2 /*return*/];
+                                            return [2 /*return*/, userId];
                                     }
                                 });
                             });
@@ -13041,19 +13224,10 @@ var TJ;
                                 var userInfo;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userInfo = param.userInfo;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.QTT.Account.GetUserInfo()];
-                                        case 2:
+                                        case 0: return [4 /*yield*/, AppRt.Develop.QTT.Account.GetUserInfo()];
+                                        case 1:
                                             userInfo = _a.sent();
-                                            _a.label = 3;
-                                        case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                        case 4:
-                                            _a.sent();
-                                            TJ.API.Account.loginPromiseWrap.Resolve();
-                                            return [2 /*return*/];
+                                            return [2 /*return*/, userInfo];
                                     }
                                 });
                             });
@@ -13426,45 +13600,26 @@ var TJ;
                         }
                         Account.prototype.Login = function (param) {
                             return __awaiter(this, void 0, void 0, function () {
-                                var userId, _a;
-                                return __generator(this, function (_b) {
-                                    switch (_b.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userId = param.userId;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.TT.Account.YLogin()];
-                                        case 2:
-                                            userId = _b.sent();
-                                            _b.label = 3;
-                                        case 3:
-                                            _a = TJ.Common.SystemInfo;
-                                            return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                        case 4:
-                                            _a.userGuid = _b.sent();
-                                            return [2 /*return*/];
+                                var userId;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, AppRt.Develop.TT.Account.YLogin(param != null ? param.force : false)];
+                                        case 1:
+                                            userId = _a.sent();
+                                            return [2 /*return*/, userId];
                                     }
                                 });
                             });
                         };
-                        Account.prototype.SetUserInfo = function (param) {
+                        Account.prototype.GetUserInfo = function (param) {
                             return __awaiter(this, void 0, void 0, function () {
                                 var userInfo;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userInfo = param.userInfo;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.TT.Account.GetUserInfo()];
-                                        case 2:
+                                        case 0: return [4 /*yield*/, AppRt.Develop.TT.Account.GetUserInfo()];
+                                        case 1:
                                             userInfo = _a.sent();
-                                            _a.label = 3;
-                                        case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                        case 4:
-                                            _a.sent();
-                                            TJ.API.Account.loginPromiseWrap.Resolve();
-                                            return [2 /*return*/];
+                                            return [2 /*return*/, userInfo];
                                     }
                                 });
                             });
@@ -13506,6 +13661,7 @@ var TJ;
                                                 item = _c[_b];
                                                 p.appLaunchOptions.push({ appId: item, extraData: param.extraData });
                                             }
+                                            AppRt.Extern.TT.SetMoreGamesInfo(p);
                                             AppRt.Extern.TT.ShowMoreGamesModal(p);
                                             return [2 /*return*/];
                                     }
@@ -14043,24 +14199,14 @@ var TJ;
                             }
                             Account.prototype.Login = function (param) {
                                 return __awaiter(this, void 0, void 0, function () {
-                                    var userId, res, _a;
-                                    return __generator(this, function (_b) {
-                                        switch (_b.label) {
-                                            case 0:
-                                                if (!(param != null)) return [3 /*break*/, 1];
-                                                userId = param.userId;
-                                                return [3 /*break*/, 3];
-                                            case 1: return [4 /*yield*/, AppRt.Develop.VIVO.Account.YLogin()];
-                                            case 2:
-                                                res = _b.sent();
+                                    var res, userId;
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0: return [4 /*yield*/, AppRt.Develop.VIVO.Account.YLogin()];
+                                            case 1:
+                                                res = _a.sent();
                                                 userId = res.data;
-                                                _b.label = 3;
-                                            case 3:
-                                                _a = TJ.Common.SystemInfo;
-                                                return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                            case 4:
-                                                _a.userGuid = _b.sent();
-                                                return [2 /*return*/];
+                                                return [2 /*return*/, userId];
                                         }
                                     });
                                 });
@@ -14070,19 +14216,10 @@ var TJ;
                                     var userInfo;
                                     return __generator(this, function (_a) {
                                         switch (_a.label) {
-                                            case 0:
-                                                if (!(param != null)) return [3 /*break*/, 1];
-                                                userInfo = param.userInfo;
-                                                return [3 /*break*/, 3];
-                                            case 1: return [4 /*yield*/, AppRt.Develop.VIVO.Account.GetUserInfo()];
-                                            case 2:
+                                            case 0: return [4 /*yield*/, AppRt.Develop.VIVO.Account.GetUserInfo()];
+                                            case 1:
                                                 userInfo = _a.sent();
-                                                _a.label = 3;
-                                            case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                            case 4:
-                                                _a.sent();
-                                                TJ.API.Account.loginPromiseWrap.Resolve();
-                                                return [2 /*return*/];
+                                                return [2 /*return*/, userInfo];
                                         }
                                     });
                                 });
@@ -14472,23 +14609,13 @@ var TJ;
                         }
                         Account.prototype.Login = function (param) {
                             return __awaiter(this, void 0, void 0, function () {
-                                var userId, _a;
-                                return __generator(this, function (_b) {
-                                    switch (_b.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userId = param.userId;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.WX.Account.YLogin()];
-                                        case 2:
-                                            userId = _b.sent();
-                                            _b.label = 3;
-                                        case 3:
-                                            _a = TJ.Common.SystemInfo;
-                                            return [4 /*yield*/, TJ.Develop.Yun.Login.Public.GetUserguid(userId)];
-                                        case 4:
-                                            _a.userGuid = _b.sent();
-                                            return [2 /*return*/];
+                                var userId;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, AppRt.Develop.WX.Account.YLogin()];
+                                        case 1:
+                                            userId = _a.sent();
+                                            return [2 /*return*/, userId];
                                     }
                                 });
                             });
@@ -14498,19 +14625,10 @@ var TJ;
                                 var userInfo;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0:
-                                            if (!(param != null)) return [3 /*break*/, 1];
-                                            userInfo = param.userInfo;
-                                            return [3 /*break*/, 3];
-                                        case 1: return [4 /*yield*/, AppRt.Develop.WX.Account.GetUserInfo()];
-                                        case 2:
+                                        case 0: return [4 /*yield*/, AppRt.Develop.WX.Account.GetUserInfo()];
+                                        case 1:
                                             userInfo = _a.sent();
-                                            _a.label = 3;
-                                        case 3: return [4 /*yield*/, TJ.Develop.Yun.Player.Player.ReportUserInfo(userInfo)];
-                                        case 4:
-                                            _a.sent();
-                                            TJ.API.Account.loginPromiseWrap.Resolve();
-                                            return [2 /*return*/];
+                                            return [2 /*return*/, userInfo];
                                     }
                                 });
                             });

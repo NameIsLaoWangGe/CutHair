@@ -499,17 +499,21 @@ declare namespace TJ.Common {
 }
 declare namespace TJ.API.Account {
     class IAccount extends Common.Component.Interface {
-        Login(param: Param): Promise<void>;
-        SetUserInfo(param: Param): Promise<void>;
+        Login(param: Param): Promise<{}>;
+        GetUserInfo(param: Param): Promise<{}>;
         OnInit(): Promise<void>;
     }
     class Param {
         force: boolean;
-        userId: {};
-        userInfo: {};
     }
+    let userId: {};
     let autoLogin: boolean;
     let loginPromiseWrap: Common.PromiseWrap<{}>;
+    function Login(param: Param): Promise<void>;
+    let userInfo: {};
+    let autoGetUserInfo: boolean;
+    let getUserInfoPromiseWrap: Common.PromiseWrap<{}>;
+    function GetUserInfo(param: Param): Promise<void>;
 }
 declare namespace TJ.API.AdService {
     class IAdService extends Common.Component.Interface {
@@ -1283,7 +1287,7 @@ declare namespace TJ.Platform.AppRt.Extern.OPPO.QG {
     }
     function InitAdService(param: InitAdServiceParam): void;
     class BannerAd {
-        private bannerAd;
+        private obj;
         constructor(obj: any);
         Show(): void;
         Hide(): void;
@@ -1299,7 +1303,7 @@ declare namespace TJ.Platform.AppRt.Extern.OPPO.QG {
     }
     function CreateBannerAd(posId: string): BannerAd;
     class InsertAd {
-        private insertAd;
+        private obj;
         constructor(obj: any);
         Load(): void;
         Show(): void;
@@ -1316,7 +1320,7 @@ declare namespace TJ.Platform.AppRt.Extern.OPPO.QG {
         isEnded: boolean;
     }
     class RewardedVideoAd {
-        private videoAd;
+        private obj;
         constructor(obj: any);
         Load(): void;
         Show(): void;
@@ -1345,7 +1349,7 @@ declare namespace TJ.Platform.AppRt.Extern.OPPO.QG {
         interactionType: number;
     }
     class NativeAd {
-        private nativeAd;
+        private obj;
         constructor(obj: any);
         Load(): void;
         ReportAdShow(adId: string): void;
@@ -1359,6 +1363,36 @@ declare namespace TJ.Platform.AppRt.Extern.OPPO.QG {
         Destroy(): void;
     }
     function CreateNativeAd(posId: string): NativeAd;
+    class GameBannerAd {
+        private obj;
+        constructor(obj: any);
+        Show(): Promise<any>;
+        Hide(): Promise<any>;
+        OnLoad(callback: (res: CallbackResult) => void): void;
+        OffLoad(callback: Function): void;
+        OnError(callback: (res: CallbackResult) => void): void;
+        OffError(callback: Function): void;
+        Destroy(): Promise<any>;
+    }
+    function CreateGameBannerAd(param: {
+        adUnitId: string;
+    }): GameBannerAd;
+    class GamePortalAd {
+        private obj;
+        constructor(obj: any);
+        Load(): Promise<any>;
+        Show(): Promise<any>;
+        OnLoad(callback: (res: CallbackResult) => void): void;
+        OffLoad(callback: Function): void;
+        OnClose(callback: (res: CallbackResult) => void): void;
+        OffClose(callback: Function): void;
+        OnError(callback: (res: CallbackResult) => void): void;
+        OffError(callback: Function): void;
+        Destroy(): Promise<any>;
+    }
+    function CreateGamePortalAd(param: {
+        adUnitId: string;
+    }): GamePortalAd;
 }
 declare namespace TJ.Platform.AppRt.Extern.OPPO.QG {
     function InstallShortcut(param: CallbackParam): void;
@@ -1763,6 +1797,7 @@ declare namespace TJ.Platform.AppRt.Extern.TT {
         videoTopics: string[];
         createChallenge: boolean;
         video_title: string;
+        cutTemplateId?: string;
     }
     class ShareAppMessageParam extends CallbackParam {
         channel: "article" | "video" | "token";
@@ -1836,6 +1871,7 @@ declare namespace TJ.Platform.AppRt.Extern.TT {
         appLaunchOptions: AppLaunchOptions[];
     }
     function ShowMoreGamesModal(param: ShowMoreGamesModalParam): void;
+    function SetMoreGamesInfo(param: ShowMoreGamesModalParam): void;
     function VibrateShort(parm: CallbackParam): void;
     function VibrateLong(parm: CallbackParam): void;
     class CheckFollowAwemeStateResult extends CallbackResult {
@@ -2443,6 +2479,11 @@ declare namespace TJ.Platform.AppRt.Develop.OPPO.Account {
     function Login(): Promise<Extern.OPPO.QG.LoginResult>;
     function GetUserInfo(): Promise<Extern.OPPO.QG.LoginResultData>;
 }
+declare namespace TJ.Platform.AppRt.Develop.OPPO.GameAd {
+    function ShowBanner(): void;
+    function RemoveBanner(): void;
+    function ShowPortal(): void;
+}
 declare namespace TJ.Platform.AppRt.Develop.QQ.Account {
     function Login(): Promise<{
         code: string;
@@ -2517,11 +2558,11 @@ declare namespace TJ.Platform.AppRt.Develop.TA {
     function Event_Level_Fail(id: string): void;
 }
 declare namespace TJ.Platform.AppRt.Develop.TT.Account {
-    function Login(): Promise<{
+    function Login(force?: boolean): Promise<{
         code: string;
         anonymousCode: string;
     }>;
-    function YLogin(): Promise<{
+    function YLogin(force?: boolean): Promise<{
         session_key: string;
         openid: string;
         anonymous_openid: string;
