@@ -14,6 +14,7 @@ import UIDefeated from "./script/Game/UIDefeated"
 import UIEasterEgg from "./script/Game/UIEasterEgg"
 import UILoding from "./script/Game/UILoding"
 import UIOperation from "./script/Game/UIOperation"
+import UIPlaqueADS from "./script/Game/UIPlaqueADS"
 import UIResurgence from "./script/Game/UIResurgence"
 import UISet from "./script/Game/UISet"
 import UIShare from "./script/Game/UIShare"
@@ -65,6 +66,7 @@ export default class GameConfig{
         reg("script/Game/UIEasterEgg.ts",UIEasterEgg);
         reg("script/Game/UILoding.ts",UILoding);
         reg("script/Game/UIOperation.ts",UIOperation);
+        reg("script/Game/UIPlaqueADS.ts",UIPlaqueADS);
         reg("script/Game/UIResurgence.ts",UIResurgence);
         reg("script/Game/UISet.ts",UISet);
         reg("script/Game/UIShare.ts",UIShare);

@@ -1395,6 +1395,7 @@
                 SceneName["UISkin"] = "UISkin";
                 SceneName["UIEasterEgg"] = "UIEasterEgg";
                 SceneName["UIADSHint"] = "UIADSHint";
+                SceneName["UIPlaqueADS"] = "UIPlaqueADS";
             })(SceneName = Admin.SceneName || (Admin.SceneName = {}));
             let GameState;
             (function (GameState) {
@@ -5494,6 +5495,9 @@
             ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
             Setting.setBtnAppear();
             PalyAudio.playDefeatedSound();
+            Laya.timer.once(500, this, () => {
+                Admin._openScene(Admin.SceneName.UIPlaqueADS);
+            });
         }
         lwgAdaptive() {
             let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
@@ -7183,6 +7187,14 @@
         }
     }
 
+    class UIPlaqueADS extends Admin.Scene {
+        lwgBtnClick() {
+            Click.on(Click.Type.largen, this.self['BtnClose'], this, null, null, () => {
+                this.self.close();
+            });
+        }
+    }
+
     class UIResurgence extends Admin.Scene {
         lwgOnEnable() {
             Admin._gameStart = false;
@@ -8543,6 +8555,9 @@
                 default:
                     break;
             }
+            Laya.timer.once(500, this, () => {
+                Admin._openScene(Admin.SceneName.UIPlaqueADS);
+            });
         }
         lwgAdaptive() {
             let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
@@ -8953,6 +8968,7 @@
             reg("script/Game/UIEasterEgg.ts", UIEasterEgg);
             reg("script/Game/UILoding.ts", UILoding);
             reg("script/Game/UIOperation.ts", UIOperation);
+            reg("script/Game/UIPlaqueADS.ts", UIPlaqueADS);
             reg("script/Game/UIResurgence.ts", UIResurgence);
             reg("script/Game/UISet.ts", UISet);
             reg("script/Game/UIShare.ts", UIShare);

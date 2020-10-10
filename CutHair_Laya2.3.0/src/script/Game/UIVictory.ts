@@ -17,7 +17,7 @@ export default class UIVictory extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
         Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
     }
-
+ 
     lwgOnEnable(): void {
         ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
 
@@ -49,6 +49,10 @@ export default class UIVictory extends lwg.Admin.Scene {
             default:
                 break;
         }
+
+        Laya.timer.once(500, this, () => {
+            Admin._openScene(Admin.SceneName.UIPlaqueADS);
+        })
     }
 
     lwgAdaptive(): void {

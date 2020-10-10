@@ -1,7 +1,0 @@
-{
-  "code": "import { EventAdmin, Click, Admin, Skin, Dialog } from \"../Lwg_Template/lwg\";\r\nexport default class UISKin_Goods extends Admin.Object {\r\n    lwgBtnClick() {\r\n        Click.on(Click.Type.largen, this.self, this, null, null, this.up, null);\r\n    }\r\n    up() {\r\n        Dialog.createVoluntarilyDialogue(135, 250, this.self['_dataSource'].name, 0, 1000);\r\n        EventAdmin.notify(Skin.EventType.select, [this.self['_dataSource']]);\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/Game/project/CutHair/Project_Laya2.3.0/CutHair_Laya2.3.0/src/script/Lwg_Template/lwg.ts",
-    "D:/Game/project/CutHair/Project_Laya2.3.0/CutHair_Laya2.3.0/src/script/Lwg_Template/Global.ts"
-  ]
-}

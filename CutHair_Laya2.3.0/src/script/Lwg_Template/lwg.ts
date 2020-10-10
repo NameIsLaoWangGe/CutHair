@@ -1137,6 +1137,7 @@ export module lwg {
             UISkin = 'UISkin',
             UIEasterEgg = 'UIEasterEgg',
             UIADSHint = 'UIADSHint',
+            UIPlaqueADS = 'UIPlaqueADS',
         }
 
         /**游戏当前的状态*/

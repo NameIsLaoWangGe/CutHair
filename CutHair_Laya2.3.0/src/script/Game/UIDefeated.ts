@@ -22,26 +22,10 @@ export default class UIDefeated extends lwg.Admin.Scene {
 
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
-        // switch (Game._platform) {
-        //     case Game._platformTpye.OPPO:
-        //         this.self['OPPO'].visible = true;
-        //         this.self['WeChat'].visible = false;
-        //         this.self['Bytedance'].visible = false;
-        //         this.self['P202'].removeSelf();
-        //         break;
-        //     case Game._platformTpye.WeChat:
-        //         this.self['OPPO'].visible = false;
-        //         this.self['WeChat'].visible = true;
-        //         this.self['Bytedance'].visible = false;
-        //         this.self['P202'].removeSelf();
-        //         break;
-        //     case Game._platformTpye.Bytedance:
-        //         this.self['OPPO'].visible = false;
-        //         this.self['WeChat'].visible = false;
-        //         this.self['Bytedance'].visible = true;
-        //     default:
-        //         break;
-        // }
+
+        Laya.timer.once(500, this, () => {
+            Admin._openScene(Admin.SceneName.UIPlaqueADS);
+        })
     }
 
     lwgAdaptive(): void {
