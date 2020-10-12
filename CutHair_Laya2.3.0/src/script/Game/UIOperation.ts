@@ -166,6 +166,10 @@ export default class UIOperation extends lwg.Admin.Scene {
 
         // PalyAudio.playSound('res/Voice/Dialog/' + 'UIOperation_01' + '.mp3');
         Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation', 0, 1000, this.self);
+
+        if (!Admin._elect) {
+            this.self['P201'].removeSelf();
+        }
     }
 
     lwgOnEnable(): void {

@@ -10,18 +10,35 @@ export default class UIVictory extends lwg.Admin.Scene {
     GlodNum: Laya.Sprite;
     /**本关应该给予多少金币*/
     getGoldNum: number;
-    lwgNodeDec(): void {
+    lwgOnAwake(): void {
         this.GlodNum = this.self['GlodNum'];
 
         ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
         ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
         Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
+        this.getGoldNum = 50;
+        switch (Admin._platform) {
+            case Game._platformTpye.OPPO:
+                this.getGoldDisPlay(1);
+                if (!Admin._elect) {
+                    this.self['P202'].removeSelf();
+                }
+                break;
+            case Admin._platformTpye.WeChat:
+                this.self['P202'].removeSelf();
+                this.getGoldDisPlay(10);
+                break;
+            case Admin._platformTpye.Bytedance:
+                this.getGoldDisPlay(10);
+                break;
+            default:
+                break;
+        }
     }
- 
+
     lwgOnEnable(): void {
         ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
 
-        this.getGoldNum = 50;
         Gold.goldAppear();
         Setting.setBtnAppear();
         Game._gameLevel.value++;
@@ -35,22 +52,7 @@ export default class UIVictory extends lwg.Admin.Scene {
 
         EventAdmin.notify(Task.TaskType.victory);
 
-        switch (Game._platform) {
-            case Game._platformTpye.OPPO:
-                this.getGoldDisPlay(1);
-                break;
-            case Game._platformTpye.WeChat:
-                this.self['P202'].removeSelf();
-                this.getGoldDisPlay(10);
-                break;
-            case Game._platformTpye.Bytedance:
-                this.getGoldDisPlay(10);
-                break;
-            default:
-                break;
-        }
-
-        Laya.timer.once(500, this, () => {
+        Laya.timer.once(1000, this, () => {
             Admin._openScene(Admin.SceneName.UIPlaqueADS);
         })
     }
@@ -78,7 +80,7 @@ export default class UIVictory extends lwg.Admin.Scene {
             Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
         });
 
-        return 0;
+        return 1200;
     }
 
     /**本关获得金币显示*/

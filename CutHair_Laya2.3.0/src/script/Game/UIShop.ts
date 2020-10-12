@@ -431,14 +431,12 @@ export default class UIShop extends Shop.ShopScene {
         Gold.addGold(500);
     }
 
-
     btnBackUp(): void {
         ADManager.TAPoint(TaT.BtnClick, 'closeword_skin');
-        this.self.close();
+        lwg.Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }
 
     shopOnDisable(): void {
-        ADManager.ShowBanner();        
         GVariate._stageClick = true;
         Setting.setBtnAppear();
     }

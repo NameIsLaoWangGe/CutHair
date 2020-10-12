@@ -180,7 +180,7 @@ export module lwg {
          * 创建通用重来prefab
          * @param parent 父节点
          */
-        export function _createStimulateDec(parent, ): void {
+        export function _createStimulateDec(parent,): void {
             let sp: Laya.Sprite;
             Laya.loader.load('prefab/StimulateDec.json', Laya.Handler.create(this, function (prefab: Laya.Prefab) {
                 let _prefab = new Laya.Prefab();
@@ -1092,7 +1092,7 @@ export module lwg {
         }
         /**是否为评测包，评测包广告默认关闭，默认为非评测包，直接获得广告奖励*/
         export let _evaluating: boolean = false;
-
+        export let _elect: boolean = true;
         /**场景控制,访问特定场景用_sceneControl[name]方位*/
         export let _sceneControl: any = {};
         /**游戏当前处于什么状态中*/
@@ -3834,6 +3834,17 @@ export module lwg {
             // 第二步，如果本地缓存有，那么需要和数据表中的数据进行对比，把缓存没有的新增对象复制进去
             // 第三步，如果本地缓存没有，那么直接从数据表获取
             let dataArr;
+
+            try {
+                console.log(Laya.LocalStorage.getJSON(storageName));
+            } catch (error) {
+                dataArr = Laya.loader.getRes(url)['RECORDS'];
+                let data = {};
+                data[storageName] = dataArr;
+                Laya.LocalStorage.setJSON(storageName, JSON.stringify(data));
+                return dataArr;
+            }
+
             if (Laya.LocalStorage.getJSON(storageName)) {
                 dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
                 console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
@@ -4211,24 +4222,26 @@ export module lwg {
          * @param skin 皮肤名称
          */
         export function setUseSkinType(): number {
-
-            let arr;
-            // 拉取
-            if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
-                arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
-            } else {
-                return;
+            let arr = [];
+            try {
+                // 拉取
+                if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
+                    arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                    useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
+                    // 去重
+                    useSkinType.push(_currentOther.name, _currentProp.name, _currentSkin.name);
+                    useSkinType = Tools.arrayUnique_03(useSkinType);
+                }
+            } catch (error) {
+                
             }
-            useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
-            // 去重
-            useSkinType.push(_currentOther.name, _currentProp.name, _currentSkin.name);
-            useSkinType = Tools.arrayUnique_03(useSkinType);
             // 上传
             let data = {
                 Shop_useSkinType: useSkinType,
             }
             Laya.LocalStorage.setJSON('Shop_useSkinType', JSON.stringify(data));
             return useSkinType.length;
+
         }
 
         /**

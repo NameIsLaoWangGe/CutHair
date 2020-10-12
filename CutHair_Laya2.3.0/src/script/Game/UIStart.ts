@@ -18,9 +18,15 @@ export default class UIStart extends lwg.Admin.Scene {
         ADManager.TAPoint(TaT.BtnShow, 'startword_main');
 
         if (Admin._platform == Admin._platformTpye.OPPO) {
-            this.self['P204'].visible = false;
-            // this.self['P201'].visible = false;
-            // this.self['P205'].visible = false;
+            if (!Admin._elect) {
+                this.self['P204'].removeSelf();
+                this.self['P201'].removeSelf();
+                this.self['P205'].removeSelf();
+            } else {
+                this.self['P204'].visible = false;
+                // this.self['P201'].visible = false;
+                // this.self['P205'].visible = false;
+            }
             ADManager.ShowBanner();
         }
         Admin._UIStartCount.value++;
@@ -141,8 +147,7 @@ export default class UIStart extends lwg.Admin.Scene {
         Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
             e.stopPropagation();
-            lwg.Admin._openScene(Admin.SceneName.UIShop);
-            ADManager.CloseBanner();
+            lwg.Admin._openScene(Admin.SceneName.UIShop, null, this.self);
         });
 
         Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
@@ -157,23 +162,19 @@ export default class UIStart extends lwg.Admin.Scene {
 
         Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e: Laya.Event) => {
             e.stopPropagation();
-            Admin._openScene(lwg.Admin.SceneName.UITask);
-            ADManager.CloseBanner();
+            Admin._openScene(lwg.Admin.SceneName.UITask, null, this.self);
         });
 
         Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, (e: Laya.Event) => {
             ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
 
             e.stopPropagation();
-            lwg.Admin._openScene(Admin.SceneName.UICheckIn);
-            ADManager.CloseBanner();
+            lwg.Admin._openScene(Admin.SceneName.UICheckIn, null, this.self);
         });
 
         Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, (e: Laya.Event) => {
-
             e.stopPropagation();
-            lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
-            ADManager.CloseBanner();
+            lwg.Admin._openScene(Admin.SceneName.UIEasterEgg, null, this.self);
         });
 
         Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
@@ -185,9 +186,9 @@ export default class UIStart extends lwg.Admin.Scene {
     }
 
     btnXDSkinUp(): void {
-        ADManager.CloseBanner();
-        lwg.Admin._openScene(Admin.SceneName.UISkinXD);
         ADManager.TAPoint(TaT.BtnClick, 'limitskinbt_main');
+
+        lwg.Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
     }
 
     onStageMouseMove(event: Laya.Event): void {
@@ -231,11 +232,9 @@ export default class UIStart extends lwg.Admin.Scene {
             }
         }
     }
-
     onStageMouseUp(): void {
         this.aotumanBack();
     }
-
     /**凹凸曼回到原位*/
     aotumanBack(): void {
         this.easterEgg_AotumanSwitch = false;

@@ -562,6 +562,7 @@
             return data;
         }
         CheckShow() {
+            let a = 0;
             for (let item of this.itemList) {
                 let node = item.owner;
                 let d = Math.abs(node.x - this.scrollValue - this.scroll.width / 2 + node.width / 2 + this.layout.spaceX);
@@ -1197,6 +1198,7 @@
             function createOneGold(width, height, url) {
                 let Gold = Laya.Pool.getItemByClass('addGold', Laya.Image);
                 Gold.name = 'addGold';
+                let num = Math.floor(Math.random() * 12);
                 Gold.alpha = 1;
                 Gold.zOrder = 60;
                 Gold.width = width;
@@ -1358,6 +1360,7 @@
                 }
             };
             Admin._evaluating = false;
+            Admin._elect = true;
             Admin._sceneControl = {};
             Admin._gameStart = false;
             let JsonProperty;
@@ -2450,6 +2453,14 @@
                 node.scale(0, 0);
                 node.alpha = firstAlpha;
                 Laya.Tween.to(node, { scaleX: scale1, scaleY: scale1, alpha: 1, rotation: rotation }, time1, Laya.Ease.cubicInOut, Laya.Handler.create(this, function () {
+                    switch (audioType) {
+                        case 'balloon':
+                            break;
+                        case 'common':
+                            break;
+                        default:
+                            break;
+                    }
                     Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
                         Laya.Tween.to(node, { scaleX: firstScale + (scale1 - firstScale) * 0.2, scaleY: firstScale + (scale1 - firstScale) * 0.2, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
                             Laya.Tween.to(node, { scaleX: firstScale, scaleY: firstScale, rotation: 0 }, time2, null, Laya.Handler.create(this, function () {
@@ -2966,6 +2977,7 @@
                 return angle - 90;
             }
             Tools.vector_Angle = vector_Angle;
+            ;
             function angle_Vector(angle) {
                 angle -= 90;
                 let radian = (90 - angle) / (180 / Math.PI);
@@ -2974,6 +2986,7 @@
                 return p;
             }
             Tools.angle_Vector = angle_Vector;
+            ;
             function maximumDistanceLimi_3D(originV3, obj, length) {
                 let subP = new Laya.Vector3();
                 let objP = obj.transform.position;
@@ -3121,6 +3134,8 @@
             }
             Tools.speedByAngle = speedByAngle;
             function speedXYByAngle(angle, speed) {
+                if (angle % 90 === 0 || !angle) {
+                }
                 const speedXY = { x: 0, y: 0 };
                 speedXY.x = speed * Math.cos(angle * Math.PI / 180);
                 speedXY.y = speed * Math.sin(angle * Math.PI / 180);
@@ -3191,6 +3206,16 @@
             Tools.arrayUnique_03 = arrayUnique_03;
             function dataCompare(url, storageName, propertyName) {
                 let dataArr;
+                try {
+                    console.log(Laya.LocalStorage.getJSON(storageName));
+                }
+                catch (error) {
+                    dataArr = Laya.loader.getRes(url)['RECORDS'];
+                    let data = {};
+                    data[storageName] = dataArr;
+                    Laya.LocalStorage.setJSON(storageName, JSON.stringify(data));
+                    return dataArr;
+                }
                 if (Laya.LocalStorage.getJSON(storageName)) {
                     dataArr = JSON.parse(Laya.LocalStorage.getJSON(storageName))[storageName];
                     console.log(storageName + '从本地缓存中获取到数据,将和文件夹的json文件进行对比');
@@ -3235,6 +3260,7 @@
                     Laya.LocalStorage.setItem('Task_todayData', date.toString());
                 }
             };
+            0;
             function getTaskProperty(ClassName, name, property) {
                 let pro = null;
                 let arr = getTaskClassArr(ClassName);
@@ -3455,16 +3481,17 @@
             };
             Shop.useSkinType = [];
             function setUseSkinType() {
-                let arr;
-                if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
-                    arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                let arr = [];
+                try {
+                    if (Laya.LocalStorage.getJSON('Shop_useSkinType')) {
+                        arr = JSON.parse(Laya.LocalStorage.getJSON('Shop_useSkinType'));
+                        Shop.useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
+                        Shop.useSkinType.push(Shop._currentOther.name, Shop._currentProp.name, Shop._currentSkin.name);
+                        Shop.useSkinType = Tools.arrayUnique_03(Shop.useSkinType);
+                    }
                 }
-                else {
-                    return;
+                catch (error) {
                 }
-                Shop.useSkinType = arr !== null ? arr['Shop_useSkinType'] : [];
-                Shop.useSkinType.push(Shop._currentOther.name, Shop._currentProp.name, Shop._currentSkin.name);
-                Shop.useSkinType = Tools.arrayUnique_03(Shop.useSkinType);
                 let data = {
                     Shop_useSkinType: Shop.useSkinType,
                 };
@@ -3902,6 +3929,7 @@
             CheckIn.setCheckProperty = setCheckProperty;
             function openCheckIn() {
                 let todayDate = (new Date).getDate();
+                let bool;
                 if (todayDate !== CheckIn._lastCheckDate.date) {
                     console.log('没有签到过，弹出签到页面！');
                     Admin._openScene(Admin.SceneName.UICheckIn);
@@ -4563,6 +4591,7 @@
             Tomato.btnPrintPoint = btnPrintPoint;
         })(Tomato = lwg.Tomato || (lwg.Tomato = {}));
     })(lwg || (lwg = {}));
+    var lwg$1 = lwg;
     let Admin = lwg.Admin;
     let Gold = lwg.Gold;
     let Click = lwg.Click;
@@ -4676,6 +4705,8 @@
                 setTimeout(() => {
                     ADManager.CanShowCD = true;
                 }, CDTime);
+            }
+            else {
             }
         }
         static Event(param, value) {
@@ -5333,7 +5364,7 @@
             lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
         }
         btnBackUp() {
-            this.self.close();
+            lwg.Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         btnThreeGetUp() {
             ADManager.ShowReward(() => {
@@ -5419,7 +5450,6 @@
         }
         checkInOnDisable() {
             Setting.setBtnAppear();
-            ADManager.ShowBanner();
         }
     }
 
@@ -5477,6 +5507,7 @@
             GSene3D.headFPos = new Laya.Vector3();
         })(GSene3D = Global.GSene3D || (Global.GSene3D = {}));
     })(Global || (Global = {}));
+    var Global$1 = Global;
     let GVariate = Global.GVariate;
     let GEnum = Global.GEnum;
     let GSene3D = Global.GSene3D;
@@ -5488,6 +5519,9 @@
             this.self['BtnAgain_WeChat'].visible = false;
             this.self['Dot_WeChat'].visible = true;
             Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
+            if (!Admin._elect) {
+                this.self['P202'].removeSelf();
+            }
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.LevelFail, 'level' + Game._gameLevel.value);
@@ -5495,13 +5529,16 @@
             ADManager.TAPoint(TaT.BtnShow, 'returnword_fail');
             Setting.setBtnAppear();
             PalyAudio.playDefeatedSound();
-            Laya.timer.once(500, this, () => {
+            Laya.timer.once(1000, this, () => {
                 Admin._openScene(Admin.SceneName.UIPlaqueADS);
             });
         }
         lwgAdaptive() {
             let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
             this.self['Select_Bytedance'].y = y;
+        }
+        lwgOpenAni() {
+            return 1000;
         }
         lwgBtnClick() {
             Click.on(Click.Type.largen, this.self['BtnAgain_WeChat'], this, null, null, this.btnAgainUp);
@@ -5863,6 +5900,7 @@
         }
     }
 
+    var notify;
     class GameMain3D_knife extends lwg3D.Scene3D {
         onTriggerEnter(other) {
             let owner = other.owner;
@@ -6264,6 +6302,16 @@
         }
     }
 
+    class shieldTime {
+    }
+    class ShieldScene {
+    }
+    class ConfigInfo {
+    }
+    class ipData {
+    }
+    class IPInfo {
+    }
     var ShieldLevel;
     (function (ShieldLevel) {
         ShieldLevel["low"] = "Low";
@@ -6423,6 +6471,7 @@
             this.inited = true;
             if (this.onConFigInited != null)
                 this.onConFigInited();
+            let iswifi = false;
             this.tt.getNetworkType({
                 success: (obj) => {
                     if (obj.networkType == "wifi") {
@@ -6483,6 +6532,7 @@
         gameInit() {
             Admin._platform = Game._platformTpye.OPPO;
             Admin._evaluating = false;
+            Admin._elect = false;
         }
         ;
         skinInit() {
@@ -6898,6 +6948,9 @@
             RecordManager.startAutoRecord();
             ADManager.TAPoint(TaT.LevelStart, 'level' + Game._gameLevel.value);
             Dialog.createVoluntarilyDialogue(150, 334, 'UIOperation', 0, 1000, this.self);
+            if (!Admin._elect) {
+                this.self['P201'].removeSelf();
+            }
         }
         lwgOnEnable() {
             this.BtnLast.visible = false;
@@ -7064,6 +7117,8 @@
                                 _HairParentNum.setValue = _HairParentNum.value - 1;
                             }
                             this.value = v;
+                        }
+                        else {
                         }
                     }
                 };
@@ -7752,10 +7807,9 @@
         }
         btnBackUp() {
             ADManager.TAPoint(TaT.BtnClick, 'closeword_skin');
-            this.self.close();
+            lwg.Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         shopOnDisable() {
-            ADManager.ShowBanner();
             GVariate._stageClick = true;
             Setting.setBtnAppear();
         }
@@ -7966,6 +8020,7 @@
         randomNoHave() {
             let arrOther = Shop.getwayGoldArr(Shop.GoodsClass.Other, undefined, true);
             let arrProp = Shop.getwayGoldArr(Shop.GoodsClass.Props, undefined, true);
+            let ele;
             let hair;
             let beard;
             for (let index = 0; index < GVariate._taskArr.length; index++) {
@@ -8138,7 +8193,6 @@
             this.progressDisplay();
         }
         skinXDAdaptive() {
-            this.self['SceneContent'].y = Laya.stage.height / 2;
         }
         progressDisplay() {
             let resCondition = Shop.getGoodsProperty(Shop.GoodsClass.Props, 'xiandanren', Shop.GoodsProperty.resCondition);
@@ -8159,7 +8213,7 @@
             });
         }
         btnBackUp() {
-            this.self.close();
+            Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         btnGetFunc() {
             ADManager.TAPoint(TaT.BtnClick, 'Adlimmitget');
@@ -8178,7 +8232,6 @@
             }
         }
         skinXDOnDisable() {
-            ADManager.ShowBanner();
             Setting.setBtnAppear();
             Gold.goldAppear();
         }
@@ -8197,7 +8250,14 @@
             ADManager.TAPoint(TaT.BtnShow, 'limitskinbt_main');
             ADManager.TAPoint(TaT.BtnShow, 'startword_main');
             if (Admin._platform == Admin._platformTpye.OPPO) {
-                this.self['P204'].visible = false;
+                if (!Admin._elect) {
+                    this.self['P204'].removeSelf();
+                    this.self['P201'].removeSelf();
+                    this.self['P205'].removeSelf();
+                }
+                else {
+                    this.self['P204'].visible = false;
+                }
                 ADManager.ShowBanner();
             }
             Admin._UIStartCount.value++;
@@ -8271,8 +8331,7 @@
             Click.on(Click.Type.largen, this.self['BtnSkin'], this, null, null, (e) => {
                 ADManager.TAPoint(TaT.BtnClick, 'setbt_main');
                 e.stopPropagation();
-                lwg.Admin._openScene(Admin.SceneName.UIShop);
-                ADManager.CloseBanner();
+                lwg.Admin._openScene(Admin.SceneName.UIShop, null, this.self);
             });
             Click.on(Click.Type.noEffect, this.self['Guide'], this, null, null, () => {
                 Admin._openScene(lwg.Admin.SceneName.UISkinTry, null, this.self);
@@ -8284,28 +8343,24 @@
             });
             Click.on(Click.Type.largen, this.self['BtnTask'], this, null, null, (e) => {
                 e.stopPropagation();
-                Admin._openScene(lwg.Admin.SceneName.UITask);
-                ADManager.CloseBanner();
+                Admin._openScene(lwg.Admin.SceneName.UITask, null, this.self);
             });
             Click.on(Click.Type.largen, this.self['BtnCheck'], this, null, null, (e) => {
                 ADManager.TAPoint(TaT.BtnClick, 'signbt_main');
                 e.stopPropagation();
-                lwg.Admin._openScene(Admin.SceneName.UICheckIn);
-                ADManager.CloseBanner();
+                lwg.Admin._openScene(Admin.SceneName.UICheckIn, null, this.self);
             });
             Click.on(Click.Type.largen, this.self['BtnAotuman'], this, null, null, (e) => {
                 e.stopPropagation();
-                lwg.Admin._openScene(Admin.SceneName.UIEasterEgg);
-                ADManager.CloseBanner();
+                lwg.Admin._openScene(Admin.SceneName.UIEasterEgg, null, this.self);
             });
             Click.on(Click.Type.largen, this.self['BtnXDSkin'], this, this.btnXDSkinDown, null, this.btnXDSkinUp);
         }
         btnXDSkinDown() {
         }
         btnXDSkinUp() {
-            ADManager.CloseBanner();
-            lwg.Admin._openScene(Admin.SceneName.UISkinXD);
             ADManager.TAPoint(TaT.BtnClick, 'limitskinbt_main');
+            lwg.Admin._openScene(Admin.SceneName.UISkinXD, null, this.self);
         }
         onStageMouseMove(event) {
             if (this.easterEgg_AotumanSwitch && !EasterEgg._easterEgg_1.value) {
@@ -8361,25 +8416,54 @@
 
     class SubpackController {
         constructor() {
-            this.subPkgInfo = [
+            this.pkgInfo = [
                 { name: "sp1", root: "res" },
                 { name: "sp2", root: "3DScene" },
                 { name: "sp3", root: "3DPrefab" },
             ];
         }
-        init(cb) {
+        init(_completeFunc) {
+            this.completeFunc = _completeFunc;
+            this.pkgFlag = 0;
             if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                this.onCpl = cb;
-                this.pkgFlag = 0;
                 this.loadPkg_wx();
+            }
+            else if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.VIVO_AppRt) {
+                this.loadPkg_VIVO();
+            }
+            else {
+                this.completeFunc();
+            }
+        }
+        loadPkg_VIVO() {
+            if (this.pkgFlag == this.pkgInfo.length) {
+                if (this.completeFunc) {
+                    this.completeFunc();
+                }
+            }
+            else {
+                let info = this.pkgInfo[this.pkgFlag];
+                let name = info.name;
+                Laya.Browser.window.qg.loadSubpackage({
+                    name: name,
+                    success: (res) => {
+                        this.pkgFlag++;
+                        this.loadPkg_VIVO();
+                    },
+                    fail: (res) => {
+                        console.error(`load ${name} err: `, res);
+                    },
+                });
             }
         }
         loadPkg_wx() {
-            if (this.pkgFlag == this.subPkgInfo.length) {
-                this.onCpl();
+            if (this.pkgFlag == this.pkgInfo.length) {
+                if (this.completeFunc) {
+                    this.completeFunc();
+                }
             }
             else {
-                let info = this.subPkgInfo[this.pkgFlag];
+                let info = this.pkgInfo[this.pkgFlag];
                 let name = info.name;
                 let root = info.root;
                 Laya.Browser.window.wx.loadSubpackage({
@@ -8402,32 +8486,13 @@
 
     class UISubpackages extends Laya.Script {
         onAwake() {
-            let isInit = false;
-            TJ.Common.PriorityInit.Add(100, () => {
-                isInit = true;
-            });
-            Game._platform == Game._platformTpye.Bytedance;
-            if (Game._platform !== Game._platformTpye.WeChat) {
+        }
+        onStart() {
+            let subpackController = new SubpackController();
+            subpackController.init(() => {
                 Admin._openScene('UILoding');
-                return;
-            }
-            let act = () => {
-                if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-                    let gameContrl = new SubpackController();
-                    gameContrl.init(() => {
-                        Admin._openScene('UILoding');
-                    });
-                }
-                else {
-                    Admin._openScene('UILoding');
-                }
-            };
-            if (isInit) {
-                act();
-            }
-            else {
-                TJ.Common.PriorityInit.Add(100, act);
-            }
+                console.log('分包完成！');
+            });
         }
     }
 
@@ -8509,10 +8574,9 @@
         }
         ;
         btnBackUp() {
-            this.self.close();
+            lwg.Admin._openScene(Admin.SceneName.UIStart, null, this.self);
         }
         taskOnDisable() {
-            ADManager.ShowBanner();
             Setting.setBtnAppear();
             GVariate._stageClick = true;
         }
@@ -8523,15 +8587,32 @@
             super(...arguments);
             this.addOrSub = 'add';
         }
-        lwgNodeDec() {
+        lwgOnAwake() {
             this.GlodNum = this.self['GlodNum'];
             ADManager.TAPoint(TaT.BtnShow, 'ADrewardbt_success');
             ADManager.TAPoint(TaT.BtnShow, 'closeword_success');
             Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
+            this.getGoldNum = 50;
+            switch (Admin._platform) {
+                case Game._platformTpye.OPPO:
+                    this.getGoldDisPlay(1);
+                    if (!Admin._elect) {
+                        this.self['P202'].removeSelf();
+                    }
+                    break;
+                case Admin._platformTpye.WeChat:
+                    this.self['P202'].removeSelf();
+                    this.getGoldDisPlay(10);
+                    break;
+                case Admin._platformTpye.Bytedance:
+                    this.getGoldDisPlay(10);
+                    break;
+                default:
+                    break;
+            }
         }
         lwgOnEnable() {
             ADManager.TAPoint(TaT.LevelFinish, 'level' + Game._gameLevel.value);
-            this.getGoldNum = 50;
             Gold.goldAppear();
             Setting.setBtnAppear();
             Game._gameLevel.value++;
@@ -8541,21 +8622,7 @@
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'right', 40, 720, 300);
             lwg.Effects.createLeftOrRightJet(Laya.stage, 'left', 40, 0, 300);
             EventAdmin.notify(Task.TaskType.victory);
-            switch (Game._platform) {
-                case Game._platformTpye.OPPO:
-                    this.getGoldDisPlay(1);
-                    break;
-                case Game._platformTpye.WeChat:
-                    this.self['P202'].removeSelf();
-                    this.getGoldDisPlay(10);
-                    break;
-                case Game._platformTpye.Bytedance:
-                    this.getGoldDisPlay(10);
-                    break;
-                default:
-                    break;
-            }
-            Laya.timer.once(500, this, () => {
+            Laya.timer.once(1000, this, () => {
                 Admin._openScene(Admin.SceneName.UIPlaqueADS);
             });
         }
@@ -8578,7 +8645,7 @@
                 Animation2D.bombs_Appear(this.self['BtnAdv_WeChat'], 0, 1, 1.2, 0, this.aniTime * 2, this.aniTime * 1, this.aniDelayde * 5);
                 Animation2D.fadeOut(this.self['Select'], 0, 1, this.aniTime * 2, this.aniDelayde * 7);
             });
-            return 0;
+            return 1200;
         }
         getGoldDisPlay(number) {
             let Num = this.GlodNum.getChildByName('Num');
@@ -8950,7 +9017,8 @@
     }
 
     class GameConfig {
-        constructor() { }
+        constructor() {
+        }
         static init() {
             var reg = Laya.ClassUtils.regClass;
             reg("TJ/Promo/script/PromoOpen.ts", PromoOpen);

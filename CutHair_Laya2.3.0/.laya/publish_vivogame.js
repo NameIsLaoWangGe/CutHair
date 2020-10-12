@@ -1,4 +1,4 @@
-// v1.2.1
+// v1.4.0
 // publish 2.x 也是用这个文件，需要做兼容
 let isPublish2 = process.argv[2].includes("publish_vivogame.js") && process.argv[3].includes("--evn=publish2");
 // 获取Node插件和工作路径
@@ -23,9 +23,11 @@ const iconv =  require(ideModuleDir + "iconv-lite");
 const revCollector = require(ideModuleDir + 'gulp-rev-collector');
 let commandSuffix = ".cmd";
 
-let prevTasks = ["packfile"];
+let copyLibsTask = ["copyLibsJsFile"];
+let packfiletask = ["packfile"];
 if (isPublish2) {
-	prevTasks = "";
+	copyLibsTask = "";
+	packfiletask = ["copyPlatformFile_VIVO"];
 }
 
 let 
@@ -39,9 +41,13 @@ let
 	isExistEngineFolder = false; // bin目录下是否存在engine文件夹
 let projSrc;
 let versionCon; // 版本管理version.json
+let layarepublicPath = path.join(ideModuleDir, "../", "code", "layarepublic");
+if (!fs.existsSync(layarepublicPath)) {
+	layarepublicPath = path.join(ideModuleDir, "../", "out", "layarepublic");
+}
 // 创建vivo项目前，拷贝vivo引擎库、修改index.js
 // 应该在publish中的，但是为了方便发布2.0及IDE 1.x，放在这里修改
-gulp.task("preCreate_VIVO", prevTasks, function() {
+gulp.task("preCreate_VIVO", copyLibsTask, function() {
 	if (isPublish2) {
 		let pubsetPath = path.join(workSpaceDir, ".laya", "pubset.json");
 		let content = fs.readFileSync(pubsetPath, "utf8");
@@ -73,14 +79,14 @@ gulp.task("copyPlatformFile_VIVO", ["preCreate_VIVO"], function() {
 	if (platform !== "vivogame") {
 		return;
 	}
-	let vivoAdapterPath = path.join(ideModuleDir, "../", "out", "layarepublic", "LayaAirProjectPack", "lib", "data", "vivofiles");
+	let vivoAdapterPath = path.join(layarepublicPath, "LayaAirProjectPack", "lib", "data", "vivofiles");
 	let copyLibsList = [`${vivoAdapterPath}/**/*.*`];
 	var stream = gulp.src(copyLibsList);
 	return stream.pipe(gulp.dest(tempReleaseDir));
 });
 
 // 检查是否全局安装了qgame
-gulp.task("createGlobalQGame_VIVO", ["copyPlatformFile_VIVO"], function() {
+gulp.task("createGlobalQGame_VIVO", packfiletask, function() {
 	// 如果不是vivo快游戏
 	if (platform !== "vivogame") {
 		return;
@@ -139,7 +145,10 @@ gulp.task("createGlobalQGame_VIVO", ["copyPlatformFile_VIVO"], function() {
 			// npm install -g @vivo-minigame/cli
 			let cmd = `npm${commandSuffix}`;
 			let args = ["install", "@vivo-minigame/cli", "-g"];
-			let cp = childProcess.spawn(cmd, args);
+			let opts = {
+				shell: true
+			};
+			let cp = childProcess.spawn(cmd, args, opts);
 			
 			cp.stdout.on('data', (data) => {
 				console.log(`stdout: ${data}`);
@@ -670,7 +679,8 @@ gulp.task("buildRPK_VIVO", ["dealNoCompile2_VIVO"], function() {
 		let cmd = `npm${commandSuffix}`;
 		let args = ["run", cmdStr];
 		let opts = {
-			cwd: projDir
+			cwd: projDir,
+			shell: true
 		};
 		let cp = childProcess.spawn(cmd, args, opts);
 		// let cp = childProcess.spawn(`npx${commandSuffix}`, ['-v']);
@@ -703,7 +713,8 @@ gulp.task("showQRCode_VIVO", ["buildRPK_VIVO"], function() {
 		let cmd = `npm${commandSuffix}`;
 		let args = ["run", "server"];
 		let opts = {
-			cwd: projDir
+			cwd: projDir,
+			shell: true
 		};
 		let cp = childProcess.spawn(cmd, args, opts);
 		// let cp = childProcess.spawn(`npx${commandSuffix}`, ['-v']);

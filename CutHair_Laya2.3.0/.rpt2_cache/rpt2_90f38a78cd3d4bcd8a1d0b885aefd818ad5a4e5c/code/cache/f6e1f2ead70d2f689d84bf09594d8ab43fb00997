@@ -1,0 +1,8 @@
+{
+  "code": "import { Admin } from \"../Lwg_Template/lwg\";\r\nimport { SubpackController } from \"./SubpackController\";\r\nexport default class UISubpackages extends Laya.Script {\r\n    onAwake() {\r\n    }\r\n    onStart() {\r\n        let subpackController = new SubpackController();\r\n        subpackController.init(() => {\r\n            Admin._openScene('UILoding');\r\n            console.log('分包完成！');\r\n        });\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/Game/project/CutHair/Project_Laya2.3.0/CutHair_Laya2.3.0/src/script/Lwg_Template/lwg.ts",
+    "D:/Game/project/CutHair/Project_Laya2.3.0/CutHair_Laya2.3.0/src/script/Game/SubpackController.ts",
+    "D:/Game/project/CutHair/Project_Laya2.3.0/CutHair_Laya2.3.0/src/script/Lwg_Template/Game.ts"
+  ]
+}

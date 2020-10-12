@@ -15,6 +15,7 @@ export default class Init extends Admin.Scene {
     gameInit(): void {
         Admin._platform = Game._platformTpye.OPPO;
         Admin._evaluating = false;
+        Admin._elect = false;
     };
     skinInit(): void {
         Skin._currentEye.name = null;

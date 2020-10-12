@@ -2,35 +2,53 @@ import UILoding from "./UILoding";
 
 export class SubpackController {
     pkgFlag: number;
-    onCpl: Function;
-
-    subPkgInfo = [
+    completeFunc: Function;
+    pkgInfo = [
         { name: "sp1", root: "res" },
         { name: "sp2", root: "3DScene" },
         { name: "sp3", root: "3DPrefab" },
     ];
-
-    init(cb) {
+    init(_completeFunc) {
+        this.completeFunc = _completeFunc;
+        this.pkgFlag = 0;
         if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.WX_AppRt) {
-            this.onCpl = cb;
-            this.pkgFlag = 0;
             this.loadPkg_wx();
+        } else if (TJ.API.AppInfo.Channel() == TJ.Define.Channel.AppRt.VIVO_AppRt) {
+            this.loadPkg_VIVO();
+        } else {
+            this.completeFunc();
         }
-        // else{
-        //     this.onCpl();
-        // }
+    }
+    loadPkg_VIVO() {
+        if (this.pkgFlag == this.pkgInfo.length) {
+            if (this.completeFunc) {
+                this.completeFunc();
+            }
+        } else {
+            let info = this.pkgInfo[this.pkgFlag];
+            let name = info.name;
+            Laya.Browser.window.qg.loadSubpackage({
+                name: name,
+                success: (res) => {
+                    this.pkgFlag++;
+                    this.loadPkg_VIVO();
+                },
+                fail: (res) => {
+                    console.error(`load ${name} err: `, res);
+                },
+            })
+        }
     }
 
     loadPkg_wx() {
-        if (this.pkgFlag == this.subPkgInfo.length) {
-
-            this.onCpl();
-
+        if (this.pkgFlag == this.pkgInfo.length) {
+            if (this.completeFunc) {
+                this.completeFunc();
+            }
         } else {
-            let info = this.subPkgInfo[this.pkgFlag];
+            let info = this.pkgInfo[this.pkgFlag];
             let name = info.name;
             let root = info.root;
-
             Laya.Browser.window.wx.loadSubpackage({
                 name: name,
                 success: (res) => {

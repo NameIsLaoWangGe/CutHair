@@ -102,7 +102,7 @@ export default class UICheckIn extends CheckIn.CheckInScene {
         lwg.Click.off('largen', this.self['BtnBack'], this, null, null, this.btnBackUp);
     }
     btnBackUp(): void {
-        this.self.close();
+        lwg.Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }
     btnThreeGetUp(): void {
         ADManager.ShowReward(() => {
@@ -195,6 +195,5 @@ export default class UICheckIn extends CheckIn.CheckInScene {
 
     checkInOnDisable(): void {
         Setting.setBtnAppear();
-        ADManager.ShowBanner();
     }
 }

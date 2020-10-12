@@ -72,11 +72,10 @@ export default class UITask extends lwg.Task.TaskScene {
     };
 
     btnBackUp(): void {
-        this.self.close();
+        lwg.Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }
 
     taskOnDisable(): void {
-        ADManager.ShowBanner();        
         Setting.setBtnAppear();
         GVariate._stageClick = true;
     }

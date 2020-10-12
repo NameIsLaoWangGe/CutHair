@@ -67,6 +67,321 @@ var DP =
     {
         QG:   //oppo小游戏
         {
+            appId:null,
+            bannerId:null,
+            insertId:null,
+            videoId:null,
+            nativeId:null,
+            nativeCustomInsert:null,
+            gameBannerId:null,
+            gamePortalId:null,
+        },
+    },
+    MZ:   //魅族快游戏
+    {
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    Kwai:   //快手小游戏
+    {
+        appId:null,
+        videoId:null,
+    },
+    HG:   //Hago游戏
+    {
+        videoId:0,
+    },
+    HBS:   //华为快游戏
+    {
+        appId:null,
+    },
+    Adwending:   //双阳小游戏
+    {
+        username:null,
+        gameid:0,
+    },
+}
+
+var DP = 
+{
+    Basic:
+    {
+        appGuid:"7d5bcb7e-cd62-be5f-04e3-11c393952a82",
+        productName:"剃头大师",
+        packageName:"com.tomatojoy.ttds.vivominigame",
+        versionName:"1.0.0",
+        versionCode:1,
+        channel:"VIVO_AppRt",
+    },
+    XIAOMI:
+    {
+        QG:   //小米快游戏
+        {
+            insertId:null,
+            videoId:null,
+        },
+    },
+    WX:   //微信小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    VIVO:
+    {
+        QG:   //vivo小游戏
+        {
+            bannerId:"a06f50fe4849413eb2644412734197dc",
+            insertId:"0298c76ee2ec44258056cc357930469d",
+            videoId:"0f37dd9eec1a442fac0dfc39723b9342",
+            nativeId:"99351dc533db46e29f0260cf8146bc1b",
+            nativeCustomInsert:null,
+        },
+    },
+    UC:   //UC小游戏
+    {
+        appid:null,
+        clientid:null,
+    },
+    TT:   //字节跳动小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    ReYun:   //热云统计
+    {
+        appId:"2990f7eeaf4df351f7a59f86ceb2b7b0",
+    },
+    QTTGame:   //趣头条游戏
+    {
+        appId:null,
+        appKey:null,
+    },
+    QQ:   //QQ小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    OPPO:
+    {
+        QG:   //oppo小游戏
+        {
+            appId:null,
+            bannerId:null,
+            insertId:null,
+            videoId:null,
+            nativeId:null,
+            nativeCustomInsert:null,
+            gameBannerId:null,
+            gamePortalId:null,
+        },
+    },
+    MZ:   //魅族快游戏
+    {
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    Kwai:   //快手小游戏
+    {
+        appId:null,
+        videoId:null,
+    },
+    HG:   //Hago游戏
+    {
+        videoId:0,
+    },
+    HBS:   //华为快游戏
+    {
+        appId:null,
+    },
+    Adwending:   //双阳小游戏
+    {
+        username:null,
+        gameid:0,
+    },
+}
+
+var DP = 
+{
+    Basic:
+    {
+        appGuid:"7d5bcb7e-cd62-be5f-04e3-11c393952a82",
+        productName:"剃头大师",
+        packageName:"com.tomatojoy.ttds.vivominigame",
+        versionName:"1.0.0",
+        versionCode:1,
+        channel:"VIVO_AppRt",
+    },
+    XIAOMI:
+    {
+        QG:   //小米快游戏
+        {
+            insertId:null,
+            videoId:null,
+        },
+    },
+    WX:   //微信小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    VIVO:
+    {
+        QG:   //vivo小游戏
+        {
+            bannerId:"a06f50fe4849413eb2644412734197dc",
+            insertId:"0298c76ee2ec44258056cc357930469d",
+            videoId:"0f37dd9eec1a442fac0dfc39723b9342",
+            nativeId:"99351dc533db46e29f0260cf8146bc1b",
+            nativeCustomInsert:null,
+        },
+    },
+    UC:   //UC小游戏
+    {
+        appid:null,
+        clientid:null,
+    },
+    TT:   //字节跳动小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    ReYun:   //热云统计
+    {
+        appId:"2990f7eeaf4df351f7a59f86ceb2b7b0",
+    },
+    QTTGame:   //趣头条游戏
+    {
+        appId:null,
+        appKey:null,
+    },
+    QQ:   //QQ小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    OPPO:
+    {
+        QG:   //oppo小游戏
+        {
+            appId:null,
+            bannerId:null,
+            insertId:null,
+            videoId:null,
+            nativeId:null,
+            nativeCustomInsert:null,
+            gameBannerId:null,
+            gamePortalId:null,
+        },
+    },
+    MZ:   //魅族快游戏
+    {
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    Kwai:   //快手小游戏
+    {
+        appId:null,
+        videoId:null,
+    },
+    HG:   //Hago游戏
+    {
+        videoId:0,
+    },
+    HBS:   //华为快游戏
+    {
+        appId:null,
+    },
+    Adwending:   //双阳小游戏
+    {
+        username:null,
+        gameid:0,
+    },
+}
+
+var DP = 
+{
+    Basic:
+    {
+        appGuid:"7d5bcb7e-cd62-be5f-04e3-11c393952a82",
+        productName:"剃头大师",
+        packageName:"com.tomatojoy.ttds.vivominigame",
+        versionName:"1.0.0",
+        versionCode:1,
+        channel:"VIVO_AppRt",
+    },
+    XIAOMI:
+    {
+        QG:   //小米快游戏
+        {
+            insertId:null,
+            videoId:null,
+        },
+    },
+    WX:   //微信小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    VIVO:
+    {
+        QG:   //vivo小游戏
+        {
+            bannerId:"a06f50fe4849413eb2644412734197dc",
+            insertId:"0298c76ee2ec44258056cc357930469d",
+            videoId:"0f37dd9eec1a442fac0dfc39723b9342",
+            nativeId:"99351dc533db46e29f0260cf8146bc1b",
+            nativeCustomInsert:null,
+        },
+    },
+    UC:   //UC小游戏
+    {
+        appid:null,
+        clientid:null,
+    },
+    TT:   //字节跳动小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    ReYun:   //热云统计
+    {
+        appId:"2990f7eeaf4df351f7a59f86ceb2b7b0",
+    },
+    QTTGame:   //趣头条游戏
+    {
+        appId:null,
+        appKey:null,
+    },
+    QQ:   //QQ小游戏
+    {
+        appId:null,
+        bannerId:null,
+        insertId:null,
+        videoId:null,
+    },
+    OPPO:
+    {
+        QG:   //oppo小游戏
+        {
             appId:"30328407",
             bannerId:"214580",
             insertId:null,
@@ -15708,4 +16023,7 @@ var TJ;
     })(IAP = TJ.IAP || (TJ.IAP = {}));
 })(TJ || (TJ = {}));
 window["TJ"] = TJ;
+
+
+
 

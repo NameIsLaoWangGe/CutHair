@@ -1,0 +1,104 @@
+{
+    "copyFilesFilter": [
+        "../bin/**/*.*"
+    ],
+    "openDataZone": false,
+    "compressJson": true,
+    "compressJsonFilter": [
+        "$basePath/**/*.{json,atlas}"
+    ],
+    "compressJsonNoteList": [
+        ""
+    ],
+    "compressImage": true,
+    "compressImageFilter": [
+        "$basePath/**/*.{png,jpg}"
+    ],
+    "compressImageNoteList": [
+        ""
+    ],
+    "compressJs": true,
+    "compressJsFilter": [
+        "$basePath/**/*.js"
+    ],
+    "compressJsNoteList": [
+        ""
+    ],
+    "version": false,
+    "versionFilter": [
+        "$basePath/**/*.*",
+        "!$basePath/*.html",
+        "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json,my-adapter.js}",
+        "!$basePath/layaforqq/**/*.*"
+    ],
+    "versionNoteList": [
+        "",
+        "",
+        "",
+        ""
+    ],
+    "exclude": false,
+    "excludeFilter": [
+        "!$basePath/res/**/*.*"
+    ],
+    "vexcludeNoteList": [
+        ""
+    ],
+    "packfile": false,
+    "keepPlatformFile": false,
+    "packfileFilter": [
+        ""
+    ],
+    "packfileFullValue": [
+        "$basePath/**/*.*"
+    ],
+    "packfileTargetValue": "",
+    "packfileNoteList": [
+        ""
+    ],
+    "clearReleaseDir": true,
+    "compile": true,
+    "forceCompile": false,
+    "onlyIndexJS": true,
+    "es6toes5": false,
+    "projectType": "ts",
+    "pubTime": 1602485359749,
+    "vivoInfo": {
+        "name": "剃头大师",
+        "projName": "quickgame",
+        "package": "com.tomatojoy.ttds.vivominigame",
+        "icon": "D:\\Game\\project\\CutHair\\美术\\2D\\UI\\icon.png",
+        "versionName": "1.0.0",
+        "versionCode": 1,
+        "minPlatformVersion": 1063,
+        "orientation": "portrait",
+        "logLevel": "log",
+        "oppoDebug": false,
+        "useReleaseSign": true,
+        "subpack": true
+    },
+    "vivoSign": {
+        "generateSign": false,
+        "countryName": "",
+        "provinceName": "",
+        "localityName": "",
+        "orgName": "",
+        "orgUnitName": "",
+        "commonName": "",
+        "emailAddr": ""
+    },
+    "vivoSubpack": [
+        {
+            "name": "sp3",
+            "root": "3DPrefab/"
+        },
+        {
+            "name": "sp1",
+            "root": "res/"
+        },
+        {
+            "name": "sp2",
+            "root": "3DScene/"
+        }
+    ]
+}

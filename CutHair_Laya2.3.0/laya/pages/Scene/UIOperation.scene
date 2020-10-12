@@ -336,7 +336,7 @@
                             "x":45,
                             "type":"Image",
                             "searchKey":"Image,Icon",
-                            "props":{"width":140,"visible":false,"skin":"UI/Common/bg.png","name":"Icon","left":27,"height":141,"centerY":0},
+                            "props":{"width":140,"visible":true,"skin":"UI/Common/bg.png","name":"Icon","left":27,"height":141,"centerY":0},
                             "nodeParent":49,
                             "label":"Icon",
                             "isDirectory":false,
@@ -390,7 +390,7 @@
                             "compId":56,
                             "child":[
                                 ],
-                            "$HIDDEN":true
+                            "$HIDDEN":false
                         }],
                     "$HIDDEN":false
                 },

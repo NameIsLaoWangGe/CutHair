@@ -12,6 +12,9 @@ export default class UIDefeated extends lwg.Admin.Scene {
         this.self['BtnAgain_WeChat'].visible = false;
         this.self['Dot_WeChat'].visible = true;
         Tools.node_ShowExcludedChild(this.var('Platform'), [Admin._platform]);
+        if (!Admin._elect) {
+            this.self['P202'].removeSelf();
+        }
     }
 
     lwgOnEnable(): void {
@@ -23,7 +26,7 @@ export default class UIDefeated extends lwg.Admin.Scene {
         Setting.setBtnAppear();
         PalyAudio.playDefeatedSound();
 
-        Laya.timer.once(500, this, () => {
+        Laya.timer.once(1000, this, () => {
             Admin._openScene(Admin.SceneName.UIPlaqueADS);
         })
     }
@@ -31,6 +34,9 @@ export default class UIDefeated extends lwg.Admin.Scene {
     lwgAdaptive(): void {
         let y = this.self['Bytedance'].globalToLocal(new Laya.Point(Laya.stage.width / 2, Laya.stage.height - 80)).y;
         this.self['Select_Bytedance'].y = y;
+    }
+    lwgOpenAni(): number {
+        return 1000;
     }
 
     lwgBtnClick(): void {

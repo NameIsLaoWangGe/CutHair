@@ -14,7 +14,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
 
     skinXDAdaptive(): void {
-        this.self['SceneContent'].y = Laya.stage.height / 2;
+        // this.self['SceneContent'].y = Laya.stage.height / 2;
     }
     /**进度条显示*/
     progressDisplay(): void {
@@ -39,7 +39,7 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
 
     btnBackUp(): void {
-        this.self.close();
+        Admin._openScene(Admin.SceneName.UIStart, null, this.self);
     }
     /**看完广告的返回函数*/
     btnGetFunc(): void {
@@ -59,7 +59,6 @@ export default class UISkinXD extends SkinXD.SkinXDScene {
     }
 
     skinXDOnDisable(): void {
-        ADManager.ShowBanner();
         Setting.setBtnAppear();
         Gold.goldAppear();
     }
